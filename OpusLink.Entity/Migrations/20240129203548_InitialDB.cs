@@ -621,6 +621,153 @@ namespace OpusLink.Entity.Migrations
                         onDelete: ReferentialAction.Restrict);
                 });
 
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "UserID", "AccessFailedCount", "Address", "AmountMoney", "BankAccountInfor", "BankName", "CVFilePath", "ConcurrencyStamp", "Dob", "Email", "EmailConfirmed", "FullNameOnIDCard", "IDNumber", "Introduction", "IsVeryfiedIdentity", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePicture", "SecurityStamp", "StarMedium", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { 1, 1, null, null, null, null, null, "407f1539-ec29-453a-85ab-d83fbc262438", null, "nva123@gmail.com", true, null, null, null, false, false, null, null, null, "test", null, false, null, null, null, false, "Nguyen Van A" },
+                    { 2, 2, null, null, null, null, null, "2b9515d0-f428-4486-ba86-d3f875d87b40", null, "nvb123@gmail.com", true, null, null, null, true, false, null, null, null, "test", null, false, null, null, null, false, "Nguyen Van B" },
+                    { 3, 0, null, null, null, null, null, "0ece3227-5e59-4dc4-9752-772561de2127", null, "nvc123@gmail.com", false, null, null, null, false, false, null, null, null, "test", null, false, null, null, null, false, "Nguyen Van C" },
+                    { 4, 3, null, null, null, null, null, "6113aea3-2102-407c-9c5f-f40a720fdb4b", null, "tvd123@gmail.com", true, null, null, null, false, false, null, null, null, "test", null, false, null, null, null, false, "Tran Van D" },
+                    { 5, 4, null, null, null, null, null, "34c2fa0b-2d94-4a29-be12-34a0417b5848", null, "tte123@gmail.com", true, null, null, null, false, false, null, null, null, "test", null, false, null, null, null, false, "Tran Thi E" },
+                    { 6, 5, null, null, null, null, null, "de7a66e1-a4dd-4e2c-873a-97c928e4bf92", null, "tvf123@gmail.com", false, null, null, null, false, false, null, null, null, "test", null, false, null, null, null, false, "Tran Van F" },
+                    { 7, 6, null, null, null, null, null, "288a6c76-a14f-43f6-aaf3-7b78b75c2e90", null, "ttg123@gmail.com", true, null, null, null, true, false, null, null, null, "test", null, false, null, null, null, false, "Tran Thi G" },
+                    { 8, 7, null, null, null, null, null, "0c38746b-38cc-46e3-a4ed-1c8e464c61d5", null, "tth123@gmail.com", true, null, null, null, false, false, null, null, null, "test", null, false, null, null, null, false, "Tran Thi H" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Category",
+                columns: new[] { "CategoryID", "CategoryName", "CategoryParentID" },
+                values: new object[,]
+                {
+                    { 1, "Web dev", null },
+                    { 4, "BA", null },
+                    { 5, "Dạy học trực tuyến", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Location",
+                columns: new[] { "LocationID", "LocationName" },
+                values: new object[,]
+                {
+                    { 1, "HaNoi" },
+                    { 2, "DaNang" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "SearchJobForm",
+                columns: new[] { "FormID", "CategoryID", "LocationID" },
+                values: new object[,]
+                {
+                    { 1, 1, 1 },
+                    { 2, 2, 2 },
+                    { 3, 5, 2 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Skill",
+                columns: new[] { "SkillID", "SkillName", "SkillParentID" },
+                values: new object[,]
+                {
+                    { 1, "Web development", null },
+                    { 4, "design 2D", null },
+                    { 5, "communication", null },
+                    { 6, "English", null },
+                    { 7, "Teaching", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Category",
+                columns: new[] { "CategoryID", "CategoryName", "CategoryParentID" },
+                values: new object[,]
+                {
+                    { 2, "BE dev", 1 },
+                    { 3, "FE dev", 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "FreelancerWithSkill",
+                columns: new[] { "FreelancerWithSkillID", "FreelancerID", "SkillID" },
+                values: new object[,]
+                {
+                    { 1, 4, 1 },
+                    { 4, 7, 4 },
+                    { 5, 8, 5 },
+                    { 6, 4, 6 },
+                    { 7, 7, 7 },
+                    { 8, 5, 1 },
+                    { 11, 8, 4 },
+                    { 12, 7, 5 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Job",
+                columns: new[] { "JobID", "BudgetFrom", "BudgetTo", "DateCreated", "EmployerID", "FreelancerID", "JobContent", "JobTitle", "LocationID", "Status" },
+                values: new object[,]
+                {
+                    { 1, 300000m, 500000m, new DateTime(2023, 1, 29, 21, 0, 0, 0, DateTimeKind.Unspecified), 1, 5, "Minh can 1 nguoi code web", "Tim DEV", 1, "Hired" },
+                    { 2, 200000m, 800000m, new DateTime(2023, 1, 29, 21, 0, 0, 0, DateTimeKind.Unspecified), 2, null, "Can 1 nguoi hieu ve nghiep vu ngan hang để tạo ra tài liệu requirement cho trang web", "Tim BA làm requirement", 1, "Approved" },
+                    { 3, 400000m, 1000000m, new DateTime(2023, 1, 29, 22, 0, 0, 0, DateTimeKind.Unspecified), 2, 8, "Can nguoi giup minh thiet ke DataBase cho trang web giao duc", "Thiet ke Database", 2, "Hired" }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Skill",
+                columns: new[] { "SkillID", "SkillName", "SkillParentID" },
+                values: new object[,]
+                {
+                    { 2, "code React", 1 },
+                    { 3, "code .net razor page", 1 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "FreelancerWithSkill",
+                columns: new[] { "FreelancerWithSkillID", "FreelancerID", "SkillID" },
+                values: new object[,]
+                {
+                    { 2, 5, 2 },
+                    { 3, 6, 3 },
+                    { 9, 6, 2 },
+                    { 10, 7, 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "JobInCategory",
+                columns: new[] { "JobInCategoryID", "CategoryID", "JobID" },
+                values: new object[,]
+                {
+                    { 1, 1, 1 },
+                    { 2, 2, 1 },
+                    { 3, 3, 1 },
+                    { 4, 4, 2 },
+                    { 5, 1, 3 },
+                    { 6, 5, 3 }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Milestone",
+                columns: new[] { "MilestoneID", "AmountToPay", "Deadline", "FilePathFreelancerUpload", "JobID", "MilestoneContent" },
+                values: new object[,]
+                {
+                    { 1, 100000m, new DateTime(2024, 2, 10, 10, 0, 0, 0, DateTimeKind.Unspecified), "Job1Moc1.pdf", 1, "Moc 1:..." },
+                    { 2, 300000m, new DateTime(2024, 2, 11, 10, 0, 0, 0, DateTimeKind.Unspecified), "Job1Moc2.pdf", 1, "Moc 2:..." },
+                    { 3, 100000m, new DateTime(2024, 2, 11, 10, 0, 0, 0, DateTimeKind.Unspecified), "Job3Moc1.pdf", 3, "Moc 1:..." },
+                    { 4, 200000m, new DateTime(2024, 2, 12, 10, 0, 0, 0, DateTimeKind.Unspecified), "Job3Moc2.pdf", 3, "Moc 2:..." },
+                    { 5, 300000m, new DateTime(2024, 2, 13, 10, 0, 0, 0, DateTimeKind.Unspecified), "Job3Moc3.pdf", 3, "Moc 3:..." }
+                });
+
+            migrationBuilder.InsertData(
+                table: "Offer",
+                columns: new[] { "OfferID", "DateOffer", "EstimatedPlan", "ExpectedDays", "FreelancerID", "JobID", "ProposedCost", "SelfIntroduction" },
+                values: new object[,]
+                {
+                    { 1, new DateTime(2023, 1, 30, 10, 0, 0, 0, DateTimeKind.Unspecified), "Nếu bạn quan tâm đến chào giá này, hãy reply cho mình biết. Mình sẽ setup một buổi meeting trao đổi chi tiết về doanh nghiệp của bạn và gửi sitemap, kế hoạch chi tiết trong vòng không quá 2 giờ sau đó.", (short)7, 5, 1, 280000m, "Đã có kinh nghiệm 3 năm làm web, mobile app đa lĩnh vực trong và ngoài nước" },
+                    { 2, new DateTime(2023, 1, 30, 10, 0, 0, 0, DateTimeKind.Unspecified), "Kế hoạch thực hiện công việc:\r\n-Thu thập thông tin khách hàng cũng nhu nhu cầu thiết kế.\r\n-Phân tích, báo giá và tiến hành thương lượng chốt sản phẩm.\r\n-Hoàn thành sản phẩm trong tiến độ đã thương lượng, test sản phẩm và bàn giao đến khách hàng.\r\n-Tiến hành sửa chữa, fix lỗi trong quá trình dùng thử.\r\n-Nhận thanh toán và áp dụng chính sách hậu mãi cho khách hàng", (short)3, 8, 1, 500000m, "Tôi là một lập trình viên có nhiều năm kinh nghiệm phát triển các loại website, đặc biệt là các trang web bán hàng, giáo dục, bất động sản và y tế. Trong suốt sự nghiệp của mình, tôi tạo ra những trang web chất lượng cao, mang tính sáng tạo và tối ưu hoá hiệu suất. Tôi tự hào về việc đã đóng góp vào việc xây dựng nền tảng kỹ thuật vững chắc để hỗ trợ các doanh nghiệp bán hàng và các tổ chức giáo dục trong việc tăng cường hiệu quả kinh doanh và phục vụ học tập.\r\n\r\nTrong quá trình làm việc, tôi đã tiếp xúc và thành thạo các công nghệ đa dạng như HTML, CSS, JavaScript, PHP, Python và nhiều framework phổ biến như Vuejs, Nuxtjs, Reactjs, Nextjs, Laravel, Django, Express, Nestjs. Sự am hiểu sâu sắc về các công nghệ này giúp tôi tạo ra những trải nghiệm người dùng tuyệt vời và tích hợp những tính năng đa dạng, như thanh toán an toàn, quản lý tài khoản, đánh giá sản phẩm và nhiều tính năng tùy chỉnh khác." },
+                    { 3, new DateTime(2023, 1, 30, 10, 0, 0, 0, DateTimeKind.Unspecified), "Meeting trao doi chi tiet ve Requirement, sau do lam Database", (short)7, 4, 3, 1000000m, "Toi co 2 nam kinh nghiem lam DataBase" },
+                    { 4, new DateTime(2023, 2, 2, 10, 0, 0, 0, DateTimeKind.Unspecified), "Làm ngay sau khi có đầy đủ nội dung và yêu cầu. Bảo hành và bảo trì.", (short)7, 5, 2, 700000m, "" },
+                    { 5, new DateTime(2023, 2, 2, 10, 0, 0, 0, DateTimeKind.Unspecified), "Thu thập thông tin về requirement, phân tích, báo giá & thương lượng, hoàn thành theo tiến độ đã vạch ra, test, hỗ trợ 1 tháng sau khi bàn giao", (short)4, 8, 3, 800000m, "Toi co 3 nam kinh nghiem lam DataBase cho cong ty cong nghe noi tieng" }
+                });
+
             migrationBuilder.CreateIndex(
                 name: "IX_AspNetRoleClaims_RoleId",
                 table: "AspNetRoleClaims",

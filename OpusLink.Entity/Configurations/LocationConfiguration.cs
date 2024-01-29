@@ -17,6 +17,10 @@ namespace OpusLink.Entity.Configurations
             builder.HasKey(x => x.LocationID);
             builder.Property(x => x.LocationID).ValueGeneratedOnAdd();
             builder.Property(x => x.LocationName).IsRequired().HasMaxLength(256);
+            builder.HasData(
+                new Location { LocationID = 1, LocationName = "HaNoi" },
+                new Location { LocationID = 2, LocationName = "DaNang" }
+                );
         }
     }
 }

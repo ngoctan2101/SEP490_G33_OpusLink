@@ -12,7 +12,7 @@ using OpusLink.Entity;
 namespace OpusLink.Entity.Migrations
 {
     [DbContext(typeof(ApplicationDBContext))]
-    [Migration("20240128232425_InitialDB")]
+    [Migration("20240129203548_InitialDB")]
     partial class InitialDB
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
@@ -196,6 +196,35 @@ namespace OpusLink.Entity.Migrations
                     b.HasIndex("CategoryParentID");
 
                     b.ToTable("Category", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            CategoryID = 1,
+                            CategoryName = "Web dev"
+                        },
+                        new
+                        {
+                            CategoryID = 2,
+                            CategoryName = "BE dev",
+                            CategoryParentID = 1
+                        },
+                        new
+                        {
+                            CategoryID = 3,
+                            CategoryName = "FE dev",
+                            CategoryParentID = 1
+                        },
+                        new
+                        {
+                            CategoryID = 4,
+                            CategoryName = "BA"
+                        },
+                        new
+                        {
+                            CategoryID = 5,
+                            CategoryName = "Dạy học trực tuyến"
+                        });
                 });
 
             modelBuilder.Entity("OpusLink.Entity.Models.ChatBox", b =>
@@ -278,6 +307,80 @@ namespace OpusLink.Entity.Migrations
                     b.HasIndex("SkillID");
 
                     b.ToTable("FreelancerWithSkill", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            FreelancerWithSkillID = 1,
+                            FreelancerID = 4,
+                            SkillID = 1
+                        },
+                        new
+                        {
+                            FreelancerWithSkillID = 2,
+                            FreelancerID = 5,
+                            SkillID = 2
+                        },
+                        new
+                        {
+                            FreelancerWithSkillID = 3,
+                            FreelancerID = 6,
+                            SkillID = 3
+                        },
+                        new
+                        {
+                            FreelancerWithSkillID = 4,
+                            FreelancerID = 7,
+                            SkillID = 4
+                        },
+                        new
+                        {
+                            FreelancerWithSkillID = 5,
+                            FreelancerID = 8,
+                            SkillID = 5
+                        },
+                        new
+                        {
+                            FreelancerWithSkillID = 6,
+                            FreelancerID = 4,
+                            SkillID = 6
+                        },
+                        new
+                        {
+                            FreelancerWithSkillID = 7,
+                            FreelancerID = 7,
+                            SkillID = 7
+                        },
+                        new
+                        {
+                            FreelancerWithSkillID = 8,
+                            FreelancerID = 5,
+                            SkillID = 1
+                        },
+                        new
+                        {
+                            FreelancerWithSkillID = 9,
+                            FreelancerID = 6,
+                            SkillID = 2
+                        },
+                        new
+                        {
+                            FreelancerWithSkillID = 10,
+                            FreelancerID = 7,
+                            SkillID = 3
+                        },
+                        new
+                        {
+                            FreelancerWithSkillID = 11,
+                            FreelancerID = 8,
+                            SkillID = 4
+                        },
+                        new
+                        {
+                            FreelancerWithSkillID = 12,
+                            FreelancerID = 7,
+                            SkillID = 5
+                        });
                 });
 
             modelBuilder.Entity("OpusLink.Entity.Models.HistoryPayment", b =>
@@ -360,6 +463,46 @@ namespace OpusLink.Entity.Migrations
                     b.HasIndex("LocationID");
 
                     b.ToTable("Job", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            JobID = 1,
+                            BudgetFrom = 300000m,
+                            BudgetTo = 500000m,
+                            DateCreated = new DateTime(2023, 1, 29, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            EmployerID = 1,
+                            FreelancerID = 5,
+                            JobContent = "Minh can 1 nguoi code web",
+                            JobTitle = "Tim DEV",
+                            LocationID = 1,
+                            Status = "Hired"
+                        },
+                        new
+                        {
+                            JobID = 2,
+                            BudgetFrom = 200000m,
+                            BudgetTo = 800000m,
+                            DateCreated = new DateTime(2023, 1, 29, 21, 0, 0, 0, DateTimeKind.Unspecified),
+                            EmployerID = 2,
+                            JobContent = "Can 1 nguoi hieu ve nghiep vu ngan hang để tạo ra tài liệu requirement cho trang web",
+                            JobTitle = "Tim BA làm requirement",
+                            LocationID = 1,
+                            Status = "Approved"
+                        },
+                        new
+                        {
+                            JobID = 3,
+                            BudgetFrom = 400000m,
+                            BudgetTo = 1000000m,
+                            DateCreated = new DateTime(2023, 1, 29, 22, 0, 0, 0, DateTimeKind.Unspecified),
+                            EmployerID = 2,
+                            FreelancerID = 8,
+                            JobContent = "Can nguoi giup minh thiet ke DataBase cho trang web giao duc",
+                            JobTitle = "Thiet ke Database",
+                            LocationID = 2,
+                            Status = "Hired"
+                        });
                 });
 
             modelBuilder.Entity("OpusLink.Entity.Models.JobInCategory", b =>
@@ -383,6 +526,44 @@ namespace OpusLink.Entity.Migrations
                     b.HasIndex("JobID");
 
                     b.ToTable("JobInCategory", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            JobInCategoryID = 1,
+                            CategoryID = 1,
+                            JobID = 1
+                        },
+                        new
+                        {
+                            JobInCategoryID = 2,
+                            CategoryID = 2,
+                            JobID = 1
+                        },
+                        new
+                        {
+                            JobInCategoryID = 3,
+                            CategoryID = 3,
+                            JobID = 1
+                        },
+                        new
+                        {
+                            JobInCategoryID = 4,
+                            CategoryID = 4,
+                            JobID = 2
+                        },
+                        new
+                        {
+                            JobInCategoryID = 5,
+                            CategoryID = 1,
+                            JobID = 3
+                        },
+                        new
+                        {
+                            JobInCategoryID = 6,
+                            CategoryID = 5,
+                            JobID = 3
+                        });
                 });
 
             modelBuilder.Entity("OpusLink.Entity.Models.Location", b =>
@@ -401,6 +582,18 @@ namespace OpusLink.Entity.Migrations
                     b.HasKey("LocationID");
 
                     b.ToTable("Location", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            LocationID = 1,
+                            LocationName = "HaNoi"
+                        },
+                        new
+                        {
+                            LocationID = 2,
+                            LocationName = "DaNang"
+                        });
                 });
 
             modelBuilder.Entity("OpusLink.Entity.Models.Message", b =>
@@ -462,6 +655,53 @@ namespace OpusLink.Entity.Migrations
                     b.HasIndex("JobID");
 
                     b.ToTable("Milestone", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            MilestoneID = 1,
+                            AmountToPay = 100000m,
+                            Deadline = new DateTime(2024, 2, 10, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            FilePathFreelancerUpload = "Job1Moc1.pdf",
+                            JobID = 1,
+                            MilestoneContent = "Moc 1:..."
+                        },
+                        new
+                        {
+                            MilestoneID = 2,
+                            AmountToPay = 300000m,
+                            Deadline = new DateTime(2024, 2, 11, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            FilePathFreelancerUpload = "Job1Moc2.pdf",
+                            JobID = 1,
+                            MilestoneContent = "Moc 2:..."
+                        },
+                        new
+                        {
+                            MilestoneID = 3,
+                            AmountToPay = 100000m,
+                            Deadline = new DateTime(2024, 2, 11, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            FilePathFreelancerUpload = "Job3Moc1.pdf",
+                            JobID = 3,
+                            MilestoneContent = "Moc 1:..."
+                        },
+                        new
+                        {
+                            MilestoneID = 4,
+                            AmountToPay = 200000m,
+                            Deadline = new DateTime(2024, 2, 12, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            FilePathFreelancerUpload = "Job3Moc2.pdf",
+                            JobID = 3,
+                            MilestoneContent = "Moc 2:..."
+                        },
+                        new
+                        {
+                            MilestoneID = 5,
+                            AmountToPay = 300000m,
+                            Deadline = new DateTime(2024, 2, 13, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            FilePathFreelancerUpload = "Job3Moc3.pdf",
+                            JobID = 3,
+                            MilestoneContent = "Moc 3:..."
+                        });
                 });
 
             modelBuilder.Entity("OpusLink.Entity.Models.Notification", b =>
@@ -535,6 +775,63 @@ namespace OpusLink.Entity.Migrations
                     b.HasIndex("JobID");
 
                     b.ToTable("Offer", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            OfferID = 1,
+                            DateOffer = new DateTime(2023, 1, 30, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedPlan = "Nếu bạn quan tâm đến chào giá này, hãy reply cho mình biết. Mình sẽ setup một buổi meeting trao đổi chi tiết về doanh nghiệp của bạn và gửi sitemap, kế hoạch chi tiết trong vòng không quá 2 giờ sau đó.",
+                            ExpectedDays = (short)7,
+                            FreelancerID = 5,
+                            JobID = 1,
+                            ProposedCost = 280000m,
+                            SelfIntroduction = "Đã có kinh nghiệm 3 năm làm web, mobile app đa lĩnh vực trong và ngoài nước"
+                        },
+                        new
+                        {
+                            OfferID = 2,
+                            DateOffer = new DateTime(2023, 1, 30, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedPlan = "Kế hoạch thực hiện công việc:\r\n-Thu thập thông tin khách hàng cũng nhu nhu cầu thiết kế.\r\n-Phân tích, báo giá và tiến hành thương lượng chốt sản phẩm.\r\n-Hoàn thành sản phẩm trong tiến độ đã thương lượng, test sản phẩm và bàn giao đến khách hàng.\r\n-Tiến hành sửa chữa, fix lỗi trong quá trình dùng thử.\r\n-Nhận thanh toán và áp dụng chính sách hậu mãi cho khách hàng",
+                            ExpectedDays = (short)3,
+                            FreelancerID = 8,
+                            JobID = 1,
+                            ProposedCost = 500000m,
+                            SelfIntroduction = "Tôi là một lập trình viên có nhiều năm kinh nghiệm phát triển các loại website, đặc biệt là các trang web bán hàng, giáo dục, bất động sản và y tế. Trong suốt sự nghiệp của mình, tôi tạo ra những trang web chất lượng cao, mang tính sáng tạo và tối ưu hoá hiệu suất. Tôi tự hào về việc đã đóng góp vào việc xây dựng nền tảng kỹ thuật vững chắc để hỗ trợ các doanh nghiệp bán hàng và các tổ chức giáo dục trong việc tăng cường hiệu quả kinh doanh và phục vụ học tập.\r\n\r\nTrong quá trình làm việc, tôi đã tiếp xúc và thành thạo các công nghệ đa dạng như HTML, CSS, JavaScript, PHP, Python và nhiều framework phổ biến như Vuejs, Nuxtjs, Reactjs, Nextjs, Laravel, Django, Express, Nestjs. Sự am hiểu sâu sắc về các công nghệ này giúp tôi tạo ra những trải nghiệm người dùng tuyệt vời và tích hợp những tính năng đa dạng, như thanh toán an toàn, quản lý tài khoản, đánh giá sản phẩm và nhiều tính năng tùy chỉnh khác."
+                        },
+                        new
+                        {
+                            OfferID = 3,
+                            DateOffer = new DateTime(2023, 1, 30, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedPlan = "Meeting trao doi chi tiet ve Requirement, sau do lam Database",
+                            ExpectedDays = (short)7,
+                            FreelancerID = 4,
+                            JobID = 3,
+                            ProposedCost = 1000000m,
+                            SelfIntroduction = "Toi co 2 nam kinh nghiem lam DataBase"
+                        },
+                        new
+                        {
+                            OfferID = 4,
+                            DateOffer = new DateTime(2023, 2, 2, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedPlan = "Làm ngay sau khi có đầy đủ nội dung và yêu cầu. Bảo hành và bảo trì.",
+                            ExpectedDays = (short)7,
+                            FreelancerID = 5,
+                            JobID = 2,
+                            ProposedCost = 700000m,
+                            SelfIntroduction = ""
+                        },
+                        new
+                        {
+                            OfferID = 5,
+                            DateOffer = new DateTime(2023, 2, 2, 10, 0, 0, 0, DateTimeKind.Unspecified),
+                            EstimatedPlan = "Thu thập thông tin về requirement, phân tích, báo giá & thương lượng, hoàn thành theo tiến độ đã vạch ra, test, hỗ trợ 1 tháng sau khi bàn giao",
+                            ExpectedDays = (short)4,
+                            FreelancerID = 8,
+                            JobID = 3,
+                            ProposedCost = 800000m,
+                            SelfIntroduction = "Toi co 3 nam kinh nghiem lam DataBase cho cong ty cong nghe noi tieng"
+                        });
                 });
 
             modelBuilder.Entity("OpusLink.Entity.Models.ReportJob", b =>
@@ -634,6 +931,26 @@ namespace OpusLink.Entity.Migrations
                     b.HasKey("FormID");
 
                     b.ToTable("SearchJobForm", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            FormID = 1,
+                            CategoryID = 1,
+                            LocationID = 1
+                        },
+                        new
+                        {
+                            FormID = 2,
+                            CategoryID = 2,
+                            LocationID = 2
+                        },
+                        new
+                        {
+                            FormID = 3,
+                            CategoryID = 5,
+                            LocationID = 2
+                        });
                 });
 
             modelBuilder.Entity("OpusLink.Entity.Models.Skill", b =>
@@ -657,6 +974,45 @@ namespace OpusLink.Entity.Migrations
                     b.HasIndex("SkillParentID");
 
                     b.ToTable("Skill", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            SkillID = 1,
+                            SkillName = "Web development"
+                        },
+                        new
+                        {
+                            SkillID = 2,
+                            SkillName = "code React",
+                            SkillParentID = 1
+                        },
+                        new
+                        {
+                            SkillID = 3,
+                            SkillName = "code .net razor page",
+                            SkillParentID = 1
+                        },
+                        new
+                        {
+                            SkillID = 4,
+                            SkillName = "design 2D"
+                        },
+                        new
+                        {
+                            SkillID = 5,
+                            SkillName = "communication"
+                        },
+                        new
+                        {
+                            SkillID = 6,
+                            SkillName = "English"
+                        },
+                        new
+                        {
+                            SkillID = 7,
+                            SkillName = "Teaching"
+                        });
                 });
 
             modelBuilder.Entity("OpusLink.Entity.Models.User", b =>
@@ -771,6 +1127,120 @@ namespace OpusLink.Entity.Migrations
                         .HasFilter("[NormalizedUserName] IS NOT NULL");
 
                     b.ToTable("AspNetUsers", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            AccessFailedCount = 1,
+                            ConcurrencyStamp = "407f1539-ec29-453a-85ab-d83fbc262438",
+                            Email = "nva123@gmail.com",
+                            EmailConfirmed = true,
+                            IsVeryfiedIdentity = false,
+                            LockoutEnabled = false,
+                            PasswordHash = "test",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "Nguyen Van A"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            AccessFailedCount = 2,
+                            ConcurrencyStamp = "2b9515d0-f428-4486-ba86-d3f875d87b40",
+                            Email = "nvb123@gmail.com",
+                            EmailConfirmed = true,
+                            IsVeryfiedIdentity = true,
+                            LockoutEnabled = false,
+                            PasswordHash = "test",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "Nguyen Van B"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            AccessFailedCount = 0,
+                            ConcurrencyStamp = "0ece3227-5e59-4dc4-9752-772561de2127",
+                            Email = "nvc123@gmail.com",
+                            EmailConfirmed = false,
+                            IsVeryfiedIdentity = false,
+                            LockoutEnabled = false,
+                            PasswordHash = "test",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "Nguyen Van C"
+                        },
+                        new
+                        {
+                            Id = 4,
+                            AccessFailedCount = 3,
+                            ConcurrencyStamp = "6113aea3-2102-407c-9c5f-f40a720fdb4b",
+                            Email = "tvd123@gmail.com",
+                            EmailConfirmed = true,
+                            IsVeryfiedIdentity = false,
+                            LockoutEnabled = false,
+                            PasswordHash = "test",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "Tran Van D"
+                        },
+                        new
+                        {
+                            Id = 5,
+                            AccessFailedCount = 4,
+                            ConcurrencyStamp = "34c2fa0b-2d94-4a29-be12-34a0417b5848",
+                            Email = "tte123@gmail.com",
+                            EmailConfirmed = true,
+                            IsVeryfiedIdentity = false,
+                            LockoutEnabled = false,
+                            PasswordHash = "test",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "Tran Thi E"
+                        },
+                        new
+                        {
+                            Id = 6,
+                            AccessFailedCount = 5,
+                            ConcurrencyStamp = "de7a66e1-a4dd-4e2c-873a-97c928e4bf92",
+                            Email = "tvf123@gmail.com",
+                            EmailConfirmed = false,
+                            IsVeryfiedIdentity = false,
+                            LockoutEnabled = false,
+                            PasswordHash = "test",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "Tran Van F"
+                        },
+                        new
+                        {
+                            Id = 7,
+                            AccessFailedCount = 6,
+                            ConcurrencyStamp = "288a6c76-a14f-43f6-aaf3-7b78b75c2e90",
+                            Email = "ttg123@gmail.com",
+                            EmailConfirmed = true,
+                            IsVeryfiedIdentity = true,
+                            LockoutEnabled = false,
+                            PasswordHash = "test",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "Tran Thi G"
+                        },
+                        new
+                        {
+                            Id = 8,
+                            AccessFailedCount = 7,
+                            ConcurrencyStamp = "0c38746b-38cc-46e3-a4ed-1c8e464c61d5",
+                            Email = "tth123@gmail.com",
+                            EmailConfirmed = true,
+                            IsVeryfiedIdentity = false,
+                            LockoutEnabled = false,
+                            PasswordHash = "test",
+                            PhoneNumberConfirmed = false,
+                            TwoFactorEnabled = false,
+                            UserName = "Tran Thi H"
+                        });
                 });
 
             modelBuilder.Entity("OpusLink.Entity.Models.WithdrawRequest", b =>

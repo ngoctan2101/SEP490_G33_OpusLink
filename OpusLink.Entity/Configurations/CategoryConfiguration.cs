@@ -18,6 +18,13 @@ namespace OpusLink.Entity.Configurations
             builder.Property(x => x.CategoryID).ValueGeneratedOnAdd();
             builder.Property(x => x.CategoryName).IsRequired().HasMaxLength(256);
             builder.HasOne(x => x.CategoryParent).WithMany().HasForeignKey(x => x.CategoryParentID).OnDelete(DeleteBehavior.Restrict);
+            builder.HasData(
+                new Category {CategoryID=1,CategoryParentID=null,CategoryName="Web dev" },
+                new Category {CategoryID=2,CategoryParentID=1,CategoryName="BE dev" },
+                new Category {CategoryID=3,CategoryParentID=1,CategoryName="FE dev" },
+                new Category {CategoryID=4,CategoryParentID=null,CategoryName="BA" },
+                new Category {CategoryID=5,CategoryParentID=null,CategoryName="Dạy học trực tuyến" }
+                );
         }
     }
 }
