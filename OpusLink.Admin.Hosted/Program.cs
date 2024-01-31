@@ -4,7 +4,7 @@ var builder = WebApplication.CreateBuilder(args);
 builder.Services.AddRazorPages();
 
 var app = builder.Build();
-
+//builder.Services.AddAutoMapper(typeof(ApplicationMapper));
 // Configure the HTTP request pipeline.
 if (!app.Environment.IsDevelopment())
 {
