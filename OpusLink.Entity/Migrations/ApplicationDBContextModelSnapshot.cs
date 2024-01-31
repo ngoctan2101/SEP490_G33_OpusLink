@@ -10,7 +10,7 @@ using OpusLink.Entity;
 
 namespace OpusLink.Entity.Migrations
 {
-    [DbContext(typeof(ApplicationDBContext))]
+    [DbContext(typeof(OpusLinkDBContext))]
     partial class ApplicationDBContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)

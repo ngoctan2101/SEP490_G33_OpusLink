@@ -11,7 +11,7 @@ using OpusLink.Entity;
 
 namespace OpusLink.Entity.Migrations
 {
-    [DbContext(typeof(ApplicationDBContext))]
+    [DbContext(typeof(OpusLinkDBContext))]
     [Migration("20240129203548_InitialDB")]
     partial class InitialDB
     {

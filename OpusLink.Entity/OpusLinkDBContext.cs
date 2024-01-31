@@ -12,13 +12,13 @@ using System.Threading.Tasks;
 
 namespace OpusLink.Entity
 {
-    public class ApplicationDBContext : IdentityDbContext<User, IdentityRole<int>, int>
+    public class OpusLinkDBContext : IdentityDbContext<User, IdentityRole<int>, int>
     {
-        public ApplicationDBContext()
+        public OpusLinkDBContext()
         {
 
         }
-        public ApplicationDBContext(DbContextOptions options) : base(options) { }
+        public OpusLinkDBContext(DbContextOptions options) : base(options) { }
         protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
         {
             if (!optionsBuilder.IsConfigured)
