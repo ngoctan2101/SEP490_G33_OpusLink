@@ -7,6 +7,11 @@
   </PropertyGroup>
 
   <ItemGroup>
+<<<<<<< Updated upstream
+=======
+    <PackageReference Include="AutoMapper" Version="12.0.1" />
+    <PackageReference Include="Microsoft.AspNetCore.Identity.EntityFrameworkCore" Version="6.0.26" />
+>>>>>>> Stashed changes
     <PackageReference Include="Microsoft.EntityFrameworkCore.Design" Version="6.0.26">
       <PrivateAssets>all</PrivateAssets>
       <IncludeAssets>runtime; build; native; contentfiles; analyzers; buildtransitive</IncludeAssets>
@@ -17,7 +22,13 @@
   </ItemGroup>
 
   <ItemGroup>
+<<<<<<< Updated upstream
     <Folder Include="DTO\" />
+=======
+    <None Update="appsettings.json">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </None>
+>>>>>>> Stashed changes
   </ItemGroup>
 
 </Project>
