@@ -1,0 +1,106 @@
+﻿@page
+@model OpusLink.Admin.Hosted.Pages.ManageSkill.ViewsModel
+@{
+}
+<body>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <!-- Thanh tìm kiếm và nút "Add New" trong một thẻ div -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <button class="btn btn-outline-secondary" type="button">Search</button>
+                </div>
+            </div>
+            <div>
+                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSkillModal">Add New</button>
+            </div>
+        </div>
+
+        <!-- Bảng kỹ năng -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">Skill Name</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Dữ liệu của bảng sẽ được thêm ở đây -->
+                <tr>
+                    <th scope="row">1</th>
+                    <td>Programming</td>
+                    <td>
+                        <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editSkillModal">Edit</button>
+                        <button class="btn btn-danger btn-sm" onclick="confirmDelete()">Delete</button>
+                    </td>
+                </tr>
+                <!-- Thêm các dòng khác nếu cần -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal Thêm mới -->
+    <div class="modal fade" id="addSkillModal" tabindex="-1" aria-labelledby="addSkillModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addSkillModalLabel">Add New Skill</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form thêm mới sẽ được thêm ở đây -->
+                    <form>
+                        <div class="mb-3">
+                            <label for="skillName" class="form-label">Skill Name</label>
+                            <input type="text" class="form-control" id="skillName" required>
+                        </div>
+                        <!-- Thêm các trường khác nếu cần -->
+                        <button type="submit" class="btn btn-primary">Add Skill</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Edit -->
+    <div class="modal fade" id="editSkillModal" tabindex="-1" aria-labelledby="editSkillModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editSkillModalLabel">Edit Skill</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form chỉnh sửa sẽ được thêm ở đây -->
+                    <form>
+                        <div class="mb-3">
+                            <label for="editSkillName" class="form-label">Skill Name</label>
+                            <input type="text" class="form-control" id="editSkillName" required>
+                        </div>
+                        <!-- Thêm các trường khác nếu cần -->
+                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS và Popper.js (cần phải đặt sau thẻ body) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        function confirmDelete() {
+            var result = confirm("Are you sure you want to delete this skill?");
+            if (result) {
+                // Thực hiện xóa nếu người dùng chọn "OK"
+                // Thêm mã xóa kỹ năng ở đây
+            } else {
+                // Hủy bỏ xóa nếu người dùng chọn "Cancel" (hoặc "No")
+            }
+        }
+    </script>
+</body>

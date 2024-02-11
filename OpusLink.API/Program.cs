@@ -1,3 +1,6 @@
+using AutoMapper;
+using OpusLink.Entity.AutoMapper;
+
 internal class Program
 {
     private static void Main(string[] args)
@@ -10,7 +13,11 @@ internal class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
-
+        var mapperConfig = new MapperConfiguration(mc =>
+        {
+            mc.AddProfile(new MapperConfig());
+        });
+        IMapper mapper = mapperConfig.CreateMapper();
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.

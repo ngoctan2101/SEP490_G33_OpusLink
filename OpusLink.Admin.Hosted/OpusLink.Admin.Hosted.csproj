@@ -7,9 +7,20 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <Compile Remove="Pages\ManageAccount\**" />
+    <Content Remove="Pages\ManageAccount\**" />
+    <EmbeddedResource Remove="Pages\ManageAccount\**" />
+    <None Remove="Pages\ManageAccount\**" />
+  </ItemGroup>
+
+  <ItemGroup>
     <ProjectReference Include="..\OpusLink.Entity\OpusLink.Entity.csproj" />
     <ProjectReference Include="..\OpusLink.Service\OpusLink.Service.csproj" />
     <ProjectReference Include="..\OpusLink.Shared\OpusLink.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="Pages\ManageJob\" />
   </ItemGroup>
 
 </Project>
