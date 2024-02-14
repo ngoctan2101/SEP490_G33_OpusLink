@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace OpusLink.Entity.Models
 {
-    public class JobInCategory
+    public class JobAndCategory
     {
-        public int JobInCategoryID { get; set; }
+        public int JobAndCategoryID { get; set; }
         public int CategoryID { get; set; }
         public int JobID { get; set; }
         public virtual Category? Category { get; set; }

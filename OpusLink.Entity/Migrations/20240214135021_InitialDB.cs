@@ -28,7 +28,7 @@ namespace OpusLink.Entity.Migrations
                 name: "AspNetUsers",
                 columns: table => new
                 {
-                    UserID = table.Column<int>(type: "int", nullable: false)
+                    Id = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
                     Email = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
@@ -45,6 +45,7 @@ namespace OpusLink.Entity.Migrations
                     BankAccountInfor = table.Column<string>(type: "nvarchar(max)", nullable: true),
                     IsVeryfiedIdentity = table.Column<bool>(type: "bit", nullable: false),
                     AmountMoney = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
+                    Status = table.Column<short>(type: "smallint", nullable: false),
                     NormalizedUserName = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     NormalizedEmail = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: true),
                     EmailConfirmed = table.Column<bool>(type: "bit", nullable: false),
@@ -59,7 +60,7 @@ namespace OpusLink.Entity.Migrations
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_AspNetUsers", x => x.UserID);
+                    table.PrimaryKey("PK_AspNetUsers", x => x.Id);
                 });
 
             migrationBuilder.CreateTable(
@@ -180,7 +181,7 @@ namespace OpusLink.Entity.Migrations
                         name: "FK_AspNetUserClaims_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "UserID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -200,7 +201,7 @@ namespace OpusLink.Entity.Migrations
                         name: "FK_AspNetUserLogins_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "UserID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -224,7 +225,7 @@ namespace OpusLink.Entity.Migrations
                         name: "FK_AspNetUserRoles_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "UserID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -244,7 +245,7 @@ namespace OpusLink.Entity.Migrations
                         name: "FK_AspNetUserTokens_AspNetUsers_UserId",
                         column: x => x.UserId,
                         principalTable: "AspNetUsers",
-                        principalColumn: "UserID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                 });
 
@@ -265,13 +266,13 @@ namespace OpusLink.Entity.Migrations
                         name: "FK_ChatBox_AspNetUsers_EmployerID",
                         column: x => x.EmployerID,
                         principalTable: "AspNetUsers",
-                        principalColumn: "UserID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ChatBox_AspNetUsers_FreelancerID",
                         column: x => x.FreelancerID,
                         principalTable: "AspNetUsers",
-                        principalColumn: "UserID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -294,13 +295,13 @@ namespace OpusLink.Entity.Migrations
                         name: "FK_FeedbackUser_AspNetUsers_CreateByUserID",
                         column: x => x.CreateByUserID,
                         principalTable: "AspNetUsers",
-                        principalColumn: "UserID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_FeedbackUser_AspNetUsers_TargetToUserID",
                         column: x => x.TargetToUserID,
                         principalTable: "AspNetUsers",
-                        principalColumn: "UserID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -312,7 +313,7 @@ namespace OpusLink.Entity.Migrations
                         .Annotation("SqlServer:Identity", "1, 1"),
                     UserID = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
-                    TransactionType = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false),
+                    TransactionType = table.Column<short>(type: "smallint", nullable: false),
                     TransactionDate = table.Column<DateTime>(type: "datetime2", nullable: false),
                     TransactionCode = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false)
                 },
@@ -323,7 +324,7 @@ namespace OpusLink.Entity.Migrations
                         name: "FK_HistoryPayment_AspNetUsers_UserID",
                         column: x => x.UserID,
                         principalTable: "AspNetUsers",
-                        principalColumn: "UserID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -346,7 +347,7 @@ namespace OpusLink.Entity.Migrations
                         name: "FK_Notification_AspNetUsers_UserID",
                         column: x => x.UserID,
                         principalTable: "AspNetUsers",
-                        principalColumn: "UserID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -368,13 +369,13 @@ namespace OpusLink.Entity.Migrations
                         name: "FK_ReportUser_AspNetUsers_CreateByUserID",
                         column: x => x.CreateByUserID,
                         principalTable: "AspNetUsers",
-                        principalColumn: "UserID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ReportUser_AspNetUsers_TargetToUserID",
                         column: x => x.TargetToUserID,
                         principalTable: "AspNetUsers",
-                        principalColumn: "UserID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -387,7 +388,7 @@ namespace OpusLink.Entity.Migrations
                     UserID = table.Column<int>(type: "int", nullable: false),
                     Amount = table.Column<decimal>(type: "decimal(18,2)", nullable: false),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: false),
-                    Status = table.Column<string>(type: "nvarchar(256)", maxLength: 256, nullable: false)
+                    Status = table.Column<short>(type: "smallint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -396,7 +397,7 @@ namespace OpusLink.Entity.Migrations
                         name: "FK_WithdrawRequest_AspNetUsers_UserID",
                         column: x => x.UserID,
                         principalTable: "AspNetUsers",
-                        principalColumn: "UserID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                 });
 
@@ -414,7 +415,7 @@ namespace OpusLink.Entity.Migrations
                     BudgetTo = table.Column<decimal>(type: "decimal(18,2)", nullable: true),
                     DateCreated = table.Column<DateTime>(type: "datetime2", nullable: true),
                     LocationID = table.Column<int>(type: "int", nullable: true),
-                    Status = table.Column<string>(type: "nvarchar(20)", maxLength: 20, nullable: true)
+                    Status = table.Column<short>(type: "smallint", nullable: false)
                 },
                 constraints: table =>
                 {
@@ -423,13 +424,13 @@ namespace OpusLink.Entity.Migrations
                         name: "FK_Job_AspNetUsers_EmployerID",
                         column: x => x.EmployerID,
                         principalTable: "AspNetUsers",
-                        principalColumn: "UserID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Cascade);
                     table.ForeignKey(
                         name: "FK_Job_AspNetUsers_FreelancerID",
                         column: x => x.FreelancerID,
                         principalTable: "AspNetUsers",
-                        principalColumn: "UserID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Job_Location_LocationID",
@@ -440,25 +441,25 @@ namespace OpusLink.Entity.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "FreelancerWithSkill",
+                name: "FreelancerAndSkill",
                 columns: table => new
                 {
-                    FreelancerWithSkillID = table.Column<int>(type: "int", nullable: false)
+                    FreelancerAndSkillID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     FreelancerID = table.Column<int>(type: "int", nullable: false),
                     SkillID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_FreelancerWithSkill", x => x.FreelancerWithSkillID);
+                    table.PrimaryKey("PK_FreelancerAndSkill", x => x.FreelancerAndSkillID);
                     table.ForeignKey(
-                        name: "FK_FreelancerWithSkill_AspNetUsers_FreelancerID",
+                        name: "FK_FreelancerAndSkill_AspNetUsers_FreelancerID",
                         column: x => x.FreelancerID,
                         principalTable: "AspNetUsers",
-                        principalColumn: "UserID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_FreelancerWithSkill_Skill_SkillID",
+                        name: "FK_FreelancerAndSkill_Skill_SkillID",
                         column: x => x.SkillID,
                         principalTable: "Skill",
                         principalColumn: "SkillID",
@@ -488,25 +489,25 @@ namespace OpusLink.Entity.Migrations
                 });
 
             migrationBuilder.CreateTable(
-                name: "JobInCategory",
+                name: "JobAndCategory",
                 columns: table => new
                 {
-                    JobInCategoryID = table.Column<int>(type: "int", nullable: false)
+                    JobAndCategoryID = table.Column<int>(type: "int", nullable: false)
                         .Annotation("SqlServer:Identity", "1, 1"),
                     CategoryID = table.Column<int>(type: "int", nullable: false),
                     JobID = table.Column<int>(type: "int", nullable: false)
                 },
                 constraints: table =>
                 {
-                    table.PrimaryKey("PK_JobInCategory", x => x.JobInCategoryID);
+                    table.PrimaryKey("PK_JobAndCategory", x => x.JobAndCategoryID);
                     table.ForeignKey(
-                        name: "FK_JobInCategory_Category_CategoryID",
+                        name: "FK_JobAndCategory_Category_CategoryID",
                         column: x => x.CategoryID,
                         principalTable: "Category",
                         principalColumn: "CategoryID",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
-                        name: "FK_JobInCategory_Job_JobID",
+                        name: "FK_JobAndCategory_Job_JobID",
                         column: x => x.JobID,
                         principalTable: "Job",
                         principalColumn: "JobID",
@@ -557,7 +558,7 @@ namespace OpusLink.Entity.Migrations
                         name: "FK_Offer_AspNetUsers_FreelancerID",
                         column: x => x.FreelancerID,
                         principalTable: "AspNetUsers",
-                        principalColumn: "UserID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_Offer_Job_JobID",
@@ -585,7 +586,7 @@ namespace OpusLink.Entity.Migrations
                         name: "FK_ReportJob_AspNetUsers_TargetToJob",
                         column: x => x.TargetToJob,
                         principalTable: "AspNetUsers",
-                        principalColumn: "UserID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_ReportJob_Job_TargetToJob",
@@ -611,7 +612,7 @@ namespace OpusLink.Entity.Migrations
                         name: "FK_SaveJob_AspNetUsers_JobID",
                         column: x => x.JobID,
                         principalTable: "AspNetUsers",
-                        principalColumn: "UserID",
+                        principalColumn: "Id",
                         onDelete: ReferentialAction.Restrict);
                     table.ForeignKey(
                         name: "FK_SaveJob_Job_JobID",
@@ -622,18 +623,29 @@ namespace OpusLink.Entity.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "AspNetUsers",
-                columns: new[] { "UserID", "AccessFailedCount", "Address", "AmountMoney", "BankAccountInfor", "BankName", "CVFilePath", "ConcurrencyStamp", "Dob", "Email", "EmailConfirmed", "FullNameOnIDCard", "IDNumber", "Introduction", "IsVeryfiedIdentity", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePicture", "SecurityStamp", "StarMedium", "TwoFactorEnabled", "UserName" },
+                table: "AspNetRoles",
+                columns: new[] { "Id", "ConcurrencyStamp", "Name", "NormalizedName" },
                 values: new object[,]
                 {
-                    { 1, 1, null, null, null, null, null, "407f1539-ec29-453a-85ab-d83fbc262438", null, "nva123@gmail.com", true, null, null, null, false, false, null, null, null, "test", null, false, null, null, null, false, "Nguyen Van A" },
-                    { 2, 2, null, null, null, null, null, "2b9515d0-f428-4486-ba86-d3f875d87b40", null, "nvb123@gmail.com", true, null, null, null, true, false, null, null, null, "test", null, false, null, null, null, false, "Nguyen Van B" },
-                    { 3, 0, null, null, null, null, null, "0ece3227-5e59-4dc4-9752-772561de2127", null, "nvc123@gmail.com", false, null, null, null, false, false, null, null, null, "test", null, false, null, null, null, false, "Nguyen Van C" },
-                    { 4, 3, null, null, null, null, null, "6113aea3-2102-407c-9c5f-f40a720fdb4b", null, "tvd123@gmail.com", true, null, null, null, false, false, null, null, null, "test", null, false, null, null, null, false, "Tran Van D" },
-                    { 5, 4, null, null, null, null, null, "34c2fa0b-2d94-4a29-be12-34a0417b5848", null, "tte123@gmail.com", true, null, null, null, false, false, null, null, null, "test", null, false, null, null, null, false, "Tran Thi E" },
-                    { 6, 5, null, null, null, null, null, "de7a66e1-a4dd-4e2c-873a-97c928e4bf92", null, "tvf123@gmail.com", false, null, null, null, false, false, null, null, null, "test", null, false, null, null, null, false, "Tran Van F" },
-                    { 7, 6, null, null, null, null, null, "288a6c76-a14f-43f6-aaf3-7b78b75c2e90", null, "ttg123@gmail.com", true, null, null, null, true, false, null, null, null, "test", null, false, null, null, null, false, "Tran Thi G" },
-                    { 8, 7, null, null, null, null, null, "0c38746b-38cc-46e3-a4ed-1c8e464c61d5", null, "tth123@gmail.com", true, null, null, null, false, false, null, null, null, "test", null, false, null, null, null, false, "Tran Thi H" }
+                    { 1, "29d646f4-5d2b-4982-aed6-671cd500a647", "Admin", null },
+                    { 2, "1ef53e36-65fd-4b37-a4ca-3ccc43bfd49f", "Freelancer", null },
+                    { 3, "c888c6d0-8189-4c8e-b957-f121ac652d30", "Employer", null }
+                });
+
+            migrationBuilder.InsertData(
+                table: "AspNetUsers",
+                columns: new[] { "Id", "AccessFailedCount", "Address", "AmountMoney", "BankAccountInfor", "BankName", "CVFilePath", "ConcurrencyStamp", "Dob", "Email", "EmailConfirmed", "FullNameOnIDCard", "IDNumber", "Introduction", "IsVeryfiedIdentity", "LockoutEnabled", "LockoutEnd", "NormalizedEmail", "NormalizedUserName", "PasswordHash", "PhoneNumber", "PhoneNumberConfirmed", "ProfilePicture", "SecurityStamp", "StarMedium", "Status", "TwoFactorEnabled", "UserName" },
+                values: new object[,]
+                {
+                    { 1, 1, null, null, null, null, null, "6bf6a083-e1c7-4852-9525-66a89a7aad61", null, "nva123@gmail.com", true, null, null, null, false, false, null, null, null, "test", null, false, null, null, null, (short)1, false, "Nguyen Van A" },
+                    { 2, 2, null, null, null, null, null, "747a09dc-42e7-4a17-87c8-591a57b4fd26", null, "nvb123@gmail.com", true, null, null, null, true, false, null, null, null, "test", null, false, null, null, null, (short)1, false, "Nguyen Van B" },
+                    { 3, 0, null, null, null, null, null, "a0c3a724-15fb-491d-a5d4-5f4de614b47f", null, "nvc123@gmail.com", false, null, null, null, false, false, null, null, null, "test", null, false, null, null, null, (short)1, false, "Nguyen Van C" },
+                    { 4, 3, null, null, null, null, null, "bcbb6907-68a7-48dc-87dd-19a376d87e62", null, "tvd123@gmail.com", true, null, null, null, false, false, null, null, null, "test", null, false, null, null, null, (short)1, false, "Tran Van D" },
+                    { 5, 4, null, null, null, null, null, "63810dba-8782-40ac-8cec-801c2d37820f", null, "tte123@gmail.com", true, null, null, null, false, false, null, null, null, "test", null, false, null, null, null, (short)1, false, "Tran Thi E" },
+                    { 6, 5, null, null, null, null, null, "36441ad6-b4f6-4283-a531-ad21475eea2e", null, "tvf123@gmail.com", false, null, null, null, false, false, null, null, null, "test", null, false, null, null, null, (short)1, false, "Tran Van F" },
+                    { 7, 6, null, null, null, null, null, "e4b45181-0d25-4abe-9540-727a0523d1e2", null, "ttg123@gmail.com", true, null, null, null, true, false, null, null, null, "test", null, false, null, null, null, (short)1, false, "Tran Thi G" },
+                    { 8, 7, null, null, null, null, null, "7da6364e-79c1-4e4c-9246-c8f0a684df5a", null, "tth123@gmail.com", true, null, null, null, false, false, null, null, null, "test", null, false, null, null, null, (short)1, false, "Tran Thi H" },
+                    { 9, 7, null, null, null, null, null, "5a848228-23c2-465e-900f-d09b412efabd", null, "admin@gmail.com", true, null, null, null, false, false, null, null, null, "admin", null, false, null, null, null, (short)1, false, "admin" }
                 });
 
             migrationBuilder.InsertData(
@@ -678,6 +690,22 @@ namespace OpusLink.Entity.Migrations
                 });
 
             migrationBuilder.InsertData(
+                table: "AspNetUserRoles",
+                columns: new[] { "RoleId", "UserId" },
+                values: new object[,]
+                {
+                    { 3, 1 },
+                    { 3, 2 },
+                    { 3, 3 },
+                    { 2, 4 },
+                    { 2, 5 },
+                    { 2, 6 },
+                    { 2, 7 },
+                    { 2, 8 },
+                    { 1, 9 }
+                });
+
+            migrationBuilder.InsertData(
                 table: "Category",
                 columns: new[] { "CategoryID", "CategoryName", "CategoryParentID" },
                 values: new object[,]
@@ -687,8 +715,8 @@ namespace OpusLink.Entity.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "FreelancerWithSkill",
-                columns: new[] { "FreelancerWithSkillID", "FreelancerID", "SkillID" },
+                table: "FreelancerAndSkill",
+                columns: new[] { "FreelancerAndSkillID", "FreelancerID", "SkillID" },
                 values: new object[,]
                 {
                     { 1, 4, 1 },
@@ -706,9 +734,9 @@ namespace OpusLink.Entity.Migrations
                 columns: new[] { "JobID", "BudgetFrom", "BudgetTo", "DateCreated", "EmployerID", "FreelancerID", "JobContent", "JobTitle", "LocationID", "Status" },
                 values: new object[,]
                 {
-                    { 1, 300000m, 500000m, new DateTime(2023, 1, 29, 21, 0, 0, 0, DateTimeKind.Unspecified), 1, 5, "Minh can 1 nguoi code web", "Tim DEV", 1, "Hired" },
-                    { 2, 200000m, 800000m, new DateTime(2023, 1, 29, 21, 0, 0, 0, DateTimeKind.Unspecified), 2, null, "Can 1 nguoi hieu ve nghiep vu ngan hang để tạo ra tài liệu requirement cho trang web", "Tim BA làm requirement", 1, "Approved" },
-                    { 3, 400000m, 1000000m, new DateTime(2023, 1, 29, 22, 0, 0, 0, DateTimeKind.Unspecified), 2, 8, "Can nguoi giup minh thiet ke DataBase cho trang web giao duc", "Thiet ke Database", 2, "Hired" }
+                    { 1, 300000m, 500000m, new DateTime(2023, 1, 29, 21, 0, 0, 0, DateTimeKind.Unspecified), 1, 5, "Minh can 1 nguoi code web", "Tim DEV", 1, (short)3 },
+                    { 2, 200000m, 800000m, new DateTime(2023, 1, 29, 21, 0, 0, 0, DateTimeKind.Unspecified), 2, null, "Can 1 nguoi hieu ve nghiep vu ngan hang để tạo ra tài liệu requirement cho trang web", "Tim BA làm requirement", 1, (short)2 },
+                    { 3, 400000m, 1000000m, new DateTime(2023, 1, 29, 22, 0, 0, 0, DateTimeKind.Unspecified), 2, 8, "Can nguoi giup minh thiet ke DataBase cho trang web giao duc", "Thiet ke Database", 2, (short)3 }
                 });
 
             migrationBuilder.InsertData(
@@ -721,8 +749,8 @@ namespace OpusLink.Entity.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "FreelancerWithSkill",
-                columns: new[] { "FreelancerWithSkillID", "FreelancerID", "SkillID" },
+                table: "FreelancerAndSkill",
+                columns: new[] { "FreelancerAndSkillID", "FreelancerID", "SkillID" },
                 values: new object[,]
                 {
                     { 2, 5, 2 },
@@ -732,8 +760,8 @@ namespace OpusLink.Entity.Migrations
                 });
 
             migrationBuilder.InsertData(
-                table: "JobInCategory",
-                columns: new[] { "JobInCategoryID", "CategoryID", "JobID" },
+                table: "JobAndCategory",
+                columns: new[] { "JobAndCategoryID", "CategoryID", "JobID" },
                 values: new object[,]
                 {
                     { 1, 1, 1 },
@@ -833,13 +861,13 @@ namespace OpusLink.Entity.Migrations
                 column: "TargetToUserID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FreelancerWithSkill_FreelancerID",
-                table: "FreelancerWithSkill",
+                name: "IX_FreelancerAndSkill_FreelancerID",
+                table: "FreelancerAndSkill",
                 column: "FreelancerID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_FreelancerWithSkill_SkillID",
-                table: "FreelancerWithSkill",
+                name: "IX_FreelancerAndSkill_SkillID",
+                table: "FreelancerAndSkill",
                 column: "SkillID");
 
             migrationBuilder.CreateIndex(
@@ -863,13 +891,13 @@ namespace OpusLink.Entity.Migrations
                 column: "LocationID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_JobInCategory_CategoryID",
-                table: "JobInCategory",
+                name: "IX_JobAndCategory_CategoryID",
+                table: "JobAndCategory",
                 column: "CategoryID");
 
             migrationBuilder.CreateIndex(
-                name: "IX_JobInCategory_JobID",
-                table: "JobInCategory",
+                name: "IX_JobAndCategory_JobID",
+                table: "JobAndCategory",
                 column: "JobID");
 
             migrationBuilder.CreateIndex(
@@ -952,13 +980,13 @@ namespace OpusLink.Entity.Migrations
                 name: "FeedbackUser");
 
             migrationBuilder.DropTable(
-                name: "FreelancerWithSkill");
+                name: "FreelancerAndSkill");
 
             migrationBuilder.DropTable(
                 name: "HistoryPayment");
 
             migrationBuilder.DropTable(
-                name: "JobInCategory");
+                name: "JobAndCategory");
 
             migrationBuilder.DropTable(
                 name: "Message");

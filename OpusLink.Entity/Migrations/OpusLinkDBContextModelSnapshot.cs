@@ -11,7 +11,7 @@ using OpusLink.Entity;
 namespace OpusLink.Entity.Migrations
 {
     [DbContext(typeof(OpusLinkDBContext))]
-    partial class ApplicationDBContextModelSnapshot : ModelSnapshot
+    partial class OpusLinkDBContextModelSnapshot : ModelSnapshot
     {
         protected override void BuildModel(ModelBuilder modelBuilder)
         {
@@ -21,36 +21,6 @@ namespace OpusLink.Entity.Migrations
                 .HasAnnotation("Relational:MaxIdentifierLength", 128);
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRole<int>", b =>
-                {
-                    b.Property<int>("Id")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
-
-                    b.Property<string>("ConcurrencyStamp")
-                        .IsConcurrencyToken()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.Property<string>("Name")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.Property<string>("NormalizedName")
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
-
-                    b.HasKey("Id");
-
-                    b.HasIndex("NormalizedName")
-                        .IsUnique()
-                        .HasDatabaseName("RoleNameIndex")
-                        .HasFilter("[NormalizedName] IS NOT NULL");
-
-                    b.ToTable("AspNetRoles", (string)null);
-                });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
@@ -119,21 +89,6 @@ namespace OpusLink.Entity.Migrations
                     b.HasIndex("UserId");
 
                     b.ToTable("AspNetUserLogins", (string)null);
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
-                {
-                    b.Property<int>("UserId")
-                        .HasColumnType("int");
-
-                    b.Property<int>("RoleId")
-                        .HasColumnType("int");
-
-                    b.HasKey("UserId", "RoleId");
-
-                    b.HasIndex("RoleId");
-
-                    b.ToTable("AspNetUserRoles", (string)null);
                 });
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserToken<int>", b =>
@@ -284,13 +239,13 @@ namespace OpusLink.Entity.Migrations
                     b.ToTable("FeedbackUser", (string)null);
                 });
 
-            modelBuilder.Entity("OpusLink.Entity.Models.FreelancerWithSkill", b =>
+            modelBuilder.Entity("OpusLink.Entity.Models.FreelancerAndSkill", b =>
                 {
-                    b.Property<int>("FreelancerWithSkillID")
+                    b.Property<int>("FreelancerAndSkillID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FreelancerWithSkillID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("FreelancerAndSkillID"), 1L, 1);
 
                     b.Property<int>("FreelancerID")
                         .HasColumnType("int");
@@ -298,84 +253,84 @@ namespace OpusLink.Entity.Migrations
                     b.Property<int>("SkillID")
                         .HasColumnType("int");
 
-                    b.HasKey("FreelancerWithSkillID");
+                    b.HasKey("FreelancerAndSkillID");
 
                     b.HasIndex("FreelancerID");
 
                     b.HasIndex("SkillID");
 
-                    b.ToTable("FreelancerWithSkill", (string)null);
+                    b.ToTable("FreelancerAndSkill", (string)null);
 
                     b.HasData(
                         new
                         {
-                            FreelancerWithSkillID = 1,
+                            FreelancerAndSkillID = 1,
                             FreelancerID = 4,
                             SkillID = 1
                         },
                         new
                         {
-                            FreelancerWithSkillID = 2,
+                            FreelancerAndSkillID = 2,
                             FreelancerID = 5,
                             SkillID = 2
                         },
                         new
                         {
-                            FreelancerWithSkillID = 3,
+                            FreelancerAndSkillID = 3,
                             FreelancerID = 6,
                             SkillID = 3
                         },
                         new
                         {
-                            FreelancerWithSkillID = 4,
+                            FreelancerAndSkillID = 4,
                             FreelancerID = 7,
                             SkillID = 4
                         },
                         new
                         {
-                            FreelancerWithSkillID = 5,
+                            FreelancerAndSkillID = 5,
                             FreelancerID = 8,
                             SkillID = 5
                         },
                         new
                         {
-                            FreelancerWithSkillID = 6,
+                            FreelancerAndSkillID = 6,
                             FreelancerID = 4,
                             SkillID = 6
                         },
                         new
                         {
-                            FreelancerWithSkillID = 7,
+                            FreelancerAndSkillID = 7,
                             FreelancerID = 7,
                             SkillID = 7
                         },
                         new
                         {
-                            FreelancerWithSkillID = 8,
+                            FreelancerAndSkillID = 8,
                             FreelancerID = 5,
                             SkillID = 1
                         },
                         new
                         {
-                            FreelancerWithSkillID = 9,
+                            FreelancerAndSkillID = 9,
                             FreelancerID = 6,
                             SkillID = 2
                         },
                         new
                         {
-                            FreelancerWithSkillID = 10,
+                            FreelancerAndSkillID = 10,
                             FreelancerID = 7,
                             SkillID = 3
                         },
                         new
                         {
-                            FreelancerWithSkillID = 11,
+                            FreelancerAndSkillID = 11,
                             FreelancerID = 8,
                             SkillID = 4
                         },
                         new
                         {
-                            FreelancerWithSkillID = 12,
+                            FreelancerAndSkillID = 12,
                             FreelancerID = 7,
                             SkillID = 5
                         });
@@ -400,10 +355,8 @@ namespace OpusLink.Entity.Migrations
                     b.Property<DateTime>("TransactionDate")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("TransactionType")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                    b.Property<short>("TransactionType")
+                        .HasColumnType("smallint");
 
                     b.Property<int>("UserID")
                         .HasColumnType("int");
@@ -448,9 +401,8 @@ namespace OpusLink.Entity.Migrations
                     b.Property<int?>("LocationID")
                         .HasColumnType("int");
 
-                    b.Property<string>("Status")
-                        .HasMaxLength(20)
-                        .HasColumnType("nvarchar(20)");
+                    b.Property<short>("Status")
+                        .HasColumnType("smallint");
 
                     b.HasKey("JobID");
 
@@ -474,7 +426,7 @@ namespace OpusLink.Entity.Migrations
                             JobContent = "Minh can 1 nguoi code web",
                             JobTitle = "Tim DEV",
                             LocationID = 1,
-                            Status = "Hired"
+                            Status = (short)3
                         },
                         new
                         {
@@ -486,7 +438,7 @@ namespace OpusLink.Entity.Migrations
                             JobContent = "Can 1 nguoi hieu ve nghiep vu ngan hang để tạo ra tài liệu requirement cho trang web",
                             JobTitle = "Tim BA làm requirement",
                             LocationID = 1,
-                            Status = "Approved"
+                            Status = (short)2
                         },
                         new
                         {
@@ -499,17 +451,17 @@ namespace OpusLink.Entity.Migrations
                             JobContent = "Can nguoi giup minh thiet ke DataBase cho trang web giao duc",
                             JobTitle = "Thiet ke Database",
                             LocationID = 2,
-                            Status = "Hired"
+                            Status = (short)3
                         });
                 });
 
-            modelBuilder.Entity("OpusLink.Entity.Models.JobInCategory", b =>
+            modelBuilder.Entity("OpusLink.Entity.Models.JobAndCategory", b =>
                 {
-                    b.Property<int>("JobInCategoryID")
+                    b.Property<int>("JobAndCategoryID")
                         .ValueGeneratedOnAdd()
                         .HasColumnType("int");
 
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("JobInCategoryID"), 1L, 1);
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("JobAndCategoryID"), 1L, 1);
 
                     b.Property<int>("CategoryID")
                         .HasColumnType("int");
@@ -517,48 +469,48 @@ namespace OpusLink.Entity.Migrations
                     b.Property<int>("JobID")
                         .HasColumnType("int");
 
-                    b.HasKey("JobInCategoryID");
+                    b.HasKey("JobAndCategoryID");
 
                     b.HasIndex("CategoryID");
 
                     b.HasIndex("JobID");
 
-                    b.ToTable("JobInCategory", (string)null);
+                    b.ToTable("JobAndCategory", (string)null);
 
                     b.HasData(
                         new
                         {
-                            JobInCategoryID = 1,
+                            JobAndCategoryID = 1,
                             CategoryID = 1,
                             JobID = 1
                         },
                         new
                         {
-                            JobInCategoryID = 2,
+                            JobAndCategoryID = 2,
                             CategoryID = 2,
                             JobID = 1
                         },
                         new
                         {
-                            JobInCategoryID = 3,
+                            JobAndCategoryID = 3,
                             CategoryID = 3,
                             JobID = 1
                         },
                         new
                         {
-                            JobInCategoryID = 4,
+                            JobAndCategoryID = 4,
                             CategoryID = 4,
                             JobID = 2
                         },
                         new
                         {
-                            JobInCategoryID = 5,
+                            JobAndCategoryID = 5,
                             CategoryID = 1,
                             JobID = 3
                         },
                         new
                         {
-                            JobInCategoryID = 6,
+                            JobAndCategoryID = 6,
                             CategoryID = 5,
                             JobID = 3
                         });
@@ -891,6 +843,56 @@ namespace OpusLink.Entity.Migrations
                     b.ToTable("ReportUser", (string)null);
                 });
 
+            modelBuilder.Entity("OpusLink.Entity.Models.Role", b =>
+                {
+                    b.Property<int>("Id")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
+
+                    b.Property<string>("ConcurrencyStamp")
+                        .IsConcurrencyToken()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Name")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.Property<string>("NormalizedName")
+                        .HasMaxLength(256)
+                        .HasColumnType("nvarchar(256)");
+
+                    b.HasKey("Id");
+
+                    b.HasIndex("NormalizedName")
+                        .IsUnique()
+                        .HasDatabaseName("RoleNameIndex")
+                        .HasFilter("[NormalizedName] IS NOT NULL");
+
+                    b.ToTable("AspNetRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            Id = 1,
+                            ConcurrencyStamp = "29d646f4-5d2b-4982-aed6-671cd500a647",
+                            Name = "Admin"
+                        },
+                        new
+                        {
+                            Id = 2,
+                            ConcurrencyStamp = "1ef53e36-65fd-4b37-a4ca-3ccc43bfd49f",
+                            Name = "Freelancer"
+                        },
+                        new
+                        {
+                            Id = 3,
+                            ConcurrencyStamp = "c888c6d0-8189-4c8e-b957-f121ac652d30",
+                            Name = "Employer"
+                        });
+                });
+
             modelBuilder.Entity("OpusLink.Entity.Models.SaveJob", b =>
                 {
                     b.Property<int>("SaveJobID")
@@ -1017,8 +1019,7 @@ namespace OpusLink.Entity.Migrations
                 {
                     b.Property<int>("Id")
                         .ValueGeneratedOnAdd()
-                        .HasColumnType("int")
-                        .HasColumnName("UserID");
+                        .HasColumnType("int");
 
                     SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("Id"), 1L, 1);
 
@@ -1106,6 +1107,9 @@ namespace OpusLink.Entity.Migrations
                     b.Property<decimal?>("StarMedium")
                         .HasColumnType("decimal(18,2)");
 
+                    b.Property<short>("Status")
+                        .HasColumnType("smallint");
+
                     b.Property<bool>("TwoFactorEnabled")
                         .HasColumnType("bit");
 
@@ -1131,13 +1135,14 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 1,
-                            ConcurrencyStamp = "407f1539-ec29-453a-85ab-d83fbc262438",
+                            ConcurrencyStamp = "6bf6a083-e1c7-4852-9525-66a89a7aad61",
                             Email = "nva123@gmail.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "test",
                             PhoneNumberConfirmed = false,
+                            Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Nguyen Van A"
                         },
@@ -1145,13 +1150,14 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 2,
-                            ConcurrencyStamp = "2b9515d0-f428-4486-ba86-d3f875d87b40",
+                            ConcurrencyStamp = "747a09dc-42e7-4a17-87c8-591a57b4fd26",
                             Email = "nvb123@gmail.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "test",
                             PhoneNumberConfirmed = false,
+                            Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Nguyen Van B"
                         },
@@ -1159,13 +1165,14 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-                            ConcurrencyStamp = "0ece3227-5e59-4dc4-9752-772561de2127",
+                            ConcurrencyStamp = "a0c3a724-15fb-491d-a5d4-5f4de614b47f",
                             Email = "nvc123@gmail.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "test",
                             PhoneNumberConfirmed = false,
+                            Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Nguyen Van C"
                         },
@@ -1173,13 +1180,14 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 3,
-                            ConcurrencyStamp = "6113aea3-2102-407c-9c5f-f40a720fdb4b",
+                            ConcurrencyStamp = "bcbb6907-68a7-48dc-87dd-19a376d87e62",
                             Email = "tvd123@gmail.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "test",
                             PhoneNumberConfirmed = false,
+                            Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Tran Van D"
                         },
@@ -1187,13 +1195,14 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 5,
                             AccessFailedCount = 4,
-                            ConcurrencyStamp = "34c2fa0b-2d94-4a29-be12-34a0417b5848",
+                            ConcurrencyStamp = "63810dba-8782-40ac-8cec-801c2d37820f",
                             Email = "tte123@gmail.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "test",
                             PhoneNumberConfirmed = false,
+                            Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Tran Thi E"
                         },
@@ -1201,13 +1210,14 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 6,
                             AccessFailedCount = 5,
-                            ConcurrencyStamp = "de7a66e1-a4dd-4e2c-873a-97c928e4bf92",
+                            ConcurrencyStamp = "36441ad6-b4f6-4283-a531-ad21475eea2e",
                             Email = "tvf123@gmail.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "test",
                             PhoneNumberConfirmed = false,
+                            Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Tran Van F"
                         },
@@ -1215,13 +1225,14 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 7,
                             AccessFailedCount = 6,
-                            ConcurrencyStamp = "288a6c76-a14f-43f6-aaf3-7b78b75c2e90",
+                            ConcurrencyStamp = "e4b45181-0d25-4abe-9540-727a0523d1e2",
                             Email = "ttg123@gmail.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "test",
                             PhoneNumberConfirmed = false,
+                            Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Tran Thi G"
                         },
@@ -1229,15 +1240,93 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 8,
                             AccessFailedCount = 7,
-                            ConcurrencyStamp = "0c38746b-38cc-46e3-a4ed-1c8e464c61d5",
+                            ConcurrencyStamp = "7da6364e-79c1-4e4c-9246-c8f0a684df5a",
                             Email = "tth123@gmail.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "test",
                             PhoneNumberConfirmed = false,
+                            Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Tran Thi H"
+                        },
+                        new
+                        {
+                            Id = 9,
+                            AccessFailedCount = 7,
+                            ConcurrencyStamp = "5a848228-23c2-465e-900f-d09b412efabd",
+                            Email = "admin@gmail.com",
+                            EmailConfirmed = true,
+                            IsVeryfiedIdentity = false,
+                            LockoutEnabled = false,
+                            PasswordHash = "admin",
+                            PhoneNumberConfirmed = false,
+                            Status = (short)1,
+                            TwoFactorEnabled = false,
+                            UserName = "admin"
+                        });
+                });
+
+            modelBuilder.Entity("OpusLink.Entity.Models.UserAndRole", b =>
+                {
+                    b.Property<int>("UserId")
+                        .HasColumnType("int");
+
+                    b.Property<int>("RoleId")
+                        .HasColumnType("int");
+
+                    b.HasKey("UserId", "RoleId");
+
+                    b.HasIndex("RoleId");
+
+                    b.ToTable("AspNetUserRoles", (string)null);
+
+                    b.HasData(
+                        new
+                        {
+                            UserId = 9,
+                            RoleId = 1
+                        },
+                        new
+                        {
+                            UserId = 1,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            UserId = 2,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            UserId = 3,
+                            RoleId = 3
+                        },
+                        new
+                        {
+                            UserId = 4,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 5,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 6,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 7,
+                            RoleId = 2
+                        },
+                        new
+                        {
+                            UserId = 8,
+                            RoleId = 2
                         });
                 });
 
@@ -1255,10 +1344,8 @@ namespace OpusLink.Entity.Migrations
                     b.Property<DateTime>("DateCreated")
                         .HasColumnType("datetime2");
 
-                    b.Property<string>("Status")
-                        .IsRequired()
-                        .HasMaxLength(256)
-                        .HasColumnType("nvarchar(256)");
+                    b.Property<short>("Status")
+                        .HasColumnType("smallint");
 
                     b.Property<int>("UserID")
                         .HasColumnType("int");
@@ -1272,7 +1359,7 @@ namespace OpusLink.Entity.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityRoleClaim<int>", b =>
                 {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
+                    b.HasOne("OpusLink.Entity.Models.Role", null)
                         .WithMany()
                         .HasForeignKey("RoleId")
                         .OnDelete(DeleteBehavior.Cascade)
@@ -1290,21 +1377,6 @@ namespace OpusLink.Entity.Migrations
 
             modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserLogin<int>", b =>
                 {
-                    b.HasOne("OpusLink.Entity.Models.User", null)
-                        .WithMany()
-                        .HasForeignKey("UserId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-                });
-
-            modelBuilder.Entity("Microsoft.AspNetCore.Identity.IdentityUserRole<int>", b =>
-                {
-                    b.HasOne("Microsoft.AspNetCore.Identity.IdentityRole<int>", null)
-                        .WithMany()
-                        .HasForeignKey("RoleId")
-                        .OnDelete(DeleteBehavior.Cascade)
-                        .IsRequired();
-
                     b.HasOne("OpusLink.Entity.Models.User", null)
                         .WithMany()
                         .HasForeignKey("UserId")
@@ -1369,16 +1441,16 @@ namespace OpusLink.Entity.Migrations
                     b.Navigation("TargetToUser");
                 });
 
-            modelBuilder.Entity("OpusLink.Entity.Models.FreelancerWithSkill", b =>
+            modelBuilder.Entity("OpusLink.Entity.Models.FreelancerAndSkill", b =>
                 {
                     b.HasOne("OpusLink.Entity.Models.User", "Freelancer")
-                        .WithMany("FreelancerWithSkills")
+                        .WithMany("FreelancerAndSkills")
                         .HasForeignKey("FreelancerID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("OpusLink.Entity.Models.Skill", "Skill")
-                        .WithMany("FreelancerWithSkills")
+                        .WithMany("FreelancerAndSkills")
                         .HasForeignKey("SkillID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1424,16 +1496,16 @@ namespace OpusLink.Entity.Migrations
                     b.Navigation("Location");
                 });
 
-            modelBuilder.Entity("OpusLink.Entity.Models.JobInCategory", b =>
+            modelBuilder.Entity("OpusLink.Entity.Models.JobAndCategory", b =>
                 {
                     b.HasOne("OpusLink.Entity.Models.Category", "Category")
-                        .WithMany("JobInCategories")
+                        .WithMany("JobAndCategories")
                         .HasForeignKey("CategoryID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
 
                     b.HasOne("OpusLink.Entity.Models.Job", "Job")
-                        .WithMany("JobInCategories")
+                        .WithMany("JobAndCategories")
                         .HasForeignKey("JobID")
                         .OnDelete(DeleteBehavior.Restrict)
                         .IsRequired();
@@ -1562,6 +1634,21 @@ namespace OpusLink.Entity.Migrations
                     b.Navigation("SkillParent");
                 });
 
+            modelBuilder.Entity("OpusLink.Entity.Models.UserAndRole", b =>
+                {
+                    b.HasOne("OpusLink.Entity.Models.Role", null)
+                        .WithMany()
+                        .HasForeignKey("RoleId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("OpusLink.Entity.Models.User", null)
+                        .WithMany()
+                        .HasForeignKey("UserId")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+                });
+
             modelBuilder.Entity("OpusLink.Entity.Models.WithdrawRequest", b =>
                 {
                     b.HasOne("OpusLink.Entity.Models.User", "User")
@@ -1575,7 +1662,7 @@ namespace OpusLink.Entity.Migrations
 
             modelBuilder.Entity("OpusLink.Entity.Models.Category", b =>
                 {
-                    b.Navigation("JobInCategories");
+                    b.Navigation("JobAndCategories");
                 });
 
             modelBuilder.Entity("OpusLink.Entity.Models.ChatBox", b =>
@@ -1585,7 +1672,7 @@ namespace OpusLink.Entity.Migrations
 
             modelBuilder.Entity("OpusLink.Entity.Models.Job", b =>
                 {
-                    b.Navigation("JobInCategories");
+                    b.Navigation("JobAndCategories");
 
                     b.Navigation("Milestones");
 
@@ -1603,7 +1690,7 @@ namespace OpusLink.Entity.Migrations
 
             modelBuilder.Entity("OpusLink.Entity.Models.Skill", b =>
                 {
-                    b.Navigation("FreelancerWithSkills");
+                    b.Navigation("FreelancerAndSkills");
                 });
 
             modelBuilder.Entity("OpusLink.Entity.Models.User", b =>
@@ -1616,7 +1703,7 @@ namespace OpusLink.Entity.Migrations
 
                     b.Navigation("FeedbackUsersAsATargeter");
 
-                    b.Navigation("FreelancerWithSkills");
+                    b.Navigation("FreelancerAndSkills");
 
                     b.Navigation("HistoryPayments");
 
