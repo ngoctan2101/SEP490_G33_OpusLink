@@ -16,8 +16,12 @@ internal class Program
         var mapperConfig = new MapperConfiguration(mc =>
         {
             mc.AddProfile(new MapperConfig());
+            mc.AddProfile(new UserMapper());
+            mc.AddProfile(new SkillMapper());
         });
         IMapper mapper = mapperConfig.CreateMapper();
+
+    
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.

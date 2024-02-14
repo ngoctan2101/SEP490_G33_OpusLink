@@ -17,7 +17,6 @@
   <ItemGroup>
     <Folder Include="Controllers\User\Freelance\" />
     <Folder Include="Controllers\User\Employer\" />
-    <Folder Include="Controllers\Admin\" />
   </ItemGroup>
 
 </Project>
