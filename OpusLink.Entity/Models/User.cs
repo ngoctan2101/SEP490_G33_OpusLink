@@ -24,7 +24,7 @@ namespace OpusLink.Entity.Models
         public string? BankAccountInfor { get; set; }
         public bool IsVeryfiedIdentity { get; set; }
         public decimal? AmountMoney { get; set; }
-
+        public int Status { get; set; }
         public virtual ICollection<ChatBox> ChatBoxsAsAFreelancer { get; set; } = new List<ChatBox>();
         public virtual ICollection<ChatBox> ChatBoxsAsAnEmployer { get; set; } = new List<ChatBox>();
         public virtual ICollection<Offer> OffersAsAFreelancer { get; set; } = new List<Offer>();
@@ -39,6 +39,6 @@ namespace OpusLink.Entity.Models
         public virtual ICollection<WithdrawRequest> WithdrawRequests { get; set; } = new List<WithdrawRequest>();
         public virtual ICollection<Notification> Notifications { get; set; } = new List<Notification>();
         public virtual ICollection<HistoryPayment> HistoryPayments { get; set; } = new List<HistoryPayment>();
-        public virtual ICollection<FreelancerWithSkill> FreelancerWithSkills { get; set; } = new List<FreelancerWithSkill>();
+        public virtual ICollection<FreelancerAndSkill> FreelancerAndSkills { get; set; } = new List<FreelancerAndSkill>();
     }
 }

@@ -19,7 +19,7 @@ namespace OpusLink.Entity.Configurations
             builder.Property(x => x.UserID).IsRequired();
             builder.Property(x => x.Amount).IsRequired();
             builder.Property(x => x.DateCreated).IsRequired();
-            builder.Property(x => x.Status).IsRequired().HasMaxLength(256);
+            builder.Property(x => x.Status).IsRequired().HasColumnType("smallint"); ;
             builder.HasOne(x => x.User).WithMany(x => x.WithdrawRequests).HasForeignKey(x => x.UserID).OnDelete(DeleteBehavior.Restrict);
         }
     }

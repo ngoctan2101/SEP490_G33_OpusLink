@@ -5,7 +5,7 @@ using System.Security.Principal;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpusLink.Service
+namespace OpusLink.Service.User
 {
     public interface IAccountService
     {

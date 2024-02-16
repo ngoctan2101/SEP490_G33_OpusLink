@@ -12,4 +12,13 @@
     <ProjectReference Include="..\OpusLink.Shared\OpusLink.Shared.csproj" />
   </ItemGroup>
 
+  <ItemGroup>
+    <Folder Include="Pages\ManageJob\" />
+    <Folder Include="Pages\ManageAccount\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
 </Project>
