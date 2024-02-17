@@ -18,9 +18,10 @@ namespace OpusLink.Entity.Configurations
             builder.Property(x => x.PaymentID).ValueGeneratedOnAdd();
             builder.Property(x => x.UserID).IsRequired();
             builder.Property(x => x.Amount).IsRequired();
-            builder.Property(x => x.TransactionType).IsRequired().HasMaxLength(256);
+            //builder.Property(x => x.TransactionType).IsRequired().HasMaxLength(256);
             builder.Property(x => x.TransactionDate).IsRequired();
             builder.Property(x => x.TransactionCode).IsRequired().HasMaxLength(256);
+            builder.Property(x => x.TransactionType).IsRequired().HasColumnType("smallint");
             builder.HasOne(x => x.User).WithMany(x => x.HistoryPayments).HasForeignKey(x => x.UserID).OnDelete(DeleteBehavior.Restrict);
 
         }

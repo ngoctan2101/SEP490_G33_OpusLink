@@ -11,7 +11,7 @@ namespace OpusLink.Entity.Models
         public int CategoryID { get; set; }
         public int? CategoryParentID { get; set; }
         public string CategoryName { get; set; }
-        public virtual ICollection<JobInCategory> JobInCategories { get; set; } = new List<JobInCategory>();
+        public virtual ICollection<JobAndCategory> JobAndCategories { get; set; } = new List<JobAndCategory>();
         public virtual Category? CategoryParent { get; set; }
     }
 }

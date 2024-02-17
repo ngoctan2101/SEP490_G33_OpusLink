@@ -11,7 +11,7 @@ namespace OpusLink.Entity.Models
         public int PaymentID { get; set; }
         public int UserID { get; set; }
         public decimal Amount { get; set; }
-        public string TransactionType { get; set; }
+        public int TransactionType { get; set; }
         public DateTime TransactionDate { get; set; }
         public string TransactionCode { get; set; }
 
