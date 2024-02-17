@@ -10,6 +10,6 @@
     <ProjectReference Include="..\OpusLink.Entity\OpusLink.Entity.csproj" />
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="Admin\" />
+    <Folder Include="s\" />
   </ItemGroup>
 </Project>
