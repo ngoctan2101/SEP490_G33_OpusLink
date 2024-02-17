@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace OpusLink.Entity.Models
 {
-    public class FreelancerWithSkill
+    public class FreelancerAndSkill
     {
-        public int FreelancerWithSkillID { get; set; }
+        public int FreelancerAndSkillID { get; set; }
         public int FreelancerID { get; set; }
         public int SkillID { get; set; }
         public virtual Skill? Skill { get; set; }
