@@ -11,7 +11,7 @@ namespace OpusLink.Entity.Models
         public int SkillID { get; set; }
         public int? SkillParentID { get; set; }
         public string SkillName { get; set; }
-        public virtual ICollection<FreelancerAndSkill> FreelancerAndSkills { get; set; } = new List<FreelancerAndSkill>();
+        public virtual ICollection<FreelancerWithSkill> FreelancerWithSkills { get; set; } = new List<FreelancerWithSkill>();
         public virtual Skill? SkillParent { get; set; }
     }
 }

@@ -17,8 +17,8 @@ namespace OpusLink.Entity.Models
         public decimal? BudgetTo { get; set; }
         public DateTime? DateCreated { get; set; }
         public int? LocationID { get; set; }
-        public int Status { get; set; }
-        public virtual ICollection<JobAndCategory> JobAndCategories { get; set; } = new List<JobAndCategory>();
+        public string? Status { get; set; }
+        public virtual ICollection<JobInCategory> JobInCategories { get; set; } = new List<JobInCategory>();
         public virtual ICollection<Offer> Offers { get; set; } = new List<Offer>();
         public virtual ICollection<Milestone> Milestones { get; set; } = new List<Milestone>();
         public virtual ICollection<ReportJob> ReportJobs { get; set; } = new List<ReportJob>();

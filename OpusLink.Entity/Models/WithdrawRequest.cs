@@ -12,7 +12,7 @@ namespace OpusLink.Entity.Models
         public int UserID { get; set; }
         public decimal Amount { get; set; }
         public DateTime DateCreated { get; set; }
-        public int Status { get; set; }
+        public string Status { get; set; }
         public virtual User? User { get; set; }
     }
 }

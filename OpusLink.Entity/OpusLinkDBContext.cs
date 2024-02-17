@@ -9,12 +9,10 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
-using OpusLink.Shared.Enums;
 
 namespace OpusLink.Entity
 {
-    public class OpusLinkDBContext : IdentityDbContext<User, Role, int,IdentityUserClaim<int>, UserAndRole
-                                                        , IdentityUserLogin<int>, IdentityRoleClaim<int>, IdentityUserToken<int>>
+    public class OpusLinkDBContext : IdentityDbContext<User, IdentityRole<int>, int>
     {
         public OpusLinkDBContext()
         {
@@ -35,8 +33,6 @@ namespace OpusLink.Entity
         protected override void OnModelCreating(ModelBuilder builder)
         {
             builder.ApplyConfiguration(new UserConfiguration());
-            builder.ApplyConfiguration(new RoleConfiguration());
-            builder.ApplyConfiguration(new UserAndRoleConfiguration());
             builder.ApplyConfiguration(new BlockWordRegExConfiguration());
             builder.ApplyConfiguration(new CategoryConfiguration());
             builder.ApplyConfiguration(new ChatBoxConfiguration());
@@ -44,7 +40,7 @@ namespace OpusLink.Entity
 
             builder.ApplyConfiguration(new HistoryPaymentConfiguration());
             builder.ApplyConfiguration(new JobConfiguration());
-            builder.ApplyConfiguration(new JobAndCategoryConfiguration());
+            builder.ApplyConfiguration(new JobInCategoryConfiguration());
             builder.ApplyConfiguration(new LocationConfiguration());
             builder.ApplyConfiguration(new MessageConfiguration());
             builder.ApplyConfiguration(new MilestoneConfiguration());
@@ -55,8 +51,13 @@ namespace OpusLink.Entity
             builder.ApplyConfiguration(new SaveJobConfiguration());
             builder.ApplyConfiguration(new SearchJobFormConfiguration());
             builder.ApplyConfiguration(new SkillConfiguration());
-            builder.ApplyConfiguration(new FreelancerAndSkillConfiguration());
+            builder.ApplyConfiguration(new FreelancerWithSkillConfiguration());
             builder.ApplyConfiguration(new WithdrawRequestConfiguration());
+            builder.Entity<User>(b =>
+            {
+                b.Property(e => e.Id).HasColumnName("UserID");
+            });
+            //Gọi các bảng của Identity nữa (Bảng role,...)
             base.OnModelCreating(builder);
         }
 
@@ -64,13 +65,11 @@ namespace OpusLink.Entity
         public virtual DbSet<Category> Categories { get; set; } = null!;
         public virtual DbSet<ChatBox> ChatBoxs { get; set; } = null!;
         public virtual DbSet<FeedbackUser> FeedbackUsers { get; set; } = null!;
-        public virtual DbSet<FreelancerAndSkill> FreelancerAndSkills { get; set; } = null!;
+        public virtual DbSet<FreelancerWithSkill> FreelancerWithSkills { get; set; } = null!;
         public virtual DbSet<HistoryPayment> HistoryPayments { get; set; } = null!;
         public virtual DbSet<Job> Jobs { get; set; } = null!;
-        public virtual DbSet<JobAndCategory> JobAndCategories { get; set; } = null!;
+        public virtual DbSet<JobInCategory> JobInCategories { get; set; } = null!;
         public virtual DbSet<Location> Locations { get; set; } = null!;
-        public virtual DbSet<Role> Roles { get; set; } = null!;
-        public virtual DbSet<UserAndRole> UserAndRoles { get; set; } = null!;
 
         public virtual DbSet<Message> Messages { get; set; } = null!;
         public virtual DbSet<Milestone> Milestones { get; set; } = null!;
