@@ -11,8 +11,8 @@ namespace OpusLink.Service.JobServices
 {
     public interface ICategoryService
     {
-        Task<Category[]> GetAllCategory();
-        Task<Category[]> GetAllChildCategory(int categoryId);
+        Task<List<Category>> GetAllCategory();
+        Task<List<Category>> GetAllChildCategory(int categoryId);
         Task<int> CountChild(int parentCategoryId);
     }
     public class CategoryService : ICategoryService
@@ -22,17 +22,17 @@ namespace OpusLink.Service.JobServices
         {
             _dbContext = dbContext;
         }
-        public async Task<Category[]> GetAllChildCategory(int categoryId)
+        public async Task<List<Category>> GetAllChildCategory(int categoryId)
         {
             if(categoryId == 0)
             {
-                return await _dbContext.Categories.Where(x => x.CategoryParentID == null ).Include("JobAndCategories").ToArrayAsync();
+                return await _dbContext.Categories.Where(x => x.CategoryParentID == null ).Include("JobAndCategories").ToListAsync();
             }
-            return await _dbContext.Categories.Where(x=>x.CategoryParentID== categoryId).Include("JobAndCategories").ToArrayAsync();
+            return await _dbContext.Categories.Where(x=>x.CategoryParentID== categoryId).Include("JobAndCategories").ToListAsync();
         }
-        public async Task<Category[]> GetAllCategory()
+        public async Task<List<Category>> GetAllCategory()
         {
-            return await _dbContext.Categories.Include("JobAndCategories").ToArrayAsync();
+            return await _dbContext.Categories.Include("JobAndCategories").ToListAsync();
         }
 
         public async Task<int> CountChild(int parentCategoryId)

@@ -9,15 +9,23 @@
     ViewData["Title"] = "Admin View All Job";
 }
 <style>
+    .filter .td{
+        padding-left:10px;
+        padding-right:5px
+    }
+    .jobTable{
+        box-shadow: 0px 0px 4px 4px #DCDCDC;
+        border:0px;
+        background-color: #FFFFFF
+    }
 
+        .jobTable th{
+            text-align:center;
+        }
     .jobTable tr {
         border-collapse: collapse;
-        border: 1px solid black;
     }
 
-    .jobTable th, td {
-        padding-left:7px;
-    }
     .link{
         text-decoration: none;
         font-weight: bold;
@@ -43,73 +51,88 @@
         margin-bottom: 3px; 
         background-color: lightblue;
         padding: 7px;
-        border-radius:5px
+        border-radius:5px;
+        font-size:14px
     }
-
+    /* Added line below */
+    hr {
+        border: none;
+        border-bottom: 2px solid #C2C2C2;
+        margin: 0px 0px;
+    }
 </style>
+<div style="background-color:#F0F0F0; padding:10px">
+<form method="post">
+    <input hidden asp-for="@Model.NumberOfPage" value="@Model.NumberOfPage"/>
 <div class="row" style="margin-bottom:15px">
     <div class="col-md-3">
-        <input type="submit" value="Search & Filter" style="width:100%" />
+                <button type="submit" name="pageNo_1" value="1" style="width:100%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964">Search & Filter</button>
     </div>
     <div class="col-md-7">
-        <input asp-for="filter.SearchStr" style="width:100%" placeholder="Find Job" />
+            <input name="Search_Str" value="@Model.filter.SearchStr" style="width:100%" placeholder="Find Job" />
     </div>
     <div class="col-md-2">
     </div>
 </div>
 <div class="row">
     <div class="col-md-3">
-        <table style="width:100%;border:1px solid black;padding:4px;margin-bottom:10px">
-            <tr>
-                <td colspan="3"><h6>Category</h6></td>
+                <table style="width:100%;margin-bottom:10px;box-shadow: 0px 0px 4px 4px #DCDCDC;background-color:#FFFFFF" class="filter">
+            <tr id="tsn123">
+                        <td colspan="3" class="td"><h6>Category</h6></td>
             </tr>
             @foreach(var category in Model.Categories)
             {
-                <tr id="tr_@category.CategoryID" style="width:100%">
-                    <td style="text-align:right"><input type="checkbox" name="checkbox_@category.CategoryID" value="@category.CategoryID"></td>
-                    <td style="text-align:left">@(category.CategoryName + " (" + category.NumberOfJob + ")")</td>
+                        <tr id="tr_@category.CategoryID" style="width:100%">
+                            <td class="td" style="text-align:right"><input type="checkbox" name="category_@category.CategoryID" value="@category.CategoryID"></td>
+                            <td style="text-align:left;font-size:14px;">
+                            @(category.CategoryName + " (" + category.NumberOfJob + ")")
+                            <hr>
+                    </td>
                     <td style="text-align:right">
                         @if (category.HasChildCategory)
                     {
-                            <a id="tr_link_@category.CategoryID" onclick="displayAllChild(@category.CategoryID)" class="link2">V</a>
-                    }</td>
+                                <a id="tr_link_@category.CategoryID" onclick="displayAllChild(@category.CategoryID)" class="link2">&#9660;</a>
+                    }
+                    </td>
+                        
                 </tr>
+                
             }
         </table>
-        <table style="width:100%;border:1px solid black;padding:4px;margin-bottom:10px">
+                <table class="filter" style="width:100%;box-shadow: 0px 0px 4px 4px #DCDCDC;padding:4px;margin-bottom:10px;background-color:#FFFFFF">
             <tr>
-                <td colspan="2"><h6>Status</h6></td>
+                <td class="td" colspan="2"><h6>Status</h6></td>
             </tr>
             @foreach (var status in Enum.GetValues(typeof(JobStatusEnum)))
             {
                 <tr style="width:100%">
-                    <td style="width:15%;text-align:right"><input type="checkbox" name="checkbox_@status.ToString()" value="@status.ToString()"></td>
+                        <td style="width:15%;text-align:right"><input type="checkbox" name="status_@((int)Enum.Parse(typeof(JobStatusEnum), status.ToString()))" value="@((int)Enum.Parse(typeof(JobStatusEnum), status.ToString()))"></td>
                     <td style="width:85%;text-align:left">@status.ToString()</td>
                 </tr>
             }
         </table>
-        <table style="width:100%;border:1px solid black;padding:4px;margin-bottom:10px">
+                <table class="filter" style="width:100%;box-shadow: 0px 0px 4px 4px #DCDCDC;padding:4px;margin-bottom:10px;background-color:#FFFFFF">
             <tr>
-                <td colspan="1"><h6>Date Range</h6></td>
+                        <td class="td" colspan="1"><h6>Date Range</h6></td>
             </tr>
             <tr>
-                <td>
-                    <input type="text" name="daterange" value="01/01/2024 - 02/15/2024" />
+                        <td class="td">
+                            <input style="margin-bottom: 5px;" type="text" name="daterange" value="@Model.filter.getDateRange()" />
                 </td>
             </tr>
-        </table>
-        <table style="width:100%;border:1px solid black;padding:4px;margin-bottom:10px">
+        </table >
+                <table class="filter" style="width:100%;box-shadow: 0px 0px 4px 4px #DCDCDC;padding:4px;margin-bottom:10px;background-color:#FFFFFF">
             <tr>
-                <td colspan="3"><h6>Price Range</h6></td>
+                        <td class="td" colspan="3"><h6>Price Range</h6></td>
             </tr>
             <tr>
-                <td>
-                    <div class="price-input">
+                        <td class="td">
+                            <div class="price-input" style="margin-bottom: 5px;">
                         <table>
                             <tr>
-                                <td><input type="text" id="price-min" pattern="[0-9đ ,]+" title="Please enter number" value="250,000 đ" style="width:100% " /></td>
+                                <td><input type="text" id="price-min" name="price_min" pattern="[0-9đ ,]+" title="Please enter number" value="@Model.filter.BudgetMin" style="width:100% " /></td>
                                 <td>-</td>
-                                <td><input type="text" id="price-max" pattern="[0-9đ ,]+" title="Please enter number" value="8,000,000 đ" style="width:100% " /></td>
+                                        <td><input type="text" id="price-max" name="price_max" pattern="[0-9đ ,]+" title="Please enter number" value="@Model.filter.BudgetMax" style="width:100% " /></td>
                             </tr>
                         </table>
                     </div>
@@ -122,25 +145,26 @@
             <thead>
                 <tr>
                     <th width="4%">
-                        <h5>Id</h5>
+                        <h6 style="margin:1px">Id</h6>
                     </th>
                     <th width="15%">
-                        <h5>Title</h5>
+                                <h6 style="margin:1px">Title</h6>
                     </th>
                     <th width="12%">
-                        <h5>Budget range</h5>
+                                <h6 style ="margin:1px">Budget range</h6>
                     </th>
                     <th width="4%">
-                        <h5>Status</h5>
+                                <h6 style="margin:1px">Status</h6>
                     </th>
                     <th width="17%">
-                        <h5>Categories</h5>
+                                <h6 style="margin:1px">Categories</h6>
                     </th>
                     <th width="5%">
-                        <h5>Offers</h5>
+                                <h6 style="margin:1px">Offers</h6>
                     </th>
                     <th width="5%"></th>
                 </tr>
+                        <tr><td colspan="7"><hr style="color:black;opacity:1"></td></tr>
             </thead>
             <tbody>
                 @foreach (var item in Model.Jobs)
@@ -150,7 +174,7 @@
                             @item.JobID
                         </td>
                         <td>
-                            <a class="link" asp-page="./AdminViewDetailJobPage/" asp-route-id="@item.JobID">@item.JobTitle</a>
+                            <a style="font-size:16px" class="link" asp-page="./AdminViewDetailJobPage/" asp-route-id="@item.JobID">@item.JobTitle</a>
                         </td>
                         <td>
                             @((item.BudgetFrom ?? 0).ToString("#,##") + " - " + (item.BudgetTo ?? 0).ToString("#,##"))
@@ -175,9 +199,18 @@
                         </td>
                         <td>
                             <div class="container" style="padding:5px">
-                                @foreach(GetCategoryResponse category in item.Categoies)
+                                @if (item.Categoies.Count > 4){
+                                    for(int i=0;i<4;i++){
+                                            <div class="category">@item.Categoies.ElementAt(i).CategoryName</div>
+                                    }
+                                        <div class="category" style="opacity:0.6">. . .</div>
+                                }
+                                else
                                 {
-                                    <div class="category">@category.CategoryName</div>
+                                    foreach(GetCategoryResponse category in item.Categoies)
+                                    {
+                                        <div class="category">@category.CategoryName</div>
+                                    }
                                 }
                             </div>
                         </td>
@@ -187,14 +220,30 @@
                         <td>
                             <a class="link" style="background-color:cornflowerblue;color:white;display:block;margin:3px;text-align:center" asp-page="./Edit" asp-route-id="@item.JobID">Edit</a>
                             <a class="link" style="background-color:red;color:white;display:block;margin:3px;text-align:center" asp-page="./Delete" asp-route-id="@item.JobID">Delete</a>
+                                
                         </td>
                     </tr>
+                    <tr><td colspan="7"><hr style="color:black;opacity:1"></td></tr>
                 }
             </tbody>
         </table>
+        <div>
+                @for(int i=1;i<=Model.NumberOfPage;i++)
+                {
+                        @if (i == Model.PageNo)
+                        {
+                            <button style="background-color:#0088CC; color:white" type="submit" name="pageNo_@i" value="@i">@i</button>
+                        }
+                        else
+                        {
+                            <button type="submit" name="pageNo_@i" value="@i">@i</button>
+                        }
+                }
+        </div>
     </div>
 </div>
-
+</form>
+</div>
 <script>
     function displayAllChild(categoryID) {
         $.ajax({
@@ -202,12 +251,17 @@
             type: "get",
             contentType: "application/json",
             success: function(result, status, xhr){
-                var str1 = "<tr id=\"ch_" + categoryID + "\"><td colspan=\"3\" style=\"width:100%;padding-right:0px;padding-left:10px\"><table style=\"width:100%;padding-right:0px\" >";
+                var str1 = "<tr id=\"ch_" + categoryID + "\"><td colspan=\"3\" style=\"width:100%;padding-right:0px;padding-left:7px\"><table style=\"width:100%;padding-right:0px\" >";
                 var str2 = "";
                 $.each(result, function (index, value) {
-                    str2 += "<tr id=\"tr_" + value["categoryID"] + "\" style=\"width:100%\"><td style=\"text-align:right;width:20%\"> <input type=\"checkbox\" name = \"checkbox_" + value["categoryID"] + "\" value = \"" + value["categoryID"] + "\"> </td><td style=\"text-align:left;width:60%;white-space: nowrap;\">" + value["categoryName"] + " (" + value["numberOfJob"] + ")</td>";
-                    str2 += (value["hasChildCategory"] == true) ? "<td style=\"text-align:right;width:20%\"> <a id=\"tr_link_" + value["categoryID"] + "\" onclick=\"displayAllChild(" + value["categoryID"] + ")\" class=\"link2\" > V </a></td>" : "<td style=\"text-align:right;width:20%\"></td>";
+                    var oldCheckbox = document.getElementById('tr_' + value["categoryID"]);
+                    if (oldCheckbox) {
+                        oldCheckbox.remove();
+                    }
+                    str2 += "<tr id=\"tr_" + value["categoryID"] + "\" style=\"width:100%\"><td class=\"td\" style=\"text-align:right;width:10%\"> <input type=\"checkbox\" name = \"category_" + value["categoryID"] + "\" value = \"" + value["categoryID"] + "\"> </td><td style=\"text-align:left;width:80%;font-size:14px;\">" + value["categoryName"] + " (" + value["numberOfJob"] + ")<hr></td>";
+                    str2 += (value["hasChildCategory"] == true) ? "<td style=\"text-align:right;width:10%\"> <a id=\"tr_link_" + value["categoryID"] + "\" onclick=\"displayAllChild(" + value["categoryID"] + ")\" class=\"link2\" > &#9660; </a></td>" : "<td style=\"text-align:right;width:10%\"></td>";
                     str2 += "</tr>";
+                    
                 });
                 var str3 = "</table></td></tr>";
                 var str = str1+str2+str3;
@@ -216,13 +270,13 @@
         })
         document.getElementById("tr_link_" + categoryID).setAttribute("onClick", "removeAllChild(" + categoryID + ")");
         document.getElementById("tr_link_" + categoryID).style["color"] = "red";
-        document.getElementById("tr_link_" + categoryID).innerText = "Λ";
+        document.getElementById("tr_link_" + categoryID).innerHTML  = '&#9650;';
     }
     function removeAllChild(categoryID){
         document.getElementById("ch_" + categoryID).outerHTML = "";
         document.getElementById("tr_link_" + categoryID).setAttribute("onClick", "displayAllChild(" + categoryID + ")");
         document.getElementById("tr_link_" + categoryID).style["color"] = "#0a58ca";
-        document.getElementById("tr_link_" + categoryID).innerText = "V";
+        document.getElementById("tr_link_" + categoryID).innerHTML  = '&#9660;';
     }
 </script>
 <script>
@@ -266,4 +320,72 @@
             input.value = formattedValue;
         }
     }, false);
+</script>
+<script>
+    function autoFillForm() {
+        //fill category
+        var categoryIDs = @Html.Raw(Json.Serialize(Model.filter.CategoryIDs));
+        var categoryNames = @Html.Raw(Json.Serialize(Model.filter.GetAllCategoryName(Model.AllCategories)));
+        var numberOfJobs = @Html.Raw(Json.Serialize(Model.filter.GetAllNumberOfJob(Model.AllCategories)));
+        for (var i = 0; i < categoryIDs.length; i++) {
+            var checkbox = document.getElementsByName('category_' + categoryIDs[i])[0];
+            if (checkbox) {
+                checkbox.checked = true;
+            }else{
+                var str = "<tr id=\"tr_" + categoryIDs[i] + "\" style=\"width:100%\"><td class=\"td\" style=\"text-align:right\"> <input type=\"checkbox\" name = \"category_" + categoryIDs[i] + "\" value = \"" + categoryIDs[i] + "\"> </td><td style=\"text-align:left\">" + categoryNames[i] + " (" + numberOfJobs[i] + ")</td><td style=\"text-align:right\"></td></tr>";
+                document.getElementById("tsn123").insertAdjacentHTML("afterend", str);
+                document.getElementsByName('category_' + categoryIDs[i])[0].checked = true;
+            }
+        }
+        //fill status
+        var statuses = @Html.Raw(Json.Serialize(Model.filter.Statuses));
+        for (var i = 0; i < statuses.length; i++) {
+            var checkbox = document.getElementsByName('status_' + statuses[i])[0];
+            if (checkbox) {
+                checkbox.checked = true;
+            }
+        }
+
+        //fill daterange
+        //da fill truc tiep r
+
+        //fill string seach
+        //da fill truc tiep r
+
+        //fill price range
+        //da fill truc tiep r
+
+        //sua lai budget range: them dau phay, them chu "d"
+            // Get the input element
+            var input = document.getElementById("price-min");
+            var input1 = input.value.replaceAll(",", "");
+            input1 = input1.replaceAll("đ", "");
+            input1 = input1.replaceAll(" ", "");
+            // Get the value and convert it to a number
+            var value = parseFloat(input1);
+            // Check if the value is a valid number
+            if (!isNaN(value)) {
+               // Format the number with dots for thousands separator
+               var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " đ";
+               // Update the input field with the formatted value
+               input.value = formattedValue;
+            }
+            // Get the input element
+            var input = document.getElementById("price-max");
+            var input1 = input.value.replaceAll(",", "");
+            input1 = input1.replaceAll("đ", "");
+            input1 = input1.replaceAll(" ", "");
+            // Get the value and convert it to a number
+            var value = parseFloat(input1);
+            // Check if the value is a valid number
+            if (!isNaN(value)) {
+                // Format the number with dots for thousands separator
+                var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " đ";
+                // Update the input field with the formatted value
+                input.value = formattedValue;
+            }
+    }
+    window.onload = function () {
+        autoFillForm();
+    };
 </script>
