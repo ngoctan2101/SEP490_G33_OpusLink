@@ -3,6 +3,9 @@ using OpusLink.Entity;
 using OpusLink.Entity.AutoMapper;
 using OpusLink.Service.JobServices;
 using Microsoft.Extensions.DependencyInjection;
+using OpusLink.Service.Admin;
+using Microsoft.EntityFrameworkCore;
+using OpusLink.Entity.Models;
 internal class Program
 {
     private static void Main(string[] args)
@@ -15,16 +18,23 @@ internal class Program
         // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
         builder.Services.AddEndpointsApiExplorer();
         builder.Services.AddSwaggerGen();
+        builder.Services.AddDbContext<OpusLinkDBContext>(opt =>
+        {
+            opt.UseSqlServer(builder.Configuration.GetConnectionString("OpusLink"));
+        });
+
         var mapperConfig = new MapperConfiguration(mc =>
         {
             mc.AddProfile(new MapperConfig());
             mc.AddProfile(new JobProfile());
             mc.AddProfile(new CategoryProfile());
+            mc.AddProfile(new SkillMapper());
         });
         IMapper mapper = mapperConfig.CreateMapper();
         builder.Services.AddScoped<IJobService, JobService>();
         builder.Services.AddScoped<ICategoryService, CategoryService>();
-
+        builder.Services.AddScoped<ISkillService, SkillService>();
+       
         builder.Services.AddDbContext<OpusLinkDBContext>();
         builder.Services.AddSingleton(mapper);
         builder.Services.AddCors();
