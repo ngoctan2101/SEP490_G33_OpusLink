@@ -8,18 +8,18 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusLink.API", "OpusLink.AP
 		{DB9CC274-95FA-4503-A44D-435CE84F187F} = {DB9CC274-95FA-4503-A44D-435CE84F187F}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpusLink.Admin.Hosted", "OpusLink.Admin.Hosted\OpusLink.Admin.Hosted.csproj", "{646C9363-0395-4E82-8C80-E0828D852A44}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusLink.Admin.Hosted", "OpusLink.Admin.Hosted\OpusLink.Admin.Hosted.csproj", "{646C9363-0395-4E82-8C80-E0828D852A44}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpusLink.User.Hosted", "OpusLink.User.Hosted\OpusLink.User.Hosted.csproj", "{FC3E5F44-B3A0-4C7C-BD37-109350869F45}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusLink.User.Hosted", "OpusLink.User.Hosted\OpusLink.User.Hosted.csproj", "{FC3E5F44-B3A0-4C7C-BD37-109350869F45}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusLink.Entity", "OpusLink.Entity\OpusLink.Entity.csproj", "{DB9CC274-95FA-4503-A44D-435CE84F187F}"
 	ProjectSection(ProjectDependencies) = postProject
 		{E054E5F4-E7DC-4A31-8F3A-FCFE4F991FBB} = {E054E5F4-E7DC-4A31-8F3A-FCFE4F991FBB}
 	EndProjectSection
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpusLink.Service", "OpusLink.Service\OpusLink.Service.csproj", "{7961701B-C815-4616-936A-7DA79CC6A25D}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusLink.Service", "OpusLink.Service\OpusLink.Service.csproj", "{7961701B-C815-4616-936A-7DA79CC6A25D}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpusLink.Shared", "OpusLink.Shared\OpusLink.Shared.csproj", "{E054E5F4-E7DC-4A31-8F3A-FCFE4F991FBB}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusLink.Shared", "OpusLink.Shared\OpusLink.Shared.csproj", "{E054E5F4-E7DC-4A31-8F3A-FCFE4F991FBB}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
