@@ -1,7 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using OpusLink.Entity.DTO;
+using OpusLink.Entity.Models;
 using OpusLink.Service.Admin;
 
 namespace OpusLink.API.Controllers.Admin
@@ -20,9 +22,19 @@ namespace OpusLink.API.Controllers.Admin
         [HttpGet("GetAllUser")]
         public IActionResult GetAllUser()
         {
+            List<OpusLink.Entity.Models.User> users = _userService.GetAllUser();
+            if (users != null && users.Count == 0)
+            {
+                return Ok("Don't have users");
+            }
+            return Ok(_mapper.Map<List<UserDTO>>(users));
+        }
+        [HttpGet("GetUserById/{id}")]
+        public IActionResult GetUserById(int id)
+        {
 
-            var user = _userService.GetAllUser();
-            if (user != null && user.Count == 0)
+            var user = _userService.GetUserById(id);
+            if (user == null)
             {
                 return Ok("Don't have user");
             }

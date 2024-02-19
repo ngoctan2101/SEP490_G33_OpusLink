@@ -12,7 +12,7 @@ namespace OpusLink.Entity.AutoMapper
     public class UserMapper : Profile
     {
         public UserMapper() {
-            CreateMap<User, UserDTO>();
+            CreateMap<User, UserDTO>().ReverseMap();
             
         }
     }

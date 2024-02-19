@@ -111,7 +111,7 @@
         }
 </style>
 <body>
-<div class="path-admin">CUSTOMER LIST</div>
+<div class="path-admin">User LIST</div>
 
 <div id="content-main-dashboard">
     <div id="product-title-header">
@@ -140,25 +140,27 @@
                 <th>Profile Picture</th>
                 <th>Phone</th>
                 <th>Address</th>
-                <th>Create Date</th>
+                <th>Date Of Birth</th>
                 <th>Active</th>
             </tr>
-            @* @foreach (var cus in Model.Customers)
+            @foreach (var item in Model.listUser)
             {
                 <tr>
-                    <td>#@cus.CustomerId</td>
-                    <td>@cus.CompanyName</td>
-                    <td>@cus.ContactName</td>
-                    <td>@cus.ContactTitle</td>
-                    <td>@cus.Address</td>
-                    <td>@((cus.CreatedAt == null ? DateTime.Now : (DateTime)cus.CreatedAt).ToString("dd/MM/yyyy"))</td>
+                    <td>@item.Id</td>
+                        <td>@item.UserName</td>
+                    <td>@item.ProfilePicture</td>
+                    <td>@item.PhoneNumber</td>
+              
+                    <td>@item.Address</td>
+                    @* <td>@((cus.CreatedAt == null ? DateTime.Now : (DateTime)cus.CreatedAt).ToString("dd/MM/yyyy"))</td> *@
+                    <td>@item.Dob</td>
                     <td>
-                        <a class="delete" id="@cus.CustomerId"
-                           asp-page="/Admin/Customer/Index" asp-route-id="@cus.CustomerId"
-                           asp-page-handler="Active">@((bool)cus.Active ? "Active" : "Deactive")</a>
+                        <a class="delete" id="@item.Id"
+                           asp-page="/Admin/Customer/Index" asp-route-id="@item.Id"
+                           asp-page-handler="Active">@(item.Status == 1 ? "Active" : "Deactive")</a>
                     </td>
                 </tr>
-            } *@
+            }
         </table>
     </div>
 

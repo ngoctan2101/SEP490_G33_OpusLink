@@ -29,12 +29,15 @@ internal class Program
             mc.AddProfile(new JobProfile());
             mc.AddProfile(new CategoryProfile());
             mc.AddProfile(new SkillMapper());
+            mc.AddProfile(new UserMapper());
+
         });
         IMapper mapper = mapperConfig.CreateMapper();
         builder.Services.AddScoped<IJobService, JobService>();
         builder.Services.AddScoped<ICategoryService, CategoryService>();
         builder.Services.AddScoped<ISkillService, SkillService>();
-       
+        builder.Services.AddScoped<IUserService, UserService>();
+
         builder.Services.AddDbContext<OpusLinkDBContext>();
         builder.Services.AddSingleton(mapper);
         builder.Services.AddCors();

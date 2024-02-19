@@ -16,7 +16,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
 
         [BindProperty]
         public List<SkillDTO> listSkills { get; set; } = null!;
-        //public int SkillID { get; set; }
+        public int SkillID { get; set; }
         //public int? SkillParentID { get; set; }
         //public string SkillName { get; set; }
         public ViewsModel()
@@ -29,12 +29,48 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
         public async Task OnGetAsync()
         {
             // call list
+            //HttpResponseMessage responseSkill = await client.GetAsync(ServiceMangaUrl + "api/Skill/GetAllSkill");
+            //if (responseSkill.IsSuccessStatusCode)
+            //{
+            //    string responseBodySkill = await responseSkill.Content.ReadAsStringAsync();
+            //    var optionSkill = new JsonSerializerOptions()
+            //    { PropertyNameCaseInsensitive = true };
+            //    listSkills = JsonSerializer.Deserialize<List<SkillDTO>>(responseBodySkill, optionSkill);
+            //}
+
+            //HttpResponseMessage responseSkill = await client.GetAsync(ServiceMangaUrl + "api/Skill/GetAllSkill");
+
+            //// Check if the HTTP request was successful
+            //if (responseSkill.IsSuccessStatusCode)
+            //{
+            //    // Read the response body as a string
+            //    string responseBodySkill = await responseSkill.Content.ReadAsStringAsync();
+
+            //    // Configure JsonSerializer options (ignoring property case)
+            //    var optionSkill = new JsonSerializerOptions()
+            //    {
+            //        PropertyNameCaseInsensitive = true
+            //    };
+
+            //    // Deserialize the JSON response into a List of SkillDTO objects
+            //    listSkills = JsonSerializer.Deserialize<List<SkillDTO>>(responseBodySkill, optionSkill);
+            //}
+
             HttpResponseMessage responseSkill = await client.GetAsync(ServiceMangaUrl + "api/Skill/GetAllSkill");
+
+            // Check if the HTTP request was successful
             if (responseSkill.IsSuccessStatusCode)
             {
+                // Read the response body as a string
                 string responseBodySkill = await responseSkill.Content.ReadAsStringAsync();
+
+                // Configure JsonSerializer options (ignoring property case)
                 var optionSkill = new JsonSerializerOptions()
-                { PropertyNameCaseInsensitive = true };
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
+                // Deserialize the JSON response into a List of SkillDTO objects
                 listSkills = JsonSerializer.Deserialize<List<SkillDTO>>(responseBodySkill, optionSkill);
             }
         }
@@ -134,6 +170,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
 
         public async Task DeleteSkillAsync(int skillIdToDelete)
         {
+            SkillID = skillIdToDelete;
             using (HttpClient client = new HttpClient())
             {
                 HttpResponseMessage responseDeleteSkill = await client.DeleteAsync(ServiceMangaUrl + $"api/Skill/DeleteSkillById/{skillIdToDelete}");
