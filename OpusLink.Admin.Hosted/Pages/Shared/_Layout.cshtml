@@ -1,60 +1,239 @@
 ﻿<!DOCTYPE html>
 <html lang="en">
+
 <head>
-    <meta charset="utf-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <title>@ViewData["Title"] - OpusLink.Admin.Hosted</title>
-    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
-    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/OpusLink.Admin.Hosted.styles.css" asp-append-version="true" />
-    @*date picker when filter*@
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
-    <script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
-    <link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
-    
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Admin</title>
+    <link rel="icon" href="path/to/english-icon.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="path/to/vietnamese-icon.png" sizes="16x16" type="image/png">
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+          integrity="sha512-H+KQOVFajAqldxUe9/ijzpOTNNx4B47uvimCzJZ17WJ8c1o4eS/RbBThTlMYNQ8Bu7Q4JugG2PD3b5gJAdqOAA=="
+          crossorigin="anonymous" referrerpolicy="no-referrer" />
+
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet">
+
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/Chart.js/2.5.0/Chart.min.js"></script>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.6.0/jquery.min.js"></script>
+    <style>
+        body {
+            /*background-color: linear-gradient(in srgb to right, #12c2e9, #c471ed, #f64f59);*/
+
+            background: linear-gradient(to left, #6699ff 0%, #ff99cc 100%);
+            /* Màu nền của trang */
+        }
+
+        #container {
+            background-color: #ffffff;
+            /* Màu nền của container */
+            border-radius: 8px;
+            /* Bo góc container */
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            /* Hiệu ứng bóng đổ */
+            margin: 20px;
+            max-width: 100%;
+            /* Chiều rộng tối đa của container */
+        }
+
+        .content-main {
+            width: 100%;
+        }
+
+        #content-main-dashboard {
+            width: 100%;
+            border: 1px solid sandybrown;
+        }
+
+        #header {
+            background: linear-gradient(to left, #6699ff 0%, #cc33ff 100%);
+            /* Màu nền của header */
+            color: #ffffff;
+            /* Màu chữ của header */
+
+            padding: 10px;
+            border-top-left-radius: 8px;
+            border-top-right-radius: 8px;
+        }
+
+        #logo-admin {
+            font-size: 40px;
+            font-weight: bold;
+            text-align: center;
+        }
+
+        #banner-admin {
+            text-align: right;
+            padding-top: 10px;
+        }
+
+            #banner-admin ul li {
+                margin-left: 20px;
+                display: inline-block;
+            }
+
+        #content {
+            display: flex;
+            justify-content: space-between;
+            width: 100%;
+        }
+
+        #content-left {
+            width: 30%;
+            height: auto;
+            /* Thay đổi chiều rộng sidebar thành 30% */
+            /* margin-right: 20px; */
+            /* Thêm khoảng trắng giữa content-left và content-right */
+
+            background: linear-gradient(to bottom, #003366 0%, #666699 100%);
+            /* Màu nền xám của content-left */
+            border-radius: 8px;
+            /* Bo góc content-left */
+            padding: 10px;
+        }
+
+            #content-left h3 {
+                border-bottom: 1px solid sienna;
+                text-align: center;
+                padding: 10px 0px;
+                color: white;
+                /* Màu chữ trong content-left */
+            }
+
+            #content-left ul {
+                list-style: none;
+                padding: 0;
+            }
+
+                #content-left ul li {
+                    padding: 10px 0px 10px 10px;
+                    border-bottom: 1px solid #dee2e6;
+                    /* Đường gạch chia giữa các mục sidebar */
+                    color: white;
+                    /* Màu chữ trong content-left */
+                    transition: background-color 0.3s;
+                    /* Hiệu ứng màu nền khi hover */
+                }
+
+                    #content-left ul li:hover {
+                        background-color: sienna;
+                        cursor: pointer;
+                        color: white;
+                    }
+
+                #content-left ul a {
+                    color: white;
+                    text-decoration: none;
+                }
+
+        #content-left-admin {
+            color: white;
+            margin-top: 20px;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            /* Hiệu ứng màu nền khi hover */
+        }
+
+            #content-left-admin:hover {
+                background-color: #333333;
+            }
+
+        #admin-dropdown {
+            display: none;
+        }
+
+        #content-right {
+            width: 70%;
+            /* Thay đổi chiều rộng content-right thành 70% */
+        }
+
+        
+
+
+        #footer-admin {
+            background-color: #007bff;
+            /* Màu nền của footer */
+            color: #ffffff;
+            /* Màu chữ của footer */
+            padding: 10px;
+            border-bottom-left-radius: 8px;
+            border-bottom-right-radius: 8px;
+            margin-top: 20px;
+        }
+    </style>
 </head>
+
 <body>
-    <header>
-        <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
-            <div class="container">
-                <a class="navbar-brand" asp-area="" asp-page="/Index">OpusLink.Admin.Hosted</a>
-                <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target=".navbar-collapse" aria-controls="navbarSupportedContent"
-                        aria-expanded="false" aria-label="Toggle navigation">
-                    <span class="navbar-toggler-icon"></span>
-                </button>
-                <div class="navbar-collapse collapse d-sm-inline-flex justify-content-between">
-                    <ul class="navbar-nav flex-grow-1">
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="JOB/AdminViewAllJobPage">All Jobs</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
-                        </li>
-                    </ul>
+    <div id="container">
+        <div id="header">
+            <div id="logo-admin">
+                Manager
+            </div>
+            <div id="banner-admin">
+                <ul>
+                    <!-- Liên kết SignOut đã được xóa -->
+                </ul>
+            </div>
+        </div>
+        <div id="content">
+            <div id="content-left">
+                <h3>OpusLink</h3>
+                <ul>
+                    <a asp-page="/Admin/Order/Index">
+                    <li>Dashboard</li>
+                    </a>
+                    <a asp-page="/ManageUser/Views">
+                    <li>User</li>
+                    </a>
+                    <a asp-page="/Admin/Customer/Index">
+                    <li>Job</li>
+                    </a>
+                    <a asp-page="/Admin/Employee/Index">
+                    <li>History payment</li>
+                    </a>
+                    <a asp-page="/ManageSkill/Views">
+                    <li>Skills</li>
+                    </a>
+                    <a asp-page="/Admin/Customer/Index">
+                    <li>Resquest</li>
+                    </a>
+                </ul>
+                <div id="content-left-admin" class="dropdown" onclick="toggleAdminPanel()">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" id="adminDropdownButton"
+                            data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                        Admin <i id="setting-icon" class="bi bi-gear"></i>
+                    </button>
+                    <div id="admin-dropdown" class="dropdown-menu" aria-labelledby="adminDropdownButton">
+                        <a class="dropdown-item" asp-page="/Admin/Profile/Index">Profile</a>
+                        <button class="dropdown-item" onclick="logout()">Logout</button>
+                    </div>
                 </div>
             </div>
-        </nav>
-    </header>
-    <div class="container">
-        <main role="main" class="pb-3">
-            @RenderBody()
-        </main>
-    </div>
-
-    <footer class="border-top footer text-muted">
-        <div class="container">
-            &copy; 2024 - OpusLink.Admin.Hosted - <a asp-area="" asp-page="/Privacy">Privacy</a>
+            <div id="content-right">
+                <div class="content-main">
+                    @RenderBody()
+                </div>
+               
+                <!-- Thêm nội dung mới vào đây nếu cần -->
+            </div>
         </div>
-    </footer>
+        <!-- <div id="footer-admin">footer</div> -->
 
-    <script src="~/lib/jquery/dist/jquery.min.js"></script>
-    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
-    <script src="~/js/site.js" asp-append-version="true"></script>
+        <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
+        <script src="~/js/site.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
+        <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.15.0/dist/js/bootstrap-icons.min.js"></script>
+        <script>
+            function toggleAdminPanel() {
+                var adminPanel = document.getElementById('admin-dropdown');
+                adminPanel.style.display = (adminPanel.style.display === 'none' || adminPanel.style.display === '') ? 'block' : 'none';
+            }
 
-    @await RenderSectionAsync("Scripts", required: false)
+            function logout() {
+                // Add logout logic here
+            }
+        </script>
+    </div>
 </body>
+
 </html>
