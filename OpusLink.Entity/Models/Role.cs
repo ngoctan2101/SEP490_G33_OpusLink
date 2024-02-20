@@ -9,5 +9,10 @@ namespace OpusLink.Entity.Models
 {
     public class Role : IdentityRole<Int32>
     {
+        private string Name { get; set; }
+        public Role(string name) : base(name)
+        {
+            Name = name;
+        }
     }
 }
