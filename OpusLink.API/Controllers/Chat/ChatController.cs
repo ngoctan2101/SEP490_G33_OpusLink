@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using OpusLink.Entity;
 using OpusLink.Entity.DTO;
 using OpusLink.Entity.Models;
 using OpusLink.Service.Admin;
@@ -13,21 +14,19 @@ namespace OpusLink.API.Controllers.Chat
     public class ChatController : ControllerBase
     {
         readonly IChatService _chatService;
-        private IMapper _mapper;
+         readonly IMapper _mapper;
         public ChatController(IChatService chatService, IMapper mapper)
         {
             _chatService = chatService;
             _mapper = mapper;
         }
         [HttpGet("GetAllChat")]
-        public IActionResult GetAllChat()
+        public ActionResult <IEnumerable<ChatDTO>> GetAllChat()
         {
-            var chat = _chatService.getAllChatBox();
-            if (chat != null && chat.Count == 0)
-            {
-                return Ok("Don't have chat");
-            }
-            return Ok(_mapper.Map<ChatBox>(chat));
+            var chat = _chatService.getAllChatBox()
+                .ToList().AsQueryable();
+            List<ChatDTO> list = _mapper.Map<List<ChatDTO>>(chat);
+            return Ok(list);
         }
     }
 }

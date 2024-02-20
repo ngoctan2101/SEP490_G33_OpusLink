@@ -1,4 +1,5 @@
-﻿using OpusLink.Entity;
+﻿using Microsoft.EntityFrameworkCore;
+using OpusLink.Entity;
 using OpusLink.Entity.Models;
 using System;
 using System.Collections.Generic;
@@ -12,19 +13,19 @@ namespace OpusLink.Service.Chat
     {
         List<ChatBox> getAllChatBox();
         ChatBox getChatBox(int id);
-
+    }
         public class ChatService : IChatService
         {
             private readonly OpusLinkDBContext _context;
             public ChatService (OpusLinkDBContext context)
             {
-                context = _context;
+                _context = context;
             }
             public List<ChatBox> getAllChatBox()
             {
                 try
                 {
-                    var chatBox = _context.ChatBoxs.ToList();
+                    var chatBox = _context.ChatBoxs.Include("Freelancer").Include("Employer").Include("Messages").ToList();
                     return chatBox;
 
                 }
@@ -38,7 +39,7 @@ namespace OpusLink.Service.Chat
             {
                 try
                 {
-                    var chatBox = _context.ChatBoxs.FirstOrDefault(x => x.ChatBoxID == id);
+                    var chatBox = _context.ChatBoxs.Include("Freelancer").Include("Employer").Include("Messages").FirstOrDefault(x => x.ChatBoxID == id);
                     return chatBox;
 
                 }
@@ -48,5 +49,5 @@ namespace OpusLink.Service.Chat
                 }
             }
         }
-    }
+    
 }
