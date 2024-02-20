@@ -10,9 +10,9 @@ namespace OpusLink.Shared.Enums
     {
         Admin = 1,
 
-        Employer = 2,
+        Freelancer = 2,
 
-        User = 3
+        Employer = 3
 
     }
 }
