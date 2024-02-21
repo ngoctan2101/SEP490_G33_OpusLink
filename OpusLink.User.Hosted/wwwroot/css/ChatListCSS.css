@@ -1,8 +1,4 @@
-﻿body {
-    margin-top: 20px;
-}
-
-.chat-online {
+﻿.chat-online {
     color: #34ce57
 }
 
@@ -31,6 +27,9 @@
     flex-direction: row-reverse;
     margin-left: auto
 }
+.ml-3{
+    color: darkmagenta;
+}
 
 .py-3 {
     padding-top: 1rem !important;
@@ -48,4 +47,3 @@
 
 .border-top {
     border-top: 1px solid #dee2e6 !important;
-}
