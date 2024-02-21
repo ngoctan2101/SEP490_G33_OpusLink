@@ -1,0 +1,265 @@
+﻿@page 
+@model OpusLink.User.Hosted.Pages.Employer.ViewsProfileFreelancerModel
+@{
+}
+
+
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>User Detail Form</title>
+    <!-- Link to Bootstrap CSS -->
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        /* Thêm CSS để căn chỉnh nút Back ở góc trái dưới cùng */
+        #backButton {
+            position: fixed;
+            bottom: 10px;
+            left: 10px;
+        }
+
+        body {
+            background: linear-gradient(to left, #6699ff 0%, #cc33ff 100%);
+        }
+
+
+        #feedbackSection {
+            background-color: #f8f9fa;
+            padding: 10px;
+            border-radius: 5px;
+            margin-top: 20px;
+        }
+
+        #rateSection {
+            background-color: #f8f9fa;
+            width: 250px;
+        }
+    </style>
+</head>
+
+<body>
+     
+    <div class="container mt-5 ">
+        <div class="row ">
+            <!-- Hình ảnh bên trái -->
+            <div class="col-md-6 mb-3;">
+                <img src="https://via.placeholder.com/300" alt="User Image" id="userImage" class="img-fluid">
+
+
+                <!-- LinkProfile, Textbox, và Nút Copy -->
+                <div class="mt-3">
+                    <p>
+                        <span id="linkProfile">LinkProfile</span>
+                        <input type="text" class="form-control" id="linkTextBox" readonly>
+                    </p>
+                    <button class="btn btn-secondary" onclick="copyLink()">Copy Link</button>
+                </div>
+                <form>
+                    <div class="mt-3">
+                        <label for="introduction" class="form-label" placeholder="Enter introduction">Introduction</label>
+                        <textarea class="form-control" id="introduction" rows="3" value="@Model.user.Introduction"></textarea>
+                    </div>
+                    <div class="mt-3">
+                        <input type="submit" class="btn btn-success" value="Update">
+
+                    </div>
+                </form>
+
+                <!-- Form for Rating and Feedback -->
+                <div class="mt-3">
+                    <h4>Rate and Provide Feedback</h4>
+
+                    <div id="rateSection">
+                        <h5>Rating:</h5>
+                        <div id="starRating" onclick="rate()">
+                            <span class="star" id="star1">&#9733;</span>
+                            <span class="star" id="star2">&#9733;</span>
+                            <span class="star" id="star3">&#9733;</span>
+                            <span class="star" id="star4">&#9733;</span>
+                            <span class="star" id="star5">&#9733;</span>
+                        </div>
+                        <p id="averageRating">Average Rating: N/A</p>
+                    </div>
+                    <!-- Feedback Display Area -->
+                    <div id="feedbackSection">
+                        <h4>
+                            Feedback from Others
+                            <button class="btn btn-info" onclick="redirectToFeedback()">See more</button>
+                        </h4>
+                        <div class="comment">Comment 1: This is a great form! (Rating: 5)</div>
+                        <div class="comment">Comment 2: Excellent user interface! (Rating: 4)</div>
+                        <div class="comment">Comment 3: This is a great form! (Rating: 5)</div>
+                        <div class="comment">Comment 4: Excellent user interface! (Rating: 4)</div>
+                        <div class="comment">Comment 5: This is a great form! (Rating: 5)</div>
+                        <div class="comment">Comment 6: Excellent user interface! (Rating: 4)</div>
+                    </div>
+
+
+                </div>
+            </div>
+
+            <!-- Thông tin bên phải -->
+            <div class="col-md-6">
+                <form>
+                    <div class="mb-3">
+                        <label for="id" class="form-label">ID:</label>
+                        <input type="text" class="form-control" id="id" name="id" placeholder="Enter ID" readonly value="@Model.user.Id">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="name" class="form-label">Name:</label>
+                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" readonly value="@Model.user.UserName">
+                    </div>
+                    <div class="mb-3">
+                        <label for="email" class="form-label">Email:</label>
+                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" readonly value="@Model.user.Email">
+                    </div>
+                    <div class="mb-3">
+                        <label for="dob" class="form-label">Date of Birth:</label>
+                        <input type="date" class="form-control" id="dob" name="dob" readonly value="@Model.user.Dob">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="phone" class="form-label">Phone:</label>
+                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter phone" readonly value="@Model.user.PhoneNumber">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="address" class="form-label">Address:</label>
+                        <input type="text" class="form-control" id="address" name="address" placeholder="Enter address" readonly value="@Model.user.Address">
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="skills" class="form-label">Skills:</label>
+                        <input type="text" class="form-control" id="skills" name="skills" placeholder="Enter skills" readonly value="@Model.user.Skills">
+                    </div>
+                    <div class="mb-3">
+                        <label for="amountmoney" class="form-label">AmountMoney:</label>
+                        <input type="text" class="form-control" id="amountmoney" name="amountmoney"
+                               placeholder="Enter amountmoney" readonly value="@Model.user.AmountMoney">
+                    </div>
+                    <div class="mb-3">
+                        <label for="cv" class="form-label">File CV:</label>
+                        <input type="file" class="form-control" id="cv" name="cv" readonly value="@Model.user.CVFilePath">
+                    </div>
+
+                    @* <div class="mb-3">
+                        <label for="experience" class="form-label">Experience:</label>
+                        <input type="text" class="form-control" id="experience" name="experience"
+                               placeholder="Enter experience" readonly>
+                    </div> *@
+                    @* <div class="mb-3">
+                        <label for="project" class="form-label">Project:</label>
+                        <input type="text" class="form-control" id="project" name="project" placeholder="Enter project" readonly>
+                    </div> *@
+
+                </form>
+            </div>
+            <!-- Nút Back -->
+            <div class="d-inline-flex p-2 bd-highlight">
+
+                <button id="backButton" class="btn btn-primary" onclick="onBack()">Back</button>
+            </div>
+
+        </div>
+    </div>
+
+    <!-- Link to Bootstrap JS and Popper.js (required for Bootstrap) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+    <script>
+        // Hàm để copy đường dẫn vào clipboard
+        function copyLink() {
+            var linkProfile = document.getElementById("linkProfile");
+            var linkTextBox = document.getElementById("linkTextBox");
+
+            // Lấy địa chỉ URL hiện tại của trang
+            var currentURL = window.location.href;
+
+            // Hiển thị đường dẫn trong textbox
+            linkTextBox.value = currentURL;
+
+            // Chọn và sao chép đường dẫn vào clipboard
+            linkTextBox.select();
+            document.execCommand("Copy");
+
+            // Thông báo cho người dùng
+            alert("Link copied successfully!");
+        }
+
+        // Thiết lập đường dẫn mẫu cho LinkProfile
+        document.getElementById("linkProfile").innerText = "LinkProfile";
+
+        // Hàm để quay lại trang trước đó
+        function onBack() {
+            window.location.href = 'User.html';
+        }
+
+        function redirectToFeedback() {
+            window.location.href = 'Skill.html'; // Thay đổi 'feedback.html' bằng đường dẫn của trang Feedback
+        }
+
+        var currentRating = 0;
+
+        // Check if the user has already rated (stored in local storage)
+
+        var userRating = localStorage.getItem("userRating");
+        if (userRating) {
+            highlightStars(userRating);
+        }
+
+        function rate() {
+            var stars = document.getElementsByClassName("star");
+
+            for (var i = 0; i < stars.length; i++) {
+                stars[i].style.color = "black"; // Reset all stars to black
+            }
+
+            event.target.style.color = "gold"; // Change the color of clicked star and above stars
+
+            // Calculate the rating based on the clicked star
+            currentRating = Array.from(stars).indexOf(event.target) + 1;
+
+            // Save the user's rating to local storage
+            localStorage.setItem("userRating", currentRating);
+
+            // Update the average rating display
+            updateAverageRating();
+        }
+
+        function updateAverageRating() {
+            var feedbackSection = document.getElementById("feedbackSection");
+            var comments = feedbackSection.getElementsByClassName("comment");
+            var totalRating = 0;
+
+            for (var i = 0; i < comments.length; i++) {
+                var rating = parseInt(comments[i].textContent.match(/\d+/)[0]); // Extract the rating from the comment
+                totalRating += rating;
+            }
+
+            var averageRating = totalRating / comments.length;
+            var averageRatingDisplay = document.getElementById("averageRating");
+
+            if (!isNaN(averageRating)) {
+                averageRatingDisplay.innerHTML = "Average Rating: " + averageRating.toFixed(2);
+            } else {
+                averageRatingDisplay.innerHTML = "Average Rating: N/A";
+            }
+        }
+
+        function highlightStars(rating) {
+            var stars = document.getElementsByClassName("star");
+            for (var i = 0; i < rating; i++) {
+                stars[i].style.color = "gold";
+            }
+        }
+
+
+
+    </script>
+</body>
+
+</html>

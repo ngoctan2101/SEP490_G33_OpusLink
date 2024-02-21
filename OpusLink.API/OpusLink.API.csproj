@@ -25,7 +25,6 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Controllers\User\Freelance\" />
     <Folder Include="Controllers\User\Employer\" />
   </ItemGroup>
 

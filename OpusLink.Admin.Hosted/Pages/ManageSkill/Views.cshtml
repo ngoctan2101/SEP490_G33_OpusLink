@@ -1,4 +1,4 @@
-﻿@page "skillID"
+﻿@page "{SkillId:int?}"
 @model OpusLink.Admin.Hosted.Pages.ManageSkill.ViewsModel
 @{
 }
@@ -53,7 +53,7 @@
                             </td>
                             <td>@item.SkillName</td>
                         <td>
-                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editSkillModal">Edit</button>
+                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editSkillModal" data-skillid="@item.SkillID">Edit</button>
                                 <button class="btn btn-danger btn-sm" onclick="confirmDelete(@item.SkillID)">Delete</button>
                         </td>
                         </tr>
@@ -108,15 +108,15 @@
                 <div class="modal-body">
                     <!-- Form chỉnh sửa sẽ được thêm ở đây -->
                     <form id="editSkillForm" method="post">
-                        <input type="hidden" id="editSkillId" name="SkillID" /> <!-- Hidden input for SkillID -->
+                        <input type="hidden" id="editSkillId" name="SkillID" value="" /> <!-- Hidden input for SkillID -->
 
                         <div class="mb-3">
                             <label for="editSkillParentID" class="form-label">SkillParentID</label>
-                            <input type="text" class="form-control" id="editSkillParentID" name="SkillParentID" required>
+                            <input type="text" class="form-control" id="editSkillParentID" name="SkillParentID" required value="">
                         </div>
                         <div class="mb-3">
                             <label for="editSkillName" class="form-label">Skill Name</label>
-                            <input type="text" class="form-control" id="editSkillName" name="SkillName" required>
+                            <input type="text" class="form-control" id="editSkillName" name="SkillName" required value="">
                         </div>
                         <!-- Thêm các trường khác nếu cần -->
                         <button type="submit" class="btn btn-primary">Save Changes</button>
@@ -148,7 +148,7 @@
             // Gửi yêu cầu xóa kỹ năng với skillID đến server
             // Ví dụ sử dụng AJAX
             $.ajax({
-                url: 'api/Skill/DeleteSkillById/' + skillID, // Update the URL based on your controller and action
+                url: 'https://localhost:7265/api/Skill/DeleteSkillById/' + skillID, // Update the URL based on your controller and action
                 type: 'POST', // You might use POST or DELETE depending on your server configuration
                 success: function (result) {
                     // Xử lý kết quả sau khi xóa (cập nhật giao diện, thông báo, v.v.)
