@@ -43,6 +43,18 @@ namespace OpusLink.API.Controllers.Admin
             return Ok(_mapper.Map<SkillDTO>(skill));
         }
 
+        [HttpGet("GetSkillsByUserId/{uid}")]
+        public IActionResult GetSkillByUserId(int uid)
+        {
+            var skills = _skillService.GetAllSkillByUserID(uid);
+            
+            if (skills == null)
+            {
+                return NotFound("Don't have skill");
+            }
+            return Ok(skills);
+        }
+
         [HttpPost("AddSkill")]
         public ActionResult<Skill> AddSkill([FromBody] SkillDTO skillDto)
         {
