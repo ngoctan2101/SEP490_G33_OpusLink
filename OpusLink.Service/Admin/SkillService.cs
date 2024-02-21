@@ -1,4 +1,5 @@
-﻿using OpusLink.Entity;
+﻿using Microsoft.EntityFrameworkCore;
+using OpusLink.Entity;
 using OpusLink.Entity.Models;
 using System;
 using System.Collections.Generic;
@@ -11,23 +12,49 @@ namespace OpusLink.Service.Admin
     public interface ISkillService
     {
         List<Skill> GetAllSkill();
-        Skill GetSkill(int skillId);
+        Skill GetSkillById(int skillId);
         void AddSkill(Skill skill);
         void UpdateSkill(Skill skill);
-        void DeleteSkill(Skill skill);
+        void DeleteSkillById(int idSkill);
+        bool CheckExist(List<Skill> skillList, int targetSkillId);
     }
     public class SkillService : ISkillService
     {
-        private readonly OpusLinkDBContext _context;
-        public SkillService(OpusLinkDBContext context)
+        public readonly OpusLinkDBContext _context = new OpusLinkDBContext();
+        public SkillService()
         {
-            context = _context;
+            
         }
 
         public void AddSkill(Skill skill)
         {
             try
             {
+                _context.Skills.Add(skill);
+                _context.SaveChanges();
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error adding skill", e);
+            }
+        }
+
+        public void DeleteSkillById(int idSkill)
+        {
+            try
+            {
+                var skill = _context.Skills.FirstOrDefault(x=>x.SkillID == idSkill);
+                var freeandskill = _context.FreelancerAndSkills.ToList();
+                foreach(var item in freeandskill)
+                {
+                    if(item.SkillID == idSkill)
+                    {
+                        _context.FreelancerAndSkills.RemoveRange(item);
+                    }
+                }
+                _context.Skills.Remove(skill);
+                _context.SaveChanges();
                 
 
             }
@@ -37,16 +64,11 @@ namespace OpusLink.Service.Admin
             }
         }
 
-        public void DeleteSkill(Skill skill)
-        {
-            throw new NotImplementedException();
-        }
-
         public List<Skill> GetAllSkill()
         {
             try
             {
-                var skill = _context.Skills.ToList();
+                var skill = _context.Skills.Include(x=>x.SkillParent).ToList();
                 return skill;
 
             }
@@ -56,7 +78,7 @@ namespace OpusLink.Service.Admin
             }
         }
 
-        public Skill GetSkill(int skillId)
+        public Skill GetSkillById(int skillId)
         {
             try
             {
@@ -72,7 +94,20 @@ namespace OpusLink.Service.Admin
 
         public void UpdateSkill(Skill skill)
         {
-            throw new NotImplementedException();
+            try
+            {
+              
+                _context.Entry(skill).State = EntityState.Modified;
+                _context.SaveChanges();
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public bool CheckExist(List<Skill> skillList, int targetSkillId)
+        {
+            return skillList.Any(skill => skill.SkillID == targetSkillId);
         }
     }
 }

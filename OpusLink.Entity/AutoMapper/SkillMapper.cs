@@ -12,7 +12,8 @@ namespace OpusLink.Entity.AutoMapper
     public class SkillMapper : Profile
     {
         public SkillMapper() {
-            CreateMap<Skill, SkillDTO>();
+            CreateMap<Skill, SkillDTO>()
+                .ForMember(dest => dest.SkillParentName, src => src.MapFrom(x => x.SkillParent.SkillName)).ReverseMap();
         }
     }
 }
