@@ -13,7 +13,6 @@ namespace OpusLink.Admin.Hosted.Pages.ManageUser
 
         [BindProperty]
         public List<UserDTO> listUser { get; set; } = null!;
-        public List<SkillDTO> listSkill { get; set; } = null!;
         //public int SkillID { get; set; }
         //public int? SkillParentID { get; set; }
         //public string SkillName { get; set; }
@@ -35,15 +34,6 @@ namespace OpusLink.Admin.Hosted.Pages.ManageUser
                 var optionUser = new JsonSerializerOptions()
                 { PropertyNameCaseInsensitive = true };
                 listUser = JsonSerializer.Deserialize<List<UserDTO>>(responseBodyUser, optionUser);
-            }
-
-            HttpResponseMessage responseSkill = await client.GetAsync(ServiceMangaUrl + "api/Skill/GetAllSkill");
-            if (responseUser.IsSuccessStatusCode)
-            {
-                string responseBodySkill = await responseUser.Content.ReadAsStringAsync();
-                var optionSkill = new JsonSerializerOptions()
-                { PropertyNameCaseInsensitive = true };
-                listSkill = JsonSerializer.Deserialize<List<SkillDTO>>(responseBodySkill, optionSkill);
             }
         }
     }

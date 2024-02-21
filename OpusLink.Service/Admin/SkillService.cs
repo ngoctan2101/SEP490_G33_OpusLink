@@ -17,7 +17,6 @@ namespace OpusLink.Service.Admin
         void UpdateSkill(Skill skill);
         void DeleteSkillById(int idSkill);
         bool CheckExist(List<Skill> skillList, int targetSkillId);
-        List<Skill> GetAllSkillByUserID(int id);
     }
     public class SkillService : ISkillService
     {
@@ -71,50 +70,6 @@ namespace OpusLink.Service.Admin
             {
                 var skill = _context.Skills.Include(x=>x.SkillParent).ToList();
                 return skill;
-
-            }
-            catch (Exception e)
-            {
-                throw new Exception(e.Message);
-            }
-        }
-        /*
-        var products
-    = from p in context.products
-      join c in context.categories on p.CategoryId equals c.CategoryId
-         */
-        public List<Skill> GetAllSkillByUserID(int id)
-        {
-            try
-            {
-                List<Skill> list = new List<Skill>();
-                var skills =( from s in _context.Skills
-                             join fs in _context.FreelancerAndSkills
-                             on s.SkillID equals fs.SkillID
-                             join us in _context.Users
-                             on fs.FreelancerID equals us.Id //ve tim user id
-                             where us.Id == id
-                             select new
-                             {
-                                 SkillID = s.SkillID,
-                                 SkillParentID = s.SkillParentID,
-                                 SkillName = s.SkillName
-                                 
-                             }).Distinct();
-                //join u in _context.Users
-                foreach (var item in skills)
-                {
-                    
-                        var skill = new Skill
-                        {
-                            SkillID = item.SkillID,
-                            SkillParentID = item.SkillParentID,
-                            SkillName = item.SkillName
-                        };
-                        list.Add(skill);
-                    
-                }
-                    return list;
 
             }
             catch (Exception e)
