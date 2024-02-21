@@ -11,9 +11,19 @@ namespace OpusLink.Entity.AutoMapper
 {
     public class UserMapper : Profile
     {
-        public UserMapper() {
-            CreateMap<User, UserDTO>().ReverseMap();
-            
+        public UserMapper()
+        {
+            CreateMap<User, UserDTO>()
+                .ForMember(dest => dest.Skills, opt => opt.MapFrom(src => ListSkills(src.FreelancerAndSkills)))
+                .ReverseMap();
+
+            CreateMap<Skill, SkillDTO>()
+                .ForMember(dest => dest.SkillParentName, opt => opt.MapFrom(src => src.SkillParent != null ? src.SkillParent.SkillName : null));
+        }
+
+        private List<string> ListSkills(ICollection<FreelancerAndSkill> freelancerAndSkills)
+        {
+            return freelancerAndSkills.Select(fas => fas.Skill.SkillName).ToList();
         }
     }
 }

@@ -1,4 +1,5 @@
-﻿using System;
+﻿using OpusLink.Entity.Models;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -25,5 +26,7 @@ namespace OpusLink.Entity.DTO
         public bool IsVeryfiedIdentity { get; set; }
         public decimal? AmountMoney { get; set; }
         public int Status { get; set; }
+
+        public List<String> Skills { get; set; }
     }
 }
