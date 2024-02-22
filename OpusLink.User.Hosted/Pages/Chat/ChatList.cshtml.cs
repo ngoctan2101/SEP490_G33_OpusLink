@@ -12,7 +12,7 @@ namespace OpusLink.User.Hosted.Pages.Chat
     public class ChatListModel : PageModel
     {
         private readonly HttpClient client = null;
-        public IList<ChatDTO> ChatDTOs { get; set; } = default;
+        public IList<ChatDTO> ChatDTOs { get; set; } = default!;
         public ChatListModel()
         {
             client = new HttpClient();
@@ -21,9 +21,9 @@ namespace OpusLink.User.Hosted.Pages.Chat
         }
         public async Task OnGetAsync()
         {
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7265/api/ChatController/GetAllChat");
+            HttpResponseMessage response = await client.GetAsync("https://localhost:7265/api/Chat/GetAllChat");
 
-            //response = await client.GetAsync("https://localhost:7265/api/ChatController/GetAllChildCategory?parentId=" + 0);
+           
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
