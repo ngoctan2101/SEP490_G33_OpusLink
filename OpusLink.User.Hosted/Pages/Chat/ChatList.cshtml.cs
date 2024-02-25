@@ -5,6 +5,7 @@ using OpusLink.Entity.Models;
 using OpusLink.Entity.Models.JOB;
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
+using Microsoft.EntityFrameworkCore;
 
 
 namespace OpusLink.User.Hosted.Pages.Chat
@@ -13,6 +14,7 @@ namespace OpusLink.User.Hosted.Pages.Chat
     {
         private readonly HttpClient client = null;
         public IList<ChatDTO> ChatDTOs { get; set; } = default!;
+        
         public ChatListModel()
         {
             client = new HttpClient();
@@ -33,7 +35,21 @@ namespace OpusLink.User.Hosted.Pages.Chat
             {
 
             }
-            
+             response = await client.GetAsync("https://localhost:7265/api/Chat/GetChatBoxById");
+
+
+            if (response.IsSuccessStatusCode)
+            {
+                string strData = await response.Content.ReadAsStringAsync();
+                ChatDTOs = JsonConvert.DeserializeObject<List<ChatDTO>>(strData);
+            }
+            else
+            {
+
+            }
+
         }
+        
+
     }
 }

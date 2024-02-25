@@ -16,9 +16,18 @@ namespace OpusLink.Entity.AutoMapper
             CreateMap<ChatBox, ChatDTO>()
                 .ForMember(x => x.EmployerName, x => x.MapFrom(x => x.Employer.UserName))
                 .ForMember(x => x.FreelancerName, x => x.MapFrom(x => x.Freelancer.UserName))
-                
+                .ForMember(x => x.NewEstMessage, x => x.MapFrom(x => NewEstMessage(x.Messages)));
+            CreateMap<Message, MessageDTO>();
+        }
 
-                .ReverseMap();
+        private string NewEstMessage(ICollection<Message> messages)
+        {
+            if(messages.Count == 0)
+            {
+                return "";
+            }
+            List<Message> messagesList = messages.OrderByDescending(o => o.DateCreated).ToList();
+            return (messagesList[0].MessageContent);
         }
     }
 }

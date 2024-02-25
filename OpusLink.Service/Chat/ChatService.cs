@@ -12,7 +12,8 @@ namespace OpusLink.Service.Chat
     public interface IChatService
     {
         List<ChatBox> getAllChatBox();
-        ChatBox getChatBox(int id);
+        ChatBox getChatBoxById(int id);
+        List<Message>  GetMessageById(int id);
     }
         public class ChatService : IChatService
         {
@@ -35,7 +36,7 @@ namespace OpusLink.Service.Chat
                 }
             }
 
-            public ChatBox getChatBox(int id)
+            public ChatBox getChatBoxById(int id)
             {
                 try
                 {
@@ -48,6 +49,23 @@ namespace OpusLink.Service.Chat
                     throw new Exception(e.Message);
                 }
             }
+
+        public List<Message>  GetMessageById(int id)
+        {
+            try
+            {
+                var message = _context.Messages.Include("ChatBox").Include("ChatBox.Employer").Include("ChatBox.Freelancer").Where(x => x.ChatBoxID == id).ToList();
+                return message;
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
         }
+
+        
+    }
+    }
     
-}
+
