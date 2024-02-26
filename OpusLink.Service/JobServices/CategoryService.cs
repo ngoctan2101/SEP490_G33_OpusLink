@@ -13,7 +13,7 @@ namespace OpusLink.Service.JobServices
     {
         Task<List<Category>> GetAllCategory();
         Task<List<Category>> GetAllChildCategory(int categoryId);
-        Task<int> CountChild(int parentCategoryId);
+        bool HasChild(int parentCategoryId);
         Task CreateCategory(Category category1);
         Task UpdateCategory(Category category1);
         Task DeleteCategory(int categoryId);
@@ -38,10 +38,10 @@ namespace OpusLink.Service.JobServices
             return await _dbContext.Categories.Include("JobAndCategories").Include("CategoryParent").ToListAsync();
         }
 
-        public async Task<int> CountChild(int parentCategoryId)
+        public bool HasChild(int parentCategoryId)
         {
-            return await _dbContext.Categories.Where(x => x.CategoryParentID == parentCategoryId).CountAsync();
-            
+            return  _dbContext.Categories.Any(c => c.CategoryParentID == parentCategoryId);
+
         }
 
         public async Task CreateCategory(Category category1)

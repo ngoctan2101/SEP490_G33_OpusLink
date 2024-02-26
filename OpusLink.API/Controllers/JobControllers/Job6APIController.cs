@@ -39,13 +39,6 @@ namespace OpusLink.API.Controllers.JobControllers
         {
             var categories = await categoryService.GetAllCategory();
             List<GetCategoryResponse> result = _mapper.Map<List<GetCategoryResponse>>(categories);
-            foreach (var category in result)
-            {
-                if (await categoryService.CountChild(category.CategoryID) > 0)
-                {
-                    category.HasChildCategory = true;
-                }
-            }
             return Ok(result);
         }
         private List<SaveJob> Search(List<SaveJob> saveJobs, Filter filter, out int numberOfPage)

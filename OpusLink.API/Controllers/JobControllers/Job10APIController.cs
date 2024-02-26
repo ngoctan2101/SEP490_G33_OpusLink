@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.Models;
 using OpusLink.Service.JobServices;
+using System.Diagnostics;
 
 namespace OpusLink.API.Controllers.JobControllers
 {
@@ -33,15 +34,14 @@ namespace OpusLink.API.Controllers.JobControllers
         [HttpGet("GetAllCategory")]
         public async Task<IActionResult> GetAllCategory()
         {
+            List<GetCategoryResponse> result;
+            Stopwatch sw = new Stopwatch();
+            sw.Start();
             var categories = await categoryService.GetAllCategory();
-            List<GetCategoryResponse> result = _mapper.Map<List<GetCategoryResponse>>(categories);
-            foreach (var category in result)
-            {
-                if (await categoryService.CountChild(category.CategoryID) > 0)
-                {
-                    category.HasChildCategory = true;
-                }
-            }
+            result = _mapper.Map<List<GetCategoryResponse>>(categories);
+            sw.Stop();
+            Console.WriteLine("Elapsed={0}", sw.Elapsed);
+           
             return Ok(result);
         }
         [HttpPost("CreateJob")]

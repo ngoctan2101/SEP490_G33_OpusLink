@@ -2,6 +2,8 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.JobDTO;
+using OpusLink.Shared.Enums;
+using System.Diagnostics;
 using System.Globalization;
 using System.Net.Http.Headers;
 using System.Text.Json;
@@ -33,10 +35,18 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 BudgetMax = 500000000,
                 DateMin = DateTime.ParseExact("2023-01-01 00:01", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture),
                 DateMax = DateTime.ParseExact("2024-03-30 23:59", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture)
+
             };
+            
+
         }
         public async Task OnGetAsync()
         {
+            if(filter.Statuses.Count == 0) {
+                filter.Statuses.Add((int)JobStatusEnum.Approved);
+                filter.Statuses.Add((int)JobStatusEnum.Hired);
+                filter.Statuses.Add((int)JobStatusEnum.Close);
+            }
             //get all first jobs
             var options = new JsonSerializerOptions
             {
@@ -125,6 +135,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
                     PageNo = filter.PageNumber;
                 }
             }
+
             //post filter to API 
             //get list 10 job base on Filter
             var options = new JsonSerializerOptions
@@ -136,11 +147,13 @@ namespace OpusLink.User.Hosted.Pages.JOB
             HttpResponseMessage response = await client.PostAsync("https://localhost:7265/api/Job4API/GetAllJob", httpContent);
             if (response.IsSuccessStatusCode)
             {
+                
                 string strData = await response.Content.ReadAsStringAsync();
                 Jobs = JsonConvert.DeserializeObject<List<GetJobResponse>>(strData);
                 //tsn goi cai nay la bi thuat :>
                 NumberOfPage = Jobs.ElementAt(Jobs.Count - 1).NumberOfOffer;
                 Jobs.RemoveAt(Jobs.Count - 1);
+               
             }
             else
             {
@@ -151,6 +164,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
             AllCategories = await GetAllCategoryAsync();
             //get list id of saved jobs
             AllSavedJobId = await GetListSavedJobId();
+            
         }
         public async Task OnPostForSaveAsync(IFormCollection collection)
         {
@@ -221,11 +235,14 @@ namespace OpusLink.User.Hosted.Pages.JOB
 
             if (response.IsSuccessStatusCode)
             {
+                
                 string strData = await response.Content.ReadAsStringAsync();
                 Jobs = JsonConvert.DeserializeObject<List<GetJobResponse>>(strData);
                 //tsn goi cai nay la bi thuat :>
                 NumberOfPage = Jobs.ElementAt(Jobs.Count - 1).NumberOfOffer;
                 Jobs.RemoveAt(Jobs.Count - 1);
+                
+                
             }
             else
             {

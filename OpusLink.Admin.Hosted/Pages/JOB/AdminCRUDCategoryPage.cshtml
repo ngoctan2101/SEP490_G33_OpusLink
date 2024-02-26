@@ -199,7 +199,7 @@
     <form method="post">
         <div class="row" style="margin-bottom:15px">
             <div class="col-md-7" style="padding-right:0px">
-                <input name="Search_Str" value="@Model.filter.SearchStr" style="width:100%" placeholder="Find Job" />
+                <input name="Search_Str" value="@Model.filter.SearchStr" style="width:100%" placeholder="Find Category" />
             </div>
             <div class="col-md-2" style="padding-left:0px">
                 <button type="submit" asp-page-handler="ForSearch" name="pageNo_1" value="1" style="width:100%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964">Search</button>
@@ -314,6 +314,6 @@
         modal2.style.display = "block";
     }
     function hideModal() {
-        model2.style.display = "none";
+        modal2.style.display = "none";
     }
 </script>
