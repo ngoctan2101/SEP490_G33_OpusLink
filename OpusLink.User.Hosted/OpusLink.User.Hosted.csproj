@@ -6,4 +6,21 @@
     <ImplicitUsings>enable</ImplicitUsings>
   </PropertyGroup>
 
+  <ItemGroup>
+    <PackageReference Include="Newtonsoft.Json" Version="13.0.3" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <ProjectReference Include="..\OpusLink.Entity\OpusLink.Entity.csproj" />
+    <ProjectReference Include="..\OpusLink.Shared\OpusLink.Shared.csproj" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <Folder Include="wwwroot\imgExample\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\imgExample\p.png" />
+  </ItemGroup>
+
 </Project>

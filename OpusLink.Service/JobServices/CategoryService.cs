@@ -14,6 +14,9 @@ namespace OpusLink.Service.JobServices
         Task<List<Category>> GetAllCategory();
         Task<List<Category>> GetAllChildCategory(int categoryId);
         Task<int> CountChild(int parentCategoryId);
+        Task CreateCategory(Category category1);
+        Task UpdateCategory(Category category1);
+        Task DeleteCategory(int categoryId);
     }
     public class CategoryService : ICategoryService
     {
@@ -32,13 +35,52 @@ namespace OpusLink.Service.JobServices
         }
         public async Task<List<Category>> GetAllCategory()
         {
-            return await _dbContext.Categories.Include("JobAndCategories").ToListAsync();
+            return await _dbContext.Categories.Include("JobAndCategories").Include("CategoryParent").ToListAsync();
         }
 
         public async Task<int> CountChild(int parentCategoryId)
         {
             return await _dbContext.Categories.Where(x => x.CategoryParentID == parentCategoryId).CountAsync();
             
+        }
+
+        public async Task CreateCategory(Category category1)
+        {
+            if(category1.CategoryParentID== 0)
+            {
+                category1.CategoryParentID = null;
+            }
+            _dbContext.Categories.Add(category1);
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task UpdateCategory(Category category1)
+        {
+            if (category1.CategoryParentID == 0)
+            {
+                category1.CategoryParentID = null;
+            }
+            Category a = _dbContext.Categories.Where(c=>c.CategoryID==category1.CategoryID).FirstOrDefault();
+            a.CategoryParentID = category1.CategoryParentID;
+            a.CategoryName=category1.CategoryName;
+            _dbContext.Entry(a).State = EntityState.Modified;
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task DeleteCategory(int categoryId)
+        {
+            Category a = _dbContext.Categories.Where(c => c.CategoryID == categoryId).Include("JobAndCategories").FirstOrDefault();
+            foreach(JobAndCategory jac in a.JobAndCategories)
+            {
+                _dbContext.Remove(jac);
+            }
+            List<Category> childCategories = _dbContext.Categories.Where(c => c.CategoryParentID == categoryId).ToList();
+            foreach (Category c in childCategories)
+            {
+                c.CategoryParent = null;
+            }
+            _dbContext.Remove(a);
+            await _dbContext.SaveChangesAsync();
         }
     }
 }

@@ -1,0 +1,319 @@
+﻿@page
+@using OpusLink.Entity.DTO.JobDTO;
+@using OpusLink.Entity.Models;
+@using OpusLink.Shared.Enums;
+@model OpusLink.Admin.Hosted.Pages.JOB.AdminCRUDCategoryPageModel
+@{
+}
+@{
+    ViewData["Title"] = "Admin CRUD Category";
+}
+<style>
+    /*pagination*/
+    .pagin {
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        border-radius: 50%;
+        border: none;
+        transition: background-color 0.2s;
+    }
+
+        .pagin:hover {
+            background-color: #0088CC;
+            color: white;
+        }
+    /*modal*/
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 0;
+        border: 1px solid #888;
+        width: 50%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 0.4s
+    }
+
+    /* Add Animation */
+    @@-webkit-keyframes animatetop {
+        from {
+            top: -300px;
+            opacity: 0
+        }
+
+        to {
+            top: 0;
+            opacity: 1
+        }
+    }
+
+    @@keyframes animatetop {
+        from {
+            top: -300px;
+            opacity: 0
+        }
+
+        to {
+            top: 0;
+            opacity: 1
+        }
+    }
+
+    /* The Close Button */
+    .close {
+        color: white;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    .modal-header {
+        padding: 2px 16px;
+        background-color: #2DB964;
+        color: white;
+    }
+
+    .modal-body {
+        padding: 2px 16px;
+    }
+
+</style>
+<div id="addModal" class="modal">
+    <!-- Modal add -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 style="font-size:24px">Create new Category</h2>
+            <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form method="post">
+                <table>
+                    <tr><td>Category Name:    </td><td><input type="text" name="AddCategoryName" required /></td></tr>
+                    <tr>
+                        <td>Category Parent:    </td>
+                        <td>
+                            <select name="AddCategoryParent">
+                                <option value="0">No Parent</option>
+                                @foreach (var item in Model.AllCategories)
+                                {
+                                    <option value="@item.CategoryID">@item.CategoryID<span>-</span>@item.CategoryName</option>
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                    <tr><td></td><td style="text-align:center"><button type="submit" asp-page-handler="ForAdd" style="width:30%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964">Add</button></td></tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="updateModal" class="modal">
+    <!-- Modal update -->
+    <div class="modal-content">
+        <div class="modal-header">
+            <h2 style="font-size:24px">Update category</h2>
+            <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form method="post">
+                <input type="text" name="UpdateCategoryID" hidden />
+                <table>
+                    <tr><td>Category Name:    </td><td><input type="text" name="UpdateCategoryName" style="width:100%" required /></td></tr>
+                    <tr>
+                        <td>Category Parent:    </td>
+                        <td>
+                            <select name="UpdateCategoryParent">
+                                <option value="0">No Parent</option>
+                                @foreach (var item in Model.AllCategories)
+                                {
+                                    <option value="@item.CategoryID">@item.CategoryID<span>-</span>@item.CategoryName</option>
+                                }
+                            </select>
+                        </td>
+                    </tr>
+                    <tr><td></td><td style="text-align:center"><button type="submit" asp-page-handler="ForUpdate" style="width:30%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964">Update</button></td></tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+<div id="deleteModal" class="modal">
+    <!-- Modal delete -->
+    <div class="modal-content" style="width:fit-content">
+        <div class="modal-header">
+            <h2 style="font-size:24px">Delete category</h2>
+            <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form method="post">
+                <table>
+                    <tr>
+                        <td colspan="2">
+                            Are you sure you want to delete this category ?
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            ID:
+                        </td>
+                        <td>
+                            <input type="text" name="DeleteCategoryID" readonly/>
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center"><button type="submit" asp-page-handler="ForDelete" style="background-color:#2DB964;color:white;border:2px solid #2DB964;width:120px">Yes</button></td>
+                        <td style="text-align:center"><button type="button" onclick="hideModal()" style="background-color:#CCCCCC; color:white;width:120px;border:2px solid #CCCCCC">No</button></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+<div style="background-color:#F0F0F0; padding:10px">
+    <form method="post">
+        <div class="row" style="margin-bottom:15px">
+            <div class="col-md-7" style="padding-right:0px">
+                <input name="Search_Str" value="@Model.filter.SearchStr" style="width:100%" placeholder="Find Job" />
+            </div>
+            <div class="col-md-2" style="padding-left:0px">
+                <button type="submit" asp-page-handler="ForSearch" name="pageNo_1" value="1" style="width:100%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964">Search</button>
+            </div>
+            <div class="col-md-3">
+                <button type="button" id="openAddCategory" style="width:80%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964">Add</button>
+            </div>
+        </div>
+        <div>
+            <table>
+                <thead>
+                    <tr>
+                        <th style="width:10%">Id</th>
+                        <th style="width:30%">Parent</th>
+                        <th style="width:30%">Category Name</th>
+                        <th style="width:15%"></th>
+                        <th style="width:15%"></th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @foreach (var item in Model.Categories)
+                    {
+                        <tr>
+                            <td id="CategoryID_@item.CategoryID">@item.CategoryID</td>
+                            <td>
+                                @if (item.ParentId != 0)
+                                {
+                                    <div style="display:inline-block" id="ParentID_@item.CategoryID">@item.ParentId</div>
+                                    <span>-</span>
+                                    @item.ParentName
+                                }
+                            </td>
+                            <td id="CategoryName_@item.CategoryID">@item.CategoryName</td>
+                            <td><button type="button" onclick="OpenUpdateCategory(@item.CategoryID)">Update</button></td>
+                            <td><button type="button" onclick="OpenDeleteCategory(@item.CategoryID)">Delete</button></td>
+                        </tr>
+                    }
+                </tbody>
+            </table>
+        </div>
+        <div style="display:flex;justify-content:center;">
+            @for (int i = 1; i <= Model.NumberOfPage; i++)
+            {
+                @if (i == Model.PageNo)
+                {
+                    <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
+                        <button class="pagin" asp-page-handler="ForSearch" style="background-color:#0088CC; color:white" type="submit" name="pageNo_@i" value="@i">@i</button>
+                    </div>
+                }
+                else
+                {
+                    <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
+                        <button class="pagin" asp-page-handler="ForSearch" type="submit" name="pageNo_@i" value="@i">@i</button>
+                    </div>
+                }
+            }
+        </div>
+    </form>
+</div>
+<script>
+    // Get the modal
+    var modal = document.getElementById("addModal");
+    var modal1 = document.getElementById("updateModal");
+    var modal2 = document.getElementById("deleteModal");
+
+    // When the user clicks on <span> (x), close the modal
+    document.getElementsByClassName("close")[0].onclick = function () {
+        modal.style.display = "none";
+    }
+    document.getElementsByClassName("close")[1].onclick = function () {
+        modal1.style.display = "none";
+    }
+    document.getElementsByClassName("close")[2].onclick = function () {
+        modal2.style.display = "none";
+    }
+
+    // When the user clicks the button, open the modal
+    document.getElementById("openAddCategory").onclick = function () {
+        modal.style.display = "block";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal1) {
+            modal1.style.display = "none";
+        }
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+        if (event.target == modal2) {
+            modal2.style.display = "none";
+        }
+    }
+
+    function OpenUpdateCategory(categoryID) {
+        var categoryid = parseInt(document.getElementById("CategoryID_" + categoryID).innerHTML);
+        document.getElementsByName("UpdateCategoryParent")[0].value = 0;
+        if (document.getElementById("ParentID_" + categoryID) === null) {
+        } else {
+            var parentid = parseInt(document.getElementById("ParentID_" + categoryID).innerHTML);
+            document.getElementsByName("UpdateCategoryParent")[0].value = parentid;
+        }
+        var categoryname = document.getElementById("CategoryName_" + categoryID).innerHTML;
+        document.getElementsByName("UpdateCategoryID")[0].value = categoryid;
+        document.getElementsByName("UpdateCategoryName")[0].value = categoryname;
+
+        modal1.style.display = "block";
+    }
+    function OpenDeleteCategory(categoryID) {
+        var categoryid = parseInt(document.getElementById("CategoryID_" + categoryID).innerHTML);
+        document.getElementsByName("DeleteCategoryID")[0].value = categoryid;
+        modal2.style.display = "block";
+    }
+    function hideModal() {
+        model2.style.display = "none";
+    }
+</script>

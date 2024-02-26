@@ -3,6 +3,8 @@ using OpusLink.Entity;
 using OpusLink.Entity.AutoMapper;
 using OpusLink.Service.JobServices;
 using Microsoft.Extensions.DependencyInjection;
+using OpusLink.Entity.AutoMapper.JOB;
+
 internal class Program
 {
     private static void Main(string[] args)
@@ -20,10 +22,17 @@ internal class Program
             mc.AddProfile(new MapperConfig());
             mc.AddProfile(new JobProfile());
             mc.AddProfile(new CategoryProfile());
+            mc.AddProfile(new OfferProfile());
+            mc.AddProfile(new SaveJobProfile());
+            mc.AddProfile(new LocationProfile());
         });
         IMapper mapper = mapperConfig.CreateMapper();
         builder.Services.AddScoped<IJobService, JobService>();
         builder.Services.AddScoped<ICategoryService, CategoryService>();
+        builder.Services.AddScoped<IOfferService, OfferService>();
+        builder.Services.AddScoped<ISaveJobService, SaveJobService>();
+        builder.Services.AddScoped<ILocationService, LocationService>();
+        builder.Services.AddScoped<IJobAndCategoryService, JobAndCategoryService>();
 
         builder.Services.AddDbContext<OpusLinkDBContext>();
         builder.Services.AddSingleton(mapper);

@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpusLink.Entity.Models.JOB
+namespace OpusLink.Entity.DTO.JobDTO
 {
     public class GetCategoryResponse
     {
@@ -12,5 +12,8 @@ namespace OpusLink.Entity.Models.JOB
         public string CategoryName { get; set; }
         public bool HasChildCategory { get; set; }//hien thi nut tha xuong trong filter
         public int NumberOfJob { get; set; } //hien thi so luong job o moi category
+
+        public int ParentId { get; set; } = 0;
+        public string ParentName { get; set; } = "";
     }
 }

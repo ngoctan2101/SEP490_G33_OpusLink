@@ -4,21 +4,22 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpusLink.Entity.Models.JOB
+namespace OpusLink.Entity.DTO.JobDTO
 {
     public class Filter
     {
         public List<int> CategoryIDs { get; set; } = new List<int>();
         public List<int> Statuses { get; set; } = new List<int>();
-        public String SearchStr { get; set; }
-        public Decimal BudgetMin { get; set; }
-        public Decimal BudgetMax { get; set;}
+        public string SearchStr { get; set; }
+        public decimal BudgetMin { get; set; }
+        public decimal BudgetMax { get; set; }
         public DateTime DateMin { get; set; }
         public DateTime DateMax { get; set; }
         public int PageNumber { get; set; }
+        public int UserId { get; set; }
         public string getDateRange()
         {
-            return DateMin.ToString("MM/dd/yyyy") + " - "+ DateMax.ToString("MM/dd/yyyy");
+            return DateMin.ToString("MM/dd/yyyy") + " - " + DateMax.ToString("MM/dd/yyyy");
         }
         public List<string> GetAllCategoryName(IList<GetCategoryResponse> Categories)
         {

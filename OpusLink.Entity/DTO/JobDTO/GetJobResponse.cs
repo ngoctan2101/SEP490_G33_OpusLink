@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpusLink.Entity.Models.JOB
+namespace OpusLink.Entity.DTO.JobDTO
 {
     public class GetJobResponse
     {
@@ -19,11 +19,10 @@ namespace OpusLink.Entity.Models.JOB
         public decimal? BudgetTo { get; set; }
         public DateTime? DateCreated { get; set; }
         public int? LocationID { get; set; }
+        public string? LocationName { get; set; }
         public int Status { get; set; } = 0;
-        public List<GetCategoryResponse> Categoies { get; set; }= new List<GetCategoryResponse>();
+        public List<GetCategoryResponse> Categoies { get; set; } = new List<GetCategoryResponse>();
         public int NumberOfOffer { get; set; } = 0;
-
-        //Will add more, because this class used in many usecases
 
     }
 }

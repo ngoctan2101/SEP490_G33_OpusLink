@@ -1,8 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.Models;
-using OpusLink.Entity.Models.JOB;
 using OpusLink.Service.JobServices;
 using System.Collections.Generic;
 
@@ -66,19 +66,6 @@ namespace OpusLink.API.Controllers.JobControllers
             result.Add(new GetJobResponse() { NumberOfOffer=numberOfPage });
             return Ok(result);
         }
-        //[HttpGet("GetAllFirstJob")]
-        //public async Task<IActionResult> GetAllFirstJob()
-        //{
-        //    var jobs = await jobService.GetAllFirstJob();
-        //    List < GetJobResponse> result = _mapper.Map< List<GetJobResponse>>(jobs);
-        //    return Ok(result);
-        //}
-        //[HttpGet("GetNumberOfPage")]
-        //public async Task<IActionResult> GetNumberOfPage()
-        //{
-        //    int numberOfPage = await jobService.GetNumberOfPage();
-        //    return Ok(numberOfPage);
-        //}
         private List<Job> Search(List<Job> jobs, Filter filter,out int numberOfPage)
         {
             List<Job> result = new List<Job>();
@@ -156,7 +143,7 @@ namespace OpusLink.API.Controllers.JobControllers
             {
                 for (int i = result.Count - 1; i >= 0; i--)
                 {
-                    if (result[i].JobTitle.Contains(filter.SearchStr) || result[i].JobContent.Contains(filter.SearchStr))
+                    if (result[i].JobTitle.ToLower().Contains(filter.SearchStr.ToLower()) || result[i].JobContent.ToLower().Contains(filter.SearchStr.ToLower()))
                     {
                         continue;
                     }
@@ -167,12 +154,12 @@ namespace OpusLink.API.Controllers.JobControllers
                 }
             }
             //loc theo page
-            numberOfPage = result.Count / 10;
-            if (result.Count % 10 > 0)
+            numberOfPage = result.Count / 6;
+            if (result.Count % 6 > 0)
             {
                 numberOfPage++;
             }
-            return result.Skip((filter.PageNumber-1)*10).Take(10).ToList();
+            return result.Skip((filter.PageNumber-1)*6).Take(6).ToList();
         }
     }
 }

@@ -1,7 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
-using OpusLink.Entity.Models.JOB;
+using OpusLink.Entity.DTO.JobDTO;
 using System.Globalization;
 using System.Net.Http.Headers;
 using System.Text.Json;
@@ -18,7 +18,6 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
         public int NumberOfPage { get; set; }
         public int PageNo { get; set; }
 
-        //will add more for usecase search and filter
 
         public AdminViewAllJobPageModel()
         {
@@ -58,8 +57,6 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
         }
 
         
-
-        //chua co paging
         public async Task OnPostAsync(IFormCollection collection)
         {
             List<string> keys=collection.Keys.ToList<string>();
