@@ -12,13 +12,8 @@ using OpusLink.Entity;
 namespace OpusLink.Entity.Migrations
 {
     [DbContext(typeof(OpusLinkDBContext))]
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-    [Migration("20240220082335_addNewDB")]
-    partial class addNewDB
-========
-    [Migration("20240223125440_InitialDB")]
+    [Migration("20240226160435_InitialDB")]
     partial class InitialDB
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
     {
         protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
@@ -49292,31 +49287,19 @@ namespace OpusLink.Entity.Migrations
                         new
                         {
                             Id = 1,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "a690d6dc-4330-4938-8931-3da39d7fa3fc",
-========
-                            ConcurrencyStamp = "51940ba5-5ec6-4e82-8214-cc45a4a3a749",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "e6a2c10d-5470-4dfc-8c68-b19d62998ad3",
                             Name = "Admin"
                         },
                         new
                         {
                             Id = 2,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "950edb5d-b139-4233-903c-40aad356a0d8",
-========
-                            ConcurrencyStamp = "aad74f40-7c29-4384-8ba0-76cde3fa8fa0",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "e00949fe-dd15-4340-8322-d3865aedf52c",
                             Name = "Freelancer"
                         },
                         new
                         {
                             Id = 3,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "187125cd-0fee-498a-9e28-2f6347fc6c1a",
-========
-                            ConcurrencyStamp = "4b4f898a-5aaa-4388-a519-74b4dd3675c6",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "a356149e-5962-4cc0-bad5-d759322753db",
                             Name = "Employer"
                         });
                 });
@@ -55877,11 +55860,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 1,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "17b2f8fa-cc0e-44f6-9180-f0af05e8ddf0",
-========
-                            ConcurrencyStamp = "b2b256ac-dea4-4805-a5ea-6129a509f226",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "763d45ac-55a1-4b52-b1b9-84e4020343d9",
                             Email = "nva123@gmail.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -55896,11 +55875,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 2,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "d83eaff7-672c-4d10-9567-f690327e3e02",
-========
-                            ConcurrencyStamp = "427406e1-a57f-4a68-b53f-6864df86ce92",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "08ed5ee6-1a1d-471d-93fc-395e1c61db95",
                             Email = "nvb123@gmail.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -55915,11 +55890,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "3279c579-9c18-44cb-9b51-4fc15d45c97f",
-========
-                            ConcurrencyStamp = "28cbee47-4150-4df9-9aae-43f57b669030",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "889eafdb-a6be-4c94-a85a-f90b3c1ce7d1",
                             Email = "nvc123@gmail.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -55934,11 +55905,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 3,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "f41b0183-e3af-40f4-9e84-59d82dfc4338",
-========
-                            ConcurrencyStamp = "97dfb473-7b9d-4e03-b19f-ad8de7c6cc68",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "99e47385-a2fa-4661-8c2a-d64619b4e6f1",
                             Email = "tvd123@gmail.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -55953,11 +55920,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 5,
                             AccessFailedCount = 4,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "c9549392-6da1-4499-b0ed-d69833974c15",
-========
-                            ConcurrencyStamp = "125fe133-306f-4399-a939-ec33d687017e",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "999e9bcf-7dcd-4abf-adb7-2ce541226a43",
                             Email = "tte123@gmail.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -55972,11 +55935,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 6,
                             AccessFailedCount = 5,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "834b3df5-de3c-47c8-b91d-79b5673e8f65",
-========
-                            ConcurrencyStamp = "1def1032-a010-42ba-99d1-18e23649ec27",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "6bdf8aa8-fbe7-4471-b0ba-f02d7a819913",
                             Email = "tvf123@gmail.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -55991,11 +55950,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 7,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "6e131cf7-b9ef-481e-8ae9-149fe0a82d05",
-========
-                            ConcurrencyStamp = "6c4d698f-12bb-464c-b146-6e7fb6a4b586",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "114a6b5f-05c8-4a12-8baa-adda7368d7fa",
                             Email = "ttg123@gmail.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -56010,11 +55965,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 8,
                             AccessFailedCount = 7,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "73772223-2d30-44bd-9ea1-fdfb204dcb07",
-========
-                            ConcurrencyStamp = "5e54b437-d3b0-49ad-b1af-0ab9074665bf",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "ea37f2cb-f0f7-4c7a-a337-25c7e79f68d5",
                             Email = "tth123@gmail.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -56029,11 +55980,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 9,
                             AccessFailedCount = 7,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "645b4ed6-df52-464a-b7c4-846b40b0311d",
-========
-                            ConcurrencyStamp = "061218fd-0dbf-46a7-95eb-e9f7f4b35efe",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "2519fa9f-f49e-44df-9aaf-941b8b924b40",
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -56048,11 +55995,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 20,
                             AccessFailedCount = 7,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "359b304f-523d-49d2-83dd-a6bc34774a5a",
-========
-                            ConcurrencyStamp = "c6a420af-7f12-4381-b5ed-573ef56ce023",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "0fd1d333-b668-4a18-bd75-a57d0abb7d39",
                             Email = "ysimeoni0@mozilla.org",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -56067,11 +56010,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 21,
                             AccessFailedCount = 3,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "9730e00f-7c75-48c4-9742-fd2365a0dda5",
-========
-                            ConcurrencyStamp = "79795248-85d7-45c7-ae25-b6da9a34ed5a",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "f30cb150-5ddb-4890-b324-7d950a8a1d70",
                             Email = "lgrisdale1@shinystat.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -56086,11 +56025,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 22,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "e4b12aa1-6140-4679-916f-fd9744fad220",
-========
-                            ConcurrencyStamp = "0aa6d9fa-b76e-4b38-84a8-c3522907d986",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "30b9625c-436e-4f1a-b8c0-cf6dacb5c625",
                             Email = "tmccarlie2@uiuc.edu",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -56105,11 +56040,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 23,
                             AccessFailedCount = 7,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "77e062e1-b00a-4841-a810-d81f7c872fd6",
-========
-                            ConcurrencyStamp = "664a5ad4-d8a5-46a7-8060-717eadc6deb3",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "6871db0e-c1ff-4799-9f94-d9aff279f6b7",
                             Email = "dartiss3@ibm.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -56124,11 +56055,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 24,
                             AccessFailedCount = 9,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "74faecc6-7293-4607-8569-288de403b5f4",
-========
-                            ConcurrencyStamp = "a86588ea-dd5c-4a9c-b845-bcd51d550ac1",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "e7621e24-092b-4756-ab58-23435646be05",
                             Email = "mhansman4@blogger.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -56143,11 +56070,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 25,
                             AccessFailedCount = 1,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "42a704dc-7912-4b02-95d4-058d95d32b6d",
-========
-                            ConcurrencyStamp = "1acf7797-c5e5-4c16-bf28-c7f4d13dc2c2",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "7a4890de-1418-45ec-be06-348bd5d6ee5f",
                             Email = "jcomello5@amazon.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -56162,11 +56085,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 26,
                             AccessFailedCount = 9,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "d34dbc3f-4be0-4df8-a4ed-af96c16717ea",
-========
-                            ConcurrencyStamp = "c0fd9f8e-1385-4b84-aa07-23678843be67",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "3c70c5ea-e46e-44ef-9af9-59c47525a02f",
                             Email = "mranshaw6@amazon.de",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -56181,11 +56100,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 27,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "cee10230-f8b9-43dd-aea6-d9bb7d27c09e",
-========
-                            ConcurrencyStamp = "361fbae9-8946-4a66-9563-05131ba80c71",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "839686fd-a068-4bef-bd2b-89d73b476676",
                             Email = "kmarchiso7@google.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -56200,11 +56115,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 28,
                             AccessFailedCount = 1,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "a96a3530-f84c-4c4a-9339-6d9203b70e54",
-========
-                            ConcurrencyStamp = "4189b9e5-11bb-40a2-810a-efc3124cee5b",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "e7dd68bd-c216-4d9b-9ad6-6481a7be697d",
                             Email = "abilovsky8@printfriendly.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -56219,11 +56130,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 29,
                             AccessFailedCount = 10,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "8c0c3fa0-2b8e-424a-818b-83b654078969",
-========
-                            ConcurrencyStamp = "7811ecbe-1589-40cd-9bcc-180e02282757",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "b6ab6c3c-8031-4a6f-8522-861ed287e932",
                             Email = "edorsey9@hc360.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -56238,11 +56145,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 30,
                             AccessFailedCount = 4,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "8b14bc98-19ec-4450-bcd2-c51440bd78fc",
-========
-                            ConcurrencyStamp = "b1fa7377-abfc-45d6-9b00-5c133e6c1984",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "09bb9fcd-ebb5-442e-8499-d7d41062edde",
                             Email = "cgoldsberrya@shareasale.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -56257,11 +56160,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 31,
                             AccessFailedCount = 10,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "19ad706a-fd80-4a23-9545-a23b2c20f56b",
-========
-                            ConcurrencyStamp = "7f599c22-e68b-43c7-9ad9-0f82162f652d",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "985c7d1c-2c76-451b-837b-3d54c332c523",
                             Email = "pwulfingerb@posterous.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -56276,11 +56175,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 32,
                             AccessFailedCount = 10,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "260ccc83-c705-4e9c-8578-c383345191c4",
-========
-                            ConcurrencyStamp = "59861c2a-c9ce-4d4e-b0aa-69f9c3a50c12",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "ff9c1680-c753-4f1e-af9c-36cd5d6db0bf",
                             Email = "ewesgatec@china.com.cn",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -56295,11 +56190,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 33,
                             AccessFailedCount = 2,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "5c649b18-23db-4ecc-b683-399161b33a5d",
-========
-                            ConcurrencyStamp = "3b8d7164-b5f2-4a37-9f2d-9df8397c3eab",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "50769b93-4063-4715-a455-3de9b7727267",
                             Email = "jfaircleyd@upenn.edu",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -56314,11 +56205,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 34,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "9022df80-6407-4551-813c-9adaa696377b",
-========
-                            ConcurrencyStamp = "bb9c9867-5bbb-4866-b385-b59b082e40be",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "72b6084e-ee4e-4b85-a336-9d529b23fab1",
                             Email = "bcatleye@wikispaces.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -56333,11 +56220,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 35,
                             AccessFailedCount = 7,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "6f392652-7f2b-4a9e-bd93-92490fefaa20",
-========
-                            ConcurrencyStamp = "c061993b-7a72-4f4d-83e9-3675405ac130",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "61654988-cd3f-45be-9ce1-3ecd6882ed8c",
                             Email = "esaylorf@last.fm",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -56352,11 +56235,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 36,
                             AccessFailedCount = 3,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "72308422-b5ef-443f-af6f-35255184c576",
-========
-                            ConcurrencyStamp = "7de606fa-2b59-4c3c-8604-c251afc88064",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "5eb8bc9b-4adf-4d2d-a67a-a57650dcadf8",
                             Email = "cfitzackerleyg@miitbeian.gov.cn",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -56371,11 +56250,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 37,
                             AccessFailedCount = 7,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "b40da522-9bf6-4678-9cf4-965b2ade7a39",
-========
-                            ConcurrencyStamp = "42e6e951-f583-4519-a7b1-498c3a9740c1",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "82f4dddc-0fa7-4cc2-83eb-3da006a59fa3",
                             Email = "sohowbaneh@globo.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -56390,11 +56265,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 38,
                             AccessFailedCount = 7,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "e2fabe76-9a05-481c-9871-4df8706b0aad",
-========
-                            ConcurrencyStamp = "232dfc80-8e63-404c-9a0a-287c8ddaf720",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "2a77fbeb-1e9c-421e-8aa9-98915284bb14",
                             Email = "nmatysiaki@amazonaws.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -56409,11 +56280,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 39,
                             AccessFailedCount = 3,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "47251b8a-050b-4f12-9573-ad411fc0f427",
-========
-                            ConcurrencyStamp = "b2e64b45-a4d9-4394-825d-b1067a52c4e5",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "02517a8c-074e-43ed-b514-67643ee23a21",
                             Email = "dkobierzyckij@yahoo.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -56428,11 +56295,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 40,
                             AccessFailedCount = 10,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "7b5fff19-0345-47c1-a825-25491b53f5c1",
-========
-                            ConcurrencyStamp = "16ae0e1c-cb26-4850-8646-d70e6f65ecaa",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "bd3de8f4-5554-43a8-9e30-32b90d94ba00",
                             Email = "awatchornk@bigcartel.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -56447,11 +56310,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 41,
                             AccessFailedCount = 10,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "2ca62ce6-d417-49c0-b020-0faf76baac6d",
-========
-                            ConcurrencyStamp = "191f377c-b4bb-43f0-9354-1ff63c3c27a6",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "c74dcdc6-3778-4b74-8a32-5a479517157c",
                             Email = "eewensonl@google.com.hk",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -56466,11 +56325,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 42,
                             AccessFailedCount = 8,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "71684127-7572-4a16-ba5c-cda74acc3ac6",
-========
-                            ConcurrencyStamp = "e769d024-8565-4d82-81e6-0a2d206e23a1",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "e0cb8e21-b6fc-426c-9e54-6a500605c615",
                             Email = "rschindlerm@ebay.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -56485,11 +56340,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 43,
                             AccessFailedCount = 2,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "185f14bd-baa1-4a93-a18d-e050c6523806",
-========
-                            ConcurrencyStamp = "e92dd990-4798-47fb-a990-c93fa48d24bc",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "0aad5332-fd20-4416-ad53-4042f734461c",
                             Email = "vhonschn@nature.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -56504,11 +56355,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 44,
                             AccessFailedCount = 4,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "6d872b7d-69d3-4227-acc8-4837a58213f9",
-========
-                            ConcurrencyStamp = "b49ed211-0653-4b74-ac2b-2f7a47c1e38c",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "62ee660e-6775-4342-a7a0-2a60bc27e1e4",
                             Email = "hnoelo@biblegateway.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -56523,11 +56370,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 45,
                             AccessFailedCount = 7,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "0dd795c0-90df-4b43-88d0-0ccb20e7626e",
-========
-                            ConcurrencyStamp = "d542bfee-0cd7-4010-8828-7b4bc993d968",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "4b3e36b3-4b84-4d47-969f-38b19dfff88f",
                             Email = "bgermanp@edublogs.org",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -56542,11 +56385,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 46,
                             AccessFailedCount = 9,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "e0c28426-3c9a-4e19-bf43-68dedb93005f",
-========
-                            ConcurrencyStamp = "21bb85c7-4db8-4951-aca5-1b0db603f487",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "dfb69ffd-75a5-412c-a46c-8d32a088c36d",
                             Email = "ometterickq@si.edu",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -56561,11 +56400,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 47,
                             AccessFailedCount = 10,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "521d3d6f-104c-4c65-ac31-2bdf5d251bd7",
-========
-                            ConcurrencyStamp = "6c0e8590-1eab-44a7-9d1f-c51400df8497",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "e1236ccd-db6d-4788-b201-0f0304251dbf",
                             Email = "wglanertr@technorati.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -56580,11 +56415,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 48,
                             AccessFailedCount = 8,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "82689ab7-8d26-4f13-a33c-761df8cd04da",
-========
-                            ConcurrencyStamp = "a1cb2d4b-d096-4ce0-b5be-94b6999d2d71",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "38097b42-b52c-4653-9939-13ec3b0b952e",
                             Email = "plongdons@so-net.ne.jp",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -56599,11 +56430,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 49,
                             AccessFailedCount = 7,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "a9e428f9-4c31-45e4-b37f-7042a3d09221",
-========
-                            ConcurrencyStamp = "6fea8b63-71b5-4a25-840a-e8fa8b39c1f8",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "6a41e00f-348d-47d7-930c-2f4b946d2ca6",
                             Email = "sgrealisht@netvibes.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -56618,11 +56445,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 50,
                             AccessFailedCount = 7,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "5039b141-8a74-4423-8634-aee75b6df558",
-========
-                            ConcurrencyStamp = "99351706-5d4e-494f-9177-1471e556de73",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "b2335d18-6e90-4e55-87ae-a9254eafe295",
                             Email = "vantoniuttiu@smugmug.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -56637,11 +56460,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 51,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "1a58ed9a-eb93-430a-90df-ffd980cd364d",
-========
-                            ConcurrencyStamp = "3eda8877-9b2f-44eb-85cb-d5550be864a3",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "f2cb4b13-d0e0-471a-9f31-1657505925b2",
                             Email = "sdellv@sakura.ne.jp",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -56656,11 +56475,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 52,
                             AccessFailedCount = 5,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "58b2aa81-0bcb-4614-8406-d3ecad0fa29a",
-========
-                            ConcurrencyStamp = "0f585e89-3a4c-4bcb-ab2b-74e0370ca5e9",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "3ac7f3b3-ebaa-4699-a987-4682b2a62c5f",
                             Email = "rmcillroyw@amazon.de",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -56675,11 +56490,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 53,
                             AccessFailedCount = 7,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "e06a36c3-f0b2-4722-9592-64f80146e974",
-========
-                            ConcurrencyStamp = "20e48e0c-9390-4d5e-a286-393d002975e8",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "c3b4f80d-7bf3-4ccf-bbc0-1b6b1de048e3",
                             Email = "ktremouletx@tripod.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -56694,11 +56505,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 54,
                             AccessFailedCount = 2,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "d9c130e3-b4ef-499c-a34c-fa82ef129a51",
-========
-                            ConcurrencyStamp = "7ff5d66d-1304-4e3d-8d3a-04147293250f",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "afe39f14-b578-47a0-9c3b-bebc3f4d8655",
                             Email = "sdunkersleyy@tuttocitta.it",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -56713,11 +56520,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 55,
                             AccessFailedCount = 10,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "af0ea888-db09-4267-bb88-2abe8236497b",
-========
-                            ConcurrencyStamp = "da5efde9-39ce-427d-b9a2-868a5e369411",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "f4179c2a-f890-458d-b5bd-03239e67b86e",
                             Email = "jyanceyz@redcross.org",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -56732,11 +56535,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 56,
                             AccessFailedCount = 8,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "5c891bad-9615-44e1-a10f-cf654814d083",
-========
-                            ConcurrencyStamp = "e5f184ef-5626-43bc-acd4-3569ecdab86d",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "c6654f61-090c-4eb6-a1a6-ea903f9881c5",
                             Email = "meble10@blog.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -56751,11 +56550,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 57,
                             AccessFailedCount = 10,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "6da45d65-5bdd-47c4-a0a4-49adef1dcc78",
-========
-                            ConcurrencyStamp = "c1654620-d23a-4115-8084-62caeadbd0e9",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "0c6081df-7e40-471e-8b50-6a3fda8a191a",
                             Email = "nwoofendell11@msn.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -56770,11 +56565,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 58,
                             AccessFailedCount = 10,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "ce641be7-eebe-4949-a49b-caa0b07b2d2f",
-========
-                            ConcurrencyStamp = "4a331e87-b56c-42af-a5b0-60e7f20a3a00",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "e5f8d0e7-639b-4ef6-bd60-3bba48dc38f6",
                             Email = "sdisbrow12@geocities.jp",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -56789,11 +56580,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 59,
                             AccessFailedCount = 4,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "ae20ec30-2a5f-40ad-9203-0d02f7a3d8ad",
-========
-                            ConcurrencyStamp = "f73e43a2-e5c0-432d-bb24-f2dfb532365d",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "0caa84dd-8248-4590-8349-9d730b3decc1",
                             Email = "rivy13@seattletimes.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -56808,11 +56595,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 60,
                             AccessFailedCount = 3,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "ebaaf42b-cbde-472e-9d7c-e404c4bc8ba6",
-========
-                            ConcurrencyStamp = "674a934a-1dd0-4468-a4f5-a4e8859b07eb",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "b963260c-7be0-4410-aa3a-3600acefcdbb",
                             Email = "dpostgate14@dyndns.org",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -56827,11 +56610,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 61,
                             AccessFailedCount = 1,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "fef9d213-e373-47d6-bf1d-9ad77d15121b",
-========
-                            ConcurrencyStamp = "33bfdfa2-30f3-469e-8ba6-f87749f62e65",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "865c8f13-8468-4918-b911-746a659f60df",
                             Email = "tmillea15@livejournal.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -56846,11 +56625,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 62,
                             AccessFailedCount = 3,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "d98e1c32-7dec-49c5-b889-9ad3d6eaeda6",
-========
-                            ConcurrencyStamp = "e95a184e-21a0-4e5f-8a48-8cfbbbfac204",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "015de119-0f4e-46fd-921b-69a49a9371bd",
                             Email = "lhallibone16@fc2.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -56865,11 +56640,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 63,
                             AccessFailedCount = 4,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "843cad98-986b-41b8-a0c9-b4050f3dd1aa",
-========
-                            ConcurrencyStamp = "88a1fdbc-f8a0-43c8-85c9-5f931e84a389",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "31ffc753-c0a1-417c-9522-cbb13e7058a1",
                             Email = "kivushkin17@oakley.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -56884,11 +56655,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 64,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "19a8e2cd-7e21-43a9-81b7-aa171dc1a31d",
-========
-                            ConcurrencyStamp = "43f59847-b4b2-4b83-82bc-2c3a8089275b",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "b05570a5-a34d-425f-b868-92f73a583f42",
                             Email = "apassman18@blogs.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -56903,11 +56670,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 65,
                             AccessFailedCount = 2,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "bd0c60d7-6482-4456-8073-3ab781ee8dec",
-========
-                            ConcurrencyStamp = "894f3960-d147-4dc7-bc7f-c915dbcb341d",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "b9022dda-1a92-4626-bea2-aac5f932cd4e",
                             Email = "iewington19@tamu.edu",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -56922,11 +56685,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 66,
                             AccessFailedCount = 9,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "054edfbf-5551-4ed0-9351-1e3e0cdd65f8",
-========
-                            ConcurrencyStamp = "53758b08-7504-430b-a7ea-378726ac8c8e",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "8b50e00d-cdf9-4bbb-ba86-4c9e78323bb1",
                             Email = "hangerstein1a@godaddy.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -56941,11 +56700,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 67,
                             AccessFailedCount = 9,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "92912170-2ca7-474c-bd3a-7f7d1398705a",
-========
-                            ConcurrencyStamp = "757349a7-86e3-4aae-abf0-cfc8b4e29e39",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "0dc1ca48-72a1-47ab-ab0a-d42a39a2f87c",
                             Email = "kfehely1b@amazon.co.jp",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -56960,11 +56715,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 68,
                             AccessFailedCount = 5,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "fc8fb0ff-6332-45f2-9dd6-206015af9ac2",
-========
-                            ConcurrencyStamp = "fdfb6ee2-7dad-4140-a3c1-df9d2d7f3577",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "b0417428-7f28-4164-98e2-85ade7f06f58",
                             Email = "jcassley1c@harvard.edu",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -56979,11 +56730,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 69,
                             AccessFailedCount = 3,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "ba03bc42-085c-4407-80f4-93e865594aa4",
-========
-                            ConcurrencyStamp = "fa6c2691-3826-423d-925e-be6f55107d2e",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "1f63b298-e97a-4255-81d7-f168fb041fe5",
                             Email = "asparrow1d@networkadvertising.org",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -56998,11 +56745,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 70,
                             AccessFailedCount = 9,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "162b3b42-b4ed-4de7-be19-946ed2d05cf9",
-========
-                            ConcurrencyStamp = "89becd4a-da80-4fc4-bc4f-83ae074c72a9",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "71e8073b-c6cf-4d03-a786-9bc882d9d72b",
                             Email = "wthomtson1e@reference.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -57017,11 +56760,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 71,
                             AccessFailedCount = 4,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "359bc393-5b7e-48a8-b423-fa75427dd31e",
-========
-                            ConcurrencyStamp = "216f521c-20b4-44cf-8797-1756d7e4d01d",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "685fecdc-72a9-4cd7-a8e9-9404c52fda23",
                             Email = "kmcloughlin1f@nps.gov",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -57036,11 +56775,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 72,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "50684b3a-b740-427d-8da0-6430b8dc6920",
-========
-                            ConcurrencyStamp = "4ec53e8e-4942-4fb4-9353-deb4edabebcf",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "de962c28-3aea-4b2d-be5d-96ab489c939c",
                             Email = "fmangeot1g@geocities.jp",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -57055,11 +56790,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 73,
                             AccessFailedCount = 3,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "e04a18d1-b3e4-4d01-99a8-df2f060ef4aa",
-========
-                            ConcurrencyStamp = "ac209fd5-743a-42a2-ba39-169c042d339b",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "33184d96-59f5-44b8-b618-4f79d95dc74a",
                             Email = "gtollow1h@smh.com.au",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -57074,11 +56805,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 74,
                             AccessFailedCount = 8,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "2a18b7da-0938-4b82-9b4c-5eb11fa7dd59",
-========
-                            ConcurrencyStamp = "61c73c40-8b23-4768-be58-da589104b09e",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "4f546744-f70b-4d9b-bcbc-4843e7994733",
                             Email = "shebden1i@cnn.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -57093,11 +56820,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 75,
                             AccessFailedCount = 4,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "0067ee0a-cde8-4e21-a040-3f7ebb6de1fc",
-========
-                            ConcurrencyStamp = "77e90d91-2b17-47ab-92bb-a2262e197b4f",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "626a7e44-c5cc-4d5e-87b5-3f866c90cfe6",
                             Email = "lbrouncker1j@sourceforge.net",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -57112,11 +56835,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 76,
                             AccessFailedCount = 8,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "e22b6228-29f4-4068-968c-06a83853eb32",
-========
-                            ConcurrencyStamp = "eb700d1c-5130-4d46-9877-6b1da5562551",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "750f21ef-e85a-4a14-810e-0fb0fcad7d4b",
                             Email = "dkeems1k@redcross.org",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -57131,11 +56850,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 77,
                             AccessFailedCount = 7,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "14c52694-cdc0-404e-8a27-c24815772d72",
-========
-                            ConcurrencyStamp = "407e9790-1185-4781-a8a6-51537fd529db",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "bcc43fc3-bab4-4483-83fe-5e88cea3b276",
                             Email = "tthyng1l@amazonaws.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -57150,11 +56865,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 78,
                             AccessFailedCount = 9,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "7d99705b-7589-4b1c-9368-d4d24d34348c",
-========
-                            ConcurrencyStamp = "89d81bda-89c8-45bc-911f-6618e40bc739",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "1354c458-e52a-42c5-b53f-eadd8b066d91",
                             Email = "ihourston1m@webnode.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -57169,11 +56880,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 79,
                             AccessFailedCount = 4,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "8adc2f75-0913-40f2-a785-75b04d1051b1",
-========
-                            ConcurrencyStamp = "1f70951a-0577-4bbc-a88e-1cb9a6325cec",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "2f9b68b8-a734-401a-a54e-282e82a3c003",
                             Email = "nscraney1n@dropbox.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -57188,11 +56895,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 80,
                             AccessFailedCount = 9,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "f3177af3-542d-4b84-8294-d7728156988d",
-========
-                            ConcurrencyStamp = "7da8124d-5402-499e-837e-af605cfcd19e",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "f5b19651-93a7-4f98-9d37-f02c4d16ec65",
                             Email = "cde1o@guardian.co.uk",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -57207,11 +56910,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 81,
                             AccessFailedCount = 2,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "f0880c81-ef63-4fcf-9f64-167de68968fc",
-========
-                            ConcurrencyStamp = "23fdedb7-9162-4e5f-94ab-2b4d0e6e3458",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "5ccf330f-637b-4032-9cf8-5579227c8471",
                             Email = "dreace1p@vkontakte.ru",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -57226,11 +56925,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 82,
                             AccessFailedCount = 2,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "adb9f437-5205-4006-a132-f7fc90daf138",
-========
-                            ConcurrencyStamp = "14d79a4c-3745-4b86-ba5f-0bc926b3dd31",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "d6fb80a3-5acc-41b2-b138-c96e6f7f7511",
                             Email = "crame1q@smugmug.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -57245,11 +56940,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 83,
                             AccessFailedCount = 8,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "9d1cebd1-6eb5-43bb-9052-ccb089d873b0",
-========
-                            ConcurrencyStamp = "5515e4a8-d060-4ea5-9d5d-57ced039e673",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "49929c79-101f-4020-aaf2-30c0fad4575e",
                             Email = "wtubble1r@marketwatch.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -57264,11 +56955,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 84,
                             AccessFailedCount = 0,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "1932bd43-3c7f-4951-a1f1-8c8c1011ed98",
-========
-                            ConcurrencyStamp = "20d7d290-7b96-4d54-977b-d6b3ce28bb6d",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "8e47e135-390b-45f8-8382-33558d495708",
                             Email = "cjosephoff1s@alibaba.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -57283,11 +56970,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 85,
                             AccessFailedCount = 3,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "daad6b7c-5a3b-4faf-ab3b-b871d36bb0f2",
-========
-                            ConcurrencyStamp = "64c7d7c0-04d8-4722-a0b8-6e34d72312c0",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "900fd8d6-9eae-42d5-9ca1-236e43955e0e",
                             Email = "hgoodband1t@ehow.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -57302,11 +56985,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 86,
                             AccessFailedCount = 3,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "a5479c0c-3678-40c8-88e9-b642ae0d7bb0",
-========
-                            ConcurrencyStamp = "354fe715-5788-4277-a47d-54c6076659f9",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "4ab51a4d-3338-4a29-b47d-d7c7309111da",
                             Email = "rrivett1u@ameblo.jp",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -57321,11 +57000,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 87,
                             AccessFailedCount = 1,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "d16ee2a2-58bd-49d0-b9ec-ed85c5245c1f",
-========
-                            ConcurrencyStamp = "65c96290-8256-4983-a422-6eb6bb11d657",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "76d8fc96-7541-4822-973a-009786d4745a",
                             Email = "rmimmack1v@domainmarket.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -57340,11 +57015,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 88,
                             AccessFailedCount = 9,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "bc9d762d-cea3-4b08-b997-e30837e04134",
-========
-                            ConcurrencyStamp = "5d5aa639-a9c4-4271-aebd-8f14752c3172",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "44543300-38bc-4d4a-8371-64b84da1dc2c",
                             Email = "btydd1w@i2i.jp",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -57359,11 +57030,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 89,
                             AccessFailedCount = 3,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "79c15f19-50a5-477f-aacd-544faba0addc",
-========
-                            ConcurrencyStamp = "3cd13b43-4c4c-4eb6-b928-7d1112e00a91",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "dbbbe595-f5b7-473f-b5c7-58dfb431d9c9",
                             Email = "srosenwasser1x@google.ru",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -57378,11 +57045,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 90,
                             AccessFailedCount = 3,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "07bfc52a-2e4f-4ffc-a6df-0085a4914122",
-========
-                            ConcurrencyStamp = "f9e50a72-ba2c-4307-9712-68dbeb83d0d9",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "35d8c0d5-a479-4428-bf03-5eb04049daa2",
                             Email = "cmatussow1y@topsy.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -57397,11 +57060,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 91,
                             AccessFailedCount = 1,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "483d5f2b-3914-4d14-a2dd-3f1f6ae81be8",
-========
-                            ConcurrencyStamp = "8f0ab76d-de77-45c9-9fc5-05dd67adf99c",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "efb6dc22-cd83-4445-b762-6038403a5a6c",
                             Email = "abugden1z@taobao.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -57416,11 +57075,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 92,
                             AccessFailedCount = 0,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "bc708bc2-5fb1-46cc-bf92-969c62d45424",
-========
-                            ConcurrencyStamp = "c234f977-7f30-4f58-a319-0953d0e775d4",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "be7757fa-e6ce-4606-b0c9-a18b2cd5eeb6",
                             Email = "ealfonsini20@unesco.org",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -57435,11 +57090,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 93,
                             AccessFailedCount = 0,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "cc317fd8-5b4b-4c69-be5c-1841a4bead41",
-========
-                            ConcurrencyStamp = "2bac49b2-efa9-4a0e-8782-739fac47d29b",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "593e3496-39cf-416d-912c-890601b979d9",
                             Email = "fla21@gravatar.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -57454,11 +57105,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 94,
                             AccessFailedCount = 10,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "6f749e58-3f00-44d2-9a89-ba842178f72a",
-========
-                            ConcurrencyStamp = "5ffbea48-02e6-4b64-afee-43d34dc567c3",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "18275179-502b-4489-bc55-b8b8daed30a2",
                             Email = "dbotwood22@cbsnews.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -57473,11 +57120,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 95,
                             AccessFailedCount = 0,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "12712201-5872-4f7b-bc19-63a6b936da65",
-========
-                            ConcurrencyStamp = "195cacdb-9247-42ad-bd15-8413ca90417d",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "c224bb3f-d59a-4445-b08c-6e153eb018b4",
                             Email = "cpriddey23@forbes.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -57492,11 +57135,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 96,
                             AccessFailedCount = 5,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "45c4447d-be38-4e1e-b63d-da03c3452b43",
-========
-                            ConcurrencyStamp = "cde84af3-a893-49c3-b261-d8af1b341f90",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "557065a1-e3fd-4d3b-b485-e09cbdc8e590",
                             Email = "cwindous24@msu.edu",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -57511,11 +57150,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 97,
                             AccessFailedCount = 3,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "0bdfe58b-1612-469b-8c15-e56293ee76e8",
-========
-                            ConcurrencyStamp = "f2aec481-3a4e-4499-ba2c-ce4144968c57",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "cc2fe0f7-c8ef-48cb-a61d-1916cab652f3",
                             Email = "aridding25@tumblr.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -57530,11 +57165,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 98,
                             AccessFailedCount = 3,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "41acf086-40e0-4842-88ad-d44edcead9d3",
-========
-                            ConcurrencyStamp = "e92e6d71-3e0b-4d64-b27d-9acbb1dfde8f",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "8c5db2e3-d0d4-4a90-b1d5-66545f999d6c",
                             Email = "nkornousek26@google.es",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -57549,11 +57180,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 99,
                             AccessFailedCount = 2,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "8fa6072e-1280-4d12-b164-4e1c71dc2a95",
-========
-                            ConcurrencyStamp = "a2444207-ea58-4084-854e-c46758b79034",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "e9d73115-e2dd-4aa7-aa4d-ab9c306ed8af",
                             Email = "mhabeshaw27@godaddy.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -57568,11 +57195,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 100,
                             AccessFailedCount = 8,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "e97c33d6-af07-4984-9370-6f11ed975a47",
-========
-                            ConcurrencyStamp = "17bd7ab2-c3bd-4c7a-b77c-b1a76195dffc",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "8997a596-23a4-4a58-a1d1-0aea59fb93fa",
                             Email = "mvasnetsov28@hao123.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -57587,11 +57210,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 101,
                             AccessFailedCount = 4,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "84c68398-d1d9-4350-a161-e8656216a1db",
-========
-                            ConcurrencyStamp = "c3c6cb8e-49fe-4bfc-bd03-978a684c9ba2",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "8f66bfdc-0278-437f-a300-7f7ee02b3588",
                             Email = "cjovis0@businesswire.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -57606,11 +57225,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 102,
                             AccessFailedCount = 0,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "b4b66ddb-f10f-4284-987b-fec5b98c1144",
-========
-                            ConcurrencyStamp = "f15aa924-c304-4cc2-9e82-77f74963c3ac",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "d5a9f9f9-72f0-455a-bb73-67606d1dbe36",
                             Email = "jmiskelly1@alibaba.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -57625,11 +57240,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 103,
                             AccessFailedCount = 10,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "aada887b-1ce9-4fbc-8156-2a5bcea42d1a",
-========
-                            ConcurrencyStamp = "fbf0559c-6595-4997-904d-af010325da89",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "c7e5654d-ffe3-4281-a5b0-4d3bc50b6a08",
                             Email = "lmcfayden2@businessinsider.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -57644,11 +57255,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 104,
                             AccessFailedCount = 5,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "218261c8-6d5a-46dc-ad76-1159c095ff81",
-========
-                            ConcurrencyStamp = "7811c42d-5c87-4ee2-83c6-1d957f60c0d7",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "e86d33d0-ee90-431b-b14b-3013a358a092",
                             Email = "mordidge3@meetup.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -57663,11 +57270,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 105,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "b4ee9c87-e063-41c6-bb13-dadc9f48f2b3",
-========
-                            ConcurrencyStamp = "8177c1ea-431e-4f3a-948d-7576c46083a0",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "fdc370e8-0658-4f39-9e89-0bac294765e1",
                             Email = "dsulley4@live.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -57682,11 +57285,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 106,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "6915dc94-6b6c-45c0-a996-75e46c96c84a",
-========
-                            ConcurrencyStamp = "056f4212-7a6a-44a5-9186-47c8a7f800d6",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "aadcd89d-e11c-4475-9c07-81e88b450ec6",
                             Email = "bthornhill5@opera.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -57701,11 +57300,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 107,
                             AccessFailedCount = 1,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "9bc542b7-7e8d-49b7-acd7-050322006961",
-========
-                            ConcurrencyStamp = "c1ca1c4b-4315-4e54-8107-af7e7bab4334",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "752d0dc2-816b-4a09-a6cb-354038895fe6",
                             Email = "cfrederick6@ehow.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -57720,11 +57315,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 108,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "c56fb96c-bd71-4774-965b-8d4152b04db2",
-========
-                            ConcurrencyStamp = "08440344-bca0-49af-9f7e-9a934260493e",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "bae7b74d-9ab0-4fe9-ab22-a0c5a8322349",
                             Email = "ebrake7@skype.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -57739,11 +57330,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 109,
                             AccessFailedCount = 2,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "1396e217-7a56-4764-a1a9-1e4ab3939b21",
-========
-                            ConcurrencyStamp = "d8d8e2cf-dcd3-4a82-b20d-e3880c740a3e",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "713abbae-8bbc-43ff-b45f-059afdcf6095",
                             Email = "civamy8@elegantthemes.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -57758,11 +57345,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 110,
                             AccessFailedCount = 7,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "ef1877a2-b7c5-4723-aa0c-783e3bd1d26b",
-========
-                            ConcurrencyStamp = "d9fdbcc4-1376-40d6-8212-444da03be898",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "32efcf77-b6ae-4655-b9d0-c38294b27489",
                             Email = "moxbie9@upenn.edu",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -57777,11 +57360,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 111,
                             AccessFailedCount = 0,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "0bcfa63d-9801-461d-a1bb-1e5ed6d41467",
-========
-                            ConcurrencyStamp = "02d00ce0-850e-4d84-9c52-c49d4b9943b0",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "5425e018-575b-432f-9202-8d2c1ca5831b",
                             Email = "asatterleea@sohu.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -57796,11 +57375,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 112,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "a0ef64e1-f2fb-45d9-b5f9-5ebbdf0b9748",
-========
-                            ConcurrencyStamp = "4d174989-9711-43ad-aa17-91ad9703510f",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "913247f7-586e-40d1-8f27-211e9cd8f48e",
                             Email = "gstambridgeb@bandcamp.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -57815,11 +57390,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 113,
                             AccessFailedCount = 4,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "d3668328-e7c4-448e-a49e-95a0ac460ac6",
-========
-                            ConcurrencyStamp = "b15fd9ec-84ca-4bda-a3f1-f21d649db075",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "1768852e-a2df-4cb9-897f-1813053499c7",
                             Email = "ddunkinsonc@ehow.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -57834,11 +57405,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 114,
                             AccessFailedCount = 10,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "cc406ec0-7649-4e17-8123-c5f09d9bc01f",
-========
-                            ConcurrencyStamp = "c90c9e43-f045-41fb-9ae2-893d88352135",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "1324d059-6d37-4344-850f-2e1df0cd5b7f",
                             Email = "aloudd@miitbeian.gov.cn",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -57853,11 +57420,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 115,
                             AccessFailedCount = 8,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "ac0d98e0-595b-42dd-9760-08b721e962c8",
-========
-                            ConcurrencyStamp = "3c3d6539-e283-45b2-b18a-47a565d4cd14",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "a8942dc0-4aae-4e3a-85bd-2bef7c5b902f",
                             Email = "zgerrene@yellowbook.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -57872,11 +57435,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 116,
                             AccessFailedCount = 2,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "54572f9a-5250-4362-aeee-25fa2e2a729a",
-========
-                            ConcurrencyStamp = "5deec33e-46fe-4f1c-b5dd-f075c9cd9305",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "aa86131b-83e9-40d2-9aae-c3c0b2efdf25",
                             Email = "bhalshawf@oaic.gov.au",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -57891,11 +57450,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 117,
                             AccessFailedCount = 0,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "7416299d-4bde-4686-a271-a925b49a64c4",
-========
-                            ConcurrencyStamp = "972d8e9a-0912-4eb5-98a0-926127ffbbca",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "f1812fe4-8f63-4c0e-baa2-dc000753477f",
                             Email = "bbollinsg@seesaa.net",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -57910,11 +57465,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 118,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "62058aa2-e8e0-4f65-bfec-586e6a0bfd43",
-========
-                            ConcurrencyStamp = "03a8b776-3e22-4b0e-8623-789fe1d5d13b",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "a1309398-474e-4ca7-829a-b4a6a780ec70",
                             Email = "mbreedyh@geocities.jp",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -57929,11 +57480,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 119,
                             AccessFailedCount = 2,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "52645168-7abc-4d63-bf6e-b9a5bd1be3b7",
-========
-                            ConcurrencyStamp = "a5d59340-b8bb-4204-84e3-939de4c846c5",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "042572c1-6ee4-4ac1-b935-7bb6e4a850bc",
                             Email = "abickmorei@irs.gov",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -57948,11 +57495,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 120,
                             AccessFailedCount = 4,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "5e6a967b-ca0b-4cdb-bd52-a6dd9fbaaff8",
-========
-                            ConcurrencyStamp = "20b0e778-3005-4a36-b874-7ffc6ad57a00",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "24995297-6804-4ad0-883a-cb8f07a8dbcc",
                             Email = "sruanej@hubpages.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -57967,11 +57510,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 121,
                             AccessFailedCount = 10,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "75b739be-2cdb-4620-8389-c3f217b9e441",
-========
-                            ConcurrencyStamp = "a21ae984-8824-49aa-8bbd-261fba325bc6",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "e23214f6-4239-40fd-9c89-2f10e9044ae7",
                             Email = "lpidduckk@1und1.de",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -57986,11 +57525,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 122,
                             AccessFailedCount = 9,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "96618834-e1ce-419e-b420-eecf4c5c0947",
-========
-                            ConcurrencyStamp = "920a8b38-c6a2-4485-a59c-073e2ec251ad",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "a49df912-6385-449b-a47e-755c85d43303",
                             Email = "abernaciakl@alexa.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -58005,11 +57540,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 123,
                             AccessFailedCount = 10,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "cd3518cf-8aff-4470-bccd-7e08092084c0",
-========
-                            ConcurrencyStamp = "f21b8ce9-ae3c-4d40-83d8-44ab2b6129bf",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "4dc84dad-4921-4cf3-9a24-8fea03fd9d58",
                             Email = "jdoonicanm@nsw.gov.au",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -58024,11 +57555,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 124,
                             AccessFailedCount = 2,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "39d46104-d829-4d3a-a786-b1e566de9a09",
-========
-                            ConcurrencyStamp = "5aa0911d-43e1-4b6e-9353-fc57d606fccd",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "f6a53b22-fde8-49a0-9d55-72162e0712a9",
                             Email = "tsammarsn@deviantart.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -58043,11 +57570,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 125,
                             AccessFailedCount = 4,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "42862431-5ecc-4ce7-b278-6b4016eef4b9",
-========
-                            ConcurrencyStamp = "6da4bff1-8d45-4b64-a92d-c621aac80972",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "e29ec521-6ea6-4284-90eb-d20f17ae8ca4",
                             Email = "rfishbourno@cmu.edu",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -58062,11 +57585,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 126,
                             AccessFailedCount = 3,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "e8730a25-1836-4d0c-bdd9-41f2f770254c",
-========
-                            ConcurrencyStamp = "fd03f035-acfd-4870-ac84-c085dc7d66dc",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "18020694-d003-4f69-a2b9-66f24e8822e2",
                             Email = "aleybandp@home.pl",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -58081,11 +57600,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 127,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "66841552-f7ed-42f9-84db-b936c67419d0",
-========
-                            ConcurrencyStamp = "5aa24fa7-8721-41fa-9bb4-fd69ab47d91d",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "ba0c47ab-a0cc-4013-98ee-889e6255513e",
                             Email = "wlumbleyq@adobe.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -58100,11 +57615,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 128,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "faa2c575-3f5b-48e8-a814-8d20847e805a",
-========
-                            ConcurrencyStamp = "2f01ef6d-818a-4c8c-ac8a-5056458d898b",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "c3e592c6-5561-4401-bd06-bfa1d4abc2e0",
                             Email = "bsedgwickr@prlog.org",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -58119,11 +57630,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 129,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "6d04a5c8-8126-4c76-ad34-2cc390f798aa",
-========
-                            ConcurrencyStamp = "310eb420-d9b6-4aa4-81ea-d2035b436c1d",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "f40f30b9-0eb5-4f1c-a976-9b554ac77d6e",
                             Email = "cdeppens@soup.io",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -58138,11 +57645,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 130,
                             AccessFailedCount = 3,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "e3621bff-6789-4595-a7dc-c76088056033",
-========
-                            ConcurrencyStamp = "9a17efc7-f56e-48e4-8f04-24fd182a4a18",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "76772645-6976-44a4-aa4e-f01bc6b1d4de",
                             Email = "bwoodwint@t.co",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -58157,11 +57660,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 131,
                             AccessFailedCount = 5,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "93374d77-2cae-4d50-beaa-1821294619f5",
-========
-                            ConcurrencyStamp = "8a00e8f9-163f-4ae7-9fc6-e4b3847fe5b5",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "c4fa739a-b80b-463d-a36f-4f49a928f4a7",
                             Email = "eeliezu@people.com.cn",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -58176,11 +57675,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 132,
                             AccessFailedCount = 0,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "6d607ccb-3b99-4729-b526-5ff5f606a4d3",
-========
-                            ConcurrencyStamp = "3ca20920-26b7-4fc5-9223-cf299dc3aa62",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "ce8f0403-ea2d-4fe8-99d5-f805f36eb850",
                             Email = "lpleumanv@aboutads.info",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -58195,11 +57690,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 133,
                             AccessFailedCount = 1,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "80941a30-32c6-47b3-9d59-916d3eaa692e",
-========
-                            ConcurrencyStamp = "1cebd2f1-2656-4007-af07-9169d488130a",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "f12bf9eb-eceb-4ba4-95a3-c2d5ecf28cbc",
                             Email = "gullrichw@wsj.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -58214,11 +57705,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 134,
                             AccessFailedCount = 10,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "18187c89-92f9-40b3-b9da-5e90090181bf",
-========
-                            ConcurrencyStamp = "e4a2eba8-d6f8-4789-8383-32cdf247f0c2",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "af03c975-5ee3-41bf-9960-f75a698e940b",
                             Email = "hfawcittx@google.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -58233,11 +57720,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 135,
                             AccessFailedCount = 9,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "6cef4992-b137-45e2-8681-94aeac7a7065",
-========
-                            ConcurrencyStamp = "89d874dd-99ec-41f6-85dd-179b805677bb",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "5f53707d-cbc2-490a-aa16-b7cf78805166",
                             Email = "fkayy@technorati.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -58252,11 +57735,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 136,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "6d777f98-e2b7-4184-8bbb-687f32b04a47",
-========
-                            ConcurrencyStamp = "1967b415-0bcb-423d-abb5-70dfb98fa237",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "8c13b3ce-9a96-4003-ae65-a281e6d38065",
                             Email = "lpolsinz@com.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -58271,11 +57750,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 137,
                             AccessFailedCount = 9,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "590e84cf-8d74-4869-844b-8ee2fd093985",
-========
-                            ConcurrencyStamp = "b0b5c5a5-5c2c-4b3e-b442-61f8c0e52dd3",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "daa51e7f-9052-4e23-8a31-00f892f14df2",
                             Email = "zjuszkiewicz10@tumblr.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -58290,11 +57765,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 138,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "a82551a3-ca74-4a63-904a-81d0f355f1fc",
-========
-                            ConcurrencyStamp = "0527e382-dc73-45fe-9f71-7800fb0bad23",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "31492eb0-1b2e-40c5-81c6-e0dd19dafe51",
                             Email = "ihindenberger11@comcast.net",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -58309,11 +57780,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 139,
                             AccessFailedCount = 10,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "a1035bb3-ca12-46b6-8173-1629dae78e0c",
-========
-                            ConcurrencyStamp = "d576dc1d-1e8d-4777-be28-a760d0228362",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "a6ce0746-5815-45ba-9525-f7e7ad28fc35",
                             Email = "fhurndall12@ehow.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -58328,11 +57795,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 140,
                             AccessFailedCount = 1,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "5de554d2-0bf1-4a88-93de-af6fa268f7c0",
-========
-                            ConcurrencyStamp = "aefa05be-3a39-4d0e-9b85-ea174c9a972a",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "df29eeae-891b-48d4-953c-3f39edf898dc",
                             Email = "csteaning13@vk.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -58347,11 +57810,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 141,
                             AccessFailedCount = 8,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "2f85158a-a742-4b33-aad5-de1fbb169eb0",
-========
-                            ConcurrencyStamp = "b0af0020-7e53-4ac3-8d02-35be4b141ca0",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "629efebc-0228-4cd2-ae47-6d4b8f27d1ae",
                             Email = "khopfner14@samsung.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -58366,11 +57825,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 142,
                             AccessFailedCount = 9,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "6cd09cce-a9d8-484e-bbe6-f9873dc2af85",
-========
-                            ConcurrencyStamp = "45099dfe-83dd-4093-b3df-e7990ed43253",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "28f5a9ec-3e21-4e73-ae34-f7fc0e2c3c7b",
                             Email = "awilkenson15@pagesperso-orange.fr",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -58385,11 +57840,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 143,
                             AccessFailedCount = 7,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "89966265-1136-425c-a5d5-d2dba8f127a9",
-========
-                            ConcurrencyStamp = "b1676434-a9ed-4326-8351-78d237bb466b",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "8910794d-7a1a-48f5-8804-0e5bbf954207",
                             Email = "jbrayley16@posterous.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -58404,11 +57855,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 144,
                             AccessFailedCount = 8,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "c7352026-5b68-4ac0-8583-007fa335deb9",
-========
-                            ConcurrencyStamp = "51fb488e-469b-444f-9085-83bf40bad52b",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "ae46efa8-374c-4b06-9e52-130728c85b38",
                             Email = "mgodilington17@w3.org",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -58423,11 +57870,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 145,
                             AccessFailedCount = 1,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "a36c45b1-4d11-47d4-817e-ce71b384e6ab",
-========
-                            ConcurrencyStamp = "5422ea32-1507-40c3-af6e-dcafe9bb75bf",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "643021de-966c-493f-a92c-ba13ecf0895e",
                             Email = "klaingmaid18@bluehost.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -58442,11 +57885,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 146,
                             AccessFailedCount = 0,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "ac621301-a797-4eef-8ad9-21e193e70720",
-========
-                            ConcurrencyStamp = "3a12e6f2-3d60-4dec-910d-691b03e60750",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "f10884cb-50b4-4a96-b319-a0254cc4e905",
                             Email = "hfidge19@flickr.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -58461,11 +57900,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 147,
                             AccessFailedCount = 2,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "2321ec67-b597-4e47-b235-038f817df29f",
-========
-                            ConcurrencyStamp = "8d8ed39c-3f1c-4f0d-a975-cb88cf534fc6",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "62898f05-7137-45ad-ac3b-a2c29d341f33",
                             Email = "ljohananoff1a@fastcompany.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -58480,11 +57915,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 148,
                             AccessFailedCount = 9,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "4cdccd5e-628d-421f-b9e4-a802b0147258",
-========
-                            ConcurrencyStamp = "e72d0c6f-58b1-482a-a1f1-8461e7ed8049",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "9fb37a38-44e6-4fee-9079-ad86bf91672d",
                             Email = "istanyland1b@usda.gov",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -58499,11 +57930,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 149,
                             AccessFailedCount = 5,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "f12aa8ba-5d04-4212-8b38-02f2f8e20401",
-========
-                            ConcurrencyStamp = "aff6bef0-2341-45ea-8b3c-6624faad40a6",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "d8aa8bcc-823a-4efe-adf3-a14a4a841f4c",
                             Email = "fboase1c@mashable.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -58518,11 +57945,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 150,
                             AccessFailedCount = 2,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "d08d5e09-09c4-4965-8181-6da8ff31ce70",
-========
-                            ConcurrencyStamp = "65035a0a-c513-490f-9283-32fd8d509dd2",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "012d2d24-9abe-4443-b403-008e3db1a4c1",
                             Email = "cskells1d@feedburner.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -58537,11 +57960,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 151,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "8a85cf65-bb7e-4ad0-9261-fa36ce885ebd",
-========
-                            ConcurrencyStamp = "8149f3be-4764-4d6e-9e21-cfafc118fd16",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "2e7568a9-84e3-4237-bd7f-967b94adad36",
                             Email = "lcurme1e@zimbio.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -58556,11 +57975,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 152,
                             AccessFailedCount = 2,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "fdfd54c1-f126-4722-a5f6-71708a08b80b",
-========
-                            ConcurrencyStamp = "69812c18-c0af-42d3-95fd-10e7cc2b3d8f",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "9851533a-5642-4782-8e34-19b9ed998e79",
                             Email = "dsearl1f@hugedomains.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -58575,11 +57990,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 153,
                             AccessFailedCount = 2,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "34e753ad-a15e-4324-b0e9-d8107d28772a",
-========
-                            ConcurrencyStamp = "644a2aa7-a443-40e8-a842-e975bbd4638e",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "8157f586-df26-4d77-a616-91221c9136b3",
                             Email = "oheady1g@storify.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -58594,11 +58005,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 154,
                             AccessFailedCount = 2,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "c742bac1-15c4-4bfb-91ec-0563f84171c8",
-========
-                            ConcurrencyStamp = "da639604-3a5e-43eb-9da7-f62cda65c652",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "5bc86de0-3b8b-46d9-b831-5e4d42f2c57f",
                             Email = "snendick1h@nsw.gov.au",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -58613,11 +58020,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 155,
                             AccessFailedCount = 8,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "6d5b3c4f-a6dc-4c29-ab79-7b80d78f799d",
-========
-                            ConcurrencyStamp = "bbc195a4-6aed-4183-83f1-64501c9fba7e",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "0a0ede12-ec6a-4266-8c90-3ec615ef1cd3",
                             Email = "lhartfield1i@webmd.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -58632,11 +58035,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 156,
                             AccessFailedCount = 1,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "02b2e27f-68e8-42c6-b729-90e2982f5853",
-========
-                            ConcurrencyStamp = "b8ef34c8-f5fb-4b51-9d55-6a311e02ccb3",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "bfab3d9d-b44f-44c0-a271-8de0ddff00cc",
                             Email = "kburgiss1j@alibaba.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -58651,11 +58050,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 157,
                             AccessFailedCount = 8,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "47322de3-cd44-4874-846b-f18522e7fde1",
-========
-                            ConcurrencyStamp = "a8060219-3649-46fb-a17a-e830c6cac7fd",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "167d9413-075b-41a1-999f-891171492197",
                             Email = "swissby1k@mapquest.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -58670,11 +58065,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 158,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "e2f7a9b4-46b1-4e6e-b5fb-ca83c824ea34",
-========
-                            ConcurrencyStamp = "1638fb8d-2d83-4b38-b3f9-2a8e6241a69f",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "88bd1167-bfe8-4b2a-bdd0-2f6156cdd316",
                             Email = "dweale1l@ezinearticles.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -58689,11 +58080,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 159,
                             AccessFailedCount = 8,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "201f3bfe-4d65-40ba-b605-d7debce6ba22",
-========
-                            ConcurrencyStamp = "31ee0ca7-54dc-4c08-912b-8aa0830834ee",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "e308bab6-9e7d-4de3-b38b-acac8e46c17a",
                             Email = "hbowley1m@army.mil",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -58708,11 +58095,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 160,
                             AccessFailedCount = 5,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "ee413403-774a-4510-987f-c56af879dd10",
-========
-                            ConcurrencyStamp = "336f902a-7aae-4edd-8043-70cb9fbbf6e3",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "724c6a2d-8da7-482c-a0f0-616203fe7813",
                             Email = "dsagg1n@dailymotion.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -58727,11 +58110,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 161,
                             AccessFailedCount = 1,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "bba6a1d9-8fc5-4f91-84b0-1372940a63c5",
-========
-                            ConcurrencyStamp = "b576e9a6-a002-47d9-99f8-6b6330815870",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "8cd2257c-537a-4dff-be46-18cc77bf719d",
                             Email = "clivesey1o@army.mil",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -58746,11 +58125,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 162,
                             AccessFailedCount = 4,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "1a8a0b7a-5130-415b-b04b-3f62d6b58af5",
-========
-                            ConcurrencyStamp = "239dacd0-d1a8-4fdd-99ea-31484c5d4f5a",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "ffc8cff4-a977-46d8-97c2-059fb5d7e77c",
                             Email = "kyarranton1p@dropbox.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -58765,11 +58140,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 163,
                             AccessFailedCount = 7,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "7f2bff25-372c-4e4b-84a2-17d8c709ca52",
-========
-                            ConcurrencyStamp = "ccdd8b25-ec84-4d99-bc39-8e9be84f4b1a",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "db6752dc-6cf4-4f9b-bdb1-2e8989b35096",
                             Email = "nryhorovich1q@senate.gov",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -58784,11 +58155,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 164,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "85250b0b-9655-4674-966a-32d21e8bfb45",
-========
-                            ConcurrencyStamp = "dd83af8a-71d9-4fba-8193-8e3792921dd3",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "c9cfbefd-8e55-4df1-a45e-04b5a50996dc",
                             Email = "idumblton1r@boston.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -58803,11 +58170,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 165,
                             AccessFailedCount = 9,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "6d7c316d-fbbc-4e66-ab4b-2bf61ff94aff",
-========
-                            ConcurrencyStamp = "238319d0-21da-45a3-a34d-be263d4e50ed",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "2e1a46b1-791a-4ccc-a3e3-e1150a95d3c5",
                             Email = "rst1s@reverbnation.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -58822,11 +58185,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 166,
                             AccessFailedCount = 8,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "c2ed749e-edd9-4fdc-9215-8bdc894e686d",
-========
-                            ConcurrencyStamp = "3169dc92-444a-430e-a908-b0aa23a9ec4c",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "6f8baaf5-45ef-4504-aedf-b8942554eb75",
                             Email = "hblondel1t@nsw.gov.au",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -58841,11 +58200,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 167,
                             AccessFailedCount = 5,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "a9311765-dee1-4c69-90db-4f340cc57a70",
-========
-                            ConcurrencyStamp = "5bcb69b3-407a-42ee-a28a-ed87d21c8d1e",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "687eba70-6ee1-45ff-a57d-9200cf2263fb",
                             Email = "nwinchcum1u@digg.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -58860,11 +58215,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 168,
                             AccessFailedCount = 9,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "2d7cee0e-abbf-4c59-9d1e-944437462e94",
-========
-                            ConcurrencyStamp = "41e7373b-1a86-4801-8149-0c2aa12de936",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "21f848f8-5384-4713-a104-d2831dacde11",
                             Email = "imenco1v@ucoz.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -58879,11 +58230,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 169,
                             AccessFailedCount = 1,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "bb585f89-8a2f-4661-b5f6-02fd49b001f3",
-========
-                            ConcurrencyStamp = "06b8d28a-26db-4638-9682-54724625ec1d",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "4bef018d-ea0a-4f7d-af02-fc8f24d0b615",
                             Email = "tshellshear1w@spotify.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -58898,11 +58245,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 170,
                             AccessFailedCount = 8,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "ebea7747-15ee-4861-a93c-2cede13bcb24",
-========
-                            ConcurrencyStamp = "adf802a2-64ca-4f71-978a-46e38066d9ab",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "05377f16-a031-48ab-8f4c-2ad9e528d7a1",
                             Email = "gallmen1x@bigcartel.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -58917,11 +58260,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 171,
                             AccessFailedCount = 9,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "5b3c9c77-b390-4414-af48-c99269295a79",
-========
-                            ConcurrencyStamp = "a73be887-66e5-4634-885a-addf484c6ef0",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "4320a1ec-7970-4603-a230-f1175bc1b79e",
                             Email = "mlevitt1y@ted.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -58936,11 +58275,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 172,
                             AccessFailedCount = 7,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "ff16d0fb-033b-42e0-9021-cd99d943ae5b",
-========
-                            ConcurrencyStamp = "235905bf-596a-4b28-8e10-b62569c1e609",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "fdf1616f-2e7f-4e56-ac2e-f8ab836f51d1",
                             Email = "rgoundsy1z@csmonitor.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -58955,11 +58290,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 173,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "fc417345-107c-40b7-9069-e72acc052739",
-========
-                            ConcurrencyStamp = "a8bece57-3b32-4531-8fb4-3707070c479b",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "4103f34f-71ef-4014-bb01-5e1ba7c3f6ba",
                             Email = "ecreffeild20@meetup.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -58974,11 +58305,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 174,
                             AccessFailedCount = 1,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "4bff39a4-bd43-42a5-948b-51e6e243b33c",
-========
-                            ConcurrencyStamp = "8b2f749a-6eb6-4200-ab0e-b436b301c2e7",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "5a7d539a-75bc-42f2-8435-b321e8aaf21d",
                             Email = "bpaine21@g.co",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -58993,11 +58320,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 175,
                             AccessFailedCount = 7,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "28b7acf0-624b-4172-bcce-8b6ff3149cb8",
-========
-                            ConcurrencyStamp = "8d24e09e-e751-4f2a-a62d-09b5c5fc75d8",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "810b60a5-ce45-45e1-9b9e-200d51b77084",
                             Email = "ttunny22@admin.ch",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -59012,11 +58335,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 176,
                             AccessFailedCount = 9,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "d926f48a-e45c-4e6a-b330-9a6d7f34e043",
-========
-                            ConcurrencyStamp = "5a83cff2-b7bb-41bf-a14e-db72cfaf7b04",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "1bb989be-8b05-465c-aa77-d2323ce52b62",
                             Email = "hemmert23@senate.gov",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -59031,11 +58350,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 177,
                             AccessFailedCount = 0,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "6e784f01-fa09-4228-8a0b-298dff994e89",
-========
-                            ConcurrencyStamp = "af3f45b6-2a00-4556-8c05-164cb8b0f64a",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "131a4285-5ca4-49c9-8683-79dc514e7821",
                             Email = "ppippin24@msn.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -59050,11 +58365,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 178,
                             AccessFailedCount = 7,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "6e9a59d8-0c95-40e8-a44f-d07e395144b0",
-========
-                            ConcurrencyStamp = "854bd036-7eeb-4630-9f5a-46d71e8b99ec",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "0646906e-8e9e-4c4d-a4ba-f75fccefed6b",
                             Email = "jbim25@vk.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -59069,11 +58380,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 179,
                             AccessFailedCount = 8,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "3ab99654-86e0-42d9-9880-6c2e275bd0de",
-========
-                            ConcurrencyStamp = "14d5c9f8-2b2b-4a2a-8f45-241fbc2b12d4",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "ff5400ba-8bb3-43e4-a2d3-f7ec8a9592d5",
                             Email = "cleechman26@dailymail.co.uk",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -59088,11 +58395,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 180,
                             AccessFailedCount = 10,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "747d4ed9-2819-47e0-afa1-a34012efbcf6",
-========
-                            ConcurrencyStamp = "6de26936-0ff3-4adb-9c60-902e25a37198",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "749e0b80-bdb0-4bb6-a426-ea6d7c2ce572",
                             Email = "ggetsham27@wiley.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -59107,11 +58410,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 181,
                             AccessFailedCount = 7,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "40dd3d27-271c-4d3a-bbc0-15d0a88b0aba",
-========
-                            ConcurrencyStamp = "283fe4dd-5234-474e-9f92-9aeb6ad77db4",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "5015717f-6bcc-4d28-be8d-0ce723841ec8",
                             Email = "abrusby28@twitpic.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -59126,11 +58425,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 182,
                             AccessFailedCount = 5,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "6562c16d-0b6f-451b-a1ae-47900f2266ca",
-========
-                            ConcurrencyStamp = "8acbf032-c61e-4fa3-ae1c-141f143c56cb",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "25f984c6-e96c-4c0c-abc8-b53539ed9c81",
                             Email = "cshirer29@ed.gov",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -59145,11 +58440,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 183,
                             AccessFailedCount = 2,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "b0945c1d-c5ce-45e8-bba5-332d6b65bc1c",
-========
-                            ConcurrencyStamp = "33847d18-ef97-442d-b8ae-871b116836b3",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "e00091f1-bdcb-4a6a-a615-5c1aa7f63c87",
                             Email = "ccluley2a@who.int",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -59164,11 +58455,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 184,
                             AccessFailedCount = 10,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "d45485f7-792a-4f06-a139-3d4fe9c55ea5",
-========
-                            ConcurrencyStamp = "51897e13-1373-4db2-9206-b770b6789e70",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "2ccc9326-36d8-4192-96cc-e4ab2fd7377b",
                             Email = "temlyn2b@ning.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -59183,11 +58470,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 185,
                             AccessFailedCount = 5,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "ca32f4e4-a108-41df-94c2-21a94658764e",
-========
-                            ConcurrencyStamp = "455d067d-c6b1-42bc-9f43-b51dac685d30",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "66ccd5b8-e086-4410-a78d-174f697382e1",
                             Email = "mweekland2c@cocolog-nifty.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -59202,11 +58485,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 186,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "d8c9644f-2926-4dd7-9575-7a4454713516",
-========
-                            ConcurrencyStamp = "b5fe2bc4-a42c-4d9d-a9c8-2fab9437f555",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "b3c7f636-6be4-440d-be93-1ec840b65e77",
                             Email = "amattevi2d@people.com.cn",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -59221,11 +58500,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 187,
                             AccessFailedCount = 10,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "334771f6-4468-4dc2-92f1-518a9af259b9",
-========
-                            ConcurrencyStamp = "8a86b92d-3db8-4504-9135-aae3fe2d4db0",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "912a0c61-7979-4d0f-945c-10340c0b1b81",
                             Email = "ceagle2e@opera.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -59240,11 +58515,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 188,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "83256fc6-3303-46ec-aeaa-43f8a9d11e17",
-========
-                            ConcurrencyStamp = "7c521e35-75a6-4396-83ba-ddc0da3a5542",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "be0e72a2-8dc3-4694-b03e-84234247374e",
                             Email = "gmcwhirter2f@usatoday.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -59259,11 +58530,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 189,
                             AccessFailedCount = 3,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "1914cc4c-ba7b-4269-aa91-36f53a441cf2",
-========
-                            ConcurrencyStamp = "1ed42a48-d23f-44a7-98ce-449e99a3e751",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "7a058aab-bdda-4c1c-b102-ab7d957ce667",
                             Email = "jquittonden2g@jimdo.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -59278,11 +58545,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 190,
                             AccessFailedCount = 9,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "882df4c9-19c2-4c7c-9660-6d6db3700020",
-========
-                            ConcurrencyStamp = "565c2cb7-b5cd-4b63-8439-3846135422d1",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "b156e557-e301-46c8-96db-33ab25be8c38",
                             Email = "faynold2h@icq.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -59297,11 +58560,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 191,
                             AccessFailedCount = 6,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "afad1f93-df11-4193-8034-b867352ebcf6",
-========
-                            ConcurrencyStamp = "3e357502-3d53-40d9-b907-0e6decc4b8eb",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "e411e4b7-162f-4672-bb4f-32d1c987d155",
                             Email = "agetsham2i@ibm.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -59316,11 +58575,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 192,
                             AccessFailedCount = 10,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "40725cb1-97e3-4a52-8cec-9176f8b5556f",
-========
-                            ConcurrencyStamp = "0cc9b004-f773-4934-a3e6-04261e5bc212",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "16a9a901-66ce-463a-9595-532b06323cf6",
                             Email = "mpandya2j@alibaba.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -59335,11 +58590,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 193,
                             AccessFailedCount = 7,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "c1078189-fbe6-4405-99ca-9d0af1aa5b55",
-========
-                            ConcurrencyStamp = "b0155fca-15cb-4f4e-a754-98614c100a03",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "efaa455f-44cc-4c4d-9736-ca292e105ab1",
                             Email = "mmcpeice2k@cdc.gov",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -59354,11 +58605,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 194,
                             AccessFailedCount = 8,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "86cc42ad-a9a2-4eb4-be85-21ab30622396",
-========
-                            ConcurrencyStamp = "783bbaff-d0b6-4cef-aba6-d18110230cbc",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "987b6094-16ac-46b2-9adc-ebd7ccc77367",
                             Email = "rduhig2l@comcast.net",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -59373,11 +58620,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 195,
                             AccessFailedCount = 3,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "0918db7c-8397-4fe8-9e7d-7dbea3a1d3fb",
-========
-                            ConcurrencyStamp = "23f1671a-b4a9-455e-8912-6e5fc64bbbef",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "1478cf2f-5fcd-4f53-8204-9fed97fc0bf5",
                             Email = "dkewzick2m@ehow.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -59392,11 +58635,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 196,
                             AccessFailedCount = 8,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "db6a47ab-8413-4e10-ab4c-9d58bce25c87",
-========
-                            ConcurrencyStamp = "dd94ae55-6090-4b2b-bf11-f8e0d5d8a5f4",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "48dda149-3d04-496d-abd7-4ad21c133ded",
                             Email = "lbroose2n@stumbleupon.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -59411,11 +58650,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 197,
                             AccessFailedCount = 0,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "48ebbc10-b788-43eb-8cf3-689007111914",
-========
-                            ConcurrencyStamp = "0b496f18-3988-47ec-844f-2308d3e9f51a",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "5f36d2fd-0320-4231-afa1-122117581550",
                             Email = "gpollie2o@redcross.org",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -59430,11 +58665,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 198,
                             AccessFailedCount = 1,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "2108a69a-546d-4121-82ca-e214ebdd05af",
-========
-                            ConcurrencyStamp = "1f20a298-cc82-44b2-9a29-8f2b75474728",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "141e8ad9-41d2-4fa9-848f-5c1b53d69da5",
                             Email = "hshrubsall2p@ft.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -59449,11 +58680,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 199,
                             AccessFailedCount = 8,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "188dfbbe-cb34-4a75-9eeb-62b709557332",
-========
-                            ConcurrencyStamp = "a35d42bb-24b7-4017-9b8d-00550df2164c",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "d5c17596-a568-419b-909f-29d4a00e92af",
                             Email = "itrewhella2q@discuz.net",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = true,
@@ -59468,11 +58695,7 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 200,
                             AccessFailedCount = 9,
-<<<<<<<< HEAD:OpusLink.Entity/Migrations/20240220082335_addNewDB.Designer.cs
-                            ConcurrencyStamp = "a35fbb44-26c2-4475-bf33-04a8c8922618",
-========
-                            ConcurrencyStamp = "cd2d3a23-f78b-4405-82e1-67b1789177d6",
->>>>>>>> nhat:OpusLink.Entity/Migrations/20240223125440_InitialDB.Designer.cs
+                            ConcurrencyStamp = "d2dc9077-c97d-4c02-9386-63c450340581",
                             Email = "ftroke2r@nsw.gov.au",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
