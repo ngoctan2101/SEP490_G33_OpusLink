@@ -1,38 +1,31 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Diagnostics;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.Models;
 using OpusLink.Service.JobServices;
-using System.Collections.Generic;
+using OpusLink.Shared.Enums;
 
 namespace OpusLink.API.Controllers.JobControllers
 {
     [Route("api/[controller]")]
     [ApiController]
-    public class Job3APIController : ControllerBase
+    public class Job12APIController : Controller
     {
         private readonly IJobService jobService;
         private readonly ICategoryService categoryService;
         private readonly IMapper _mapper;
-        public Job3APIController(IJobService jobService, ICategoryService categoryService, IMapper mapper)
+
+        public Job12APIController(IJobService jobService, ICategoryService categoryService, IMapper mapper)
         {
-            this.categoryService = categoryService;
             this.jobService = jobService;
+            this.categoryService = categoryService;
             _mapper = mapper;
         }
-        //[HttpGet("GetAllJob")]
-        //public async Task<IActionResult> GetAllJob()
-        //{
-        //    var jobs = await jobService.GetAllJob(); 
-        //    List<GetJobResponse> result = _mapper.Map<List<GetJobResponse>>(jobs);
-        //    return Ok(result);
-        //}
         [HttpGet("GetAllCategory")]
         public async Task<IActionResult> GetAllCategory()
         {
             var categories = await categoryService.GetAllCategory();
-            List < GetCategoryResponse> result = _mapper.Map< List<GetCategoryResponse>>(categories);
+            List<GetCategoryResponse> result = _mapper.Map<List<GetCategoryResponse>>(categories);
             foreach (var category in result)
             {
                 if (await categoryService.CountChild(category.CategoryID) > 0)
@@ -46,8 +39,8 @@ namespace OpusLink.API.Controllers.JobControllers
         public async Task<IActionResult> GetAllChildCategory(int parentId)
         {
             var categories = await categoryService.GetAllChildCategory(parentId);
-            List < GetCategoryResponse> result = _mapper.Map< List<GetCategoryResponse>>(categories);
-            foreach(var category in result)
+            List<GetCategoryResponse> result = _mapper.Map<List<GetCategoryResponse>>(categories);
+            foreach (var category in result)
             {
                 if (await categoryService.CountChild(category.CategoryID) > 0)
                 {
@@ -56,22 +49,24 @@ namespace OpusLink.API.Controllers.JobControllers
             }
             return Ok(result);
         }
-        [HttpPost("GetAllJob")]
-        public async Task<IActionResult> GetAllJob([FromBody] Filter filter)
+        [HttpPost("GetAllJobRequested")]
+        public async Task<IActionResult> GetAllJobRequested([FromBody] Filter filter)
         {
             int numberOfPage;
-            var jobs = await jobService.GetAllJob();
-            var jobsResultAfterSearch= Search(jobs, filter, out numberOfPage);
-            List < GetJobResponse> result = _mapper.Map< List<GetJobResponse>>(jobsResultAfterSearch);
-            result.Add(new GetJobResponse() { NumberOfOffer=numberOfPage });
+            var jobs = await jobService.GetAllJobRequested();
+            var jobsResultAfterSearch = Search(jobs, filter, out numberOfPage);
+            List<GetJobResponse> result = _mapper.Map<List<GetJobResponse>>(jobsResultAfterSearch);
+            result.Add(new GetJobResponse() { NumberOfOffer = numberOfPage });
             return Ok(result);
         }
-        private List<Job> Search(List<Job> jobs, Filter filter,out int numberOfPage)
+
+        private List<Job> Search(List<Job> jobs, Filter filter, out int numberOfPage)
         {
             List<Job> result = new List<Job>();
             //loc theo category
-            if(filter.CategoryIDs.Count== 0) {
-                result=jobs;
+            if (filter.CategoryIDs.Count == 0)
+            {
+                result = jobs.ToList();
             }
             else
             {
@@ -94,30 +89,10 @@ namespace OpusLink.API.Controllers.JobControllers
                     }
                 }
             }
-
-            //loc theo status
-            if (filter.Statuses.Count > 0)
-            {
-                for (int i = result.Count - 1; i >= 0; i--)
-                {
-                    bool isOke = false;
-                    foreach (int status in filter.Statuses)
-                    {
-                        if (result[i].Status == status)
-                        {
-                            isOke = true; break;
-                        }
-                    }
-                    if (isOke == false)
-                    {
-                        result.RemoveAt(i);
-                    }
-                }
-            }
             //max job >= min filter && min job <= max filter
             for (int i = result.Count - 1; i >= 0; i--)
-            { 
-                if(result[i].BudgetTo >= filter.BudgetMin && result[i].BudgetFrom <= filter.BudgetMax)
+            {
+                if (result[i].BudgetTo >= filter.BudgetMin && result[i].BudgetFrom <= filter.BudgetMax)
                 {
                     continue;
                 }
@@ -159,7 +134,7 @@ namespace OpusLink.API.Controllers.JobControllers
             {
                 numberOfPage++;
             }
-            return result.Skip((filter.PageNumber-1)*6).Take(6).ToList();
+            return result.Skip((filter.PageNumber - 1) * 6).Take(6).ToList();
         }
     }
 }

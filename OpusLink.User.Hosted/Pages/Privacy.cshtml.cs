@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using System.Dynamic;
 
 namespace OpusLink.User.Hosted.Pages
 {
@@ -11,9 +12,14 @@ namespace OpusLink.User.Hosted.Pages
         {
             _logger = logger;
         }
-
-        public void OnGet()
+        public  void OnGet()
         {
+
+        }
+        public IActionResult OnPost()
+        {
+            // chuyen ve trang home
+            return RedirectToPage("/Index");
         }
     }
 

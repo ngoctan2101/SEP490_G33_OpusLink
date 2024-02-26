@@ -176,7 +176,7 @@
     <link rel="stylesheet" href="~/OpusLink.User.Hosted.styles.css" asp-append-version="true" />
 </head>
 <body>
-    <header>
+    <header id="headerOfLayoutPage">
         <nav class="navbar navbar-expand-sm navbar-toggleable-sm navbar-light bg-white border-bottom box-shadow mb-3">
             <div class="container">
                 <a class="navbar-brand" asp-area="" asp-page="/Index">OpusLink.User.Hosted</a>
@@ -188,6 +188,21 @@
                     <ul class="navbar-nav flex-grow-1">
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/JOB/FreelancerViewAllJobPage">Find online job</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/JOB/EmployerViewAllJobCreatedPage">My created job</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/JOB/EmployerCreateAJobPage">Post job now</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/JOB/FreelancerViewAllJobOfferedPage">My Offers</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/JOB/FreelancerViewAllJobSavedPage">Saved job</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
@@ -203,7 +218,7 @@
         </main>
     </div>
 
-    <footer class="border-top footer text-muted">
+    <footer class="border-top footer text-muted" id="footerOfLayoutPage">
         <div class="container">
             &copy; 2024 - OpusLink.User.Hosted - <a asp-area="" asp-page="/Privacy">Privacy</a>
         </div>

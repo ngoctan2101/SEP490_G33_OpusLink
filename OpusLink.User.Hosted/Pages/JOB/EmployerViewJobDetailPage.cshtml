@@ -1,0 +1,134 @@
+﻿@page
+@using OpusLink.Entity.DTO.JobDTO;
+@using OpusLink.Entity.Models;
+@using OpusLink.Shared.Enums;
+@model OpusLink.User.Hosted.Pages.JOB.EmployerViewJobDetailPageModel
+@{
+    GetJobDetailResponse item = Model.job;
+}
+@{
+    ViewData["Title"] = "Employer View Job Detail";
+}
+<style>
+
+    .link {
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        .link:hover {
+            cursor: pointer;
+        }
+
+    .status {
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        display: inline-block;
+    }
+
+    .category {
+        display: inline-block;
+        margin-bottom: 3px;
+        background-color: lightblue;
+        padding: 7px;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .categoryFake {
+        display: inline-block;
+        margin-bottom: 3px;
+        background-color: lightblue;
+        padding: 7px;
+        border-radius: 5px;
+        font-size: 14px;
+        opacity: 0.6;
+    }
+
+        .categoryFake:hover {
+            cursor: pointer;
+        }
+</style>
+<div style="display:inline-block;text-align:center;position: relative;width:100%;height:50px">
+    <a href="../JOB/FreelancerViewAllJobPage" style="position: absolute;top: 50%;left: 0px;">Back to list</a>
+    <a asp-page="./EmployerUpdateJobPage" asp-route-JobId="@item.JobId" style="width:100px; background-color:#4A86E8;color:white;font-weight:bold;font-size:18px;position: absolute;height:30px;bottom:0px;right: 10px;text-decoration: none;">Edit</a>
+</div>
+<div class="row">
+    <div class="col-md-3">
+        <img id="profileImage" src="/imgexample/p.png" style="width:50%;height:auto;display:block" />
+        <a href="#" class="link" style="display:block">@item.EmployerName</a>
+        ⭐⭐⭐⭐⭐
+        <p>Project Information:</p>
+        <table style="width:100%;font-size:13px">
+            <tr><td>Project Id:</td><td>@item.JobId</td></tr>
+            <tr><td style="width:100px">Posted Date:</td><td>@item.DateCreated.ToString("dd/MM/yyyy")</td></tr>
+            <tr><td>Budget:</td><td>@Math.Round(item.BudgetMin,0) đ<span style="display:inline-block"> - </span>@Math.Round(item.BudgetMax,0) đ</td></tr>
+            <tr><td>Location:</td><td>@item.Location</td></tr>
+        </table>
+        <button type="button" style="margin-top:15px;width:80%;background-color:#4A86E8;color:white;font-weight:bold;font-size:20px;border:none">View offers (@item.TotalOffer)</button>
+    </div>
+    <div class="col-md-9">
+        <div>
+            <p style="font-weight:bold;display:inline-block">@item.JobTitle</p>
+            @if (item.Status == (int)JobStatusEnum.NotApprove)
+            {
+                <p class="status" style="background-color:grey;margin:0px">Not Approved</p>
+            }
+            else if (item.Status == (int)JobStatusEnum.Approved)
+            {
+                <p class="status" style="background-color:#5B9044;margin:0px">Hiring</p>
+            }
+            else if (item.Status == (int)JobStatusEnum.Hired)
+            {
+                <p class="status" style="background-color:orange;margin:0px">Hired</p>
+            }
+            else if (item.Status == (int)JobStatusEnum.Close)
+            {
+                <p class="status" style="background-color:#FF0000;margin:0px">Closed</p>
+            }
+        </div>
+        <div class="row">
+            <div class="col-md-2">
+                <p style="display:inline-block">Categories: </p>
+            </div>
+            <div class="col-md-10">
+                @if (item.Categories.Count > 4)
+                {
+                    for (int i = 0; i < 4; i++)
+                    {
+                        <div class="category">@item.Categories.ElementAt(i).CategoryName</div>
+                    }
+                    <div name="hidden_fake_category_@item.JobId" class="categoryFake" onclick="DisplayAllCategory('@item.JobId')">. . .</div>
+                    for (int i = 4; i < item.Categories.Count; i++)
+                    {
+                        <div name="hidden_category_@item.JobId" class="category" style="display: none;">@item.Categories.ElementAt(i).CategoryName</div>
+                    }
+                }
+                else
+                {
+                    foreach (GetCategoryResponse category in item.Categories)
+                    {
+                        <div class="category">@category.CategoryName</div>
+                    }
+                }
+            </div>
+        </div>
+        @*<p style="white-space: pre-line">@Html.Raw(item.JobContent.Replace("\r\n", "&#10;"))</p>*@
+        <p style="white-space: pre-line;margin-top:10px">@item.JobContent</p>
+        <div class="row">
+            <div class="col-md-4">Submit offer: @item.TotalOffer</div>
+            <div class="col-md-4">Average: @Math.Round(item.AverageCost,0) đ</div>
+            <div class="col-md-4">Average time: @item.AverageTime days</div>
+        </div>
+    </div>
+</div>
+<script>
+    function DisplayAllCategory(JobID) {
+        document.getElementsByName('hidden_fake_category_' + JobID)[0].style.display = "none";
+        var hiddenCategory = document.getElementsByName('hidden_category_' + JobID);
+        hiddenCategory.forEach(function (hiddenCategory) {
+            hiddenCategory.style.display = "inline-block";
+        })
+    }
+</script>
