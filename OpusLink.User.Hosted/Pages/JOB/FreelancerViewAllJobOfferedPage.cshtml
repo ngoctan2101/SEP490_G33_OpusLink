@@ -1,0 +1,269 @@
+﻿@page
+@using OpusLink.Entity.DTO.JobDTO;
+@using OpusLink.Entity.Models;
+@using OpusLink.Shared.Enums;
+@model OpusLink.User.Hosted.Pages.JOB.FreelancerViewAllJobOfferedModel
+@{
+}
+@{
+    ViewData["Title"] = "Freelancer View All Job Offered";
+}
+<style>
+    .filter .td {
+        padding-left: 10px;
+        padding-right: 5px
+    }
+
+    .link {
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        .link:hover {
+            cursor: pointer;
+        }
+
+    .link2 {
+        text-decoration: none;
+        font-weight: bold;
+        padding-right: 8px;
+    }
+
+        .link2:hover {
+            cursor: pointer;
+        }
+
+    .status {
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        display: inline-block;
+    }
+
+    .category {
+        display: inline-block;
+        margin-bottom: 3px;
+        background-color: lightblue;
+        padding: 7px;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .categoryFake {
+        display: inline-block;
+        margin-bottom: 3px;
+        background-color: lightblue;
+        padding: 7px;
+        border-radius: 5px;
+        font-size: 14px;
+        opacity: 0.6;
+    }
+
+        .categoryFake:hover {
+            cursor: pointer;
+        }
+    /* Added line below */
+    .hrCategory {
+        border: none;
+        border-bottom: 2px solid #C2C2C2;
+        margin: 0px 0px;
+    }
+
+    .hrJob {
+        border: none;
+        border-bottom: 3px solid #383838;
+        margin-top: 5px;
+        margin-bottom: 0px;
+        margin-left: -14px;
+        margin-right: -14px;
+    }
+    /*pagination*/
+    .pagin {
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        border-radius: 50%;
+        border: none;
+        transition: background-color 0.2s;
+    }
+
+        .pagin:hover {
+            background-color: #0088CC;
+            color: white;
+        }
+</style>
+<div style="background-color:#F0F0F0; padding:10px">
+    <form method="post">
+        <input hidden asp-for="@Model.NumberOfPage" value="@Model.NumberOfPage" />
+        <div class="row" style="margin-bottom:15px">
+            <div class="col-md-3">
+                <button type="submit" name="pageNo_1" value="1" style="width:100%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964">Search & Filter</button>
+            </div>
+            <div class="col-md-7">
+                <input name="Search_Str" value="@Model.filter.SearchStr" style="width:100%" placeholder="Find Job" />
+            </div>
+            <div class="col-md-2">
+            </div>
+        </div>
+        <div class="row">
+            <div style="box-shadow: 0px 0px 4px 4px #DCDCDC;background-color:#FFFFFF; padding-top: 10px">
+                @foreach (var item in Model.Offers)
+                {
+                    @*@if (item.GetJobResponse.Status == (int)JobStatusEnum.NotApprove)
+                {
+                continue;
+                }*@
+                    <div style="display:block;padding:5px 10px 4px 16px">
+                        <div>
+                            <a style="font-size:16px" class="link" asp-page="./FreelancerViewJobDetail" asp-route-JobId="@item.JobID">@item.GetJobResponse.JobTitle</a>
+                            @if (item.GetJobResponse.Status == (int)JobStatusEnum.NotApprove)
+                            {
+                                <p class="status" style="background-color:grey;margin:0px">Not Approved</p>
+                            }
+                            else if (item.GetJobResponse.Status == (int)JobStatusEnum.Approved)
+                            {
+                                <p class="status" style="background-color:#5B9044;margin:0px">Hiring</p>
+                            }
+                            else if (item.GetJobResponse.Status == (int)JobStatusEnum.Hired)
+                            {
+                                <p class="status" style="background-color:orange;margin:0px">Hired</p>
+                            }
+                            else if (item.GetJobResponse.Status == (int)JobStatusEnum.Close)
+                            {
+                                <p class="status" style="background-color:#FF0000;margin:0px">Closed</p>
+                            }
+                        </div>
+                        <div>
+                            <span>5</span>⭐ <a style="text-decoration:none" asp-page="userProfile" asp-route-id="@item.GetJobResponse.EmployerID">@item.GetJobResponse.EmployerName</a>
+                        </div>
+                        <div style="background-color:#F5F5F5; padding:5px">
+                            <p style="display:inline">@item.GetJobResponse.LocationName</p> | <p class="FormatBudget" style="display:inline">@(item.GetJobResponse.BudgetFrom)</p> - <p class="FormatBudget" style="display:inline">@(item.GetJobResponse.BudgetTo)</p>
+                        </div>
+                        <div>
+                            <p class="JobContent">@item.GetJobResponse.JobContent</p>
+                        </div>
+                        <div class="row">
+                            <div class="col-md-10">
+                                @if (item.GetJobResponse.Categoies.Count > 4)
+                                {
+                                    for (int i = 0; i < 4; i++)
+                                    {
+                                        <div class="category">@item.GetJobResponse.Categoies.ElementAt(i).CategoryName</div>
+                                    }
+                                    <div name="hidden_fake_category_@item.GetJobResponse.JobID" class="categoryFake" onclick="DisplayAllCategory('@item.GetJobResponse.JobID')">. . .</div>
+                                    for (int i = 4; i < item.GetJobResponse.Categoies.Count; i++)
+                                    {
+                                        <div name="hidden_category_@item.GetJobResponse.JobID" class="category" style="display: none;">@item.GetJobResponse.Categoies.ElementAt(i).CategoryName</div>
+                                    }
+                                }
+                                else
+                                {
+                                    foreach (GetCategoryResponse category in item.GetJobResponse.Categoies)
+                                    {
+                                        <div class="category">@category.CategoryName</div>
+                                    }
+                                }
+                            </div>
+                            <div class="col-md-2" style="text-align:right">
+                                <p style="margin-right:10px;font-size:17px">@item.GetJobResponse.NumberOfOffer Offers</p>
+                            </div>
+                        </div>
+                        <div class="row" style="border: 1px solid #C2C2C2">
+                            <div class="col-md-2">
+                                <p><a href="" class="link">You</a>:</p>
+                                <p>@item.DateOffer.ToString("dd/MM/yyyy")</p>
+                            </div>
+                            <div class="col-md-10">
+                                <p><span style="font-weight:bold">Duration</span>: @item.ExpectedDays days</p>
+                                <p><span style="font-weight:bold">Proposed cost</span>: @item.ProposedCost đ</p>
+                                <p><span style="font-weight:bold">Experience</span>: @item.SelfIntroduction</p>
+                                <p><span style="font-weight:bold">Plan</span>: @item.EstimatedPlan</p>
+                            </div>
+                        </div>
+                        <hr class="hrJob">
+                    </div>
+                }
+                <div style="display:flex;justify-content:center;">
+                    @for (int i = 1; i <= Model.NumberOfPage; i++)
+                    {
+                        @if (i == Model.PageNo)
+                        {
+                            <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
+                                <button class="pagin" style="background-color:#0088CC; color:white" type="submit" name="pageNo_@i" value="@i">@i</button>
+                            </div>
+                        }
+                        else
+                        {
+                            <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
+                                <button class="pagin" type="submit" name="pageNo_@i" value="@i">@i</button>
+                            </div>
+                        }
+                    }
+                </div>
+            </div>
+        </div>
+    </form>
+</div>
+<script>
+    window.onload = function () {
+        FormatBudget();
+        FormatJobContent();
+        FomatPagination();
+    };
+</script>
+<script>
+    function FormatBudget() {
+        var paragraphs = document.querySelectorAll('.FormatBudget');
+        paragraphs.forEach(function (paragraph) {
+            var formattedValue = parseFloat(paragraph.textContent).toLocaleString('en', { maximumFractionDigits: 0 }) + " đ";
+            paragraph.textContent = formattedValue;
+        });
+    }
+    function FormatJobContent() {
+        var paragraphs = document.querySelectorAll('.JobContent');
+        paragraphs.forEach(function (paragraph) {
+            var content = paragraph.textContent;
+            if (content.length > 200) {
+                paragraph.textContent = content.slice(0, 200) + '...'; // Truncate content to 200 characters
+                paragraph.innerHTML += " <span style=\"color:#3F88CC\">More<span>"
+            }
+        });
+    }
+    function DisplayAllCategory(JobID) {
+        document.getElementsByName('hidden_fake_category_' + JobID)[0].style.display = "none";
+        var hiddenCategory = document.getElementsByName('hidden_category_' + JobID);
+        hiddenCategory.forEach(function (hiddenCategory) {
+            hiddenCategory.style.display = "inline-block";
+        })
+
+    }
+    function FomatPagination() {
+        for (let i = 1; i <= @Model.NumberOfPage; i++) {
+            if (i == 1) {
+                document.getElementById('pagin_' + i).style.display = "inline-block";
+                continue;
+            }
+            if (i == @Model.PageNo || i == @Model.PageNo+1 || i == @Model.PageNo-1 || i == @Model.PageNo+2 || i == @Model.PageNo-2) {
+                document.getElementById('pagin_' + i).style.display = "inline-block";
+                continue;
+            }
+            if (i == @Model.NumberOfPage ) {
+                document.getElementById('pagin_' + i).style.display = "inline-block";
+                continue;
+            }
+            document.getElementById('pagin_' + i).style.display = "none";
+        }
+        for (let i = 1; i <= @Model.PageNo; i++) {
+            if (document.getElementById('pagin_' + i).style.display == "none") {
+                document.getElementById('pagin_' + i).insertAdjacentHTML("afterend", "<div style=\"display: inline-block;margin:10px 5px 10px 5px\"><p style=\"margin: 10px 10px 10px 10px\">. . .</p></div>");
+                break;
+            }
+        }
+        for (let i = @Model.PageNo; i <= @Model.NumberOfPage; i++) {
+            if (document.getElementById('pagin_' + i).style.display == "none") {
+                document.getElementById('pagin_' + i).insertAdjacentHTML("afterend", "<div style=\"display: inline-block;margin:10px 5px 10px 5px\"><p style=\"margin: 10px 10px 10px 10px\">. . .</p></div>");
+                break;
+            }
+        }
+    }
+</script>

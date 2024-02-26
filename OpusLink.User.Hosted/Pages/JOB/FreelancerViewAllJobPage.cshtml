@@ -2,11 +2,11 @@
 @using OpusLink.Entity.DTO.JobDTO;
 @using OpusLink.Entity.Models;
 @using OpusLink.Shared.Enums;
-@model OpusLink.Admin.Hosted.Pages.JOB.AdminViewAllJobPageModel
+@model OpusLink.User.Hosted.Pages.JOB.FreelancerViewAllJobPageModel
 @{
 }
 @{
-    ViewData["Title"] = "Admin View All Job";
+    ViewData["Title"] = "Freelancer View All Job";
 }
 <style>
     .filter .td {
@@ -14,24 +14,14 @@
         padding-right: 5px
     }
 
-    .jobTable {
-        box-shadow: 0px 0px 4px 4px #DCDCDC;
-        border: 0px;
-        background-color: #FFFFFF
-    }
-
-        .jobTable th {
-            text-align: center;
-        }
-
-        .jobTable tr {
-            border-collapse: collapse;
-        }
-
     .link {
         text-decoration: none;
         font-weight: bold;
     }
+
+        .link:hover {
+            cursor: pointer;
+        }
 
     .link2 {
         text-decoration: none;
@@ -47,6 +37,7 @@
         font-weight: bold;
         color: white;
         text-align: center;
+        display:inline-block;
     }
 
     .category {
@@ -55,13 +46,36 @@
         background-color: lightblue;
         padding: 7px;
         border-radius: 5px;
-        font-size: 14px
+        font-size: 14px;
     }
+
+    .categoryFake {
+        display: inline-block;
+        margin-bottom: 3px;
+        background-color: lightblue;
+        padding: 7px;
+        border-radius: 5px;
+        font-size: 14px;
+        opacity: 0.6;
+    }
+
+        .categoryFake:hover {
+            cursor: pointer;
+        }
     /* Added line below */
-    hr {
+    .hrCategory {
         border: none;
         border-bottom: 2px solid #C2C2C2;
         margin: 0px 0px;
+    }
+
+    .hrJob {
+        border: none;
+        border-bottom: 2px solid #C2C2C2;
+        margin-top: 20px;
+        margin-bottom: 0px;
+        margin-left: -5px;
+        margin-right: -5px;
     }
     /*pagination*/
     .pagin {
@@ -83,7 +97,7 @@
         <input hidden asp-for="@Model.NumberOfPage" value="@Model.NumberOfPage" />
         <div class="row" style="margin-bottom:15px">
             <div class="col-md-3">
-                <button type="submit" name="pageNo_1" value="1" style="width:100%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964">Search & Filter</button>
+                <button type="submit" asp-page-handler="ForSearch" name="pageNo_1" value="1" style="width:100%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964">Search & Filter</button>
             </div>
             <div class="col-md-7">
                 <input name="Search_Str" value="@Model.filter.SearchStr" style="width:100%" placeholder="Find Job" />
@@ -103,7 +117,7 @@
                             <td class="td" style="text-align:right"><input type="checkbox" name="category_@category.CategoryID" value="@category.CategoryID"></td>
                             <td style="text-align:left;font-size:14px;">
                                 @(category.CategoryName + " (" + category.NumberOfJob + ")")
-                                <hr>
+                                <hr class="hrCategory">
                             </td>
                             <td style="text-align:right">
                                 @if (category.HasChildCategory)
@@ -122,6 +136,10 @@
                     </tr>
                     @foreach (var status in Enum.GetValues(typeof(JobStatusEnum)))
                     {
+                        @if (status.ToString() == JobStatusEnum.NotApprove.ToString())
+                        {
+                            continue;
+                        }
                         <tr style="width:100%">
                             <td style="width:15%;text-align:right"><input type="checkbox" name="status_@((int)Enum.Parse(typeof(JobStatusEnum), status.ToString()))" value="@((int)Enum.Parse(typeof(JobStatusEnum), status.ToString()))"></td>
                             <td style="width:85%;text-align:left">@status.ToString()</td>
@@ -158,45 +176,17 @@
                 </table>
             </div>
             <div class="col-md-9">
-                <table class="jobTable">
-                    <thead>
-                        <tr>
-                            <th width="4%">
-                                <h6 style="margin:1px">Id</h6>
-                            </th>
-                            <th width="15%">
-                                <h6 style="margin:1px">Title</h6>
-                            </th>
-                            <th width="12%">
-                                <h6 style="margin:1px">Budget range</h6>
-                            </th>
-                            <th width="4%">
-                                <h6 style="margin:1px">Status</h6>
-                            </th>
-                            <th width="17%">
-                                <h6 style="margin:1px">Categories</h6>
-                            </th>
-                            <th width="5%">
-                                <h6 style="margin:1px">Offers</h6>
-                            </th>
-                            <th width="5%"></th>
-                        </tr>
-                        <tr><td colspan="7"><hr style="color:black;opacity:1"></td></tr>
-                    </thead>
-                    <tbody>
-                        @foreach (var item in Model.Jobs)
+                <div style="box-shadow: 0px 0px 4px 4px #DCDCDC;background-color:#FFFFFF; padding-top: 10px">
+                    @foreach (var item in Model.Jobs)
+                    {
+                        @if (item.Status == (int)JobStatusEnum.NotApprove)
                         {
-                            <tr>
-                                <td style="text-align: center;">
-                                    @item.JobID
-                                </td>
-                                <td>
-                                    <a style="font-size:16px" class="link" asp-page="./AdminViewDetailJobPage" asp-route-JobId="@item.JobID" >123 @item.JobTitle</a>
-                                </td>
-                                <td>
-                                    @((item.BudgetFrom ?? 0).ToString("#,##") + " - " + (item.BudgetTo ?? 0).ToString("#,##"))
-                                </td>
-                                <td style="text-align: center">
+                            continue;
+                        }
+                        <div style="display:block;padding:5px 10px 4px 16px">
+                            <div class="row">
+                                <div class="col-md-10">
+                                    <a style="font-size:16px" class="link" asp-page="./FreelancerViewJobDetail" asp-route-JobId="@item.JobID">@item.JobTitle</a>
                                     @if (item.Status == (int)JobStatusEnum.NotApprove)
                                     {
                                         <p class="status" style="background-color:grey;margin:0px">Not Approved</p>
@@ -213,55 +203,83 @@
                                     {
                                         <p class="status" style="background-color:#FF0000;margin:0px">Closed</p>
                                     }
-                                </td>
-                                <td>
-                                    <div class="container" style="padding:5px">
-                                        @if (item.Categoies.Count > 4)
+                                </div>
+                                <div class="col-md-2">
+                                    @{
+                                        bool isSaved = false;
+                                        foreach(int i in Model.AllSavedJobId)
                                         {
-                                            for (int i = 0; i < 4; i++)
+                                            if (i == item.JobID)
                                             {
-                                                <div class="category">@item.Categoies.ElementAt(i).CategoryName</div>
-                                            }
-                                            <div class="category" style="opacity:0.6">. . .</div>
-                                        }
-                                        else
-                                        {
-                                            foreach (GetCategoryResponse category in item.Categoies)
-                                            {
-                                                <div class="category">@category.CategoryName</div>
+                                                isSaved = true;
                                             }
                                         }
-                                    </div>
-                                </td>
-                                <td>
-                                    @(item.NumberOfOffer + " / " + "20")
-                                </td>
-                                <td>
-                                    <a class="link" style="background-color:cornflowerblue;color:white;display:block;margin:3px;text-align:center" asp-page="./Edit" asp-route-id="@item.JobID">Edit</a>
-                                    <a class="link" style="background-color:red;color:white;display:block;margin:3px;text-align:center" asp-page="./Delete" asp-route-id="@item.JobID">Delete</a>
-
-                                </td>
-                            </tr>
-                            <tr><td colspan="7"><hr style="color:black;opacity:1"></td></tr>
-                        }
-                    </tbody>
-                </table>
-                <div style="display:flex;justify-content:center;">
-                    @for (int i = 1; i <= Model.NumberOfPage; i++)
-                    {
-                        @if (i == Model.PageNo)
-                        {
-                            <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
-                                <button class="pagin" style="background-color:#0088CC; color:white" type="submit" asp-page-handler="ForSearch" name="pageNo_@i" value="@i">@i</button>
+                                    }
+                                    @*<button type="submit" asp-page-handler="ForSave" style="background-color:cornflowerblue;color:white;display:block;margin:3px;text-align:center" name="saveJobId" value="@item.JobID">Save</button>*@
+                                    @if(isSaved){
+                                        <button type="button" onclick="SaveJob(@item.JobID, 111)" style="background-color:grey;color:white;display:block;margin:3px;text-align:center" id="btnSave_@item.JobID" disabled>Saved</button>
+                                    }
+                                    else
+                                    {
+                                        <button type="button" onclick="SaveJob(@item.JobID, 111)" style="background-color:cornflowerblue;color:white;display:block;margin:3px;text-align:center" id="btnSave_@item.JobID">Save</button>
+                                    }
+                                </div>
                             </div>
-                        }
-                        else
-                        {
-                            <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
-                                <button class="pagin" type="submit" asp-page-handler="ForSearch" name="pageNo_@i" value="@i">@i</button>
+                            <div>
+                                <span>5</span>⭐ <a style="text-decoration:none" asp-page="userProfile" asp-route-id="@item.EmployerID">@item.EmployerName</a>
                             </div>
-                        }
+                            <div style="background-color:#F5F5F5; padding:5px">
+                                <p style="display:inline">@item.LocationName</p> | <p class="FormatBudget" style="display:inline">@(item.BudgetFrom)</p> - <p class="FormatBudget" style="display:inline">@(item.BudgetTo)</p>
+                            </div>
+                            <div>
+                                <p class="JobContent">@item.JobContent</p>
+                            </div>
+                            <div class="row">
+                                <div class="col-md-10">
+                                    @if (item.Categoies.Count > 4)
+                                    {
+                                        for (int i = 0; i < 4; i++)
+                                        {
+                                            <div class="category">@item.Categoies.ElementAt(i).CategoryName</div>
+                                        }
+                                        <div name="hidden_fake_category_@item.JobID" class="categoryFake" onclick="DisplayAllCategory('@item.JobID')">. . .</div>
+                                        for (int i = 4; i < item.Categoies.Count; i++)
+                                        {
+                                            <div name="hidden_category_@item.JobID" class="category" style="display: none;">@item.Categoies.ElementAt(i).CategoryName</div>
+                                        }
+                                    }
+                                    else
+                                    {
+                                        foreach (GetCategoryResponse category in item.Categoies)
+                                        {
+                                            <div class="category">@category.CategoryName</div>
+                                        }
+                                    }
+                                </div>
+                                <div class="col-md-2" style="text-align:right">
+                                    <p style="margin-right:10px;font-size:17px">@item.NumberOfOffer Offers</p>
+                                </div>
+                            </div>
+                            <hr class="hrJob">
+                        </div>
                     }
+                    <div style="display:flex;justify-content:center;">
+                        @for (int i = 1; i <= Model.NumberOfPage; i++)
+                        {
+                            @if (i == Model.PageNo)
+                            {
+                                <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
+                                    <button class="pagin" style="background-color:#0088CC; color:white" type="submit" asp-page-handler="ForSearch" name="pageNo_@i" value="@i">@i</button>
+                                </div>
+                            }
+                            else
+                            {
+                                <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
+                                    <button class="pagin" type="submit" asp-page-handler="ForSearch" name="pageNo_@i" value="@i">@i</button>
+                                </div>
+                            }
+                        }
+                    </div>
                 </div>
             </div>
         </div>
@@ -281,7 +299,7 @@
                     if (oldCheckbox) {
                         oldCheckbox.remove();
                     }
-                    str2 += "<tr id=\"tr_" + value["categoryID"] + "\" style=\"width:100%\"><td class=\"td\" style=\"text-align:right;width:10%\"> <input type=\"checkbox\" name = \"category_" + value["categoryID"] + "\" value = \"" + value["categoryID"] + "\"> </td><td style=\"text-align:left;width:80%;font-size:14px;\">" + value["categoryName"] + " (" + value["numberOfJob"] + ")<hr></td>";
+                    str2 += "<tr id=\"tr_" + value["categoryID"] + "\" style=\"width:100%\"><td class=\"td\" style=\"text-align:right;width:10%\"> <input type=\"checkbox\" name = \"category_" + value["categoryID"] + "\" value = \"" + value["categoryID"] + "\"> </td><td style=\"text-align:left;width:80%;font-size:14px;\">" + value["categoryName"] + " (" + value["numberOfJob"] + ")<hr class=\"hrCategory\"></td>";
                     str2 += (value["hasChildCategory"] == true) ? "<td style=\"text-align:right;width:10%\"> <a id=\"tr_link_" + value["categoryID"] + "\" onclick=\"displayAllChild(" + value["categoryID"] + ")\" class=\"link2\" > &#9660; </a></td>" : "<td style=\"text-align:right;width:10%\"></td>";
                     str2 += "</tr>";
 
@@ -300,6 +318,19 @@
         document.getElementById("tr_link_" + categoryID).setAttribute("onClick", "displayAllChild(" + categoryID + ")");
         document.getElementById("tr_link_" + categoryID).style["color"] = "#0a58ca";
         document.getElementById("tr_link_" + categoryID).innerHTML = '&#9660;';
+    }
+    function SaveJob(JobId, FreelancerId){
+        $.ajax({
+            url: "https://localhost:7265/api/Job7API/AddSaveJob",
+            type: "post",
+            contentType: "application/json",
+            data: JSON.stringify({ JobID: JobId, FreelancerID: FreelancerId }),
+            success: function (result, status, xhr) {
+                document.getElementById("btnSave_" + JobId).innerHTML = "Saved";
+                document.getElementById("btnSave_" + JobId).style.backgroundColor = "grey";
+                document.getElementById("btnSave_" + JobId).disabled = true;
+            }
+        })
     }
 </script>
 <script>
@@ -410,10 +441,37 @@
     }
     window.onload = function () {
         autoFillForm();
+        FormatBudget();
+        FormatJobContent();
         FomatPagination();
     };
 </script>
 <script>
+    function FormatBudget() {
+        var paragraphs = document.querySelectorAll('.FormatBudget');
+        paragraphs.forEach(function (paragraph) {
+            var formattedValue = parseFloat(paragraph.textContent).toLocaleString('en', { maximumFractionDigits: 0 }) + " đ";
+            paragraph.textContent = formattedValue;
+        });
+    }
+    function FormatJobContent() {
+        var paragraphs = document.querySelectorAll('.JobContent');
+        paragraphs.forEach(function (paragraph) {
+            var content = paragraph.textContent;
+            if (content.length > 200) {
+                paragraph.textContent = content.slice(0, 200) + '...'; // Truncate content to 200 characters
+                paragraph.innerHTML += " <span style=\"color:#3F88CC\">More<span>"
+            }
+        });
+    }
+    function DisplayAllCategory(JobID) {
+        document.getElementsByName('hidden_fake_category_' + JobID)[0].style.display = "none";
+        var hiddenCategory = document.getElementsByName('hidden_category_' + JobID);
+        hiddenCategory.forEach(function (hiddenCategory) {
+            hiddenCategory.style.display = "inline-block";
+        })
+
+    }
     function FomatPagination() {
         for (let i = 1; i <= @Model.NumberOfPage; i++) {
             if (i == 1) {
