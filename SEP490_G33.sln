@@ -26,7 +26,7 @@ Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusLink.Service", "OpusLin
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusLink.Shared", "OpusLink.Shared\OpusLink.Shared.csproj", "{E054E5F4-E7DC-4A31-8F3A-FCFE4F991FBB}"
 EndProject
-Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "OpusLink.Test", "OpusLink.Test\OpusLink.Test.csproj", "{D1DD0245-3074-4AD2-9145-2098D6BC4D56}"
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusLink.Test", "OpusLink.Test\OpusLink.Test.csproj", "{D1DD0245-3074-4AD2-9145-2098D6BC4D56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
