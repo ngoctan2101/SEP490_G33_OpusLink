@@ -1,0 +1,38 @@
+﻿@page
+@model OpusLink.User.Hosted.Pages.User.RegisterModel
+@{
+    Layout = null;
+}
+
+<form method="post">
+    <div class="form-group">
+        <label for="UserName">Username:</label>
+        <input type="text" class="form-control" id="UserName" name="Username" required>
+    </div>
+    <div class="form-group">
+        <label for="Email">Email:</label>
+        <input type="email" class="form-control" id="Email" name="Email" required>
+    </div>
+    <div class="form-group">
+        <label for="Password">Password:</label>
+        <input type="password" class="form-control" id="Password" name="Password" required>
+    </div>
+    <div class="form-group">
+        <label for="ConfirmPassword">Confirm Password:</label>
+        <input type="password" class="form-control" id="ConfirmPassword" name="ConfirmPassword" required>
+    </div>
+    @if (ViewData["Success"] != null)
+    {
+        <div class="alert alert-success" role="alert">
+            @ViewData["Success"]
+        </div>
+    }
+    @if (ViewData["Error"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewData["Error"]
+        </div>
+    }
+    <button type="submit" class="btn btn-primary">Register</button>
+</form>
+

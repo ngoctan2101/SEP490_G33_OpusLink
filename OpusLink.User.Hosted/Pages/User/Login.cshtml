@@ -1,0 +1,28 @@
+﻿@page
+@model OpusLink.User.Hosted.Pages.User.LoginModel
+@{
+    Layout = null;
+}
+
+<form method="post">
+    <div>
+        <label for="inputUsername">Tên người dùng</label>
+        <input type="text" id="inputUsername" name="Username" />
+    </div>
+
+    <div>
+        <label for="inputPassword">Mật khẩu</label>
+        <input type="password" id="inputPassword" name="Password" />
+    </div>
+
+    @if (ViewData["Error"] != null)
+    {
+        <div class="alert alert-danger" role="alert">
+            @ViewData["Error"]
+        </div>
+    }
+
+    <button type="submit">Đăng nhập</button>
+    <button type="submit">Đăng nhập với Google</button>
+
+</form>

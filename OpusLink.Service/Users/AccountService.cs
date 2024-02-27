@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using OpusLink.Entity.Models;
 using OpusLink.Entity.DTO.HaiDTO;
 using OpusLink.Shared.Enums;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace OpusLink.Service.Users
 {
@@ -133,7 +135,13 @@ namespace OpusLink.Service.Users
                     Message = "Error when create user",
                     IsSuccess = false
                 };
-            }
+            }/*
+            else
+            {
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var email_body = $"Please confirm your account by <a href='{_jwtSetting.Issuer}/Account/ConfirmEmail?email={user.Email}&code={code}'>clicking here</a>";
+                var callback_url = Request.Scheme + "://" + Request.Host + Url.Ac
+            }*/
             return result;
 
         }
