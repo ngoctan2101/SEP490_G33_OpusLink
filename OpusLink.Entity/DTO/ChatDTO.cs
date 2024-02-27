@@ -12,7 +12,7 @@ namespace OpusLink.Entity.DTO
         public int EmployerID { get; set; }
         public int FreelancerID { get; set; }
         public bool IsViewed { get; set; }
-        public string EmployerName { get; set; }
+        public string? EmployerName { get; set; }
         public string FreelancerName { get; set; }
         public string NewEstMessage { get; set; }
     }

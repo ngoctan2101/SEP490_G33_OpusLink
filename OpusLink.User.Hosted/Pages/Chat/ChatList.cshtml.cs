@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OpusLink.Entity.DTO;
 using OpusLink.Entity.Models;
@@ -14,6 +14,7 @@ namespace OpusLink.User.Hosted.Pages.Chat
     {
         private readonly HttpClient client = null;
         public IList<ChatDTO> ChatDTOs { get; set; } = default!;
+        public IList<MessageDTO> MessageDTOs { get; set; } = default!;
         
         public ChatListModel()
         {
@@ -47,9 +48,42 @@ namespace OpusLink.User.Hosted.Pages.Chat
             {
 
             }
+            response = await client.GetAsync("https://localhost:7265/api/Chat/GetMessageById");
+
+
+            if (response.IsSuccessStatusCode)
+            {
+                string strData = await response.Content.ReadAsStringAsync();
+                MessageDTOs = JsonConvert.DeserializeObject<List<MessageDTO>>(strData);
+            }
+            else
+            {
+
+            }
 
         }
-        
+        public async Task OnGetMessageByIdAsync(int chatBoxId)
+        {
+            HttpResponseMessage response = await client.GetAsync($"https://localhost:7265/api/Chat/GetMessageById/{chatBoxId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                string strData = await response.Content.ReadAsStringAsync();
+                MessageDTOs = JsonConvert.DeserializeObject<List<MessageDTO>>(strData);
+                
+            }
+             response = await client.GetAsync("https://localhost:7265/api/Chat/GetAllChat");
+
+
+            if (response.IsSuccessStatusCode)
+            {
+                string strData = await response.Content.ReadAsStringAsync();
+                ChatDTOs = JsonConvert.DeserializeObject<List<ChatDTO>>(strData);
+            }
+
+        }
+
+
 
     }
 }
