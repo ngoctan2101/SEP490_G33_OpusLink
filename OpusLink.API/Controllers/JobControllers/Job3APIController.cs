@@ -1,7 +1,11 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
-using OpusLink.Entity.Models.JOB;
+using Microsoft.EntityFrameworkCore.Diagnostics;
+using OpusLink.Entity.DTO.JobDTO;
+using OpusLink.Entity.Models;
 using OpusLink.Service.JobServices;
+using System.Collections.Generic;
+using System.Diagnostics;
 
 namespace OpusLink.API.Controllers.JobControllers
 {
@@ -18,26 +22,44 @@ namespace OpusLink.API.Controllers.JobControllers
             this.jobService = jobService;
             _mapper = mapper;
         }
-        [HttpGet("GetAllJob")]
-        public async Task<IActionResult> GetAllJob()
+        //[HttpGet("GetAllJob")]
+        //public async Task<IActionResult> GetAllJob()
+        //{
+        //    var jobs = await jobService.GetAllJob(); 
+        //    List<GetJobResponse> result = _mapper.Map<List<GetJobResponse>>(jobs);
+        //    return Ok(result);
+        //}
+        [HttpGet("GetAllCategory")]
+        public async Task<IActionResult> GetAllCategory()
         {
-            var jobs = await jobService.GetAllJob(); 
-            GetJobResponse[] result = _mapper.Map<GetJobResponse[]>(jobs);
+            var categories = await categoryService.GetAllCategory();
+            List <GetCategoryResponse> result = _mapper.Map< List<GetCategoryResponse>>(categories);
             return Ok(result);
         }
         [HttpGet("GetAllChildCategory")]
         public async Task<IActionResult> GetAllChildCategory(int parentId)
         {
             var categories = await categoryService.GetAllChildCategory(parentId);
-            GetCategoryResponse[] result = _mapper.Map<GetCategoryResponse[]>(categories);
+            List < GetCategoryResponse> result = _mapper.Map< List<GetCategoryResponse>>(categories);
             foreach(var category in result)
             {
-                if (await categoryService.CountChild(category.CategoryID) > 0)
+                if (categoryService.HasChild(category.CategoryID))
                 {
                     category.HasChildCategory = true;
                 }
             }
             return Ok(result);
         }
+        [HttpPost("GetAllJob")]
+        public async Task<IActionResult> GetAllJob([FromBody] Filter filter)
+        {
+            int numberOfPage;
+            //var jobs = await jobService.GetAllJob();
+            var jobsResultAfterSearch= jobService.Search(filter, out numberOfPage);
+            List < GetJobResponse> result = _mapper.Map< List<GetJobResponse>>(jobsResultAfterSearch);
+            result.Add(new GetJobResponse() { NumberOfOffer=numberOfPage });
+            return Ok(result);
+        }
+        
     }
 }

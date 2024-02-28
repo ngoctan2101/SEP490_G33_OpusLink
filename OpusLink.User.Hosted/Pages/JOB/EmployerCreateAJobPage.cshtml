@@ -1,0 +1,150 @@
+﻿@page
+@using OpusLink.Entity.DTO.JobDTO;
+@using OpusLink.Entity.Models;
+@using OpusLink.Shared.Enums;
+@model OpusLink.User.Hosted.Pages.JOB.EmployerCreateAJobPageModel
+@{
+}
+@{
+    ViewData["Title"] = "Employer Create A Job";
+}
+<style>
+    .Label{
+        font-weight:bold;
+        margin: 20px 0px 5px 0px;
+    }
+
+    .ACategory{
+        display:inline-block;
+        background-color: #CFE2F3;
+        border:1px solid grey;
+        margin: 9px 9px 0px 0px;
+        padding-left:5px;
+    }
+    /* The Close Button */
+    .close {
+        color: red;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        height:30px;
+        line-height: 22px;
+        vertical-align: middle;
+        padding:0px 5px 0px 5px
+    }
+
+    .close:hover,
+    .close:focus {
+        color: #000;
+        text-decoration: none;
+        cursor: pointer;
+    }
+</style>
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-6">
+        <form method="post">
+            <p class="Label">Set a title for the job</p>
+            <input type="text" name="title" placeholder="Job Title" style="width:100% " />
+            <p class="Label">Set categories to recruit</p>
+            <select style="width:350px;height:30px" onchange="ClickACategory()" id="categoryDropdown">
+                <option value="" disabled selected>Choose category</option>
+                @foreach (var item in Model.AllCategories)
+                {
+                    <option value="@item.CategoryID" onclick="ClickACategory(@item.CategoryID ,@item.CategoryName)">@item.CategoryName</option>
+                }
+            </select>
+            <div id="CategoryContainer" style="min-height:30px">
+                
+            </div>
+            <p class="Label">Description for the job</p>
+            <textarea name="content" style="width:100%;" rows="5" ></textarea>
+            <p class="Label">Expected budget for this job</p>
+            <div class="row">
+                <div class="col-md-1">From</div>
+                <div class="col-md-5">
+                    <select name="budget_min">
+                        @for(int i = 1; i < 200; i++)
+                        {
+                            if (i == 10)
+                            {
+                                <option value="@(i*500000)" selected>@((i * 500000).ToString("#,##0")) đ</option>
+                            }
+                            else
+                            {
+                                <option value="@(i*500000)">@((i * 500000).ToString("#,##0")) đ</option>
+                            }
+                        }
+                    </select>
+                </div>
+                <div class="col-md-1">To</div>
+                <div class="col-md-5">
+                    <select name="budget_max">
+                        @for (int i = 1; i < 200; i++)
+                        {
+                            if (i == 20)
+                            {
+                                <option value="@(i*500000)" selected>@((i * 500000).ToString("#,##0")) đ</option>
+                            }
+                            else
+                            {
+                                <option value="@(i*500000)">@((i * 500000).ToString("#,##0")) đ</option>
+                            }
+                        }
+                    </select>
+                </div>
+            </div>
+            <p class="Label">Location</p>
+            <select name="location">
+                @foreach(var loca in Model.AllLocations)
+                {
+                    if (loca.LocationId == 1)
+                    {
+                        <option value="@loca.LocationId" selected>@loca.LocationName</option>
+                    }
+                    else
+                    {
+                        <option value="@loca.LocationId">@loca.LocationName</option>
+                    }
+                }
+            </select>
+            <div style="text-align:center;margin-top:15px">
+                <button type="submit" style="background-color:#3C78D8;color:white;font-size:20px">Request to post job</button>
+            </div>
+        </form>
+    </div>
+    <div class="col-md-3"></div>
+</div>
+<script>
+    function ClickACategory(){
+
+        var selectElement = document.getElementById("categoryDropdown");
+        var selectedCategoryId = selectElement.value;
+        var selectedCategoryName = selectElement.options[selectElement.selectedIndex].text;
+        var CategoryContainer = document.getElementById("CategoryContainer");
+        var str = "<div class=\"ACategory\" id=\"ACategory_" + selectedCategoryId + "\">" + selectedCategoryName + "<span class=\"close\" onclick=\"Delete(" + selectedCategoryId + ")\">&times;</span><input type=\"text\" name=\"category_" + selectedCategoryId + "\" value=\"" + selectedCategoryId + "\" hidden/></div>"
+        CategoryContainer.innerHTML += str;
+    }
+    function Delete(CategoryID){
+        var CategoryDiv = document.getElementById("ACategory_" + CategoryID).remove();
+    }
+</script>
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

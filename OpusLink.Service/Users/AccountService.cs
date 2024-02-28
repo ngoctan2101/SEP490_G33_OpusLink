@@ -13,6 +13,8 @@ using System.Threading.Tasks;
 using OpusLink.Entity.Models;
 using OpusLink.Entity.DTO.HaiDTO;
 using OpusLink.Shared.Enums;
+using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.WebUtilities;
 
 namespace OpusLink.Service.Users
 {
@@ -32,13 +34,13 @@ namespace OpusLink.Service.Users
     }
     public class AccountService : IAccountService
     {
-        private UserManager<User> _userManager;
+        private UserManager<OpusLink.Entity.Models.User> _userManager;
         private readonly RoleManager<Role> _roleManager;
-        private readonly SignInManager<User> _signInManager;
+        private readonly SignInManager<OpusLink.Entity.Models.User> _signInManager;
         private readonly JWTSetting _jwtSetting;
         private readonly OpusLinkDBContext _dbContext;
 
-        public AccountService(UserManager<User> userManager, RoleManager<Role> roleManager, SignInManager<User> signInManager, IOptionsMonitor<JWTSetting> jwtSetting, OpusLinkDBContext dbContext)
+        public AccountService(UserManager<OpusLink.Entity.Models.User> userManager, RoleManager<Role> roleManager, SignInManager<OpusLink.Entity.Models.User> signInManager, IOptionsMonitor<JWTSetting> jwtSetting, OpusLinkDBContext dbContext)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -111,7 +113,7 @@ namespace OpusLink.Service.Users
 
             //(Đoạn này : Nếu không tồn tại thì tạo ra 1 user
             //ID của User thì nó tự tạo rồi
-            var user = new User()
+            var user = new OpusLink.Entity.Models.User()
             {
                 Email = model.Email,
                 SecurityStamp = Guid.NewGuid().ToString(),
@@ -133,7 +135,13 @@ namespace OpusLink.Service.Users
                     Message = "Error when create user",
                     IsSuccess = false
                 };
-            }
+            }/*
+            else
+            {
+                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+                var email_body = $"Please confirm your account by <a href='{_jwtSetting.Issuer}/Account/ConfirmEmail?email={user.Email}&code={code}'>clicking here</a>";
+                var callback_url = Request.Scheme + "://" + Request.Host + Url.Ac
+            }*/
             return result;
 
         }

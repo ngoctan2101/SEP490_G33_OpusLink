@@ -11,6 +11,11 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusLink.Admin.Hosted", "OpusLink.Admin.Hosted\OpusLink.Admin.Hosted.csproj", "{646C9363-0395-4E82-8C80-E0828D852A44}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusLink.User.Hosted", "OpusLink.User.Hosted\OpusLink.User.Hosted.csproj", "{FC3E5F44-B3A0-4C7C-BD37-109350869F45}"
+	ProjectSection(ProjectDependencies) = postProject
+		{4BF49F8B-435B-4365-B7EE-98960A440C87} = {4BF49F8B-435B-4365-B7EE-98960A440C87}
+		{DB9CC274-95FA-4503-A44D-435CE84F187F} = {DB9CC274-95FA-4503-A44D-435CE84F187F}
+		{E054E5F4-E7DC-4A31-8F3A-FCFE4F991FBB} = {E054E5F4-E7DC-4A31-8F3A-FCFE4F991FBB}
+	EndProjectSection
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusLink.Entity", "OpusLink.Entity\OpusLink.Entity.csproj", "{DB9CC274-95FA-4503-A44D-435CE84F187F}"
 	ProjectSection(ProjectDependencies) = postProject
@@ -20,6 +25,8 @@ EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusLink.Service", "OpusLink.Service\OpusLink.Service.csproj", "{7961701B-C815-4616-936A-7DA79CC6A25D}"
 EndProject
 Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusLink.Shared", "OpusLink.Shared\OpusLink.Shared.csproj", "{E054E5F4-E7DC-4A31-8F3A-FCFE4F991FBB}"
+EndProject
+Project("{9A19103F-16F7-4668-BE54-9A1E7A4F7556}") = "OpusLink.Test", "OpusLink.Test\OpusLink.Test.csproj", "{D1DD0245-3074-4AD2-9145-2098D6BC4D56}"
 EndProject
 Global
 	GlobalSection(SolutionConfigurationPlatforms) = preSolution
@@ -51,6 +58,10 @@ Global
 		{E054E5F4-E7DC-4A31-8F3A-FCFE4F991FBB}.Debug|Any CPU.Build.0 = Debug|Any CPU
 		{E054E5F4-E7DC-4A31-8F3A-FCFE4F991FBB}.Release|Any CPU.ActiveCfg = Release|Any CPU
 		{E054E5F4-E7DC-4A31-8F3A-FCFE4F991FBB}.Release|Any CPU.Build.0 = Release|Any CPU
+		{D1DD0245-3074-4AD2-9145-2098D6BC4D56}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{D1DD0245-3074-4AD2-9145-2098D6BC4D56}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{D1DD0245-3074-4AD2-9145-2098D6BC4D56}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{D1DD0245-3074-4AD2-9145-2098D6BC4D56}.Release|Any CPU.Build.0 = Release|Any CPU
 	EndGlobalSection
 	GlobalSection(SolutionProperties) = preSolution
 		HideSolutionNode = FALSE

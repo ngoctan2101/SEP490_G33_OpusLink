@@ -1,0 +1,273 @@
+﻿@page
+@using OpusLink.Entity.DTO.JobDTO;
+@using OpusLink.Entity.Models;
+@using OpusLink.Shared.Enums;
+@model OpusLink.Admin.Hosted.Pages.JOB.AdminViewDetailJobPageModel
+@{
+}
+@{
+    GetJobDetailResponse item = Model.job;
+}
+@{
+    ViewData["Title"] = "Admin Detail Job";
+}
+<style>
+
+    .link {
+        text-decoration: none;
+        font-weight: bold;
+    }
+
+        .link:hover {
+            cursor: pointer;
+        }
+
+    .status {
+        font-weight: bold;
+        color: white;
+        text-align: center;
+        display: inline-block;
+    }
+
+    .category {
+        display: inline-block;
+        margin-bottom: 3px;
+        background-color: lightblue;
+        padding: 7px;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .categoryFake {
+        display: inline-block;
+        margin-bottom: 3px;
+        background-color: lightblue;
+        padding: 7px;
+        border-radius: 5px;
+        font-size: 14px;
+        opacity: 0.6;
+    }
+
+        .categoryFake:hover {
+            cursor: pointer;
+        }
+    /*modal*/
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 0;
+        border: 1px solid #888;
+        width: 50%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 0.4s
+    }
+
+    /* Add Animation */
+    @@-webkit-keyframes animatetop {
+        from {
+            top: -300px;
+            opacity: 0
+        }
+
+        to {
+            top: 0;
+            opacity: 1
+        }
+    }
+
+    @@keyframes animatetop {
+        from {
+            top: -300px;
+            opacity: 0
+        }
+
+        to {
+            top: 0;
+            opacity: 1
+        }
+    }
+
+    /* The Close Button */
+    .close {
+        color: white;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    .modal-header {
+        padding: 2px 16px;
+        background-color: #2DB964;
+        color: white;
+    }
+
+    .modal-body {
+        padding: 2px 16px;
+    }
+</style>
+<div id="ConfirmDeleteModal" class="modal">
+    <!-- Modal delete -->
+    <div class="modal-content" style="width:fit-content">
+        <div class="modal-header">
+            <h2 style="font-size:24px">Delete job</h2>
+            <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form method="post">
+                <table>
+                    <tr>
+                        <td colspan="2">
+                            Are you sure you want to delete this job ?
+                        </td>
+                    </tr>
+                    <tr>
+                        <td>
+                            ID:
+                        </td>
+                        <td>
+                            <input type="text" name="DeleteJobID" readonly />
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center"><button type="submit" asp-page-handler="ForDelete" style="background-color:#2DB964;color:white;border:2px solid #2DB964;width:120px">Yes</button></td>
+                        <td style="text-align:center"><button type="button" onclick="hideModal()" style="background-color:#CCCCCC; color:white;width:120px;border:2px solid #CCCCCC">No</button></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+<div style="margin:10px 10px 10px 10px">
+    <div style="display:inline-block;text-align:center;position: relative;width:100%;height:50px">
+        <a href="../JOB/AdminViewAllJobPage" style="position: absolute;top: 50%;left: 0px;">Back to list</a>
+        <a asp-page="./AdminEditJobPage" asp-route-JobId="@item.JobId" style="width:100px; background-color:#4A86E8;color:white;font-weight:bold;font-size:18px;position: absolute;height:30px;bottom:0px;right: 10px;text-decoration: none;">Edit</a>
+        <button type="button" id="openDeleteConfirmBox" onclick="OpenDeleteJob(@item.JobId)" style="width:100px; background-color:red;color:white;font-weight:bold;font-size:18px;position: absolute;height:30px;bottom:0px;right: 150px;text-decoration: none;">Delete</button>
+    </div>
+    <div class="row">
+        <div class="col-md-3">
+            <img id="profileImage" src="/imgexample/p.png" style="width:50%;height:auto;display:block" />
+            <a href="#" class="link" style="display:block">@item.EmployerName</a>
+            ⭐⭐⭐⭐⭐
+            <p>Project Information:</p>
+            <table style="width:100%;font-size:13px">
+                <tr><td>Project Id:</td><td>@item.JobId</td></tr>
+                <tr><td style="width:100px">Posted Date:</td><td>@item.DateCreated.ToString("dd/MM/yyyy")</td></tr>
+                <tr><td>Budget:</td><td>@Math.Round(item.BudgetMin,0) đ<span style="display:inline-block"> - </span>@Math.Round(item.BudgetMax,0) đ</td></tr>
+                <tr><td>Location:</td><td>@item.Location</td></tr>
+            </table>
+            <button type="button" style="margin-top:15px;width:80%;background-color:#4A86E8;color:white;font-weight:bold;font-size:20px;border:none">View offers (@item.TotalOffer)</button>
+        </div>
+        <div class="col-md-9">
+            <div>
+                <p style="font-weight:bold;display:inline-block">@item.JobTitle</p>
+                @if (item.Status == (int)JobStatusEnum.NotApprove)
+                {
+                    <p class="status" style="background-color:grey;margin:0px">Not Approved</p>
+                }
+                else if (item.Status == (int)JobStatusEnum.Approved)
+                {
+                    <p class="status" style="background-color:#5B9044;margin:0px">Hiring</p>
+                }
+                else if (item.Status == (int)JobStatusEnum.Hired)
+                {
+                    <p class="status" style="background-color:orange;margin:0px">Hired</p>
+                }
+                else if (item.Status == (int)JobStatusEnum.Close)
+                {
+                    <p class="status" style="background-color:#FF0000;margin:0px">Closed</p>
+                }
+            </div>
+            <div class="row">
+                <div class="col-md-2">
+                    <p style="display:inline-block">Categories: </p>
+                </div>
+                <div class="col-md-10">
+                    @if (item.Categories.Count > 4)
+                    {
+                        for (int i = 0; i < 4; i++)
+                        {
+                            <div class="category">@item.Categories.ElementAt(i).CategoryName</div>
+                        }
+                        <div name="hidden_fake_category_@item.JobId" class="categoryFake" onclick="DisplayAllCategory('@item.JobId')">. . .</div>
+                        for (int i = 4; i < item.Categories.Count; i++)
+                        {
+                            <div name="hidden_category_@item.JobId" class="category" style="display: none;">@item.Categories.ElementAt(i).CategoryName</div>
+                        }
+                    }
+                    else
+                    {
+                        foreach (GetCategoryResponse category in item.Categories)
+                        {
+                            <div class="category">@category.CategoryName</div>
+                        }
+                    }
+                </div>
+            </div>
+            @*<p style="white-space: pre-line">@Html.Raw(item.JobContent.Replace("\r\n", "&#10;"))</p>*@
+            <p style="white-space: pre-line;margin-top:10px">@item.JobContent</p>
+            <div class="row">
+                <div class="col-md-4">Submit offer: @item.TotalOffer</div>
+                <div class="col-md-4">Average: @Math.Round(item.AverageCost,0) đ</div>
+                <div class="col-md-4">Average time: @item.AverageTime days</div>
+            </div>
+        </div>
+    </div>
+</div>
+<script>
+    function DisplayAllCategory(JobID) {
+        document.getElementsByName('hidden_fake_category_' + JobID)[0].style.display = "none";
+        var hiddenCategory = document.getElementsByName('hidden_category_' + JobID);
+        hiddenCategory.forEach(function (hiddenCategory) {
+            hiddenCategory.style.display = "inline-block";
+        })
+    }
+</script>
+<script>
+    // Get the modal
+    var modal = document.getElementById("ConfirmDeleteModal");
+
+    // When the user clicks on <span> (x), close the modal
+    document.getElementsByClassName("close")[0].onclick = function () {
+        modal.style.display = "none";
+    }
+
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    }
+    function OpenDeleteJob(jobID) {
+        document.getElementsByName("DeleteJobID")[0].value = jobID;
+        modal.style.display = "block";
+    }
+    function hideModal() {
+        modal.style.display = "none";
+    }
+</script>
