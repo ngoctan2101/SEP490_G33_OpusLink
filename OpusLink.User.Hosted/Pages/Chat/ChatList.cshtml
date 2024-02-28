@@ -86,8 +86,16 @@
 						<div class="d-flex align-items-start" id="@chatdto.ChatBoxID" href="" >
 							<img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="rounded-circle mr-1" alt="" width="40" height="40">
 							<div class="flex-grow-1 ml-3">
-								@chatdto.EmployerName
-								<div class="small">@chatdto.NewEstMessage</div>
+								@if (!chatdto.IsViewed)
+								{
+									<strong >@chatdto.EmployerName</strong>
+									<div class="small"><strong>@chatdto.NewEstMessage</strong></div>
+								}
+								else
+								{
+									@chatdto.EmployerName
+									<div class="small">@chatdto.NewEstMessage</div>
+								}
 							</div>
 						</div>
 					</a>
@@ -109,7 +117,17 @@
 						<img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
 					</div>
 					<div class="flex-grow-1 pl-3">
-						<strong></strong>
+						<strong>
+							@if (Model.MessageDTOs != null && Model.MessageDTOs.Any())
+							{
+								var firstMessage = Model.MessageDTOs.First();
+								var chatDTO = Model.ChatDTOs.FirstOrDefault(c => c.ChatBoxID == firstMessage.ChatBoxID);
+								if (chatDTO != null )
+								{
+									@chatDTO.EmployerName
+								}
+							}
+						</strong>
 						<div class="text-muted small"><em>Typing...</em></div>
 					</div>
 					<div>
@@ -129,13 +147,13 @@
 							<div class="@(message.FromEmployer ? "chat-message-left" : "chat-message-right") pb-4">
 								<div>
 									<img src="@(message.FromEmployer ? "https://bootdey.com/img/Content/avatar/avatar3.png" : "https://bootdey.com/img/Content/avatar/avatar1.png")" class="rounded-circle mr-1" alt="@(message.FromEmployer ? "Employer" : "You")" width="40" height="40">
-									<div class="text-muted small text-nowrap mt-2">@message.DateCreated</div>
+									<div class="text-muted small text-nowrap mt-2">@message.DateCreated.ToString("HH:mm")</div>
 								</div>
 								<div class="flex-shrink-1 bg-light rounded py-2 px-3 @(message.FromEmployer ? "ml-3" : "mr-3")">
 									<div class="font-weight-bold mb-1">
 										@if (message.FromEmployer)
 										{
-											<text>Employer</text>
+											<text>@Model.ChatDTOs.FirstOrDefault(c => c.ChatBoxID == message.ChatBoxID)?.EmployerName</text>
 										}
 										else
 										{

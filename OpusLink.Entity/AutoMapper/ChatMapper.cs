@@ -17,7 +17,8 @@ namespace OpusLink.Entity.AutoMapper
                 .ForMember(x => x.EmployerName, x => x.MapFrom(x => x.Employer.UserName))
                 .ForMember(x => x.FreelancerName, x => x.MapFrom(x => x.Freelancer.UserName))
                 .ForMember(x => x.NewEstMessage, x => x.MapFrom(x => NewEstMessage(x.Messages)));
-            CreateMap<Message, MessageDTO>();
+            CreateMap<Message, MessageDTO>()
+                .ForMember(dest => dest.DateCreated, opt => opt.MapFrom(src => src.DateCreated.ToString("HH:mm"))); 
         }
 
         private string NewEstMessage(ICollection<Message> messages)
