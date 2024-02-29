@@ -2,7 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OpusLink.Entity.DTO;
 using OpusLink.Entity.Models;
-using OpusLink.Entity.Models.JOB;
+
 using System.Net.Http.Headers;
 using Newtonsoft.Json;
 using Microsoft.EntityFrameworkCore;
