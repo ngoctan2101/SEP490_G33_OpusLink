@@ -17,6 +17,7 @@ namespace OpusLink.Entity.DTO.JobDTO
         public int FreelancerId { get; set; }
         public string EmployerName { get; set; }
         public string EmployerImagePath { get; set; }
+        public byte[] EmployerImageBytes { get; set; }
         public int EmployerStarMedium { get; set; }
         public DateTime DateCreated { get; set; }
         public decimal BudgetMin { get; set; }

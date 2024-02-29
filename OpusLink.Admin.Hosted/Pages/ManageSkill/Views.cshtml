@@ -2,99 +2,134 @@
 @model OpusLink.Admin.Hosted.Pages.ManageSkill.ViewsModel
 @{
 }
+<style>
+    /*pagination*/
+    .pagin {
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        border-radius: 50%;
+        border: none;
+        transition: background-color 0.2s;
+    }
+
+        .pagin:hover {
+            background-color: #0088CC;
+            color: white;
+        }
+</style>
 <body>
 
     <!-- Main Content -->
     <div class="container mt-5">
-        <!-- Thanh tìm kiếm và nút "Add New" trong một thẻ div -->
-        <div class="d-flex justify-content-between align-items-center mb-4">
-            <div>
-                <div class="input-group">
-                    <input type="text" class="form-control" placeholder="Search by Name">
-                    <button class="btn btn-outline-secondary" type="button">Search</button>
+        <form method="post">
+            <!-- Thanh tìm kiếm và nút "Add New" trong một thẻ div -->
+            <div class="d-flex justify-content-between align-items-center mb-4">
+                <div>
+                    <div class="input-group">
+                        <input type="text" name="Search_Str" value="@Model.filter.SearchStr" class="form-control" placeholder="Search by Name">
+                        <button class="btn btn-outline-secondary" type="submit" asp-page-handler="ForSearch" name="pageNo_1" value="1" >Search</button>
+                    </div>
+                </div>
+                <div>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSkillModal">Add New</button>
                 </div>
             </div>
-            <div>
-                <button class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSkillModal">Add New</button>
-            </div>
-        </div>
 
-        <!-- Bảng kỹ năng -->
-        <table class="table">
-            <thead>
-                <tr>
-                    <th scope="col">#</th>
-                    <th scope="col">SkillParentID</th>
-                    <th scope="col">Skill Name</th>
-                    <th scope="col">Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @if (Model.listSkills != null)
-                {
-                    
-                    <!-- Dữ liệu của bảng sẽ được thêm ở đây -->
-                    @foreach (var item in Model.listSkills)
+            <!-- Bảng kỹ năng -->
+            <table class="table">
+                <thead>
+                    <tr>
+                        <th scope="col">#</th>
+                        <th scope="col">SkillParentID</th>
+                        <th scope="col">Skill Name</th>
+                        <th scope="col">Actions</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    @if (Model.listSkills != null)
                     {
-                        
-                         @* var displaySkillName = string.IsNullOrEmpty((item.SkillParentID).ToString()) ? item.SkillName: $"{item.SkillName} ({item.SkillParentID})";
-                        var displaySkillName1 = item.SkillParentID == item.SkillID 
-                        ? displaySkillName
-                        : $"{item.SkillName} ({item.SkillParentID})"; *@
 
-                       <tr>
-                            <th scope="row" name="@item.SkillID">@item.SkillID</th>
-                            <td>
-                                @if (item.SkillParentName != null )
-                                {
-                                    <p>@item.SkillParentName</p>
-                                }
-                                
-                            </td>
-                            <td>@item.SkillName</td>
-                        <td>
-                                <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editSkillModal" data-skillid="@item.SkillID">Edit</button>
-                                <button class="btn btn-danger btn-sm" onclick="confirmDelete(@item.SkillID)">Delete</button>
-                        </td>
-                        </tr>
-                        <!-- Modal Edit -->
-                        <div class="modal fade"  id="editSkillModal-@item.SkillID" tabindex="-1" aria-labelledby="editSkillModalLabel" aria-hidden="true">
-                            <!-- Modal content goes here -->
+                        <!-- Dữ liệu của bảng sẽ được thêm ở đây -->
+                        @foreach (var item in Model.listSkills)
+                        {
+
+                            @* var displaySkillName = string.IsNullOrEmpty((item.SkillParentID).ToString()) ? item.SkillName: $"{item.SkillName} ({item.SkillParentID})";
+                    var displaySkillName1 = item.SkillParentID == item.SkillID
+                    ? displaySkillName
+                    : $"{item.SkillName} ({item.SkillParentID})"; *@
+
+                            <tr>
+                                <th scope="row" name="@item.SkillID">@item.SkillID</th>
+                                <td>
+                                    @if (item.SkillParentName != null)
+                                    {
+                                        <p>@item.SkillParentName</p>
+                                    }
+
+                                </td>
+                                <td>@item.SkillName</td>
+                                <td>
+                                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editSkillModal" data-skillid="@item.SkillID">Edit</button>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(@item.SkillID)">Delete</button>
+                                </td>
+                            </tr>
+                            <!-- Modal Edit -->
+                            <div class="modal fade" id="editSkillModal-@item.SkillID" tabindex="-1" aria-labelledby="editSkillModalLabel" aria-hidden="true">
+                                <!-- Modal content goes here -->
+                            </div>
+                            <!-- Thêm các dòng khác nếu cần -->
+                        }
+                    }
+
+                </tbody>
+            </table>
+            <div style="display:flex;justify-content:center;">
+                @for (int i = 1; i <= Model.NumberOfPage; i++)
+                {
+                    @if (i == Model.PageNo)
+                    {
+                        <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
+                            <button class="pagin" asp-page-handler="ForSearch" style="background-color:#0088CC; color:white" type="submit" name="pageNo_@i" value="@i">@i</button>
                         </div>
-                        <!-- Thêm các dòng khác nếu cần --> 
+                    }
+                    else
+                    {
+                        <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
+                            <button class="pagin" asp-page-handler="ForSearch" type="submit" name="pageNo_@i" value="@i">@i</button>
+                        </div>
                     }
                 }
-                
-            </tbody>
-        </table>
+            </div>
+        </form>
     </div>
 
     <!-- Modal add new Skill -->
     <div class="modal fade" id="addSkillModal" tabindex="-1" aria-labelledby="addSkillModalLabel" aria-hidden="true">
-    <div class="modal-dialog">
-        <div class="modal-content">
-            <div class="modal-header">
-                <h5 class="modal-title" id="addSkillModalLabel">Add New Skill</h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-            </div>
-            <div class="modal-body">
-                <!-- Form thêm mới sẽ được thêm ở đây -->
-                <form id="addSkillForm" method ="post">
-                    <div class="mb-3">
-                        <label for="skillParentID" class="form-label">SkillParentName</label>
-                        <input type="text" class="form-control" id="skillParentID" name="SkillParentID" required>
-                    </div>
-                    <div class="mb-3">
-                        <label for="skillName" class="form-label">Skill Name</label>
-                        <input type="text" class="form-control" id="skillName" name="SkillName" required>
-                    </div>
-                    <!-- Thêm các trường khác nếu cần -->
-                    <button type="submit" class="btn btn-primary" >Add Skill</button>
-                </form>
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addSkillModalLabel">Add New Skill</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form thêm mới sẽ được thêm ở đây -->
+                    <form id="addSkillForm" method="post">
+                        <div class="mb-3">
+                            <label for="skillParentID" class="form-label">SkillParentName</label>
+                            <input type="text" class="form-control" id="skillParentID" name="SkillParentID" required>
+                        </div>
+                        <div class="mb-3">
+                            <label for="skillName" class="form-label">Skill Name</label>
+                            <input type="text" class="form-control" id="skillName" name="SkillName" required>
+                        </div>
+                        <!-- Thêm các trường khác nếu cần -->
+                        <button type="submit" class="btn btn-primary">Add Skill</button>
+                    </form>
+                </div>
             </div>
         </div>
     </div>
-</div>
 
 
     <!-- Modal Edit -->
@@ -132,17 +167,17 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
     <script>
-        
-            function confirmDelete(skillID) {
-                var result = confirm("Are you sure you want to delete this skill?");
-                if (result) {
-                    // Thực hiện xóa nếu người dùng chọn "OK"
-                    // Thêm mã xóa kỹ năng ở đây, truyền skillID về hàm deleteSkill
-                    deleteSkill(skillID);
-                } else {
-                    // Hủy bỏ xóa nếu người dùng chọn "Cancel" (hoặc "No")
-                }
+
+        function confirmDelete(skillID) {
+            var result = confirm("Are you sure you want to delete this skill?");
+            if (result) {
+                // Thực hiện xóa nếu người dùng chọn "OK"
+                // Thêm mã xóa kỹ năng ở đây, truyền skillID về hàm deleteSkill
+                deleteSkill(skillID);
+            } else {
+                // Hủy bỏ xóa nếu người dùng chọn "Cancel" (hoặc "No")
             }
+        }
 
         function deleteSkill(skillID) {
             // Gửi yêu cầu xóa kỹ năng với skillID đến server
@@ -160,6 +195,6 @@
                 }
             });
         }
-    
+
     </script>
 </body>

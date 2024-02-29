@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OpusLink.Entity.DTO;
+using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.Models;
 using OpusLink.Service.Admin;
 using System.IO;
@@ -20,6 +21,49 @@ namespace OpusLink.API.Controllers.Admin
             _skillService = skillService;
             _mapper = mapper;
         }
+        [HttpPost("GetTenSkill")]
+        public IActionResult GetTenSkill([FromBody] Filter filter)
+        {
+            int numberOfPage;
+            List<Skill> skill = _skillService.GetAllSkill();
+            var skillResultAfterSearch = Search(skill, filter, out numberOfPage);
+            if (skill != null && skill.Count == 0)
+            {
+                return Ok("Don't have skill");
+            }
+            List<SkillDTO> result = _mapper.Map<List<SkillDTO>>(skillResultAfterSearch);
+            result.Add(new SkillDTO { SkillID = numberOfPage });
+            return Ok(result);
+        }
+
+        private object Search(List<Skill> skills, Filter filter, out int numberOfPage)
+        {
+            List<Skill> result = new List<Skill>();
+            result = skills.ToList();
+            //search string
+            if (filter.SearchStr.Length > 0)
+            {
+                for (int i = result.Count - 1; i >= 0; i--)
+                {
+                    if (result[i].SkillName.ToLower().Contains(filter.SearchStr.ToLower()))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        result.RemoveAt(i);
+                    }
+                }
+            }
+            //loc theo page
+            numberOfPage = result.Count / 10;
+            if (result.Count % 10 > 0)
+            {
+                numberOfPage++;
+            }
+            return result.Skip((filter.PageNumber - 1) * 10).Take(10).ToList();
+        }
+
         [HttpGet("GetAllSkill")]
         public IActionResult GetAllSkill()
         {

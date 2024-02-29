@@ -1,6 +1,8 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OpusLink.Entity;
+using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.Models;
+using OpusLink.Shared.Enums;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -12,6 +14,7 @@ namespace OpusLink.Service.JobServices
     public interface IOfferService
     {
         Task<List<Offer>> GetAllOffer(int userId);
+        Task<List<Offer>> GetAllOfferOfJob(int jobId);
         Task CreateOffer(Offer offer);
         Task UpdateOffer(Offer offer);
         Task DeleteOffer(int offerId);
@@ -46,6 +49,11 @@ namespace OpusLink.Service.JobServices
                 .Include("Job.Location")
                 .Where(s => s.FreelancerID == userId)
                 .ToListAsync();
+        }
+
+        public async Task<List<Offer>> GetAllOfferOfJob(int jobId)
+        {
+            return await _dbContext.Offers.Where(o => o.JobID == jobId).Include("Freelancer").Include("Freelancer.JobsAsAFreelancer").Include("Freelancer.FreelancerAndSkills.Skill").ToListAsync();
         }
 
         public async Task UpdateOffer(Offer offer)

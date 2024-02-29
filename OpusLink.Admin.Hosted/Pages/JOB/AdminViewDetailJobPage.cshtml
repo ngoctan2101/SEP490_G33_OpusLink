@@ -171,7 +171,14 @@
     </div>
     <div class="row">
         <div class="col-md-3">
-            <img id="profileImage" src="/imgexample/p.png" style="width:50%;height:auto;display:block" />
+            @{
+                if (item.EmployerImageBytes != null && item.EmployerImageBytes.Length > 0)
+                {
+                    var base64Image = Convert.ToBase64String(item.EmployerImageBytes);
+                    var imgSrc = $"data:image/png;base64,{base64Image}";
+                    <img id="profileImage" src="@imgSrc" style="width:50%;height:auto;display:block" />
+                }
+            }
             <a href="#" class="link" style="display:block">@item.EmployerName</a>
             ⭐⭐⭐⭐⭐
             <p>Project Information:</p>
