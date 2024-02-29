@@ -14,7 +14,7 @@ namespace OpusLink.Admin.Hosted.Pages
 
         public void OnGet()
         {
-
+            HttpContext.Session.SetString("PageNow", "Index");
         }
     }
 }

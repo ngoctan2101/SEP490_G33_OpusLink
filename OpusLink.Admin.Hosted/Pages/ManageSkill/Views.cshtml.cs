@@ -43,6 +43,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
         // list skill
         public async Task OnGetAsync()
         {
+            HttpContext.Session.SetString("PageNow", "ManageSkill");
             // call list
             //HttpResponseMessage responseSkill = await client.GetAsync(ServiceMangaUrl + "api/Skill/GetAllSkill");
             //if (responseSkill.IsSuccessStatusCode)
@@ -80,7 +81,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
                 listSkills.RemoveAt(listSkills.Count - 1);
             }
             //return list ALL skill (for add,edit)
-            AllSkills= await GetAllSkillAsync();
+            AllSkills = await GetAllSkillAsync();
         }
 
         private async Task<IList<SkillDTO>> GetAllSkillAsync()
@@ -184,10 +185,6 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
         // add new skill
         public async Task<IActionResult> OnPostAsync(SkillDTO newSkill)
         {
-            if (!ModelState.IsValid)
-            {
-                return Page();
-            }
 
             var jsonRequestBody = JsonSerializer.Serialize(newSkill, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
@@ -231,55 +228,32 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
         //}
 
         // update skill
-        [HttpPost("{SkillId:int?}")]
-        public async Task<IActionResult> OnPutAsync(Skill updatedSkill, int SkillId)
+        //[HttpPost("{SkillId:int?}")]
+        public async Task<IActionResult> OnPostForUpdateAsync(SkillDTO updatedSkill)
         {
-            try {
-                if (!ModelState.IsValid)
-                {
-                    return Page();
-                }
 
-                HttpResponseMessage responseSkill = await client.GetAsync(ServiceMangaUrl + "api/Skill/GetSkillById" + SkillId);
-                if (responseSkill.IsSuccessStatusCode)
-                {
-                    string responseBodySkill = await responseSkill.Content.ReadAsStringAsync();
-                    var optionSkill = new JsonSerializerOptions()
-                    { PropertyNameCaseInsensitive = true };
-                    SkillDto = JsonSerializer.Deserialize<SkillDTO>(responseBodySkill, optionSkill);
-                }
 
-                var jsonRequestBody = JsonSerializer.Serialize(updatedSkill, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            var jsonRequestBody = JsonSerializer.Serialize(updatedSkill, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
-                var content = new StringContent(jsonRequestBody, Encoding.UTF8, "application/json");
+            var content = new StringContent(jsonRequestBody, Encoding.UTF8, "application/json");
 
-                // Assuming your API endpoint for updating a skill is using the PUT method
-                var response = await client.PutAsync(ServiceMangaUrl + $"api/Skill/UpdateSkill/{updatedSkill.SkillID}", content);
-                if (response.IsSuccessStatusCode)
-                {
-                    return RedirectToPage("./Views"); // Redirect to the skills index page after successful update
-                }
-                else
-                {
-                    // Handle error
-                    return Page();
-                }
-            }
-            catch (Exception ex)
+            // Assuming your API endpoint for updating a skill is using the PUT method
+            var response = await client.PutAsync(ServiceMangaUrl + $"api/Skill/UpdateSkill", content);
+            if (response.IsSuccessStatusCode)
             {
-                // Log the exception
-                // Example: logger.LogError(ex, "An error occurred during skill update.");
-
-                // You might want to show an error message to the user or handle it in some way
-                ModelState.AddModelError(string.Empty, "An unexpected error occurred. Please try again.");
+                return RedirectToPage("./Views"); // Redirect to the skills index page after successful update
+            }
+            else
+            {
+                // Handle error
                 return Page();
             }
-           
+
         }
-       
+
         public async Task DeleteSkillAsync(int skillIdToDelete)
         {
-            
+
             using (HttpClient client = new HttpClient())
             {
                 HttpResponseMessage responseDeleteSkill = await client.DeleteAsync(ServiceMangaUrl + $"api/Skill/DeleteSkillById/{skillIdToDelete}");

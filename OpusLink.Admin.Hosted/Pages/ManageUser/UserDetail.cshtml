@@ -66,7 +66,7 @@
 
 <body>
     <form method="post" enctype="multipart/form-data">
-        <input type="number" hidden name="userId" value="@Model.user.Id"/>
+        <input type="number" hidden name="userId" value="@Model.user.Id" />
         <div class="container mt-5 ">
             <div class="row ">
                 <!-- Hình ảnh bên trái -->
@@ -77,11 +77,12 @@
                         {
                             var base64Image = Convert.ToBase64String(Model.user.UserImageBytes);
                             var imgSrc = $"data:image/png;base64,{base64Image}";
-                            <img alt="User Image" id="userImage"  class="img-fluid" src="@imgSrc" style="width:50%;height:auto;display:block;margin-bottom:10px" />
-                        }else
-                {
-                            <img id="profileImage" src="/img/default.png" style="width:50%;height:auto;display:block;margin-bottom:10px" />
-                }
+                            <img alt="User Image" id="userImage" class="img-fluid" src="@imgSrc" style="width:50%;height:auto;display:block;margin-bottom:10px" />
+                        }
+                        else
+                        {
+                            <img id="userImage" src="/img/default.png" style="width:50%;height:auto;display:block;margin-bottom:10px" />
+                        }
                     }
                     <input type="file" name="image" accept="image/x-png, image/jpeg" onchange="readURL(this);" />
                     @*<!-- LinkProfile, Textbox, và Nút Copy -->
@@ -99,7 +100,7 @@
                     </div>
                     <div class="mb-3">
                         <label for="cv" class="form-label">Upload CV:</label>
-                        <input type="file" class="form-control" id="cv" name="cv" readonly  accept=".pdf,.docx">
+                        <input type="file" class="form-control" id="cv" name="cv" readonly accept=".pdf,.docx">
                     </div>
                     <div class="mb-3">
                         <a asp-page-handler="ForDownload" asp-route-UserId="@Model.user.Id">Download CV</a>

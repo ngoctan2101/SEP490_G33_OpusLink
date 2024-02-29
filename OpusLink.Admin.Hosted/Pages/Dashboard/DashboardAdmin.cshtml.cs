@@ -36,6 +36,7 @@ namespace OpusLink.Admin.Hosted.Pages.Dashboard
 
         public void OnGet()
         {
+            HttpContext.Session.SetString("PageNow", "Dashboard");
             ChartDataList = new List<ChartData>
             {
                 // ... (same as the original code)

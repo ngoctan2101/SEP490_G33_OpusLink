@@ -52,33 +52,20 @@
         padding: 15px;
     }
 
-    #paging {
+    /*pagination*/
+    .pagin {
+        width: 40px;
+        height: 40px;
         text-align: center;
-        margin-top: 15px;
+        border-radius: 50%;
+        border: none;
+        transition: background-color 0.2s;
     }
 
-    .pagination {
-        display: inline-block;
-        text-align: center;
-    }
-
-        .pagination a {
-            color: black;
-            float: left;
-            padding: 8px 16px;
-            text-decoration: none;
+        .pagin:hover {
+            background-color: #0088CC;
+            color: white;
         }
-
-            .pagination a.active {
-                background-color: sienna;
-                color: white;
-                border-radius: 5px;
-            }
-
-            .pagination a:hover:not(.active) {
-                background-color: #ddd;
-                border-radius: 5px;
-            }
 
     #product-title-header {
         line-height: 40px;
@@ -113,13 +100,12 @@
 </style>
 <body>
     <div class="path-admin">User LIST</div>
-
+    <form method="post">
     <div id="content-main-dashboard">
         <div id="product-title-header">
-            <form id="filter" style="width: 80%;">
                 <div id="customer-title-1">
-                    <input type="text" name="txtSearch" placeholder="Enter name to search" value="" @* @Model.Search *@ />
-                    <input type="submit" value="Search" />
+                    <input type="text" name="Search_Str" value="@Model.filter.SearchStr" class="form-control" placeholder="Search by Name">
+                    <button class="btn btn-outline-secondary" type="submit" asp-page-handler="ForSearch" name="pageNo_1" value="1">Search</button>
                 </div>
                 <div class="d-flex justify-content-between align-items-center mb-3 --bs-primary">
                     <!-- Combobox -->
@@ -132,7 +118,7 @@
 
                     </select>
                 </div>
-            </form>
+            
         </div>
 
         <div id="order-table-admin">
@@ -157,16 +143,16 @@
                                 {
                                     var base64Image = Convert.ToBase64String(item.UserImageBytes);
                                     var imgSrc = $"data:image/png;base64,{base64Image}";
-                                    <img id="profileImage" src="@imgSrc" style="width:50%;height:auto;display:block" />
+                                    <img id="profileImage" src="@imgSrc" style="width:auto;height:100px;display:block" />
                                 }
                                 else
                                 {
-                                    <img id="profileImage" src="/img/default.png" style="width:50%;height:auto;display:block;margin-bottom:10px" />
+                                    <img id="profileImage" src="/img/default.png" style="width:auto;height:100px;display:block;margin-bottom:10px" />
                                 }
-                                
-                                    
-                                }
-                                
+
+
+                            }
+
                         </td>
                         <td>@item.PhoneNumber</td>
 
@@ -183,13 +169,57 @@
             </table>
         </div>
 
-        <div id="paging">
-            <div class="pagination">
-                @* @foreach (var item in Model.PagesLink)
+        <div style="display:flex;justify-content:center;">
+            @for (int i = 1; i <= Model.NumberOfPage; i++)
+            {
+                @if (i == Model.PageNo)
                 {
-                @Html.Raw(item)
-                } *@
-            </div>
+                    <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
+                        <button class="pagin" style="background-color:#0088CC; color:white" type="submit" asp-page-handler="ForSearch" name="pageNo_@i" value="@i">@i</button>
+                    </div>
+                }
+                else
+                {
+                    <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
+                        <button class="pagin" type="submit" asp-page-handler="ForSearch" name="pageNo_@i" value="@i">@i</button>
+                    </div>
+                }
+            }
         </div>
     </div>
+    </form>
 </body>
+<script>
+    window.onload = function () {
+        FomatPagination();
+    };
+    function FomatPagination() {
+        for (let i = 1; i <= @Model.NumberOfPage; i++) {
+            if (i == 1) {
+                document.getElementById('pagin_' + i).style.display = "inline-block";
+                continue;
+            }
+            if (i == @Model.PageNo || i == @Model.PageNo+1 || i == @Model.PageNo-1 || i == @Model.PageNo+2 || i == @Model.PageNo-2) {
+                document.getElementById('pagin_' + i).style.display = "inline-block";
+                continue;
+            }
+            if (i == @Model.NumberOfPage ) {
+                document.getElementById('pagin_' + i).style.display = "inline-block";
+                continue;
+            }
+            document.getElementById('pagin_' + i).style.display = "none";
+        }
+        for (let i = 1; i <= @Model.PageNo; i++) {
+            if (document.getElementById('pagin_' + i).style.display == "none") {
+                document.getElementById('pagin_' + i).insertAdjacentHTML("afterend", "<div style=\"display: inline-block;margin:10px 5px 10px 5px\"><p style=\"margin: 10px 10px 10px 10px\">. . .</p></div>");
+                break;
+            }
+        }
+        for (let i = @Model.PageNo; i <= @Model.NumberOfPage; i++) {
+            if (document.getElementById('pagin_' + i).style.display == "none") {
+                document.getElementById('pagin_' + i).insertAdjacentHTML("afterend", "<div style=\"display: inline-block;margin:10px 5px 10px 5px\"><p style=\"margin: 10px 10px 10px 10px\">. . .</p></div>");
+                break;
+            }
+        }
+    }
+</script>

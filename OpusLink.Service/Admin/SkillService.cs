@@ -31,6 +31,12 @@ namespace OpusLink.Service.Admin
         {
             try
             {
+                if (skill.SkillParentID==null||skill.SkillParentID == 0)
+                {
+                    skill.SkillParentID = null;
+                }
+                skill.SkillParent = null;
+                skill.FreelancerAndSkills = null;
                 _context.Skills.Add(skill);
                 _context.SaveChanges();
 
@@ -147,7 +153,12 @@ namespace OpusLink.Service.Admin
         {
             try
             {
-              
+                if (skill.SkillParentID==null||skill.SkillParentID == 0)
+                {
+                    skill.SkillParentID = null;
+                    skill.SkillParent = null;
+                }
+                skill.FreelancerAndSkills = null;
                 _context.Entry(skill).State = EntityState.Modified;
                 _context.SaveChanges();
             }

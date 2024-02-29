@@ -28,7 +28,7 @@
                 <div>
                     <div class="input-group">
                         <input type="text" name="Search_Str" value="@Model.filter.SearchStr" class="form-control" placeholder="Search by Name">
-                        <button class="btn btn-outline-secondary" type="submit" asp-page-handler="ForSearch" name="pageNo_1" value="1" >Search</button>
+                        <button class="btn btn-outline-secondary" type="submit" asp-page-handler="ForSearch" name="pageNo_1" value="1">Search</button>
                     </div>
                 </div>
                 <div>
@@ -41,7 +41,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">SkillParentID</th>
+                        <th scope="col">Skill Parent</th>
                         <th scope="col">Skill Name</th>
                         <th scope="col">Actions</th>
                     </tr>
@@ -60,17 +60,19 @@
                     : $"{item.SkillName} ({item.SkillParentID})"; *@
 
                             <tr>
-                                <th scope="row" name="@item.SkillID">@item.SkillID</th>
+                                <th scope="row" name="@item.SkillID" id="SkillID_@item.SkillID">@item.SkillID</th>
                                 <td>
-                                    @if (item.SkillParentName != null)
-                                    {
-                                        <p>@item.SkillParentName</p>
-                                    }
+                                    @if (item.SkillParentID != 0)
+                                {
+                                    <div style="display:inline-block" id="ParentID_@item.SkillID">@item.SkillParentID</div>
+                                    <span>-</span>
+                                    @item.SkillParentName
+                                }
 
                                 </td>
-                                <td>@item.SkillName</td>
+                                <td id="SkillName_@item.SkillID">@item.SkillName</td>
                                 <td>
-                                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editSkillModal" data-skillid="@item.SkillID">Edit</button>
+                                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editSkillModal" data-skillid="@item.SkillID" onclick="OpenUpdateSkill(@item.SkillID)">Edit</button>
                                     <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(@item.SkillID)">Delete</button>
                                 </td>
                             </tr>
@@ -116,15 +118,21 @@
                     <!-- Form thêm mới sẽ được thêm ở đây -->
                     <form id="addSkillForm" method="post">
                         <div class="mb-3">
-                            <label for="skillParentID" class="form-label">SkillParentName</label>
-                            <input type="text" class="form-control" id="skillParentID" name="SkillParentID" required>
+                            <label for="skillParentID" class="form-label">Skill Parent</label>
+                            <select name="SkillParentID">
+                                <option value="0">No Parent</option>
+                                @foreach (var item in Model.AllSkills)
+                                {
+                                    <option value="@item.SkillID">@item.SkillID<span>-</span>@item.SkillName</option>
+                                }
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="skillName" class="form-label">Skill Name</label>
                             <input type="text" class="form-control" id="skillName" name="SkillName" required>
                         </div>
                         <!-- Thêm các trường khác nếu cần -->
-                        <button type="submit" class="btn btn-primary">Add Skill</button>
+                        <button type="submit" asp-page-handler="ForAdd" class="btn btn-primary">Add Skill</button>
                     </form>
                 </div>
             </div>
@@ -147,14 +155,20 @@
 
                         <div class="mb-3">
                             <label for="editSkillParentID" class="form-label">SkillParentID</label>
-                            <input type="text" class="form-control" id="editSkillParentID" name="SkillParentID" required value="">
+                            <select name="SkillParentID">
+                                <option value="0">No Parent</option>
+                                @foreach (var item in Model.AllSkills)
+                                {
+                                    <option value="@item.SkillID">@item.SkillID<span>-</span>@item.SkillName</option>
+                                }
+                            </select>
                         </div>
                         <div class="mb-3">
                             <label for="editSkillName" class="form-label">Skill Name</label>
                             <input type="text" class="form-control" id="editSkillName" name="SkillName" required value="">
                         </div>
                         <!-- Thêm các trường khác nếu cần -->
-                        <button type="submit" class="btn btn-primary">Save Changes</button>
+                        <button type="submit" asp-page-handler="ForUpdate" class="btn btn-primary">Save Changes</button>
                     </form>
                 </div>
             </div>
@@ -195,6 +209,49 @@
                 }
             });
         }
-
+        window.onload = function () {
+            FomatPagination();
+        };
+        function FomatPagination() {
+            for (let i = 1; i <= @Model.NumberOfPage; i++) {
+                if (i == 1) {
+                    document.getElementById('pagin_' + i).style.display = "inline-block";
+                    continue;
+                }
+                if (i == @Model.PageNo || i == @Model.PageNo+1 || i == @Model.PageNo-1 || i == @Model.PageNo+2 || i == @Model.PageNo-2) {
+                    document.getElementById('pagin_' + i).style.display = "inline-block";
+                    continue;
+                }
+                if (i == @Model.NumberOfPage ) {
+                    document.getElementById('pagin_' + i).style.display = "inline-block";
+                    continue;
+                }
+                document.getElementById('pagin_' + i).style.display = "none";
+            }
+            for (let i = 1; i <= @Model.PageNo; i++) {
+                if (document.getElementById('pagin_' + i).style.display == "none") {
+                    document.getElementById('pagin_' + i).insertAdjacentHTML("afterend", "<div style=\"display: inline-block;margin:10px 5px 10px 5px\"><p style=\"margin: 10px 10px 10px 10px\">. . .</p></div>");
+                    break;
+                }
+            }
+            for (let i = @Model.PageNo; i <= @Model.NumberOfPage; i++) {
+                if (document.getElementById('pagin_' + i).style.display == "none") {
+                    document.getElementById('pagin_' + i).insertAdjacentHTML("afterend", "<div style=\"display: inline-block;margin:10px 5px 10px 5px\"><p style=\"margin: 10px 10px 10px 10px\">. . .</p></div>");
+                    break;
+                }
+            }
+        }
+        function OpenUpdateSkill(skillID) {
+        var skillid = parseInt(document.getElementById("SkillID_" + skillID).innerHTML);
+        document.getElementsByName("SkillParentID")[0].value = 0;
+        if (document.getElementById("ParentID_" + skillID) === null) {
+        } else {
+            var parentid = parseInt(document.getElementById("ParentID_" + skillID).innerHTML);
+            document.getElementsByName("SkillParentID")[1].value = parentid;
+        }
+        var skillname = document.getElementById("SkillName_" + skillID).innerHTML;
+        document.getElementsByName("SkillID")[0].value = skillID;
+        document.getElementsByName("SkillName")[1].value = skillname;
+        }
     </script>
 </body>

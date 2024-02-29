@@ -54,6 +54,64 @@ namespace OpusLink.API.Controllers.Admin
             }
             return Ok(userdto);
         }
+        [HttpPost("GetTenUser")]
+        public IActionResult GetTenUser([FromBody] Filter filter)
+        {
+            int numberOfPage;
+            List<OpusLink.Entity.Models.User> users = _userService.GetAllUser();
+            var userResultAfterSearch = Search(users, filter, out numberOfPage);
+            if (users != null && users.Count == 0)
+            {
+                return Ok("Don't have user");
+            }
+            List<UserDTO> result = _mapper.Map<List<UserDTO>>(userResultAfterSearch);
+            string UserImagePath;
+            string imageFilePath;
+            foreach (UserDTO user in result)
+            {
+                UserImagePath = user.ProfilePicture;
+                if (UserImagePath == null || UserImagePath.Length == 0)
+                {
+                    continue;
+                }
+                imageFilePath = Path.Combine(Directory.GetCurrentDirectory(), "FilesUserUpload\\profileImage", UserImagePath);
+                // Check if the file exists
+                if (System.IO.File.Exists(imageFilePath))
+                {
+                    user.UserImageBytes = System.IO.File.ReadAllBytes(imageFilePath);
+                }
+
+            }
+            result.Add(new UserDTO { Id = numberOfPage });
+            return Ok(result);
+        }
+        private object Search(List<OpusLink.Entity.Models.User> users, Filter filter, out int numberOfPage)
+        {
+            List<OpusLink.Entity.Models.User> result = new List<OpusLink.Entity.Models.User>();
+            result = users.ToList();
+            //search string
+            if (filter.SearchStr.Length > 0)
+            {
+                for (int i = result.Count - 1; i >= 0; i--)
+                {
+                    if (result[i].UserName.ToLower().Contains(filter.SearchStr.ToLower()))
+                    {
+                        continue;
+                    }
+                    else
+                    {
+                        result.RemoveAt(i);
+                    }
+                }
+            }
+            //loc theo page
+            numberOfPage = result.Count / 10;
+            if (result.Count % 10 > 0)
+            {
+                numberOfPage++;
+            }
+            return result.Skip((filter.PageNumber - 1) * 10).Take(10).ToList();
+        }
         [HttpGet("GetUserById/{id}")]
         public IActionResult GetUserById(int id)
         {

@@ -36,6 +36,7 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
         }
         public async Task OnGetAsync()
         {
+            HttpContext.Session.SetString("PageNow", "ManageCategory");
             //get all first categories
             var options = new JsonSerializerOptions
             {
