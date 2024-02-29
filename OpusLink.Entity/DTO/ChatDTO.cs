@@ -14,6 +14,7 @@ namespace OpusLink.Entity.DTO
         public bool IsViewed { get; set; }
         public string? EmployerName { get; set; }
         public string FreelancerName { get; set; }
+        public string? ProfilePicture { get; set; }
         public string NewEstMessage { get; set; }
     }
 }

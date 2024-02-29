@@ -18,6 +18,7 @@ namespace OpusLink.Service.JobServices
         List<Job> Search(Filter filter, out int numberOfPage);
         List<Job> SearchById(Filter filter, out int numberOfPage);
         List<Job> GetAllJobRequested(Filter filter, out int numberOfPage);
+        List<Job> GetJob();
         Task ApproveJob(int jobId);
         Task<Job> GetJobDetail(int jobId);
         Task<int> CreateNewJob(Job j);
@@ -67,6 +68,13 @@ namespace OpusLink.Service.JobServices
                 .Include("Offers")
                 .Include("Location")
                 .Include("Employer").FirstAsync();
+        }
+        public  List<Job> GetJob()
+        {
+            
+            var jobs = _dbContext.Jobs
+                .Include("Employer").ToList();
+            return jobs;
         }
 
         public async Task<int> CreateNewJob(Job j)

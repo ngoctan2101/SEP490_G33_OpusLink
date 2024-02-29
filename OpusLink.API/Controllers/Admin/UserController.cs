@@ -40,6 +40,12 @@ namespace OpusLink.API.Controllers.Admin
             }
             return Ok(_mapper.Map<UserDTO>(user));
         }
+        [HttpGet("CountUsers")]
+        public IActionResult CountUsers()
+        {
+            int userCount = _userService.GetAllUser().Count;
+            return Ok(userCount);
+        }
     }
 
     
