@@ -12,6 +12,8 @@ using OpusLink.Entity.DTO.HaiDTO;
 using OpusLink.Service.Users;
 using System.Text;
 using OpusLink.Entity.AutoMapper.JOB;
+using OpusLink.Service.User;
+
 internal class Program
 {
     private static void Main(string[] args)
@@ -39,6 +41,7 @@ internal class Program
             mc.AddProfile(new OfferProfile());
             mc.AddProfile(new SaveJobProfile());
             mc.AddProfile(new LocationProfile());
+            mc.AddProfile(new UserProfile());
         });
         IMapper mapper = mapperConfig.CreateMapper();
 
@@ -53,6 +56,7 @@ internal class Program
         builder.Services.AddScoped<ISaveJobService, SaveJobService>();
         builder.Services.AddScoped<ILocationService, LocationService>();
         builder.Services.AddScoped<IJobAndCategoryService, JobAndCategoryService>();
+        builder.Services.AddScoped<IFreelancerAndSkillService, FreelancerAndSkillService>();
 
         builder.Services.AddDbContext<OpusLinkDBContext>();
         builder.Services.AddSingleton(mapper);

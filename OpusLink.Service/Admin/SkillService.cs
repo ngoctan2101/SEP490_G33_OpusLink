@@ -87,34 +87,40 @@ namespace OpusLink.Service.Admin
         {
             try
             {
-                List<Skill> list = new List<Skill>();
-                var skills =( from s in _context.Skills
-                             join fs in _context.FreelancerAndSkills
-                             on s.SkillID equals fs.SkillID
-                             join us in _context.Users
-                             on fs.FreelancerID equals us.Id //ve tim user id
-                             where us.Id == id
-                             select new
-                             {
-                                 SkillID = s.SkillID,
-                                 SkillParentID = s.SkillParentID,
-                                 SkillName = s.SkillName
+                //List<Skill> list = new List<Skill>();
+                //var skills =( from s in _context.Skills
+                //             join fs in _context.FreelancerAndSkills
+                //             on s.SkillID equals fs.SkillID
+                //             join us in _context.Users
+                //             on fs.FreelancerID equals us.Id //ve tim user id
+                //             where us.Id == id
+                //             select new
+                //             {
+                //                 SkillID = s.SkillID,
+                //                 SkillParentID = s.SkillParentID,
+                //                 SkillName = s.SkillName
                                  
-                             }).Distinct();
-                //join u in _context.Users
-                foreach (var item in skills)
+                //             }).Distinct();
+                ////join u in _context.Users
+                //foreach (var item in skills)
+                //{
+                    
+                //        var skill = new Skill
+                //        {
+                //            SkillID = item.SkillID,
+                //            SkillParentID = item.SkillParentID,
+                //            SkillName = item.SkillName
+                //        };
+                //        list.Add(skill);
+                    
+                //}
+                var freelancerAndSkills =_context.FreelancerAndSkills.Where(fs=>fs.FreelancerID== id).Include("Skill").ToList();
+                List<Skill> list = new List<Skill>();
+                foreach(var fs in freelancerAndSkills)
                 {
-                    
-                        var skill = new Skill
-                        {
-                            SkillID = item.SkillID,
-                            SkillParentID = item.SkillParentID,
-                            SkillName = item.SkillName
-                        };
-                        list.Add(skill);
-                    
+                    list.Add(fs.Skill);
                 }
-                    return list;
+                return list;
 
             }
             catch (Exception e)
