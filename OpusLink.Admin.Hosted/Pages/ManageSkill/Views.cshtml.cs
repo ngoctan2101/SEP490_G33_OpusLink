@@ -1,7 +1,10 @@
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OpusLink.Entity.DTO;
+using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.Models;
+using System.Globalization;
 using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text;
@@ -20,12 +23,22 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
         //public int SkillID { get; set; }
         //public int? SkillParentID { get; set; }
         //public string SkillName { get; set; }
+        public IList<SkillDTO> AllSkills { get; set; } = default!;
+        public Filter filter { get; set; }
+        public int NumberOfPage { get; set; }
+        public int PageNo { get; set; }
         public ViewsModel()
         {
             client = new HttpClient();
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
             ServiceMangaUrl = "https://localhost:7265/";
+            PageNo = 1;
+            //category thi chi can moi search thoi
+            filter = new Filter()
+            {
+                SearchStr = ""
+            };
         }
         // list skill
         public async Task OnGetAsync()
@@ -39,10 +52,14 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
             //    { PropertyNameCaseInsensitive = true };
             //    listSkills = JsonSerializer.Deserialize<List<SkillDTO>>(responseBodySkill, optionSkill);
             //}
-
-            
-
-            HttpResponseMessage responseSkill = await client.GetAsync(ServiceMangaUrl + "api/Skill/GetAllSkill");
+            //get list first 10 skills
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = false,
+            };
+            string json = System.Text.Json.JsonSerializer.Serialize<Filter>(filter, options);
+            StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            HttpResponseMessage responseSkill = await client.PostAsync(ServiceMangaUrl + "api/Skill/GetTenSkill", httpContent);
 
             // Check if the HTTP request was successful
             if (responseSkill.IsSuccessStatusCode)
@@ -58,12 +75,80 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
 
                 // Deserialize the JSON response into a List of SkillDTO objects
                 listSkills = JsonSerializer.Deserialize<List<SkillDTO>>(responseBodySkill, optionSkill);
+                //tsn goi cai nay la bi thuat :>
+                NumberOfPage = listSkills.ElementAt(listSkills.Count - 1).SkillID;
+                listSkills.RemoveAt(listSkills.Count - 1);
+            }
+            //return list ALL skill (for add,edit)
+            AllSkills= await GetAllSkillAsync();
+        }
+
+        private async Task<IList<SkillDTO>> GetAllSkillAsync()
+        {
+            HttpResponseMessage responseSkill = await client.GetAsync(ServiceMangaUrl + "api/Skill/GetAllSkill");
+
+            // Check if the HTTP request was successful
+            if (responseSkill.IsSuccessStatusCode)
+            {
+                // Read the response body as a string
+                string responseBodySkill = await responseSkill.Content.ReadAsStringAsync();
+
+                // Configure JsonSerializer options (ignoring property case)
+                var optionSkill = new JsonSerializerOptions()
+                {
+                    PropertyNameCaseInsensitive = true
+                };
+
+                // Deserialize the JSON response into a List of SkillDTO objects
+                return JsonSerializer.Deserialize<List<SkillDTO>>(responseBodySkill, optionSkill);
+            }
+            else
+            {
+                return null;
             }
         }
-        
+        public async Task OnPostForSearchAsync(IFormCollection collection)
+        {
+            List<string> keys = collection.Keys.ToList<string>();
+            // manual bind to get Filter object
+            foreach (string key in keys)
+            {
+                if (key.Contains("Search_Str"))
+                {
+                    filter.SearchStr = collection[key];
+                }
+                else if (key.Contains("pageNo"))
+                {
+                    filter.PageNumber = Int32.Parse(collection[key]);
+                    PageNo = filter.PageNumber;
+                }
+            }
+            //get list 10 skill base on Filter
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = true,
+            };
+            string json = System.Text.Json.JsonSerializer.Serialize<Filter>(filter, options);
+            StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync(ServiceMangaUrl + "api/Skill/GetTenSkill", httpContent);
+            if (response.IsSuccessStatusCode)
+            {
+                string responseBodySkill = await response.Content.ReadAsStringAsync();
+                listSkills = JsonSerializer.Deserialize<List<SkillDTO>>(responseBodySkill, options);
+                //tsn goi cai nay la bi thuat :>
+                NumberOfPage = listSkills.ElementAt(listSkills.Count - 1).SkillID;
+                listSkills.RemoveAt(listSkills.Count - 1);
+            }
+            else
+            {
+
+            }
+            //return list ALL skill (for add,edit)
+            AllSkills = await GetAllSkillAsync();
+        }
         //public async Task OnGetAsync(int SkillId)
         //{
-           
+
         //    HttpResponseMessage responseSkill = await client.GetAsync(ServiceMangaUrl + "api/Skill/GetSkillById" + SkillId);
         //    if (responseSkill.IsSuccessStatusCode)
         //    {
