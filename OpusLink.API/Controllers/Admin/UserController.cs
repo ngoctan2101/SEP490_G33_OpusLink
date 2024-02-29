@@ -45,7 +45,12 @@ namespace OpusLink.API.Controllers.Admin
                     continue;
                 }
                 imageFilePath = Path.Combine(Directory.GetCurrentDirectory(), "FilesUserUpload\\profileImage", UserImagePath);
-                user.UserImageBytes = System.IO.File.ReadAllBytes(imageFilePath);
+                // Check if the file exists
+                if (System.IO.File.Exists(imageFilePath))
+                {
+                    user.UserImageBytes = System.IO.File.ReadAllBytes(imageFilePath);
+                }
+                
             }
             return Ok(userdto);
         }
@@ -69,7 +74,11 @@ namespace OpusLink.API.Controllers.Admin
                 return Ok(userdto);
             }
             string imageFilePath = Path.Combine(Directory.GetCurrentDirectory(), "FilesUserUpload\\profileImage", UserImagePath);
-            userdto.UserImageBytes = System.IO.File.ReadAllBytes(imageFilePath);
+            // Check if the file exists
+            if (System.IO.File.Exists(imageFilePath))
+            {
+                userdto.UserImageBytes = System.IO.File.ReadAllBytes(imageFilePath);
+            }
             return Ok(userdto);
         }
         [HttpGet("GetUserByName/{txt}")]
@@ -81,6 +90,23 @@ namespace OpusLink.API.Controllers.Admin
             if (user != null && user.Count == 0)
             {
                 return NotFound("Don't have users");
+            }
+            string UserImagePath;
+            string imageFilePath;
+            foreach (UserDTO user1 in userdto)
+            {
+                UserImagePath = user1.ProfilePicture;
+                if (UserImagePath == null || UserImagePath.Length == 0)
+                {
+                    continue;
+                }
+                imageFilePath = Path.Combine(Directory.GetCurrentDirectory(), "FilesUserUpload\\profileImage", UserImagePath);
+                // Check if the file exists
+                if (System.IO.File.Exists(imageFilePath))
+                {
+                    user1.UserImageBytes = System.IO.File.ReadAllBytes(imageFilePath);
+                }
+
             }
             return Ok(userdto);
         }

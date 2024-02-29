@@ -31,7 +31,11 @@ namespace OpusLink.API.Controllers.OfferControllers
                     continue;
                 }
                 string imageFilePath = Path.Combine(Directory.GetCurrentDirectory(), "FilesUserUpload\\profileImage", FreelancerImagePath);
-                offer.FreelancerImageBytes = System.IO.File.ReadAllBytes(imageFilePath);
+                // Check if the file exists
+                if (System.IO.File.Exists(imageFilePath))
+                {
+                    offer.FreelancerImageBytes = System.IO.File.ReadAllBytes(imageFilePath);
+                }
             }
             
             return Ok(result);

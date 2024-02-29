@@ -178,6 +178,10 @@
                     var imgSrc = $"data:image/png;base64,{base64Image}";
                     <img id="profileImage" src="@imgSrc" style="width:50%;height:auto;display:block" />
                 }
+                else
+                {
+                    <img id="profileImage" src="/img/default.png" style="width:50%;height:auto;display:block;margin-bottom:10px" />
+                }
             }
             <a href="#" class="link" style="display:block">@item.EmployerName</a>
             ⭐⭐⭐⭐⭐

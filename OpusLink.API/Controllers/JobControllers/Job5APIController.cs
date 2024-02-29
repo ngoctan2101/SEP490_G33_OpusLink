@@ -27,7 +27,11 @@ namespace OpusLink.API.Controllers.JobControllers
                 return Ok(result);
             }
             string imageFilePath = Path.Combine(Directory.GetCurrentDirectory(), "FilesUserUpload\\profileImage", EmployerImagePath);
-            result.EmployerImageBytes = System.IO.File.ReadAllBytes(imageFilePath);
+            // Check if the file exists
+            if (System.IO.File.Exists(imageFilePath))
+            {
+                result.EmployerImageBytes = System.IO.File.ReadAllBytes(imageFilePath);
+            }
             return Ok(result);
         }
     }

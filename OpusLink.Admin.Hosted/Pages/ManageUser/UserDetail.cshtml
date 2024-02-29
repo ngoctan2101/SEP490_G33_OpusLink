@@ -78,7 +78,10 @@
                             var base64Image = Convert.ToBase64String(Model.user.UserImageBytes);
                             var imgSrc = $"data:image/png;base64,{base64Image}";
                             <img alt="User Image" id="userImage"  class="img-fluid" src="@imgSrc" style="width:50%;height:auto;display:block;margin-bottom:10px" />
-                        }
+                        }else
+                {
+                            <img id="profileImage" src="/img/default.png" style="width:50%;height:auto;display:block;margin-bottom:10px" />
+                }
                     }
                     <input type="file" name="image" accept="image/x-png, image/jpeg" onchange="readURL(this);" />
                     @*<!-- LinkProfile, Textbox, và Nút Copy -->
