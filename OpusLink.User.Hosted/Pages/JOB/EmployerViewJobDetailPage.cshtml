@@ -86,6 +86,10 @@
                 var imgSrc = $"data:image/png;base64,{base64Image}";
                 <img id="profileImage" src="@imgSrc" style="width:50%;height:auto;display:block" />
             }
+            else
+            {
+                <img id="profileImage" src="/imgExample/default.png" style="width:50%;height:auto;display:block" />
+            }
         }
         <a href="#" class="link" style="display:block">@item.EmployerName</a>
         ⭐⭐⭐⭐⭐
@@ -167,6 +171,9 @@
                                     var base64Image = Convert.ToBase64String(a.FreelancerImageBytes);
                                     var imgSrc = $"data:image/png;base64,{base64Image}";
                                     <img id="profileImage_@a.OfferID" src="@imgSrc" style="width:80%;height:auto;display:block" />
+                                }else
+                                {
+                                    <img id="profileImage" src="/imgExample/default.png" style="width:80%;height:auto;display:block" />
                                 }
                             }
                         </td>
