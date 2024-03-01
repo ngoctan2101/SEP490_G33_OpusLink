@@ -1,3 +1,4 @@
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OpusLink.Entity.AutoMapper.JOB;
@@ -14,9 +15,12 @@ namespace OpusLink.Admin.Hosted.Pages.Dashboard
         private string ServiceMangaUrl = "";
         public int TotalUsers { get; set; }
         public int TotalJobs { get; set; }
+        public int TotalJobsRequest { get; set; }
         [BindProperty]
         public List<UserDTO> listUser { get; set; } = null!;
+        public List<ChatDTO> chats { get; set; } = null!;
         public List<GetJobResponse> listJob { get; set; } = null!;
+        public List<GetJobResponse> Jobs { get; set; } = default!;
         //public int SkillID { get; set; }
         //public int? SkillParentID { get; set; }
         //public string SkillName { get; set; }
@@ -39,9 +43,9 @@ namespace OpusLink.Admin.Hosted.Pages.Dashboard
                 { PropertyNameCaseInsensitive = true };
                 listUser = JsonSerializer.Deserialize<List<UserDTO>>(responseBodyUser, optionUser);
                 TotalUsers = listUser.Count;
-                
+
             }
-           
+
             responseUser = await client.GetAsync(ServiceMangaUrl + "api/Job3API/GetAllJob2");
             if (responseUser.IsSuccessStatusCode)
             {
@@ -49,9 +53,20 @@ namespace OpusLink.Admin.Hosted.Pages.Dashboard
                 var optionUser = new JsonSerializerOptions()
                 { PropertyNameCaseInsensitive = true };
                 listJob = JsonSerializer.Deserialize<List<GetJobResponse>>(responseBodyUser, optionUser);
-                
+
                 TotalJobs = listJob.Count;
             }
+            HttpResponseMessage responseJobRequest = await client.GetAsync(ServiceMangaUrl + "api/Job12API/GetAllJobRequested2");
+            if (responseJobRequest.IsSuccessStatusCode)
+            {
+                string responseBodyJobRequest = await responseJobRequest.Content.ReadAsStringAsync();
+                var optionJobRequest = new JsonSerializerOptions()
+                { PropertyNameCaseInsensitive = true };
+                var jobRequests = JsonSerializer.Deserialize<List<GetJobResponse>>(responseBodyJobRequest, optionJobRequest);
+                TotalJobsRequest = jobRequests.ElementAt(jobRequests.Count-1).EmployerID;
+                jobRequests.RemoveAt(jobRequests.Count - 1);
+            }
+
         }
     }
 
