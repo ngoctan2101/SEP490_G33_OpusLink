@@ -1,61 +1,72 @@
+
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using OpusLink.Entity.AutoMapper.JOB;
+using OpusLink.Entity.DTO;
+using OpusLink.Entity.DTO.JobDTO;
+using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace OpusLink.Admin.Hosted.Pages.Dashboard
 {
     public class DashboardAdminModel : PageModel
     {
-        public class SpacingModel
+        private readonly HttpClient client = null;
+        private string ServiceMangaUrl = "";
+        public int TotalUsers { get; set; }
+        public int TotalJobs { get; set; }
+        public int TotalJobsRequest { get; set; }
+        [BindProperty]
+        public List<UserDTO> listUser { get; set; } = null!;
+        public List<ChatDTO> chats { get; set; } = null!;
+        public List<GetJobResponse> listJob { get; set; } = null!;
+        public List<GetJobResponse> Jobs { get; set; } = default!;
+        //public int SkillID { get; set; }
+        //public int? SkillParentID { get; set; }
+        //public string SkillName { get; set; }
+        public DashboardAdminModel()
         {
-            public double[] CellSpacing { get; set; }
+            client = new HttpClient();
+            var contentType = new MediaTypeWithQualityHeaderValue("application/json");
+            client.DefaultRequestHeaders.Accept.Add(contentType);
+            ServiceMangaUrl = "https://localhost:7265/";
         }
 
-        public class ChartData
+        public async Task OnGetAsync()
         {
-            public string Month { get; set; }
-            public double Sales { get; set; }
-        }
-
-        public class LineData
-        {
-            public double X { get; set; }
-            public double Y { get; set; }
-        }
-
-        public class PieData
-        {
-            public string X { get; set; }
-            public double Y { get; set; }
-            public string Text { get; set; }
-        }
-
-        public List<ChartData> ChartDataList { get; set; }
-        public List<LineData> LineDataList { get; set; }
-        public List<PieData> PieDataList1 { get; set; }
-        public SpacingModel ModelValue { get; set; }
-
-        public void OnGet()
-        {
-            HttpContext.Session.SetString("PageNow", "Dashboard");
-            ChartDataList = new List<ChartData>
+            // call list
+            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetAllUser");
+            if (responseUser.IsSuccessStatusCode)
             {
-                // ... (same as the original code)
-            };
+                string responseBodyUser = await responseUser.Content.ReadAsStringAsync();
+                var optionUser = new JsonSerializerOptions()
+                { PropertyNameCaseInsensitive = true };
+                listUser = JsonSerializer.Deserialize<List<UserDTO>>(responseBodyUser, optionUser);
+                TotalUsers = listUser.Count;
 
-            LineDataList = new List<LineData>
-            {
-                // ... (same as the original code)
-            };
+            }
 
-            PieDataList1 = new List<PieData>
+            responseUser = await client.GetAsync(ServiceMangaUrl + "api/Job3API/GetAllJob2");
+            if (responseUser.IsSuccessStatusCode)
             {
-                // ... (same as the original code)
-            };
+                string responseBodyUser = await responseUser.Content.ReadAsStringAsync();
+                var optionUser = new JsonSerializerOptions()
+                { PropertyNameCaseInsensitive = true };
+                listJob = JsonSerializer.Deserialize<List<GetJobResponse>>(responseBodyUser, optionUser);
 
-            ModelValue = new SpacingModel
+                TotalJobs = listJob.Count;
+            }
+            HttpResponseMessage responseJobRequest = await client.GetAsync(ServiceMangaUrl + "api/Job12API/GetAllJobRequested2");
+            if (responseJobRequest.IsSuccessStatusCode)
             {
-                CellSpacing = new double[] { 10, 10 }
-            };
+                string responseBodyJobRequest = await responseJobRequest.Content.ReadAsStringAsync();
+                var optionJobRequest = new JsonSerializerOptions()
+                { PropertyNameCaseInsensitive = true };
+                var jobRequests = JsonSerializer.Deserialize<List<GetJobResponse>>(responseBodyJobRequest, optionJobRequest);
+                TotalJobsRequest = jobRequests.ElementAt(jobRequests.Count-1).EmployerID;
+                jobRequests.RemoveAt(jobRequests.Count - 1);
+            }
+
         }
     }
 

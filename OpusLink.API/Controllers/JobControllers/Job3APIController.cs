@@ -1,6 +1,7 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Diagnostics;
+using OpusLink.Entity.DTO;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.Models;
 using OpusLink.Service.JobServices;
@@ -33,15 +34,15 @@ namespace OpusLink.API.Controllers.JobControllers
         public async Task<IActionResult> GetAllCategory()
         {
             var categories = await categoryService.GetAllCategory();
-            List <GetCategoryResponse> result = _mapper.Map< List<GetCategoryResponse>>(categories);
+            List<GetCategoryResponse> result = _mapper.Map<List<GetCategoryResponse>>(categories);
             return Ok(result);
         }
         [HttpGet("GetAllChildCategory")]
         public async Task<IActionResult> GetAllChildCategory(int parentId)
         {
             var categories = await categoryService.GetAllChildCategory(parentId);
-            List < GetCategoryResponse> result = _mapper.Map< List<GetCategoryResponse>>(categories);
-            foreach(var category in result)
+            List<GetCategoryResponse> result = _mapper.Map<List<GetCategoryResponse>>(categories);
+            foreach (var category in result)
             {
                 if (categoryService.HasChild(category.CategoryID))
                 {
@@ -55,11 +56,21 @@ namespace OpusLink.API.Controllers.JobControllers
         {
             int numberOfPage;
             //var jobs = await jobService.GetAllJob();
-            var jobsResultAfterSearch= jobService.Search(filter, out numberOfPage);
-            List < GetJobResponse> result = _mapper.Map< List<GetJobResponse>>(jobsResultAfterSearch);
-            result.Add(new GetJobResponse() { NumberOfOffer=numberOfPage });
+            var jobsResultAfterSearch = jobService.Search(filter, out numberOfPage);
+            List<GetJobResponse> result = _mapper.Map<List<GetJobResponse>>(jobsResultAfterSearch);
+            result.Add(new GetJobResponse() { NumberOfOffer = numberOfPage });
             return Ok(result);
         }
-        
+        [HttpGet("GetAllJob2")]
+        public ActionResult<IEnumerable<GetJobResponse>> GetAllJob2()
+        {
+            var job = jobService.GetJob();
+            List<GetJobResponse> listjob = _mapper.Map<List<GetJobResponse>>(job)
+                .ToList();
+
+            return Ok(listjob);
+        }
+
+
     }
 }
