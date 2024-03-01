@@ -11,6 +11,6 @@ namespace OpusLink.Entity.DTO
         public int SkillID { get; set; }
         public int? SkillParentID { get; set; }
         public string SkillName { get; set; }
-        public string SkillParentName { get; set; }
+        public string? SkillParentName { get; set; }
     }
 }

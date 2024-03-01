@@ -49285,19 +49285,31 @@ namespace OpusLink.Entity.Migrations
                         new
                         {
                             Id = 1,
+<<<<<<< HEAD
                             ConcurrencyStamp = "9fee0a16-072f-4125-96b5-d0758e8405c8",
+=======
+                            ConcurrencyStamp = "96c651bc-2736-41ca-88b4-52c1bc794f7a",
+>>>>>>> Test
                             Name = "Admin"
                         },
                         new
                         {
                             Id = 2,
+<<<<<<< HEAD
                             ConcurrencyStamp = "2d1793be-7bd8-4c48-b6c7-dc96c16417fd",
+=======
+                            ConcurrencyStamp = "39a95eef-aeb3-4af3-b4d8-77bc68d78c1f",
+>>>>>>> Test
                             Name = "Freelancer"
                         },
                         new
                         {
                             Id = 3,
+<<<<<<< HEAD
                             ConcurrencyStamp = "77900395-c985-4e3a-af4b-ae3084e95126",
+=======
+                            ConcurrencyStamp = "55e8ae8f-1e80-4d8f-a9fc-65defe408386",
+>>>>>>> Test
                             Name = "Employer"
                         });
                 });
@@ -55858,7 +55870,11 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 1,
                             AccessFailedCount = 1,
+<<<<<<< HEAD
                             ConcurrencyStamp = "6e7c940e-b0b6-48a3-bd77-f92b3945cc7f",
+=======
+                            ConcurrencyStamp = "4b31b2dd-a2e9-4e65-88c5-7660454363a7",
+>>>>>>> Test
                             Email = "nva123@gmail.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -55873,7 +55889,11 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 2,
                             AccessFailedCount = 2,
+<<<<<<< HEAD
                             ConcurrencyStamp = "76c10430-5391-42b5-8025-ca788b30f70e",
+=======
+                            ConcurrencyStamp = "cee4243d-fe56-4bd0-aa55-d30d84eb8b09",
+>>>>>>> Test
                             Email = "nvb123@gmail.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -55888,7 +55908,11 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 3,
                             AccessFailedCount = 0,
+<<<<<<< HEAD
                             ConcurrencyStamp = "dd5ad753-cb98-499f-aac9-54a38081ab3d",
+=======
+                            ConcurrencyStamp = "8dc56f46-4bd7-407c-a5cb-0ded511ed362",
+>>>>>>> Test
                             Email = "nvc123@gmail.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -55903,7 +55927,11 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 4,
                             AccessFailedCount = 3,
+<<<<<<< HEAD
                             ConcurrencyStamp = "83b18b89-7454-4dfe-8581-bd0f496a8416",
+=======
+                            ConcurrencyStamp = "c92efd17-0368-45db-aa77-8e8e56557cf2",
+>>>>>>> Test
                             Email = "tvd123@gmail.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -55918,7 +55946,11 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 5,
                             AccessFailedCount = 4,
+<<<<<<< HEAD
                             ConcurrencyStamp = "ae4df6a6-5cb0-4fdb-abaa-1fa3a1e3e508",
+=======
+                            ConcurrencyStamp = "b5882a94-0ce4-4593-8ee7-c63da81080e7",
+>>>>>>> Test
                             Email = "tte123@gmail.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -55933,7 +55965,11 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 6,
                             AccessFailedCount = 5,
+<<<<<<< HEAD
                             ConcurrencyStamp = "7a071ea1-1e1b-41b3-b387-3eab6c0e3590",
+=======
+                            ConcurrencyStamp = "730e679e-61ed-4a46-9420-67479cfe4366",
+>>>>>>> Test
                             Email = "tvf123@gmail.com",
                             EmailConfirmed = false,
                             IsVeryfiedIdentity = false,
@@ -55948,7 +55984,11 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 7,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "0d3242ae-dbcb-4750-8833-f2e77872c89d",
+=======
+                            ConcurrencyStamp = "726dd320-bb38-46d9-bd96-755bb98f86d7",
+>>>>>>> Test
                             Email = "ttg123@gmail.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -55963,7 +56003,11 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 8,
                             AccessFailedCount = 7,
+<<<<<<< HEAD
                             ConcurrencyStamp = "bcdf00b3-ba6d-4a53-8515-4bcdde510768",
+=======
+                            ConcurrencyStamp = "aa0b2919-9810-4e85-b6b0-37a9015084cc",
+>>>>>>> Test
                             Email = "tth123@gmail.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = false,
@@ -55978,7 +56022,11 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 9,
                             AccessFailedCount = 7,
+<<<<<<< HEAD
                             ConcurrencyStamp = "37b03ec4-1520-42a6-b983-22d6ec3b0ae5",
+=======
+                            ConcurrencyStamp = "510b59b8-93e2-4683-8aa3-8030284e7d78",
+>>>>>>> Test
                             Email = "admin@gmail.com",
                             EmailConfirmed = true,
                             IsVeryfiedIdentity = true,
@@ -55993,13 +56041,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 20,
                             AccessFailedCount = 7,
+<<<<<<< HEAD
                             ConcurrencyStamp = "beb13e7d-6b8c-4173-94b6-864714802817",
+=======
+                            CVFilePath = "r20.pdf",
+                            ConcurrencyStamp = "08faf66d-bf04-4219-afeb-45c722e44ad1",
+>>>>>>> Test
                             Email = "ysimeoni0@mozilla.org",
                             EmailConfirmed = true,
+                            Introduction = "Android app developer with expertise in Kotlin and Java. Proficient in building responsive and user-friendly native Android applications. Experienced in integrating with RESTful APIs, implementing material design principles, and optimizing app performance for various Android devices.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$6kaQYtDscHATHAinhjacG.EfcTJKno26khjROjQoWeVV5WrQOu6xe",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i20.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Yulma Simeoni"
@@ -56008,13 +56063,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 21,
                             AccessFailedCount = 3,
+<<<<<<< HEAD
                             ConcurrencyStamp = "2783152c-86a4-4e00-9957-3c813379f38a",
+=======
+                            CVFilePath = "r21.pdf",
+                            ConcurrencyStamp = "1dad7e9f-2586-45f3-8724-bfbed90177d4",
+>>>>>>> Test
                             Email = "lgrisdale1@shinystat.com",
                             EmailConfirmed = false,
+                            Introduction = "Full-stack mobile developer adept at both iOS and Android development. Skilled in cross-platform frameworks such as React Native and Flutter. Experienced in building hybrid mobile applications with a focus on code reusability and maintaining native-like performance.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$nsg4Z0f/JuHmwpUj64BaKep9.ChE4oO9w.pVJRMYenpW1c3B2fBGO",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i21.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Lora Grisdale"
@@ -56023,13 +56085,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 22,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "133dd764-5236-41d5-a2b6-d0ff7fcfada5",
+=======
+                            CVFilePath = "r22.pdf",
+                            ConcurrencyStamp = "5c4cf929-cb92-4c0e-87bd-d2644e054f73",
+>>>>>>> Test
                             Email = "tmccarlie2@uiuc.edu",
                             EmailConfirmed = true,
+                            Introduction = " Mobile game developer specializing in Unity3D and C#. Experienced in creating 2D and 3D mobile games for iOS and Android platforms. Proficient in game mechanics, physics simulations, and optimizing game performance for mobile devices.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$j0KXnGiwsqEz5ZIV7KaJUuejL6pW5gcgesxaR3FqGkC6v5uub59Sq",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i22.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Tammi McCarlie"
@@ -56038,13 +56107,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 23,
                             AccessFailedCount = 7,
+<<<<<<< HEAD
                             ConcurrencyStamp = "a5d65beb-0b06-4e55-a8df-2258438f6e42",
+=======
+                            CVFilePath = "r23.pdf",
+                            ConcurrencyStamp = "77c2fb6c-7d3d-4458-a8f6-2f9535b841ea",
+>>>>>>> Test
                             Email = "dartiss3@ibm.com",
                             EmailConfirmed = false,
+                            Introduction = "Front-end mobile developer with a focus on building engaging user interfaces. Experienced in React Native and Vue Native for cross-platform mobile app development. Skilled in responsive design, state management, and integrating with backend APIs.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$ok2109e.dVxcexkAxiLar.VUtA0.717xr21.4UxIlFuyPMEgQIOJC",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i23.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Dex Artiss"
@@ -56053,13 +56129,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 24,
                             AccessFailedCount = 9,
+<<<<<<< HEAD
                             ConcurrencyStamp = "c276d6a9-2550-47ed-b37f-acb2d82ee1ad",
+=======
+                            CVFilePath = "r24.pdf",
+                            ConcurrencyStamp = "ff0f6ed9-f390-45fc-bb1a-0adc3572b5ae",
+>>>>>>> Test
                             Email = "mhansman4@blogger.com",
                             EmailConfirmed = false,
+                            Introduction = "Mobile app architect with a strong background in building scalable and maintainable architectures. Experienced in designing MVVM and MVP patterns for Android and iOS applications. Proficient in incorporating dependency injection, unit testing, and continuous integration into mobile app development workflows.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$qhUk1h6FSM57RgnWfm/hZ.IoqDyavw1rc7uqayfvL5fmuXrs3XWci",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i24.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Melosa Hansman"
@@ -56068,13 +56151,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 25,
                             AccessFailedCount = 1,
+<<<<<<< HEAD
                             ConcurrencyStamp = "41404af5-009e-4532-8f1d-fb79dafe0165",
+=======
+                            CVFilePath = "r25.docx",
+                            ConcurrencyStamp = "9186b736-ce49-4447-9523-7961ed65322b",
+>>>>>>> Test
                             Email = "jcomello5@amazon.com",
                             EmailConfirmed = false,
+                            Introduction = "Mobile app UI/UX designer with a passion for creating visually stunning and intuitive user interfaces. Experienced in Adobe XD, Sketch, and Figma for wireframing, prototyping, and user testing. Skilled in designing mobile app interfaces that prioritize usability and accessibility.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$QEn8V4JpdNzh69s.efuXueC21vZfUYULhOMo0RV405BYF.x8/MHxW",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i25.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Jehu Comello"
@@ -56083,13 +56173,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 26,
                             AccessFailedCount = 9,
+<<<<<<< HEAD
                             ConcurrencyStamp = "df44ac4c-86cf-4607-82e7-cabb6dbadc05",
+=======
+                            CVFilePath = "r26.docx",
+                            ConcurrencyStamp = "9e1e3d70-581d-43c2-8e27-aba5b46aa029",
+>>>>>>> Test
                             Email = "mranshaw6@amazon.de",
                             EmailConfirmed = true,
+                            Introduction = " Mobile app security specialist with expertise in securing iOS and Android applications. Experienced in conducting security audits, implementing encryption algorithms, and mitigating common mobile security threats. Proficient in OWASP Mobile Top 10 vulnerabilities and best practices for secure mobile app development.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$UJBoHn8G0E7a.hQd2ypeIeBp0qecRF8d0wL3CXASXbeACfNhu5Uaa",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i26.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Melisenda Ranshaw"
@@ -56098,13 +56195,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 27,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "ff091b88-a6af-4bd9-972c-f6b94f6b5fa1",
+=======
+                            CVFilePath = "r27.docx",
+                            ConcurrencyStamp = "78389ed7-106d-4820-a3b6-734749c73931",
+>>>>>>> Test
                             Email = "kmarchiso7@google.com",
                             EmailConfirmed = true,
+                            Introduction = " Junior mobile app developer enthusiastic about learning and contributing to mobile app development projects. Proficient in programming languages such as Swift, Kotlin, and JavaScript. Eager to collaborate with experienced developers to enhance mobile app functionalities and user experiences.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$HMhvPXU/UVDlvxp69kVk6OGu8fhJ1cp3CYxfO9reqF/VoXG4HsESC",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i27.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Kendrick Marchiso"
@@ -56113,13 +56217,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 28,
                             AccessFailedCount = 1,
+<<<<<<< HEAD
                             ConcurrencyStamp = "10e9e770-cf63-4b9a-8c7e-8a8766a087f5",
+=======
+                            CVFilePath = "r28.docx",
+                            ConcurrencyStamp = "5978760f-bff1-4d8d-a02a-3aa527e30615",
+>>>>>>> Test
                             Email = "abilovsky8@printfriendly.com",
                             EmailConfirmed = true,
+                            Introduction = "Mobile app entrepreneur and developer with a track record of launching successful apps on both iOS and Android platforms. Skilled in market research, app monetization strategies, and app store optimization (ASO). Passionate about creating innovative mobile solutions that address real-world problems.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$1omTyh/5BRKbTlj4T4ntresw.Jah37pQdWRByBHy.2hOoWyWMQk3a",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i28.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Alexandro Bilovsky"
@@ -56128,13 +56239,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 29,
                             AccessFailedCount = 10,
+<<<<<<< HEAD
                             ConcurrencyStamp = "df932efb-50ce-4d89-aca7-648a7c0426d6",
+=======
+                            CVFilePath = "r29.docx",
+                            ConcurrencyStamp = "7a154aec-b9e7-4051-b076-a953ec71cc1e",
+>>>>>>> Test
                             Email = "edorsey9@hc360.com",
                             EmailConfirmed = true,
+                            Introduction = "Nghiên cứu viên UX có kinh nghiệm với lịch sử trong lĩnh vực tương tác người-máy. Có kinh nghiệm trong phương pháp nghiên cứu chất lượng và lượng, bao gồm phỏng vấn người dùng, khảo sát và kiểm tra tính khả dụng. Thạo việc tổng hợp các kết quả nghiên cứu để hỗ trợ quyết định thiết kế và cải thiện trải nghiệm người dùng.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$n30zXjTuTTbmcuN9cA6I.eblO8E4/JL1p9OIKzgkiu7MGAAGyB4Ya",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i29.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Emmet Dorsey"
@@ -56143,13 +56261,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 30,
                             AccessFailedCount = 4,
+<<<<<<< HEAD
                             ConcurrencyStamp = "d8afd37c-a94d-49e6-add3-6949f19f290a",
+=======
+                            CVFilePath = "r30.pdf",
+                            ConcurrencyStamp = "fc6bba64-18a6-4f0c-88a0-e31cdd9651ae",
+>>>>>>> Test
                             Email = "cgoldsberrya@shareasale.com",
                             EmailConfirmed = false,
+                            Introduction = "Nhà nghiên cứu UX chuyên về phân tích hành vi người dùng và đồng hành. Thạo việc thu thập và phân tích dữ liệu người dùng để xác định các vấn đề và cơ hội cải thiện. Có kinh nghiệm trong việc làm việc cùng các nhóm chức năng khác nhau để chuyển đổi những hiểu biết nghiên cứu thành các đề xuất thiết kế hành động.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$IXQDrcm52R..rKAOy0WTP.IXQVPdpS5y5YS/thyvNdXPoQ0lH7dZ6",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i30.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Cahra Goldsberry"
@@ -56158,13 +56283,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 31,
                             AccessFailedCount = 10,
+<<<<<<< HEAD
                             ConcurrencyStamp = "b7942daf-0eb5-45bc-862d-5e941ef8d4a0",
+=======
+                            CVFilePath = "r31.pdf",
+                            ConcurrencyStamp = "58af2103-b2a6-4cb5-b2dd-93afcda63d0d",
+>>>>>>> Test
                             Email = "pwulfingerb@posterous.com",
                             EmailConfirmed = true,
+                            Introduction = "Nhà nghiên cứu UX có chuyên môn về tâm lý học hành vi con người. Có kinh nghiệm trong việc tiến hành các nghiên cứu người dùng, đánh giá tiêu chuẩn và kiểm tra hành trình tư duy. Thạo việc áp dụng các nguyên lý tâm lý học vào việc thiết kế giao diện người dùng.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$hH/0kPq.q9I9KsD/lmHE9eJQ.D2QsDu2v.15O7vRxWiiTL8cHLxe2",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i31.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Paulette Wulfinger"
@@ -56173,13 +56305,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 32,
                             AccessFailedCount = 10,
+<<<<<<< HEAD
                             ConcurrencyStamp = "f5813e1f-9e54-4bfc-adae-4b6bcc397926",
+=======
+                            CVFilePath = "r32.pdf",
+                            ConcurrencyStamp = "7a3779fd-c5c2-4335-82c6-89d324c9f619",
+>>>>>>> Test
                             Email = "ewesgatec@china.com.cn",
                             EmailConfirmed = true,
+                            Introduction = "Nhà nghiên cứu UX với sự chú trọng vào khả năng tiếp cận và thiết kế bao gồm mọi người. Có kinh nghiệm trong việc tiến hành kiểm tra khả dụng và kiểm tra hành vi với các nhóm người dùng đa dạng, bao gồm cả những người khuyết tật. Thạo việc thúc đẩy các nguyên tắc thiết kế có sẵn và tuân thủ các hướng dẫn về tiếp cận.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$lx0OqGz.N4PNpbXT18LQI.LIRw03DGzpNWet/nlAJwjCdaD6nphoi",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i32.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Eberto Wesgate"
@@ -56188,13 +56327,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 33,
                             AccessFailedCount = 2,
+<<<<<<< HEAD
                             ConcurrencyStamp = "25addb52-cab2-4be9-8015-d63b661fecc5",
+=======
+                            CVFilePath = "r33.pdf",
+                            ConcurrencyStamp = "337b0345-4810-46e8-96cf-104a4f6e4d65",
+>>>>>>> Test
                             Email = "jfaircleyd@upenn.edu",
                             EmailConfirmed = false,
+                            Introduction = "Nhà nghiên cứu UX chuyên về nghiên cứu dân số và phân loại người dùng. Thạo việc xác định các nhân vật người dùng, tiến hành phân tích cạnh tranh và thu thập thông tin thị trường để hỗ trợ chiến lược sản phẩm. Có kinh nghiệm trong việc áp dụng các phương pháp dựa trên dữ liệu để tối ưu hóa trải nghiệm người dùng.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$nm9YQ1icfNU4CizCPQonmehLkZZmv6E2OLXIz2z/kXQqgbSyfC0cq",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i33.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Jacky Faircley"
@@ -56203,13 +56349,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 34,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "63541f21-7719-43ea-af74-136e48ff742a",
+=======
+                            CVFilePath = "r34.pdf",
+                            ConcurrencyStamp = "decb26d5-1733-49f4-a54c-aece2d2ed6c4",
+>>>>>>> Test
                             Email = "bcatleye@wikispaces.com",
                             EmailConfirmed = true,
+                            Introduction = "Nhà nghiên cứu UX với sự chuyên sâu trong phân tích nghiên cứu dân tộc và kiểm tra ngữ cảnh. Thạo việc tiến hành các nghiên cứu trường học và quan sát để hiểu hành vi người dùng trong môi trường thực tế. Có kinh nghiệm trong việc chuyển đổi những hiểu biết về dân tộc thành cơ hội thiết kế cho các sản phẩm và dịch vụ số.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$j6twwudj2WPEO76NUsqDdOBew7PO4Rc7BpFiwbGVq48tvXq6PTegi",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i34.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Bertie Catley"
@@ -56218,13 +56371,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 35,
                             AccessFailedCount = 7,
+<<<<<<< HEAD
                             ConcurrencyStamp = "15aa5632-3a20-4060-ae7b-cba75fe4a02d",
+=======
+                            CVFilePath = "r35.pdf",
+                            ConcurrencyStamp = "a8ea2965-d26a-4b5e-bed7-b18daeaa5db0",
+>>>>>>> Test
                             Email = "esaylorf@last.fm",
                             EmailConfirmed = false,
+                            Introduction = "Nhà nghiên cứu UX với sự chuyên sâu về an toàn và thiết kế bao gồm mọi người. Có kinh nghiệm trong việc tiến hành kiểm tra khả dụng và kiểm tra hành vi với các nhóm người dùng đa dạng, bao gồm cả những người khuyết tật. Thạo việc thúc đẩy các nguyên tắc thiết kế có sẵn và tuân thủ các hướng dẫn về an toàn.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$XZTxljewq5F7en46SZj9R.y8Z7wz0dHdrdGAG2NO36WR3sCo6PrMG",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i35.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Evelina Saylor"
@@ -56233,13 +56393,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 36,
                             AccessFailedCount = 3,
+<<<<<<< HEAD
                             ConcurrencyStamp = "262ed7c4-f893-42fc-9374-a2d931852f91",
+=======
+                            CVFilePath = "r36.pdf",
+                            ConcurrencyStamp = "9345b4f7-b343-489d-8d3a-debeca9330d2",
+>>>>>>> Test
                             Email = "cfitzackerleyg@miitbeian.gov.cn",
                             EmailConfirmed = false,
+                            Introduction = "Nhà nghiên cứu UX mới bắt đầu nhiệt huyết với sự học hỏi và đóng góp cho các dự án nghiên cứu. Thạo việc tiến hành phỏng vấn người dùng, kiểm tra tính khả dụng và khảo sát để thu thập phản hồi và hiểu biết từ người dùng. Hăng hái hợp tác với các nhà nghiên cứu kinh nghiệm để cải thiện chức năng và trải nghiệm của sản phẩm.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$pBof1tLNUgaAQRbOm7ENmeuZoJr96dn1PLtpsgrveEdHXCG0buKy2",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i36.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Chas Fitzackerley"
@@ -56248,13 +56415,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 37,
                             AccessFailedCount = 7,
+<<<<<<< HEAD
                             ConcurrencyStamp = "2272bcf3-90cd-424d-8c20-602b2009278d",
+=======
+                            CVFilePath = "r37.pdf",
+                            ConcurrencyStamp = "2eef271b-7cac-4db0-9601-25af818f834d",
+>>>>>>> Test
                             Email = "sohowbaneh@globo.com",
                             EmailConfirmed = true,
+                            Introduction = "Nhà nghiên cứu UX với sự chuyên sâu về số liệu và phân tích. Có kinh nghiệm trong việc xác định các chỉ số hiệu suất chính, thiết lập các công cụ phân tích và phân tích dữ liệu người dùng để đo lường và cải thiện hiệu suất UX. Thạo việc trực quan hóa dữ liệu và truyền đạt hiểu biết cho các bên liên quan một cách hiệu quả.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$lS.n44udNYDZVUqDRgbwp.1F0VZgNhSAl20Sqynr4Xo.wGt15ypDC",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i37.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Sharity O'Howbane"
@@ -56263,13 +56437,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 38,
                             AccessFailedCount = 7,
+<<<<<<< HEAD
                             ConcurrencyStamp = "a547b1a0-f56c-4a7f-9980-26ac9c8abe28",
+=======
+                            CVFilePath = "r38.pdf",
+                            ConcurrencyStamp = "6e68d5b3-b1e9-4395-92ac-da174efb2881",
+>>>>>>> Test
                             Email = "nmatysiaki@amazonaws.com",
                             EmailConfirmed = false,
+                            Introduction = "Nhà nghiên cứu UX với sự chuyên sâu trong việc thực hiện nghiên cứu về tâm lý học và kinh tế học hành vi. Có kinh nghiệm trong việc áp dụng các lý thuyết tâm lý học vào nghiên cứu UX, chẳng hạn như các heuristics quyết định và mô hình tư duy. Thạo việc tiến hành các nghiên cứu theo dõi mắt và kiểm tra A/B để tối ưu hóa giao diện người dùng và tương tác.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$T3Vij/zpGwLiHr8q22CBT.HSMGzlNNYVU4YhAOJZ0kU5uPhI4mgxa",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i38.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Nikoletta Matysiak"
@@ -56278,13 +56459,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 39,
                             AccessFailedCount = 3,
+<<<<<<< HEAD
                             ConcurrencyStamp = "2bd71904-db57-432c-9d76-8387827c89b6",
+=======
+                            CVFilePath = "r39.pdf",
+                            ConcurrencyStamp = "564b0805-4753-42cd-8579-1b48b921448c",
+>>>>>>> Test
                             Email = "dkobierzyckij@yahoo.com",
                             EmailConfirmed = true,
+                            Introduction = "Kỹ sư Machine Learning có kinh nghiệm trong việc xây dựng và triển khai các mô hình học máy. Thạo việc tiền xử lý dữ liệu, lựa chọn mô hình phù hợp và tinh chỉnh tham số để đạt được hiệu suất tốt nhất. Sẵn lòng tham gia vào các dự án thú vị và học hỏi từ những kỹ sư hàng đầu.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$AL64EqKymYrsBb/mwy2v0.uH3Ye7R0a4lK.YhCIlF4EZEk/TkWD3q",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i39.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Darda Kobierzycki"
@@ -56293,13 +56481,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 40,
                             AccessFailedCount = 10,
+<<<<<<< HEAD
                             ConcurrencyStamp = "ad0e4daf-8e20-44d8-87d2-71ae468f8cc0",
+=======
+                            CVFilePath = "r40.pdf",
+                            ConcurrencyStamp = "4d3fde6e-3c7c-4fd7-a459-a1fcc3463f39",
+>>>>>>> Test
                             Email = "awatchornk@bigcartel.com",
                             EmailConfirmed = true,
+                            Introduction = "Kỹ sư Machine Learning với kiến thức vững về học sâu và học máy. Có kinh nghiệm trong việc áp dụng các mô hình CNN, RNN, và Transformer cho các bài toán nhận diện, dự đoán và dịch ngôn ngữ. Nhiệt tình với việc nghiên cứu và áp dụng các công nghệ mới nhất trong lĩnh vực.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$R7Et/9gWTUMrsrjE2t3h9.bI10ezjnl5YJjtdmRrWQSDOQtulPx6i",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i40.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Arielle Watchorn"
@@ -56308,13 +56503,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 41,
                             AccessFailedCount = 10,
+<<<<<<< HEAD
                             ConcurrencyStamp = "e65ab891-2183-4a57-aaad-840893cc1956",
+=======
+                            CVFilePath = "r41.pdf",
+                            ConcurrencyStamp = "fc3e20e7-21dc-4be2-8244-834d08b0fe96",
+>>>>>>> Test
                             Email = "eewensonl@google.com.hk",
                             EmailConfirmed = false,
+                            Introduction = "Kỹ sư Machine Learning chuyên sâu về thị giác máy tính và xử lý ảnh. Có kinh nghiệm trong việc xây dựng các hệ thống nhận diện khuôn mặt, phát hiện vật thể và phân tích hình ảnh y tế. Sẵn lòng tìm hiểu và thử nghiệm các phương pháp mới để cải thiện hiệu suất của các ứng dụng.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$pYXTTsJ8GeRmnUP2DZHwWuUUruSwAEm2aonwARv.O7dDgPa9PGeq6",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i41.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Elnar Ewenson"
@@ -56323,13 +56525,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 42,
                             AccessFailedCount = 8,
+<<<<<<< HEAD
                             ConcurrencyStamp = "a52ea8e7-d8a9-4d5b-8a9e-648b933b78fe",
+=======
+                            CVFilePath = "r42.pdf",
+                            ConcurrencyStamp = "4c9e7d73-014d-4fad-bc49-871982ff4fa1",
+>>>>>>> Test
                             Email = "rschindlerm@ebay.com",
                             EmailConfirmed = false,
+                            Introduction = "Kỹ sư Machine Learning với kỹ năng tốt về xử lý dữ liệu lớn và học máy phân tán. Có kinh nghiệm trong việc triển khai các mô hình học máy trên cơ sở dữ liệu phân tán và hệ thống phân tán. Sẵn lòng tham gia vào các dự án có quy mô lớn và phức tạp.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$Ewz8pVwm1Uxz4S01.LIgLe3Q/JHk/SJb4R1h8.NtWgfyrusGAMYY6",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i42.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Roldan Schindler"
@@ -56338,13 +56547,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 43,
                             AccessFailedCount = 2,
+<<<<<<< HEAD
                             ConcurrencyStamp = "b27bef28-4c95-47f6-b0a7-74afc4627694",
+=======
+                            CVFilePath = "r43.pdf",
+                            ConcurrencyStamp = "ae0a8b4e-a7e4-4a44-9a57-c494000508da",
+>>>>>>> Test
                             Email = "vhonschn@nature.com",
                             EmailConfirmed = false,
+                            Introduction = "Kỹ sư Machine Learning có chuyên môn về xử lý ngôn ngữ tự nhiên và hiểu ngôn ngữ tự nhiên. Có kinh nghiệm trong việc xây dựng các hệ thống gợi ý, phân loại văn bản và dịch máy. Nhiệt tình với việc áp dụng học sâu và phương pháp trích xuất thông tin để giải quyết các thách thức trong lĩnh vực này.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$B7.HuHmcItU.ZdKOtAk/Me3FuantzbaX8rCW890RfHnV29a.YoNC2",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i43.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Vina Honsch"
@@ -56353,13 +56569,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 44,
                             AccessFailedCount = 4,
+<<<<<<< HEAD
                             ConcurrencyStamp = "eaf236d4-e759-44ee-a67d-93bc060c60c8",
+=======
+                            CVFilePath = "r44.pdf",
+                            ConcurrencyStamp = "5a1b7a64-9667-43e6-adb8-66550b6e62f9",
+>>>>>>> Test
                             Email = "hnoelo@biblegateway.com",
                             EmailConfirmed = true,
+                            Introduction = "Kỹ sư Machine Learning với kiến thức vững về học tăng cường và học máy tăng cường. Có kinh nghiệm trong việc áp dụng các thuật toán Q-learning, DQN và các phương pháp tối ưu hoá chính sách để giải quyết các bài toán điều khiển và quyết định. Sẵn lòng tham gia vào các dự án về học máy tăng cường và đóng góp ý kiến.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$FkX1Z1iJdEki68AWZTb7UenoSjvba6jYKQg/J3WevQzvvmvPz0Qse",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i44.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Hamlen Noel"
@@ -56368,13 +56591,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 45,
                             AccessFailedCount = 7,
+<<<<<<< HEAD
                             ConcurrencyStamp = "44c983c0-bca7-4af0-b2b7-132f7529aea6",
+=======
+                            CVFilePath = "r45.pdf",
+                            ConcurrencyStamp = "35081dd2-5e31-4791-89dc-b045b910e1f7",
+>>>>>>> Test
                             Email = "bgermanp@edublogs.org",
                             EmailConfirmed = true,
+                            Introduction = "Kỹ sư Machine Learning có kinh nghiệm trong việc xây dựng hệ thống gợi ý và hệ thống lọc cộng tác. Có kiến thức sâu về các thuật toán cơ bản như collaborative filtering và content-based filtering, cũng như các phương pháp tiên tiến như matrix factorization và deep learning. Nhiệt tình với việc nghiên cứu và triển khai các giải pháp gợi ý hiệu quả.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$BO2hCS7qr8nl4d0XO6kZTuyn1cscbAxsoQoos8kGBaGZozSDeJVoW",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i45.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Bernardina German"
@@ -56383,13 +56613,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 46,
                             AccessFailedCount = 9,
+<<<<<<< HEAD
                             ConcurrencyStamp = "a27901bb-ce05-42d4-a351-ef9020b88065",
+=======
+                            CVFilePath = "r46.pdf",
+                            ConcurrencyStamp = "4ad5b98e-c7d2-4def-9134-5fe3e6e59571",
+>>>>>>> Test
                             Email = "ometterickq@si.edu",
                             EmailConfirmed = true,
+                            Introduction = "Kỹ sư Machine Learning với kỹ năng tốt về phân tích dữ liệu và dự báo. Có kinh nghiệm trong việc sử dụng các thuật toán học máy và thống kê để dự báo xu hướng và xu hướng trong dữ liệu. Sẵn lòng tham gia vào các dự án phức tạp và đóng góp ý kiến xây dựng mô hình.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$tSjWDxMvzPu9KblXaPaRZ.a0kRSUDaD9lidva9wVn68txT8E8aDp.",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i46.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Ollie Metterick"
@@ -56398,13 +56635,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 47,
                             AccessFailedCount = 10,
+<<<<<<< HEAD
                             ConcurrencyStamp = "dd02b41e-0a40-4f18-9cf3-a285d6ef9940",
+=======
+                            CVFilePath = "r47.pdf",
+                            ConcurrencyStamp = "42036dea-9262-4203-b2da-5d1b9d725db4",
+>>>>>>> Test
                             Email = "wglanertr@technorati.com",
                             EmailConfirmed = true,
+                            Introduction = "Kỹ sư Machine Learning mới vào nghề, đầy nhiệt huyết và sẵn lòng học hỏi. Có kiến thức cơ bản về các thuật toán học máy và kinh nghiệm trong việc xử lý dữ liệu. Năng động và hợp tác trong môi trường làm việc nhóm.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$yimp1eJifnBgzhTPro9D9uKItP14jP5HRPZpPsL/36WCz7phoRCUW",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i47.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Winna Glanert"
@@ -56413,13 +56657,21 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 48,
                             AccessFailedCount = 8,
+<<<<<<< HEAD
                             ConcurrencyStamp = "8b945a6c-cfde-415e-8a42-3d22a5a98b82",
                             Email = "plongdons@so-net.ne.jp",
+=======
+                            CVFilePath = "r48.pdf",
+                            ConcurrencyStamp = "c3a4270d-232b-4c5a-a18f-98772b838337",
+                            Email = "plongdons@so - net.ne.jp",
+>>>>>>> Test
                             EmailConfirmed = false,
+                            Introduction = "Kỹ sư Machine Learning với kinh nghiệm rộng trong việc xử lý dữ liệu cấu trúc và không cấu trúc. Có kỹ năng tốt trong việc lựa chọn, triển khai và tinh chỉnh mô hình học máy. Sẵn lòng chia sẻ kiến thức và kinh nghiệm với đồng nghiệp mới.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$Mu71kQEib0BOLMwPRzYsm.U4CWkkjrGUPXS92zr6Z4yWM5DMkjaye",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i48.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Perry Longdon"
@@ -56428,13 +56680,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 49,
                             AccessFailedCount = 7,
+<<<<<<< HEAD
                             ConcurrencyStamp = "9472fd07-e7e5-48a1-9017-4c20ac374c92",
+=======
+                            CVFilePath = "r49.pdf",
+                            ConcurrencyStamp = "7a250d9e-a1aa-4b60-b4df-60e5fc0d63f1",
+>>>>>>> Test
                             Email = "sgrealisht@netvibes.com",
                             EmailConfirmed = false,
+                            Introduction = "là một Project Manager có kinh nghiệm với niềm đam mê đưa sự hòa hợp vào mỗi dự án mà cô đảm nhận. Với lý lịch trong lĩnh vực kỹ thuật phần mềm, cô liên kết một cách trơn tru sự chuyên môn kỹ thuật với kỹ năng quản lý dự án. Sự bình tĩnh và kỹ năng giao tiếp mạnh mẽ của Namita khiến cô trở thành một nhà lãnh đạo tự nhiên, tài ba trong việc chỉ đạo đội ngũ đạt được kết quả dự án thành công. Sự yêu thích của Namita với âm nhạc và vũ điệu cổ điển Ấn Độ phản ánh qua cách tiếp cận quản lý dự án của cô, nơi cô điều phối các nhiệm vụ một cách chính xác và tinh tế, đảm bảo mọi khía cạnh của dự án diễn ra một cách hoàn hảo",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$lVRSYIkuZsasAcJPy1FsyOitl6HybOG5rqT6jzZ.aRwp/EgmrLNI.",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i49.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Salomi Grealish"
@@ -56443,13 +56702,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 50,
                             AccessFailedCount = 7,
+<<<<<<< HEAD
                             ConcurrencyStamp = "bf245a1a-edc3-4ab0-adeb-ed505cf373d3",
+=======
+                            CVFilePath = "r50.pdf",
+                            ConcurrencyStamp = "9b816571-86dd-4651-8dfa-38341392d748",
+>>>>>>> Test
                             Email = "vantoniuttiu@smugmug.com",
                             EmailConfirmed = true,
+                            Introduction = "là một Project Manager năng động nổi tiếng với tư duy chiến lược và kế hoạch tỉ mỉ. Với lý lịch trong quản trị kinh doanh kết hợp với kinh nghiệm trong quản lý dự án, anh có góc nhìn độc đáo trong việc xử lý các dự án phức tạp. Phong cách lãnh đạo của Rajesh được đặc trưng bởi khả năng truyền cảm hứng và khích lệ các thành viên trong đội làm việc của anh để đạt được tối đa hiệu quả làm việc của họ. Lấy cảm hứng từ văn học và triết học cổ điển Ấn Độ, Rajesh tiếp cận quản lý dự án với tư duy toàn diện, luôn xem xét tầm nhìn toàn diện và hậu quả dài hạn của quyết định của mình",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$JLiq0tTWaA6IJjXw1VdCq.2L2nqZwnICsp8RNPPCEMDqD/CYhe9UK",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i50.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Vale Antoniutti"
@@ -56458,13 +56724,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 51,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "d9fdb554-3010-41e9-8b3c-199b405b30e8",
+=======
+                            CVFilePath = "r51.pdf",
+                            ConcurrencyStamp = "ce7f3f83-7540-4343-a0a1-49c60cb3bf3d",
+>>>>>>> Test
                             Email = "sdellv@sakura.ne.jp",
                             EmailConfirmed = false,
+                            Introduction = "Alok là một Project Manager chuyên nghiệp nổi tiếng với cam kết kiên định đối với việc đạt được kết quả. Với lý lịch trong kỹ thuật cơ khí, anh có ánh mắt tinh tế và phương pháp giải quyết vấn đề một cách hệ thống. Phong cách lãnh đạo của Alok được đặc trưng bởi khả năng giữ bình tĩnh dưới áp lực và khả năng tìm ra các giải pháp hiệu quả cho những thách thức phức tạp. Lấy cảm hứng từ các triết lý cổ điển Ấn Độ, Alok tin rằng việc tự phản ánh và liên tục cải tiến là quan trọng, luôn cố gắng hoàn thiện kỹ năng quản lý dự án của mình và dẫn dắt đội ngũ của mình đến sự xuất sắc.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$qxZ0IO6WgnYGcXemkruc4uxe68Yb18G9HuxlstWmridNvTu0Ba2QC",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i51.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Stanley Dell Casa"
@@ -56473,13 +56746,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 52,
                             AccessFailedCount = 5,
+<<<<<<< HEAD
                             ConcurrencyStamp = "475adeee-efc3-43d2-b0bc-ebcb4b24eea7",
+=======
+                            CVFilePath = "r52.pdf",
+                            ConcurrencyStamp = "cac54330-37b2-4093-a5de-702e172eebbf",
+>>>>>>> Test
                             Email = "rmcillroyw@amazon.de",
                             EmailConfirmed = true,
+                            Introduction = "Neha là một Project Manager thông minh với sự linh hoạt và sự kiên nhẫn trong việc vượt qua môi trường dự án phức tạp. Với lý lịch trong công nghệ thông tin, cô giỏi sử dụng công nghệ để tối ưu hóa quy trình dự án và tăng cường hiệu suất làm việc. Phong cách lãnh đạo của Neha được đặc trưng bởi khả năng dễ dàng điều hành trong điều kiện không rõ ràng và tìm ra các giải pháp sáng tạo cho những thách thức mới nảy sinh. Lấy cảm hứng từ thần thoại Ấn Độ, Neha tiếp cận quản lý dự án với tinh thần kiên định và kiên nhẫn, tin rằng mọi trở ngại đều là cơ hội cho sự phát triển và học hỏi.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$2oO0.6Uv1ckhAZcOb8z4culCXZMy.piQcekvAvj/4enurWQ9ICgWK",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i52.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Ronald McIllroy"
@@ -56488,13 +56768,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 53,
                             AccessFailedCount = 7,
+<<<<<<< HEAD
                             ConcurrencyStamp = "71947ee2-d0a3-4d6c-b13e-6d4ba7721c65",
+=======
+                            CVFilePath = "r53.pdf",
+                            ConcurrencyStamp = "80a03e52-806c-451a-aad1-95618e8cb1c0",
+>>>>>>> Test
                             Email = "ktremouletx@tripod.com",
                             EmailConfirmed = true,
+                            Introduction = "Arjun là một Project Manager hấp dẫn với tài năng xây dựng mối quan hệ mạnh mẽ và thúc đẩy sự hợp tác. Với lý lịch trong kỹ thuật xây dựng, anh mang đến một cách tiếp cận có cấu trúc và hệ thống cho các dự án của mình, đảm bảo mọi chi tiết được lập kế hoạch và thực hiện một cách tỉ mỉ. Phong cách lãnh đạo của Arjun được đặc trưng bởi tư duy chiến lược và khả năng truyền cảm hứng cho các thành viên trong đội làm việc của anh để tư duy sáng tạo. Lấy cảm hứng từ nguyên lý karma và dharma, Arjun tiếp cận quản lý dự án với tinh thần mục đích và trách nhiệm, luôn cố gắng tạo ra kết quả tích cực cho cả đội và các bên liên quan.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$Ua4kw.SZzryF0Ik6MT25d.5liMa2ymjQMp9JkLzagNoyJ0u8tn6P2",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i53.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Kelley Tremoulet"
@@ -56503,13 +56790,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 54,
                             AccessFailedCount = 2,
+<<<<<<< HEAD
                             ConcurrencyStamp = "f8ac37af-d56a-4d8f-8019-11da671fd421",
+=======
+                            CVFilePath = "r54.pdf",
+                            ConcurrencyStamp = "fc8dacf2-a230-4cff-90a1-8c221bebc507",
+>>>>>>> Test
                             Email = "sdunkersleyy@tuttocitta.it",
                             EmailConfirmed = false,
+                            Introduction = "Ananya là một Project Manager chiến lược nổi tiếng với khả năng phân tích tinh tế và cách tiếp cận tiên tiến. Với lý lịch trong tài chính, cô có hiểu biết sâu sắc về các nguyên tắc kinh doanh và động lực thị trường, mà cô sử dụng để thúc đẩy thành công của dự án. Phong cách lãnh đạo của Ananya được đặc trưng bởi khả năng dự đoán các thách thức tiềm ẩn và tích cực giảm thiểu rủi ro, đảm bảo việc thực hiện dự án diễn ra một cách trơn tru. Lấy cảm hứng từ khái niệm 'jugaad' trong văn hóa Ấn Độ, Ananya hưởng ứng tư duy tiết kiệm và sáng tạo, luôn tìm kiếm các giải pháp sáng tạo để tối ưu hóa tài nguyên và tối đa hóa kết quả của dự án.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$w8fvqa9FwMX3X5byuleHROC8cyrkKlovsnj0wP2.3gqtngkxei15m",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i54.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Sheffy Dunkersley"
@@ -56518,13 +56812,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 55,
                             AccessFailedCount = 10,
+<<<<<<< HEAD
                             ConcurrencyStamp = "6376d1d5-d69b-401d-89fc-43cf8ede4601",
+=======
+                            CVFilePath = "r55.pdf",
+                            ConcurrencyStamp = "50d59a1a-7b45-49f4-8f78-4b12020f6433",
+>>>>>>> Test
                             Email = "jyanceyz@redcross.org",
                             EmailConfirmed = false,
+                            Introduction = "Vikram là một Project Manager tầm nhìn với khả năng tưởng tượng và thực hiện các dự án phức tạp một cách chính xác. Với lý lịch trong kiến trúc, anh mang đến một kết hợp độc đáo giữa sự sáng tạo và chuyên môn kỹ thuật cho công việc của mình. Phong cách lãnh đạo của Vikram được đặc trưng bởi tư duy chiến lược và khả năng truyền cảm hứng cho các thành viên trong đội làm việc của anh để tư duy sáng tạo. Lấy cảm hứng từ di sản kiến trúc phong phú của Ấn Độ, Vikram tiếp cận quản lý dự án như một hình thức biểu đạt sáng tạo, luôn thách thức giới hạn của sự đổi mới để mang lại kết quả ấn tượng.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$jf6Rqk83qj1yl409cxuhreyUG1c1nUwnwYOVRxs1NWDZs6SKwtGGy",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i55.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Janifer Yancey"
@@ -56533,13 +56834,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 56,
                             AccessFailedCount = 8,
+<<<<<<< HEAD
                             ConcurrencyStamp = "b3939cc6-33e4-4fc9-882b-b5bbdead9077",
+=======
+                            CVFilePath = "r56.pdf",
+                            ConcurrencyStamp = "28703733-4808-44b2-85c8-cc1720084f8e",
+>>>>>>> Test
                             Email = "meble10@blog.com",
                             EmailConfirmed = true,
+                            Introduction = " Tôi là một lập trình viên Full-Stack đến từ Bắc Kinh, Trung Quốc. Tôi đam mê việc lập trình và tận tâm với công việc của mình. Tôi có kinh nghiệm và kiến thức sâu rộng về cả phía Front-end và Back-end. JavaScript, React và Node.js là những công cụ tôi thường xuyên sử dụng để xây dựng ứng dụng web động và hiệu quả.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$mska6go1xMbwmnr.70jfM.iEagWviKq4inOQaGtcgEWwq1AJxQRJq",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i56.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Marlene Eble"
@@ -56548,13 +56856,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 57,
                             AccessFailedCount = 10,
+<<<<<<< HEAD
                             ConcurrencyStamp = "a0f140d1-7036-4c1d-ac79-fc82392a43a8",
+=======
+                            CVFilePath = "r57.pdf",
+                            ConcurrencyStamp = "af1427f0-dacb-4493-b41f-09d9a5ec1867",
+>>>>>>> Test
                             Email = "nwoofendell11@msn.com",
                             EmailConfirmed = false,
+                            Introduction = "Tôi đến từ Thượng Hải và là một lập trình viên Full-Stack. Tôi say mê với việc lập trình và đã tích luỹ được nhiều kinh nghiệm trong lĩnh vực này. Vue.js, Python và Django là những công nghệ mà tôi thường sử dụng để xây dựng các ứng dụng web hiệu quả và linh hoạt.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$DBZi1HoeEUQqbNyqZSTiCubVvMAQ6kR8cdjcv3tVwhgPHZGvgOj1a",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i57.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Nonnah Woofendell"
@@ -56563,13 +56878,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 58,
                             AccessFailedCount = 10,
+<<<<<<< HEAD
                             ConcurrencyStamp = "2142c833-2390-46a8-89f6-df1b3336e05b",
+=======
+                            CVFilePath = "r58.pdf",
+                            ConcurrencyStamp = "12804c86-d81b-453c-8192-25a42d6bd3bc",
+>>>>>>> Test
                             Email = "sdisbrow12@geocities.jp",
                             EmailConfirmed = true,
+                            Introduction = "Tôi là một lập trình viên Full-Stack đến từ Thành Đô, Trung Quốc. Tôi đam mê công việc lập trình và luôn mong muốn học hỏi thêm nhiều công nghệ mới. Angular, Java và Spring Boot là những công cụ mà tôi thường sử dụng để xây dựng các ứng dụng web chất lượng và ổn định.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$4eP3.VFL0NjIuvGdUoHDaOG5Mfk06C6bUv.strqQkQoSg8oBZMf9S",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i58.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Siward Disbrow"
@@ -56578,13 +56900,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 59,
                             AccessFailedCount = 4,
+<<<<<<< HEAD
                             ConcurrencyStamp = "6d136112-d398-416d-8e31-6d075755e3b7",
+=======
+                            CVFilePath = "r59.pdf",
+                            ConcurrencyStamp = "900bed52-201a-40ea-bfa0-d2bd255ca21e",
+>>>>>>> Test
                             Email = "rivy13@seattletimes.com",
                             EmailConfirmed = true,
+                            Introduction = "Tôi đến từ Thâm Quyến và là một lập trình viên Full-Stack. Tôi có sở thích về việc tạo ra những ứng dụng web đa dạng và phức tạp. React, Python và Flask là những công nghệ mà tôi thường xuyên áp dụng để phát triển các dự án của mình.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$vJzxvWxQyFZSxn93ZO27v.LCpTLLTMQ11eRDwf29ifBH1Pb7UAlr6",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i59.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Renie Ivy"
@@ -56593,13 +56922,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 60,
                             AccessFailedCount = 3,
+<<<<<<< HEAD
                             ConcurrencyStamp = "1bbe849a-3a50-4832-9f4b-68a311ca5958",
+=======
+                            CVFilePath = "r60.pdf",
+                            ConcurrencyStamp = "bfac2444-733e-4a8d-a7d4-68a1d10586f8",
+>>>>>>> Test
                             Email = "dpostgate14@dyndns.org",
                             EmailConfirmed = true,
+                            Introduction = "Tôi đến từ Thanh Đảo, Trung Quốc và là một lập trình viên Full-Stack. Tôi có kinh nghiệm trong việc xây dựng ứng dụng web từ đơn giản đến phức tạp. React, Express và MongoDB là những công nghệ mà tôi thường sử dụng để phát triển các dự án của mình.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$iv8jY88RTQil7kU4AcQdBu9rACTYdBaM4bHqEAKNzMtcILAMQrMs.",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i60.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Delainey Postgate"
@@ -56608,13 +56944,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 61,
                             AccessFailedCount = 1,
+<<<<<<< HEAD
                             ConcurrencyStamp = "0e73f333-f5de-4b81-a44d-7e19b4a0177b",
+=======
+                            CVFilePath = "r61.docx",
+                            ConcurrencyStamp = "a58bdbe8-159c-4eff-bc7e-af1a0e8bc007",
+>>>>>>> Test
                             Email = "tmillea15@livejournal.com",
                             EmailConfirmed = true,
+                            Introduction = "Tôi là một lập trình viên Full-Stack đến từ Thượng Hải, Trung Quốc. Tôi đam mê công việc lập trình và luôn mong muốn tìm hiểu về những công nghệ mới. Vue.js, Node.js và MongoDB là những công cụ mà tôi thường sử dụng để xây dựng các ứng dụng web hiệu quả và linh hoạt.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$fhss0ne.c0ZiobEa5D26He33GrBC2buGGvv.8Cj9NXAN86nm5dIZ2",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i61.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Trix Millea"
@@ -56623,13 +56966,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 62,
                             AccessFailedCount = 3,
+<<<<<<< HEAD
                             ConcurrencyStamp = "e58b5ecc-ebf4-44d0-94ea-2736968d1f5c",
+=======
+                            CVFilePath = "r62.docx",
+                            ConcurrencyStamp = "4757df6a-36fb-450a-8d89-93a7cfcdd71f",
+>>>>>>> Test
                             Email = "lhallibone16@fc2.com",
                             EmailConfirmed = false,
+                            Introduction = "Tôi đến từ Thành Đô và là một lập trình viên Full-Stack. Tôi có sở thích về việc phát triển các ứng dụng web và đã có nhiều kinh nghiệm trong lĩnh vực này. Angular, Java và Spring Boot là những công nghệ mà tôi thường sử dụng để xây dựng các ứng dụng web chất lượng và ổn định.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$oP4yak72I88kyY6CxWKWTur7mS0ZOk7RSkqLpAQTfmQkCfJmSGNuS",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i62.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Leon Hallibone"
@@ -56638,13 +56988,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 63,
                             AccessFailedCount = 4,
+<<<<<<< HEAD
                             ConcurrencyStamp = "78008d09-51df-4b2e-bf73-f0dff9313a79",
+=======
+                            CVFilePath = "r63.docx",
+                            ConcurrencyStamp = "3ddb2d17-d075-418e-933a-275f2dae318e",
+>>>>>>> Test
                             Email = "kivushkin17@oakley.com",
                             EmailConfirmed = false,
+                            Introduction = "Tôi đến từ Thâm Quyến, Trung Quốc và là một lập trình viên Full-Stack. Tôi có kinh nghiệm trong việc xây dựng các ứng dụng web đa dạng và linh hoạt. React, Python và Flask là những công nghệ mà tôi thường sử dụng để phát triển các dự án của mình.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$WuDoA27RGJ.tfHn2bzDUeuR/ZdDCloSNc66XlbwaYRrpkPE9qOkKe",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Kari Ivushkin"
@@ -56653,43 +57010,64 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 64,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "e90f3ed7-327b-4068-98fd-3160106e4a2e",
+=======
+                            CVFilePath = "r64.docx",
+                            ConcurrencyStamp = "9a82af12-761b-4f04-aaa3-8da92bc51703",
+>>>>>>> Test
                             Email = "apassman18@blogs.com",
                             EmailConfirmed = false,
+                            Introduction = "Benjamin, armed with a background in computer science or software engineering, is a master of programming languages and game engines. He thrives on solving technical challenges and pushing the boundaries of what's possible in game development through innovative gameplay mechanics and cutting-edge technology",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$COucln69MUQWz8WeMhR81eAYnCrOAr4ABIBwCsHSV32rMJgPYeTIW",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = false,
-                            UserName = "Abigale Passman"
+                            UserName = "Abigale Passman Benjamin"
                         },
                         new
                         {
                             Id = 65,
                             AccessFailedCount = 2,
+<<<<<<< HEAD
                             ConcurrencyStamp = "e099d94d-4ba7-4614-abee-99ce7e83243f",
+=======
+                            CVFilePath = "r65.docx",
+                            ConcurrencyStamp = "76b436b0-e2d7-46a3-909e-20c57b3a3b37",
+>>>>>>> Test
                             Email = "iewington19@tamu.edu",
                             EmailConfirmed = false,
+                            Introduction = "Claire, with a degree in fine arts or graphic design, has a talent for creating visually stunning game worlds and characters. Her creativity knows no bounds as she crafts breathtaking landscapes, intricate character designs, and captivating animations that bring games to life.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$8h6SDxbdE1x65GFfC48uBOEadXN0mKucOXrKmHzHUf1MtvsRv2a7S",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)0,
                             TwoFactorEnabled = false,
-                            UserName = "Igor Ewington"
+                            UserName = "Igor Ewington Claire"
                         },
                         new
                         {
                             Id = 66,
                             AccessFailedCount = 9,
+<<<<<<< HEAD
                             ConcurrencyStamp = "40120452-43f9-494f-8ff0-b49df90e4d00",
+=======
+                            CVFilePath = "r66.docx",
+                            ConcurrencyStamp = "36638520-3ca6-4373-b8dc-fd384c298893",
+>>>>>>> Test
                             Email = "hangerstein1a@godaddy.com",
                             EmailConfirmed = true,
+                            Introduction = "Tôi là một Backend Developer với 5 năm kinh nghiệm trong ngành công nghệ thông tin. Trình độ chuyên môn của tôi tập trung vào lập trình Java và Python, cùng với các kỹ năng vững về xử lý dữ liệu và tối ưu hóa hiệu suất. Tôi đã tham gia vào nhiều dự án lớn, từ các ứng dụng web đến các hệ thống quản lý cơ sở dữ liệu phức tạp. Sự kiên nhẫn và ham học hỏi là những điểm mạnh của tôi, và tôi luôn mong muốn thách thức bản thân để phát triển mỗi ngày.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$7ZK8ncz5okb46SXMi2aX/OFn9uu1KmEedijLd68QYqC5vfb82w2Me",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i66.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Holmes Angerstein"
@@ -56698,13 +57076,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 67,
                             AccessFailedCount = 9,
+<<<<<<< HEAD
                             ConcurrencyStamp = "fa54e178-cf95-473c-8f40-445d897065d9",
+=======
+                            CVFilePath = "r67.docx",
+                            ConcurrencyStamp = "3ccf2f76-a4a3-49cd-866a-a70145d6c1d3",
+>>>>>>> Test
                             Email = "kfehely1b@amazon.co.jp",
                             EmailConfirmed = false,
+                            Introduction = "một Backend Developer với 3 năm kinh nghiệm. Tôi có kiến thức sâu rộng về lập trình Python và Node.js, cũng như về các công nghệ liên quan đến cơ sở dữ liệu như MySQL và MongoDB. Tôi luôn muốn học hỏi và khám phá những công nghệ mới, và tôi tin rằng việc này giúp tôi ngày càng phát triển và đóng góp nhiều hơn trong dự án mà tôi tham gia.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$STs4qX6wgYma/k.0Qxap3.ApRyNYRZ.moD849n.URGRUZjVEuF7sS",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i67.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Kasper Fehely"
@@ -56713,13 +57098,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 68,
                             AccessFailedCount = 5,
+<<<<<<< HEAD
                             ConcurrencyStamp = "ef5f788b-ff17-431c-8546-965c1dfe71e8",
+=======
+                            CVFilePath = "r68.docx",
+                            ConcurrencyStamp = "213300b2-d0a4-4fde-871f-3adf0c7e84e5",
+>>>>>>> Test
                             Email = "jcassley1c@harvard.edu",
                             EmailConfirmed = false,
+                            Introduction = "Tôi là một Backend Developer tận tụy với hơn 4 năm kinh nghiệm trong ngành phát triển phần mềm. Sở trường của tôi nằm ở việc xây dựng các hệ thống phức tạp bằng Java và PHP. Tôi luôn chú trọng đến việc viết mã sạch và hiệu quả, cũng như đảm bảo tính ổn định và bảo mật cho ứng dụng. Sự cam kết và trách nhiệm là hai đặc điểm quan trọng trong cách làm việc của tôi.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$4fFaXEcih4iFQOn40vDLx.9th9oc56K7njiCobya/QCj0tuCNqhs.",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i68.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Janean Cassley"
@@ -56728,13 +57120,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 69,
                             AccessFailedCount = 3,
+<<<<<<< HEAD
                             ConcurrencyStamp = "35b3b057-f2d1-4b64-b925-a2934028e8fa",
+=======
+                            CVFilePath = "r69.docx",
+                            ConcurrencyStamp = "206aa484-fce7-46c8-8608-90c26592ab61",
+>>>>>>> Test
                             Email = "asparrow1d@networkadvertising.org",
                             EmailConfirmed = false,
+                            Introduction = "Tôi chuyên sâu về lập trình PHP và Python, và đã tham gia vào nhiều dự án thành công từ các ứng dụng web đến hệ thống phân phối dữ liệu lớn. Tôi luôn tìm kiếm cơ hội để phát triển kỹ năng của mình và đóng góp vào sự thành công của dự án. Sự sẵn lòng học hỏi và tinh thần hợp tác là những phẩm chất quan trọng tôi luôn giữ vững.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$i5PUjd61xykHpVi29Wnylu2Wb35xOhzX/l2IR2lvdSM.C.SsXTmJa",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i69.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Ammamaria Sparrow"
@@ -56743,13 +57142,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 70,
                             AccessFailedCount = 9,
+<<<<<<< HEAD
                             ConcurrencyStamp = "260db19a-f373-47c3-9941-dc8745e0aefd",
+=======
+                            CVFilePath = "r70.docx",
+                            ConcurrencyStamp = "82e96043-11c8-49b0-ba2f-b078c24a25c4",
+>>>>>>> Test
                             Email = "wthomtson1e@reference.com",
                             EmailConfirmed = false,
+                            Introduction = "Tôi là một Backend Developer với kinh nghiệm hơn 3 năm trong lĩnh vực công nghệ thông tin. Sự chuyên môn của tôi tập trung vào việc phát triển các ứng dụng web bằng Python và Java, cũng như xây dựng và quản lý cơ sở dữ liệu. Tôi tự hào về khả năng giải quyết vấn đề và sự kiên nhẫn trong việc tìm kiếm các giải pháp tối ưu. Tôi luôn sẵn lòng học hỏi và thích thú với những thách thức mới trong công việc.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$Z5yvYBKAKC6oExcmyfZUKOCKy.FtvIlVc8i0.y3E1fyXMD2zmMqpa",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i70.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Willabella Thomtson"
@@ -56758,13 +57164,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 71,
                             AccessFailedCount = 4,
+<<<<<<< HEAD
                             ConcurrencyStamp = "c67f296d-45d9-473f-9a82-ab8af64d723d",
+=======
+                            CVFilePath = "r71.docx",
+                            ConcurrencyStamp = "bed2bea9-cbad-4a21-8b31-fdf94a26bcee",
+>>>>>>> Test
                             Email = "kmcloughlin1f@nps.gov",
                             EmailConfirmed = false,
+                            Introduction = "Tôi là một Backend Developer với hơn 5 năm kinh nghiệm trong việc phát triển và tối ưu hóa các ứng dụng web. Tôi có kiến thức chuyên sâu về lập trình PHP và Node.js, cũng như về các cơ sở dữ liệu như MySQL và MongoDB. Tôi luôn đặt sự tập trung vào việc viết mã sạch và hiệu quả, cũng như đảm bảo tính bảo mật và ổn định cho các ứng dụng mà tôi tham gia phát triển.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$VAvcyKU0buGYF4ZSWNnQRu9QXe5AEg/.yEh4BJPUmvquBMMJAuUBm",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i71.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Kessiah McLoughlin"
@@ -56773,13 +57186,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 72,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "c4fd1f0e-e41c-428e-ba40-b063ea846cc2",
+=======
+                            CVFilePath = "r72.docx",
+                            ConcurrencyStamp = "adf986b7-46e3-4afc-90a1-9826e6ac8ead",
+>>>>>>> Test
                             Email = "fmangeot1g@geocities.jp",
                             EmailConfirmed = false,
+                            Introduction = "Tôi là một Backend Developer với kinh nghiệm hơn 4 năm làm việc trong ngành phát triển phần mềm. Tôi có sự thành thạo trong việc sử dụng các ngôn ngữ lập trình như Java, Python và PHP để xây dựng các hệ thống phức tạp. Tôi luôn quan tâm đến việc nắm bắt công nghệ mới và áp dụng chúng vào các dự án của mình để tạo ra giải pháp hiệu quả nhất cho người dùng.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$GRd8Vi6QvZQYp40QpqwuFu8IgVcLVEs8xWaJTFcyyxhkO8DcbYDvS",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i72.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Frederick Mangeot"
@@ -56788,13 +57208,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 73,
                             AccessFailedCount = 3,
+<<<<<<< HEAD
                             ConcurrencyStamp = "fd712491-71b4-4603-b3a4-fb126511f40f",
+=======
+                            CVFilePath = "r73.docx",
+                            ConcurrencyStamp = "343ab266-82e5-4bd8-8c13-f18902fe7e9f",
+>>>>>>> Test
                             Email = "gtollow1h@smh.com.au",
                             EmailConfirmed = false,
+                            Introduction = "Tôi là một Backend Developer với hơn 6 năm kinh nghiệm trong lĩnh vực công nghệ thông tin. Sự chuyên môn của tôi tập trung vào việc phát triển các ứng dụng web bằng Java và Python, cũng như xây dựng và quản lý cơ sở dữ liệu. Tôi tự hào về khả năng giải quyết vấn đề và sự kiên nhẫn trong việc tìm kiếm các giải pháp tối ưu. Tôi luôn sẵn lòng học hỏi và thích thú với những thách thức mới trong công việc.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$AMKObTGCqkCC96a0Ifclte8cmKK90kf/KNgnIjMmphOxNi.0Ndfuu",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i73.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Gaston Tollow"
@@ -56803,13 +57230,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 74,
                             AccessFailedCount = 8,
+<<<<<<< HEAD
                             ConcurrencyStamp = "28fd9c4e-e681-4ca2-849e-b728b23e5787",
+=======
+                            CVFilePath = "r74.docx",
+                            ConcurrencyStamp = "5ab55832-b89d-45ea-8800-5f264e6e14dd",
+>>>>>>> Test
                             Email = "shebden1i@cnn.com",
                             EmailConfirmed = false,
+                            Introduction = "Tôi là một Backend Developer với kinh nghiệm hơn 4 năm làm việc trong lĩnh vực công nghệ thông tin. Trong thời gian làm việc, tôi đã tham gia vào nhiều dự án phát triển ứng dụng web và hệ thống quản lý cơ sở dữ liệu. Sự ham học hỏi và khả năng tìm hiểu nhanh chóng là điểm mạnh của tôi, và tôi luôn mong muốn được thử thách với những dự án mới và học hỏi từ những người đồng nghiệp.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$p6cGnSKNGM1kE7OUG3Euq.XECbZDAUejL7X0pO9pXk7BXl.BRVLwC",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i74.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Stevena Hebden"
@@ -56818,13 +57252,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 75,
                             AccessFailedCount = 4,
+<<<<<<< HEAD
                             ConcurrencyStamp = "c7e7f9bc-ff0e-4a79-a0a3-262cb41d40d8",
+=======
+                            CVFilePath = "r75.docx",
+                            ConcurrencyStamp = "7361fbc3-d985-4f69-ac03-62b12f3562a2",
+>>>>>>> Test
                             Email = "lbrouncker1j@sourceforge.net",
                             EmailConfirmed = true,
+                            Introduction = "một Backend Developer với kinh nghiệm hơn 3 năm làm việc trong ngành công nghệ thông tin. Tôi chuyên về lập trình Python và Java, cũng như xây dựng và quản lý cơ sở dữ liệu. Tôi luôn tìm kiếm cơ hội để phát triển kỹ năng của mình và đóng góp vào sự thành công của dự án. Sự sẵn lòng học hỏi và tinh thần hợp tác là hai phẩm chất quan trọng tôi luôn giữ vững.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$ew2ocDOguz7npS6Fc3lirOVWcDIm1V4v.PDOOXTyd6J2FY6VViSR6",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i75.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Lola Brouncker"
@@ -56833,13 +57274,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 76,
                             AccessFailedCount = 8,
+<<<<<<< HEAD
                             ConcurrencyStamp = "3a70780f-a1a3-4fc1-b6cf-8002618c5492",
+=======
+                            CVFilePath = "r76.docx",
+                            ConcurrencyStamp = "238abd87-85d0-44c7-a7f3-a10600c1b0b8",
+>>>>>>> Test
                             Email = "dkeems1k@redcross.org",
                             EmailConfirmed = false,
+                            Introduction = "là một Frontend Developer có kinh nghiệm, đam mê với việc tạo ra giao diện người dùng đẹp mắt và tương tác. Với khả năng sáng tạo và kiến ​​thức chuyên sâu về HTML, CSS và JavaScript, anh luôn chú trọng đến việc tối ưu hóa trải nghiệm người dùng.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$SCWTCX/rpZpoi5EncaK0bueF.phF9sBGEyQZYWIfnhloAdOTZbPpG",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i76.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Delcina Keems"
@@ -56848,13 +57296,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 77,
                             AccessFailedCount = 7,
+<<<<<<< HEAD
                             ConcurrencyStamp = "e9672604-aa58-407c-a61e-156103c0e0af",
+=======
+                            CVFilePath = "r77.docx",
+                            ConcurrencyStamp = "0b611710-e2d5-402c-9815-3307b35527f1",
+>>>>>>> Test
                             Email = "tthyng1l@amazonaws.com",
                             EmailConfirmed = false,
+                            Introduction = "là một Frontend Developer trẻ trung và năng động, luôn tìm kiếm cơ hội để khám phá và học hỏi. Với kiến thức vững chắc về các công nghệ front-end hiện đại như React và Vue.js, cô luôn thúc đẩy sự sáng tạo và tính tương tác trong công việc của mình.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$HNHb9el7k9neXcn8WmeLPuSDUljCtJGJKByTvQ7TuTWEFT8wT.lG.",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i77.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Tiffie Thyng"
@@ -56863,13 +57318,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 78,
                             AccessFailedCount = 9,
+<<<<<<< HEAD
                             ConcurrencyStamp = "91490d2d-009c-4a47-9f65-d9a51f7027a1",
+=======
+                            CVFilePath = "r78.docx",
+                            ConcurrencyStamp = "27b4833c-266d-4cf0-b276-f3f9aea4add0",
+>>>>>>> Test
                             Email = "ihourston1m@webnode.com",
                             EmailConfirmed = true,
+                            Introduction = "là một Frontend Developer tự hào về khả năng tạo ra các trải nghiệm người dùng mượt mà và hiệu quả. Với kinh nghiệm trong việc phát triển các ứng dụng web đa nền tảng, anh có khả năng làm việc hiệu quả cả độc lập và trong nhóm.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$OI7HTcyeydP00P8oaGK1yO7HfrJw5KcNGqcMZORhc5g6wuLcL19C.",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i78.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Imelda Hourston"
@@ -56878,13 +57340,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 79,
                             AccessFailedCount = 4,
+<<<<<<< HEAD
                             ConcurrencyStamp = "f320ef5f-f70f-4a12-ac05-f4b029a0bc28",
+=======
+                            CVFilePath = "r79.docx",
+                            ConcurrencyStamp = "b6f142c7-c509-4565-94fe-39ab74bf07a2",
+>>>>>>> Test
                             Email = "nscraney1n@dropbox.com",
                             EmailConfirmed = false,
+                            Introduction = "là một Frontend Developer sáng tạo và nhiệt huyết, luôn tìm kiếm cách để nâng cao kỹ năng và kiến thức của mình. Với niềm đam mê với việc thiết kế và phát triển giao diện người dùng đẹp mắt, cô luôn đặt mục tiêu cao và không ngừng nỗ lực để đạt được chúng.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$dh7ISIBGZjq7Vl7FuPcYSuRSOkku4pJqzQ4OyOD1haXOlFoNgO4ie",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i79.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Ninnette Scraney"
@@ -56893,13 +57362,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 80,
                             AccessFailedCount = 9,
+<<<<<<< HEAD
                             ConcurrencyStamp = "07902612-06e1-4f3e-b4b6-ca1a2cf6daf2",
+=======
+                            CVFilePath = "r80.docx",
+                            ConcurrencyStamp = "0c7f648c-4236-403d-9308-f3dd7bee1412",
+>>>>>>> Test
                             Email = "cde1o@guardian.co.uk",
                             EmailConfirmed = false,
+                            Introduction = "là một Frontend Developer có khả năng tự học cao và tinh thần sáng tạo. Với kinh nghiệm trong việc phát triển các ứng dụng web đa nền tảng, anh tự tin có thể xử lý các thách thức phức tạp và đem lại giải pháp hiệu quả.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$iDqmBXnP18uQ7XnKM8dvy.vJqfW3gPxBTlgXcfEJeR0aDW3.VtYcm",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i80.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Corabel De Mitris"
@@ -56908,28 +57384,42 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 81,
                             AccessFailedCount = 2,
+<<<<<<< HEAD
                             ConcurrencyStamp = "57c2f72f-9f0f-482c-a936-fe4ca3a7aadd",
+=======
+                            CVFilePath = "r81.docx",
+                            ConcurrencyStamp = "121fd7be-a94f-466d-8bdd-d18d279f8f83",
+>>>>>>> Test
                             Email = "dreace1p@vkontakte.ru",
                             EmailConfirmed = true,
+                            Introduction = "David, a musician or sound engineer by training, has a knack for crafting immersive audio experiences that enhance gameplay and evoke emotion. He understands the power of sound in storytelling and gameplay and uses his expertise to create memorable soundtracks and sound effects",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$4.AVe66dWIJkq8GdS4B5N.URqQh3kEUVIx2Fo0h.Ttp8ijyIJgCTW",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = true,
-                            UserName = "Donnell Reace"
+                            UserName = "Donnell Reace David"
                         },
                         new
                         {
                             Id = 82,
                             AccessFailedCount = 2,
+<<<<<<< HEAD
                             ConcurrencyStamp = "20f04418-752f-4d65-bdd1-f8c682480c9f",
+=======
+                            CVFilePath = "r82.docx",
+                            ConcurrencyStamp = "4bf8b57e-312a-48b6-9578-7dc5be069815",
+>>>>>>> Test
                             Email = "crame1q@smugmug.com",
                             EmailConfirmed = false,
+                            Introduction = "là một Frontend Developer năng động với tinh thần sáng tạo cao. Với kinh nghiệm trong việc phát triển giao diện người dùng đa dạng và phức tạp, cô luôn tìm kiếm cách để cải thiện và làm mới hơn sản phẩm của mình.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$oZTC.Dbb7WSrzll0fQqvsODpcxCQAuirI6lK9HfW9JoWZ/OyeqUme",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i82.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Claudius Rame"
@@ -56938,13 +57428,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 83,
                             AccessFailedCount = 8,
+<<<<<<< HEAD
                             ConcurrencyStamp = "32916efa-0d84-4da2-9990-479e95d715f4",
+=======
+                            CVFilePath = "r83.docx",
+                            ConcurrencyStamp = "cea99d52-2b0e-4544-84f8-3d5fdf2ae9b3",
+>>>>>>> Test
                             Email = "wtubble1r@marketwatch.com",
                             EmailConfirmed = false,
+                            Introduction = "là một Frontend Developer có niềm đam mê với việc tạo ra các sản phẩm web độc đáo và tương tác. Với kinh nghiệm trong việc sử dụng các framework như Angular và React, cô luôn tìm kiếm cách để nâng cao trải nghiệm người dùng và tăng cường tính tương tác.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$aDyL.6V1./eF7bf9TJoTtezYARHbTOi4iYEWPd5HlMjuYAlJKEYM2",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i83.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Whittaker Tubble"
@@ -56953,13 +57450,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 84,
                             AccessFailedCount = 0,
+<<<<<<< HEAD
                             ConcurrencyStamp = "c607e17c-10d2-427a-bd87-820209bf0b4a",
+=======
+                            CVFilePath = "r84.docx",
+                            ConcurrencyStamp = "00ef94d4-d9bd-469b-8e78-19816c64ba57",
+>>>>>>> Test
                             Email = "cjosephoff1s@alibaba.com",
                             EmailConfirmed = true,
+                            Introduction = "Emily, with a background in game design or interactive media, specializes in crafting engaging gameplay experiences. She excels at designing compelling game mechanics, balancing difficulty levels, and ensuring that gameplay is both challenging and rewarding for players.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$rya8h5xcwvpYgG96Q.HLDet9F0Z1aZHXuvOCa2Hw0aOtHZRB72jDW",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Conway Josephoff"
@@ -56968,13 +57472,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 85,
                             AccessFailedCount = 3,
+<<<<<<< HEAD
                             ConcurrencyStamp = "f21fde0d-95eb-4cfc-a6cb-0ab6d590ebc7",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "edc60c20-fd94-4b7b-a293-af588cb77829",
+>>>>>>> Test
                             Email = "hgoodband1t@ehow.com",
                             EmailConfirmed = false,
+                            Introduction = "Finn, known for his excellent communication skills and collaborative spirit, thrives in team environments. He excels at working closely with artists, programmers, and other team members to bring projects to fruition, leveraging his interpersonal skills to foster a positive and productive work atmosphere.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$rd.zIOhrhPwxBx3nMSVXR.p3VurK3TgBlils3m.S3b9sLy/f3PDYC",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Herrick Goodband"
@@ -56983,13 +57494,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 86,
                             AccessFailedCount = 3,
+<<<<<<< HEAD
                             ConcurrencyStamp = "2a2bc7b6-2a0e-4c54-88f0-c050a1fa5e76",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "282c3c0f-4ccd-4fa3-9b2c-321414d820c4",
+>>>>>>> Test
                             Email = "rrivett1u@ameblo.jp",
                             EmailConfirmed = true,
+                            Introduction = "Gabrielle is known for her meticulous attention to detail and dedication to quality. She approaches game development with precision and care, meticulously refining every aspect of gameplay, graphics, and audio to ensure a polished and immersive player experience.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$enCuS6CtarNUJoSnjZY/8.cLU63XkayvXkAY7jw7.p3Vum7fG4oXi",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Reggie Rivett"
@@ -56998,13 +57516,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 87,
                             AccessFailedCount = 1,
+<<<<<<< HEAD
                             ConcurrencyStamp = "7780f443-7260-43be-b845-f5fbccc96fbf",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "6c52ee51-e8c5-4076-aaca-9a5458931cf3",
+>>>>>>> Test
                             Email = "rmimmack1v@domainmarket.com",
                             EmailConfirmed = true,
+                            Introduction = "Hector, a self-starter and risk-taker, is passionate about creating original and unique indie games. He embraces the freedom of indie development to experiment with unconventional ideas, art styles, and gameplay mechanics, challenging the status quo and pushing the boundaries of the medium.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$a9FBpEKt1pJsj7P6nt77tulaVx6i5muQFNSTz6Oai9ui2j6hQbkvW",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Renell Mimmack"
@@ -57013,13 +57538,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 88,
                             AccessFailedCount = 9,
+<<<<<<< HEAD
                             ConcurrencyStamp = "54d7f391-90b8-4717-9060-06ed743d41ea",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "1c6bff2c-5d26-447c-b698-b31e6d315513",
+>>>>>>> Test
                             Email = "btydd1w@i2i.jp",
                             EmailConfirmed = false,
+                            Introduction = "Jack, a savvy businessperson as well as a skilled developer, is adept at navigating the competitive landscape of the gaming industry. He possesses a keen understanding of market trends, player demographics, and monetization strategies, leveraging his entrepreneurial spirit to launch successful game projects and build sustainable careers.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$rIF.k5Tj1cq.SnLkRTkUN.XybKSzcdXgFs3ATIyfd3ZWtMESD6I1S",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Brittaney Tydd"
@@ -57028,13 +57560,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 89,
                             AccessFailedCount = 3,
+<<<<<<< HEAD
                             ConcurrencyStamp = "8a689902-7661-4584-8af2-f782093a9646",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "d2b61823-ab44-4e35-8b25-14655d88d17b",
+>>>>>>> Test
                             Email = "srosenwasser1x@google.ru",
                             EmailConfirmed = false,
+                            Introduction = "Isabella, with a focus on building and nurturing player communities, is passionate about engaging with fans, gathering feedback, and fostering a sense of belonging among players. She prioritizes transparency and communication, actively involving the community in the game development process and listening to their input.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$hWcC/IgOqsX99AsQ70pMm.IuX/9WuWJTQ.yqqmibdTBl5KDrLbDAe",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Stanley Rosenwasser"
@@ -57043,13 +57582,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 90,
                             AccessFailedCount = 3,
+<<<<<<< HEAD
                             ConcurrencyStamp = "6d088f40-96d4-4848-b571-de10760cbd03",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "5a3a4156-5a31-4baf-a006-e45ab4615ee4",
+>>>>>>> Test
                             Email = "cmatussow1y@topsy.com",
                             EmailConfirmed = true,
+                            Introduction = "là một Business Analyst tự tin và kiên nhẫn, luôn tìm kiếm cách để giải quyết các thách thức trong quy trình kinh doanh. Với khả năng nắm bắt nhanh chóng và hiểu rõ yêu cầu của khách hàng, anh có thể đưa ra các giải pháp phù hợp và hiệu quả. ",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$3PRQZUB0DKgcWTRygFRe0u0.YdzjkROXrW0vn5yWHAUzdzZS1urz2",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i90.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Carlie Matussow"
@@ -57058,13 +57604,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 91,
                             AccessFailedCount = 1,
+<<<<<<< HEAD
                             ConcurrencyStamp = "d6470c05-29b6-4e52-935b-764cb25fb807",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "5a2e931a-7193-4ddc-b11b-ca6381d64697",
+>>>>>>> Test
                             Email = "abugden1z@taobao.com",
                             EmailConfirmed = true,
+                            Introduction = "là một Business Analyst năng động và sáng tạo, luôn tìm kiếm cách để cải thiện quy trình kinh doanh. Với kinh nghiệm trong việc làm việc với các phần mềm phân tích dữ liệu và các công cụ quản lý dự án, cô có thể đưa ra các giải pháp hiệu quả và thực thi được.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$3phzY/jP2dJV6yaL0gUhRugI13dzrxC0bPh35SxiCm1EmI2sL04jG",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i91.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Austine Bugden"
@@ -57073,13 +57626,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 92,
                             AccessFailedCount = 0,
+<<<<<<< HEAD
                             ConcurrencyStamp = "a02d6b8d-7a3d-489e-93bd-a2bbada9f6e0",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "6b2bad3a-e56f-4941-bb51-6434dac82d48",
+>>>>>>> Test
                             Email = "ealfonsini20@unesco.org",
                             EmailConfirmed = true,
+                            Introduction = "là một Business Analyst có kỹ năng giao tiếp xuất sắc và khả năng làm việc hiệu quả trong môi trường đa văn hóa. Với kinh nghiệm trong việc làm việc với các đội ngũ đa chức năng, anh có thể tạo ra môi trường làm việc tích cực và đem lại giải pháp tối ưu cho các vấn đề kinh doanh.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$v59flZYIgjsf.D5g2Ig09eaKNA.z54sFJaAL4c55pNOFaI1pRcBOm",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i92.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Elyse Alfonsini"
@@ -57088,13 +57648,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 93,
                             AccessFailedCount = 0,
+<<<<<<< HEAD
                             ConcurrencyStamp = "520ed6de-10ea-4852-8a67-b1a70c166363",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "16f184be-a907-4d45-bb1f-76eda24a5a49",
+>>>>>>> Test
                             Email = "fla21@gravatar.com",
                             EmailConfirmed = true,
+                            Introduction = "",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$ZhnSWXAwliiderUmZYOcae.VuOQV6bxEch.WxkwrfjKn6PtOgYNDu",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Felicio La Torre"
@@ -57103,13 +57670,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 94,
                             AccessFailedCount = 10,
+<<<<<<< HEAD
                             ConcurrencyStamp = "17aa4af6-35c5-47fb-9303-36136f739b29",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "84973233-bdb9-45d9-b9fe-63be464642fc",
+>>>>>>> Test
                             Email = "dbotwood22@cbsnews.com",
                             EmailConfirmed = true,
+                            Introduction = "là một Frontend Developer có tư duy logic và khả năng giải quyết vấn đề tốt. Với kiến thức vững chắc về HTML, CSS và JavaScript, anh có thể tạo ra các giao diện người dùng tương tác và thân thiện.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$WjP0G3wOvMqSpsw0qXJYeun2ijScq6vbghda./bWAEt6yuPYixGbm",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Dougy Botwood"
@@ -57118,13 +57692,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 95,
                             AccessFailedCount = 0,
+<<<<<<< HEAD
                             ConcurrencyStamp = "a673f6c5-37cf-4b16-9b1b-f846a1526278",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "9e8c76c0-793f-4057-a426-b81365356a26",
+>>>>>>> Test
                             Email = "cpriddey23@forbes.com",
                             EmailConfirmed = true,
+                            Introduction = "",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$AHubu9WVpzgHqmTaZ73lT.paec6N6jql5DfGtuCbr9XMQCkQX7OzW",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Candice Priddey"
@@ -57133,13 +57714,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 96,
                             AccessFailedCount = 5,
+<<<<<<< HEAD
                             ConcurrencyStamp = "7ea3023a-cb61-4f46-974d-3a226522b381",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "e118ea5b-0229-44ff-8f60-25c225f30f28",
+>>>>>>> Test
                             Email = "cwindous24@msu.edu",
                             EmailConfirmed = false,
+                            Introduction = "Tôi đến từ Thanh Đảo và là một lập trình viên Full-Stack. Tôi có kinh nghiệm trong việc phát triển các ứng dụng web từ đơn giản đến phức tạp. React, Express và MongoDB là những công nghệ mà tôi thường sử dụng để xây dựng các dự án của mình.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$wjbhWEx5GpDLrNe2ZHbMPeHZvib1i.oLu/3MwDE0dIwyj96Jz7eL6",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Cynde Windous"
@@ -57148,13 +57736,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 97,
                             AccessFailedCount = 3,
+<<<<<<< HEAD
                             ConcurrencyStamp = "df297706-ba0d-4e56-b2fa-23fc7980a58d",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "667d238d-fbfa-4034-994c-6a89a023138e",
+>>>>>>> Test
                             Email = "aridding25@tumblr.com",
                             EmailConfirmed = true,
+                            Introduction = "",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$EsUQZ6NHgJLOPpGIsG6EyeaWyVyyaCFpviNlROluaslSgPv7S1wHO",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Annetta Ridding"
@@ -57163,13 +57758,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 98,
                             AccessFailedCount = 3,
+<<<<<<< HEAD
                             ConcurrencyStamp = "11632ca8-17d8-4685-9c52-00947e89061a",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "5e58d83a-cf5b-4eab-9033-99b00fced12f",
+>>>>>>> Test
                             Email = "nkornousek26@google.es",
                             EmailConfirmed = true,
+                            Introduction = "",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$of2ICHWzTFmi0BxXpqX50eerrA9H7zog42StlYDyPpm9i.xSgf3qK",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Newton Kornousek"
@@ -57178,13 +57780,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 99,
                             AccessFailedCount = 2,
+<<<<<<< HEAD
                             ConcurrencyStamp = "90f82883-0cb7-40c2-976c-c3ca6ebe4bb5",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "ff33ea4b-b6c6-4ff4-bc08-46949c9cab6f",
+>>>>>>> Test
                             Email = "mhabeshaw27@godaddy.com",
                             EmailConfirmed = false,
+                            Introduction = "Tôi đến từ Bắc Kinh và là một lập trình viên Full-Stack. Tôi đam mê công việc lập trình và luôn mong muốn học hỏi thêm nhiều công nghệ mới. Angular, Java và Spring Boot là những công cụ mà tôi thường sử dụng để xây dựng các ứng dụng web chất lượng và ổn định.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$MdZqNQzc0Z4AUVdJDGBMze.2sUtkB/Wp8aUta97.HamrmIaXY8fhS",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Maiga Habeshaw"
@@ -57193,13 +57802,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 100,
                             AccessFailedCount = 8,
+<<<<<<< HEAD
                             ConcurrencyStamp = "cda391fe-4d98-4ad7-ae81-77138d1b47c9",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "71dd5391-aec1-4300-862b-6a773b228f15",
+>>>>>>> Test
                             Email = "mvasnetsov28@hao123.com",
                             EmailConfirmed = false,
+                            Introduction = "",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$X1X1j.BRETuvauqz6xsz1OZgYW91D4YFdFhAUPK5Ef5hoJX.KamRm",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Moira Vasnetsov"
@@ -57208,13 +57824,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 101,
                             AccessFailedCount = 4,
+<<<<<<< HEAD
                             ConcurrencyStamp = "de825c01-9313-4ce5-8e08-005922ab36d5",
+=======
+                            CVFilePath = "r101.docx",
+                            ConcurrencyStamp = "26ce31ea-be8f-488d-954d-8f65325e2238",
+>>>>>>> Test
                             Email = "cjovis0@businesswire.com",
                             EmailConfirmed = true,
+                            Introduction = "",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$B8VxJeiXCw47tX7HoSEXpu3K.CFdsZtKEV/Gr5FpdAqHMFEmVnQP.",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Conney Jovis"
@@ -57223,13 +57846,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 102,
                             AccessFailedCount = 0,
+<<<<<<< HEAD
                             ConcurrencyStamp = "105108e5-5de0-4f64-b945-34e9db43981b",
+=======
+                            CVFilePath = "r102.docx",
+                            ConcurrencyStamp = "22b9d2bd-6dfb-4020-8485-14b65e0febca",
+>>>>>>> Test
                             Email = "jmiskelly1@alibaba.com",
                             EmailConfirmed = false,
+                            Introduction = "là một kỹ sư phần mềm tài năng với kinh nghiệm làm việc trong lĩnh vực phát triển phần mềm hơn 8 năm. Cô có kiến thức sâu rộng về lập trình Java và C#, cũng như về phát triển các ứng dụng di động bằng Xamarin và Flutter. Trần Thị Thu Hằng là một người chủ động và luôn tìm kiếm các cơ hội để tham gia vào các dự án công nghệ mới và đổi mới.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$kWJ9ZLHZDX35g5aDHDCv1.2TfPoZt1WVQHkm4kuRmWI9SVi75XHuu",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Justis Miskelly"
@@ -57238,13 +57868,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 103,
                             AccessFailedCount = 10,
+<<<<<<< HEAD
                             ConcurrencyStamp = "bd68033d-afe0-444e-b2e4-27adafa55559",
+=======
+                            CVFilePath = "r103.docx",
+                            ConcurrencyStamp = "b80cf91d-737c-40a4-ae78-260907b55a6f",
+>>>>>>> Test
                             Email = "lmcfayden2@businessinsider.com",
                             EmailConfirmed = false,
+                            Introduction = "là một kỹ sư phần mềm có kinh nghiệm trong việc phát triển ứng dụng di động và web. Anh có kỹ năng chuyên môn vững về lập trình Swift và Kotlin cho các ứng dụng di động, cũng như về phát triển ứng dụng web bằng React và Node.js. Với tinh thần sáng tạo và ham học hỏi, Đỗ Văn Quân luôn tìm kiếm cơ hội để thử thách bản thân và đóng góp vào các dự án công nghệ mới.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$7ElG0A8fplwGCA8iw2fkcO.1CvP.xXjUFJqfge5opqRGNE7iB2OcO",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Letty McFayden"
@@ -57253,13 +57890,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 104,
                             AccessFailedCount = 5,
+<<<<<<< HEAD
                             ConcurrencyStamp = "1eecd6e6-1c5c-4897-8c5e-ea58e90cebc5",
+=======
+                            CVFilePath = "r104.docx",
+                            ConcurrencyStamp = "738ce78b-d872-46e4-96cc-39b8304cc659",
+>>>>>>> Test
                             Email = "mordidge3@meetup.com",
                             EmailConfirmed = false,
+                            Introduction = "là một kỹ sư phần mềm trẻ năng động với khả năng lập trình và hiểu biết sâu rộng về các công nghệ mới. Cô có kinh nghiệm trong việc phát triển ứng dụng web bằng React và Angular, cũng như trong việc xây dựng các dịch vụ API bằng Node.js và Django.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$qprtVWrmehNX.47KtHjRv.9q6ELN.mUMzpsiLinBabh5l4pemzTgG",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Mozelle Ordidge"
@@ -57268,13 +57912,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 105,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "af8b2333-fba4-4746-ab9d-a1c6ba537d6c",
+=======
+                            CVFilePath = "r105.pdf",
+                            ConcurrencyStamp = "1c0fcd94-2dc3-49a2-922f-f566c8e712a2",
+>>>>>>> Test
                             Email = "dsulley4@live.com",
                             EmailConfirmed = false,
+                            Introduction = "",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$wgdu0T9fPJUlVcP7iT8hbeVRx37e00Jq6hQrZRqyTQeBxMSiMwSOy",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Dorree Sulley"
@@ -57283,13 +57934,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 106,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "392de05c-e264-47ba-874b-7a14b9d60a91",
+=======
+                            CVFilePath = "r106.pdf",
+                            ConcurrencyStamp = "e11c96e3-9920-4dd7-9826-a8157603e2b9",
+>>>>>>> Test
                             Email = "bthornhill5@opera.com",
                             EmailConfirmed = false,
+                            Introduction = "Tôi là một lập trình viên Full-Stack đến từ Hà Nội, Việt Nam. Tôi đam mê công việc lập trình và luôn tìm kiếm cơ hội để áp dụng những công nghệ mới vào dự án của mình. React, Node.js và MongoDB là những công nghệ mà tôi thường sử dụng để xây dựng các ứng dụng web hiệu quả",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$rSDJ5a54Jl6NX50VtENu5evxsl28FctsoPBisd3L1cDsgfABMU0dS",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Broderick Thornhill"
@@ -57298,13 +57956,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 107,
                             AccessFailedCount = 1,
+<<<<<<< HEAD
                             ConcurrencyStamp = "dc3efd55-094a-43fa-a0d7-95a3c2b6b566",
+=======
+                            CVFilePath = "r107.pdf",
+                            ConcurrencyStamp = "9c09c29f-ea9c-4cf6-b812-4ed0abab353d",
+>>>>>>> Test
                             Email = "cfrederick6@ehow.com",
                             EmailConfirmed = false,
+                            Introduction = "Tôi là một lập trình viên Full-Stack đến từ Đà Nẵng, Việt Nam. Tôi có kinh nghiệm trong việc phát triển cả phía Front-end và Back-end của các ứng dụng web. Vue.js, Python và Django là những công nghệ mà tôi thường sử dụng để xây dựng các dự án của mình.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$lVsBL79.fdWr1.0vbbNIcO3wnQ1eYeD2pMrUGmRAr7izyeAJIkQGG",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Catrina Frederick"
@@ -57313,13 +57978,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 108,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "04931dc5-82ec-4a30-82f4-f5ddca13e3cb",
+=======
+                            CVFilePath = "r108.pdf",
+                            ConcurrencyStamp = "3f979e02-d050-4fcf-a595-7f6662569660",
+>>>>>>> Test
                             Email = "ebrake7@skype.com",
                             EmailConfirmed = true,
+                            Introduction = "Tôi đến từ Sài Gòn và là một lập trình viên Full-Stack. Tôi có kinh nghiệm trong việc xây dựng các ứng dụng web đa dạng và linh hoạt. React, Express và MongoDB là những công nghệ mà tôi thường sử dụng để phát triển các dự án của mình.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$uFqn.Kqz84gAvcxrQIr2I.J9YwLFomKkNOxTNYYOH2RIBuPFRL3w2",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Erminie Brake"
@@ -57328,13 +58000,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 109,
                             AccessFailedCount = 2,
+<<<<<<< HEAD
                             ConcurrencyStamp = "d4aaf870-51e5-492e-8a68-3cb242cae926",
+=======
+                            CVFilePath = "r109.pdf",
+                            ConcurrencyStamp = "4b4932ff-cbe0-4a1f-b7e8-406ef60c0a4c",
+>>>>>>> Test
                             Email = "civamy8@elegantthemes.com",
                             EmailConfirmed = true,
+                            Introduction = "Tôi đến từ Hải Phòng và là một lập trình viên Full-Stack. Tôi đam mê việc sáng tạo và luôn tìm kiếm cách để nâng cao kỹ năng lập trình của mình. Angular, Java và Spring Boot là những công cụ mà tôi thường sử dụng để xây dựng các ứng dụng web chất lượng.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$GiAQ.hNZl0oM8omH4.WsWeEtIGzos3lnxfqSSsWEMTtppa0ecp1S6",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Colas Ivamy"
@@ -57343,13 +58022,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 110,
                             AccessFailedCount = 7,
+<<<<<<< HEAD
                             ConcurrencyStamp = "f1904621-1dc9-4b63-bf80-3d3dae09821d",
+=======
+                            CVFilePath = "r110.pdf",
+                            ConcurrencyStamp = "ea790c65-5144-412a-910c-c73b6c1aaaf0",
+>>>>>>> Test
                             Email = "moxbie9@upenn.edu",
                             EmailConfirmed = true,
+                            Introduction = "Tôi đến từ Huế và là một lập trình viên Full-Stack. Tôi có kinh nghiệm trong việc phát triển các ứng dụng web từ đơn giản đến phức tạp. React, Python và Flask là những công nghệ mà tôi thường sử dụng để xây dựng các dự án của mình.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$GuW/gLYccJkuwQy/0XgNq.HVg1TH1yksGXp17nR2kJK69GxXqrIli",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i110.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Margy Oxbie"
@@ -57358,13 +58044,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 111,
                             AccessFailedCount = 0,
+<<<<<<< HEAD
                             ConcurrencyStamp = "958b9223-c1d0-4682-bc83-e5d86cc51b06",
+=======
+                            CVFilePath = "r111.docx",
+                            ConcurrencyStamp = "ee078fb8-1d80-4475-befe-994fab4299a4",
+>>>>>>> Test
                             Email = "asatterleea@sohu.com",
                             EmailConfirmed = false,
+                            Introduction = "Tôi đến từ Quảng Ninh và là một lập trình viên Full-Stack. Tôi có kinh nghiệm trong việc phát triển các ứng dụng web đa nền tảng và linh hoạt. Vue.js, Node.js và MySQL là những công nghệ mà tôi thường sử dụng để xây dựng các ứng dụng web chất lượng.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$vpvMFYyke./WCP1gMi1sKOdQzdvdK/pJioT00hF72QLPVexaPeF4C",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i111.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Annaliese Satterlee"
@@ -57373,13 +58066,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 112,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "22f0fa78-5c33-4df8-934e-339b82a54159",
+=======
+                            CVFilePath = "r112.docx",
+                            ConcurrencyStamp = "2f2845df-3dd8-4b21-bac9-a5d1e8b4fa47",
+>>>>>>> Test
                             Email = "gstambridgeb@bandcamp.com",
                             EmailConfirmed = false,
+                            Introduction = "Tôi đến từ Hà Tĩnh và là một lập trình viên Full-Stack. Tôi đam mê công việc lập trình và luôn tìm kiếm cơ hội để thử nghiệm những công nghệ mới. Angular, Java và Spring Boot là những công cụ mà tôi thường sử dụng để xây dựng các ứng dụng web chất lượng và ổn định.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$nN8tayHsKI.dKagxtdG5fewKV855TwxwmRxdbwNbqd/IsIgmeZuE.",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i112.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Guido Stambridge"
@@ -57388,13 +58088,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 113,
                             AccessFailedCount = 4,
+<<<<<<< HEAD
                             ConcurrencyStamp = "62968315-f235-4532-86cf-55aea22c922b",
+=======
+                            CVFilePath = "r113.docx",
+                            ConcurrencyStamp = "2576c46f-34ad-4cf9-aac9-9009d8f9c778",
+>>>>>>> Test
                             Email = "ddunkinsonc@ehow.com",
                             EmailConfirmed = false,
+                            Introduction = "Tôi đến từ Cần Thơ và là một lập trình viên Full-Stack. Tôi có kinh nghiệm trong việc phát triển cả phía Front-end và Back-end của các ứng dụng web. React, Node.js và MongoDB là những công nghệ mà tôi thường sử dụng để xây dựng các dự án của mình.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$V2byfGY2wco6yCYWI8mY.ujYEuV7fZ/70kGEvOEqItNhysqWHPT7e",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i113.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Dyan Dunkinson"
@@ -57403,13 +58110,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 114,
                             AccessFailedCount = 10,
+<<<<<<< HEAD
                             ConcurrencyStamp = "0b9dbad5-2950-4d09-a943-2a68945ff111",
+=======
+                            CVFilePath = "r114.docx",
+                            ConcurrencyStamp = "70e93600-3a64-4cb2-9775-200e4e511aeb",
+>>>>>>> Test
                             Email = "aloudd@miitbeian.gov.cn",
                             EmailConfirmed = true,
+                            Introduction = "Tôi đến từ Vũng Tàu và là một lập trình viên Full-Stack. Tôi thích thách thức và luôn tìm kiếm cách để cải thiện kỹ năng lập trình của mình. React, Express và MongoDB là những công nghệ mà tôi thường sử dụng để phát triển các dự án của mình.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$LneVAuyqWDXQgRsLXchc4O2Q5oyyH6OXNavMmUsASXuVlyp6FEiYa",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i114.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Alvie Loud"
@@ -57418,13 +58132,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 115,
                             AccessFailedCount = 8,
+<<<<<<< HEAD
                             ConcurrencyStamp = "b6b046a4-0f70-4865-ae77-91a6103a1b66",
+=======
+                            CVFilePath = "r115.docx",
+                            ConcurrencyStamp = "4c07dff2-1316-4c2b-b7a7-07cd8897eb89",
+>>>>>>> Test
                             Email = "zgerrene@yellowbook.com",
                             EmailConfirmed = true,
+                            Introduction = "Tôi đến từ Đồng Nai và là một lập trình viên Full-Stack. Tôi có kinh nghiệm trong việc phát triển các ứng dụng web đa dạng và linh hoạt. Angular, Java và Spring Boot là những công cụ mà tôi thường sử dụng để xây dựng các dự án của mình",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$mfkcj6gfT9wbKh93POX7EOSw9N1XeEmacLlhMSwuoxB6lJNpM2s0a",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i115.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Zaria Gerren"
@@ -57433,13 +58154,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 116,
                             AccessFailedCount = 2,
+<<<<<<< HEAD
                             ConcurrencyStamp = "15b4747c-f780-4b17-a931-d49677204cab",
+=======
+                            CVFilePath = "r116.docx",
+                            ConcurrencyStamp = "ab7ae6a0-1d83-44b4-8c5f-64a55052453a",
+>>>>>>> Test
                             Email = "bhalshawf@oaic.gov.au",
                             EmailConfirmed = true,
+                            Introduction = "Tôi đến từ Nha Trang và là một lập trình viên Full-Stack. Tôi đam mê công việc lập trình và luôn tìm kiếm cơ hội để áp dụng những công nghệ mới vào dự án của mình. React, Node.js và PostgreSQL là những công nghệ mà tôi thường sử dụng để xây dựng các ứng dụng web hiệu quả.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$Fm.7B7.kjX4wD33HNGtWH.UDB9oejK/AUCHjNZ7VUyEeSYPCdj8u6",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i116.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Bella Halshaw"
@@ -57448,13 +58176,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 117,
                             AccessFailedCount = 0,
+<<<<<<< HEAD
                             ConcurrencyStamp = "c0a32af1-d7ce-4184-83b4-503aad2ae4cd",
+=======
+                            CVFilePath = "r117.docx",
+                            ConcurrencyStamp = "553ad935-6733-422f-87ef-b5d6c31666da",
+>>>>>>> Test
                             Email = "bbollinsg@seesaa.net",
                             EmailConfirmed = false,
+                            Introduction = "Tôi đến từ Hải Dương và là một lập trình viên Full-Stack. Tôi có kinh nghiệm trong việc phát triển cả phía Front-end và Back-end của các ứng dụng web. Vue.js, Python và Flask là những công nghệ mà tôi thường sử dụng để xây dựng các dự án của mình.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$7d5w/gmPu6AKJzHPWY/z9uiCtlNdEvtZbiqCwNzsZc6pNvFaAri2e",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i117.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Bendicty Bollins"
@@ -57463,13 +58198,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 118,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "929fca21-deb9-4bc9-a7ea-063d55f9b264",
+=======
+                            CVFilePath = "r118.docx",
+                            ConcurrencyStamp = "431cc267-056a-4f5d-ba77-f19eefb2bf97",
+>>>>>>> Test
                             Email = "mbreedyh@geocities.jp",
                             EmailConfirmed = true,
+                            Introduction = "Tôi đến từ Bắc Giang và là một lập trình viên Full-Stack. Tôi có kinh nghiệm trong việc xây dựng các ứng dụng web đa dạng và linh hoạt. React, Express và MongoDB là những công nghệ mà tôi thường sử dụng để phát triển các dự án của mình.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$KReeIyUXIWkz5TfvLNTq2OU.InDWuCKOKtxQOWy5pmcPApjh.PYzu",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i118.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Malina Breedy"
@@ -57478,13 +58220,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 119,
                             AccessFailedCount = 2,
+<<<<<<< HEAD
                             ConcurrencyStamp = "0fa5d26c-c2f6-4e17-835d-e54c393d92b0",
+=======
+                            CVFilePath = "r119.docx",
+                            ConcurrencyStamp = "5f77e130-22e6-422d-8343-59915493defd",
+>>>>>>> Test
                             Email = "abickmorei@irs.gov",
                             EmailConfirmed = false,
+                            Introduction = "Tôi đến từ Hà Nam và là một lập trình viên Full-Stack. Tôi đam mê việc sáng tạo và luôn tìm kiếm cách để nâng cao kỹ năng lập trình của mình. Angular, Java và Spring Boot là những công cụ mà tôi thường sử dụng để xây dựng các ứng dụng web chất lượng.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$tpy//6TEZJ3HxQB3dfWT0e5EVOfiDdJIeECJXyuIbqq.l/b9NHwxi",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i119.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Aline Bickmore"
@@ -57493,13 +58242,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 120,
                             AccessFailedCount = 4,
+<<<<<<< HEAD
                             ConcurrencyStamp = "98711442-89c0-46d8-81be-2f259e3c4654",
+=======
+                            CVFilePath = "r120.docx",
+                            ConcurrencyStamp = "e8ccf7d3-5de2-4995-beb7-4fe700de74a5",
+>>>>>>> Test
                             Email = "sruanej@hubpages.com",
                             EmailConfirmed = false,
+                            Introduction = "Tôi đến từ Vĩnh Phúc và là một lập trình viên Full-Stack. Tôi có kinh nghiệm trong việc phát triển các ứng dụng web từ đơn giản đến phức tạp. React, Python và Flask là những công nghệ mà tôi thường sử dụng để xây dựng các dự án của mình.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$Sj4RaFprJHKrM1GP10XNmuda0Idtz9Z1.LFxzCEUtSnJvYTjnCZm.",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i120.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Sarena Ruane"
@@ -57508,13 +58264,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 121,
                             AccessFailedCount = 10,
+<<<<<<< HEAD
                             ConcurrencyStamp = "2e8c4136-18c6-4656-840c-22dc6809b5e9",
+=======
+                            CVFilePath = "r121.docx",
+                            ConcurrencyStamp = "9810fceb-e3b4-41de-b3de-9e4f4916935b",
+>>>>>>> Test
                             Email = "lpidduckk@1und1.de",
                             EmailConfirmed = false,
+                            Introduction = "Tôi đến từ Hà Tĩnh và là một lập trình viên Full-Stack. Tôi có kinh nghiệm trong việc phát triển các ứng dụng web đa nền tảng và linh hoạt. Vue.js, Node.js và MySQL là những công nghệ mà tôi thường sử dụng để xây dựng các ứng dụng web chất lượng.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$c4vCrYYdWMI1QwcICeM0oOXG31FZ9/59gXkuvj7/XexhO.1U07cN2",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i121.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Lilly Pidduck"
@@ -57523,13 +58286,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 122,
                             AccessFailedCount = 9,
+<<<<<<< HEAD
                             ConcurrencyStamp = "715b5a35-8569-46a4-8e3b-601f5595d175",
+=======
+                            CVFilePath = "r122.docx",
+                            ConcurrencyStamp = "7e2ae038-7f86-4bd6-b3ce-e605c618aa92",
+>>>>>>> Test
                             Email = "abernaciakl@alexa.com",
                             EmailConfirmed = false,
+                            Introduction = "Tôi đến từ Hưng Yên và là một lập trình viên Full-Stack. Tôi đam mê công việc lập trình và luôn tìm kiếm cơ hội để thử nghiệm những công nghệ mới. Angular, Java và Spring Boot là những công cụ mà tôi thường sử dụng để xây dựng các ứng dụng web chất lượng và ổn định.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$gtd2Ags/9qTWZSbT/CMs5ehFz1NxrH1Sfyhz7XR6EwVKlDK9/eh5u",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i122.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "April Bernaciak"
@@ -57538,13 +58308,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 123,
                             AccessFailedCount = 10,
+<<<<<<< HEAD
                             ConcurrencyStamp = "5d2b0c06-c84b-445c-8746-3bb0b02af111",
+=======
+                            CVFilePath = "r123.docx",
+                            ConcurrencyStamp = "7963b7bf-17f2-44ef-94f4-a322a9b80ab0",
+>>>>>>> Test
                             Email = "jdoonicanm@nsw.gov.au",
                             EmailConfirmed = false,
+                            Introduction = "Tôi đến từ Hải Phòng và là một lập trình viên Full-Stack. Tôi có kinh nghiệm trong việc phát triển cả phía Front-end và Back-end của các ứng dụng web. React, Node.js và PostgreSQL là những công nghệ mà tôi thường sử dụng để xây dựng các dự án của mình.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$FL5G9TJzglyPQZTp1UB9KeVcVdRUiET588CAbGqmITdpRL26j3aiG",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i123.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Jenifer Doonican"
@@ -57553,13 +58330,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 124,
                             AccessFailedCount = 2,
+<<<<<<< HEAD
                             ConcurrencyStamp = "b6cb44d6-cd79-42df-8d05-ba773d14ff52",
+=======
+                            CVFilePath = "r124.docx",
+                            ConcurrencyStamp = "84231dc7-6976-4547-92ba-540241126f1d",
+>>>>>>> Test
                             Email = "tsammarsn@deviantart.com",
                             EmailConfirmed = false,
+                            Introduction = "Tôi đến từ Đà Lạt và là một lập trình viên Full-Stack. Tôi thích thách thức và luôn tìm kiếm cách để cải thiện kỹ năng lập trình của mình. React, Express và MongoDB là những công nghệ mà tôi thường sử dụng để phát triển các dự án của mình.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$n21wyyMxm2aX.c2Y7cH0/O8VPJ4WMANGS75458pcLeB..bZW8Kkz2",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i124.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Tory Sammars"
@@ -57568,13 +58352,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 125,
                             AccessFailedCount = 4,
+<<<<<<< HEAD
                             ConcurrencyStamp = "bb68cb09-68af-4403-9750-f6ecce5c8f86",
+=======
+                            CVFilePath = "r125.docx",
+                            ConcurrencyStamp = "f8ce4bb8-87fa-42bd-b8a6-4c3907260b24",
+>>>>>>> Test
                             Email = "rfishbourno@cmu.edu",
                             EmailConfirmed = true,
+                            Introduction = "Tôi đến từ Cà Mau và là một lập trình viên Full-Stack. Tôi có kinh nghiệm trong việc phát triển các ứng dụng web đa dạng và linh hoạt. Angular, Java và Spring Boot là những công cụ mà tôi thường sử dụng để xây dựng các dự án của mình.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$gqO8W1g3J8nReA36fbyVFOmqRr6lxeB66Tt9UURE4faGVRXjGxBkC",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i125.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Roobbie Fishbourn"
@@ -57583,13 +58374,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 126,
                             AccessFailedCount = 3,
+<<<<<<< HEAD
                             ConcurrencyStamp = "14ac4521-0a1d-41b5-88da-ab18ea95020f",
+=======
+                            CVFilePath = "r126.docx",
+                            ConcurrencyStamp = "d70451ef-e584-40cc-95a6-4feb5dbe5629",
+>>>>>>> Test
                             Email = "aleybandp@home.pl",
                             EmailConfirmed = false,
+                            Introduction = "Là một kỹ sư phần mềm trẻ với năng lượng sáng tạo và sự tập trung cao độ. Anh có kinh nghiệm trong việc phát triển ứng dụng di động bằng React Native và Flutter, cũng như trong việc xây dựng các ứng dụng web bằng Node.js và Angular. Anh luôn thúc đẩy sự đổi mới và tạo ra các giải pháp phần mềm hiệu quả, đồng thời luôn mong muốn học hỏi và áp dụng những công nghệ mới vào công việc của mình.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$ppcitaBBNoV06TXmJZayr.LFOZ5GoTnpPd8MWLcFDoTzlCl1SeYMy",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i126.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Aggi Leyband"
@@ -57598,13 +58396,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 127,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "345de574-0be6-4edb-9d1e-a2fadec647cf",
+=======
+                            CVFilePath = "r127.docx",
+                            ConcurrencyStamp = "7f4f0f96-1ba0-4572-bc92-4ed0b535784a",
+>>>>>>> Test
                             Email = "wlumbleyq@adobe.com",
                             EmailConfirmed = false,
+                            Introduction = "có kiến thức vững về lập trình Java và JavaScript, cũng như về xây dựng các dịch vụ API bằng Node.js và Spring Boot",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$tRvM6sUQHSkYlWf8vl2psuhQQpqp8jwJGEDSlSkOuQ9buwi7KSe5e",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i127.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Winny Lumbley"
@@ -57613,13 +58418,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 128,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "8a65255c-19ee-4227-bcb2-b1753535b9fc",
+=======
+                            CVFilePath = "r128.docx",
+                            ConcurrencyStamp = "347ef4dc-6b0e-41b6-a444-80e6eb59e9b4",
+>>>>>>> Test
                             Email = "bsedgwickr@prlog.org",
                             EmailConfirmed = false,
+                            Introduction = "",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$/CYCjBEHiYwiHeF3FgFlNe7Llesb7UU6YmcdAytIh4PAXcrreb9l2",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i128.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Barny Sedgwick"
@@ -57628,13 +58440,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 129,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "149107bb-7118-49d8-adac-895b2bfe5d43",
+=======
+                            CVFilePath = "r129.docx",
+                            ConcurrencyStamp = "220c87e8-d779-44d3-8604-68d851cbcb31",
+>>>>>>> Test
                             Email = "cdeppens@soup.io",
                             EmailConfirmed = false,
+                            Introduction = "",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$2FAS5NOxul.yKVbAGUppF.AnjLcuGIUoOiW5wKSZHn2PkNZJ773WS",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i129.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Caritta Deppen"
@@ -57643,13 +58462,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 130,
                             AccessFailedCount = 3,
+<<<<<<< HEAD
                             ConcurrencyStamp = "762b97ef-431b-473d-bcc2-cd7b37fa3421",
+=======
+                            CVFilePath = "r130.docx",
+                            ConcurrencyStamp = "3e195c15-df6a-45e1-b82e-e95b4152ba0c",
+>>>>>>> Test
                             Email = "bwoodwint@t.co",
                             EmailConfirmed = false,
+                            Introduction = "",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$oxlfe8pOIqHWPAfSV/cSE.hgSA41EcEf6nzxcYkv//vgmxjc2PIfm",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i130.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Brien Woodwin"
@@ -57658,13 +58484,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 131,
                             AccessFailedCount = 5,
+<<<<<<< HEAD
                             ConcurrencyStamp = "d195dbc1-27ae-419b-b1af-911590ca0ac4",
+=======
+                            CVFilePath = "r131.docx",
+                            ConcurrencyStamp = "d924c6ed-916f-4ddc-bfbd-f274faddf9a5",
+>>>>>>> Test
                             Email = "eeliezu@people.com.cn",
                             EmailConfirmed = true,
+                            Introduction = "là một kỹ sư phần mềm có kinh nghiệm trong việc phát triển các ứng dụng di động và web. Cô có kiến thức sâu rộng về lập trình Java và JavaScript, cũng như về xây dựng các dịch vụ API bằng Node.js và Spring Boot.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$4GyyAWzYWHXQ4Uz3Yxg8sefFURcfAATOjlGWHbEYJL9bcYu/IN9RK",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i131.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Elizabeth Eliez"
@@ -57673,13 +58506,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 132,
                             AccessFailedCount = 0,
+<<<<<<< HEAD
                             ConcurrencyStamp = "30f323fd-73d9-4859-a3e6-b88680ea636f",
+=======
+                            CVFilePath = "r132.docx",
+                            ConcurrencyStamp = "f974ee85-6af6-4dd5-8d56-9e6dc4ed1d92",
+>>>>>>> Test
                             Email = "lpleumanv@aboutads.info",
                             EmailConfirmed = false,
+                            Introduction = "Kỹ sư Machine Learning chuyên về dữ liệu y tế và y sinh. Có kiến thức vững về phân tích dữ liệu y tế, dự đoán bệnh lý và tạo ra các giải pháp y tế dựa trên dữ liệu. Nhiệt tình với việc áp dụng học máy để cải thiện chăm sóc sức khỏe và đời sống của con người.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$EDXnJilKue4SwHuY.PaurOORFSa/dMNb6BUDtoMhqTN4oHRIQMdEC",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i132.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Lucho Pleuman"
@@ -57688,13 +58528,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 133,
                             AccessFailedCount = 1,
+<<<<<<< HEAD
                             ConcurrencyStamp = "43d8f9ed-effa-4839-bbdc-fd7646dd9216",
+=======
+                            CVFilePath = "r133.docx",
+                            ConcurrencyStamp = "70235375-f9f2-4170-97d2-3cd30795dd25",
+>>>>>>> Test
                             Email = "gullrichw@wsj.com",
                             EmailConfirmed = true,
+                            Introduction = "Kỹ sư Machine Learning với kỹ năng vững về xử lý dữ liệu lớn và học máy phân tán. Có kinh nghiệm trong việc xây dựng hệ thống lớn và phức tạp, đặc biệt là trong môi trường dữ liệu phân tán và có cấu trúc phức tạp.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$8ErD3BGB/ih6KaWbK1rVu.ZcXtZIjNRoilR./cD9cNw.kajOuN2uu",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i133.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Gaye Ullrich"
@@ -57703,13 +58550,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 134,
                             AccessFailedCount = 10,
+<<<<<<< HEAD
                             ConcurrencyStamp = "6d9adea6-d911-4894-b43a-3059790dcc4a",
+=======
+                            CVFilePath = "r134.docx",
+                            ConcurrencyStamp = "c2f58b4a-c9a3-478c-b432-ce5886c4f833",
+>>>>>>> Test
                             Email = "hfawcittx@google.com",
                             EmailConfirmed = true,
+                            Introduction = "Kỹ sư Machine Learning chuyên về dự báo và phân tích tài chính. Có kiến thức vững về các phương pháp dự báo chuỗi thời gian và phân tích dữ liệu tài chính. Nhiệt tình với việc áp dụng học máy để tối ưu hóa quy trình quản lý rủi ro và ra quyết định tài chính.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$wkxOPx4Bpz/.HFzc5dgmLujl4IHU7zD8illlJv1cPUweEQAiD.YIe",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i134.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Hart Fawcitt"
@@ -57718,13 +58572,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 135,
                             AccessFailedCount = 9,
+<<<<<<< HEAD
                             ConcurrencyStamp = "d80159f6-28f1-4d4f-be6b-e849bf739ed3",
+=======
+                            CVFilePath = "r135.docx",
+                            ConcurrencyStamp = "f4c7e3bb-640b-4f94-8260-2eee1d7bcb1b",
+>>>>>>> Test
                             Email = "fkayy@technorati.com",
                             EmailConfirmed = false,
+                            Introduction = "Kỹ sư Machine Learning chuyên về lĩnh vực IoT (Internet of Things) và các hệ thống nhúng. Có kinh nghiệm trong việc phát triển các mô hình học máy nhúng để thu thập và phân tích dữ liệu từ các thiết bị IoT. Nhiệt tình với việc tạo ra các giải pháp thông minh dựa trên dữ liệu từ IoT.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$FOFtd/3JA3xeP0qCytvrOepub/1Pw0LWC81xen75XQDp0iiIdVYMO",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i135.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Fons Kay"
@@ -57733,13 +58594,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 136,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "9e2522aa-f7e3-431c-8671-687335914bdc",
+=======
+                            CVFilePath = "r136.docx",
+                            ConcurrencyStamp = "1a7def79-1178-4431-8400-fd6e17c1e7a1",
+>>>>>>> Test
                             Email = "lpolsinz@com.com",
                             EmailConfirmed = true,
+                            Introduction = "Kỹ sư Machine Learning có kiến thức rộng về các phương pháp học tăng cường và ứng dụng của chúng trong robot và tự động hóa. Có kinh nghiệm trong việc phát triển các thuật toán học tăng cường cho các ứng dụng thực tế như điều khiển robot và tự động hóa quy trình sản xuất.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$h7Us3hpaP0slV4btM9HIG.KDMrFRr0ptxw5HHSfywA0cKnk.jZYG.",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i136.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Lindsey Polsin"
@@ -57748,13 +58616,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 137,
                             AccessFailedCount = 9,
+<<<<<<< HEAD
                             ConcurrencyStamp = "fc384d10-72aa-4f1b-9961-e9a72b760837",
+=======
+                            CVFilePath = "r137.docx",
+                            ConcurrencyStamp = "6a96f91f-0dbe-4149-86ea-73ee325024db",
+>>>>>>> Test
                             Email = "zjuszkiewicz10@tumblr.com",
                             EmailConfirmed = false,
+                            Introduction = "Kỹ sư Machine Learning chuyên về phân loại và phân tích dữ liệu văn bản. Có kinh nghiệm trong việc xây dựng các hệ thống phân loại văn bản tự động, phân tích cảm xúc và phát hiện tin tức giả mạo. Nhiệt tình với việc áp dụng học máy để giải quyết các vấn đề xã hội và truyền thông.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$V1IRf5Tl.PI8ATFPow1O5.W6Wnnpd5B/mpNPEvIxogyMT9qB0LLWa",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i137.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Zacharias Juszkiewicz"
@@ -57763,13 +58638,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 138,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "7cd8ec53-1181-4075-ac6c-0fcff13a6bce",
+=======
+                            CVFilePath = "r138.docx",
+                            ConcurrencyStamp = "f7b40a65-911b-447d-97c6-2bd2e00c4ecb",
+>>>>>>> Test
                             Email = "ihindenberger11@comcast.net",
                             EmailConfirmed = true,
+                            Introduction = "Kỹ sư Machine Learning với kỹ năng vững về phát triển các hệ thống học máy sản phẩm. Có kinh nghiệm trong việc thiết kế, triển khai và duy trì các hệ thống học máy trực tuyến. Sẵn lòng tham gia vào các dự án mới và đóng góp ý kiến để cải thiện sản phẩm.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$qgLPn8llWqEm5jjHy1TSGOU2nQLrH92RCRdXMagLXxYMNGkNF9XPq",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i138.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Iain Hindenberger"
@@ -57778,13 +58660,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 139,
                             AccessFailedCount = 10,
+<<<<<<< HEAD
                             ConcurrencyStamp = "5a94928c-01bd-45a6-a08e-81e4dd80b4fb",
+=======
+                            CVFilePath = "r139.docx",
+                            ConcurrencyStamp = "af9496ed-490f-4f06-bad8-a774ed74686a",
+>>>>>>> Test
                             Email = "fhurndall12@ehow.com",
                             EmailConfirmed = false,
+                            Introduction = "Sự hiểu biết sâu sắc về các tiêu chuẩn và quy trình trong lĩnh vực công nghệ thông tin giúp tôi đảm bảo tính linh hoạt và tuân thủ đúng theo yêu cầu của dự án.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$0ckv4UysAYoKpEw2rCXgl.GW/Rv9s8jmIwFf3Mj0JqrbdbJ9a.WmO",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i139.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Finn Hurndall"
@@ -57793,13 +58682,21 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 140,
                             AccessFailedCount = 1,
+<<<<<<< HEAD
                             ConcurrencyStamp = "22f9b143-9f10-478c-8488-bad917bb9436",
                             Email = "csteaning13@vk.com",
+=======
+                            CVFilePath = "r140.pdf",
+                            ConcurrencyStamp = "377e3463-c2da-4435-919b-1ec762d6ec9e",
+                            Email = "",
+>>>>>>> Test
                             EmailConfirmed = true,
+                            Introduction = "Khả năng tương tác tốt với đồng đội và khách hàng là một trong những ưu điểm mà tôi luôn coi trọng, giúp tạo ra một môi trường làm việc tích cực và hợp tác.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$phUshZOTURnxItMBc5GEeeQMCKlacHBq2tqtCjG2H3QdC4UEBYCfe",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i140.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Codie Steaning"
@@ -57808,13 +58705,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 141,
                             AccessFailedCount = 8,
+<<<<<<< HEAD
                             ConcurrencyStamp = "22792a44-d8af-4ff5-8090-beea53c06bf6",
+=======
+                            CVFilePath = "r141.pdf",
+                            ConcurrencyStamp = "6c31b383-c716-4e25-8004-92bb0d6f5d89",
+>>>>>>> Test
                             Email = "khopfner14@samsung.com",
                             EmailConfirmed = false,
+                            Introduction = "Tôi luôn đặt lợi ích của dự án lên hàng đầu, đảm bảo rằng mỗi quyết định và hành động của tôi đều được tối ưu hóa để đạt được mục tiêu cuối cùng của tổ chức.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$enBTJLJbh94SMTsfjT4jDeK26P.j80I1yRaeu3h6EWJJJzu1Uy9KG",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i141.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Kendal Hopfner"
@@ -57823,13 +58727,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 142,
                             AccessFailedCount = 9,
+<<<<<<< HEAD
                             ConcurrencyStamp = "76dd0cdb-8b89-4b2a-9b29-1853102bf608",
+=======
+                            CVFilePath = "r142.pdf",
+                            ConcurrencyStamp = "8b8ba18a-7aa9-48f7-939f-544ea571c372",
+>>>>>>> Test
                             Email = "awilkenson15@pagesperso-orange.fr",
                             EmailConfirmed = false,
+                            Introduction = "Kỹ năng phân tích và giải quyết vấn đề của tôi đã được kiểm chứng qua nhiều dự án thành công, từ những hệ thống quy mô nhỏ đến các ứng dụng phức tạp.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$uflZGGp/L7GxBvRJHgR2nOp7az1KU8t8E/try.iTyxOrRkvm4OcRq",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i142.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Arron Wilkenson"
@@ -57838,13 +58749,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 143,
                             AccessFailedCount = 7,
+<<<<<<< HEAD
                             ConcurrencyStamp = "5ab9b6e3-4424-4482-bd16-3e6e4d1e4397",
+=======
+                            CVFilePath = "r143.pdf",
+                            ConcurrencyStamp = "aaac3426-e8e6-4f06-b42f-02fc7ccbc647",
+>>>>>>> Test
                             Email = "jbrayley16@posterous.com",
                             EmailConfirmed = false,
+                            Introduction = "Sự kiên nhẫn và kiên định là hai phẩm chất mà tôi mang lại, giúp tôi vượt qua mọi thách thức và đảm bảo tiến độ dự án luôn được duy trì.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$oWTYsE.EoLeicVCFyzT6d.a3nO2q1FTutxal/EcHyBe9ReA85wyMi",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i143.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Jeannette Brayley"
@@ -57853,13 +58771,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 144,
                             AccessFailedCount = 8,
+<<<<<<< HEAD
                             ConcurrencyStamp = "452b3155-a53b-405e-9746-075384d1482b",
+=======
+                            CVFilePath = "r144.pdf",
+                            ConcurrencyStamp = "acfca2a4-dc28-40eb-b8a5-8df13695a328",
+>>>>>>> Test
                             Email = "mgodilington17@w3.org",
                             EmailConfirmed = false,
+                            Introduction = "Với khả năng tư duy logic và sáng tạo, tôi luôn sẵn lòng đưa ra các ý tưởng mới và cải tiến để tối ưu hóa hiệu suất và chất lượng.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$AXRKNtMaHPBH5Ph0Vibc9OyIZJZExFtBdNeYET5DqZSPVhJ.E0L9K",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i144.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Morgan Godilington"
@@ -57868,13 +58793,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 145,
                             AccessFailedCount = 1,
+<<<<<<< HEAD
                             ConcurrencyStamp = "4e7d3a2d-26e1-491b-9216-1c71a676e657",
+=======
+                            CVFilePath = "r145.pdf",
+                            ConcurrencyStamp = "3fd45cad-e8ee-47ec-90bc-e8efb6781dad",
+>>>>>>> Test
                             Email = "klaingmaid18@bluehost.com",
                             EmailConfirmed = false,
+                            Introduction = "Tôi đặt mục tiêu của mình là không chỉ hoàn thành công việc mà còn vượt xa mong đợi, đem lại giá trị thực sự cho tổ chức và dự án.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$HsHfCeneYTx/VgJuGVfiq.gLkQtp7CakoWgi3MTfhibqU/yaWl6u2",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i145.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Kiah Laingmaid"
@@ -57883,13 +58815,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 146,
                             AccessFailedCount = 0,
+<<<<<<< HEAD
                             ConcurrencyStamp = "b2f4621b-f068-4f78-a71e-d96da970bf0a",
+=======
+                            CVFilePath = "r146.pdf",
+                            ConcurrencyStamp = "d5d792d7-aca1-44c9-8171-e5d3b98bf559",
+>>>>>>> Test
                             Email = "hfidge19@flickr.com",
                             EmailConfirmed = false,
+                            Introduction = "Bằng sự cam kết và sự tự tin trong kỹ năng của mình, tôi tin rằng tôi có thể đóng góp một cách tích cực và hiệu quả vào mọi dự án mà tôi tham gia.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$xz/Ipe3qJGOVqMDTMv5zOuHGzkf8vm1GU2mYgk0vwmWXFsGlfrDW.",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i146.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Henrieta Fidge"
@@ -57898,13 +58837,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 147,
                             AccessFailedCount = 2,
+<<<<<<< HEAD
                             ConcurrencyStamp = "a3c01cc6-3824-4b3a-9c9d-67ba61249558",
+=======
+                            CVFilePath = "r147.pdf",
+                            ConcurrencyStamp = "d2eecc43-0f71-490e-a8d7-9125aca496b7",
+>>>>>>> Test
                             Email = "ljohananoff1a@fastcompany.com",
                             EmailConfirmed = false,
+                            Introduction = "Kỹ năng lãnh đạo của tôi đã được phát triển thông qua việc dẫn dắt các nhóm làm việc đa dạng, từ việc hướng dẫn các nhân viên mới đến việc điều phối công việc giữa các bộ phận khác nhau.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$i6N05y3h8XplMrTxaAoUWO.47cOim0o3OKKPXeCNJ9s.mCnNO6W0a",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i147.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Loraine Johananoff"
@@ -57913,13 +58859,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 148,
                             AccessFailedCount = 9,
+<<<<<<< HEAD
                             ConcurrencyStamp = "5a78f99e-a3a6-4962-9769-4ff89aebc670",
+=======
+                            CVFilePath = "r148.pdf",
+                            ConcurrencyStamp = "b9fdf480-ee7e-4fc6-b921-0fa12ef00f4f",
+>>>>>>> Test
                             Email = "istanyland1b@usda.gov",
                             EmailConfirmed = false,
+                            Introduction = "Sự kiến thức vững vàng về các công nghệ mới nhất cùng khả năng áp dụng chúng vào thực tế giúp tôi luôn là người đứng đầu trong việc đổi mới và cải tiến.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$y/Xjwk4AeC19qBtEFFNcb.LzwinAUWVGftXMnjgE8F7LyuiKSCTuO",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i148.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Ivan Stanyland"
@@ -57928,13 +58881,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 149,
                             AccessFailedCount = 5,
+<<<<<<< HEAD
                             ConcurrencyStamp = "b60c94ff-ae5b-408e-88c0-1a825ccdc4dc",
+=======
+                            CVFilePath = "r149.pdf",
+                            ConcurrencyStamp = "e7447e5f-0ff5-47a8-97b6-011d8c6f70ea",
+>>>>>>> Test
                             Email = "fboase1c@mashable.com",
                             EmailConfirmed = false,
+                            Introduction = "Tôi luôn đặt mình vào vị trí của người dùng cuối để đảm bảo rằng sản phẩm của chúng ta đáp ứng đúng nhu cầu và mang lại trải nghiệm tốt nhất cho họ.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$iEcnKDZMb1C1rxAqp3SHMeFcV6HW2xAKENj/XtvaKRhCNo4EJbbe.",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i149.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Filippo Boase"
@@ -57943,13 +58903,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 150,
                             AccessFailedCount = 2,
+<<<<<<< HEAD
                             ConcurrencyStamp = "b7ea31ae-6ba3-4d98-bd2b-03b8a16b73d7",
+=======
+                            CVFilePath = "r150.pdf",
+                            ConcurrencyStamp = "454d38f0-d233-4e66-9b1f-1ecf6cf87f54",
+>>>>>>> Test
                             Email = "cskells1d@feedburner.com",
                             EmailConfirmed = true,
+                            Introduction = "Đam mê với công nghệ và sự ham học hỏi không ngừng giúp tôi luôn cập nhật với những xu hướng mới nhất và áp dụng chúng vào công việc hàng ngày.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$rDs5EPwx6Ne1SOl3FZTh5usNYrwa0UGIi0SrhT7n1wfFUq5i6T0Va",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i150.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Cosette Skells"
@@ -57958,13 +58925,21 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 151,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "ef042b7f-5aa9-4870-ab05-431ec5ca3086",
                             Email = "lcurme1e@zimbio.com",
+=======
+                            CVFilePath = "r151.pdf",
+                            ConcurrencyStamp = "072d21c3-a283-42b1-a613-264728007c7b",
+                            Email = "",
+>>>>>>> Test
                             EmailConfirmed = false,
+                            Introduction = "Tôi có khả năng làm việc hiệu quả cả độc lập và trong nhóm, đảm bảo rằng dự án luôn diễn ra một cách suôn sẻ và hiệu quả.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$fuoOkIC.6XrY2W4XkQzSqeIcZLqexOjIJXb2g2Z/Y3hZcn.8JFP7m",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i151.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Lin Curme"
@@ -57973,13 +58948,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 152,
                             AccessFailedCount = 2,
+<<<<<<< HEAD
                             ConcurrencyStamp = "e96234fa-d7f5-4ce0-a34c-807e4019ff8a",
+=======
+                            CVFilePath = "r152.pdf",
+                            ConcurrencyStamp = "499b29b0-7ab0-4c29-babe-d453553380ea",
+>>>>>>> Test
                             Email = "dsearl1f@hugedomains.com",
                             EmailConfirmed = false,
+                            Introduction = "Tôi đã xây dựng một mạng lưới liên kết rộng lớn trong ngành công nghiệp, từ các chuyên gia đến các đối tác chiến lược, giúp tôi có thể tận dụng tối đa các tài nguyên bên ngoài.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$2VjPNibMrhH1HEj2IBU8JOIqbhfJQsrqpd4NCcSybC0Obs4hQeI5S",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i152.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Drona Searl"
@@ -57988,13 +58970,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 153,
                             AccessFailedCount = 2,
+<<<<<<< HEAD
                             ConcurrencyStamp = "0e823c2e-9cf3-4f95-a8e5-718f214424c5",
+=======
+                            CVFilePath = "r153.pdf",
+                            ConcurrencyStamp = "0d3ff784-6d8d-47c7-b8e9-ba8c9b4a55ec",
+>>>>>>> Test
                             Email = "oheady1g@storify.com",
                             EmailConfirmed = false,
+                            Introduction = "Sự tỉ mỉ và chi tiết trong công việc giúp tôi luôn duy trì chất lượng cao và độ tin cậy trong mọi sản phẩm và dịch vụ mà tôi tham gia.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$.dM1yWs4Y8z/K.bc1Tmp0eLU8czj08B.t4/Ic2Wrh1nsdblmtcdFm",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i153.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Opalina Heady"
@@ -58003,13 +58992,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 154,
                             AccessFailedCount = 2,
+<<<<<<< HEAD
                             ConcurrencyStamp = "4abdf5ba-7c1e-4f8c-97fd-6e26e7e3fde1",
+=======
+                            CVFilePath = "r154.pdf",
+                            ConcurrencyStamp = "602442bd-e9bb-475e-aafd-2d28836d5ad8",
+>>>>>>> Test
                             Email = "snendick1h@nsw.gov.au",
                             EmailConfirmed = false,
+                            Introduction = "Tôi không ngừng nâng cao kỹ năng giao tiếp của mình để có thể truyền đạt thông điệp của dự án một cách rõ ràng và hiệu quả.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$4TulBvdQdwS/WivyNP0q8uqifbqbOk19OrjukUt/eBsnHHhhjpmnG",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i154.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Sapphira Nendick"
@@ -58018,13 +59014,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 155,
                             AccessFailedCount = 8,
+<<<<<<< HEAD
                             ConcurrencyStamp = "438242df-3590-43b2-83f6-20d94c807b2b",
+=======
+                            CVFilePath = "r155.pdf",
+                            ConcurrencyStamp = "6a873da8-0846-4290-aa7a-722c15febd28",
+>>>>>>> Test
                             Email = "lhartfield1i@webmd.com",
                             EmailConfirmed = true,
+                            Introduction = "Tôi là người luôn tìm kiếm cơ hội để phát triển và thúc đẩy sự nghiệp của mình, đồng thời cống hiến hết mình cho mỗi dự án mà tôi tham gia.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$LqPxrMaNmt4C.M79HQk1AON845QXp6LghJfydzNStm1UkIqJ4QNjy",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i155.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Lisbeth Hartfield"
@@ -58033,13 +59036,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 156,
                             AccessFailedCount = 1,
+<<<<<<< HEAD
                             ConcurrencyStamp = "25f5867c-2950-425c-987e-8f335e8871f3",
+=======
+                            CVFilePath = "r156.pdf",
+                            ConcurrencyStamp = "7fd25175-de0b-4543-a487-71c51745e176",
+>>>>>>> Test
                             Email = "kburgiss1j@alibaba.com",
                             EmailConfirmed = false,
+                            Introduction = "Bằng sự tận tụy và sự chuyên nghiệp, tôi cam kết sẽ mang lại giá trị và thành công cho tổ chức của bạn thông qua kinh nghiệm và kỹ năng trong lĩnh vực công nghệ thông tin.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$x9UhFYEU9GIiSC2HaDO.neGDhWo0jFw6.Lp93H9nhk1znCKewq0FO",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i156.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Kimbra Burgiss"
@@ -58048,13 +59058,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 157,
                             AccessFailedCount = 8,
+<<<<<<< HEAD
                             ConcurrencyStamp = "91409356-bf1e-4cde-8ac4-71e830072091",
+=======
+                            CVFilePath = "r157.pdf",
+                            ConcurrencyStamp = "68044b76-c11a-4c8b-9142-e4526cbd3818",
+>>>>>>> Test
                             Email = "swissby1k@mapquest.com",
                             EmailConfirmed = true,
+                            Introduction = "Tôi là Chuyên Gia Sở Hữu Dữ Liệu:\n\n Tôi có kỹ năng trong việc quản lý và bảo quản dữ liệu liên quan đến API. Tôi thiết kế cơ sở dữ liệu và hệ thống lưu trữ để lưu trữ và truy xuất dữ liệu một cách hiệu quả, đảm bảo tính toàn vẹn và bảo mật của thông tin.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$RSm3WkWTt8EL/J.YyUk6m..oBKAW7AN4QrqJvzv0WUsvKs4zp08YG",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i157.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Sayers Wissby"
@@ -58063,13 +59080,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 158,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "70ea36cb-8a8e-4a8f-99da-df612f5ae4f5",
+=======
+                            CVFilePath = "r158.pdf",
+                            ConcurrencyStamp = "0a48f083-358d-44c4-9814-c48b364b4900",
+>>>>>>> Test
                             Email = "dweale1l@ezinearticles.com",
                             EmailConfirmed = true,
+                            Introduction = "Tôi là Chuyên Gia Tăng Tính Mở Rộng của API:\n\n Tôi tập trung vào việc thiết kế và triển khai các API có khả năng mở rộng dễ dàng. Tôi sử dụng các kiến thức và kỹ thuật tiên tiến để xây dựng các hệ thống có khả năng mở rộng ngang và dọc, đáp ứng nhu cầu mở rộng của người dùng.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$EigabtnWx0zZbYlOQPzWm.6.Dup9nLCGKWMLUazGsV3Bgrj1cDoe2",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i158.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Dougie Weale"
@@ -58078,13 +59102,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 159,
                             AccessFailedCount = 8,
+<<<<<<< HEAD
                             ConcurrencyStamp = "61f1f954-f08a-4251-a306-ab5ee61dec81",
+=======
+                            CVFilePath = "r159.pdf",
+                            ConcurrencyStamp = "16fa9431-57ec-4e97-9cbc-f65f73577ced",
+>>>>>>> Test
                             Email = "hbowley1m@army.mil",
                             EmailConfirmed = false,
+                            Introduction = "Tôi là Nhà Phát Triển Tinh Tế và Dễ Thương:\n\n Tôi tạo ra các giao diện API dễ dàng sử dụng và thân thiện với người dùng. Tôi tập trung vào việc thiết kế các API có trải nghiệm người dùng tốt nhất có thể, từ việc đơn giản hóa quy trình tích hợp đến cung cấp tài liệu hướng dẫn chi tiết.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$u9PMxHVe2gWmjm2wfZoPBellFmXZPrbAslHAwnHQXTgsLpbe3V9xO",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i159.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Hallie Bowley"
@@ -58093,13 +59124,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 160,
                             AccessFailedCount = 5,
+<<<<<<< HEAD
                             ConcurrencyStamp = "53fcbc7e-0394-45d2-9731-1db802e5af10",
+=======
+                            CVFilePath = "r160.pdf",
+                            ConcurrencyStamp = "4a1564ef-7747-47b3-b7b0-a60389af1329",
+>>>>>>> Test
                             Email = "dsagg1n@dailymotion.com",
                             EmailConfirmed = false,
+                            Introduction = "Tôi là Chuyên Gia Quản Lý Phiên Bản API: \n\n Tôi đảm bảo quản lý phiên bản của các API một cách chuyên nghiệp và hiệu quả. Tôi thiết lập và tuân thủ các quy trình quản lý phiên bản để đảm bảo tính ổn định và tương thích giữa các phiên bản khác nhau của API.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$GRywuwmcaxsznjVQsIYJje2N5S73.56udrPQgUgsnrsH8xx7BF4hW",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i160.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Dory Sagg"
@@ -58108,13 +59146,21 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 161,
                             AccessFailedCount = 1,
+<<<<<<< HEAD
                             ConcurrencyStamp = "ed955f5b-59fd-4524-b025-eae0c6254786",
                             Email = "clivesey1o@army.mil",
+=======
+                            CVFilePath = "r161.docx",
+                            ConcurrencyStamp = "f70ee3cb-a9a1-4ae6-9ff1-37c618025adf",
+                            Email = "",
+>>>>>>> Test
                             EmailConfirmed = true,
+                            Introduction = "Tôi là Người Đam Mê Học Tập và Chia Sẻ Kiến Thức: Tôi tận hưởng việc học hỏi và chia sẻ kiến thức của mình với cộng đồng. Tôi thường xuyên tham gia các hoạt động học tập và sự kiện, cũng như viết blog và tham gia diễn đàn để chia sẻ thông tin và kinh nghiệm với người khác.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$elJyNTPtvQL/WzYq2eCvfeMl/ZiucShYxg1mBpHZwUDYEJQf0qY7O",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i161.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Cece Livesey"
@@ -58123,13 +59169,21 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 162,
                             AccessFailedCount = 4,
+<<<<<<< HEAD
                             ConcurrencyStamp = "ebe0940b-84a9-4d27-8efb-93082d800013",
                             Email = "kyarranton1p@dropbox.com",
+=======
+                            CVFilePath = "r162.docx",
+                            ConcurrencyStamp = "5d118305-6e63-4efa-adc3-1343493ac41e",
+                            Email = "",
+>>>>>>> Test
                             EmailConfirmed = false,
+                            Introduction = "Hi, I'm Karen, a software engineer passionate about natural language processing (NLP) and human-computer interaction (HCI). I specialize in building conversational AI systems and chatbots that understand and respond to human language. Python, NLTK, and TensorFlow are my main tools for creating intelligent conversational agents.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$n7Yg9vTfaNFKy0418Y1HiesztR9T226DlNpj2LE/ekQq7TF1gnkBi",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i162.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Keriann Yarranton"
@@ -58138,13 +59192,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 163,
                             AccessFailedCount = 7,
+<<<<<<< HEAD
                             ConcurrencyStamp = "8535f630-af26-4305-811c-582e2f1a5ddf",
+=======
+                            CVFilePath = "r163.docx",
+                            ConcurrencyStamp = "b381aec4-d895-44b7-b90f-c1de247131fa",
+>>>>>>> Test
                             Email = "nryhorovich1q@senate.gov",
                             EmailConfirmed = true,
+                            Introduction = "Hello, I'm Leo, a software engineer with expertise in backend development and distributed systems. I thrive on architecting scalable and resilient systems that handle massive amounts of data with efficiency. Java, Scala, and Kafka are among my favorite technologies for building high-performance microservices architectures.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$uiMDTu8f6IPFzMi37xbrTesODfuJQkpqOhbO1WYUy.vbLtnnm0lC2",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Nichols Ryhorovich"
@@ -58153,13 +59214,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 164,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "0abae24a-931c-4244-a05a-309971585987",
+=======
+                            CVFilePath = "r164.docx",
+                            ConcurrencyStamp = "a0f38ea5-1615-402d-986f-1008b5f9f780",
+>>>>>>> Test
                             Email = "idumblton1r@boston.com",
                             EmailConfirmed = true,
+                            Introduction = "Hey there! I'm Mia, a software engineer passionate about e-commerce and digital payments. I specialize in building secure and reliable payment processing systems that facilitate seamless transactions. From integrating payment gateways like Stripe and PayPal to implementing fraud detection algorithms, I'm dedicated to enhancing the online shopping experience.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$fwr1HdFSqdcB7OBkFXjDhOfhJuPJJfqZngkvxJzl3.7R4956R2ucO",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Ingamar Dumblton"
@@ -58168,13 +59236,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 165,
                             AccessFailedCount = 9,
+<<<<<<< HEAD
                             ConcurrencyStamp = "6df6d40b-5e14-47a7-b436-c34674bd8ee7",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "d894149e-0a7e-41e6-a5a8-22546cac9525",
+>>>>>>> Test
                             Email = "rst1s@reverbnation.com",
                             EmailConfirmed = false,
+                            Introduction = "Hi, I'm Nate, a software engineer with a focus on virtual reality (VR) and augmented reality (AR) development. I enjoy creating immersive experiences that blur the lines between the digital and physical worlds. Unity and Unreal Engine are my go-to platforms for building interactive VR/AR applications that transport users to new realities.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$l3bC8iY7duGbJLmSy2.okOle.m/AmRSxJxCCqLAyZDv98xdIyV7RK",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Rosabella St. Ledger"
@@ -58183,13 +59258,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 166,
                             AccessFailedCount = 8,
+<<<<<<< HEAD
                             ConcurrencyStamp = "dc867f52-181f-41d2-b78d-09e75d8c2c87",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "f60cd300-13c9-46af-b1ab-acb9cb64fc07",
+>>>>>>> Test
                             Email = "hblondel1t@nsw.gov.au",
                             EmailConfirmed = true,
+                            Introduction = "Greetings! I'm Olivia, a software engineer specializing in web accessibility and inclusive design. I'm passionate about creating digital experiences that are accessible to all users, regardless of their abilities. WCAG guidelines and ARIA attributes are key elements of my toolkit for designing and developing inclusive web applications.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$FuaiTCbZoJf0l24bGfJDy.Nrnl.SakvETRlVM1T/g.1FS21.lK/aS",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i166.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Huey Blondel"
@@ -58198,13 +59280,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 167,
                             AccessFailedCount = 5,
+<<<<<<< HEAD
                             ConcurrencyStamp = "510db445-3bf0-411e-84a1-9eeb188adc39",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "d82819db-850d-49a1-a115-bb2a98d8aa07",
+>>>>>>> Test
                             Email = "nwinchcum1u@digg.com",
                             EmailConfirmed = true,
+                            Introduction = "Hey, I'm Peter, a software engineer with a focus on bioinformatics and computational biology. I'm passionate about leveraging technology to analyze biological data and unravel the mysteries of life. Python, R, and bioinformatics tools like BLAST and Biopython are my allies in exploring genomics, proteomics, and beyond.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$OlUM1RfOIcDavJMBWXARo.0i9Xbkh73mXIvnh1wqdRm3nKXBlhm2y",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i167.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Noreen Winchcum"
@@ -58213,13 +59302,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 168,
                             AccessFailedCount = 9,
+<<<<<<< HEAD
                             ConcurrencyStamp = "65218cab-6653-4edb-8a1e-4cda6b0c0b38",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "ea3958ac-c51b-4807-bc5e-b990499c542d",
+>>>>>>> Test
                             Email = "imenco1v@ucoz.com",
                             EmailConfirmed = true,
+                            Introduction = "Hi there! I'm Quinn, a software engineer specializing in blockchain and decentralized applications (DApps). I'm fascinated by the potential of blockchain technology to revolutionize industries and empower individuals. Solidity and Ethereum are my primary tools for building smart contracts and decentralized protocols that enable trustless interactions.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$VfflMTC2rRZSAYlNMf6Ix.T9dpfUGFpjv//C.AQSngEIRWa9x.sW.",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i168.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Ivie Menco"
@@ -58228,13 +59324,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 169,
                             AccessFailedCount = 1,
+<<<<<<< HEAD
                             ConcurrencyStamp = "3524c94d-8df0-4a33-a070-0c79d375791c",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "eae78a0a-401a-41e8-8e00-6f9d1c4beff9",
+>>>>>>> Test
                             Email = "tshellshear1w@spotify.com",
                             EmailConfirmed = false,
+                            Introduction = "Hello, I'm Ryan, a software engineer with expertise in high-frequency trading (HFT) and algorithmic trading systems. I thrive in fast-paced environments where microseconds matter, designing and optimizing trading strategies for maximum efficiency. Python, C++, and platforms like QuantConnect are my playgrounds for quantitative finance and automated trading.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$PBtokwb52sOmX0dGx0pS5ekuJMNddfqqTLSbNGj9RmfyZcW7/qMsW",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i169.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Tiler Shellshear"
@@ -58243,13 +59346,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 170,
                             AccessFailedCount = 8,
+<<<<<<< HEAD
                             ConcurrencyStamp = "a0f0e01e-5914-44db-92b5-6b87113fa419",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "e9cf3874-3b68-44ec-88b9-1067fb846bbe",
+>>>>>>> Test
                             Email = "gallmen1x@bigcartel.com",
                             EmailConfirmed = true,
+                            Introduction = "Hi, I'm Sara, a software engineer passionate about sustainable development and green technologies. I specialize in building software solutions that promote environmental conservation and renewable energy. From energy management systems to carbon footprint calculators, I'm committed to using technology for a greener future.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$aCfj5.IAtqiVxKvbbYzp5OaFYglEbzRDYgDxe1bze2TaBgN36ugWq",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i170.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Ginevra Allmen"
@@ -58258,13 +59368,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 171,
                             AccessFailedCount = 9,
+<<<<<<< HEAD
                             ConcurrencyStamp = "36a046a2-c845-45ed-b990-adb2d3691372",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "e9456a9c-f18e-4d06-8a8f-b76b26cea051",
+>>>>>>> Test
                             Email = "mlevitt1y@ted.com",
                             EmailConfirmed = false,
+                            Introduction = "Hey, I'm Tom, a software engineer with a focus on cybersecurity and ethical hacking. I'm dedicated to identifying and patching vulnerabilities in software systems to enhance their security posture. From conducting penetration tests to developing security tools, I'm always on the lookout for ways to stay one step ahead of cyber threats.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$/P1y/EDSnzPIYQpuoOgG8eVingLugJSdTq/D9J/U5z62imwqniOTy",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i171.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Moritz Levitt"
@@ -58273,13 +59390,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 172,
                             AccessFailedCount = 7,
+<<<<<<< HEAD
                             ConcurrencyStamp = "01484677-19b4-4c09-b3fc-55c01282b869",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "d1d5f0a7-2739-4feb-8e43-b1143737c9c3",
+>>>>>>> Test
                             Email = "rgoundsy1z@csmonitor.com",
                             EmailConfirmed = false,
+                            Introduction = "Hi, I'm Uma, a software engineer specializing in cloud-native application development and DevOps practices. I excel in designing and implementing scalable, resilient, and highly available systems on cloud platforms like AWS, GCP, and Azure. Kubernetes, Docker, and Terraform are my go-to tools for building and managing cloud infrastructure.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$5AgBMDeee5P1BL4KmyPYVuCuFZSMYWYuOUvEV8/k5moWqGgRR0NzK",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i172.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Richie Goundsy"
@@ -58288,13 +59412,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 173,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "19857faf-8181-4fc8-9f7b-9ccd40e1ebb7",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "f00dda44-be89-4a1e-8ef6-e6c7e362df10",
+>>>>>>> Test
                             Email = "ecreffeild20@meetup.com",
                             EmailConfirmed = true,
+                            Introduction = "Hello! I'm Victor, a software engineer with a passion for open-source development and community-driven projects. I contribute to various open-source initiatives, ranging from libraries and frameworks to operating systems and developer tools. Git, GitHub, and continuous integration/delivery pipelines are my tools for collaboration and code sharing.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$gVB6kkDDg8c8.r1TI/xxM.Pt.MEcqLSQHvMkcUhCTrl8VYk0JImKy",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i173.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Eba Creffeild"
@@ -58303,13 +59434,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 174,
                             AccessFailedCount = 1,
+<<<<<<< HEAD
                             ConcurrencyStamp = "20123984-9006-491d-b428-03c18bd89861",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "f5e704bb-68b7-435f-ab36-0c0ae4a15eda",
+>>>>>>> Test
                             Email = "bpaine21@g.co",
                             EmailConfirmed = false,
+                            Introduction = "Greetings! I'm Wendy, a software engineer specializing in digital marketing and analytics platforms. I develop custom solutions that empower marketers to analyze and optimize their campaigns for maximum impact. From building data pipelines to implementing tracking pixels, I'm dedicated to helping businesses make data-driven decisions.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$hz7MN6Y.L7GYLiEEv0tthuKoI/0wzpF1Nj.m88UZlSLl.Oghsux1O",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i174.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Byrann Paine"
@@ -58318,13 +59456,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 175,
                             AccessFailedCount = 7,
+<<<<<<< HEAD
                             ConcurrencyStamp = "77df1083-e3e2-49f7-a4cd-425f59a60a48",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "becde638-a992-4a9d-a743-b1923967ceac",
+>>>>>>> Test
                             Email = "ttunny22@admin.ch",
                             EmailConfirmed = false,
+                            Introduction = "Hi there! I'm Xavier, a software engineer with expertise in computer vision and image processing. I enjoy working on projects that involve analyzing and understanding visual data, from object detection and recognition to image segmentation and classification. Python, OpenCV, and TensorFlow are my allies in unraveling the secrets hidden within images.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$P7d1/5.zI49KhGAD8n4oiubNQFCk2NFDefa5gMQGQY1hZdEdlqRgK",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i175.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Tulley Tunny"
@@ -58333,13 +59478,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 176,
                             AccessFailedCount = 9,
+<<<<<<< HEAD
                             ConcurrencyStamp = "d58d2dcf-0a99-4a6b-8b78-464a0d421e53",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "adecc8ec-5eb1-4290-86fb-db86f855f9eb",
+>>>>>>> Test
                             Email = "hemmert23@senate.gov",
                             EmailConfirmed = true,
+                            Introduction = "Greetings! I'm Tina, a software engineer with expertise in financial risk management and quantitative analysis. I develop software solutions that enable financial institutions to assess and mitigate risks associated with investments, loans, and trading activities. Monte Carlo simulations, risk models, and financial derivatives pricing are among my areas of focus.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$J1uXK2HEUNBdd/vDMkTTaO9GmeSWjVRpwMvMKcq9iDUoRDD8mf24C",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i176.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Harmon Emmert"
@@ -58348,13 +59500,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 177,
                             AccessFailedCount = 0,
+<<<<<<< HEAD
                             ConcurrencyStamp = "08a5f0df-5516-44a8-a69d-9fa10f0364da",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "a8934a27-1bba-4fbf-b310-c1c688ebd011",
+>>>>>>> Test
                             Email = "ppippin24@msn.com",
                             EmailConfirmed = true,
+                            Introduction = "Hey, I'm Ulysses, a software engineer with a focus on digital forensics and cybersecurity investigations. I develop software tools and techniques that help law enforcement and cybersecurity professionals gather and analyze digital evidence to solve crimes and protect organizations from cyber threats. Python, digital forensic tools, and incident response frameworks are among my areas of expertise.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$g/1jvNTR1ygIkMU3ceoosu4CaEuyhCWPpCsCRJh9Fy6VkizRDEZqm",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i177.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Page Pippin"
@@ -58363,13 +59522,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 178,
                             AccessFailedCount = 7,
+<<<<<<< HEAD
                             ConcurrencyStamp = "665ec377-8a24-4a08-9f5e-a7a66fa25024",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "7a45f4e0-84df-4688-a345-ea861dd36606",
+>>>>>>> Test
                             Email = "jbim25@vk.com",
                             EmailConfirmed = false,
+                            Introduction = "Hi there! I'm Vivian, a software engineer specializing in computational neuroscience and brain-computer interfaces (BCI). I develop software tools and algorithms that enable researchers to analyze brain activity and develop neurotechnologies for medical and research applications. MATLAB, Python, and signal processing techniques are among my areas of expertise.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$W1RzClGnuao/CKqLPEFISuOs7C1349Ijid58HTiSbnIJm/rJmuNu6",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i178.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Jocelin Bim"
@@ -58378,13 +59544,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 179,
                             AccessFailedCount = 8,
+<<<<<<< HEAD
                             ConcurrencyStamp = "af84404b-ec0a-422d-8a9e-3c42f3356206",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "33135d28-423b-4e84-8859-8feb9b55ee4e",
+>>>>>>> Test
                             Email = "cleechman26@dailymail.co.uk",
                             EmailConfirmed = false,
+                            Introduction = "Hello, I'm Walter, a software engineer with expertise in simulation and modeling for engineering and scientific applications. I develop software solutions that enable engineers and researchers to simulate and analyze complex systems, from structural mechanics to fluid dynamics. Finite element analysis (FEA), computational fluid dynamics (CFD), and simulation software platforms are among my areas of focus.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$X4k6y7Zi8lEgwszN781iOuT4BsBGsjJcti52Yfd9RgzqDS1dAOjGe",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i179.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Constantia Leechman"
@@ -58393,13 +59566,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 180,
                             AccessFailedCount = 10,
+<<<<<<< HEAD
                             ConcurrencyStamp = "74c1954b-502d-42a8-b6e0-d6d8b4244ef7",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "5edecf61-e1e9-40cf-8699-776bd304f15e",
+>>>>>>> Test
                             Email = "ggetsham27@wiley.com",
                             EmailConfirmed = true,
+                            Introduction = "Xin chào, tôi là Nguyễn Thị H. Tôi đến từ Cần Thơ và là một lập trình viên Full-Stack. Tôi có kinh nghiệm trong việc phát triển cả phía Front-end và Back-end của các ứng dụng web. React, Node.js và MongoDB là những công nghệ mà tôi thường sử dụng để xây dựng các dự án của mình.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$xSDGKKLyQVqnm2Fc5uRF.umw1.4U/FHiE2xjy20uPFO14obtyIqx2",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i180.png",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Gus Getsham"
@@ -58408,13 +59588,21 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 181,
                             AccessFailedCount = 7,
+<<<<<<< HEAD
                             ConcurrencyStamp = "a005deab-4f1e-4529-bf5e-dd0e8c6a6d44",
                             Email = "abrusby28@twitpic.com",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "da39b028-c377-468a-85fb-8f1cd4569669",
+                            Email = "",
+>>>>>>> Test
                             EmailConfirmed = false,
+                            Introduction = "Xin chào, tôi là Trần Văn G. Tôi đến từ Hà Tĩnh và là một lập trình viên Full-Stack. Tôi đam mê công việc lập trình và luôn tìm kiếm cơ hội để thử nghiệm những công nghệ mới. Angular, Java và Spring Boot là những công cụ mà tôi thường sử dụng để xây dựng các ứng dụng web chất lượng và ổn định.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$Qf6A4cDZFteJrrFbmjVCxeOAO8Ox8wBSizktIWLHc2M5BpatyfpWO",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Adrien Brusby"
@@ -58423,13 +59611,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 182,
                             AccessFailedCount = 5,
+<<<<<<< HEAD
                             ConcurrencyStamp = "e40a3daf-184c-4dbc-a347-a18d8e39041a",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "724a5f56-ffd2-4ef0-a5e8-7a61314ae971",
+>>>>>>> Test
                             Email = "cshirer29@ed.gov",
                             EmailConfirmed = true,
+                            Introduction = "Xin chào tôi là Lê Thị I. Tôi đến từ Vũng Tàu và là một lập trình viên Full-Stack. Tôi thích thách thức và luôn tìm kiếm cách để cải thiện kỹ năng lập trình của mình. React, Express và MongoDB là những công nghệ mà tôi thường sử dụng để phát triển các dự án của mình.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$v6iGxWkhTh5DLacUMLpeXOzzO5lr3dHGBuqZ.AT7mj1utumTub.56",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i182.png",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Clair Shirer"
@@ -58438,13 +59633,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 183,
                             AccessFailedCount = 2,
+<<<<<<< HEAD
                             ConcurrencyStamp = "58de1dd5-8513-4fc2-8475-43f7c80c59a7",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "5687ce58-ced3-474c-934c-e8ef4f4dfd3b",
+>>>>>>> Test
                             Email = "ccluley2a@who.int",
                             EmailConfirmed = true,
+                            Introduction = "Xin chào, tôi là Hoàng Thị K. Tôi đến từ Đồng Nai và là một lập trình viên Full-Stack. Tôi có kinh nghiệm trong việc phát triển các ứng dụng web đa dạng và linh hoạt. Angular, Java và Spring Boot là những công cụ mà tôi thường sử dụng để xây dựng các dự án của mình.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$n/Xo2/VSAUBX3uCkzac/lOTn0NyYdMsMkReYrwG2wFRnt3Ba1BguK",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i183.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Consalve Cluley"
@@ -58453,13 +59655,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 184,
                             AccessFailedCount = 10,
+<<<<<<< HEAD
                             ConcurrencyStamp = "6425c4bb-1019-44e5-a73b-4627a990635a",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "fdbc2ad6-847b-4f37-b409-2553bbbce3b9",
+>>>>>>> Test
                             Email = "temlyn2b@ning.com",
                             EmailConfirmed = true,
+                            Introduction = "Xin chào, tôi là Nguyễn Văn L. Tôi đến từ Nha Trang và là một lập trình viên Full-Stack. Tôi đam mê công việc lập trình và luôn tìm kiếm cơ hội để áp dụng những công nghệ mới vào dự án của mình. React, Node.js và PostgreSQL là những công nghệ mà tôi thường sử dụng để xây dựng các ứng dụng web hiệu quả.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$dAjhREwrmamSFmoD9myMMueiowY3yoQL.GuhRCc.W9BXZjjBc0OjK",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Thornie Emlyn"
@@ -58468,13 +59677,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 185,
                             AccessFailedCount = 5,
+<<<<<<< HEAD
                             ConcurrencyStamp = "ecdef6c8-ed48-4be2-a636-f6d907c8238f",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "6cb2260c-8942-432b-9456-d7bfa0122bcd",
+>>>>>>> Test
                             Email = "mweekland2c@cocolog-nifty.com",
                             EmailConfirmed = false,
+                            Introduction = "Xin chào mọi người, tôi là Trần Thị M. Tôi đến từ Hải Dương và là một lập trình viên Full-Stack. Tôi có kinh nghiệm trong việc phát triển cả phía Front-end và Back-end của các ứng dụng web. Vue.js, Python và Flask là những công nghệ mà tôi thường sử dụng để xây dựng các dự án của mình.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$z2zfraEEPlDZ5rOgVzp54.lopYZP6U.54DQ0Xhim3oe8v0FhglnSS",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Moll Weekland"
@@ -58483,13 +59699,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 186,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "37778d6a-25fd-4c93-bee7-176ddaa396f2",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "c01b8e3d-3e55-49fd-a4b9-cc1b568cf465",
+>>>>>>> Test
                             Email = "amattevi2d@people.com.cn",
                             EmailConfirmed = false,
+                            Introduction = "Xin chào, tôi là Phạm Văn N. Tôi đến từ Bắc Giang và là một lập trình viên Full-Stack. Tôi có kinh nghiệm trong việc xây dựng các ứng dụng web đa dạng và linh hoạt. React, Express và MongoDB là những công nghệ mà tôi thường sử dụng để phát triển các dự án của mình.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$y6e6zAgo9oUUnWuDHrR7eeB.lwHT3TcoDJDmneMemolP/nJk047b.",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Astrix Mattevi"
@@ -58498,13 +59721,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 187,
                             AccessFailedCount = 10,
+<<<<<<< HEAD
                             ConcurrencyStamp = "79d976e5-ef50-4079-99fb-17b1d54c921a",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "fec0d7ff-16b7-41dc-949e-9604e3a178fa",
+>>>>>>> Test
                             Email = "ceagle2e@opera.com",
                             EmailConfirmed = false,
+                            Introduction = "Xin chào, tôi là Nguyễn Thị O. Tôi đến từ Hà Nam và là một lập trình viên Full-Stack. Tôi đam mê việc sáng tạo và luôn tìm kiếm cách để nâng cao kỹ năng lập trình của mình. Angular, Java và Spring Boot là những công cụ mà tôi thường sử dụng để xây dựng các ứng dụng web chất lượng.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$PBZmdl2SU8rMMbMUuVMtPeqyaDocgWyJVfOkIUBop4jyto3CsOyUi",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Clarisse Eagle"
@@ -58513,13 +59743,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 188,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "01d41c5e-e9bf-4227-b4cb-38fd59072ad9",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "00f55e33-0235-4248-8c00-6aa4022225fc",
+>>>>>>> Test
                             Email = "gmcwhirter2f@usatoday.com",
                             EmailConfirmed = false,
+                            Introduction = "Với hơn mười năm kinh nghiệm làm việc trong lĩnh vực công nghệ thông tin, tôi đã tích lũy được một bộ kỹ năng đa dạng và sâu rộng. Sự am hiểu sâu sắc về các công nghệ mới nhất cùng khả năng giải quyết vấn đề hiệu quả là những điểm mạnh mà tôi có thể đem lại cho dự án của bạn. Chắc chắn rằng việc giao nhiệm vụ cho tôi sẽ đem lại kết quả đáng tin cậy và chất lượng cao.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$.XCaPQwJtnthBrwjZs2lPeJt78feusDAmP85re/PWR1X1UnOt7v.W",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Gibb McWhirter"
@@ -58528,13 +59765,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 189,
                             AccessFailedCount = 3,
+<<<<<<< HEAD
                             ConcurrencyStamp = "bb28c1c0-68bf-43f2-93e8-5a88125f3999",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "1647eef4-8ab1-49eb-b693-26f5741d791d",
+>>>>>>> Test
                             Email = "jquittonden2g@jimdo.com",
                             EmailConfirmed = true,
+                            Introduction = "Với sự chuyên môn trong việc phát triển phần mềm và quản lý hạ tầng mạng, tôi tự tin rằng có thể đưa ra các giải pháp hiệu quả để nâng cao hiệu suất và an ninh cho hệ thống của bạn.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$R6OClAsS4cyYv7tV4SUAs.luqfjn5SODKHBz2nPKYmMhZSKbJG9RO",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Jerri Quittonden"
@@ -58543,13 +59787,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 190,
                             AccessFailedCount = 9,
+<<<<<<< HEAD
                             ConcurrencyStamp = "7c6827bf-4cff-404c-a7d3-c0977ca1d3c1",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "bc8c4b87-f5cf-4359-b328-0cf7e89b476c",
+>>>>>>> Test
                             Email = "faynold2h@icq.com",
                             EmailConfirmed = false,
+                            Introduction = "Kinh nghiệm của tôi không chỉ giới hạn trong việc lập trình và phát triển ứng dụng, mà còn bao gồm cả quản lý dự án và tư vấn công nghệ, đảm bảo rằng mọi công việc đều được thực hiện một cách suôn sẻ và chuyên nghiệp.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$MYE8FD5NcIAyADKDuJYq3O9LclqP7SYFWE/1DkuwZM7Paed/zn7Rm",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "i190.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Fabio Aynold"
@@ -58558,13 +59809,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 191,
                             AccessFailedCount = 6,
+<<<<<<< HEAD
                             ConcurrencyStamp = "63ce0c16-08b0-4fac-8a53-c320c62c4e29",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "76de041e-9ffd-4d0f-b151-b74b2342647c",
+>>>>>>> Test
                             Email = "agetsham2i@ibm.com",
                             EmailConfirmed = true,
+                            Introduction = "Sự hiểu biết sâu sắc về các tiêu chuẩn và quy trình trong lĩnh vực công nghệ thông tin giúp tôi đảm bảo tính linh hoạt và tuân thủ đúng theo yêu cầu của dự án.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$6sPLvO3/RRsplW0/jCd.J.Qz3WIo0W3IQY3bSd3KMEansv/X2312y",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i191.png",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Arnold Getsham"
@@ -58573,13 +59831,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 192,
                             AccessFailedCount = 10,
+<<<<<<< HEAD
                             ConcurrencyStamp = "e59680fa-5602-4115-894d-c28029e1c0bb",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "d036114b-e34b-488b-9101-fccc838886c6",
+>>>>>>> Test
                             Email = "mpandya2j@alibaba.com",
                             EmailConfirmed = true,
+                            Introduction = "Khả năng tương tác tốt với đồng đội và khách hàng là một trong những ưu điểm mà tôi luôn coi trọng, giúp tạo ra một môi trường làm việc tích cực và hợp tác.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$IeJljzg.9Tu1HiYBHFxDkeULemJzNHm004cwPXyoRYZ8GxrHED9pC",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "i192.png",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Meghan Pandya"
@@ -58588,13 +59853,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 193,
                             AccessFailedCount = 7,
+<<<<<<< HEAD
                             ConcurrencyStamp = "2cbf278a-f58b-4fc5-b0ec-d9cca9fbdd38",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "19ac8e5b-4e8a-4e64-86cf-df592815a2d5",
+>>>>>>> Test
                             Email = "mmcpeice2k@cdc.gov",
                             EmailConfirmed = false,
+                            Introduction = "Hi, I'm Penelope, a software engineer specializing in supply chain management and logistics optimization. I develop software solutions that help organizations streamline their supply chain operations, from inventory management to route optimization. Python, optimization algorithms, and supply chain analytics platforms are among my tools for improving efficiency and reducing costs.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$S41aNIxS0dIQcTxtWkzzkemoasl5wRuAR7KwXHbqQXJ8ITtej2yyW",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Miltie McPeice"
@@ -58603,13 +59875,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 194,
                             AccessFailedCount = 8,
+<<<<<<< HEAD
                             ConcurrencyStamp = "dae748cb-41b1-4770-8724-1a6110ddb4df",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "77547400-b166-4d13-9564-f8ad83253c16",
+>>>>>>> Test
                             Email = "rduhig2l@comcast.net",
                             EmailConfirmed = true,
+                            Introduction = "Hey there! I'm Quentin, a software engineer with a focus on simulation and modeling for scientific research. I develop software tools that enable scientists and engineers to simulate complex systems, analyze data, and gain insights into natural phenomena. MATLAB, Simulink, and computational fluid dynamics (CFD) software are among my areas of expertise.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$nSJHnxgCqtxfHKMiZUCWOOPhQuX0FSoYXcUAy.WcUKAEl886sjTTe",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Redford Duhig"
@@ -58618,13 +59897,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 195,
                             AccessFailedCount = 3,
+<<<<<<< HEAD
                             ConcurrencyStamp = "98d896f6-99d0-411a-a73f-3b789730df30",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "95e68b16-65d2-461a-9716-3046bb2a14ef",
+>>>>>>> Test
                             Email = "dkewzick2m@ehow.com",
                             EmailConfirmed = true,
+                            Introduction = "Hello, I'm Rachel, a software engineer passionate about accessibility and inclusive design. I develop software solutions that ensure digital products and services are accessible to users of all abilities. From screen readers compatibility to keyboard navigation, I'm dedicated to making technology inclusive and empowering for everyone.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$iFWfdKfm.aclJH8zKIViN.zKcu2sCtfTq9nkeZfVPCM9mYzyIvnH.",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Dyane Kewzick"
@@ -58633,13 +59919,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 196,
                             AccessFailedCount = 8,
+<<<<<<< HEAD
                             ConcurrencyStamp = "becb5328-727d-4e34-8af9-fe47438946b2",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "04989d25-0507-47b8-b08a-839f1102c169",
+>>>>>>> Test
                             Email = "lbroose2n@stumbleupon.com",
                             EmailConfirmed = false,
+                            Introduction = "Hi, I'm Sam, a software engineer specializing in video game engine development and graphics programming. I develop software frameworks and tools that empower game developers to create immersive and visually stunning gaming experiences. C++, DirectX, and OpenGL are among my areas of expertise in pushing the boundaries of real-time graphics.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$NsPM4YPHytoJ7mTfVzZxOuykJRHGEeQXr2qRWhJZGLRJnSciE.AQm",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)0,
                             TwoFactorEnabled = false,
                             UserName = "Lana Broose"
@@ -58648,13 +59941,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 197,
                             AccessFailedCount = 0,
+<<<<<<< HEAD
                             ConcurrencyStamp = "5f53ad02-3034-4d91-95bc-81404e14b70f",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "9ae0bd60-b423-4153-8ec1-1f171f204aef",
+>>>>>>> Test
                             Email = "gpollie2o@redcross.org",
                             EmailConfirmed = false,
+                            Introduction = "Greetings! I'm Tina, a software engineer with expertise in financial risk management and quantitative analysis. I develop software solutions that enable financial institutions to assess and mitigate risks associated with investments, loans, and trading activities. Monte Carlo simulations, risk models, and financial derivatives pricing are among my areas of focus.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$dRVnlbY7ktbrU156CdspY.VPaFu6Rws0jsfBO3y0CpyoxS/nscLZ.",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)0,
                             TwoFactorEnabled = true,
                             UserName = "Guenna Pollie"
@@ -58663,13 +59963,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 198,
                             AccessFailedCount = 1,
+<<<<<<< HEAD
                             ConcurrencyStamp = "a85177bc-cfec-4a8d-90ab-78cc2fddbb31",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "e21442f2-bef1-4589-8682-84c7a9753457",
+>>>>>>> Test
                             Email = "hshrubsall2p@ft.com",
                             EmailConfirmed = true,
+                            Introduction = "Hey, I'm Ulysses, a software engineer with a focus on digital forensics and cybersecurity investigations. I develop software tools and techniques that help law enforcement and cybersecurity professionals gather and analyze digital evidence to solve crimes and protect organizations from cyber threats. Python, digital forensic tools, and incident response frameworks are among my areas of expertise.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
                             PasswordHash = "$2a$04$ZhRsWlJTDh7/pGrMYUjaZOzUbbp8PQBzjWObpwocogRt5mXSnBLtq",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Hartley Shrubsall"
@@ -58678,13 +59985,20 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 199,
                             AccessFailedCount = 8,
+<<<<<<< HEAD
                             ConcurrencyStamp = "7de607ce-36b5-4290-8485-6e8beb9a31ea",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "07ea470e-6ca0-47d0-a421-63f7c40c9490",
+>>>>>>> Test
                             Email = "itrewhella2q@discuz.net",
                             EmailConfirmed = false,
+                            Introduction = "Hi there! I'm Vivian, a software engineer specializing in computational neuroscience and brain-computer interfaces (BCI). I develop software tools and algorithms that enable researchers to analyze brain activity and develop neurotechnologies for medical and research applications. MATLAB, Python, and signal processing techniques are among my areas of expertise.",
                             IsVeryfiedIdentity = true,
                             LockoutEnabled = false,
                             PasswordHash = "$2a$04$EnSnxiQdxtW8Itf3uTm.vuy13BJ8uOYu3ZJnRlaV/piCIQecFKJF6",
                             PhoneNumberConfirmed = false,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = true,
                             UserName = "Ilyse Trewhella"
@@ -58693,13 +60007,21 @@ namespace OpusLink.Entity.Migrations
                         {
                             Id = 200,
                             AccessFailedCount = 9,
+<<<<<<< HEAD
                             ConcurrencyStamp = "b93b6472-ead5-48ee-a98c-43a3019adcfb",
                             Email = "ftroke2r@nsw.gov.au",
+=======
+                            CVFilePath = "",
+                            ConcurrencyStamp = "241015aa-fd2c-40ff-b830-358212c21a85",
+                            Email = "",
+>>>>>>> Test
                             EmailConfirmed = false,
+                            Introduction = "Hello, I'm Walter, a software engineer with expertise in simulation and modeling for engineering and scientific applications. I develop software solutions that enable engineers and researchers to simulate and analyze complex systems, from structural mechanics to fluid dynamics. Finite element analysis (FEA), computational fluid dynamics (CFD), and simulation software platforms are among my areas of focus.",
                             IsVeryfiedIdentity = false,
                             LockoutEnabled = true,
-                            PasswordHash = "$2a$04$2DxBqD9fig5810VjYCynNeg/KtSOFfe6HHWekPRNFAOII3uKHvFqq",
+                            PasswordHash = "",
                             PhoneNumberConfirmed = true,
+                            ProfilePicture = "",
                             Status = (short)1,
                             TwoFactorEnabled = false,
                             UserName = "Finlay Troke"

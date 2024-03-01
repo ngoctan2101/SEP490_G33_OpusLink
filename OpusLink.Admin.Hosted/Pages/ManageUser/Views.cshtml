@@ -14,6 +14,7 @@
         font-weight: bold;
         padding-left: 5px;
     }
+
     #order-table-admin {
         margin-top: -30px;
     }
@@ -51,33 +52,20 @@
         padding: 15px;
     }
 
-    #paging {
+    /*pagination*/
+    .pagin {
+        width: 40px;
+        height: 40px;
         text-align: center;
-        margin-top: 15px;
+        border-radius: 50%;
+        border: none;
+        transition: background-color 0.2s;
     }
 
-    .pagination {
-        display: inline-block;
-        text-align: center;
-    }
-
-        .pagination a {
-            color: black;
-            float: left;
-            padding: 8px 16px;
-            text-decoration: none;
+        .pagin:hover {
+            background-color: #0088CC;
+            color: white;
         }
-
-            .pagination a.active {
-                background-color: sienna;
-                color: white;
-                border-radius: 5px;
-            }
-
-            .pagination a:hover:not(.active) {
-                background-color: #ddd;
-                border-radius: 5px;
-            }
 
     #product-title-header {
         line-height: 40px;
@@ -111,66 +99,127 @@
         }
 </style>
 <body>
-<div class="path-admin">User LIST</div>
+    <div class="path-admin">User LIST</div>
+    <form method="post">
+    <div id="content-main-dashboard">
+        <div id="product-title-header">
+                <div id="customer-title-1">
+                    <input type="text" name="Search_Str" value="@Model.filter.SearchStr" class="form-control" placeholder="Search by Name">
+                    <button class="btn btn-outline-secondary" type="submit" asp-page-handler="ForSearch" name="pageNo_1" value="1">Search</button>
+                </div>
+                <div class="d-flex justify-content-between align-items-center mb-3 --bs-primary">
+                    <!-- Combobox -->
+                    <select id="congViecSelect" class="form-select --bs-primary" aria-label="Choose skill">
+                        <option selected>AllSkill</option>
+                        @foreach (var item in Model.listSkill)
+                        {
+                            <option value="@item.SkillID">@item.SkillName</option>
+                        }
 
-<div id="content-main-dashboard">
-    <div id="product-title-header">
-        <form id="filter" style="width: 80%;">
-            <div id="customer-title-1">
-                <input type="text" name="txtSearch" placeholder="Enter name to search" value="" @* @Model.Search *@ />
-                <input type="submit" value="Search" />
-            </div>
-            <div class="d-flex justify-content-between align-items-center mb-3 --bs-primary">
-                <!-- Combobox -->
-                <select id="congViecSelect" class="form-select --bs-primary" aria-label="Choose skill">
-                    <option selected>Skill</option>
-                    <option value="1l">Công việc A</option>
-                    <option value="congviec-2.html">Công việc B</option>
-                    <option value="congviec-3.html">Công việc C</option>
-                </select>
-            </div>
-        </form>
-    </div>
+                    </select>
+                </div>
+            
+        </div>
 
-    <div id="order-table-admin">
-        <table id="orders">
-            <tr>
-                <th>Id</th>
-                <th>Name</th>
-                <th>Profile Picture</th>
-                <th>Phone</th>
-                <th>Address</th>
-                <th>Date Of Birth</th>
-                <th>Active</th>
-            </tr>
-            @foreach (var item in Model.listUser)
-            {
+        <div id="order-table-admin">
+            <table id="orders">
                 <tr>
-                    <td>@item.Id</td>
-                        <td>@item.UserName</td>
-                    <td>@item.ProfilePicture</td>
-                    <td>@item.PhoneNumber</td>
-              
-                    <td>@item.Address</td>
-                    @* <td>@((cus.CreatedAt == null ? DateTime.Now : (DateTime)cus.CreatedAt).ToString("dd/MM/yyyy"))</td> *@
-                    <td>@item.Dob</td>
-                    <td>
-                        <a class="delete" id="@item.Id"
-                           asp-page="/Admin/Customer/Index" asp-route-id="@item.Id"
-                           asp-page-handler="Active">@(item.Status == 1 ? "Active" : "Deactive")</a>
-                    </td>
+                    <th>Id</th>
+                    <th>Name</th>
+                    <th>Profile Picture</th>
+                    <th>Phone</th>
+                    <th>Address</th>
+                    <th>Date Of Birth</th>
+                    <th>Active</th>
                 </tr>
-            }
-        </table>
-    </div>
+                @foreach (var item in Model.listUser)
+                {
+                    <tr>
+                        <td><a asp-page="/ManageUser/UserDetail" asp-route-id="@item.Id">#@item.Id</a></td>
+                        <td>@item.UserName</td>
+                        <td>
+                            @{
+                                if (item.UserImageBytes != null && item.UserImageBytes.Length > 0)
+                                {
+                                    var base64Image = Convert.ToBase64String(item.UserImageBytes);
+                                    var imgSrc = $"data:image/png;base64,{base64Image}";
+                                    <img id="profileImage" src="@imgSrc" style="width:auto;height:100px;display:block" />
+                                }
+                                else
+                                {
+                                    <img id="profileImage" src="/img/default.png" style="width:auto;height:100px;display:block;margin-bottom:10px" />
+                                }
 
-    <div id="paging">
-        <div class="pagination">
-            @* @foreach (var item in Model.PagesLink)
+
+                            }
+
+                        </td>
+                        <td>@item.PhoneNumber</td>
+
+                        <td>@item.Address</td>
+                        @* <td>@((cus.CreatedAt == null ? DateTime.Now : (DateTime)cus.CreatedAt).ToString("dd/MM/yyyy"))</td> *@
+                        <td>@item.Dob</td>
+                        <td>
+                            <a class="delete" id="@item.Id"
+                           asp-page="/ManageUser/UserDetail" asp-route-id="@item.Id"
+                           asp-page-handler="Active">@(item.Status == 1 ? "Active" : "Deactive")</a>
+                        </td>
+                    </tr>
+                }
+            </table>
+        </div>
+
+        <div style="display:flex;justify-content:center;">
+            @for (int i = 1; i <= Model.NumberOfPage; i++)
             {
-                @Html.Raw(item)
-            } *@
+                @if (i == Model.PageNo)
+                {
+                    <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
+                        <button class="pagin" style="background-color:#0088CC; color:white" type="submit" asp-page-handler="ForSearch" name="pageNo_@i" value="@i">@i</button>
+                    </div>
+                }
+                else
+                {
+                    <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
+                        <button class="pagin" type="submit" asp-page-handler="ForSearch" name="pageNo_@i" value="@i">@i</button>
+                    </div>
+                }
+            }
         </div>
     </div>
-</div>
+    </form>
 </body>
+<script>
+    window.onload = function () {
+        FomatPagination();
+    };
+    function FomatPagination() {
+        for (let i = 1; i <= @Model.NumberOfPage; i++) {
+            if (i == 1) {
+                document.getElementById('pagin_' + i).style.display = "inline-block";
+                continue;
+            }
+            if (i == @Model.PageNo || i == @Model.PageNo+1 || i == @Model.PageNo-1 || i == @Model.PageNo+2 || i == @Model.PageNo-2) {
+                document.getElementById('pagin_' + i).style.display = "inline-block";
+                continue;
+            }
+            if (i == @Model.NumberOfPage ) {
+                document.getElementById('pagin_' + i).style.display = "inline-block";
+                continue;
+            }
+            document.getElementById('pagin_' + i).style.display = "none";
+        }
+        for (let i = 1; i <= @Model.PageNo; i++) {
+            if (document.getElementById('pagin_' + i).style.display == "none") {
+                document.getElementById('pagin_' + i).insertAdjacentHTML("afterend", "<div style=\"display: inline-block;margin:10px 5px 10px 5px\"><p style=\"margin: 10px 10px 10px 10px\">. . .</p></div>");
+                break;
+            }
+        }
+        for (let i = @Model.PageNo; i <= @Model.NumberOfPage; i++) {
+            if (document.getElementById('pagin_' + i).style.display == "none") {
+                document.getElementById('pagin_' + i).insertAdjacentHTML("afterend", "<div style=\"display: inline-block;margin:10px 5px 10px 5px\"><p style=\"margin: 10px 10px 10px 10px\">. . .</p></div>");
+                break;
+            }
+        }
+    }
+</script>

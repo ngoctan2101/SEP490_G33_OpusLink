@@ -35,6 +35,7 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
         }
         public async Task OnGetAsync()
         {
+            HttpContext.Session.SetString("PageNow", "ManageJob");
             //get all first jobs
             var options = new JsonSerializerOptions
             {

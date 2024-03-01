@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using OpusLink.Entity.DTO;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.Models;
 using OpusLink.Service.JobServices;
@@ -29,6 +30,17 @@ namespace OpusLink.API.Controllers.JobControllers
         {
             var job = await jobService.GetJobDetail(jobId);
             GetJobDetailResponse result = _mapper.Map<GetJobDetailResponse>(job);
+            string EmployerImagePath = result.EmployerImagePath;
+            if (EmployerImagePath == null || EmployerImagePath.Length == 0)
+            {
+                return Ok(result);
+            }
+            string imageFilePath = Path.Combine(Directory.GetCurrentDirectory(), "FilesUserUpload\\profileImage", EmployerImagePath);
+            // Check if the file exists
+            if (System.IO.File.Exists(imageFilePath))
+            {
+                result.EmployerImageBytes = System.IO.File.ReadAllBytes(imageFilePath);
+            }
             return Ok(result);
         }
         [HttpGet("GetAllLocation")]

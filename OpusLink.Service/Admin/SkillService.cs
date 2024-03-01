@@ -30,6 +30,12 @@ namespace OpusLink.Service.Admin
         {
             try
             {
+                if (skill.SkillParentID==null||skill.SkillParentID == 0)
+                {
+                    skill.SkillParentID = null;
+                }
+                skill.SkillParent = null;
+                skill.FreelancerAndSkills = null;
                 _context.Skills.Add(skill);
                 _context.SaveChanges();
 
@@ -77,6 +83,56 @@ namespace OpusLink.Service.Admin
                 throw new Exception(e.Message);
             }
         }
+        /*
+        var products
+    = from p in context.products
+      join c in context.categories on p.CategoryId equals c.CategoryId
+         */
+        public List<Skill> GetAllSkillByUserID(int id)
+        {
+            try
+            {
+                //List<Skill> list = new List<Skill>();
+                //var skills =( from s in _context.Skills
+                //             join fs in _context.FreelancerAndSkills
+                //             on s.SkillID equals fs.SkillID
+                //             join us in _context.Users
+                //             on fs.FreelancerID equals us.Id //ve tim user id
+                //             where us.Id == id
+                //             select new
+                //             {
+                //                 SkillID = s.SkillID,
+                //                 SkillParentID = s.SkillParentID,
+                //                 SkillName = s.SkillName
+                                 
+                //             }).Distinct();
+                ////join u in _context.Users
+                //foreach (var item in skills)
+                //{
+                    
+                //        var skill = new Skill
+                //        {
+                //            SkillID = item.SkillID,
+                //            SkillParentID = item.SkillParentID,
+                //            SkillName = item.SkillName
+                //        };
+                //        list.Add(skill);
+                    
+                //}
+                var freelancerAndSkills =_context.FreelancerAndSkills.Where(fs=>fs.FreelancerID== id).Include("Skill").ToList();
+                List<Skill> list = new List<Skill>();
+                foreach(var fs in freelancerAndSkills)
+                {
+                    list.Add(fs.Skill);
+                }
+                return list;
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
 
         public Skill GetSkillById(int skillId)
         {
@@ -96,7 +152,12 @@ namespace OpusLink.Service.Admin
         {
             try
             {
-              
+                if (skill.SkillParentID==null||skill.SkillParentID == 0)
+                {
+                    skill.SkillParentID = null;
+                    skill.SkillParent = null;
+                }
+                skill.FreelancerAndSkills = null;
                 _context.Entry(skill).State = EntityState.Modified;
                 _context.SaveChanges();
             }

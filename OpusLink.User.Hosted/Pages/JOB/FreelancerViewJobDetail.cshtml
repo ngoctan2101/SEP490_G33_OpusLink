@@ -49,11 +49,45 @@
         .categoryFake:hover {
             cursor: pointer;
         }
+
+    .skill {
+        display: inline-block;
+        margin-bottom: 3px;
+        background-color: lightblue;
+        padding: 7px;
+        border-radius: 5px;
+        font-size: 14px;
+    }
+
+    .skillFake {
+        display: inline-block;
+        margin-bottom: 3px;
+        background-color: lightblue;
+        padding: 7px;
+        border-radius: 5px;
+        font-size: 14px;
+        opacity: 0.6;
+    }
+
+        .skillFake:hover {
+            cursor: pointer;
+        }
 </style>
 <a href="../JOB/FreelancerViewAllJobPage">Back to list</a>
 <div class="row">
     <div class="col-md-3">
-        <img id="profileImage" src="/imgexample/p.png" style="width:50%;height:auto;display:block" />
+        @{
+            if (item.EmployerImageBytes != null && item.EmployerImageBytes.Length > 0)
+            {
+                var base64Image = Convert.ToBase64String(item.EmployerImageBytes);
+                var imgSrc = $"data:image/png;base64,{base64Image}";
+                <img id="profileImage" src="@imgSrc" style="width:50%;height:auto;display:block" />
+            }
+            else
+            {
+                <img id="profileImage" src="/imgExample/default.png" style="width:50%;height:auto;display:block" />
+            }
+        }
         <a href="#" class="link" style="display:block">@item.EmployerName</a>
         ⭐⭐⭐⭐⭐
         <p>Project Information:</p>
@@ -120,6 +154,66 @@
         </div>
     </div>
 </div>
+<div>
+    @foreach (var a in Model.offers)
+    {
+        <div class="row" style="margin-bottom:30px;border:2px solid black">
+            <div class="col-md-3">
+                <table>
+                    <tr>
+                        <td rowspan="2">
+                            @{
+                                if (a.FreelancerImageBytes != null && a.FreelancerImageBytes.Length > 0)
+                                {
+                                    var base64Image = Convert.ToBase64String(a.FreelancerImageBytes);
+                                    var imgSrc = $"data:image/png;base64,{base64Image}";
+                                    <img id="profileImage_@a.OfferID" src="@imgSrc" style="width:80%;height:auto;display:block" />
+                                }else
+                                {
+                                    <img id="profileImage" src="/imgExample/default.png" style="width:80%;height:auto;display:block" />
+                                }
+                            }
+                        </td>
+                        <td>
+                            <a href="#" class="link">@a.FreelancerName</a>
+                        </td>
+                    </tr>
+                    <tr><td>⭐⭐⭐⭐⭐</td></tr>
+                </table>
+                <div>
+                    @if (a.Skills.Count > 3)
+                    {
+                        for (int i = 0; i < 3; i++)
+                        {
+                            <div class="skill">@a.Skills.ElementAt(i)</div>
+                        }
+                        <div name="hidden_fake_skill_@a.OfferID" class="skillFake" onclick="DisplayAllSkill('@a.OfferID')">. . .</div>
+                        for (int i = 3; i < a.Skills.Count; i++)
+                        {
+                            <div name="hidden_skill_@a.OfferID" class="skill" style="display: none;">@a.Skills.ElementAt(i)</div>
+                        }
+                    }
+                    else
+                    {
+                        foreach (string skill in a.Skills)
+                        {
+                            <div class="skill">@skill</div>
+                        }
+                    }
+                </div>
+                <p>Job Done: @a.NumberOfJobDone</p>
+                <button type="button">Message</button>
+            </div>
+            <div class="col-md-9" style="border-left:2px solid black">
+                <p><span style="font-weight:bold">Time:</span> @a.DateOffer.ToString("dd/MM/yyyy")</p>
+                <p><span style="font-weight:bold">Proposed Cost:</span> @a.ProposedCost</p>
+                <p><span style="font-weight:bold">Expected Days:</span> @a.ExpectedDays days</p>
+                <p><span style="font-weight:bold">Self Introduction:</span> @a.SelfIntroduction</p>
+                <p><span style="font-weight:bold">Estimated Plan:</span> @a.EstimatedPlan</p>
+            </div>
+        </div>
+    }
+</div>
 <script>
     function DisplayAllCategory(JobID) {
         document.getElementsByName('hidden_fake_category_' + JobID)[0].style.display = "none";
@@ -128,5 +222,12 @@
             hiddenCategory.style.display = "inline-block";
         })
 
+    }
+    function DisplayAllSkill(OfferID) {
+        document.getElementsByName('hidden_fake_skill_' + OfferID)[0].style.display = "none";
+        var hiddenSkill = document.getElementsByName('hidden_skill_' + OfferID);
+        hiddenSkill.forEach(function (hiddenSkill) {
+            hiddenSkill.style.display = "inline-block";
+        })
     }
 </script>

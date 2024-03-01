@@ -12,6 +12,8 @@ namespace OpusLink.Service.Admin
     {
         List<OpusLink.Entity.Models.User> GetAllUser();
         OpusLink.Entity.Models.User GetUserById(int id);
+        List<OpusLink.Entity.Models.User> GetUserByName(string txt);
+        void UpdateOnlyUserIntroductionFileCVAndImage(Entity.Models.User a);
     }
 
 
@@ -27,7 +29,8 @@ namespace OpusLink.Service.Admin
         {
             try
             {
-                var user = _context.Users.FirstOrDefault(x => x.Id == id);
+                var user = _context.Users.Where(u=>u.Id==id).Include("FreelancerAndSkills").Include("FreelancerAndSkills.Skill").FirstOrDefault();
+                
                 return user;
 
             }
@@ -51,6 +54,14 @@ namespace OpusLink.Service.Admin
             {
                 throw new Exception(e.Message);
             }
+        }
+        public void UpdateOnlyUserIntroductionFileCVAndImage(Entity.Models.User a)
+        {
+            Entity.Models.User user=_context.Users.Where(u=>u.Id==a.Id).FirstOrDefault();
+            user.Introduction= a.Introduction;
+            user.CVFilePath= a.CVFilePath;
+            user.ProfilePicture= a.ProfilePicture;
+            _context.SaveChanges();
         }
     }
 

@@ -13,6 +13,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
     {
         private readonly HttpClient client = null;
         public GetJobDetailResponse job { get; set; }
+        public List<GetOfferAndFreelancerResponse> offers { get; set; }
         public FreelancerViewJobDetailModel()
         {
             client = new HttpClient();
@@ -26,6 +27,13 @@ namespace OpusLink.User.Hosted.Pages.JOB
             {
                 string strData = await response.Content.ReadAsStringAsync();
                 job = JsonConvert.DeserializeObject<GetJobDetailResponse>(strData);
+            }
+            //get list offers for job
+            response = await client.GetAsync("https://localhost:7265/api/Offer3API/GetAllOfferOfJob/" + JobId);
+            if (response.IsSuccessStatusCode)
+            {
+                string strData = await response.Content.ReadAsStringAsync();
+                offers = JsonConvert.DeserializeObject<List<GetOfferAndFreelancerResponse>>(strData);
             }
         }
     }

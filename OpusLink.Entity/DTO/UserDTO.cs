@@ -12,6 +12,7 @@ namespace OpusLink.Entity.DTO
         public string UserName { get; set; }
         public string Email { get; set; }
         public string? ProfilePicture { get; set; }
+        public byte[] UserImageBytes { get; set; }
         public string? PhoneNumber { get; set; }
         public string? Address { get; set; }
         public string? FullNameOnIDCard { get; set; }
@@ -25,5 +26,7 @@ namespace OpusLink.Entity.DTO
         public bool IsVeryfiedIdentity { get; set; }
         public decimal? AmountMoney { get; set; }
         public int Status { get; set; }
+
+        public List<SkillDTO> Skills { get; set; }=new List<SkillDTO>();
     }
 }
