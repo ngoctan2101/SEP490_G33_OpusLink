@@ -13,6 +13,7 @@ using OpusLink.Service.Users;
 using System.Text;
 using OpusLink.Entity.AutoMapper.JOB;
 using OpusLink.Service.User;
+using OpusLink.Service.Chat;
 
 internal class Program
 {
@@ -42,6 +43,8 @@ internal class Program
             mc.AddProfile(new SaveJobProfile());
             mc.AddProfile(new LocationProfile());
             mc.AddProfile(new UserProfile());
+            mc.AddProfile(new ChatMapper());
+
         });
         IMapper mapper = mapperConfig.CreateMapper();
 
@@ -57,6 +60,7 @@ internal class Program
         builder.Services.AddScoped<ILocationService, LocationService>();
         builder.Services.AddScoped<IJobAndCategoryService, JobAndCategoryService>();
         builder.Services.AddScoped<IFreelancerAndSkillService, FreelancerAndSkillService>();
+        builder.Services.AddScoped<IChatService, ChatService>();
 
         builder.Services.AddDbContext<OpusLinkDBContext>();
         builder.Services.AddSingleton(mapper);
