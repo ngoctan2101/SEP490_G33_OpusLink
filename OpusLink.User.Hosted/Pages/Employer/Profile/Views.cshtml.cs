@@ -3,10 +3,10 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using OpusLink.Entity.DTO;
 using OpusLink.Entity.DTO.JobDTO;
 using System.Net.Http.Headers;
+using System.Runtime.Intrinsics.X86;
 using System.Text.Json;
 
-
-namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
+namespace OpusLink.User.Hosted.Pages.Employer.Profile
 {
     public class ViewsModel : PageModel
     {
@@ -24,7 +24,7 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
             client.DefaultRequestHeaders.Accept.Add(contentType);
             ServiceMangaUrl = "https://localhost:7265/";
         }
-        public async Task OnGetAsync(int id = 41)
+        public async Task OnGetAsync(int id=41)
         {
             // call list
             HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/" + id);
@@ -143,7 +143,7 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
             {
                 PropertyNameCaseInsensitive = false,
             };
-
+            
             string json = System.Text.Json.JsonSerializer.Serialize<PutUserRequest>(PutUser, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.PutAsync(ServiceMangaUrl + "api/User/PutUserUser", httpContent);
@@ -151,8 +151,7 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
             {
                 //message "User Edited" green
             }
-            return RedirectToPage("/Freelancer/Profile/Views", new { id = PutUser.Id });
+            return RedirectToPage("/Employer/Profile/Views", new { id = PutUser.Id });
         }
-
     }
 }

@@ -20,9 +20,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
         [BindProperty]
         public List<SkillDTO> listSkills { get; set; } = null!;
         public SkillDTO SkillDto { get; set; } = null!;
-        //public int SkillID { get; set; }
-        //public int? SkillParentID { get; set; }
-        //public string SkillName { get; set; }
+       
         public IList<SkillDTO> AllSkills { get; set; } = default!;
         public Filter filter { get; set; }
         public int NumberOfPage { get; set; }

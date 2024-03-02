@@ -14,6 +14,8 @@ namespace OpusLink.Service.Admin
         OpusLink.Entity.Models.User GetUserById(int id);
         List<OpusLink.Entity.Models.User> GetUserByName(string txt);
         void UpdateOnlyUserIntroductionFileCVAndImage(Entity.Models.User a);
+
+        void UpdateUser2(Entity.Models.User a);
     }
 
 
@@ -83,6 +85,27 @@ namespace OpusLink.Service.Admin
             user.Introduction= a.Introduction;
             user.CVFilePath= a.CVFilePath;
             user.ProfilePicture= a.ProfilePicture;
+            _context.SaveChanges();
+        }
+
+        public void UpdateUser2(Entity.Models.User a)
+        {
+            Entity.Models.User user = _context.Users.Where(u => u.Id == a.Id).FirstOrDefault();
+        
+            user.Email= a.Email;
+            user.ProfilePicture= a.ProfilePicture;
+            user.Address= a.Address;
+            user.FullNameOnIDCard = a.FullNameOnIDCard;
+            user.Dob = a.Dob;
+            user.PhoneNumber = a.PhoneNumber;
+            user.Introduction = a.Introduction;
+            user.CVFilePath = a.CVFilePath;
+            user.BankName = a.BankName;
+            user.BankAccountInfor = a.BankAccountInfor;
+           
+           
+
+      
             _context.SaveChanges();
         }
     }

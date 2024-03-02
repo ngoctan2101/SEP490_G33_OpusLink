@@ -259,6 +259,77 @@ namespace OpusLink.API.Controllers.Admin
             return Ok();
         }
 
+        [HttpPut("PutUserUser")]
+        public async Task<IActionResult> PutUserUser([FromBody] PutUserRequest putUserRequest)
+        {
+            //update skill
+            List<FreelancerAndSkill> fass = await _freelancerAndSkillService.getAllFASOfUser(putUserRequest.Id);
+            //find list fas to delete
+            List<FreelancerAndSkill> fasd = FindFAS2Delete(fass, putUserRequest.SkillIDs);
+            //find list fas to add
+            List<FreelancerAndSkill> fasa = FindFAS2Add(fass, putUserRequest.SkillIDs, putUserRequest.Id);
+            await _freelancerAndSkillService.DeleteRangeAsync(fasd);
+            await _freelancerAndSkillService.AddRangeAsync(fasa);
+            //cv and image
+            OpusLink.Entity.Models.User thisUser = _userService.GetUserById(putUserRequest.Id);
+            thisUser.Introduction = putUserRequest.Introduction;
+            thisUser.Email = putUserRequest.Email;
+            thisUser.Address = putUserRequest.Address;
+            thisUser.FullNameOnIDCard = putUserRequest.FullNameOnIDCard;
+            thisUser.PhoneNumber = putUserRequest.PhoneNumber;
+            thisUser.Dob = putUserRequest.Dob;
+            thisUser.BankName = putUserRequest.BankName;
+            thisUser.BankAccountInfor = putUserRequest.BankAccountInfor;
+            string cvFilePath = "";
+            string imageFilePath = "";
+            if (putUserRequest.UserCVBytes != null)
+            {
+                if (String.IsNullOrEmpty(thisUser.CVFilePath))
+                {
+                    //tao file moi
+                    System.IO.File.WriteAllBytes(Path.Combine(Directory.GetCurrentDirectory(), "FilesUserUpload\\resume", "r" + thisUser.Id + putUserRequest.cvExtension)
+                        , putUserRequest.UserCVBytes);
+                    //them ten file
+                    thisUser.CVFilePath = "r" + thisUser.Id + putUserRequest.cvExtension;
+                }
+                else
+                {
+                    //xoa file cu
+                    System.IO.File.Delete(Path.Combine(Directory.GetCurrentDirectory(), "FilesUserUpload\\resume", thisUser.CVFilePath));
+                    //tao file moi
+                    System.IO.File.WriteAllBytes(Path.Combine(Directory.GetCurrentDirectory(), "FilesUserUpload\\resume", "r" + thisUser.Id + putUserRequest.cvExtension)
+                        , putUserRequest.UserCVBytes);
+                    //them ten file
+                    thisUser.CVFilePath = "r" + thisUser.Id + putUserRequest.cvExtension;
+
+                }
+            }
+            if (putUserRequest.UserImageBytes != null)
+            {
+                if (String.IsNullOrEmpty(thisUser.ProfilePicture))
+                {
+                    //tao file moi
+                    System.IO.File.WriteAllBytes(Path.Combine(Directory.GetCurrentDirectory(), "FilesUserUpload\\profileImage", "i" + thisUser.Id + putUserRequest.imageExtension)
+                        , putUserRequest.UserImageBytes);
+                    //them ten file
+                    thisUser.ProfilePicture = "i" + thisUser.Id + putUserRequest.imageExtension;
+                }
+                else
+                {
+                    //xoa file cu
+                    System.IO.File.Delete(Path.Combine(Directory.GetCurrentDirectory(), "FilesUserUpload\\profileImage", thisUser.ProfilePicture));
+                    //tao file moi
+                    System.IO.File.WriteAllBytes(Path.Combine(Directory.GetCurrentDirectory(), "FilesUserUpload\\profileImage", "i" + thisUser.Id + putUserRequest.imageExtension)
+                        , putUserRequest.UserImageBytes);
+                    //them ten file
+                    thisUser.ProfilePicture = "i" + thisUser.Id + putUserRequest.imageExtension;
+
+                }
+            }
+            _userService.UpdateUser2(thisUser);
+            return Ok();
+        }
+
         private List<FreelancerAndSkill> FindFAS2Add(List<FreelancerAndSkill> fasa, List<int> skillIDs, int userId)
         {
             List<FreelancerAndSkill> fasResult = new List<FreelancerAndSkill>();

@@ -4,9 +4,9 @@ using OpusLink.Entity.DTO;
 using System.Net.Http.Headers;
 using System.Text.Json;
 
-namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
+namespace OpusLink.User.Hosted.Pages.Employer.Profile
 {
-    public class ViewsProfileOrtherModel : PageModel
+    public class ViewsProfileFreelancerModel : PageModel
     {
         private readonly HttpClient client = null;
         private string ServiceMangaUrl = "";
@@ -16,7 +16,7 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
         //public int SkillID { get; set; }
         //public int? SkillParentID { get; set; }
         //public string SkillName { get; set; }
-        public ViewsProfileOrtherModel()
+        public ViewsProfileFreelancerModel()
         {
             client = new HttpClient();
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
