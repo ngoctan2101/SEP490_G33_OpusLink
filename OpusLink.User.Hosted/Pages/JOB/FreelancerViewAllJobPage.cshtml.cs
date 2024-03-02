@@ -155,7 +155,8 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 //tsn goi cai nay la bi thuat :>
                 NumberOfPage = Jobs.ElementAt(Jobs.Count - 1).NumberOfOffer;
                 Jobs.RemoveAt(Jobs.Count - 1);
-               
+                Jobs = Jobs.OrderByDescending(j => j.DateCreated).ToList();
+
             }
             else
             {
@@ -243,8 +244,8 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 //tsn goi cai nay la bi thuat :>
                 NumberOfPage = Jobs.ElementAt(Jobs.Count - 1).NumberOfOffer;
                 Jobs.RemoveAt(Jobs.Count - 1);
-                
-                
+
+                Jobs = Jobs.OrderByDescending(j => j.DateCreated).ToList();
             }
             else
             {
