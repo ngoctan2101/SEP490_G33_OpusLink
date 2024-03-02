@@ -1,7 +1,8 @@
 ﻿@page "{id:int?}"
-@model OpusLink.User.Hosted.Pages.Freelancer.Profile.ViewsProfileOrtherModel
+@model OpusLink.User.Hosted.Pages.Employer.Profile.ViewsModel
 @{
 }
+
 
 <!DOCTYPE html>
 <html lang="en">
@@ -178,11 +179,11 @@
                     <div class="mb-3">
                         <label for="skills" class="form-label">Skills:</label>
                         @* <select style="width:100%;height:30px" onchange="ClickASkill()" id="skillDropdown" hidden>
-                            <option value="" disabled selected>Choose skill</option>
-                            @foreach (var item in Model.AllSkills)
-                            {
-                                <option value="@item.SkillID" onclick="ClickASkill(@item.SkillID ,@item.SkillName)">@item.SkillName</option>
-                            }
+                        <option value="" disabled selected>Choose skill</option>
+                        @foreach (var item in Model.AllSkills)
+                        {
+                        <option value="@item.SkillID" onclick="ClickASkill(@item.SkillID ,@item.SkillName)">@item.SkillName</option>
+                        }
                         </select> *@
                         <div id="SkillContainer" style="min-height:30px">
                             @foreach (var item in Model.user.Skills)
