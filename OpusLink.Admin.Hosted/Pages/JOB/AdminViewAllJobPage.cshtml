@@ -147,9 +147,9 @@
                             <div class="price-input" style="margin-bottom: 5px;">
                                 <table>
                                     <tr>
-                                        <td><input type="text" id="price-min" name="price_min" pattern="[0-9đ ,]+" title="Please enter number" value="@Model.filter.BudgetMin" style="width:100% " /></td>
+                                        <td><input type="text" id="price-min" name="price_min" pattern="[0-9VND ,]+" title="Please enter number" value="@Model.filter.BudgetMin" style="width:100% " /></td>
                                         <td>-</td>
-                                        <td><input type="text" id="price-max" name="price_max" pattern="[0-9đ ,]+" title="Please enter number" value="@Model.filter.BudgetMax" style="width:100% " /></td>
+                                        <td><input type="text" id="price-max" name="price_max" pattern="[0-9VND ,]+" title="Please enter number" value="@Model.filter.BudgetMax" style="width:100% " /></td>
                                     </tr>
                                 </table>
                             </div>
@@ -311,14 +311,14 @@
         // Get the input element
         var input = document.getElementById("price-min");
         var input1 = input.value.replaceAll(",", "");
-        input1 = input1.replaceAll("đ", "");
+        input1 = input1.replaceAll("VND", "");
         input1 = input1.replaceAll(" ", "");
         // Get the value and convert it to a number
         var value = parseFloat(input1);
         // Check if the value is a valid number
         if (!isNaN(value)) {
             // Format the number with dots for thousands separator
-            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " đ";
+            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " VND";
 
             // Update the input field with the formatted value
             input.value = formattedValue;
@@ -330,14 +330,14 @@
         // Get the input element
         var input = document.getElementById("price-max");
         var input1 = input.value.replaceAll(",", "");
-        input1 = input1.replaceAll("đ", "");
+        input1 = input1.replaceAll("VND", "");
         input1 = input1.replaceAll(" ", "");
         // Get the value and convert it to a number
         var value = parseFloat(input1);
         // Check if the value is a valid number
         if (!isNaN(value)) {
             // Format the number with dots for thousands separator
-            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " đ";
+            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " VND";
 
             // Update the input field with the formatted value
             input.value = formattedValue;
@@ -382,28 +382,28 @@
         // Get the input element
         var input = document.getElementById("price-min");
         var input1 = input.value.replaceAll(",", "");
-        input1 = input1.replaceAll("đ", "");
+        input1 = input1.replaceAll("VND", "");
         input1 = input1.replaceAll(" ", "");
         // Get the value and convert it to a number
         var value = parseFloat(input1);
         // Check if the value is a valid number
         if (!isNaN(value)) {
             // Format the number with dots for thousands separator
-            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " đ";
+            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " VND";
             // Update the input field with the formatted value
             input.value = formattedValue;
         }
         // Get the input element
         var input = document.getElementById("price-max");
         var input1 = input.value.replaceAll(",", "");
-        input1 = input1.replaceAll("đ", "");
+        input1 = input1.replaceAll("VND", "");
         input1 = input1.replaceAll(" ", "");
         // Get the value and convert it to a number
         var value = parseFloat(input1);
         // Check if the value is a valid number
         if (!isNaN(value)) {
             // Format the number with dots for thousands separator
-            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " đ";
+            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " VND";
             // Update the input field with the formatted value
             input.value = formattedValue;
         }

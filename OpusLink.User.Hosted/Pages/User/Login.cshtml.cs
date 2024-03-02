@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Http;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.HaiDTO;
@@ -47,6 +48,8 @@ namespace OpusLink.User.Hosted.Pages.User
                             string userId = jsonToken.Claims.First(claim => claim.Type == "UserId").Value;
 
                             Console.WriteLine("User Id: " + userId);
+                            HttpContext.Session.SetInt32("UserId", Int32.Parse(userId));
+                            HttpContext.Session.SetString("token", token);
 
                             return RedirectToPage("/Index", new { token = apiResponse.Data.ToString() });
                         }

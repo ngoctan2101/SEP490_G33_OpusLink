@@ -82,15 +82,15 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 {
                     string price = collection[key].ToString();
                     price = price.Replace(",", string.Empty);
-                    price = price.Replace("đ", string.Empty);
+                    price = price.Replace("VND", string.Empty);
                     price = price.Replace(" ", string.Empty);
-                    filter.BudgetMin = Int32.Parse(price);
+                    filter.BudgetMin = Int32.Parse(price);  
                 }
                 else if (key.Contains("price_max"))
                 {
                     string price = collection[key].ToString();
                     price = price.Replace(",", string.Empty);
-                    price = price.Replace("đ", string.Empty);
+                    price = price.Replace("VND", string.Empty);
                     price = price.Replace(" ", string.Empty);
                     filter.BudgetMax = Int32.Parse(price);
                 }

@@ -18,6 +18,8 @@ namespace OpusLink.Service.JobServices
         Task CreateOffer(Offer offer);
         Task UpdateOffer(Offer offer);
         Task DeleteOffer(int offerId);
+        bool IsOffered(int jobId, int userId);
+        Task<Offer> GetOffer(int jobId, int userId);
     }
     public class OfferService : IOfferService
     {
@@ -56,10 +58,23 @@ namespace OpusLink.Service.JobServices
             return await _dbContext.Offers.Where(o => o.JobID == jobId).Include("Freelancer").Include("Freelancer.JobsAsAFreelancer").Include("Freelancer.FreelancerAndSkills.Skill").ToListAsync();
         }
 
+        public async Task<Offer> GetOffer(int jobId, int userId)
+        {
+            return await _dbContext.Offers.Where(o => o.FreelancerID == userId && o.JobID == jobId).FirstOrDefaultAsync();
+        }
+
+        public  bool IsOffered(int jobId, int userId)
+        {
+            return  _dbContext.Offers.Any(o=>o.FreelancerID==userId&&o.JobID==jobId);
+        }
+
         public async Task UpdateOffer(Offer offer)
         {
             Offer a = _dbContext.Offers.Where(c => c.OfferID == offer.OfferID).FirstOrDefault();
-            a = offer;
+            a.ProposedCost = offer.ProposedCost;
+            a.ExpectedDays = offer.ExpectedDays;
+            a.SelfIntroduction = offer.SelfIntroduction;
+            a.EstimatedPlan = offer.EstimatedPlan;
             _dbContext.Entry(a).State = EntityState.Modified;
             await _dbContext.SaveChangesAsync();
         }

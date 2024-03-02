@@ -34,6 +34,7 @@ namespace OpusLink.Admin.Hosted.Pages.Dashboard
 
         public async Task OnGetAsync()
         {
+            HttpContext.Session.SetString("PageNow", "Dashboard");
             // call list
             HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetAllUser");
             if (responseUser.IsSuccessStatusCode)

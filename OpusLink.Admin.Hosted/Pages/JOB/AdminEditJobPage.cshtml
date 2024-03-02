@@ -82,11 +82,11 @@
                         {
                             if (i == (int)(itemMain.BudgetMin / 500000))
                             {
-                                        <option value="@itemMain.BudgetMin" selected>@((itemMain.BudgetMin).ToString("#,##0")) đ</option>
+                                <option value="@itemMain.BudgetMin" selected>@((itemMain.BudgetMin).ToString("#,##0")) VND</option>
                             }
                             else
                             {
-                                        <option value="@(i*500000)">@((i * 500000).ToString("#,##0")) đ</option>
+                                <option value="@(i*500000)">@((i * 500000).ToString("#,##0")) VND</option>
                             }
                         }
                     </select>
@@ -98,11 +98,11 @@
                         {
                             if (i == (int)(itemMain.BudgetMax / 500000))
                             {
-                                        <option value="@itemMain.BudgetMax" selected>@((itemMain.BudgetMax).ToString("#,##0")) đ</option>
+                                        <option value="@itemMain.BudgetMax" selected>@((itemMain.BudgetMax).ToString("#,##0")) VND</option>
                             }
                             else
                             {
-                                        <option value="@(i*500000)">@((i * 500000).ToString("#,##0")) đ</option>
+                                <option value="@(i*500000)">@((i * 500000).ToString("#,##0")) VND</option>
                             }
                         }
                     </select>

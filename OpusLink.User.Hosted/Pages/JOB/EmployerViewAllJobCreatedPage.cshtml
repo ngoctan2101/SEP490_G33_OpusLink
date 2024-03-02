@@ -36,7 +36,7 @@
     .status {
         font-weight: bold;
         color: white;
-        display:inline-block;
+        display: inline-block;
     }
 
     .category {
@@ -91,171 +91,177 @@
             color: white;
         }
 </style>
-<div style="background-color:#F0F0F0; padding:10px">
-    <form method="post">
-        <input hidden asp-for="@Model.NumberOfPage" value="@Model.NumberOfPage" />
-        <div class="row" style="margin-bottom:15px">
-            <div class="col-md-3">
-                <button type="submit" name="pageNo_1" value="1" style="width:100%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964">Search & Filter</button>
-            </div>
-            <div class="col-md-7">
-                <input name="Search_Str" value="@Model.filter.SearchStr" style="width:100%" placeholder="Find Job" />
-            </div>
-            <div class="col-md-2">
-            </div>
-        </div>
-        <div class="row">
-            <div class="col-md-3">
-                <table style="width:100%;margin-bottom:10px;box-shadow: 0px 0px 4px 4px #DCDCDC;background-color:#FFFFFF" class="filter">
-                    <tr id="tsn123">
-                        <td colspan="3" class="td"><h6>Category</h6></td>
-                    </tr>
-                    @foreach (var category in Model.Categories)
-                    {
-                        <tr id="tr_@category.CategoryID" style="width:100%">
-                            <td class="td" style="text-align:right"><input type="checkbox" name="category_@category.CategoryID" value="@category.CategoryID"></td>
-                            <td style="text-align:left;font-size:14px;">
-                                @(category.CategoryName + " (" + category.NumberOfJob + ")")
-                                <hr class="hrCategory">
-                            </td>
-                            <td style="text-align:right">
-                                @if (category.HasChildCategory)
-                                {
-                                    <a id="tr_link_@category.CategoryID" onclick="displayAllChild(@category.CategoryID)" class="link2">&#9660;</a>
-                                }
-                            </td>
-
-                        </tr>
-
-                    }
-                </table>
-                <table class="filter" style="width:100%;box-shadow: 0px 0px 4px 4px #DCDCDC;padding:4px;margin-bottom:10px;background-color:#FFFFFF">
-                    <tr>
-                        <td class="td" colspan="2"><h6>Status</h6></td>
-                    </tr>
-                    @foreach (var status in Enum.GetValues(typeof(JobStatusEnum)))
-                    {
-                        @if (status.ToString() == JobStatusEnum.NotApprove.ToString())
-                        {
-                            continue;
-                        }
-                        <tr style="width:100%">
-                            <td style="width:15%;text-align:right"><input type="checkbox" name="status_@((int)Enum.Parse(typeof(JobStatusEnum), status.ToString()))" value="@((int)Enum.Parse(typeof(JobStatusEnum), status.ToString()))"></td>
-                            <td style="width:85%;text-align:left">@status.ToString()</td>
-                        </tr>
-                    }
-                </table>
-                <table class="filter" style="width:100%;box-shadow: 0px 0px 4px 4px #DCDCDC;padding:4px;margin-bottom:10px;background-color:#FFFFFF">
-                    <tr>
-                        <td class="td" colspan="1"><h6>Date Range</h6></td>
-                    </tr>
-                    <tr>
-                        <td class="td">
-                            <input style="margin-bottom: 5px;" type="text" name="daterange" value="@Model.filter.getDateRange()" />
-                        </td>
-                    </tr>
-                </table>
-                <table class="filter" style="width:100%;box-shadow: 0px 0px 4px 4px #DCDCDC;padding:4px;margin-bottom:10px;background-color:#FFFFFF">
-                    <tr>
-                        <td class="td" colspan="3"><h6>Price Range</h6></td>
-                    </tr>
-                    <tr>
-                        <td class="td">
-                            <div class="price-input" style="margin-bottom: 5px;">
-                                <table>
-                                    <tr>
-                                        <td><input type="text" id="price-min" name="price_min" pattern="[0-9đ ,]+" title="Please enter number" value="@Model.filter.BudgetMin" style="width:100% " /></td>
-                                        <td>-</td>
-                                        <td><input type="text" id="price-max" name="price_max" pattern="[0-9đ ,]+" title="Please enter number" value="@Model.filter.BudgetMax" style="width:100% " /></td>
-                                    </tr>
-                                </table>
-                            </div>
-                        </td>
-                    </tr>
-                </table>
-            </div>
-            <div class="col-md-9">
-                <div style="box-shadow: 0px 0px 4px 4px #DCDCDC;background-color:#FFFFFF; padding-top: 10px">
-                    <table class="jobTable">
-                        <thead>
-                            <tr>
-                                <th width="10%">
-                                    <h6 style="margin:1px;text-align: center">Id</h6>
-                                </th>
-                                <th width="60%">
-                                    <h6 style="margin:1px;text-align: left">Title</h6>
-                                </th>
-                                <th width="10%">
-                                    <h6 style="margin:1px;text-align: center">Offers</h6>
-                                </th>
-                                <th width="10%">
-                                    <h6 style="margin:1px;text-align: left">Status</h6>
-                                </th>
-                                <th width="17%"></th>
-                            </tr>
-                        </thead>
-                        <tbody>
-                            <tr><td colspan="5"><hr class="hrJob"></td></tr>
-                            @foreach (var item in Model.Jobs)
-                            {
-                                <tr>
-                                    <td style="text-align: center;">
-                                        @item.JobID
-                                    </td>
-                                    <td style="text-align: left">
-                                        <a style="font-size:16px" class="link" asp-page="./EmployerViewJobDetailPage/" asp-route-JobId="@item.JobID">@item.JobTitle</a>
-                                    </td>
-                                    <td style="text-align: center;">
-                                        @(item.NumberOfOffer)
-                                    </td>
-                                    <td style="text-align: left">
-                                        @if (item.Status == (int)JobStatusEnum.NotApprove)
-                                        {
-                                            <p class="status" style="background-color:grey;margin:0px">Not Approved</p>
-                                        }
-                                        else if (item.Status == (int)JobStatusEnum.Approved)
-                                        {
-                                            <p class="status" style="background-color:#5B9044;margin:0px">Hiring</p>
-                                        }
-                                        else if (item.Status == (int)JobStatusEnum.Hired)
-                                        {
-                                            <p class="status" style="background-color:orange;margin:0px">Hired</p>
-                                        }
-                                        else if (item.Status == (int)JobStatusEnum.Close)
-                                        {
-                                            <p class="status" style="background-color:#FF0000;margin:0px">Closed</p>
-                                        }
-                                    </td>
-                                    <td style="">
-                                        <a class="link" style="background-color:#09E20C;color:#007D00;display:block;margin:3px;text-align:center" asp-page="./PushToTop" asp-route-id="@item.JobID">Push to top <span style="color:white">$</span></a>
-
-                                    </td>
-                                </tr>
-                                <tr><td colspan="5"><hr class="hrJob"></td></tr>
-                            }
-                        </tbody>
-                    </table>
-                    <div style="display:flex;justify-content:center;">
-                        @for (int i = 1; i <= Model.NumberOfPage; i++)
-                        {
-                            @if (i == Model.PageNo)
-                            {
-                                <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
-                                    <button class="pagin" style="background-color:#0088CC; color:white" type="submit" name="pageNo_@i" value="@i">@i</button>
-                                </div>
-                            }
-                            else
-                            {
-                                <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
-                                    <button class="pagin" type="submit" name="pageNo_@i" value="@i">@i</button>
-                                </div>
-                            }
-                        }
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div style="background-color:#F0F0F0; padding:10px">
+            <form method="post">
+                <input hidden asp-for="@Model.NumberOfPage" value="@Model.NumberOfPage" />
+                <div class="row" style="margin-bottom:15px">
+                    <div class="col-md-3">
+                        <button type="submit" name="pageNo_1" value="1" style="width:100%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964">Search & Filter</button>
+                    </div>
+                    <div class="col-md-7">
+                        <input name="Search_Str" value="@Model.filter.SearchStr" style="width:100%" placeholder="Find Job" />
+                    </div>
+                    <div class="col-md-2">
                     </div>
                 </div>
-            </div>
+                <div class="row">
+                    <div class="col-md-3">
+                        <table style="width:100%;margin-bottom:10px;box-shadow: 0px 0px 4px 4px #DCDCDC;background-color:#FFFFFF" class="filter">
+                            <tr id="tsn123">
+                                <td colspan="3" class="td"><h6>Category</h6></td>
+                            </tr>
+                            @foreach (var category in Model.Categories)
+                            {
+                                <tr id="tr_@category.CategoryID" style="width:100%">
+                                    <td class="td" style="text-align:right"><input type="checkbox" name="category_@category.CategoryID" value="@category.CategoryID"></td>
+                                    <td style="text-align:left;font-size:14px;">
+                                        @(category.CategoryName + " (" + category.NumberOfJob + ")")
+                                        <hr class="hrCategory">
+                                    </td>
+                                    <td style="text-align:right">
+                                        @if (category.HasChildCategory)
+                                        {
+                                            <a id="tr_link_@category.CategoryID" onclick="displayAllChild(@category.CategoryID)" class="link2">&#9660;</a>
+                                        }
+                                    </td>
+
+                                </tr>
+
+                            }
+                        </table>
+                        <table class="filter" style="width:100%;box-shadow: 0px 0px 4px 4px #DCDCDC;padding:4px;margin-bottom:10px;background-color:#FFFFFF">
+                            <tr>
+                                <td class="td" colspan="2"><h6>Status</h6></td>
+                            </tr>
+                            @foreach (var status in Enum.GetValues(typeof(JobStatusEnum)))
+                            {
+                                @if (status.ToString() == JobStatusEnum.NotApprove.ToString())
+                                {
+                                    continue;
+                                }
+                                <tr style="width:100%">
+                                    <td style="width:15%;text-align:right"><input type="checkbox" name="status_@((int)Enum.Parse(typeof(JobStatusEnum), status.ToString()))" value="@((int)Enum.Parse(typeof(JobStatusEnum), status.ToString()))"></td>
+                                    <td style="width:85%;text-align:left">@status.ToString()</td>
+                                </tr>
+                            }
+                        </table>
+                        <table class="filter" style="width:100%;box-shadow: 0px 0px 4px 4px #DCDCDC;padding:4px;margin-bottom:10px;background-color:#FFFFFF">
+                            <tr>
+                                <td class="td" colspan="1"><h6>Date Range</h6></td>
+                            </tr>
+                            <tr>
+                                <td class="td">
+                                    <input style="margin-bottom: 5px;" type="text" name="daterange" value="@Model.filter.getDateRange()" />
+                                </td>
+                            </tr>
+                        </table>
+                        <table class="filter" style="width:100%;box-shadow: 0px 0px 4px 4px #DCDCDC;padding:4px;margin-bottom:10px;background-color:#FFFFFF">
+                            <tr>
+                                <td class="td" colspan="3"><h6>Price Range</h6></td>
+                            </tr>
+                            <tr>
+                                <td class="td">
+                                    <div class="price-input" style="margin-bottom: 5px;">
+                                        <table>
+                                            <tr>
+                                                <td><input type="text" id="price-min" name="price_min" pattern="[0-9đ ,]+" title="Please enter number" value="@Model.filter.BudgetMin" style="width:100% " /></td>
+                                                <td>-</td>
+                                                <td><input type="text" id="price-max" name="price_max" pattern="[0-9đ ,]+" title="Please enter number" value="@Model.filter.BudgetMax" style="width:100% " /></td>
+                                            </tr>
+                                        </table>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </div>
+                    <div class="col-md-9">
+                        <div style="box-shadow: 0px 0px 4px 4px #DCDCDC;background-color:#FFFFFF; padding-top: 10px">
+                            <table class="jobTable">
+                                <thead>
+                                    <tr>
+                                        <th width="10%">
+                                            <h6 style="margin:1px;text-align: center">Id</h6>
+                                        </th>
+                                        <th width="60%">
+                                            <h6 style="margin:1px;text-align: left">Title</h6>
+                                        </th>
+                                        <th width="10%">
+                                            <h6 style="margin:1px;text-align: center">Offers</h6>
+                                        </th>
+                                        <th width="10%">
+                                            <h6 style="margin:1px;text-align: left">Status</h6>
+                                        </th>
+                                        <th width="17%"></th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    <tr><td colspan="5"><hr class="hrJob"></td></tr>
+                                    @foreach (var item in Model.Jobs)
+                                    {
+                                        <tr>
+                                            <td style="text-align: center;">
+                                                @item.JobID
+                                            </td>
+                                            <td style="text-align: left">
+                                                <a style="font-size:16px" class="link" asp-page="./EmployerViewJobDetailPage/" asp-route-JobId="@item.JobID">@item.JobTitle</a>
+                                            </td>
+                                            <td style="text-align: center;">
+                                                @(item.NumberOfOffer)
+                                            </td>
+                                            <td style="text-align: left">
+                                                @if (item.Status == (int)JobStatusEnum.NotApprove)
+                                                {
+                                                    <p class="status" style="background-color:grey;margin:0px">Not Approved</p>
+                                                }
+                                                else if (item.Status == (int)JobStatusEnum.Approved)
+                                                {
+                                                    <p class="status" style="background-color:#5B9044;margin:0px">Hiring</p>
+                                                }
+                                                else if (item.Status == (int)JobStatusEnum.Hired)
+                                                {
+                                                    <p class="status" style="background-color:orange;margin:0px">Hired</p>
+                                                }
+                                                else if (item.Status == (int)JobStatusEnum.Close)
+                                                {
+                                                    <p class="status" style="background-color:#FF0000;margin:0px">Closed</p>
+                                                }
+                                            </td>
+                                            <td style="">
+                                                <a class="link" style="background-color:#09E20C;color:#007D00;display:block;margin:3px;text-align:center" asp-page="./PushToTop" asp-route-id="@item.JobID">Push to top <span style="color:white">$</span></a>
+
+                                            </td>
+                                        </tr>
+                                        <tr><td colspan="5"><hr class="hrJob"></td></tr>
+                                    }
+                                </tbody>
+                            </table>
+                            <div style="display:flex;justify-content:center;">
+                                @for (int i = 1; i <= Model.NumberOfPage; i++)
+                                {
+                                    @if (i == Model.PageNo)
+                                    {
+                                        <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
+                                            <button class="pagin" style="background-color:#0088CC; color:white" type="submit" name="pageNo_@i" value="@i">@i</button>
+                                        </div>
+                                    }
+                                    else
+                                    {
+                                        <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
+                                            <button class="pagin" type="submit" name="pageNo_@i" value="@i">@i</button>
+                                        </div>
+                                    }
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </form>
         </div>
-    </form>
+    </div>
+    <div class="col-md-2"></div>
 </div>
 <script>
     function displayAllChild(categoryID) {
