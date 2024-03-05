@@ -6,6 +6,8 @@ using OpusLink.Entity.DTO.AccountDTO.SendEmail;
 using OpusLink.Entity.Models;
 using Microsoft.AspNetCore.Identity;
 using OpusLink.Shared.Enums;
+using System.Text;
+using System.Runtime.InteropServices;
 
 namespace OpusLink.API.Controllers.AccountControllers
 {
@@ -125,7 +127,7 @@ namespace OpusLink.API.Controllers.AccountControllers
         }
 
         [HttpGet("confirmEmail")]
-        public async Task<ApiResponseModel> ConfirmEmail([FromBody] ConfirmEmailDTO model)
+        public async Task<ApiResponseModel> ConfirmEmail(string token, string email)
         {
             try
             {
@@ -142,7 +144,7 @@ namespace OpusLink.API.Controllers.AccountControllers
                         Message = string.Join(";", errors)
                     };
                 }
-                var result = await _accountService.ConfirmEmail(model);
+                var result = await _accountService.ConfirmEmail(token, email);
                 return result;
             }
             catch (Exception ex)
@@ -161,8 +163,25 @@ namespace OpusLink.API.Controllers.AccountControllers
         private async void SendEmail(User user)
         {
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
+            var userName = user.UserName;
             var confirmationLink = Url.Action(nameof(ConfirmEmail), "Account", new { token, email = user.Email }, Request.Scheme);
-            var message = new MessageEmail(new string[] { user.Email! }, "Confirm your email", confirmationLink!);
+
+            // Tạo nội dung HTML cho email
+            string titleContent = "Xác nhận địa chỉ Email của bạn - Opuslink";
+
+            string emailContent = "Xin chào " + userName + ",\r\n\r\n" +
+                "Cảm ơn bạn đã đăng ký tài khoản trên Opuslink, nền tảng tìm việc làm freelancer hàng đầu. " +
+                "Để hoàn tất quá trình đăng ký và bắt đầu sử dụng dịch vụ của chúng tôi, bạn cần xác nhận địa chỉ email của mình.\r\n\r\n" +
+                "Vui lòng nhấp vào liên kết bên dưới để xác nhận địa chỉ email của bạn :" + "\r\n" +
+                confirmationLink + "\r\n\r\n" +
+                "Nếu bạn không thực hiện yêu cầu này, bạn có thể bỏ qua email này.\r\n" +
+                "Cảm ơn bạn đã sử dụng Opuslink. Nếu bạn có bất kỳ câu hỏi nào, vui lòng liên hệ với chúng tôi qua email support@opuslink.com.\r\n\r\n" +
+                "Trân trọng,\r\nĐội ngũ hỗ trợ Opuslink";
+
+            // Tạo đối tượng MessageEmail với nội dung HTML
+            var message = new MessageEmail(new string[] { user.Email! }, titleContent, emailContent);
+
+            // Gửi email
             _emailService.SendEmail(message);
         }
     }

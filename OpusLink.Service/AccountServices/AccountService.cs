@@ -18,7 +18,7 @@ namespace OpusLink.Service.AccountServices
     public interface IAccountService
     {
         Task<ApiResponseModel> Login(LoginDTO model);
-        Task<ApiResponseModel> ConfirmEmail(ConfirmEmailDTO model);
+        Task<ApiResponseModel> ConfirmEmail(string token, string email);
     }
     public class AccountService : IAccountService
     {
@@ -76,12 +76,12 @@ namespace OpusLink.Service.AccountServices
         }
 
         //Confirm Email khi ấn link từ Email
-        public async Task<ApiResponseModel> ConfirmEmail(ConfirmEmailDTO model)
+        public async Task<ApiResponseModel> ConfirmEmail(string token, string email)
         {
-            var user = await _userManager.FindByEmailAsync(model.Email);
+            var user = await _userManager.FindByEmailAsync(email);
             if (user != null)
             {
-                var result = await _userManager.ConfirmEmailAsync(user, model.Token);
+                var result = await _userManager.ConfirmEmailAsync(user, token);
                 if (result.Succeeded)
                 {
                     return new ApiResponseModel
