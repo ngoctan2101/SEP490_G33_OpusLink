@@ -1,10 +1,10 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
-using OpusLink.Entity.DTO.AccountDTO;
 using OpusLink.Entity.DTO.AccountDTO.Common;
+using OpusLink.Entity.DTO.AccountDTO;
 
-namespace OpusLink.User.Hosted.Pages.User
+namespace OpusLink.User.Hosted.Pages.Login_Register
 {
     public class RegisterModel : PageModel
     {
@@ -39,7 +39,7 @@ namespace OpusLink.User.Hosted.Pages.User
                         if (apiResponse.IsSuccess)
                         {
                             ViewData["Success"] = apiResponse.Message;
-                            return Page();
+                            return RedirectToPage("EmailVerify");
                         }
                         else
                         {
