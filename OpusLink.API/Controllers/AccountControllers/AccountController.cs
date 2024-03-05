@@ -101,6 +101,8 @@ namespace OpusLink.API.Controllers.AccountControllers
                 var resultRoleFreelancer = await _userManager.AddToRoleAsync(user, Roles.Freelancer.ToString());
                 var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Employer.ToString());
 
+                //Role cho Admin
+                /*var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Admin.ToString());*/
                 if (!resultCreateUser.Succeeded)
                 {
                     return new ApiResponseModel()
