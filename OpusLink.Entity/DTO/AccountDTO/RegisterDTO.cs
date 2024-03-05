@@ -5,16 +5,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpusLink.Entity.DTO.HaiDTO
+namespace OpusLink.Entity.DTO.AccountDTO
 {
     public class RegisterDTO
     {
+        [Required(ErrorMessage = "Username is required")]
+        public string UserName { get; set; }
+
         [Required(ErrorMessage = "Email is required")]
         [EmailAddress]
         public string Email { get; set; }
-
-        [Required(ErrorMessage = "Username is required")]
-        public string UserName { get; set; }
 
         [Required(ErrorMessage = "Password is required")]
         [MinLength(6)]

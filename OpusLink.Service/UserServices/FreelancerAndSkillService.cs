@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 using System.Security.Cryptography;
 using Microsoft.EntityFrameworkCore;
 
-namespace OpusLink.Service.User
+namespace OpusLink.Service.UserServices
 {
     public interface IFreelancerAndSkillService
     {

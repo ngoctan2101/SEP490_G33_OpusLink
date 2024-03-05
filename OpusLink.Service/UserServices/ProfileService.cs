@@ -6,7 +6,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpusLink.Service.User
+namespace OpusLink.Service.UserServices
 {
     public interface IProfileService
     {

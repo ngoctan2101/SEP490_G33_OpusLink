@@ -1,10 +1,9 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using OpusLink.Entity.DTO;
 using OpusLink.Service.Admin;
 
-namespace OpusLink.API.Controllers.User.Freelance
+namespace OpusLink.API.Controllers.UserControllers.Freelance
 {
     [Route("api/[controller]")]
     [ApiController]
