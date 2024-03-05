@@ -9,23 +9,26 @@ using OpusLink.Shared.Enums;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
+using OpusLink.Entity.DTO.AccountDTO.SendEmail;
+using Org.BouncyCastle.Asn1.Ocsp;
+using System.Security.Policy;
 
 namespace OpusLink.Service.AccountServices
 {
     public interface IAccountService
     {
         Task<ApiResponseModel> Login(LoginDTO model);
-        Task<ApiResponseModel> Register(RegisterDTO model);
+        Task<ApiResponseModel> ConfirmEmail(ConfirmEmailDTO model);
     }
     public class AccountService : IAccountService
     {
-        private UserManager<OpusLink.Entity.Models.User> _userManager;
+        private UserManager<User> _userManager;
         private readonly RoleManager<Role> _roleManager;
-        private readonly SignInManager<OpusLink.Entity.Models.User> _signInManager;
+        private readonly SignInManager<User> _signInManager;
         private readonly JWTSetting _jwtSetting;
         private readonly OpusLinkDBContext _dbContext;
 
-        public AccountService(UserManager<OpusLink.Entity.Models.User> userManager, RoleManager<Role> roleManager, SignInManager<OpusLink.Entity.Models.User> signInManager, IOptionsMonitor<JWTSetting> jwtSetting, OpusLinkDBContext dbContext)
+        public AccountService(UserManager<User> userManager, RoleManager<Role> roleManager, SignInManager<User> signInManager, IOptionsMonitor<JWTSetting> jwtSetting, OpusLinkDBContext dbContext)
         {
             _userManager = userManager;
             _roleManager = roleManager;
@@ -72,63 +75,29 @@ namespace OpusLink.Service.AccountServices
             return result;
         }
 
-        public async Task<ApiResponseModel> Register(RegisterDTO model)
+        //Confirm Email khi ấn link từ Email
+        public async Task<ApiResponseModel> ConfirmEmail(ConfirmEmailDTO model)
         {
-            ApiResponseModel result = new ApiResponseModel()
+            var user = await _userManager.FindByEmailAsync(model.Email);
+            if (user != null)
             {
-                Code = 200,
-                IsSuccess = true,
-                Message = "User created success",
-                Data = model
-            };
-
-            //( Đoạn này : Nếu Mail và Name đã tồn tại
-            var userExistMail = await _userManager.FindByEmailAsync(model.Email);
-            var userExistName = await _userManager.FindByNameAsync(model.UserName);
-            if (userExistMail != null || userExistName != null)
-            {
-                return new ApiResponseModel()
+                var result = await _userManager.ConfirmEmailAsync(user, model.Token);
+                if (result.Succeeded)
                 {
-                    Code = 400,
-                    Message = "User has been already existed!",
-                    IsSuccess = false
-                };
+                    return new ApiResponseModel
+                    {
+                        Code = 200,
+                        IsSuccess = true,
+                        Message = "Confirm email successfully"
+                    };
+                }
             }
-            //)
-
-            //(Đoạn này : Nếu không tồn tại thì tạo ra 1 user
-            //ID của User thì nó tự tạo rồi
-            var user = new OpusLink.Entity.Models.User()
+            return new ApiResponseModel
             {
-                Email = model.Email,
-                SecurityStamp = Guid.NewGuid().ToString(),
-                UserName = model.UserName,
+                Code = 400,
+                IsSuccess = false,
+                Message = "Confirm email failed"
             };
-            //)
-
-            var resultCreateUser = await _userManager.CreateAsync(user, model.Password);
-
-            //Role mặc định là Freelancer and Employer
-            var resultRoleFreelancer = await _userManager.AddToRoleAsync(user, Roles.Freelancer.ToString());
-            var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Employer.ToString());
-
-            if (!resultCreateUser.Succeeded)
-            {
-                return new ApiResponseModel()
-                {
-                    Code = 400,
-                    Message = "Error when create user",
-                    IsSuccess = false
-                };
-            }/*
-            else
-            {
-                var code = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-                var email_body = $"Please confirm your account by <a href='{_jwtSetting.Issuer}/Account/ConfirmEmail?email={user.Email}&code={code}'>clicking here</a>";
-                var callback_url = Request.Scheme + "://" + Request.Host + Url.Ac
-            }*/
-            return result;
-
         }
 
         //Lấy về thông tin của người dùng bao gồm, Name, Email, Id,..

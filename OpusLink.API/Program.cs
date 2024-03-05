@@ -10,10 +10,11 @@ using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
 using System.Text;
 using OpusLink.Entity.AutoMapper.JOB;
-using OpusLink.Service.User;
 using OpusLink.Service.Chat;
 using OpusLink.Service.AccountServices;
 using OpusLink.Entity.DTO.AccountDTO.Common;
+using OpusLink.Entity.DTO.AccountDTO.SendEmail;
+using OpusLink.Service.UserServices;
 
 internal class Program
 {
@@ -61,6 +62,7 @@ internal class Program
         builder.Services.AddScoped<IJobAndCategoryService, JobAndCategoryService>();
         builder.Services.AddScoped<IFreelancerAndSkillService, FreelancerAndSkillService>();
         builder.Services.AddScoped<IChatService, ChatService>();
+        builder.Services.AddScoped<IEmailService, EmailService>();
 
         builder.Services.AddDbContext<OpusLinkDBContext>();
         builder.Services.AddSingleton(mapper);
@@ -127,6 +129,9 @@ internal class Program
 
             //setting for user
             options.User.RequireUniqueEmail = true; //Không được đăng kí trùng email
+
+            //setting for signin
+            options.SignIn.RequireConfirmedEmail = false;
         });
 
         services.AddAuthentication(options =>
@@ -153,5 +158,9 @@ internal class Program
                 IssuerSigningKey = new SymmetricSecurityKey(Encoding.UTF8.GetBytes(configuration["JwtSetting:Key"]))
             };
         });
+
+        // Add Email Configs
+        var emailConfig = configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
+        services.AddSingleton(emailConfig);
     }
 }

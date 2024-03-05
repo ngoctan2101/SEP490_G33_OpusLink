@@ -4,7 +4,6 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.AccountDTO;
 using OpusLink.Entity.DTO.AccountDTO.Common;
-using OpusLink.Entity.DTO.HaiDTO;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace OpusLink.User.Hosted.Pages.User
