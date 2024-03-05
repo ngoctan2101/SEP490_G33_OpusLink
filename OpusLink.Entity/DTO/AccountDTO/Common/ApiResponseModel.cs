@@ -4,7 +4,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace OpusLink.Entity.DTO.HaiDTO
+namespace OpusLink.Entity.DTO.AccountDTO.Common
 {
     public class ApiResponseModel
     {

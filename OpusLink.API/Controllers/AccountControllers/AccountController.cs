@@ -1,9 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
-using OpusLink.Entity.DTO.HaiDTO;
-using OpusLink.Service.Users;
+﻿using Microsoft.AspNetCore.Mvc;
+using OpusLink.Entity.DTO.AccountDTO.Common;
+using OpusLink.Entity.DTO.AccountDTO;
+using OpusLink.Service.AccountServices;
 
-namespace OpusLink.API.Controllers.HaiControllers
+namespace OpusLink.API.Controllers.AccountControllers
 {
     [Route("api/[controller]")]
     [ApiController]

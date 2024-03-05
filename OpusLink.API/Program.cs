@@ -8,12 +8,12 @@ using OpusLink.Entity.Models;
 using Microsoft.AspNetCore.Authentication.JwtBearer;
 using Microsoft.AspNetCore.Identity;
 using Microsoft.IdentityModel.Tokens;
-using OpusLink.Entity.DTO.HaiDTO;
-using OpusLink.Service.Users;
 using System.Text;
 using OpusLink.Entity.AutoMapper.JOB;
 using OpusLink.Service.User;
 using OpusLink.Service.Chat;
+using OpusLink.Service.AccountServices;
+using OpusLink.Entity.DTO.AccountDTO.Common;
 
 internal class Program
 {
@@ -87,16 +87,6 @@ internal class Program
             endpoints.MapControllers();
         });
 
-        //( Khối này để update dữ liệu
-        var scope = app.Services.CreateScope();
-        var services = scope.ServiceProvider.GetServices<IDataUpdate>();
-        foreach (var service in services)
-        {
-            //Vì dùng bất đồng bộ nên dùng Awaiter và Result
-            service.UpdateData().GetAwaiter().GetResult();
-        }
-        //)
-
         app.Run();
     }
 
@@ -108,7 +98,6 @@ internal class Program
         });
 
         //Map cái interface và class với nhau
-        services.AddTransient<IDataUpdate, RoleDataUpdate>();
         services.AddTransient<IAccountService, AccountService>();
     }
 

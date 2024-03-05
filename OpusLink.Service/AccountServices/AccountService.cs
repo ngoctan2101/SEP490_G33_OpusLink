@@ -1,36 +1,21 @@
 ﻿using Microsoft.AspNetCore.Identity;
 using Microsoft.Extensions.Options;
 using Microsoft.IdentityModel.Tokens;
-using OpusLink.Entity;
-using System;
-using System.Collections.Generic;
-using System.IdentityModel.Tokens.Jwt;
-using System.Linq;
-using System.Security.Claims;
-using System.Security.Principal;
-using System.Text;
-using System.Threading.Tasks;
+using OpusLink.Entity.DTO.AccountDTO.Common;
+using OpusLink.Entity.DTO.AccountDTO;
 using OpusLink.Entity.Models;
-using OpusLink.Entity.DTO.HaiDTO;
+using OpusLink.Entity;
 using OpusLink.Shared.Enums;
-using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.WebUtilities;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
-namespace OpusLink.Service.Users
+namespace OpusLink.Service.AccountServices
 {
     public interface IAccountService
     {
         Task<ApiResponseModel> Login(LoginDTO model);
         Task<ApiResponseModel> Register(RegisterDTO model);
-        //List<Account>? GetAccountsByKeyword(string keyword);
-        //List<Account>? GetAllAccount();
-        //Account? GetAccountById(int id);
-        //Account? GetAccountByEmailAndPassword(string email, string password);
-        //Account? GetAccountByEmail(string email);
-        //CreateAccountResponse AddAccount(CreateAccountRequest account);
-        //UpdateAccountResponse UpdateAccount(UpdateAccountRequest account);
-        //bool UpdateDeleteStatusAccount(int id);
-        //List<Account> GetAccountsByRoleId(int roleId);
     }
     public class AccountService : IAccountService
     {
@@ -187,30 +172,5 @@ namespace OpusLink.Service.Users
             }
             return result;
         }
-
-        //private readonly FstoreContext _context;
-        //private readonly IEncryptionService _encryptionService;
-
-        //public AccountService(FstoreContext context, IEncryptionService encryptionService)
-        //{
-        //    _context = context;
-        //    _encryptionService = encryptionService;
-        //}
-
-
-        //public List<Account> GetAccountsByKeyword(string keyword)
-        //{
-        //    try
-        //    {
-        //        var accounts = _context.Accounts.Where(x => x.FullName.ToLower().Contains(keyword.ToLower())).ToList();
-        //        return accounts;
-
-        //    }
-        //    catch (Exception e)
-        //    {
-        //        throw new Exception(e.Message);
-        //    }
-        //}
-
     }
 }
