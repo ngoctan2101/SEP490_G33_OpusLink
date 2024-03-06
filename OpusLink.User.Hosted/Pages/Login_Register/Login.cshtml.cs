@@ -1,12 +1,11 @@
-﻿using Microsoft.AspNetCore.Http;
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
-using OpusLink.Entity.DTO.AccountDTO;
 using OpusLink.Entity.DTO.AccountDTO.Common;
+using OpusLink.Entity.DTO.AccountDTO;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace OpusLink.User.Hosted.Pages.User
+namespace OpusLink.User.Hosted.Pages.Login_Register
 {
     public class LoginModel : PageModel
     {
@@ -15,10 +14,7 @@ namespace OpusLink.User.Hosted.Pages.User
         public LoginModel() { }
 
         string link = "https://localhost:7265/api/Account/Login";
-        public void OnGet()
-        {
-
-        }
+        public void OnGet() {}
 
         public async Task<IActionResult> OnPostAsync(string username, string password)
         {

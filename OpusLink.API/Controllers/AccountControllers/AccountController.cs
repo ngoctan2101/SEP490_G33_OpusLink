@@ -6,8 +6,8 @@ using OpusLink.Entity.DTO.AccountDTO.SendEmail;
 using OpusLink.Entity.Models;
 using Microsoft.AspNetCore.Identity;
 using OpusLink.Shared.Enums;
-using System.Text;
-using System.Runtime.InteropServices;
+using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OpusLink.API.Controllers.AccountControllers
 {
@@ -161,11 +161,99 @@ namespace OpusLink.API.Controllers.AccountControllers
             }
         }
 
+        [HttpPost("forgotPassword")]
+        [AllowAnonymous]
+        public async Task<ApiResponseModel> ForgotPassword([Required] string email)
+        {
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user != null)
+            {
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var passwordResetLink = Url.Action(nameof(ResetPassword), "Account", new { token, email = user.Email }, Request.Scheme);
+                string userName = user.UserName;
+                // Tạo nội dung HTML cho email
+                string titleContent = "Đổi mật khẩu - Opuslink";
+
+                string emailContent = "Xin chào " + userName + ",\r\n\r\n" +
+                    "Cảm ơn đã sử dụng dịch vụ của Opuslink, nền tảng tìm việc làm freelancer hàng đầu. " +
+                    "Nếu bạn đã quên mật khẩu của mình, đừng lo lắng! Chúng tôi sẽ giúp bạn khôi phục mật khẩu một cách dễ dàng.\r\n\r\n" +
+                    "Vui lòng nhấp vào liên kết dưới đây để thiết lập lại mật khẩu của bạn :" + "\r\n" +
+                    passwordResetLink + "\r\n\r\n" +
+                    "Nếu bạn không thực hiện yêu cầu này, bạn có thể bỏ qua email này.\r\n" +
+                    "Cảm ơn bạn đã sử dụng Opuslink. Nếu bạn cần hỗ trợ hoặc có bất kỳ câu hỏi nào, đừng ngần ngại liên hệ với chúng tôi qua email support@opuslink.com.\r\n\r\n" +
+                    "Trân trọng,\r\nĐội ngũ hỗ trợ Opuslink";
+                var message = new MessageEmail(new string[] { user.Email! }, titleContent, emailContent);
+                _emailService.SendEmail(message);
+                return new ApiResponseModel()
+                {
+                    Code = 200,
+                    IsSuccess = true,
+                    Message = "Reset password sent",
+                };
+            }
+            return new ApiResponseModel()
+            {
+                Code = 400,
+                IsSuccess = false,
+                Message = "Email not found",
+            };
+        }
+
+        [HttpGet("resetPassword")]
+        public async Task<IActionResult> ResetPassword(string token, string email)
+        {
+                var model = new ResetPassword { Token = token, Email = email };
+            return Ok(new
+            {
+                model
+            });
+        }
+
+        [HttpPost("resetPassword")]
+        [AllowAnonymous]
+        public async Task<ApiResponseModel> ResetPassword(ResetPassword resetPassword)
+        {
+            var user = await _userManager.FindByEmailAsync(resetPassword.Email);
+            if (user != null)
+            {
+                var resetPassResult = await _userManager.ResetPasswordAsync(user, resetPassword.Token, resetPassword.Password);
+                if (!resetPassResult.Succeeded)
+                {
+                    foreach (var error in resetPassResult.Errors)
+                    {
+                        ModelState.AddModelError(error.Code, error.Description);
+                    }
+                    var errors = ModelState.Values.SelectMany(v => v.Errors)
+                                   .Select(e => e.ErrorMessage)
+                                   .ToList();
+                    return new ApiResponseModel()
+                    {
+                        Code = 400,
+                        Message = string.Join("; ", errors),
+                        IsSuccess = false
+                    };
+                }
+                    return new ApiResponseModel()
+                {
+                    Code = 200,
+                    IsSuccess = true,
+                    Message = "Reset password sent",
+                };
+            }
+            return new ApiResponseModel()
+            {
+                Code = 400,
+                IsSuccess = false,
+                Message = "Email not found",
+            };
+        }
+        
+
         //Add Token to Verify Email
         private async void SendEmail(User user)
         {
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
-            var userName = user.UserName;
+            string userName = user.UserName;
             var confirmationLink = Url.Action(nameof(ConfirmEmail), "Account", new { token, email = user.Email }, Request.Scheme);
 
             // Tạo nội dung HTML cho email
