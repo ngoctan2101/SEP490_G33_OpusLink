@@ -6,9 +6,8 @@ using OpusLink.Entity.DTO.AccountDTO.SendEmail;
 using OpusLink.Entity.Models;
 using Microsoft.AspNetCore.Identity;
 using OpusLink.Shared.Enums;
-using System.Text;
-using System.Runtime.InteropServices;
 using System.ComponentModel.DataAnnotations;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OpusLink.API.Controllers.AccountControllers
 {
@@ -102,7 +101,9 @@ namespace OpusLink.API.Controllers.AccountControllers
                 var resultRoleFreelancer = await _userManager.AddToRoleAsync(user, Roles.Freelancer.ToString());
                 var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Employer.ToString());
 
+                //Role cho Admin
                 /*var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Admin.ToString());*/
+
                 if (!resultCreateUser.Succeeded)
                 {
                     return new ApiResponseModel()
@@ -162,31 +163,41 @@ namespace OpusLink.API.Controllers.AccountControllers
         }
 
         [HttpPost("forgotPassword")]
+        [AllowAnonymous]
         public async Task<ApiResponseModel> ForgotPassword([Required] string email)
         {
-            try
+            var user = await _userManager.FindByEmailAsync(email);
+            if (user != null)
             {
-                ApiResponseModel result = new ApiResponseModel()
+                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                var passwordResetLink = Url.Action(nameof(ResetPassword), "Account", new { token, email = user.Email }, Request.Scheme);
+                string userName = user.UserName;
+                // Tạo nội dung HTML cho email
+                string titleContent = "Đổi mật khẩu - Opuslink";
+
+                string emailContent = "Xin chào " + userName + ",\r\n\r\n" +
+                    "Cảm ơn đã sử dụng dịch vụ của Opuslink, nền tảng tìm việc làm freelancer hàng đầu. " +
+                    "Nếu bạn đã quên mật khẩu của mình, đừng lo lắng! Chúng tôi sẽ giúp bạn khôi phục mật khẩu một cách dễ dàng.\r\n\r\n" +
+                    "Vui lòng nhấp vào liên kết dưới đây để thiết lập lại mật khẩu của bạn :" + "\r\n" +
+                    passwordResetLink + "\r\n\r\n" +
+                    "Nếu bạn không thực hiện yêu cầu này, bạn có thể bỏ qua email này.\r\n" +
+                    "Cảm ơn bạn đã sử dụng Opuslink. Nếu bạn cần hỗ trợ hoặc có bất kỳ câu hỏi nào, đừng ngần ngại liên hệ với chúng tôi qua email support@opuslink.com.\r\n\r\n" +
+                    "Trân trọng,\r\nĐội ngũ hỗ trợ Opuslink";
+                var message = new MessageEmail(new string[] { user.Email! }, titleContent, emailContent);
+                _emailService.SendEmail(message);
+                return new ApiResponseModel()
                 {
                     Code = 200,
                     IsSuccess = true,
-                    Message = "Password sent",
-                    Data = "No"
+                    Message = "Reset password sent",
                 };
-
-                ForgotPasswordEmail(email);
-                return result;
             }
-            catch (Exception ex)
+            return new ApiResponseModel()
             {
-                return new ApiResponseModel()
-                {
-                    Code = StatusCodes.Status400BadRequest,
-                    Message = ex.Message,
-                    Data = ex,
-                    IsSuccess = false
-                };
-            }
+                Code = 400,
+                IsSuccess = false,
+                Message = "Email not found",
+            };
         }
 
         [HttpGet("resetPassword")]
@@ -200,31 +211,44 @@ namespace OpusLink.API.Controllers.AccountControllers
         }
 
         [HttpPost("resetPassword")]
+        [AllowAnonymous]
         public async Task<ApiResponseModel> ResetPassword(ResetPassword resetPassword)
         {
-            try
+            var user = await _userManager.FindByEmailAsync(resetPassword.Email);
+            if (user != null)
             {
-                ApiResponseModel result = new ApiResponseModel()
+                var resetPassResult = await _userManager.ResetPasswordAsync(user, resetPassword.Token, resetPassword.Password);
+                if (!resetPassResult.Succeeded)
+                {
+                    foreach (var error in resetPassResult.Errors)
+                    {
+                        ModelState.AddModelError(error.Code, error.Description);
+                    }
+                    var errors = ModelState.Values.SelectMany(v => v.Errors)
+                                   .Select(e => e.ErrorMessage)
+                                   .ToList();
+                    return new ApiResponseModel()
+                    {
+                        Code = 400,
+                        Message = string.Join("; ", errors),
+                        IsSuccess = false
+                    };
+                }
+                    return new ApiResponseModel()
                 {
                     Code = 200,
                     IsSuccess = true,
-                    Message = "Reset Password sent",
+                    Message = "Reset password sent",
                 };
-
-                ResetPasswordEmail(resetPassword);
-                return result;
             }
-            catch (Exception ex)
+            return new ApiResponseModel()
             {
-                return new ApiResponseModel()
-                {
-                    Code = StatusCodes.Status400BadRequest,
-                    Message = ex.Message,
-                    Data = ex,
-                    IsSuccess = false
-                };
-            }
+                Code = 400,
+                IsSuccess = false,
+                Message = "Email not found",
+            };
         }
+        
 
         //Add Token to Verify Email
         private async void SendEmail(User user)
@@ -250,69 +274,6 @@ namespace OpusLink.API.Controllers.AccountControllers
 
             // Gửi email
             _emailService.SendEmail(message);
-        }
-
-        private async void ForgotPasswordEmail(string email)
-        {
-            var user = await _userManager.FindByEmailAsync(email);
-
-            if (user != null)
-            {
-                var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-
-                string userName = user.UserName;
-                var passwordResetLink = Url.Action(nameof(ResetPassword), "Account", new { token, email = user.Email }, Request.Scheme);
-
-                // Tạo nội dung HTML cho email
-                string titleContent = "Đổi mật khẩu - Opuslink";
-
-                string emailContent = "Xin chào " + userName + ",\r\n\r\n" +
-                    "Cảm ơn đã sử dụng dịch vụ của Opuslink, nền tảng tìm việc làm freelancer hàng đầu. " +
-                    "Nếu bạn đã quên mật khẩu của mình, đừng lo lắng! Chúng tôi sẽ giúp bạn khôi phục mật khẩu một cách dễ dàng.\r\n\r\n" +
-                    "Vui lòng nhấp vào liên kết dưới đây để thiết lập lại mật khẩu của bạn :" + "\r\n" +
-                    passwordResetLink + "\r\n\r\n" +
-                    "Nếu bạn không thực hiện yêu cầu này, bạn có thể bỏ qua email này.\r\n" +
-                    "Cảm ơn bạn đã sử dụng Opuslink. Nếu bạn cần hỗ trợ hoặc có bất kỳ câu hỏi nào, đừng ngần ngại liên hệ với chúng tôi qua email support@opuslink.com.\r\n\r\n" +
-                    "Trân trọng,\r\nĐội ngũ hỗ trợ Opuslink";
-
-                var message = new MessageEmail(new string[] { user.Email! }, titleContent, emailContent);
-                _emailService.SendEmail(message);
-            }
-        }
-
-        private async Task<ApiResponseModel> ResetPasswordEmail(ResetPassword resetPassword)
-        {
-            var user = await _userManager.FindByEmailAsync(resetPassword.Email);
-            if (user != null)
-            {
-               var resetPassResult = await _userManager.ResetPasswordAsync(user, resetPassword.Token, resetPassword.Password);
-               if (!resetPassResult.Succeeded)
-                {
-                    foreach (var error in resetPassResult.Errors)
-                    {
-                        ModelState.AddModelError(error.Code, error.Description);
-                    }
-                    return new ApiResponseModel()
-                    {
-                        Code = 400,
-                        Message = "Error",
-                        IsSuccess = false
-                    };
-                }
-
-               return new ApiResponseModel()
-               {
-                   Code = 200,
-                   IsSuccess = true,
-                   Message = "Reset Password Successfully"
-               };
-            }
-            return new ApiResponseModel()
-            {
-                Code = 400,
-                Message = "Error",
-                IsSuccess = false
-            };
         }
     }
 }
