@@ -103,7 +103,6 @@ namespace OpusLink.API.Controllers.AccountControllers
 
                 //Role cho Admin
                 /*var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Admin.ToString());*/
-
                 if (!resultCreateUser.Succeeded)
                 {
                     return new ApiResponseModel()
