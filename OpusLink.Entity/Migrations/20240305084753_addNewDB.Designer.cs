@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using OpusLink.Entity;
 
@@ -11,9 +12,10 @@ using OpusLink.Entity;
 namespace OpusLink.Entity.Migrations
 {
     [DbContext(typeof(OpusLinkDBContext))]
-    partial class OpusLinkDBContextModelSnapshot : ModelSnapshot
+    [Migration("20240305084753_addNewDB")]
+    partial class addNewDB
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder

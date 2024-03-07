@@ -1,0 +1,46 @@
+﻿@page
+@model OpusLink.User.Hosted.Pages.Login_Register.LoginModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Login Form | Opuslink Team</title>
+    <link rel="stylesheet" href="~/css/Login.css">
+    <link href='https://unpkg.com/boxicons@2.1.4/css/boxicons.min.css' rel='stylesheet'>
+    @*     <link href="~/lib/bootstrap/dist/css/bootstrap.min.css" rel="stylesheet" /> *@
+</head>
+<body>
+    <div class="wrapper container-fluid">
+        <form method="post">
+            <h1>Đăng nhập | Opuslink</h1>
+            <div class="input-box">
+                <input type="text" placeholder="Nhập tên đăng nhập" id="Username" name="Username" required>
+                <i class='bx bxs-user-pin'></i>
+            </div>
+            <div class="input-box">
+                <input type="password" placeholder="Nhập mật khẩu" id="Username" name="Password" required>
+                <i class='bx bxs-lock-alt'></i>
+            </div>
+            @if (ViewData["Error"] != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ViewData["Error"]
+                </div>
+            }
+            <br />
+            <div class="remember-forgot">
+                <label><input type="checkbox">Ghi nhớ Tôi</label>
+                <a href="#">Quên mật khẩu?</a>
+            </div>
+            <button type="submit" class="btn-login">Đăng nhập</button>
+            <div class="register-link">
+                <p>Don't have an account? <a asp-page="/User/Register">Đăng ký</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

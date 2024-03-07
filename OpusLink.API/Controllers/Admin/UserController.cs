@@ -6,8 +6,7 @@ using OpusLink.Entity.DTO;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.Models;
 using OpusLink.Service.Admin;
-using OpusLink.Service.JobServices;
-using OpusLink.Service.User;
+using OpusLink.Service.UserServices;
 
 namespace OpusLink.API.Controllers.Admin
 {
