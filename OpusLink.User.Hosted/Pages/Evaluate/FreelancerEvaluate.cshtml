@@ -1,0 +1,212 @@
+﻿@page
+@model OpusLink.User.Hosted.Pages.Evaluate.FreelancerEvaluateModel
+<script src="https://kit.fontawesome.com/a076d05399.js" crossorigin="anonymous"></script>
+
+<div class="container">
+	<div class="header">
+		<div class="logo">Opuslink</div>
+		<div class="chat">
+			<img src="https://cdn.builder.io/api/v1/image/assets/TEMP/412c2e66651b01c951b336ec271764f605885f0cfb40bc677f26eaf5bbb8f67d?" class="chat-icon" loading="lazy" />
+		</div>
+	</div>
+	<div class="evaluation">
+		<div class="title">Đánh giá freelancer</div>
+		<p>
+			Chi phí hợp lí: <span class="star-rating1">
+				<label for="rate-1" style="--i:1"><i class="fa-solid fa-star"></i></label>
+				<input type="radio" name="rating" id="rate-1" value="1">
+				<label for="rate-2" style="--i:2"><i class="fa-solid fa-star"></i></label>
+				<input type="radio" name="rating" id="rate-2" value="2" >
+				<label for="rate-3" style="--i:3"><i class="fa-solid fa-star"></i></label>
+				<input type="radio" name="rating" id="rate-3" value="3">
+				<label for="rate-4" style="--i:4"><i class="fa-solid fa-star"></i></label>
+				<input type="radio" name="rating" id="rate-4" value="4">
+				<label for="rate-5" style="--i:5"><i class="fa-solid fa-star"></i></label>
+				<input type="radio" name="rating" id="rate-5" value="5">
+			</span>
+		</p><p>
+			Tiến độ dự án: <span class="star-rating2">
+				<label for="rate-1" style="--i:1"><i class="fa-solid fa-star"></i></label>
+				<input type="radio" name="rating" id="rate-1" value="1">
+				<label for="rate-2" style="--i:2"><i class="fa-solid fa-star"></i></label>
+				<input type="radio" name="rating" id="rate-2" value="2" checked>
+				<label for="rate-3" style="--i:3"><i class="fa-solid fa-star"></i></label>
+				<input type="radio" name="rating" id="rate-3" value="3">
+				<label for="rate-4" style="--i:4"><i class="fa-solid fa-star"></i></label>
+				<input type="radio" name="rating" id="rate-4" value="4">
+				<label for="rate-5" style="--i:5"><i class="fa-solid fa-star"></i></label>
+				<input type="radio" name="rating" id="rate-5" value="5">
+			</span>
+		</p><p>
+			Khả năng giao tiếp: <span class="star-rating">
+				<label for="rate-1" style="--i:1"><i class="fa-solid fa-star"></i></label>
+				<input type="radio" name="rating" id="rate-1" value="1">
+				<label for="rate-2" style="--i:2"><i class="fa-solid fa-star"></i></label>
+				<input type="radio" name="rating" id="rate-2" value="2" checked>
+				<label for="rate-3" style="--i:3"><i class="fa-solid fa-star"></i></label>
+				<input type="radio" name="rating" id="rate-3" value="3">
+				<label for="rate-4" style="--i:4"><i class="fa-solid fa-star"></i></label>
+				<input type="radio" name="rating" id="rate-4" value="4">
+				<label for="rate-5" style="--i:5"><i class="fa-solid fa-star"></i></label>
+				<input type="radio" name="rating" id="rate-5" value="5">
+			</span>
+		</p><p>
+			Kết quả sản phẩm: <span class="star-rating">
+				<label for="rate-1" style="--i:1"><i class="fa-solid fa-star"></i></label>
+				<input type="radio" name="rating" id="rate-1" value="1">
+				<label for="rate-2" style="--i:2"><i class="fa-solid fa-star"></i></label>
+				<input type="radio" name="rating" id="rate-2" value="2" checked>
+				<label for="rate-3" style="--i:3"><i class="fa-solid fa-star"></i></label>
+				<input type="radio" name="rating" id="rate-3" value="3">
+				<label for="rate-4" style="--i:4"><i class="fa-solid fa-star"></i></label>
+				<input type="radio" name="rating" id="rate-4" value="4">
+				<label for="rate-5" style="--i:5"><i class="fa-solid fa-star"></i></label>
+				<input type="radio" name="rating" id="rate-5" value="5">
+			</span>
+		</p>
+		<div class="description">
+			Đánh giá của bạn sẽ giúp chúng tôi tìm ra những ứng viên phù hợp và nâng cao chất lượng ứng viên
+		</div>
+		<div class="submit">Gửi đánh giá</div>
+	</div>
+	<!-- Other evaluation components here -->
+
+</div>
+
+
+<style>
+	.container {
+		border: 1px solid #000;
+		background-color: #fff;
+		display: flex;
+		flex-direction: column;
+		padding-bottom: 50px;
+	}
+
+	.header {
+		border-bottom: 1px solid #4b32e8;
+		background-color: #f0edff;
+		display: flex;
+		justify-content: space-between;
+		gap: 20px;
+		padding: 14px 42px;
+		text-transform: uppercase;
+	}
+
+	.star-rating1 {
+		white-space: nowrap;
+	}
+
+		.star-rating1 [type="radio"] {
+			appearance: none;
+		}
+
+		.star-rating1 i {
+			font-size: 1.2em;
+			transition: 0.3s;
+		}
+
+		.star-rating1 label:is(:hover, :has(~ :hover)) i {
+			transform: scale(1.35);
+			color: #fffdba;
+			animation: jump 0.5s calc(0.3s + (var(--i) - 1) * 0.15s) alternate infinite;
+		}
+
+		.star-rating1 label:has(~ :checked) i {
+			color: #faec1b;
+			text-shadow: 0 0 2px #ffffff, 0 0 10px #ffee58;
+		}
+
+		/*------------------*/
+	.star-rating2 {
+		white-space: nowrap;
+	}
+
+		.star-rating2 [type="radio"] {
+			appearance: none;
+		}
+
+		.star-rating2 i {
+			font-size: 1.2em;
+			transition: 0.3s;
+		}
+
+		.star-rating2 label:is(:hover, :has(~ :hover)) i {
+			transform: scale(1.35);
+			color: #fffdba;
+			animation: jump 0.5s calc(0.3s + (var(--i) - 1) * 0.15s) alternate infinite;
+		}
+
+		.star-rating2 label:has(~ :checked) i {
+			color: #faec1b;
+			text-shadow: 0 0 2px #ffffff, 0 0 10px #ffee58;
+		}
+
+	/*keyframes jump {
+		0%,
+		50% {
+			transform: translatey(0) scale(1.35);
+		}
+		100% {
+			transform: translatey(-15%) scale(1.35);
+		}
+	}*/
+
+
+
+	.submit {
+		border: 1px solid #4ce149;
+		background-color: #fff;
+		border-radius: 8px;
+		color: #4ce149;
+		cursor: pointer;
+		text-align: center;
+		text-transform: uppercase;
+		padding: 15px 19px;
+		font: 600 16px/1 Poppins, sans-serif;
+		margin-top: 30px;
+	}
+
+	body {
+		background-color: #eef3f4;
+	}
+
+	.height-100 {
+		height: 100vh;
+	}
+
+	.card {
+		width: 380px;
+		border: none;
+		height: 280px;
+	}
+
+	.ratings {
+		margin-right: 10px;
+	}
+
+		.ratings i {
+			color: #cecece;
+			font-size: 32px;
+		}
+
+	.rating-color {
+		color: #fbc634 !important;
+	}
+
+	.review-count {
+		font-weight: 400;
+		margin-bottom: 2px;
+		font-size: 24px !important;
+	}
+
+	.small-ratings i {
+		color: #cecece;
+	}
+
+	.review-stat {
+		font-weight: 300;
+		font-size: 18px;
+		margin-bottom: 2px;
+	}
+</style>
