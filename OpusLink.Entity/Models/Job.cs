@@ -23,6 +23,8 @@ namespace OpusLink.Entity.Models
         public virtual ICollection<Milestone> Milestones { get; set; } = new List<Milestone>();
         public virtual ICollection<ReportJob> ReportJobs { get; set; } = new List<ReportJob>();
         public virtual ICollection<SaveJob> SaveJobs { get; set; } = new List<SaveJob>();
+        public virtual ICollection<FeedbackUser> FeedbackUsers { get; set; } = new List<FeedbackUser>();
+        public virtual ICollection<ChatBox> ChatBoxes { get; set; } = new List<ChatBox>();
 
         //chua co SaveJob va ReportJob
         public virtual Location? Location { get; set; }
