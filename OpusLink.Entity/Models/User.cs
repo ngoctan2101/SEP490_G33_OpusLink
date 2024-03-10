@@ -22,6 +22,8 @@ namespace OpusLink.Entity.Models
         public bool IsVeryfiedIdentity { get; set; }
         public decimal? AmountMoney { get; set; }
         public int Status { get; set; }
+        public DateTime? EndBanDate { get; set; }
+        public string? BanReason { get; set; }
         public virtual ICollection<ChatBox> ChatBoxsAsAFreelancer { get; set; } = new List<ChatBox>();
         public virtual ICollection<ChatBox> ChatBoxsAsAnEmployer { get; set; } = new List<ChatBox>();
         public virtual ICollection<Offer> OffersAsAFreelancer { get; set; } = new List<Offer>();
