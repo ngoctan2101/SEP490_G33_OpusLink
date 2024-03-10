@@ -51,7 +51,18 @@ namespace OpusLink.API.Controllers.JobControllers
             result.Add(new GetJobResponse() { NumberOfOffer = numberOfPage });
             return Ok(result);
         }
+        [HttpGet("GetAllJobRequested2")]
+        public async Task<IActionResult> GetAllJobRequested2()
+        {
+            var jobsResultAfterSearch = jobService.GetAllJobRequested2();
+            List<GetJobResponse> result = _mapper.Map<List<GetJobResponse>>(jobsResultAfterSearch);
+            int numberOfJobRequests = jobsResultAfterSearch.Count(); // Count of job requests
+            result.Add(new GetJobResponse { EmployerID = numberOfJobRequests });
 
-        
+            return Ok(result);
+        }
+
+
+
     }
 }

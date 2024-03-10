@@ -42,91 +42,97 @@
         }
 </style>
 <div class="row">
-    <div class="col-md-3"></div>
-    <div class="col-md-6">
-        <form method="post">
-            <input type="number" hidden name="jobId" value="@itemMain.JobId"/>
-            <input type="number" hidden name="status" value="@((int)JobStatusEnum.NotApprove)"/>
-            <input type="number" hidden name="freelancerId" value="@itemMain.FreelancerId"/>
-            <input type="text" hidden name="dateCreated" value="@itemMain.DateCreated.ToString()" />
-            <p class="Label">Set a title for the job</p>
-            <input type="text" name="title" value="@itemMain.JobTitle" placeholder="Job Title" style="width:100% " />
-            <p class="Label">Set categories to recruit</p>
-            <select style="width:350px;height:30px" onchange="ClickACategory()" id="categoryDropdown">
-                <option value="" disabled selected>Choose category</option>
-                @foreach (var item in Model.AllCategories)
-                {
-                    <option value="@item.CategoryID" onclick="ClickACategory(@item.CategoryID ,@item.CategoryName)">@item.CategoryName</option>
-                }
-            </select>
-            <div id="CategoryContainer" style="min-height:30px">
-                @foreach (var item in Model.Job.Categories)
-                {
-                    <div class="ACategory" id="ACategory_@item.CategoryID">
-                        @item.CategoryName
-                        <span class="close" onclick="Delete(@item.CategoryID)">&times;</span>
-                        <input type="text" name="category_@item.CategoryID" value="@item.CategoryID" hidden />
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div class="row">
+            <div class="col-md-3"></div>
+            <div class="col-md-6">
+                <form method="post">
+                    <input type="number" hidden name="jobId" value="@itemMain.JobId" />
+                    <input type="number" hidden name="status" value="@((int)JobStatusEnum.NotApprove)" />
+                    <input type="number" hidden name="freelancerId" value="@itemMain.FreelancerId" />
+                    <input type="text" hidden name="dateCreated" value="@itemMain.DateCreated.ToString()" />
+                    <p class="Label">Set a title for the job</p>
+                    <input type="text" name="title" value="@itemMain.JobTitle" placeholder="Job Title" style="width:100% " />
+                    <p class="Label">Set categories to recruit</p>
+                    <select style="width:350px;height:30px" onchange="ClickACategory()" id="categoryDropdown">
+                        <option value="" disabled selected>Choose category</option>
+                        @foreach (var item in Model.AllCategories)
+                        {
+                            <option value="@item.CategoryID" onclick="ClickACategory(@item.CategoryID ,@item.CategoryName)">@item.CategoryName</option>
+                        }
+                    </select>
+                    <div id="CategoryContainer" style="min-height:30px">
+                        @foreach (var item in Model.Job.Categories)
+                        {
+                            <div class="ACategory" id="ACategory_@item.CategoryID">
+                                @item.CategoryName
+                                <span class="close" onclick="Delete(@item.CategoryID)">&times;</span>
+                                <input type="text" name="category_@item.CategoryID" value="@item.CategoryID" hidden />
+                            </div>
+                        }
                     </div>
-                }
-            </div>
-            <p class="Label">Description for the job</p>
-            @*white-space: pre-line*@
-            <textarea name="content" style="width:100%;height:auto" rows="15">@itemMain.JobContent</textarea>
-            <p class="Label">Expected budget for this job</p>
-            <div class="row">
-                <div class="col-md-1">From</div>
-                <div class="col-md-5">
-                    <select name="budget_min">
-                        @for (int i = 1; i < 200; i++)
+                    <p class="Label">Description for the job</p>
+                    @*white-space: pre-line*@
+                    <textarea name="content" style="width:100%;height:auto" rows="15">@itemMain.JobContent</textarea>
+                    <p class="Label">Expected budget for this job</p>
+                    <div class="row">
+                        <div class="col-md-1">From</div>
+                        <div class="col-md-5">
+                            <select name="budget_min">
+                                @for (int i = 1; i < 200; i++)
+                                {
+                                    if (i == (int)(itemMain.BudgetMin / 500000))
+                                    {
+                                        <option value="@itemMain.BudgetMin" selected>@((itemMain.BudgetMin).ToString("#,##0")) đ</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@(i*500000)">@((i * 500000).ToString("#,##0")) đ</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                        <div class="col-md-1">To</div>
+                        <div class="col-md-5">
+                            <select name="budget_max">
+                                @for (int i = 1; i < 200; i++)
+                                {
+                                    if (i == (int)(itemMain.BudgetMax / 500000))
+                                    {
+                                        <option value="@itemMain.BudgetMax" selected>@((itemMain.BudgetMax).ToString("#,##0")) đ</option>
+                                    }
+                                    else
+                                    {
+                                        <option value="@(i*500000)">@((i * 500000).ToString("#,##0")) đ</option>
+                                    }
+                                }
+                            </select>
+                        </div>
+                    </div>
+                    <p class="Label">Location</p>
+                    <select name="location">
+                        @foreach (var loca in Model.AllLocations)
                         {
-                            if (i == (int)(itemMain.BudgetMin/500000))
+                            if (loca.LocationId == itemMain.LocationId)
                             {
-                                <option value="@itemMain.BudgetMin" selected>@((itemMain.BudgetMin).ToString("#,##0")) đ</option>
+                                <option value="@loca.LocationId" selected>@loca.LocationName</option>
                             }
                             else
                             {
-                                <option value="@(i*500000)">@((i * 500000).ToString("#,##0")) đ</option>
+                                <option value="@loca.LocationId">@loca.LocationName</option>
                             }
                         }
                     </select>
-                </div>
-                <div class="col-md-1">To</div>
-                <div class="col-md-5">
-                    <select name="budget_max">
-                        @for (int i = 1; i < 200; i++)
-                        {
-                            if (i == (int)(itemMain.BudgetMax / 500000))
-                            {
-                                <option value="@itemMain.BudgetMax" selected>@((itemMain.BudgetMax).ToString("#,##0")) đ</option>
-                            }
-                            else
-                            {
-                                <option value="@(i*500000)">@((i * 500000).ToString("#,##0")) đ</option>
-                            }
-                        }
-                    </select>
-                </div>
+                    <div style="text-align:center;margin-top:15px">
+                        <button type="submit" style="background-color:#3C78D8;color:white;font-size:20px">Request to edit job</button>
+                    </div>
+                </form>
             </div>
-            <p class="Label">Location</p>
-            <select name="location">
-                @foreach (var loca in Model.AllLocations)
-                {
-                    if (loca.LocationId == itemMain.LocationId)
-                    {
-                        <option value="@loca.LocationId" selected>@loca.LocationName</option>
-                    }
-                    else
-                    {
-                        <option value="@loca.LocationId">@loca.LocationName</option>
-                    }
-                }
-            </select>
-            <div style="text-align:center;margin-top:15px">
-                <button type="submit" style="background-color:#3C78D8;color:white;font-size:20px">Request to edit job</button>
-            </div>
-        </form>
+            <div class="col-md-3"></div>
+        </div>
     </div>
-    <div class="col-md-3"></div>
+    <div class="col-md-2"></div>
 </div>
 <script>
     function ClickACategory() {

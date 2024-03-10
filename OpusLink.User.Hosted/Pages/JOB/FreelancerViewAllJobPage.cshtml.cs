@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.JobDTO;
+using OpusLink.Entity.Models;
 using OpusLink.Shared.Enums;
 using System.Diagnostics;
 using System.Globalization;
@@ -62,6 +63,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 //tsn goi cai nay la bi thuat :>
                 NumberOfPage = Jobs.ElementAt(Jobs.Count - 1).NumberOfOffer;
                 Jobs.RemoveAt(Jobs.Count - 1);
+                Jobs = Jobs.OrderByDescending(j=>j.DateCreated).ToList();
             }
             //get all category has parent is 0
             Categories = await GetListCategoryAsync();
@@ -110,7 +112,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 {
                     string price = collection[key].ToString();
                     price = price.Replace(",", string.Empty);
-                    price = price.Replace("đ", string.Empty);
+                    price = price.Replace("VND", string.Empty);
                     price = price.Replace(" ", string.Empty);
                     filter.BudgetMin = Int32.Parse(price);
                 }
@@ -118,7 +120,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 {
                     string price = collection[key].ToString();
                     price = price.Replace(",", string.Empty);
-                    price = price.Replace("đ", string.Empty);
+                    price = price.Replace("VND", string.Empty);
                     price = price.Replace(" ", string.Empty);
                     filter.BudgetMax = Int32.Parse(price);
                 }
@@ -153,7 +155,8 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 //tsn goi cai nay la bi thuat :>
                 NumberOfPage = Jobs.ElementAt(Jobs.Count - 1).NumberOfOffer;
                 Jobs.RemoveAt(Jobs.Count - 1);
-               
+                Jobs = Jobs.OrderByDescending(j => j.DateCreated).ToList();
+
             }
             else
             {
@@ -188,9 +191,9 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 }
                 else if (key.Contains("price_min"))
                 {
-                    string price = collection[key].ToString();
+                    string price = collection[key].ToString();  
                     price = price.Replace(",", string.Empty);
-                    price = price.Replace("đ", string.Empty);
+                    price = price.Replace("VND", string.Empty);
                     price = price.Replace(" ", string.Empty);
                     filter.BudgetMin = Int32.Parse(price);
                 }
@@ -198,7 +201,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 {
                     string price = collection[key].ToString();
                     price = price.Replace(",", string.Empty);
-                    price = price.Replace("đ", string.Empty);
+                    price = price.Replace("VND", string.Empty);
                     price = price.Replace(" ", string.Empty);
                     filter.BudgetMax = Int32.Parse(price);
                 }
@@ -241,8 +244,8 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 //tsn goi cai nay la bi thuat :>
                 NumberOfPage = Jobs.ElementAt(Jobs.Count - 1).NumberOfOffer;
                 Jobs.RemoveAt(Jobs.Count - 1);
-                
-                
+
+                Jobs = Jobs.OrderByDescending(j => j.DateCreated).ToList();
             }
             else
             {

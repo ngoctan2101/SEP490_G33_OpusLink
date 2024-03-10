@@ -31,6 +31,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
             {
                 string strData = await response.Content.ReadAsStringAsync();
                 offers = JsonConvert.DeserializeObject<List<GetOfferAndFreelancerResponse>>(strData);
+                offers = offers.OrderByDescending(o => o.DateOffer).ToList();
             }
         }
     }

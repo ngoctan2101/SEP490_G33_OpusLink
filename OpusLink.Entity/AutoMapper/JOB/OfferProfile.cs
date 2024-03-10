@@ -38,6 +38,17 @@ namespace OpusLink.Entity.AutoMapper.JOB
                 .ForMember(dest => dest.SelfIntroduction, src => src.MapFrom(x => x.SelfIntroduction))
                 .ForMember(dest => dest.EstimatedPlan, src => src.MapFrom(x => x.EstimatedPlan))
                 .ReverseMap();
-        }
+
+            CreateMap<CreateUpdateOfferRequest, Offer>()
+                .ForMember(dest => dest.OfferID, src => src.MapFrom(x => x.OfferID))
+                .ForMember(dest => dest.DateOffer, src => src.MapFrom(x => x.DateOffer))
+                .ForMember(dest => dest.FreelancerID, src => src.MapFrom(x => x.FreelancerID))
+                .ForMember(dest => dest.ProposedCost, src => src.MapFrom(x => x.ProposedCost))
+                .ForMember(dest => dest.ExpectedDays, src => src.MapFrom(x => x.ExpectedDays))
+                .ForMember(dest => dest.SelfIntroduction, src => src.MapFrom(x => x.SelfIntroduction))
+                .ForMember(dest => dest.EstimatedPlan, src => src.MapFrom(x => x.EstimatedPlan))
+                .ReverseMap();
+        
+    }
     }
 }

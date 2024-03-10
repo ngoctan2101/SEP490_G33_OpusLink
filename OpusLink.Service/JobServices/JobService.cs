@@ -18,6 +18,8 @@ namespace OpusLink.Service.JobServices
         List<Job> Search(Filter filter, out int numberOfPage);
         List<Job> SearchById(Filter filter, out int numberOfPage);
         List<Job> GetAllJobRequested(Filter filter, out int numberOfPage);
+        List<Job> GetAllJobRequested2();
+        List<Job> GetJob();
         Task ApproveJob(int jobId);
         Task<Job> GetJobDetail(int jobId);
         Task<int> CreateNewJob(Job j);
@@ -52,6 +54,17 @@ namespace OpusLink.Service.JobServices
             // Return paginated result
             return jobs.Skip((filter.PageNumber - 1) * 6).Take(6).ToList();
         }
+        public List<Job> GetAllJobRequested2()
+        {
+            List<Job> jobs = new List<Job>();
+            jobs= _dbContext.Jobs
+                .Include("Employer")
+                .Where(j => j.Status == (int)JobStatusEnum.NotApprove)
+                .ToList();
+            
+           
+            return jobs.ToList();
+        }
         public async Task ApproveJob(int jobId)
         {
             Job a = await _dbContext.Jobs.Where(j => j.JobID == jobId).FirstAsync();
@@ -67,6 +80,13 @@ namespace OpusLink.Service.JobServices
                 .Include("Offers")
                 .Include("Location")
                 .Include("Employer").FirstAsync();
+        }
+        public  List<Job> GetJob()
+        {
+            
+            var jobs = _dbContext.Jobs
+                .Include("Employer").ToList();
+            return jobs;
         }
 
         public async Task<int> CreateNewJob(Job j)

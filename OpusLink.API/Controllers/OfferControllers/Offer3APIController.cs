@@ -40,5 +40,31 @@ namespace OpusLink.API.Controllers.OfferControllers
             
             return Ok(result);
         }
+        [HttpGet("IsOffered/{jobId}/{userId}")]
+        public async Task<IActionResult> IsOffered(int jobId, int userId)
+        {
+            bool result =  offerService.IsOffered(jobId, userId);
+            return Ok(result);
+        }
+        [HttpGet("GetOffer/{jobId}/{userId}")]
+        public async Task<IActionResult> GetOffer(int jobId, int userId)
+        {
+            var result = await offerService.GetOffer(jobId, userId);
+            return Ok(_mapper.Map<GetOfferResponse>(result));
+        }
+        [HttpPost("CreateOffer")]
+        public async Task<IActionResult> CreateOffer([FromBody] CreateUpdateOfferRequest offer)
+        {
+            Offer o = _mapper.Map<Offer>(offer);
+            await offerService.CreateOffer(o);
+            return Ok();
+        }
+        [HttpPut("UpdateOffer")]
+        public async Task<IActionResult> UpdateOffer([FromBody] CreateUpdateOfferRequest offer)
+        {
+            Offer o = _mapper.Map<Offer>(offer);
+            await offerService.UpdateOffer(o);
+            return Ok();
+        }
     }
 }

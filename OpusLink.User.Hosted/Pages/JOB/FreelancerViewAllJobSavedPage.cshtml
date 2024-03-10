@@ -92,110 +92,116 @@
             color: white;
         }
 </style>
-<div style="background-color:#F0F0F0; padding:10px">
-    <form method="post">
-        <input hidden asp-for="@Model.NumberOfPage" value="@Model.NumberOfPage" />
-        <div class="row" style="margin-bottom:15px">
-            <div class="col-md-3">
-                <button type="submit" asp-page-handler="ForSearch" name="pageNo_1" value="1" style="width:100%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964">Search & Filter</button>
-            </div>
-            <div class="col-md-7">
-                <input name="Search_Str" value="@Model.filter.SearchStr" style="width:100%" placeholder="Find Job" />
-            </div>
-            <div class="col-md-2">
-            </div>
-        </div>
-        <div class="row">
-            <div style="box-shadow: 0px 0px 4px 4px #DCDCDC;background-color:#FFFFFF; padding-top: 10px">
-                @foreach (var item in Model.SavedJobs)
-                {
-                    @*@if (item.GetJobResponse.Status == (int)JobStatusEnum.NotApprove)
-                {
-                continue;
-                }*@
-                    <div style="display:block;padding:5px 10px 4px 16px">
-                        <div class="row">
-                            <div class="col-md-10">
-                                <a style="font-size:16px" class="link" asp-page="./FreelancerViewDetailJobPage/" asp-route-id="@item.GetJobResponse.JobID">@item.GetJobResponse.JobTitle</a>
-                                @if (item.GetJobResponse.Status == (int)JobStatusEnum.NotApprove)
-                                {
-                                    <p class="status" style="background-color:grey;margin:0px">Not Approved</p>
-                                }
-                                else if (item.GetJobResponse.Status == (int)JobStatusEnum.Approved)
-                                {
-                                    <p class="status" style="background-color:#5B9044;margin:0px">Hiring</p>
-                                }
-                                else if (item.GetJobResponse.Status == (int)JobStatusEnum.Hired)
-                                {
-                                    <p class="status" style="background-color:orange;margin:0px">Hired</p>
-                                }
-                                else if (item.GetJobResponse.Status == (int)JobStatusEnum.Close)
-                                {
-                                    <p class="status" style="background-color:#FF0000;margin:0px">Closed</p>
-                                }
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8">
+        <div style="background-color:#F0F0F0; padding:10px">
+            <form method="post">
+                <input hidden asp-for="@Model.NumberOfPage" value="@Model.NumberOfPage" />
+                <div class="row" style="margin-bottom:15px">
+                    <div class="col-md-3">
+                        <button type="submit" asp-page-handler="ForSearch" name="pageNo_1" value="1" style="width:100%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964">Search & Filter</button>
+                    </div>
+                    <div class="col-md-7">
+                        <input name="Search_Str" value="@Model.filter.SearchStr" style="width:100%" placeholder="Find Job" />
+                    </div>
+                    <div class="col-md-2">
+                    </div>
+                </div>
+                <div class="row" style="margin:0px">
+                    <div style="box-shadow: 0px 0px 4px 4px #DCDCDC;background-color:#FFFFFF; padding-top: 10px">
+                        @foreach (var item in Model.SavedJobs)
+                        {
+                            @*@if (item.GetJobResponse.Status == (int)JobStatusEnum.NotApprove)
+                        {
+                        continue;
+                        }*@
+                            <div style="display:block;padding:5px 10px 4px 16px">
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        <a style="font-size:16px" class="link" asp-page="./FreelancerViewJobDetail" asp-route-JobId="@item.JobID">@item.GetJobResponse.JobTitle</a>
+                                        @if (item.GetJobResponse.Status == (int)JobStatusEnum.NotApprove)
+                                        {
+                                            <p class="status" style="background-color:grey;margin:0px">Not Approved</p>
+                                        }
+                                        else if (item.GetJobResponse.Status == (int)JobStatusEnum.Approved)
+                                        {
+                                            <p class="status" style="background-color:#5B9044;margin:0px">Hiring</p>
+                                        }
+                                        else if (item.GetJobResponse.Status == (int)JobStatusEnum.Hired)
+                                        {
+                                            <p class="status" style="background-color:orange;margin:0px">Hired</p>
+                                        }
+                                        else if (item.GetJobResponse.Status == (int)JobStatusEnum.Close)
+                                        {
+                                            <p class="status" style="background-color:#FF0000;margin:0px">Closed</p>
+                                        }
+                                    </div>
+                                    <div class="col-md-2">
+                                        <button type="submit" asp-page-handler="ForUnSave" style="background-color:grey;color:white;display:block;margin:3px;text-align:center" name="btnUnSave" value="@item.SaveJobID">Un-save</button>
+                                    </div>
+                                </div>
+                                <div>
+                                    <span>5</span>⭐ <a style="text-decoration:none" asp-page="userProfile" asp-route-id="@item.GetJobResponse.EmployerID">@item.GetJobResponse.EmployerName</a>
+                                </div>
+                                <div style="background-color:#F5F5F5; padding:5px">
+                                    <p style="display:inline">@item.GetJobResponse.LocationName</p> | <p class="FormatBudget" style="display:inline">@(item.GetJobResponse.BudgetFrom)</p> - <p class="FormatBudget" style="display:inline">@(item.GetJobResponse.BudgetTo)</p>
+                                </div>
+                                <div>
+                                    <p class="JobContent">@item.GetJobResponse.JobContent</p>
+                                </div>
+                                <div class="row">
+                                    <div class="col-md-10">
+                                        @if (item.GetJobResponse.Categoies.Count > 4)
+                                        {
+                                            for (int i = 0; i < 4; i++)
+                                            {
+                                                <div class="category">@item.GetJobResponse.Categoies.ElementAt(i).CategoryName</div>
+                                            }
+                                            <div name="hidden_fake_category_@item.GetJobResponse.JobID" class="categoryFake" onclick="DisplayAllCategory('@item.GetJobResponse.JobID')">. . .</div>
+                                            for (int i = 4; i < item.GetJobResponse.Categoies.Count; i++)
+                                            {
+                                                <div name="hidden_category_@item.GetJobResponse.JobID" class="category" style="display: none;">@item.GetJobResponse.Categoies.ElementAt(i).CategoryName</div>
+                                            }
+                                        }
+                                        else
+                                        {
+                                            foreach (GetCategoryResponse category in item.GetJobResponse.Categoies)
+                                            {
+                                                <div class="category">@category.CategoryName</div>
+                                            }
+                                        }
+                                    </div>
+                                    <div class="col-md-2" style="text-align:right">
+                                        <p style="margin-right:10px;font-size:17px">@item.GetJobResponse.NumberOfOffer Offers</p>
+                                    </div>
+                                </div>
+                                <hr class="hrJob">
                             </div>
-                            <div class="col-md-2">
-                                <button type="submit" asp-page-handler="ForUnSave" style="background-color:grey;color:white;display:block;margin:3px;text-align:center" name="btnUnSave" value="@item.SaveJobID" >Un-save</button>
-                            </div>
-                        </div>
-                        <div>
-                            <span>5</span>⭐ <a style="text-decoration:none" asp-page="userProfile" asp-route-id="@item.GetJobResponse.EmployerID">@item.GetJobResponse.EmployerName</a>
-                        </div>
-                        <div style="background-color:#F5F5F5; padding:5px">
-                            <p style="display:inline">@item.GetJobResponse.LocationName</p> | <p class="FormatBudget" style="display:inline">@(item.GetJobResponse.BudgetFrom)</p> - <p class="FormatBudget" style="display:inline">@(item.GetJobResponse.BudgetTo)</p>
-                        </div>
-                        <div>
-                            <p class="JobContent">@item.GetJobResponse.JobContent</p>
-                        </div>
-                        <div class="row">
-                            <div class="col-md-10">
-                                @if (item.GetJobResponse.Categoies.Count > 4)
+                        }
+                        <div style="display:flex;justify-content:center;">
+                            @for (int i = 1; i <= Model.NumberOfPage; i++)
+                            {
+                                @if (i == Model.PageNo)
                                 {
-                                    for (int i = 0; i < 4; i++)
-                                    {
-                                        <div class="category">@item.GetJobResponse.Categoies.ElementAt(i).CategoryName</div>
-                                    }
-                                    <div name="hidden_fake_category_@item.GetJobResponse.JobID" class="categoryFake" onclick="DisplayAllCategory('@item.GetJobResponse.JobID')">. . .</div>
-                                    for (int i = 4; i < item.GetJobResponse.Categoies.Count; i++)
-                                    {
-                                        <div name="hidden_category_@item.GetJobResponse.JobID" class="category" style="display: none;">@item.GetJobResponse.Categoies.ElementAt(i).CategoryName</div>
-                                    }
+                                    <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
+                                        <button class="pagin" style="background-color:#0088CC; color:white" type="submit" asp-page-handler="ForSearch" name="pageNo_@i" value="@i">@i</button>
+                                    </div>
                                 }
                                 else
                                 {
-                                    foreach (GetCategoryResponse category in item.GetJobResponse.Categoies)
-                                    {
-                                        <div class="category">@category.CategoryName</div>
-                                    }
+                                    <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
+                                        <button class="pagin" type="submit" asp-page-handler="ForSearch" name="pageNo_@i" value="@i">@i</button>
+                                    </div>
                                 }
-                            </div>
-                            <div class="col-md-2" style="text-align:right">
-                                <p style="margin-right:10px;font-size:17px">@item.GetJobResponse.NumberOfOffer Offers</p>
-                            </div>
+                            }
                         </div>
-                        <hr class="hrJob">
                     </div>
-                }
-                <div style="display:flex;justify-content:center;">
-                    @for (int i = 1; i <= Model.NumberOfPage; i++)
-                    {
-                        @if (i == Model.PageNo)
-                        {
-                            <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
-                                <button class="pagin" style="background-color:#0088CC; color:white" type="submit" asp-page-handler="ForSearch" name="pageNo_@i" value="@i">@i</button>
-                            </div>
-                        }
-                        else
-                        {
-                            <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
-                                <button class="pagin" type="submit" asp-page-handler="ForSearch" name="pageNo_@i" value="@i">@i</button>
-                            </div>
-                        }
-                    }
                 </div>
-            </div>
+            </form>
         </div>
-    </form>
+    </div>
+    <div class="col-md-2"></div>
 </div>
 <script>
     window.onload = function () {
@@ -208,7 +214,7 @@
     function FormatBudget() {
         var paragraphs = document.querySelectorAll('.FormatBudget');
         paragraphs.forEach(function (paragraph) {
-            var formattedValue = parseFloat(paragraph.textContent).toLocaleString('en', { maximumFractionDigits: 0 }) + " đ";
+            var formattedValue = parseFloat(paragraph.textContent).toLocaleString('en', { maximumFractionDigits: 0 }) + " VND";
             paragraph.textContent = formattedValue;
         });
     }

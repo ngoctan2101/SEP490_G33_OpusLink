@@ -189,7 +189,7 @@
             <table style="width:100%;font-size:13px">
                 <tr><td>Project Id:</td><td>@item.JobId</td></tr>
                 <tr><td style="width:100px">Posted Date:</td><td>@item.DateCreated.ToString("dd/MM/yyyy")</td></tr>
-                <tr><td>Budget:</td><td>@Math.Round(item.BudgetMin,0) đ<span style="display:inline-block"> - </span>@Math.Round(item.BudgetMax,0) đ</td></tr>
+                <tr><td>Budget:</td><td>@Math.Round(item.BudgetMin,0).ToString("#,##") VND<span style="display:inline-block"> - </span>@Math.Round(item.BudgetMax,0).ToString("#,##") VND</td></tr>
                 <tr><td>Location:</td><td>@item.Location</td></tr>
             </table>
             <button type="button" style="margin-top:15px;width:80%;background-color:#4A86E8;color:white;font-weight:bold;font-size:20px;border:none">View offers (@item.TotalOffer)</button>
@@ -244,7 +244,7 @@
             <p style="white-space: pre-line;margin-top:10px">@item.JobContent</p>
             <div class="row">
                 <div class="col-md-4">Submit offer: @item.TotalOffer</div>
-                <div class="col-md-4">Average: @Math.Round(item.AverageCost,0) đ</div>
+                <div class="col-md-4">Average: @Math.Round(item.AverageCost,0).ToString("#,##") VND</div>
                 <div class="col-md-4">Average time: @item.AverageTime days</div>
             </div>
         </div>
