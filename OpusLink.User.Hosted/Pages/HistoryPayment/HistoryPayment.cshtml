@@ -66,23 +66,35 @@
                              </tr>
                         </thead>
                         <tbody>
-                            <tr class="align-middle">
-                                <td>
-                                    #57473829
-                                </td>
-                                <td>13 Sep, 2021</td>
-                                <td>Renee Sims</td>
-                                <td>
-                                    <div class="d-flex align-items-center">
-                                        <span><i class="fa fa-arrow-up" aria-hidden="true"></i></span>
-                                        <span>$145</span>
-                                    </div>
-                                </td>
-                                <td>
-                                    <span class="badge fs-6 fw-normal bg-tint-success text-success">Completed</span>
-                                </td>
-                            </tr>
-                            <tr class="align-middle">
+                            
+                                @if(Model.historyPaymentDTOs!= null){
+                                    @foreach (var hp in Model.historyPaymentDTOs.Where(hp=> hp.UserID==34))
+                                    {
+                                    <tr class="align-middle">
+                                        <td>
+                                            @hp.PaymentID
+                                        </td>
+                                        <td>@hp.TransactionDate</td>
+                                        <td>@hp.TransactionCode</td>
+                                        <td>
+                                            <div class="d-flex align-items-center">
+                                                <span><i class="fa fa-arrow-up" aria-hidden="true"></i></span>
+                                                <span>$@hp.Amount</span>
+                                            </div>
+                                        </td>
+                                        <td>
+                                            <span class="badge fs-6 fw-normal bg-tint-success text-success">@hp.TransactionType</span>
+                                        </td>
+                                    </tr>
+                                    }
+                                }
+                                else{
+                                    <h1> Không có thanh toán</h1>
+                                }
+                                
+                                
+                            
+                            @* <tr class="align-middle">
                                 <td>
                                     #012458780
                                 </td>
@@ -145,7 +157,7 @@
                                 <td>
                                     <span class="badge fs-6 fw-normal bg-tint-success text-success">Completed</span>
                                 </td>
-                            </tr>
+                            </tr>*@
                         </tbody>
                     </table>
                 </div>
