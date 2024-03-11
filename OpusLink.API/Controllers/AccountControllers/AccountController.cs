@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using OpusLink.Shared.Enums;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json.Linq;
 
 namespace OpusLink.API.Controllers.AccountControllers
 {
@@ -161,7 +162,7 @@ namespace OpusLink.API.Controllers.AccountControllers
             }
         }
 
-        [HttpPost("forgotPassword")]
+        [HttpGet("forgotPassword")]
         [AllowAnonymous]
         public async Task<ApiResponseModel> ForgotPassword([Required] string email)
         {
@@ -169,8 +170,8 @@ namespace OpusLink.API.Controllers.AccountControllers
             if (user != null)
             {
                 var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var passwordResetLink = Url.Action(nameof(ResetPassword), "Account", new { token, email = user.Email }, Request.Scheme);
                 string userName = user.UserName;
+                var passwordResetLink = TotalLink.LinkForgotPassword + "?token=" + Uri.EscapeDataString(token) + "&email=" + user.Email;
                 // Tạo nội dung HTML cho email
                 string titleContent = "Đổi mật khẩu - Opuslink";
 
@@ -199,10 +200,69 @@ namespace OpusLink.API.Controllers.AccountControllers
             };
         }
 
+        [HttpPost("reSendEmail")]
+        //Resend Email
+        [AllowAnonymous]
+        public async Task<ApiResponseModel> ReSendEmail(string email)
+        {
+            try
+            {
+                var user = await _userManager.FindByEmailAsync(email);
+                if (user != null)
+                {
+                    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                    var passwordResetLink = Url.Action(nameof(ReSendEmail), "Account", new { token, email = user.Email }, Request.Scheme);
+                    string userName = user.UserName;
+                    // Tạo nội dung HTML cho email
+                    string titleContent = "Re-send your password - Opuslink";
+
+                    string emailContent = "Hello " + userName + ",\r\n\r\n" +
+                        "Thank you for using Opuslink services. If you have forgotten your password, don't worry! We will help you reset your password easily.\r\n\r\n" +
+                        "Please click on the link below to set your new password:" + "\r\n" +
+                        passwordResetLink + "\r\n\r\n" +
+                        "If you did not request this, please ignore this email.\r\n" +
+                        "Thank you for using Opuslink. If you need assistance or have any questions, please feel free to contact us via email support@opuslink.com.\r\n\r\n" +
+                        "Regards,\r\nOpuslink Support Team";
+
+                    var message = new MessageEmail(new string[] { user.Email! }, titleContent, emailContent);
+                    _emailService.SendEmail(message);
+                    return new ApiResponseModel()
+                    {
+                        IsSuccess = true,
+                        Message = "Reset password email sent",
+                    };
+                }
+                return new ApiResponseModel()
+                {
+                    IsSuccess = false,
+                    Message = "Email not found",
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponseModel()
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                };
+            }
+        }
+
+        [HttpGet("reSendEmail")]
+        public async Task<IActionResult> ReSendEmail(string token, string email)
+        {
+            var model = new ReSendEmailDTO { Token = token, Email = email };
+            return Ok(new
+            {
+                model
+            });
+        }
+
+
         [HttpGet("resetPassword")]
         public async Task<IActionResult> ResetPassword(string token, string email)
         {
-                var model = new ResetPassword { Token = token, Email = email };
+                var model = new ResetPassword { Token = token, Email = email  };
             return Ok(new
             {
                 model
@@ -254,7 +314,7 @@ namespace OpusLink.API.Controllers.AccountControllers
         {
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             string userName = user.UserName;
-            var confirmationLink = Url.Action(nameof(ConfirmEmail), "Account", new { token, email = user.Email }, Request.Scheme);
+            string confirmationLink = TotalLink.LinkValidRegister + "?token=" + Uri.EscapeDataString(token) + "&email=" + user.Email;
 
             // Tạo nội dung HTML cho email
             string titleContent = "Xác nhận địa chỉ Email của bạn - Opuslink";

@@ -126,7 +126,7 @@ namespace OpusLink.Service.AccountServices
             var result = new ApiResponseModel()
             {
                 Code = 200,
-                Message = "Ok",
+                Message = "ValidLogin thành công",
                 IsSuccess = true
             };
             var userIdentity = await _userManager.FindByNameAsync(user.UserName);
@@ -136,7 +136,7 @@ namespace OpusLink.Service.AccountServices
                 {
                     Code = 400,
                     IsSuccess = false,
-                    Message = "Username or Password is incorrect!"
+                    Message = TotalMessage.ErrorLogin
                 };
             }
             return result;
