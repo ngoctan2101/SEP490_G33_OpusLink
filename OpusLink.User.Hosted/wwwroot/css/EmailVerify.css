@@ -10,7 +10,7 @@ body {
     justify-content: center;
     align-items: center;
     min-height: 100vh;
-    background: black
+    background: linear-gradient(to left, #6699ff 0%, #ff99cc 100%);
 }
 
 .wrapper {

@@ -35,18 +35,17 @@ namespace OpusLink.User.Hosted.Pages.Account
 
                         if (apiResponse.IsSuccess)
                         {
-                            HttpContext.Session.SetString("AccountToken", apiResponse.Data.ToString());
-
                             string token = apiResponse.Data.ToString();
                             var handler = new JwtSecurityTokenHandler();
                             var jsonToken = handler.ReadToken(token) as JwtSecurityToken;
 
                             // Lấy ra UserId từ claims
                             string userId = jsonToken.Claims.First(claim => claim.Type == "UserId").Value;
+                            string currentRole = jsonToken.Claims.First(claim => claim.Type == "role").Value;
 
-                            Console.WriteLine("User Id: " + userId);
                             HttpContext.Session.SetInt32("UserId", Int32.Parse(userId));
                             HttpContext.Session.SetString("token", token);
+                            HttpContext.Session.SetString("currentRole", currentRole);
 
                             return RedirectToPage("/Index", new { token = apiResponse.Data.ToString() });
                         }

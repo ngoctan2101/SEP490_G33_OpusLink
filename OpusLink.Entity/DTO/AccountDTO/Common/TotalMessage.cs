@@ -28,6 +28,10 @@ namespace OpusLink.Entity.DTO.AccountDTO.Common
         //Khi không tìm thấy email nhập vào quên mật khẩu 
         public static string ForgotPasswordError = "Email không đúng";
 
+        //---LogOut---
+        //Khi quên mật khẩu thành công
+        public static string LogOutSuccess = "Đăng xuất thành công";
+
 
     }
 }
