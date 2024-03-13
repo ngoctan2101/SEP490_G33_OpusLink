@@ -70,7 +70,7 @@ namespace OpusLink.API.Controllers.AccountControllers
                 {
                     Code = 200,
                     IsSuccess = true,
-                    Message = "User created success",
+                    Message = TotalMessage.RegisterSuccess,
                     Data = model
                 };
 
@@ -82,7 +82,7 @@ namespace OpusLink.API.Controllers.AccountControllers
                     return new ApiResponseModel()
                     {
                         Code = 400,
-                        Message = "User has been already existed!",
+                        Message = TotalMessage.RegisterAccountExists,
                         IsSuccess = false
                     };
                 }
@@ -109,7 +109,7 @@ namespace OpusLink.API.Controllers.AccountControllers
                     return new ApiResponseModel()
                     {
                         Code = 400,
-                        Message = "Error when create user",
+                        Message = TotalMessage.RegisterError,
                         IsSuccess = false
                     };
                 }
@@ -185,18 +185,19 @@ namespace OpusLink.API.Controllers.AccountControllers
                     "Trân trọng,\r\nĐội ngũ hỗ trợ Opuslink";
                 var message = new MessageEmail(new string[] { user.Email! }, titleContent, emailContent);
                 _emailService.SendEmail(message);
+
                 return new ApiResponseModel()
                 {
                     Code = 200,
                     IsSuccess = true,
-                    Message = "Reset password sent",
+                    Message = TotalMessage.ForgotPasswordSuccess,
                 };
             }
             return new ApiResponseModel()
             {
                 Code = 400,
                 IsSuccess = false,
-                Message = "Email not found",
+                Message = TotalMessage.ForgotPasswordError,
             };
         }
 

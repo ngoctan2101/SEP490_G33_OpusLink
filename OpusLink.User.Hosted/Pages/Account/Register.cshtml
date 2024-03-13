@@ -18,14 +18,14 @@
     var password = passwordInput.value;
     var errorElement = document.getElementById("passwordError");
     var hasLength = password.length >= 6;
-    var hasSpecialChar = /[ `!#$%^&*()_+\-=\[\]{};':"\\|,.<>\/?~]/.test(password);
+    var hasSpecialChar = /[ `!#$%^&*()_+\-=\@@[\]{};':"\\|,.<>\/?~]/.test(password);
     var hasNumber = /\d/.test(password);
     var hasUpperCase = /[A-Z]/.test(password);
     var hasLowerCase = /[a-z]/.test(password);
     if (!hasLength) {
         errorElement.innerText = "Mật khẩu phải dài ít nhất 6 ký tự.";
     } else if (!hasSpecialChar) {
-        errorElement.innerText = "Mật khẩu phải chứa ít nhất một ký tự đặc biệt.Trừ ký tự @@";
+        errorElement.innerText = "Mật khẩu phải chứa ít nhất một ký tự đặc biệt";
     } else if (!hasNumber) {
         errorElement.innerText = "Mật khẩu phải chứa ít nhất một số.";
     } else if (!hasUpperCase || !hasLowerCase) {
@@ -49,6 +49,13 @@
             icon.classList.add("fa-eye-slash");
         }
     }
+
+    window.onload = function () {
+        document.getElementById('UserName').value = ''
+        document.getElementById('Email').value = ''
+        document.getElementById('Password').value = ''
+        document.getElementById('ConfirmPassword').value = ''
+    };
 
     function validatePasswords() {
         var password = document.getElementById("Password").value;
@@ -102,7 +109,7 @@
             }
             <button type="submit" class="btn-register">Đăng ký tài khoản</button>
             <div class="login-link">
-                <p>Đã có tài khoản? <a asp-page="/User/Login">Đăng nhập</a></p>
+                <p>Bạn đã có tài khoản rồi? <a asp-page="/Account/Login">Đăng nhập ngay!</a></p>
             </div>
         </form>
     </div>

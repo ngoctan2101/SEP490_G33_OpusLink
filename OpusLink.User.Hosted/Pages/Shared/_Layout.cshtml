@@ -1,4 +1,6 @@
-﻿ <!DOCTYPE html>
+﻿@inject IHttpContextAccessor HttpContextAccessor;
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -48,33 +50,29 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/JOB/EmployerViewAllJobCreatedPage" style="background-color:blueviolet;margin:0px 2px 0px 2px"> My created job</a>
                         </li>
                         <li class="nav-item">
-<<<<<<< HEAD
-                            <a class="nav-link text-dark" asp-area="" asp-page="/JOB/FreelancerViewAllJobSavedPage">Saved job</a>
+                            <a class="nav-link text-dark" asp-area="" asp-page="/JOB/FreelancerViewAllJobSavedPage" style="background-color:blueviolet;margin:0px 2px 0px 2px">Saved job</a>
                         </li>
                         @*<li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
                         </li>*@
-@*                         <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Account/Register">Register</a>
-                        </li> *@
                         <li class="nav-item">
-@*                             <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login">Login</a> *@
-=======
                             <a class="nav-link text-dark" asp-area="" asp-page="/JOB/EmployerCreateAJobPage" style="background-color:blueviolet;margin:0px 2px 0px 2px">Post job now</a>
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Chat/ChatList" style="background-color:orange;margin:0px 2px 0px 2px">Chat</a>
                         </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login" style="background-color:yellowgreen;margin:0px 2px 0px 2px">Login</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Account/EmailVerify" style="background-color:yellowgreen;margin:0px 2px 0px 2px">EmailVerify</a>
-                        </li>
-                        <li class="nav-item">
-                            <a class="nav-link text-dark" asp-area="" asp-page="/Account/Register" style="background-color:yellowgreen;margin:0px 2px 0px 2px">Register</a>
->>>>>>> nhat
-                        </li>
+                        @{
+                            string userId = HttpContextAccessor.HttpContext.Session.GetString("UserId");
+                        }
+                        @if (string.IsNullOrEmpty(userId))
+                        {
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login" style="background-color:yellowgreen;margin:0px 2px 0px 2px">Login</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link text-dark" asp-area="" asp-page="/Account/Register" style="background-color:yellowgreen;margin:0px 2px 0px 2px">Register</a>
+                            </li>
+                        }
                     </ul>
                     <ul class="navbar-nav ms-auto">
                         <li class="nav-item dropdown">
