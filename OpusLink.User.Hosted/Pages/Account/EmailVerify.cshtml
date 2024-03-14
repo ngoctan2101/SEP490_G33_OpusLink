@@ -1,0 +1,29 @@
+﻿@page
+@model OpusLink.User.Hosted.Pages.Account.EmailVerifyModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Verify Your Email | Opuslink Team</title>
+    <link rel="stylesheet" href="~/css/EmailVerify.css">
+</head>
+<body>
+    <div class="wrapper container-fluid">
+        <form method="post">
+            <h1>Kiểm tra Email của bạn</h1>
+            <label class="label">Chúng tôi vừa gửi một đường link xác nhận đến email @Model.Email của bạn. Hãy kiểm tra Email và xác nhận nhé</label>
+@*             <button type="submit" class="btn-resend">Gửi lại Email</button> *@
+            @if (ViewData["Message"] != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ViewData["Message"]
+                </div>
+            }
+        </form>
+    </div>
+</body>
+</html>

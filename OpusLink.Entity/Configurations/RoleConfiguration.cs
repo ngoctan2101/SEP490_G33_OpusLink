@@ -16,9 +16,9 @@ namespace OpusLink.Entity.Configurations
         {
             builder.ToTable("Role");
             builder.HasData(
-                new IdentityRole<int> { Id=1,Name="Admin"},
-                new IdentityRole<int> { Id=2,Name= "Freelancer" },
-                new IdentityRole<int> { Id=3,Name= "Employer" }
+                new IdentityRole<int> { Id=1,Name="Admin", NormalizedName ="ADMIN"},
+                new IdentityRole<int> { Id=2,Name= "Freelancer", NormalizedName = "FREELANCER" },
+                new IdentityRole<int> { Id=3,Name= "Employer", NormalizedName = "EMPLOYER" }
             ) ;
         }
     }
