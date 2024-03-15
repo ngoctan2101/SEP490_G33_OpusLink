@@ -2,7 +2,7 @@
 @model OpusLink.Admin.Hosted.Pages.ManageUser.ViewsModel
 @{
 }
-
+<link rel="stylesheet" href="~/css/ManagerUser.css">
 <style>
     .path-admin {
         line-height: 40px;
@@ -97,9 +97,30 @@
             width: auto;
             height: auto;
         }
+
+    .delete {
+        /* CSS chung cho button */
+        padding: 5px 10px;
+        border: none;
+        cursor: pointer;
+        border-radius: 10px;
+    }
+
+    .active {
+        /* Màu xanh cho trạng thái Active */
+        background-color: green;
+        color: white;
+    }
+
+    .deactive {
+        /* Màu đỏ cho trạng thái Deactive */
+        background-color: red;
+        color: white;
+    }
+
 </style>
 <body>
-    <div class="path-admin">User LIST</div>
+    <div class="path-admin">Danh sách Người dùng</div>
     <form method="post">
     <div id="content-main-dashboard">
         <div id="product-title-header">
@@ -125,12 +146,12 @@
             <table id="orders">
                 <tr>
                     <th>Id</th>
-                    <th>Name</th>
-                    <th>Profile Picture</th>
-                    <th>Phone</th>
-                    <th>Address</th>
-                    <th>Date Of Birth</th>
-                    <th>Active</th>
+                    <th>Tên người dùng</th>
+                    <th>Ảnh hồ sơ</th>
+                    <th>Số điện thoại</th>
+                    <th>Địa chỉ</th>
+                    <th>Ngày sinh</th>
+                    <th>Trạng thái</th>
                 </tr>
                 @foreach (var item in Model.listUser)
                 {
@@ -159,10 +180,17 @@
                         <td>@item.Address</td>
                         @* <td>@((cus.CreatedAt == null ? DateTime.Now : (DateTime)cus.CreatedAt).ToString("dd/MM/yyyy"))</td> *@
                         <td>@item.Dob</td>
-                        <td>
+@*                         <td>
                             <a class="delete" id="@item.Id"
                            asp-page="/ManageUser/UserDetail" asp-route-id="@item.Id"
                            asp-page-handler="Active">@(item.Status == 1 ? "Active" : "Deactive")</a>
+                        </td> *@
+                        <td>
+                                <form asp-page="/ManageUser/UserDetail" asp-route-id="@item.Id" asp-page-handler="Active" method="post">
+                                    <button type="submit" class="delete @(item.Status == 1 ? "active" : "deactive")" id="@item.Id">
+                                        @(item.Status == 1 ? "Active" : "Deactive")
+                                    </button>
+                                </form>
                         </td>
                     </tr>
                 }
@@ -188,6 +216,15 @@
         </div>
     </div>
     </form>
+    <!-- Modal -->
+    <div id="confirmationModal" class="modal">
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <p>Bạn có chắc chắn muốn thực hiện hành động này?</p>
+            <button id="confirmButton">Xác nhận</button>
+            <button id="cancelButton">Hủy</button>
+        </div>
+    </div>
 </body>
 <script>
     window.onload = function () {
@@ -222,4 +259,44 @@
             }
         }
     }
+</script>
+<script>
+    // JavaScript để hiển thị và ẩn modal
+    var modal = document.getElementById("confirmationModal");
+    var confirmButton = document.getElementById("confirmButton");
+    var cancelButton = document.getElementById("cancelButton");
+
+    // Khi người dùng nhấp vào nút "Active" hoặc "Deactive"
+    var buttons = document.querySelectorAll(".delete");
+    buttons.forEach(function (button) {
+        button.addEventListener("click", function () {
+            modal.style.display = "block";
+        });
+    });
+
+    // Khi người dùng nhấp vào nút xác nhận trong modal
+    confirmButton.onclick = function () {
+        // Thực hiện hành động tương ứng ở đây
+        modal.style.display = "none";
+    };
+
+    // Khi người dùng nhấp vào nút hủy trong modal
+    cancelButton.onclick = function () {
+        modal.style.display = "none";
+    };
+
+    // Khi người dùng nhấp vào nút đóng (×) trong modal
+    var closeButtons = document.querySelectorAll(".close");
+    closeButtons.forEach(function (closeButton) {
+        closeButton.addEventListener("click", function () {
+            modal.style.display = "none";
+        });
+    });
+
+    // Khi người dùng nhấp ra ngoài modal, nó sẽ đóng modal
+    window.onclick = function (event) {
+        if (event.target == modal) {
+            modal.style.display = "none";
+        }
+    };
 </script>

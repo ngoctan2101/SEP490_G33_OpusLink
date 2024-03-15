@@ -9,6 +9,10 @@ using OpusLink.Shared.Enums;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
 using Newtonsoft.Json.Linq;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace OpusLink.API.Controllers.AccountControllers
 {
@@ -19,12 +23,14 @@ namespace OpusLink.API.Controllers.AccountControllers
         private readonly IAccountService _accountService;
         private readonly IEmailService _emailService;
         private UserManager<User> _userManager;
+        private SignInManager<User> _signInManager;
 
-        public AccountController(UserManager<User> userManager, IAccountService userService, IEmailService emailService)
+        public AccountController(UserManager<User> userManager, IAccountService userService, IEmailService emailService, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _accountService = userService;
             _emailService = emailService;
+            _signInManager = signInManager;
         }
 
         [HttpPost("login")]
@@ -53,7 +59,7 @@ namespace OpusLink.API.Controllers.AccountControllers
             {
                 return new ApiResponseModel()
                 {
-                    Code = StatusCodes.Status400BadRequest,
+                    Code = 404,
                     Message = ex.Message,
                     Data = ex,
                     IsSuccess = false
@@ -70,7 +76,7 @@ namespace OpusLink.API.Controllers.AccountControllers
                 {
                     Code = 200,
                     IsSuccess = true,
-                    Message = "User created success",
+                    Message = TotalMessage.RegisterSuccess,
                     Data = model
                 };
 
@@ -82,7 +88,7 @@ namespace OpusLink.API.Controllers.AccountControllers
                     return new ApiResponseModel()
                     {
                         Code = 400,
-                        Message = "User has been already existed!",
+                        Message = TotalMessage.RegisterAccountExists,
                         IsSuccess = false
                     };
                 }
@@ -103,13 +109,13 @@ namespace OpusLink.API.Controllers.AccountControllers
                 var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Employer.ToString());
 
                 //Role cho Admin
-                /*var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Admin.ToString());*/
+/*                var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Admin.ToString());*/
                 if (!resultCreateUser.Succeeded)
                 {
                     return new ApiResponseModel()
                     {
                         Code = 400,
-                        Message = "Error when create user",
+                        Message = TotalMessage.RegisterError,
                         IsSuccess = false
                     };
                 }
@@ -185,18 +191,19 @@ namespace OpusLink.API.Controllers.AccountControllers
                     "Trân trọng,\r\nĐội ngũ hỗ trợ Opuslink";
                 var message = new MessageEmail(new string[] { user.Email! }, titleContent, emailContent);
                 _emailService.SendEmail(message);
+
                 return new ApiResponseModel()
                 {
                     Code = 200,
                     IsSuccess = true,
-                    Message = "Reset password sent",
+                    Message = TotalMessage.ForgotPasswordSuccess,
                 };
             }
             return new ApiResponseModel()
             {
                 Code = 400,
                 IsSuccess = false,
-                Message = "Email not found",
+                Message = TotalMessage.ForgotPasswordError,
             };
         }
 
@@ -333,6 +340,51 @@ namespace OpusLink.API.Controllers.AccountControllers
 
             // Gửi email
             _emailService.SendEmail(message);
+        }
+
+        [HttpPost("update-role")]
+        public async Task<ApiResponseModel> UpdateUserRole(UpdateRoleDTO model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    var errors = ModelState.Values.SelectMany(v => v.Errors)
+                        .Select(e => e.ErrorMessage)
+                        .ToList();
+                    return new ApiResponseModel()
+                    {
+                        Code = 400,
+                        Data = errors,
+                        IsSuccess = false,
+                        Message = string.Join(";", errors)
+                    };
+                }
+                var result = await _accountService.UpdateUserRole(model);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponseModel()
+                {
+                    Code = StatusCodes.Status400BadRequest,
+                    Message = ex.Message,
+                    Data = ex,
+                    IsSuccess = false
+                };
+            }
+        }
+
+        [HttpGet("logout")]
+        public async Task<ApiResponseModel> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return new ApiResponseModel()
+            {
+                Code = 200,
+                IsSuccess = true,
+                Message = TotalMessage.LogOutSuccess
+            };
         }
     }
 }
