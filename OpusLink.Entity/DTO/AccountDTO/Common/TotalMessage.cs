@@ -19,7 +19,7 @@ namespace OpusLink.Entity.DTO.AccountDTO.Common
         public static string RegisterError = "Lỗi khi tạo tài khoản, vui lòng thử lại";
 
 
-        public static string ErrorLogin = "Tên đăng nhập hoặc Mật khẩu không đúng!";
+        public static string LoginError = "Tên đăng nhập hoặc Mật khẩu không đúng!";
 
         //---ForgotPassword---
         //Khi quên mật khẩu thành công

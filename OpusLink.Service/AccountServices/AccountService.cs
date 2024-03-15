@@ -179,7 +179,7 @@ namespace OpusLink.Service.AccountServices
             string accessToken = jwtTokenHandler.WriteToken(token);
 
             //Trả về cái accessToken
-            return new ApiResponseModel() { IsSuccess = true, Data = accessToken };
+            return new ApiResponseModel() { Code =200, Message = "Success", IsSuccess = true, Data = accessToken };
         }
 
         //Check xem User có tồn tại hay không
@@ -191,14 +191,25 @@ namespace OpusLink.Service.AccountServices
                 Message = "ValidLogin thành công",
                 IsSuccess = true
             };
-            var userIdentity = await _userManager.FindByNameAsync(user.UserName);
-            if (userIdentity == null || !await _userManager.CheckPasswordAsync(userIdentity, user.Password))
+            try
+            {
+                var userIdentity = await _userManager.FindByNameAsync(user.UserName);
+                if (userIdentity == null || !await _userManager.CheckPasswordAsync(userIdentity, user.Password))
+                {
+                    return new ApiResponseModel
+                    {
+                        Code = 400,
+                        IsSuccess = false,
+                        Message = TotalMessage.LoginError
+                    };
+                }
+            }catch(Exception ex)
             {
                 return new ApiResponseModel
                 {
                     Code = 400,
                     IsSuccess = false,
-                    Message = TotalMessage.ErrorLogin
+                    Message = TotalMessage.LoginError
                 };
             }
             return result;

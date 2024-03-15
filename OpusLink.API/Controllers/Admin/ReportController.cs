@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OpusLink.Entity;
@@ -6,6 +7,7 @@ using OpusLink.Entity.DTO.AccountDTO.Common;
 
 namespace OpusLink.API.Controllers.Admin
 {
+/*    [Authorize(Roles = "Admin")]*/
     [Route("api/[controller]")]
     [ApiController]
     public class ReportController : ControllerBase

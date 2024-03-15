@@ -59,7 +59,7 @@ namespace OpusLink.API.Controllers.AccountControllers
             {
                 return new ApiResponseModel()
                 {
-                    Code = StatusCodes.Status400BadRequest,
+                    Code = 404,
                     Message = ex.Message,
                     Data = ex,
                     IsSuccess = false
@@ -375,7 +375,7 @@ namespace OpusLink.API.Controllers.AccountControllers
             }
         }
 
-        [HttpPost("logout")]
+        [HttpGet("logout")]
         public async Task<ApiResponseModel> Logout()
         {
             await _signInManager.SignOutAsync();
