@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.JobDTO;
+using OpusLink.Entity.Models;
 using System.Globalization;
 using System.Net.Http.Headers;
 using System.Text.Json;
@@ -31,14 +32,20 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 BudgetMin = 100000,
                 BudgetMax = 500000000,
                 DateMin = DateTime.ParseExact("2023-01-01 00:01", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture),
-                DateMax = DateTime.ParseExact("2024-03-30 23:59", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture),
-                //VI DU USER ID 
-                UserId= 20
+                DateMax = DateTime.ParseExact("2024-03-30 23:59", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture)
             };
             
         }
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("/Account/Login");
+            }
+            else
+            {
+                filter.UserId = HttpContext.Session.GetInt32("UserId") ?? 0;
+            }
             //get all first jobs
             var options = new JsonSerializerOptions
             {
@@ -58,10 +65,19 @@ namespace OpusLink.User.Hosted.Pages.JOB
             //get all category has parent is 0
             Categories = await GetListCategoryAsync();
             AllCategories = await GetAllCategoryAsync();
+            return Page();
         }
 
-        public async Task OnPostAsync(IFormCollection collection)
+        public async Task<IActionResult> OnPostAsync(IFormCollection collection)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("/Account/Login");
+            }
+            else
+            {
+                filter.UserId = HttpContext.Session.GetInt32("UserId") ?? 0;
+            }
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get Filter object
             foreach (string key in keys)
@@ -82,7 +98,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 {
                     string price = collection[key].ToString();
                     price = price.Replace(",", string.Empty);
-                    price = price.Replace("VND", string.Empty);
+                    price = price.Replace("₫", string.Empty);
                     price = price.Replace(" ", string.Empty);
                     filter.BudgetMin = Int32.Parse(price);  
                 }
@@ -90,7 +106,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 {
                     string price = collection[key].ToString();
                     price = price.Replace(",", string.Empty);
-                    price = price.Replace("VND", string.Empty);
+                    price = price.Replace("₫", string.Empty);
                     price = price.Replace(" ", string.Empty);
                     filter.BudgetMax = Int32.Parse(price);
                 }
@@ -131,6 +147,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
             //get all category has parent is 0
             Categories = await GetListCategoryAsync();
             AllCategories = await GetAllCategoryAsync();
+            return Page();
         }
 
         private async Task<IList<GetCategoryResponse>> GetListCategoryAsync()

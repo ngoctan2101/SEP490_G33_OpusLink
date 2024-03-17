@@ -33,9 +33,16 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 DateMax = DateTime.ParseExact("2024-04-30 23:59", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture)
             };
         }
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-            userID = 111;
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("/Account/Login");
+            }
+            else
+            {
+                userID = HttpContext.Session.GetInt32("UserId") ?? 0;
+            }
             //Get All Offer by userID
             var options = new JsonSerializerOptions
             {
@@ -54,10 +61,18 @@ namespace OpusLink.User.Hosted.Pages.JOB
             }
             //get all category
             AllCategories = await GetAllCategoryAsync();
+            return Page();
         }
-        public async Task OnPostForSearchAsync(IFormCollection collection)
+        public async Task<IActionResult> OnPostForSearchAsync(IFormCollection collection)
         {
-            userID = 111;
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("/Account/Login");
+            }
+            else
+            {
+                userID = HttpContext.Session.GetInt32("UserId") ?? 0;
+            }
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get Filter object
             foreach (string key in keys)
@@ -91,11 +106,19 @@ namespace OpusLink.User.Hosted.Pages.JOB
             }
             //get all category
             AllCategories = await GetAllCategoryAsync();
+            return Page();
         }
-        public async Task OnPostForUnSaveAsync(IFormCollection collection)
+        public async Task<IActionResult> OnPostForUnSaveAsync(IFormCollection collection)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("/Account/Login");
+            }
+            else
+            {
+                userID = HttpContext.Session.GetInt32("UserId") ?? 0;
+            }
             int SaveJobId = 0;
-            userID = 111;
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get Filter object
             foreach (string key in keys)
@@ -133,7 +156,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
             }
             //get all category
             AllCategories = await GetAllCategoryAsync();
-            
+            return Page();
         }
 
         private async Task<IList<GetCategoryResponse>> GetAllCategoryAsync()

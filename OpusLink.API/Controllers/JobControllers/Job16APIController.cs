@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.Models;
 using OpusLink.Service.JobServices;
+using OpusLink.Shared.Enums;
 
 namespace OpusLink.API.Controllers.JobControllers
 {
@@ -25,6 +26,7 @@ namespace OpusLink.API.Controllers.JobControllers
         {
             int numberOfPage;
             var offers = await offerService.GetAllOffer(userId);
+            offers=offers.Where(o=>o.Job.Status!=(int)JobStatusEnum.NotApprove).ToList();
             var resultAfterSearch = Search(offers, filter, out numberOfPage);
             List<GetOfferResponse> result = _mapper.Map<List<GetOfferResponse>>(resultAfterSearch);
             for(int i = 0; i < result.Count; i++)
@@ -62,12 +64,12 @@ namespace OpusLink.API.Controllers.JobControllers
                 }
             }
             //loc theo page
-            numberOfPage = result.Count / 10;
-            if (result.Count % 10 > 0)
+            numberOfPage = result.Count / 5;
+            if (result.Count % 5 > 0)
             {
                 numberOfPage++;
             }
-            return result.Skip((filter.PageNumber - 1) * 10).Take(10).ToList();
+            return result.Skip((filter.PageNumber - 1) * 5).Take(5).ToList();
         }
     }
 }

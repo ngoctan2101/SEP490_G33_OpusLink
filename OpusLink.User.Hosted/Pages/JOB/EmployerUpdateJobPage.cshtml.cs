@@ -15,6 +15,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
         public PutJobRequest PutJob { get; set; }
         public IList<GetCategoryResponse> AllCategories { get; set; } = default!;
         public IList<GetLocationResponse> AllLocations { get; set; } = default!;
+        private int userId;
 
         public EmployerUpdateJobPageModel()
         {
@@ -23,14 +24,19 @@ namespace OpusLink.User.Hosted.Pages.JOB
             client.DefaultRequestHeaders.Accept.Add(contentType);
         }
 
-        public async Task OnGetAsync(int JobId)
+        public async Task<IActionResult> OnGetAsync(int JobId)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("/Account/Login");
+            }
             //get all category
             AllCategories = await GetAllCategoryAsync();
             //get all location
             AllLocations = await GetAllLocationAsync();
             //get this Job
             Job=await GetJobDetail(JobId);
+            return Page();
         }
 
         private async Task<GetJobDetailResponse> GetJobDetail(int jobId)
@@ -46,8 +52,16 @@ namespace OpusLink.User.Hosted.Pages.JOB
 
         public async Task<RedirectToPageResult> OnPostAsync(IFormCollection collection)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("/Account/Login");
+            }
+            else
+            {
+                userId = HttpContext.Session.GetInt32("UserId") ?? 0;
+            }
             PutJob = new PutJobRequest();
-            PutJob.EmployerID = 20;
+            PutJob.EmployerID = userId;
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get Filter object
             foreach (string key in keys)
@@ -82,10 +96,18 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 }
                 else if (key.Contains("freelancerId"))
                 {
-                    PutJob.FreelancerID = Int32.Parse(collection[key].ToString());
+                    if (String.IsNullOrEmpty(collection[key].ToString()))
+                    {
+                        PutJob.FreelancerID = null;
+                    }
+                    else
+                    {
+                        PutJob.FreelancerID = Int32.Parse(collection[key].ToString());
+                    }
                 }
                 else if (key.Contains("dateCreated"))
                 {
+                    
                     PutJob.DateCreated = DateTime.Parse(collection[key].ToString());
                 }
                 else if (key.Contains("status"))

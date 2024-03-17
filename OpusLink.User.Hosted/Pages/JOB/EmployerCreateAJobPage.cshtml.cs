@@ -15,6 +15,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
         public CreateJobRequest Job { get; set; } = default!;
         public IList<GetCategoryResponse> AllCategories { get; set; } = default!;
         public IList<GetLocationResponse> AllLocations { get; set; } = default!;
+        private int userId;
 
         public EmployerCreateAJobPageModel()
         {
@@ -35,8 +36,16 @@ namespace OpusLink.User.Hosted.Pages.JOB
 
         public async Task<RedirectToPageResult> OnPostAsync(IFormCollection collection)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("/Account/Login");
+            }
+            else
+            {
+                userId = HttpContext.Session.GetInt32("UserId")??0;
+            }
             Job = new CreateJobRequest();
-            Job.EmployerId = 20;
+            Job.EmployerId = userId;
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get Filter object
             foreach (string key in keys)
@@ -81,6 +90,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
             }
             return RedirectToPage("/JOB/EmployerViewAllJobCreatedPage");
         }
+
 
         private async Task<IList<GetCategoryResponse>> GetAllCategoryAsync()
         {

@@ -2,12 +2,14 @@
 @using OpusLink.Entity.DTO.JobDTO;
 @using OpusLink.Entity.Models;
 @using OpusLink.Shared.Enums;
+@inject IHttpContextAccessor HttpContextAccessor;
 @model OpusLink.User.Hosted.Pages.JOB.EmployerViewJobDetailPageModel
 @{
     GetJobDetailResponse item = Model.job;
 }
 @{
     ViewData["Title"] = "Employer View Job Detail";
+    int userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId") ?? 0;
 }
 <style>
 
@@ -73,11 +75,11 @@
             cursor: pointer;
         }
 </style>
-<div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
+<div class="row" style="margin:10px 0px 10px 0px">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
         <div style="display:inline-block;text-align:center;position: relative;width:100%;height:50px">
-            <a href="../JOB/FreelancerViewAllJobPage" style="position: absolute;top: 50%;left: 0px;">Back to list</a>
+            <a href="../JOB/EmployerViewAllJobCreatedPage" style="position: absolute;top: 50%;left: 0px;">Back to list</a>
             <a asp-page="./EmployerUpdateJobPage" asp-route-JobId="@item.JobId" style="width:100px; background-color:#4A86E8;color:white;font-weight:bold;font-size:18px;position: absolute;height:30px;bottom:0px;right: 10px;text-decoration: none;">Edit</a>
         </div>
         <div class="row">
@@ -94,35 +96,35 @@
                         <img id="profileImage" src="/imgExample/default.png" style="width:50%;height:auto;display:block" />
                     }
                 }
-                <a href="#" class="link" style="display:block">@item.EmployerName</a>
+                <a asp-page="../Employer/Profile/Views" asp-route-id="@item.EmployerId" class="link" style="display:block">@item.EmployerName</a>
                 ⭐⭐⭐⭐⭐
                 <p>Project Information:</p>
                 <table style="width:100%;font-size:13px">
                     <tr><td>Project Id:</td><td>@item.JobId</td></tr>
                     <tr><td style="width:100px">Posted Date:</td><td>@item.DateCreated.ToString("dd/MM/yyyy")</td></tr>
-                    <tr><td>Budget:</td><td>@Math.Round(item.BudgetMin,0).ToString("#,##") VND<span style="display:inline-block"> - </span>@Math.Round(item.BudgetMax,0).ToString("#,##") VND</td></tr>
+                    <tr><td>Budget:</td><td>@Math.Round(item.BudgetMin,0).ToString("#,##") ₫<span style="display:inline-block"> - </span>@Math.Round(item.BudgetMax,0).ToString("#,##") ₫</td></tr>
                     <tr><td>Location:</td><td>@item.Location</td></tr>
                 </table>
-                <button type="button" style="margin-top:15px;width:80%;background-color:#4A86E8;color:white;font-weight:bold;font-size:20px;border:none">View offers (@item.TotalOffer)</button>
+                @*<button type="button" style="margin-top:15px;width:80%;background-color:#4A86E8;color:white;font-weight:bold;font-size:20px;border:none">View offers (@item.TotalOffer)</button>*@
             </div>
             <div class="col-md-9">
                 <div>
                     <p style="font-weight:bold;display:inline-block">@item.JobTitle</p>
                     @if (item.Status == (int)JobStatusEnum.NotApprove)
                     {
-                        <p class="status" style="background-color:grey;margin:0px">Not Approved</p>
+                        <p class="status" style="background-color:grey;margin:0px;padding:0px 4px 0px 4px">Not Approved</p>
                     }
-                    else if (item.Status == (int)JobStatusEnum.Approved)
+                    else if (item.Status == (int)JobStatusEnum.Hiring)
                     {
-                        <p class="status" style="background-color:#5B9044;margin:0px">Hiring</p>
+                        <p class="status" style="background-color:#5B9044;margin:0px;padding:0px 4px 0px 4px">Hiring</p>
                     }
                     else if (item.Status == (int)JobStatusEnum.Hired)
                     {
-                        <p class="status" style="background-color:orange;margin:0px">Hired</p>
+                        <p class="status" style="background-color:orange;margin:0px;padding:0px 4px 0px 4px">Hired</p>
                     }
                     else if (item.Status == (int)JobStatusEnum.Close)
                     {
-                        <p class="status" style="background-color:#FF0000;margin:0px">Closed</p>
+                        <p class="status" style="background-color:#FF0000;margin:0px;padding:0px 4px 0px 4px">Closed</p>
                     }
                 </div>
                 <div class="row">
@@ -155,15 +157,23 @@
                 <p style="white-space: pre-line;margin-top:10px">@item.JobContent</p>
                 <div class="row">
                     <div class="col-md-4">Submit offer: @item.TotalOffer</div>
-                    <div class="col-md-4">Average: @(Math.Round(item.AverageCost, 0)).ToString("#,##") VND</div>
+                    <div class="col-md-4">Average: @(Math.Round(item.AverageCost, 0).ToString("#,##")) ₫</div>
                     <div class="col-md-4">Average time: @item.AverageTime days</div>
                 </div>
             </div>
         </div>
+        @if (Model.offers.Count > 0)
+        {
+            <p style="width:100%;text-align:center;color:#4A86E8;font-size:30px">Offers:</p>
+        }
+        else
+        {
+            <p style="width:100%;text-align:center;color:#4A86E8;font-size:20px">Receiving Offers</p>
+        }
         <div>
             @foreach (var a in Model.offers)
             {
-                <div class="row" style="margin-bottom:30px;border:2px solid black">
+                <div class="row" style="box-shadow: 0px 0px 4px 4px #DCDCDC;border-radius:5px;margin-bottom:30px">
                     <div class="col-md-3">
                         <table>
                             <tr>
@@ -182,7 +192,7 @@
                                     }
                                 </td>
                                 <td>
-                                    <a href="#" class="link">@a.FreelancerName</a>
+                                    <a asp-page="../Employer/Profile/ViewsProfileFreelancer" asp-route-id="@a.FreelancerID" class="link">@a.FreelancerName</a>
                                 </td>
                             </tr>
                             <tr><td>⭐⭐⭐⭐⭐</td></tr>
@@ -211,18 +221,18 @@
                         <p>Job Done: @a.NumberOfJobDone</p>
                         <button type="button">Message</button>
                     </div>
-                    <div class="col-md-9" style="border-left:2px solid black">
-                        <p><span style="font-weight:bold">Time:</span> @a.DateOffer.ToString("dd/MM/yyyy")</p>
-                        <p><span style="font-weight:bold">Proposed Cost:</span> @((int)a.ProposedCost).ToString("#,##") VND</p>
-                        <p><span style="font-weight:bold">Expected Days:</span> @a.ExpectedDays days</p>
-                        <p><span style="font-weight:bold">Self Introduction:</span> @a.SelfIntroduction</p>
-                        <p><span style="font-weight:bold">Estimated Plan:</span> @a.EstimatedPlan</p>
+                    <div class="col-md-9" style="border-left:2px solid #BEBEBE">
+                        <p>@a.DateOffer.ToString("dd/MM/yyyy")</p>
+                        <p><span style="font-weight:normal;color:#BEBEBE">Trả giá   </span><span style="font-size:20px">@(((int)a.ProposedCost).ToString("#,##")) ₫</span></p>
+                        <p><span style="font-weight:normal;color:#BEBEBE">Số ngày dự kiến   </span> <span style="font-size:20px">@a.ExpectedDays ngày</span></p>
+                        <p style="white-space:pre-line"><span style="font-weight:bold">Tự giới thiệu:</span><br> @a.SelfIntroduction</p>
+                        <p style="white-space:pre-line"><span style="font-weight:bold">Kế hoạch dự tính:</span><br> @a.EstimatedPlan</p>
                     </div>
                 </div>
             }
         </div>
     </div>
-    <div class="col-md-2"></div>
+    <div class="col-md-1"></div>
 </div>
 <script>
     function DisplayAllCategory(JobID) {

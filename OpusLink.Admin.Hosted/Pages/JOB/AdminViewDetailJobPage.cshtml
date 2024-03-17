@@ -130,6 +130,16 @@
     .modal-body {
         padding: 2px 16px;
     }
+
+    .buttonEdit:hover {
+        background-color: #1B6ABE;
+        color: white !important;
+    }
+
+    .buttonDelete:hover {
+        background-color: #CD2000;
+        color: white !important;
+    }
 </style>
 <div id="ConfirmDeleteModal" class="modal">
     <!-- Modal delete -->
@@ -166,8 +176,8 @@
 <div style="margin:10px 10px 10px 10px">
     <div style="display:inline-block;text-align:center;position: relative;width:100%;height:50px">
         <a href="../JOB/AdminViewAllJobPage" style="position: absolute;top: 50%;left: 0px;">Back to list</a>
-        <a asp-page="./AdminEditJobPage" asp-route-JobId="@item.JobId" style="width:100px; background-color:#4A86E8;color:white;font-weight:bold;font-size:18px;position: absolute;height:30px;bottom:0px;right: 10px;text-decoration: none;">Edit</a>
-        <button type="button" id="openDeleteConfirmBox" onclick="OpenDeleteJob(@item.JobId)" style="width:100px; background-color:red;color:white;font-weight:bold;font-size:18px;position: absolute;height:30px;bottom:0px;right: 150px;text-decoration: none;">Delete</button>
+        <button asp-page="./AdminEditJobPage" asp-route-JobId="@item.JobId" class="buttonEdit" style="width:50px;box-shadow: 0px 0px 1px 1px #1B6ABE;color: #1B6ABE;border: none; border-radius:2px;position: absolute;height:30px;bottom:0px;right: 10px;text-decoration: none;">✎</button>
+        <button type="button" class="buttonDelete" id="openDeleteConfirmBox" onclick="OpenDeleteJob(@item.JobId)" style="width:50px;box-shadow: 0px 0px 1px 1px #CD2000;color: #CD2000;border: none; border-radius:2px;position: absolute;height:30px;bottom:0px;right: 150px;text-decoration: none;">X</button>
     </div>
     <div class="row">
         <div class="col-md-3">
@@ -182,36 +192,35 @@
                 {
                     <img id="profileImage" src="/img/default.png" style="width:50%;height:auto;display:block;margin-bottom:10px" />
                 }
-            }
-            <a href="#" class="link" style="display:block">@item.EmployerName</a>
+            } 
+            <a asp-page="../ManageUser/UserDetail" asp-route-id="@item.EmployerId" class="link" style="display:block">@item.EmployerName</a>
             ⭐⭐⭐⭐⭐
             <p>Project Information:</p>
             <table style="width:100%;font-size:13px">
                 <tr><td>Project Id:</td><td>@item.JobId</td></tr>
                 <tr><td style="width:100px">Posted Date:</td><td>@item.DateCreated.ToString("dd/MM/yyyy")</td></tr>
-                <tr><td>Budget:</td><td>@Math.Round(item.BudgetMin,0).ToString("#,##") VND<span style="display:inline-block"> - </span>@Math.Round(item.BudgetMax,0).ToString("#,##") VND</td></tr>
+                <tr><td>Budget:</td><td>@Math.Round(item.BudgetMin,0).ToString("#,##") ₫<span style="display:inline-block"> - </span>@Math.Round(item.BudgetMax,0).ToString("#,##") ₫</td></tr>
                 <tr><td>Location:</td><td>@item.Location</td></tr>
             </table>
-            <button type="button" style="margin-top:15px;width:80%;background-color:#4A86E8;color:white;font-weight:bold;font-size:20px;border:none">View offers (@item.TotalOffer)</button>
         </div>
         <div class="col-md-9">
             <div>
                 <p style="font-weight:bold;display:inline-block">@item.JobTitle</p>
                 @if (item.Status == (int)JobStatusEnum.NotApprove)
                 {
-                    <p class="status" style="background-color:grey;margin:0px">Not Approved</p>
+                    <p class="status" style="background-color:grey;margin:0px;padding:0px 4px 0px 4px">Not Approved</p>
                 }
-                else if (item.Status == (int)JobStatusEnum.Approved)
+                else if (item.Status == (int)JobStatusEnum.Hiring)
                 {
-                    <p class="status" style="background-color:#5B9044;margin:0px">Hiring</p>
+                    <p class="status" style="background-color:#5B9044;margin:0px;padding:0px 4px 0px 4px">Hiring</p>
                 }
                 else if (item.Status == (int)JobStatusEnum.Hired)
                 {
-                    <p class="status" style="background-color:orange;margin:0px">Hired</p>
+                    <p class="status" style="background-color:orange;margin:0px;padding:0px 4px 0px 4px">Hired</p>
                 }
                 else if (item.Status == (int)JobStatusEnum.Close)
                 {
-                    <p class="status" style="background-color:#FF0000;margin:0px">Closed</p>
+                    <p class="status" style="background-color:#FF0000;margin:0px;padding:0px 4px 0px 4px">Closed</p>
                 }
             </div>
             <div class="row">
@@ -242,11 +251,14 @@
             </div>
             @*<p style="white-space: pre-line">@Html.Raw(item.JobContent.Replace("\r\n", "&#10;"))</p>*@
             <p style="white-space: pre-line;margin-top:10px">@item.JobContent</p>
-            <div class="row">
-                <div class="col-md-4">Submit offer: @item.TotalOffer</div>
-                <div class="col-md-4">Average: @Math.Round(item.AverageCost,0).ToString("#,##") VND</div>
-                <div class="col-md-4">Average time: @item.AverageTime days</div>
-            </div>
+            @if (item.TotalOffer > 0)
+            {
+                <div class="row">
+                    <div class="col-md-4">Submit offer: @item.TotalOffer</div>
+                    <div class="col-md-4">Average: @Math.Round(item.AverageCost,0).ToString("#,##") ₫</div>
+                    <div class="col-md-4">Average time: @item.AverageTime days</div>
+                </div>
+            }
         </div>
     </div>
 </div>

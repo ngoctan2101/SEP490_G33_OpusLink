@@ -11,7 +11,7 @@ namespace OpusLink.Service.Chat
 {
     public interface IChatService
     {
-        List<ChatBox> getAllChatBox();
+        List<ChatBox> getAllChatBox(int userId, int role);
         ChatBox getChatBoxById(int id);
         List<Message>  GetMessageById(int id);
     }
@@ -22,7 +22,7 @@ namespace OpusLink.Service.Chat
             {
                 _context = context;
             }
-            public List<ChatBox> getAllChatBox()
+            public List<ChatBox> getAllChatBox(int userId, int role)
             {
                 try
                 {

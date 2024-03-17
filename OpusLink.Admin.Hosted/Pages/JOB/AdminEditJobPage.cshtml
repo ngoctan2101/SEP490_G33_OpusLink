@@ -51,7 +51,7 @@
             <input type="number" hidden name="employerId" value="@itemMain.EmployerId" />
             <input type="text" hidden name="dateCreated" value="@itemMain.DateCreated.ToString()" />
             <p class="Label">Set a title for the job</p>
-            <input type="text" name="title" value="@itemMain.JobTitle" placeholder="Job Title" style="width:100% " />
+            <input type="text" name="title" value="@itemMain.JobTitle" placeholder="Job Title" style="width:100% " required/>
             <p class="Label">Set categories to recruit</p>
             <select style="width:350px;height:30px" onchange="ClickACategory()" id="categoryDropdown">
                 <option value="" disabled selected>Choose category</option>
@@ -72,7 +72,7 @@
             </div>
             <p class="Label">Description for the job</p>
             @*white-space: pre-line*@
-            <textarea name="content" style="width:100%;height:auto" rows="15">@itemMain.JobContent</textarea>
+            <textarea name="content" style="width:100%;height:auto" rows="15" required>@itemMain.JobContent</textarea>
             <p class="Label">Expected budget for this job</p>
             <div class="row">
                 <div class="col-md-1">From</div>
@@ -82,11 +82,11 @@
                         {
                             if (i == (int)(itemMain.BudgetMin / 500000))
                             {
-                                <option value="@itemMain.BudgetMin" selected>@((itemMain.BudgetMin).ToString("#,##0")) VND</option>
+                                <option value="@itemMain.BudgetMin" selected>@((itemMain.BudgetMin).ToString("#,##0")) ₫</option>
                             }
                             else
                             {
-                                <option value="@(i*500000)">@((i * 500000).ToString("#,##0")) VND</option>
+                                <option value="@(i*500000)">@((i * 500000).ToString("#,##0")) ₫</option>
                             }
                         }
                     </select>
@@ -98,11 +98,11 @@
                         {
                             if (i == (int)(itemMain.BudgetMax / 500000))
                             {
-                                        <option value="@itemMain.BudgetMax" selected>@((itemMain.BudgetMax).ToString("#,##0")) VND</option>
+                                <option value="@itemMain.BudgetMax" selected>@((itemMain.BudgetMax).ToString("#,##0")) ₫</option>
                             }
                             else
                             {
-                                <option value="@(i*500000)">@((i * 500000).ToString("#,##0")) VND</option>
+                                <option value="@(i*500000)">@((i * 500000).ToString("#,##0")) ₫</option>
                             }
                         }
                     </select>

@@ -15,7 +15,7 @@ namespace OpusLink.Service.JobServices
 {
     public interface IJobService
     {
-        List<Job> Search(Filter filter, out int numberOfPage);
+        List<Job> Search(Filter filter, bool forFreelancer,out int numberOfPage);
         List<Job> SearchById(Filter filter, out int numberOfPage);
         List<Job> GetAllJobRequested(Filter filter, out int numberOfPage);
         List<Job> GetAllJobRequested2();
@@ -68,7 +68,7 @@ namespace OpusLink.Service.JobServices
         public async Task ApproveJob(int jobId)
         {
             Job a = await _dbContext.Jobs.Where(j => j.JobID == jobId).FirstAsync();
-            a.Status = (int)JobStatusEnum.Approved;
+            a.Status = (int)JobStatusEnum.Hiring;
             await _dbContext.SaveChangesAsync();
         }
 
@@ -108,15 +108,15 @@ namespace OpusLink.Service.JobServices
             await _dbContext.SaveChangesAsync();
         }
 
-        public List<Job> Search(Filter filter, out int numberOfPage)
+        public List<Job> Search(Filter filter, bool forFreelancer,out int numberOfPage)
         {
-            List<Job> jobs = new List<Job>();
+            List<Job> jobsFinal = new List<Job>();
             numberOfPage = 0;
             try
             {
                 Stopwatch sw = new Stopwatch();
                 sw.Start();
-                    jobs = _dbContext.Jobs
+                   var jobs = _dbContext.Jobs
                 .Include("JobAndCategories")
                 .Include("JobAndCategories.Category")
                 .Include("Offers")
@@ -126,13 +126,17 @@ namespace OpusLink.Service.JobServices
                                 (filter.CategoryIDs.Count==0?true:j.JobAndCategories.Any(jac => filter.CategoryIDs.Contains(jac.CategoryID))) &&
                                 (j.BudgetFrom <= filter.BudgetMax && j.BudgetTo >= filter.BudgetMin) &&
                                 (j.DateCreated >= filter.DateMin && j.DateCreated <= filter.DateMax) &&
-                                (filter.SearchStr.Length==0?true:(j.JobTitle.Contains(filter.SearchStr) || j.JobContent.Contains(filter.SearchStr)))).ToList();
+                                (filter.SearchStr.Length==0?true:(j.JobTitle.Contains(filter.SearchStr) || j.JobContent.Contains(filter.SearchStr))));
 
-
-
+                if (forFreelancer)
+                {
+                    jobs = jobs.Where(j => j.Status != (int)JobStatusEnum.NotApprove);     
+                }
+                jobs = jobs.OrderByDescending(j => j.DateCreated);
+                jobsFinal=jobs.ToList();
                 // Calculate number of pages
-                numberOfPage = jobs.Count / 6;
-                if (jobs.Count % 6 > 0)
+                numberOfPage = jobsFinal.Count / 6;
+                if (jobsFinal.Count % 6 > 0)
                 {
                     numberOfPage++;
                 }
@@ -140,7 +144,7 @@ namespace OpusLink.Service.JobServices
                 sw.Stop();
                 Console.WriteLine("Elapsed={0}", sw.Elapsed);
                 // Return paginated result
-                return jobs.Skip((filter.PageNumber - 1) * 6).Take(6).ToList();
+                return jobsFinal.Skip((filter.PageNumber - 1) * 6).Take(6).ToList();
             }
             catch (Exception es)
             {
