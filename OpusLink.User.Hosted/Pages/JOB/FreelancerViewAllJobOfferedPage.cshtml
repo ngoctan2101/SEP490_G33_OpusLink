@@ -92,18 +92,18 @@
             color: white;
         }
 </style>
-<div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
+<div class="row" style="margin:10px 0px 10px 0px">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
         <div style="background-color:#F0F0F0; padding:10px">
             <form method="post">
                 <input hidden asp-for="@Model.NumberOfPage" value="@Model.NumberOfPage" />
                 <div class="row" style="margin-bottom:15px">
                     <div class="col-md-3">
-                        <button type="submit" name="pageNo_1" value="1" style="width:100%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964">Search & Filter</button>
+                        <button type="submit" name="pageNo_1" value="1" style="width:100%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964;border-radius:3px">Search & Filter</button>
                     </div>
                     <div class="col-md-7">
-                        <input name="Search_Str" value="@Model.filter.SearchStr" style="width:100%" placeholder="Find Job" />
+                        <input name="Search_Str" value="@Model.filter.SearchStr" style="width:100%;border-radius:3px" placeholder="Find Job" />
                     </div>
                     <div class="col-md-2">
                     </div>
@@ -113,31 +113,31 @@
                         @foreach (var item in Model.Offers)
                         {
                             @*@if (item.GetJobResponse.Status == (int)JobStatusEnum.NotApprove)
-                        {
-                        continue;
-                        }*@
+                            {
+                                continue;
+                            }*@
                             <div style="display:block;padding:5px 10px 4px 16px">
                                 <div>
                                     <a style="font-size:16px" class="link" asp-page="./FreelancerViewJobDetail" asp-route-JobId="@item.JobID">@item.GetJobResponse.JobTitle</a>
                                     @if (item.GetJobResponse.Status == (int)JobStatusEnum.NotApprove)
                                     {
-                                        <p class="status" style="background-color:grey;margin:0px">Not Approved</p>
+                                        <p class="status" style="background-color:grey;margin:0px;padding:0px 4px 0px 4px">Not Approved</p>
                                     }
-                                    else if (item.GetJobResponse.Status == (int)JobStatusEnum.Approved)
+                                    else if (item.GetJobResponse.Status == (int)JobStatusEnum.Hiring)
                                     {
-                                        <p class="status" style="background-color:#5B9044;margin:0px">Hiring</p>
+                                        <p class="status" style="background-color:#5B9044;margin:0px;padding:0px 4px 0px 4px">Hiring</p>
                                     }
                                     else if (item.GetJobResponse.Status == (int)JobStatusEnum.Hired)
                                     {
-                                        <p class="status" style="background-color:orange;margin:0px">Hired</p>
+                                        <p class="status" style="background-color:orange;margin:0px;padding:0px 4px 0px 4px">Hired</p>
                                     }
                                     else if (item.GetJobResponse.Status == (int)JobStatusEnum.Close)
                                     {
-                                        <p class="status" style="background-color:#FF0000;margin:0px">Closed</p>
+                                        <p class="status" style="background-color:#FF0000;margin:0px;padding:0px 4px 0px 4px">Closed</p>
                                     }
                                 </div>
                                 <div>
-                                    <span>5</span>⭐ <a style="text-decoration:none" asp-page="userProfile" asp-route-id="@item.GetJobResponse.EmployerID">@item.GetJobResponse.EmployerName</a>
+                                    <span>5</span>⭐ <a style="text-decoration:none" asp-page="../Freelancer/Profile/ViewsProfileEmployer" asp-route-id="@item.GetJobResponse.EmployerID">@item.GetJobResponse.EmployerName</a>
                                 </div>
                                 <div style="background-color:#F5F5F5; padding:5px">
                                     <p style="display:inline">@item.GetJobResponse.LocationName</p> | <p class="FormatBudget" style="display:inline">@(item.GetJobResponse.BudgetFrom)</p> - <p class="FormatBudget" style="display:inline">@(item.GetJobResponse.BudgetTo)</p>
@@ -178,7 +178,7 @@
                                     </div>
                                     <div class="col-md-10">
                                         <p><span style="font-weight:bold">Duration</span>: @item.ExpectedDays days</p>
-                                        <p><span style="font-weight:bold">Proposed cost</span>: @item.ProposedCost VND</p>
+                                        <p><span style="font-weight:bold">Proposed cost</span>: @Math.Round(item.ProposedCost,0).ToString("#,##") ₫</p>
                                         <p><span style="font-weight:bold">Experience</span>: @item.SelfIntroduction</p>
                                         <p><span style="font-weight:bold">Plan</span>: @item.EstimatedPlan</p>
                                     </div>
@@ -208,7 +208,7 @@
             </form>
         </div>
     </div>
-    <div class="col-md-2"></div>
+    <div class="col-md-1"></div>
 </div>
 
 <script>
@@ -222,7 +222,7 @@
     function FormatBudget() {
         var paragraphs = document.querySelectorAll('.FormatBudget');
         paragraphs.forEach(function (paragraph) {
-            var formattedValue = parseFloat(paragraph.textContent).toLocaleString('en', { maximumFractionDigits: 0 }) + " VND";
+            var formattedValue = parseFloat(paragraph.textContent).toLocaleString('en', { maximumFractionDigits: 0 }) + " ₫";
             paragraph.textContent = formattedValue;
         });
     }

@@ -34,9 +34,16 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 DateMax = DateTime.ParseExact("2024-04-30 23:59", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture)
             };
         }
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
-             userID = 111;
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("/Account/Login");
+            }
+            else
+            {
+                userID = HttpContext.Session.GetInt32("UserId") ?? 0;
+            }
             //Get All Offer by userID
             var options = new JsonSerializerOptions
             {
@@ -56,11 +63,19 @@ namespace OpusLink.User.Hosted.Pages.JOB
             Offers= Offers.OrderByDescending(o=>o.DateOffer).ToList();
             //get all category
             AllCategories = await GetAllCategoryAsync();
+            return Page();
         }
 
-        public async Task OnPostAsync(IFormCollection collection)
+        public async Task<IActionResult> OnPostAsync(IFormCollection collection)
         {
-            userID = 111;
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("/Account/Login");
+            }
+            else
+            {
+                userID = HttpContext.Session.GetInt32("UserId") ?? 0;
+            }
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get Filter object
             foreach (string key in keys)
@@ -95,6 +110,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
             Offers = Offers.OrderByDescending(o => o.DateOffer).ToList();
             //get all category
             AllCategories = await GetAllCategoryAsync();
+            return Page();
         }
         private async Task<IList<GetCategoryResponse>> GetAllCategoryAsync()
         {

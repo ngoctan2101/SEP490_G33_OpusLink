@@ -24,8 +24,17 @@ namespace OpusLink.User.Hosted.Pages.JOB
             client.DefaultRequestHeaders.Accept.Add(contentType);
             offerResponse = new GetOfferResponse();
         }
-        public async Task OnGetAsync(int JobId)
+        public async Task<IActionResult> OnGetAsync(int JobId)
         {
+            int userId=0;
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("/Account/Login");
+            }
+            else
+            {
+                userId = HttpContext.Session.GetInt32("UserId") ?? 0;
+            }
 
             HttpResponseMessage response = await client.GetAsync("https://localhost:7265/api/Job5API/GetJobDetail/" + JobId);
             if (response.IsSuccessStatusCode)
@@ -43,14 +52,14 @@ namespace OpusLink.User.Hosted.Pages.JOB
             }
             isOffered = false;
             //is offered or not
-            response = await client.GetAsync("https://localhost:7265/api/Offer3API/IsOffered/" + JobId + "/" + 111);
+            response = await client.GetAsync("https://localhost:7265/api/Offer3API/IsOffered/" + JobId + "/" + userId);
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
                 if (strData.Equals("true"))
                 {
                     isOffered = true;
-                    response = await client.GetAsync("https://localhost:7265/api/Offer3API/GetOffer/" + JobId + "/" + 111);
+                    response = await client.GetAsync("https://localhost:7265/api/Offer3API/GetOffer/" + JobId + "/" + userId);
                     if (response.IsSuccessStatusCode)
                     {
                         strData = await response.Content.ReadAsStringAsync();
@@ -62,12 +71,19 @@ namespace OpusLink.User.Hosted.Pages.JOB
                     isOffered = false;
                 }
             }
-
+            return Page();
         }
         public async Task<RedirectToPageResult> OnPostForAddAsync(IFormCollection collection)
         {
             CreateUpdateOfferRequest createUpdateOfferRequest = new CreateUpdateOfferRequest();
-            createUpdateOfferRequest.FreelancerID = 111;
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("/Account/Login");
+            }
+            else
+            {
+                createUpdateOfferRequest.FreelancerID = HttpContext.Session.GetInt32("UserId") ?? 0;
+            }
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get Offer object
             foreach (string key in keys)
@@ -118,7 +134,14 @@ namespace OpusLink.User.Hosted.Pages.JOB
         public async Task<RedirectToPageResult> OnPostForUpdateAsync(IFormCollection collection)
         {
             CreateUpdateOfferRequest createUpdateOfferRequest = new CreateUpdateOfferRequest();
-            createUpdateOfferRequest.FreelancerID = 111;
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("/Account/Login");
+            }
+            else
+            {
+                createUpdateOfferRequest.FreelancerID = HttpContext.Session.GetInt32("UserId") ?? 0;
+            }
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get Offer object
             foreach (string key in keys)

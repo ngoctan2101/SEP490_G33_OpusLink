@@ -14,7 +14,7 @@ namespace OpusLink.Entity.DTO.JobDTO
         public string JobContent { get; set; }
         public int Status { get; set; }
         public int EmployerId { get; set; }
-        public int FreelancerId { get; set; }
+        public int? FreelancerId { get; set; }
         public string EmployerName { get; set; }
         public string EmployerImagePath { get; set; }
         public byte[] EmployerImageBytes { get; set; }

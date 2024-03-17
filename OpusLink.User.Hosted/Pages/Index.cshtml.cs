@@ -12,9 +12,20 @@ namespace OpusLink.User.Hosted.Pages
             _logger = logger;
         }
 
-        public void OnGet()
+        public void OnGet(string role)
         {
-
+            if (String.IsNullOrEmpty(role))
+            {
+                role = "Freelancer";
+            }
+            if (role.Equals("Freelancer"))
+            {
+                HttpContext.Session.SetString("Role", "Freelancer");
+            }
+            else if (role.Equals("Employer"))
+            {
+                HttpContext.Session.SetString("Role", "Employer");
+            }
         }
     }
 }

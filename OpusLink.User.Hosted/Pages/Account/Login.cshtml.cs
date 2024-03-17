@@ -47,8 +47,7 @@ namespace OpusLink.User.Hosted.Pages.Account
                             Console.WriteLine("User Id: " + userId);
                             HttpContext.Session.SetInt32("UserId", Int32.Parse(userId));
                             HttpContext.Session.SetString("token", token);
-
-                            return RedirectToPage("/Index", new { token = apiResponse.Data.ToString() });
+                            return RedirectToPage("/Index", new { role = HttpContext.Session.GetString("Role")??"Freelancer" });
                         }
                         else
                         {
