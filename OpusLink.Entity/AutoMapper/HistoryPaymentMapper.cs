@@ -16,6 +16,7 @@ namespace OpusLink.Entity.AutoMapper
             CreateMap<HistoryPayment, HistoryPaymentDTO>()
                 .ForMember(x => x.UserName, x => x.MapFrom(x => x.User.UserName))
                 
+                
                 ;
         }
     }

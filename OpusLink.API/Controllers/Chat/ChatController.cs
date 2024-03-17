@@ -1,6 +1,8 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
+using OpusLink.API.Hubs;
 using OpusLink.Entity;
 using OpusLink.Entity.DTO;
 using OpusLink.Entity.Models;
@@ -16,10 +18,13 @@ namespace OpusLink.API.Controllers.Chat
 
     public class ChatController : ControllerBase
     {
+
         readonly IChatService _chatService;
         readonly IMapper _mapper;
-        public ChatController(IChatService chatService, IMapper mapper)
+        readonly IHubContext<ChatHub> _hubContext;
+        public ChatController(IHubContext<ChatHub> hubContext,IChatService chatService, IMapper mapper)
         {
+            _hubContext = hubContext;
             _chatService = chatService;
             _mapper = mapper;
         }
@@ -43,9 +48,6 @@ namespace OpusLink.API.Controllers.Chat
 
 
 
-
-
-
         }
         [HttpGet("GetMessageById/{id}")]
         public IActionResult GetMessageById(int id)
@@ -58,6 +60,37 @@ namespace OpusLink.API.Controllers.Chat
             return Ok(_mapper.Map<List<MessageDTO>>(message));
 
 
+        }
+
+
+        [HttpPost("CreateMessage")]
+        public IActionResult CreateMessage([FromBody] CreateMessageDTO createMessageDTO)
+        {
+            try
+            {
+                var createdMessage = _chatService.CreateMessage(createMessageDTO);
+                // Send message to clients
+                _hubContext.Clients.All.SendAsync("ReceiveMessage", createdMessage);
+                return Ok(createdMessage);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpPost("CreateChatBox")]
+        public IActionResult CreateChatBox([FromBody] CreateChatBoxDTO createChatBoxDTO)
+        {
+            try
+            {
+                var createdChatBox = _chatService.CreateChatBox(createChatBoxDTO);
+                return Ok(createdChatBox);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
         }
     }
 }

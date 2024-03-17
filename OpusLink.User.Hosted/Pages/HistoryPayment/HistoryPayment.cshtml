@@ -51,8 +51,8 @@
         <div class="col-12 mb-3 mb-lg-5">
             <div class="position-relative card table-nowrap table-card">
                 <div class="card-header align-items-center">
-                    <h5 class="mb-0">Latest Transactions</h5>
-                    <p class="mb-0 small text-muted">1 Pending</p>
+                    @*<h5 class="mb-0">Latest Transactions</h5>
+                    <p class="mb-0 small text-muted">1 Pending</p>*@
                 </div>
                 <div class="table-responsive">
                     <table class="table mb-0">
@@ -68,7 +68,7 @@
                         <tbody>
                             
                                 @if(Model.historyPaymentDTOs!= null){
-                                    @foreach (var hp in Model.historyPaymentDTOs.Where(hp=> hp.UserID==34))
+                                @foreach (var hp in Model.historyPaymentDTOs.Where(hp => hp.UserID == 34).OrderByDescending(hp => hp.TransactionDate))
                                     {
                                     <tr class="align-middle">
                                         <td>
@@ -78,8 +78,15 @@
                                         <td>@hp.TransactionCode</td>
                                         <td>
                                             <div class="d-flex align-items-center">
-                                                <span><i class="fa fa-arrow-up" aria-hidden="true"></i></span>
-                                                <span>$@hp.Amount</span>
+                                                @if(hp.TransactionType == 2 ){
+                                                    <span><i class="fa fa-arrow-up" aria-hidden="true"></i></span>
+                                                    <span>$@hp.Amount</span>
+                                                }
+                                                else{
+                                                    <span><i class="fa fa-arrow-down" aria-hidden="true"></i></span>
+                                                    <span>$@hp.Amount</span>
+                                                }
+                                               
                                             </div>
                                         </td>
                                         <td>
@@ -91,9 +98,7 @@
                                 else{
                                     <h1> Không có thanh toán</h1>
                                 }
-                                
-                                
-                            
+                      
                             @* <tr class="align-middle">
                                 <td>
                                     #012458780

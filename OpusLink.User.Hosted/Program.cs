@@ -1,5 +1,7 @@
 using Microsoft.EntityFrameworkCore;
+using OpusLink.API.Hubs;
 using OpusLink.Entity;
+using OpusLink.User.Hosted.Pages.Chat;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -11,6 +13,7 @@ builder.Services.AddDbContext<OpusLinkDBContext>(options =>
 // Add services to the container.
 builder.Services.AddSession();
 builder.Services.AddRazorPages();
+builder.Services.AddSignalR();
 
 
 var app = builder.Build();
@@ -29,7 +32,13 @@ app.UseStaticFiles();
 app.UseRouting();
 app.UseAuthentication(); ;
 app.UseAuthorization();
+app.UseEndpoints(endpoints =>
+{
+    
+    endpoints.MapHub<ChatHub>("/chatHub");
+});
 
 app.MapRazorPages();
+
 
 app.Run();

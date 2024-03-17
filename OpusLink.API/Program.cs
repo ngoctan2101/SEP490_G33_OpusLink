@@ -17,6 +17,7 @@ using OpusLink.Entity.DTO.AccountDTO.SendEmail;
 using OpusLink.Service.UserServices;
 using Microsoft.OpenApi.Models;
 using OpusLink.Service.HistoryPaymentService;
+using OpusLink.API.Hubs;
 
 internal class Program
 {
@@ -103,7 +104,16 @@ internal class Program
 
         builder.Services.AddDbContext<OpusLinkDBContext>();
         builder.Services.AddSingleton(mapper);
-        builder.Services.AddCors();
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowOrigin", builder =>
+            {
+                builder.WithOrigins("https://localhost:7265")
+                       .AllowAnyHeader()
+                       .AllowAnyMethod();
+            });
+        });
+        builder.Services.AddSignalR();
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -124,6 +134,7 @@ internal class Program
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
+            endpoints.MapHub<ChatHub>("/chatHub");
         });
 
         app.Run();
