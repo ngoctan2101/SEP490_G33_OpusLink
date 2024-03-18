@@ -2,6 +2,7 @@
 @using OpusLink.Entity.DTO.JobDTO;
 @using OpusLink.Entity.Models;
 @using OpusLink.Shared.Enums;
+@inject IHttpContextAccessor HttpContextAccessor;
 @model OpusLink.User.Hosted.Pages.JOB.FreelancerViewJobDetailModel
 @{
     GetJobDetailResponse item = Model.job;
@@ -73,10 +74,22 @@
             cursor: pointer;
         }
 </style>
-<div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
-        <a href="../JOB/FreelancerViewAllJobPage">Back to list</a>
+@{
+    int userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId") ?? -1;
+    bool IsThisFreelancerGetAcceptToTheJob = false;
+    string AddReadonlyIfThisFreelancerGetAcceptedToTheJob = "";
+    if ((item.FreelancerId??=0) == userId)
+    {
+        AddReadonlyIfThisFreelancerGetAcceptedToTheJob = "readonly";
+        IsThisFreelancerGetAcceptToTheJob = true;
+    }
+    bool IsThisJobExpried=false;
+    //if(item.)
+}
+<div class="row" style="margin:10px 0px 10px 0px">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
+        @*<a href="../JOB/FreelancerViewAllJobPage">Back to list</a>*@
         <div class="row">
             <div class="col-md-3" style="margin-bottom:10px">
                 @{
@@ -97,7 +110,7 @@
                 <table style="width:100%;font-size:13px">
                     <tr><td>Project Id:</td><td>@item.JobId</td></tr>
                     <tr><td style="width:100px">Posted Date:</td><td>@item.DateCreated.ToString("dd/MM/yyyy")</td></tr>
-                    <tr><td>Budget:</td><td>@Math.Round(item.BudgetMin,0).ToString("#,##") VND<span style="display:inline-block"> - </span>@Math.Round(item.BudgetMax,0).ToString("#,##") VND</td></tr>
+                    <tr><td>Budget:</td><td>@Math.Round(item.BudgetMin,0).ToString("#,##") ₫<span style="display:inline-block"> - </span>@Math.Round(item.BudgetMax,0).ToString("#,##") ₫</td></tr>
                     <tr><td>Location:</td><td>@item.Location</td></tr>
                 </table>
 
@@ -107,19 +120,19 @@
                     <p style="font-weight:bold;display:inline-block">@item.JobTitle</p>
                     @if (item.Status == (int)JobStatusEnum.NotApprove)
                     {
-                        <p class="status" style="background-color:grey;margin:0px">Not Approved</p>
+                        <p class="status" style="background-color:grey;margin:0px;padding:0px 4px 0px 4px">Not Approved</p>
                     }
-                    else if (item.Status == (int)JobStatusEnum.Approved)
+                    else if (item.Status == (int)JobStatusEnum.Hiring)
                     {
-                        <p class="status" style="background-color:#5B9044;margin:0px">Hiring</p>
+                        <p class="status" style="background-color:#5B9044;margin:0px;padding:0px 4px 0px 4px">Hiring</p>
                     }
                     else if (item.Status == (int)JobStatusEnum.Hired)
                     {
-                        <p class="status" style="background-color:orange;margin:0px">Hired</p>
+                        <p class="status" style="background-color:orange;margin:0px;padding:0px 4px 0px 4px">Hired</p>
                     }
                     else if (item.Status == (int)JobStatusEnum.Close)
                     {
-                        <p class="status" style="background-color:#FF0000;margin:0px">Closed</p>
+                        <p class="status" style="background-color:#FF0000;margin:0px;padding:0px 4px 0px 4px">Closed</p>
                     }
                 </div>
                 <div class="row">
@@ -150,84 +163,136 @@
                 </div>
                 @*<p style="white-space: pre-line">@Html.Raw(item.JobContent.Replace("\r\n", "&#10;"))</p>*@
                 <p style="white-space: pre-line;margin-top:10px">@item.JobContent</p>
-                <div class="row">
-                    <div class="col-md-4">Submit offer: @item.TotalOffer</div>
-                    <div class="col-md-4">Average: @Math.Round(item.AverageCost,0).ToString("#,##") VND</div>
-                    <div class="col-md-4">Average time: @item.AverageTime days</div>
-                </div>
+                @if (Model.offers.Count != 0)
+                {
+                    <div class="row">
+                        <div class="col-md-4">Submit offer: @item.TotalOffer</div>
+                        <div class="col-md-4">Average: @Math.Round(item.AverageCost,0).ToString("#,##") ₫</div>
+                        <div class="col-md-4">Average time: @item.AverageTime days</div>
+                    </div>
+                }
             </div>
         </div>
         @{
             int aa = 0;
-        string b = DateTime.Now.ToString(), e = "", f = "";
+            string b = DateTime.Now.ToString(), e = "", f = "";
             int c = 0;
             if (Model.isOffered)
             {
-                aa = Model.offerResponse.OfferID ;
+                aa = Model.offerResponse.OfferID;
                 b = "value=\"" + Model.offerResponse.DateOffer + "\"";
                 c = (int)Model.offerResponse.ProposedCost;
                 e = Model.offerResponse.SelfIntroduction;
                 f = Model.offerResponse.EstimatedPlan;
             }
         }
-        <form method="post" style="border:2px dashed black;padding:10px;width:100%">
+        @if (IsThisJobExpried)
+        {
             <div class="row">
-                <div class="col-md-4">
-                    <input type="number" name="offerId" value="@aa" hidden />
-                    <input type="number" name="jobId" value="@Model.job.JobId" hidden />
-                    <input type="number" name="dateOffer" @b hidden />
-                    <label style="font-weight:bold;font-size:20px;display:block">Proposed cost<span style="color:red">*</span></label>
-                    <input type="text" id="proposedCost" name="proposedCost" placeholder="5,000,000 VND" value="@c" required />
-                    <label style="font-weight:bold;font-size:20px;display:block">Expected days<span style="color:red">*</span></label>
-                    <select name="expectedDays" style="width:100%">
-                        @for (int i = 1; i < 101; i++)
-                        {
-                            if (i == Model.offerResponse.ExpectedDays)
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <p>Công việc này đã hết hạn nhận đơn</p>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        }
+        else if (item.Status == (int)JobStatusEnum.Hiring || (item.Status == (int)JobStatusEnum.Hired && IsThisFreelancerGetAcceptToTheJob))
+        {
+            <form method="post" style="box-shadow: 0px 0px 4px 4px #DCDCDC;border-radius:5px;margin-top:30px;padding:8px 12px 8px 12px">
+                <div class="row">
+                    <div class="col-md-4">
+                        <input type="number" name="offerId" value="@aa" hidden />
+                        <input type="number" name="jobId" value="@Model.job.JobId" hidden />
+                        <input type="number" name="dateOffer" @b hidden />
+                        <label style="font-weight:bold;font-size:20px;display:block">Proposed cost<span style="color:red">*</span></label>
+                        <input type="text" id="proposedCost" name="proposedCost" placeholder="5,000,000 ₫" value="@c" required @AddReadonlyIfThisFreelancerGetAcceptedToTheJob />
+                        <label style="font-weight:bold;font-size:20px;display:block">Expected days<span style="color:red">*</span></label>
+                        <select name="expectedDays" style="width:100%" @AddReadonlyIfThisFreelancerGetAcceptedToTheJob>
+                            @for (int i = 1; i < 101; i++)
                             {
-                                <option value="@i" selected>@(i) day</option>
+                                if (i == Model.offerResponse.ExpectedDays)
+                                {
+                                    <option value="@i" selected>@(i) day</option>
+                                }
+                                else if (i == 1)
+                                {
+                                    <option value="@(i*2)">@(i * 2) day</option>
+                                }
+                                else
+                                {
+                                    <option value="@(i*2)">@(i * 2) days</option>
+                                }
+
                             }
-                            else if (i == 1)
+                        </select>
+                        @if (!IsThisFreelancerGetAcceptToTheJob)
+                        {
+                            if (Model.isOffered)
                             {
-                                <option value="@(i*2)">@(i * 2) day</option>
+                                <button type="submit" asp-page-handler="ForUpdate" style="margin-top:15px;width:80%;background-color:green;color:white;font-weight:bold;font-size:30px;border:none">Edit Offer</button>
                             }
                             else
                             {
-                                <option value="@(i*2)">@(i * 2) days</option>
+                                <button type="submit" asp-page-handler="ForAdd" style="margin-top:15px;width:80%;background-color:#FF9900;color:white;font-weight:bold;font-size:30px;border:none">Offer</button>
                             }
-
                         }
-                    </select>
-                    @if (Model.isOffered)
-                    {
-                        <button type="submit" asp-page-handler="ForUpdate" style="margin-top:15px;width:80%;background-color:green;color:white;font-weight:bold;font-size:30px;border:none">Edit Offer</button>
-                    }
-                    else
-                    {
+                    </div>
+                    <div class="col-md-8">
+                        <div>
+                            <label for="selfIntroduction" style="font-weight:bold;font-size:20px;display:block">Self introduction<span style="color:red">*</span></label>
+                            <textarea rows="7" style="width:100%" name="selfIntroduction" placeholder="As a software engineer with a focus on ...&#10;I'm dedicated to ..." required @AddReadonlyIfThisFreelancerGetAcceptedToTheJob>@e</textarea>
+                        </div>
+                        <div>
+                            <label for="estimatedPlan" style="font-weight:bold;font-size:20px;display:block">Estimated plan<span style="color:red">*</span></label>
+                            <textarea rows="7" style="width:100%" name="estimatedPlan" placeholder="First, we will focus on ... by create a ...&#10;Then, use ... to create a ...&#10;Perform test to ensure ..." required @AddReadonlyIfThisFreelancerGetAcceptedToTheJob>@f</textarea>
+                        </div>
 
-                        <button type="submit" asp-page-handler="ForAdd" style="margin-top:15px;width:80%;background-color:#FF9900;color:white;font-weight:bold;font-size:30px;border:none">Submit</button>
 
-                    }
-
+                    </div>
                 </div>
+            </form>
+        }
+        else if (item.Status == (int)JobStatusEnum.Hired)
+        {
+            <div class="row">
+                <div class="col-md-2"></div>
                 <div class="col-md-8">
-                    <div>
-                        <label for="selfIntroduction" style="font-weight:bold;font-size:20px;display:block">Self introduction<span style="color:red">*</span></label>
-                        <textarea rows="7" style="width:100%" name="selfIntroduction" placeholder="As a software engineer with a focus on ...&#10;I'm dedicated to ..." required>@e</textarea>
-                    </div>
-                    <div>
-                        <label for="estimatedPlan" style="font-weight:bold;font-size:20px;display:block">Estimated plan<span style="color:red">*</span></label>
-                        <textarea rows="7" style="width:100%" name="estimatedPlan" placeholder="First, we will focus on ... by create a ...&#10;Then, use ... to create a ...&#10;Perform test to ensure ..." required>@f</textarea>
-                    </div>
-
-
+                    <p style="text-align:center">Đang có một Freelancer làm công việc này</p>
                 </div>
+                <div class="col-md-2"></div>
             </div>
-        </form>
-        <p style="width:100%;text-align:center;color:#4A86E8;font-size:30px">Offers:</p>
-        <div>
+        }
+        else if (item.Status == (int)JobStatusEnum.Close)
+        {
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <p style="text-align:center">Công việc này đã kết thúc</p>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        }
+        else if (item.Status == (int)JobStatusEnum.NotApprove)
+        {
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <p style="text-align:center">Công việc này chưa được đăng</p>
+                </div>
+                <div class="col-md-2"></div>
+            </div>
+        }
+
+
+        @if (Model.offers.Count != 0)
+        {
+            <p style="width:100%;text-align:center;color:#4A86E8;font-size:30px;margin-top:20px">Offers:</p>
+        }
+
+        <div style="padding:10px">
             @foreach (var a in Model.offers)
             {
-                <div class="row" style="margin-bottom:30px;border:2px solid black">
+                <div class="row" style="box-shadow: 0px 0px 4px 4px #DCDCDC;border-radius:5px;margin-bottom:30px;padding:8px 0px 8px 0px">
                     <div class="col-md-3">
                         <table>
                             <tr>
@@ -275,18 +340,18 @@
                         <p>Job Done: @a.NumberOfJobDone</p>
                         <button type="button">Message</button>
                     </div>
-                    <div class="col-md-9" style="border-left:2px solid black">
-                        <p><span style="font-weight:bold">Time:</span> @a.DateOffer.ToString("dd/MM/yyyy")</p>
-                        <p><span style="font-weight:bold">Proposed Cost:</span> @a.ProposedCost.ToString("#,##") đ</p>
-                        <p><span style="font-weight:bold">Expected Days:</span> @a.ExpectedDays days</p>
-                        <p><span style="font-weight:bold">Self Introduction:</span> @a.SelfIntroduction</p>
-                        <p><span style="font-weight:bold">Estimated Plan:</span> @a.EstimatedPlan</p>
+                    <div class="col-md-9" style="border-left:2px solid #BEBEBE">
+                        <p>@a.DateOffer.ToString("dd/MM/yyyy")</p>
+                        <p><span style="font-weight:normal;color:#BEBEBE">Trả giá   </span><span style="font-size:20px">@(((int)a.ProposedCost).ToString("#,##")) ₫</span></p>
+                        <p><span style="font-weight:normal;color:#BEBEBE">Số ngày dự kiến   </span> <span style="font-size:20px">@a.ExpectedDays ngày</span></p>
+                        @*<p style="white-space:pre-line"><span style="font-weight:bold">Tự giới thiệu:</span><br> @a.SelfIntroduction</p>
+                    <p style="white-space:pre-line"><span style="font-weight:bold">Kế hoạch dự tính:</span><br> @a.EstimatedPlan</p>*@
                     </div>
                 </div>
             }
         </div>
     </div>
-    <div class="col-md-2"></div>
+    <div class="col-md-1"></div>
 </div>
 <script>
     document.getElementById("proposedCost").addEventListener('change', function () {
@@ -299,7 +364,7 @@
         // Check if the value is a valid number
         if (!isNaN(value)) {
             // Format the number with dots for thousands separator
-            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " VND";
+            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " ₫";
 
             // Update the input field with the formatted value
             input.value = formattedValue;
@@ -332,7 +397,7 @@
         // Check if the value is a valid number
         if (!isNaN(value)) {
             // Format the number with dots for thousands separator
-            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " VND";
+            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " ₫";
 
             // Update the input field with the formatted value
             input.value = formattedValue;

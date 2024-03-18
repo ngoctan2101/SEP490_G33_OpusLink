@@ -23,7 +23,7 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
             client.DefaultRequestHeaders.Accept.Add(contentType);
             ServiceMangaUrl = "https://localhost:7265/";
         }
-        public async Task OnGetAsync(int id = 200)
+        public async Task OnGetAsync(int id)
         {
             // call list
             HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/" + id);

@@ -28,10 +28,10 @@ namespace OpusLink.API.Controllers.Chat
             _chatService = chatService;
             _mapper = mapper;
         }
-        [HttpGet("GetAllChat")]
-        public ActionResult<IEnumerable<ChatDTO>> GetAllChat()
+        [HttpGet("GetAllChat/{userId}/{role}")]
+        public ActionResult<IEnumerable<ChatDTO>> GetAllChat(int userId, int role)
         {
-            List<ChatBox> chat = _chatService.getAllChatBox()
+            List<ChatBox> chat = _chatService.getAllChatBox(userId, role)
                 .ToList();
             List<ChatDTO> list = _mapper.Map<List<ChatDTO>>(chat);
             return Ok(list);

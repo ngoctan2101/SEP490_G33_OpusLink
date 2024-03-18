@@ -56,7 +56,7 @@ namespace OpusLink.API.Controllers.JobControllers
         {
             int numberOfPage;
             //var jobs = await jobService.GetAllJob();
-            var jobsResultAfterSearch = jobService.Search(filter, out numberOfPage);
+            var jobsResultAfterSearch = jobService.Search(filter, false,out numberOfPage);
             List<GetJobResponse> result = _mapper.Map<List<GetJobResponse>>(jobsResultAfterSearch);
             result.Add(new GetJobResponse() { NumberOfOffer = numberOfPage });
             return Ok(result);

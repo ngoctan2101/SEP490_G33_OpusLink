@@ -41,19 +41,19 @@
             cursor: pointer;
         }
 </style>
-<div class="row">
-    <div class="col-md-2"></div>
-    <div class="col-md-8">
+<div class="row" style="margin:10px 0px 10px 0px">
+    <div class="col-md-1"></div>
+    <div class="col-md-10">
         <div class="row">
             <div class="col-md-3"></div>
             <div class="col-md-6">
-                <form method="post">
+                <form method="post" onsubmit="return validateBudgetFromAndTo()">
                     <input type="number" hidden name="jobId" value="@itemMain.JobId" />
                     <input type="number" hidden name="status" value="@((int)JobStatusEnum.NotApprove)" />
                     <input type="number" hidden name="freelancerId" value="@itemMain.FreelancerId" />
                     <input type="text" hidden name="dateCreated" value="@itemMain.DateCreated.ToString()" />
                     <p class="Label">Set a title for the job</p>
-                    <input type="text" name="title" value="@itemMain.JobTitle" placeholder="Job Title" style="width:100% " />
+                    <input type="text" name="title" value="@itemMain.JobTitle" placeholder="Job Title" style="width:100% " required />
                     <p class="Label">Set categories to recruit</p>
                     <select style="width:350px;height:30px" onchange="ClickACategory()" id="categoryDropdown">
                         <option value="" disabled selected>Choose category</option>
@@ -74,12 +74,12 @@
                     </div>
                     <p class="Label">Description for the job</p>
                     @*white-space: pre-line*@
-                    <textarea name="content" style="width:100%;height:auto" rows="15">@itemMain.JobContent</textarea>
+                    <textarea name="content" style="width:100%;height:auto" rows="15" required>@itemMain.JobContent</textarea>
                     <p class="Label">Expected budget for this job</p>
                     <div class="row">
                         <div class="col-md-1">From</div>
                         <div class="col-md-5">
-                            <select name="budget_min">
+                            <select name="budget_min" id="budgetFrom">
                                 @for (int i = 1; i < 200; i++)
                                 {
                                     if (i == (int)(itemMain.BudgetMin / 500000))
@@ -95,7 +95,7 @@
                         </div>
                         <div class="col-md-1">To</div>
                         <div class="col-md-5">
-                            <select name="budget_max">
+                            <select name="budget_max" id="budgetTo">
                                 @for (int i = 1; i < 200; i++)
                                 {
                                     if (i == (int)(itemMain.BudgetMax / 500000))
@@ -109,6 +109,9 @@
                                 }
                             </select>
                         </div>
+                    </div>
+                    <div>
+                        <span id="errorMessage" style="color:red"></span>
                     </div>
                     <p class="Label">Location</p>
                     <select name="location">
@@ -125,14 +128,21 @@
                         }
                     </select>
                     <div style="text-align:center;margin-top:15px">
-                        <button type="submit" style="background-color:#3C78D8;color:white;font-size:20px">Request to edit job</button>
+                        @if (itemMain.Status == (int)JobStatusEnum.NotApprove)
+                        {
+                            <button type="submit" style="background-color:#3C78D8;color:white;font-size:20px">Done</button>
+                        }
+                        else
+                        {
+                            <button type="submit" style="background-color:#3C78D8;color:white;font-size:20px">Request to edit job</button>
+                        }
                     </div>
                 </form>
             </div>
             <div class="col-md-3"></div>
         </div>
     </div>
-    <div class="col-md-2"></div>
+    <div class="col-md-1"></div>
 </div>
 <script>
     function ClickACategory() {
@@ -148,6 +158,41 @@
         var CategoryDiv = document.getElementById("ACategory_" + CategoryID).remove();
     }
 </script>
+<script>
+    function validateBudgetFromAndTo() {
+
+        var fromBudget = document.getElementById("budgetFrom").value.replace(/\D/g, '');
+        var toBudget = document.getElementById("budgetTo").value.replace(/\D/g, '');
+        var fromBudgetInput = document.getElementById("budgetFrom");
+        var toBudgetInput = document.getElementById("budgetTo");
+        var errorMessage = document.getElementById("errorMessage");
+
+        // Remove existing error messages
+        fromBudgetInput.classList.remove("error");
+        toBudgetInput.classList.remove("error");
+        errorMessage.innerHTML = "";
+
+        //// Check if both fields are filled
+        //if (fromBudget === "" || toBudget === "") {
+        //    if (fromBudget === "") fromBudgetInput.classList.add("error");
+        //    if (toBudget === "") toBudgetInput.classList.add("error");
+        //    errorMessage.innerHTML = "Please select both From Budget and To Budget.";
+        //    return false;
+        //}
+
+        // Check if fromBudget is less than or equal to toBudget
+        if (parseInt(fromBudget) >= parseInt(toBudget)) {
+            fromBudgetInput.classList.add("error");
+            toBudgetInput.classList.add("error");
+            errorMessage.innerHTML = "From Budget must be less than To Budget.";
+            return false;
+        }
+
+        // If everything is fine, allow the form to be submitted
+        return true;
+    }
+</script>
+
 
 
 

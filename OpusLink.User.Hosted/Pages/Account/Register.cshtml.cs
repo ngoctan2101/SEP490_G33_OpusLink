@@ -3,8 +3,9 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.AccountDTO.Common;
 using OpusLink.Entity.DTO.AccountDTO;
+using System.ComponentModel.DataAnnotations;
 
-namespace OpusLink.User.Hosted.Pages.Login_Register
+namespace OpusLink.User.Hosted.Pages.Account
 {
     public class RegisterModel : PageModel
     {
@@ -14,9 +15,6 @@ namespace OpusLink.User.Hosted.Pages.Login_Register
         public string ConfirmPassword { get; set; }
 
         string link = "https://localhost:7265/api/Account/register";
-        public void OnGet()
-        {
-        }
         public async Task<IActionResult> OnPostAsync(string username, string password, string email, string confirmPassword)
         {
             RegisterDTO account = new RegisterDTO()
@@ -39,6 +37,7 @@ namespace OpusLink.User.Hosted.Pages.Login_Register
                         if (apiResponse.IsSuccess)
                         {
                             ViewData["Success"] = apiResponse.Message;
+                            TempData["Email"] = email;
                             return RedirectToPage("EmailVerify");
                         }
                         else

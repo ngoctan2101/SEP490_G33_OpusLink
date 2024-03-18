@@ -2,327 +2,313 @@
 @model OpusLink.User.Hosted.Pages.Employer.Profile.ViewsModel
 @{
 }
+<style>
+    /* Thêm CSS để căn chỉnh nút Back ở góc trái dưới cùng */
+    #backButton {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+    }
 
-<!DOCTYPE html>
-<html lang="en">
+    body {
+        background: linear-gradient(to left, #6699ff 0%, #cc33ff 100%);
+    }
 
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>User Detail Form</title>
-    <!-- Link to Bootstrap CSS -->
-    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
-    <style>
-        /* Thêm CSS để căn chỉnh nút Back ở góc trái dưới cùng */
-        #backButton {
-            position: fixed;
-            bottom: 10px;
-            left: 10px;
+
+    #feedbackSection {
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+
+    #rateSection {
+        background-color: #f8f9fa;
+        width: 250px;
+    }
+
+    .ASkill {
+        display: inline-block;
+        background-color: #CFE2F3;
+        border: 1px solid grey;
+        margin: 9px 9px 0px 0px;
+        padding-left: 5px;
+    }
+    /* The Close Button */
+    .close {
+        color: red;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        height: 30px;
+        line-height: 22px;
+        vertical-align: middle;
+        padding: 0px 5px 0px 5px
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
         }
-
-        body {
-            background: linear-gradient(to left, #6699ff 0%, #cc33ff 100%);
-        }
+</style>
 
 
-        #feedbackSection {
-            background-color: #f8f9fa;
-            padding: 10px;
-            border-radius: 5px;
-            margin-top: 20px;
-        }
+<form method="post" enctype="multipart/form-data">
+    <input type="number" hidden name="userId" value="@Model.user.Id" />
+    <div class="container mt-5 ">
+        <div class="row ">
+            <!-- Hình ảnh bên trái -->
+            <div class="col-md-6 mb-3;">
 
-        #rateSection {
-            background-color: #f8f9fa;
-            width: 250px;
-        }
-
-        .ASkill {
-            display: inline-block;
-            background-color: #CFE2F3;
-            border: 1px solid grey;
-            margin: 9px 9px 0px 0px;
-            padding-left: 5px;
-        }
-        /* The Close Button */
-        .close {
-            color: red;
-            float: right;
-            font-size: 28px;
-            font-weight: bold;
-            height: 30px;
-            line-height: 22px;
-            vertical-align: middle;
-            padding: 0px 5px 0px 5px
-        }
-
-            .close:hover,
-            .close:focus {
-                color: #000;
-                text-decoration: none;
-                cursor: pointer;
-            }
-    </style>
-</head>
-
-<body>
-    <form method="post" enctype="multipart/form-data">
-        <input type="number" hidden name="userId" value="@Model.user.Id" />
-        <div class="container mt-5 ">
-            <div class="row ">
-                <!-- Hình ảnh bên trái -->
-                <div class="col-md-6 mb-3;">
-
-                    @{
-                        if (Model.user.UserImageBytes != null && Model.user.UserImageBytes.Length > 0)
-                        {
-                            var base64Image = Convert.ToBase64String(Model.user.UserImageBytes);
-                            var imgSrc = $"data:image/png;base64,{base64Image}";
-                            <img alt="User Image" id="userImage" class="img-fluid" src="@imgSrc" style="width:50%;height:auto;display:block;margin-bottom:10px" />
-                        }
-                        else
-                        {
-                            <img id="userImage" src="/img/default.png" style="width:50%;height:auto;display:block;margin-bottom:10px" />
-                        }
+                @{
+                    if (Model.user.UserImageBytes != null && Model.user.UserImageBytes.Length > 0)
+                    {
+                        var base64Image = Convert.ToBase64String(Model.user.UserImageBytes);
+                        var imgSrc = $"data:image/png;base64,{base64Image}";
+                        <img alt="User Image" id="userImage" class="img-fluid" src="@imgSrc" style="width:50%;height:auto;display:block;margin-bottom:10px" />
                     }
-                    <input type="file" name="image" accept="image/x-png, image/jpeg" onchange="readURL(this);" />
-                    @*<!-- LinkProfile, Textbox, và Nút Copy -->
-                    <div class="mt-3">
-                    <p>
-                    <span id="linkProfile">LinkProfile</span>
-                    <input type="text" class="form-control" id="linkTextBox" readonly>
-                    </p>
-                    <button type="button" class="btn btn-secondary" onclick="copyLink()">Copy Link</button>
-                    </div>*@
+                    else
+                    {
+                        <img id="userImage" src="/img/default.png" style="width:50%;height:auto;display:block;margin-bottom:10px" />
+                    }
+                }
+                <input type="file" name="image" accept="image/x-png, image/jpeg" onchange="readURL(this);" />
+                @*<!-- LinkProfile, Textbox, và Nút Copy -->
+                <div class="mt-3">
+                <p>
+                <span id="linkProfile">LinkProfile</span>
+                <input type="text" class="form-control" id="linkTextBox" readonly>
+                </p>
+                <button type="button" class="btn btn-secondary" onclick="copyLink()">Copy Link</button>
+                </div>*@
 
-                    <div class="mt-3">
-                        <label for="introduction" class="form-label" placeholder="Enter introduction">Introduction</label>
-                        <textarea class="form-control" id="introduction" rows="11" name="introduction">@Model.user.Introduction</textarea>
-                    </div>
-                    <div class="mb-3">
-                        <label for="cv" class="form-label">Upload CV:</label>
-                        <input type="file" class="form-control" id="cv" name="cv" readonly accept=".pdf,.docx">
-                    </div>
-                    <div class="mb-3">
-                        <a asp-page-handler="ForDownload" asp-route-UserId="@Model.user.Id">Download CV</a>
-                    </div>
-                    <div class="mt-3">
-                        <input type="submit" asp-page-handler="ForSave" class="btn btn-success" value="Update">
+                <div class="mt-3">
+                    <label for="introduction" class="form-label" placeholder="Enter introduction">Introduction</label>
+                    <textarea class="form-control" id="introduction" rows="11" name="introduction">@Model.user.Introduction</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="cv" class="form-label">Upload CV:</label>
+                    <input type="file" class="form-control" id="cv" name="cv" readonly accept=".pdf,.docx">
+                </div>
+                <div class="mb-3">
+                    <a asp-page-handler="ForDownload" asp-route-UserId="@Model.user.Id">Download CV</a>
+                </div>
+                <div class="mt-3">
+                    <input type="submit" asp-page-handler="ForSave" class="btn btn-success" value="Update">
 
-                    </div>
-
-
-                    <!-- Form for Rating and Feedback -->
-                    @* <div class="mt-3">
-                        <h4>Rate and Provide Feedback</h4>
-
-                        <div id="rateSection">
-                            <h5>Rating:</h5>
-                            <div id="starRating" onclick="rate()">
-                                <span class="star" id="star1">&#9733;</span>
-                                <span class="star" id="star2">&#9733;</span>
-                                <span class="star" id="star3">&#9733;</span>
-                                <span class="star" id="star4">&#9733;</span>
-                                <span class="star" id="star5">&#9733;</span>
-                            </div>
-                            <p id="averageRating">Average Rating: N/A</p>
-                        </div>
-                        <!-- Feedback Display Area -->
-                        <div id="feedbackSection">
-                            <h4>
-                                Feedback from Others
-                                <button type="button" class="btn btn-info" onclick="redirectToFeedback()">See more</button>
-                            </h4>
-                            <div class="comment">Comment 1: This is a great form! (Rating: 5)</div>
-                            <div class="comment">Comment 2: Excellent user interface! (Rating: 4)</div>
-                            <div class="comment">Comment 3: This is a great form! (Rating: 5)</div>
-                            <div class="comment">Comment 4: Excellent user interface! (Rating: 4)</div>
-                            <div class="comment">Comment 5: This is a great form! (Rating: 5)</div>
-                            <div class="comment">Comment 6: Excellent user interface! (Rating: 4)</div>
-                        </div>
-
-
-                    </div> *@
                 </div>
 
-                <!-- Thông tin bên phải -->
-                <div class="col-md-6">
-                    <div class="mb-3">
-                        <label for="id" class="form-label">ID:</label>
-                        <input type="text" class="form-control" id="id" name="id" placeholder="Enter ID" readonly value="@Model.user.Id">
-                    </div>
 
-                    <div class="mb-3">
-                        <label for="name" class="form-label">Name:</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" readonly value="@Model.user.UserName">
-                    </div>
-                    <div class="mb-3">
-                        <label for="email" class="form-label">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email"  value="@Model.user.Email">
-                    </div>
-                    <div class="mb-3">
-                        <label for="dob" class="form-label">Date of Birth:</label>
-                        <input type="date" class="form-control" id="dob" name="dob" value="@Model.user.Dob?.ToString("yyyy-MM-dd")">
-                    </div>
+                <!-- Form for Rating and Feedback -->
+                @* <div class="mt-3">
+                <h4>Rate and Provide Feedback</h4>
 
-                    <div class="mb-3">
-                        <label for="phone" class="form-label">Phone:</label>
-                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter phone"  value="@Model.user.PhoneNumber">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="address" class="form-label">Address:</label>
-                        <input type="text" class="form-control" id="address" name="address" placeholder="Enter address"  value="@Model.user.Address">
-                    </div>
-
-                    <div class="mb-3">
-                        <label for="skills" class="form-label">Skills:</label>
-                        <select style="width:100%;height:30px" onchange="ClickASkill()" id="skillDropdown">
-                            <option value="" disabled selected>Choose skill</option>
-                            @foreach (var item in Model.AllSkills)
-                            {
-                                <option value="@item.SkillID" onclick="ClickASkill(@item.SkillID ,@item.SkillName)">@item.SkillName</option>
-                            }
-                        </select>
-                        <div id="SkillContainer" style="min-height:30px">
-                            @foreach (var item in Model.user.Skills)
-                            {
-                                <div class="ASkill" id="ASkill_@item.SkillID">
-                                    @item.SkillName
-                                    <span class="close" onclick="Delete(@item.SkillID)">&times;</span>
-                                    <input type="text" name="skill_@item.SkillID" value="@item.SkillID" hidden />
-                                </div>
-                            }
-                        </div>
-                    </div>
-                    <div class="mb-3">
-                        <label for="amountmoney" class="form-label">AmountMoney:</label>
-                        <input type="text" class="form-control" id="amountmoney" name="amountmoney"
-                               placeholder="Enter amountmoney" readonly value="@Model.user.AmountMoney">
-                    </div>
-                    <!-- Nút Back -->
-                    <div class="d-inline-flex p-2 bd-highlight">
-
-                        <button type="button" id="backButton" class="btn btn-primary" onclick="onBack()">Back</button>
-                    </div>
-
+                <div id="rateSection">
+                <h5>Rating:</h5>
+                <div id="starRating" onclick="rate()">
+                <span class="star" id="star1">&#9733;</span>
+                <span class="star" id="star2">&#9733;</span>
+                <span class="star" id="star3">&#9733;</span>
+                <span class="star" id="star4">&#9733;</span>
+                <span class="star" id="star5">&#9733;</span>
                 </div>
+                <p id="averageRating">Average Rating: N/A</p>
+                </div>
+                <!-- Feedback Display Area -->
+                <div id="feedbackSection">
+                <h4>
+                Feedback from Others
+                <button type="button" class="btn btn-info" onclick="redirectToFeedback()">See more</button>
+                </h4>
+                <div class="comment">Comment 1: This is a great form! (Rating: 5)</div>
+                <div class="comment">Comment 2: Excellent user interface! (Rating: 4)</div>
+                <div class="comment">Comment 3: This is a great form! (Rating: 5)</div>
+                <div class="comment">Comment 4: Excellent user interface! (Rating: 4)</div>
+                <div class="comment">Comment 5: This is a great form! (Rating: 5)</div>
+                <div class="comment">Comment 6: Excellent user interface! (Rating: 4)</div>
+                </div>
+
+
+                </div> *@
             </div>
-    </form>
-    <!-- Link to Bootstrap JS and Popper.js (required for Bootstrap) -->
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
 
-    <script>
-        // Hàm để copy đường dẫn vào clipboard
-        function copyLink() {
-            var linkProfile = document.getElementById("linkProfile");
-            var linkTextBox = document.getElementById("linkTextBox");
+            <!-- Thông tin bên phải -->
+            <div class="col-md-6">
+                <div class="mb-3">
+                    <label for="id" class="form-label">ID:</label>
+                    <input type="text" class="form-control" id="id" name="id" placeholder="Enter ID" readonly value="@Model.user.Id">
+                </div>
 
-            // Lấy địa chỉ URL hiện tại của trang
-            var currentURL = window.location.href;
+                <div class="mb-3">
+                    <label for="name" class="form-label">Name:</label>
+                    <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" readonly value="@Model.user.UserName">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email:</label>
+                    <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" value="@Model.user.Email">
+                </div>
+                <div class="mb-3">
+                    <label for="dob" class="form-label">Date of Birth:</label>
+                    <input type="date" class="form-control" id="dob" name="dob" value="@Model.user.Dob?.ToString("yyyy-MM-dd")">
+                </div>
 
-            // Hiển thị đường dẫn trong textbox
-            linkTextBox.value = currentURL;
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Phone:</label>
+                    <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter phone" value="@Model.user.PhoneNumber">
+                </div>
 
-            // Chọn và sao chép đường dẫn vào clipboard
-            linkTextBox.select();
-            document.execCommand("Copy");
+                <div class="mb-3">
+                    <label for="address" class="form-label">Address:</label>
+                    <input type="text" class="form-control" id="address" name="address" placeholder="Enter address" value="@Model.user.Address">
+                </div>
 
-            // Thông báo cho người dùng
-            alert("Link copied successfully!");
+                <div class="mb-3">
+                    <label for="skills" class="form-label">Skills:</label>
+                    <select style="width:100%;height:30px" onchange="ClickASkill()" id="skillDropdown">
+                        <option value="" disabled selected>Choose skill</option>
+                        @foreach (var item in Model.AllSkills)
+                        {
+                            <option value="@item.SkillID" onclick="ClickASkill(@item.SkillID ,@item.SkillName)">@item.SkillName</option>
+                        }
+                    </select>
+                    <div id="SkillContainer" style="min-height:30px">
+                        @foreach (var item in Model.user.Skills)
+                        {
+                            <div class="ASkill" id="ASkill_@item.SkillID">
+                                @item.SkillName
+                                <span class="close" onclick="Delete(@item.SkillID)">&times;</span>
+                                <input type="text" name="skill_@item.SkillID" value="@item.SkillID" hidden />
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="mb-3">
+                    <label for="amountmoney" class="form-label">AmountMoney:</label>
+                    <input type="text" class="form-control" id="amountmoney" name="amountmoney"
+                           placeholder="Enter amountmoney" readonly value="@Model.user.AmountMoney">
+                </div>
+                <!-- Nút Back -->
+                <div class="d-inline-flex p-2 bd-highlight">
+
+                    <button type="button" id="backButton" class="btn btn-primary" onclick="onBack()">Back</button>
+                </div>
+
+            </div>
+        </div>
+</form>
+<!-- Link to Bootstrap JS and Popper.js (required for Bootstrap) -->
+<script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+<script>
+    // Hàm để copy đường dẫn vào clipboard
+    function copyLink() {
+        var linkProfile = document.getElementById("linkProfile");
+        var linkTextBox = document.getElementById("linkTextBox");
+
+        // Lấy địa chỉ URL hiện tại của trang
+        var currentURL = window.location.href;
+
+        // Hiển thị đường dẫn trong textbox
+        linkTextBox.value = currentURL;
+
+        // Chọn và sao chép đường dẫn vào clipboard
+        linkTextBox.select();
+        document.execCommand("Copy");
+
+        // Thông báo cho người dùng
+        alert("Link copied successfully!");
+    }
+
+    // Thiết lập đường dẫn mẫu cho LinkProfile
+    document.getElementById("linkProfile").innerText = "LinkProfile";
+
+    // Hàm để quay lại trang trước đó
+    function onBack() {
+        window.location.href = '#';
+    }
+
+    function redirectToFeedback() {
+        window.location.href = 'Skill.html'; // Thay đổi 'feedback.html' bằng đường dẫn của trang Feedback
+    }
+
+    var currentRating = 0;
+
+    // Check if the user has already rated (stored in local storage)
+
+    var userRating = localStorage.getItem("userRating");
+    if (userRating) {
+        highlightStars(userRating);
+    }
+
+    function rate() {
+        var stars = document.getElementsByClassName("star");
+
+        for (var i = 0; i < stars.length; i++) {
+            stars[i].style.color = "black"; // Reset all stars to black
         }
 
-        // Thiết lập đường dẫn mẫu cho LinkProfile
-        document.getElementById("linkProfile").innerText = "LinkProfile";
+        event.target.style.color = "gold"; // Change the color of clicked star and above stars
 
-        // Hàm để quay lại trang trước đó
-        function onBack() {
-            window.location.href = '#';
+        // Calculate the rating based on the clicked star
+        currentRating = Array.from(stars).indexOf(event.target) + 1;
+
+        // Save the user's rating to local storage
+        localStorage.setItem("userRating", currentRating);
+
+        // Update the average rating display
+        updateAverageRating();
+    }
+
+    function updateAverageRating() {
+        var feedbackSection = document.getElementById("feedbackSection");
+        var comments = feedbackSection.getElementsByClassName("comment");
+        var totalRating = 0;
+
+        for (var i = 0; i < comments.length; i++) {
+            var rating = parseInt(comments[i].textContent.match(/\d+/)[0]); // Extract the rating from the comment
+            totalRating += rating;
         }
 
-        function redirectToFeedback() {
-            window.location.href = 'Skill.html'; // Thay đổi 'feedback.html' bằng đường dẫn của trang Feedback
+        var averageRating = totalRating / comments.length;
+        var averageRatingDisplay = document.getElementById("averageRating");
+
+        if (!isNaN(averageRating)) {
+            averageRatingDisplay.innerHTML = "Average Rating: " + averageRating.toFixed(2);
+        } else {
+            averageRatingDisplay.innerHTML = "Average Rating: N/A";
         }
+    }
 
-        var currentRating = 0;
-
-        // Check if the user has already rated (stored in local storage)
-
-        var userRating = localStorage.getItem("userRating");
-        if (userRating) {
-            highlightStars(userRating);
+    function highlightStars(rating) {
+        var stars = document.getElementsByClassName("star");
+        for (var i = 0; i < rating; i++) {
+            stars[i].style.color = "gold";
         }
+    }
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
 
-        function rate() {
-            var stars = document.getElementsByClassName("star");
+            reader.onload = function (e) {
+                $('#userImage').attr('src', e.target.result);
+            };
 
-            for (var i = 0; i < stars.length; i++) {
-                stars[i].style.color = "black"; // Reset all stars to black
-            }
-
-            event.target.style.color = "gold"; // Change the color of clicked star and above stars
-
-            // Calculate the rating based on the clicked star
-            currentRating = Array.from(stars).indexOf(event.target) + 1;
-
-            // Save the user's rating to local storage
-            localStorage.setItem("userRating", currentRating);
-
-            // Update the average rating display
-            updateAverageRating();
+            reader.readAsDataURL(input.files[0]);
         }
+    }
+    function ClickASkill() {
 
-        function updateAverageRating() {
-            var feedbackSection = document.getElementById("feedbackSection");
-            var comments = feedbackSection.getElementsByClassName("comment");
-            var totalRating = 0;
+        var selectElement = document.getElementById("skillDropdown");
+        var selectedSkillId = selectElement.value;
+        var selectedSkillName = selectElement.options[selectElement.selectedIndex].text;
+        var SkillContainer = document.getElementById("SkillContainer");
+        var str = "<div class=\"ASkill\" id=\"ASkill_" + selectedSkillId + "\">" + selectedSkillName + "<span class=\"close\" onclick=\"Delete(" + selectedSkillId + ")\">&times;</span><input type=\"text\" name=\"skill_" + selectedSkillId + "\" value=\"" + selectedSkillId + "\" hidden/></div>"
+        SkillContainer.innerHTML += str;
+    }
+    function Delete(SkillId) {
+        var SkillDiv = document.getElementById("ASkill_" + SkillId).remove();
+    }
 
-            for (var i = 0; i < comments.length; i++) {
-                var rating = parseInt(comments[i].textContent.match(/\d+/)[0]); // Extract the rating from the comment
-                totalRating += rating;
-            }
-
-            var averageRating = totalRating / comments.length;
-            var averageRatingDisplay = document.getElementById("averageRating");
-
-            if (!isNaN(averageRating)) {
-                averageRatingDisplay.innerHTML = "Average Rating: " + averageRating.toFixed(2);
-            } else {
-                averageRatingDisplay.innerHTML = "Average Rating: N/A";
-            }
-        }
-
-        function highlightStars(rating) {
-            var stars = document.getElementsByClassName("star");
-            for (var i = 0; i < rating; i++) {
-                stars[i].style.color = "gold";
-            }
-        }
-        function readURL(input) {
-            if (input.files && input.files[0]) {
-                var reader = new FileReader();
-
-                reader.onload = function (e) {
-                    $('#userImage').attr('src', e.target.result);
-                };
-
-                reader.readAsDataURL(input.files[0]);
-            }
-        }
-        function ClickASkill() {
-
-            var selectElement = document.getElementById("skillDropdown");
-            var selectedSkillId = selectElement.value;
-            var selectedSkillName = selectElement.options[selectElement.selectedIndex].text;
-            var SkillContainer = document.getElementById("SkillContainer");
-            var str = "<div class=\"ASkill\" id=\"ASkill_" + selectedSkillId + "\">" + selectedSkillName + "<span class=\"close\" onclick=\"Delete(" + selectedSkillId + ")\">&times;</span><input type=\"text\" name=\"skill_" + selectedSkillId + "\" value=\"" + selectedSkillId + "\" hidden/></div>"
-            SkillContainer.innerHTML += str;
-        }
-        function Delete(SkillId) {
-            var SkillDiv = document.getElementById("ASkill_" + SkillId).remove();
-        }
-
-    </script>
-</body>
-
-</html>
+</script>

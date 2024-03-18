@@ -5,7 +5,7 @@ using OpusLink.Entity.DTO.AccountDTO.Common;
 using OpusLink.Entity.DTO.AccountDTO;
 using System.IdentityModel.Tokens.Jwt;
 
-namespace OpusLink.User.Hosted.Pages.Login_Register
+namespace OpusLink.Admin.Hosted.Pages.Account
 {
     public class LoginModel : PageModel
     {
@@ -13,8 +13,8 @@ namespace OpusLink.User.Hosted.Pages.Login_Register
         public string Password { get; set; }
         public LoginModel() { }
 
-        string link = "https://localhost:7265/api/Account/Login";
-        public void OnGet() {}
+        string link = "https://localhost:7265/api/AdminAccount/login";
+        public void OnGet() { }
 
         public async Task<IActionResult> OnPostAsync(string username, string password)
         {
@@ -35,8 +35,6 @@ namespace OpusLink.User.Hosted.Pages.Login_Register
 
                         if (apiResponse.IsSuccess)
                         {
-                            HttpContext.Session.SetString("AccountToken", apiResponse.Data.ToString());
-
                             string token = apiResponse.Data.ToString();
                             var handler = new JwtSecurityTokenHandler();
                             var jsonToken = handler.ReadToken(token) as JwtSecurityToken;
@@ -44,16 +42,24 @@ namespace OpusLink.User.Hosted.Pages.Login_Register
                             // Lấy ra UserId từ claims
                             string userId = jsonToken.Claims.First(claim => claim.Type == "UserId").Value;
 
-                            Console.WriteLine("User Id: " + userId);
                             HttpContext.Session.SetInt32("UserId", Int32.Parse(userId));
                             HttpContext.Session.SetString("token", token);
 
-                            return RedirectToPage("/Index", new { token = apiResponse.Data.ToString() });
+                            /*return RedirectToPage("/Index", new { token = apiResponse.Data.ToString() });*/
+                            return RedirectToPage("/Index");
                         }
                         else
                         {
-                            ViewData["Error"] = apiResponse.Message;
-                            return Page();
+                            if (apiResponse.Code == 0)
+                            {
+                                ViewData["Error"] = TotalMessage.LoginError;
+                                return Page();
+                            }
+                            else
+                            {
+                                ViewData["Error"] = apiResponse.Message;
+                                return Page();
+                            }
                         }
                     }
                 }

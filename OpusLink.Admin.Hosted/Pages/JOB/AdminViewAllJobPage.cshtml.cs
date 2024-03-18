@@ -80,7 +80,7 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
                 {
                     string price = collection[key].ToString();
                     price = price.Replace(",", string.Empty);
-                    price = price.Replace("VND", string.Empty);
+                    price = price.Replace("₫", string.Empty);
                     price = price.Replace(" ", string.Empty);
                     filter.BudgetMin = Int32.Parse(price);
                 }
@@ -88,7 +88,7 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
                 {
                     string price = collection[key].ToString();
                     price = price.Replace(",", string.Empty);
-                    price = price.Replace("VND", string.Empty);
+                    price = price.Replace("₫", string.Empty);
                     price = price.Replace(" ", string.Empty);
                     filter.BudgetMax= Int32.Parse(price);
                 }

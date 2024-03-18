@@ -1,0 +1,117 @@
+﻿@page
+@model OpusLink.User.Hosted.Pages.Account.RegisterModel
+@{
+    Layout = null;
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Register Form | Opuslink Team</title>
+    <link rel="stylesheet" href="~/css/Register.css">
+    <script src="https://kit.fontawesome.com/10f63c3d6e.js" crossorigin="anonymous"></script>
+</head>
+<script>
+    function checkPasswordLength() {
+        var passwordInput = document.getElementById("Password");
+    var password = passwordInput.value;
+    var errorElement = document.getElementById("passwordError");
+    var hasLength = password.length >= 6;
+    var hasSpecialChar = /[ `!#$%^&*()_+\-=\@@[\]{};':"\\|,.<>\/?~]/.test(password);
+    var hasNumber = /\d/.test(password);
+    var hasUpperCase = /[A-Z]/.test(password);
+    var hasLowerCase = /[a-z]/.test(password);
+    if (!hasLength) {
+        errorElement.innerText = "Mật khẩu phải dài ít nhất 6 ký tự.";
+    } else if (!hasSpecialChar) {
+        errorElement.innerText = "Mật khẩu phải chứa ít nhất một ký tự đặc biệt";
+    } else if (!hasNumber) {
+        errorElement.innerText = "Mật khẩu phải chứa ít nhất một số.";
+    } else if (!hasUpperCase || !hasLowerCase) {
+        errorElement.innerText = "Mật khẩu phải chứa ít nhất một chữ cái viết hoa và một chữ cái viết thường.";
+    } else {
+        errorElement.innerText = "";
+    }
+    }
+
+    function togglePasswordVisibility(inputId, iconId) {
+        var passwordInput = document.getElementById(inputId);
+        var icon = document.getElementById(iconId);
+
+        if (passwordInput.type === "password") {
+            passwordInput.type = "text";
+            icon.classList.remove("fa-eye-slash");
+            icon.classList.add("fa-eye");
+        } else {
+            passwordInput.type = "password";
+            icon.classList.remove("fa-eye");
+            icon.classList.add("fa-eye-slash");
+        }
+    }
+
+    window.onload = function () {
+        document.getElementById('UserName').value = ''
+        document.getElementById('Email').value = ''
+        document.getElementById('Password').value = ''
+        document.getElementById('ConfirmPassword').value = ''
+    };
+
+    function validatePasswords() {
+        var password = document.getElementById("Password").value;
+        var confirmPassword = document.getElementById("ConfirmPassword").value;
+        var confirmPasswordError = document.getElementById("confirmPasswordError");
+
+        if (password !== confirmPassword) {
+            confirmPasswordError.innerText = "Nhập lại mật khẩu không khớp với mật khẩu";
+        } else {
+            confirmPasswordError.innerText = "";
+        }
+    }
+</script>
+<body>
+    <div class="wrapper">
+        <form method="post">
+            <h1>Đăng ký | Opuslink</h1>
+            <div class="input-box">
+                <label class="label">Tên đăng nhập</label>
+                <input type="text" placeholder="Nhập tên đăng nhập" id="UserName" name="Username" required>
+                <i class="fa-solid fa-user"></i>
+            </div>
+            <div class="input-box">
+                <label class="label">Email</label>
+                <input type="email" placeholder="Nhập email" id="Email" name="Email" required onblur="validateEmail()">
+                <i class="fa-solid fa-envelope"></i>
+            </div>
+            <div class="input-box">
+                <label class="label">Mật khẩu</label>
+                <input type="password" placeholder="Nhập mật khẩu" id="Password" name="Password" required onchange="checkPasswordLength()">
+                <i class="fa-solid fa-eye-slash" id="eyeIcon" onclick="togglePasswordVisibility('Password', 'eyeIcon')"></i>
+            </div>
+            <div id="passwordError" class="alert alert-danger error-message"></div>
+            <div class="input-box">
+                <label class="label">Nhập lại mật khẩu</label>
+                <input type="password" placeholder="Nhập lại mật khẩu" id="ConfirmPassword" name="ConfirmPassword" required onchange="validatePasswords()">
+                <i class="fa-solid fa-eye-slash" id="eyeIcon1" onclick="togglePasswordVisibility('ConfirmPassword', 'eyeIcon1')"></i>
+            </div>
+            <div id="confirmPasswordError" class="alert alert-danger error-message"></div>
+            @if (ViewData["Success"] != null)
+            {
+                <div class="alert alert-success" role="alert">
+                    @ViewData["Success"]
+                </div>
+            }
+            @if (ViewData["Error"] != null)
+            {
+                <div class="alert alert-danger" role="alert">
+                    @ViewData["Error"]
+                </div>
+            }
+            <button type="submit" class="btn-register">Đăng ký tài khoản</button>
+            <div class="login-link">
+                <p>Bạn đã có tài khoản rồi? <a asp-page="/Account/Login">Đăng nhập ngay!</a></p>
+            </div>
+        </form>
+    </div>
+</body>
+</html>

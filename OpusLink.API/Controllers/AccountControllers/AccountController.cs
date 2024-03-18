@@ -8,6 +8,11 @@ using Microsoft.AspNetCore.Identity;
 using OpusLink.Shared.Enums;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
+using Newtonsoft.Json.Linq;
+using Microsoft.IdentityModel.Tokens;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Claims;
+using System.Text;
 
 namespace OpusLink.API.Controllers.AccountControllers
 {
@@ -18,12 +23,14 @@ namespace OpusLink.API.Controllers.AccountControllers
         private readonly IAccountService _accountService;
         private readonly IEmailService _emailService;
         private UserManager<User> _userManager;
+        private SignInManager<User> _signInManager;
 
-        public AccountController(UserManager<User> userManager, IAccountService userService, IEmailService emailService)
+        public AccountController(UserManager<User> userManager, IAccountService userService, IEmailService emailService, SignInManager<User> signInManager)
         {
             _userManager = userManager;
             _accountService = userService;
             _emailService = emailService;
+            _signInManager = signInManager;
         }
 
         [HttpPost("login")]
@@ -52,7 +59,7 @@ namespace OpusLink.API.Controllers.AccountControllers
             {
                 return new ApiResponseModel()
                 {
-                    Code = StatusCodes.Status400BadRequest,
+                    Code = 404,
                     Message = ex.Message,
                     Data = ex,
                     IsSuccess = false
@@ -69,7 +76,7 @@ namespace OpusLink.API.Controllers.AccountControllers
                 {
                     Code = 200,
                     IsSuccess = true,
-                    Message = "User created success",
+                    Message = TotalMessage.RegisterSuccess,
                     Data = model
                 };
 
@@ -81,7 +88,7 @@ namespace OpusLink.API.Controllers.AccountControllers
                     return new ApiResponseModel()
                     {
                         Code = 400,
-                        Message = "User has been already existed!",
+                        Message = TotalMessage.RegisterAccountExists,
                         IsSuccess = false
                     };
                 }
@@ -102,13 +109,13 @@ namespace OpusLink.API.Controllers.AccountControllers
                 var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Employer.ToString());
 
                 //Role cho Admin
-                /*var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Admin.ToString());*/
+/*                var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Admin.ToString());*/
                 if (!resultCreateUser.Succeeded)
                 {
                     return new ApiResponseModel()
                     {
                         Code = 400,
-                        Message = "Error when create user",
+                        Message = TotalMessage.RegisterError,
                         IsSuccess = false
                     };
                 }
@@ -161,7 +168,7 @@ namespace OpusLink.API.Controllers.AccountControllers
             }
         }
 
-        [HttpPost("forgotPassword")]
+        [HttpGet("forgotPassword")]
         [AllowAnonymous]
         public async Task<ApiResponseModel> ForgotPassword([Required] string email)
         {
@@ -169,8 +176,8 @@ namespace OpusLink.API.Controllers.AccountControllers
             if (user != null)
             {
                 var token = await _userManager.GeneratePasswordResetTokenAsync(user);
-                var passwordResetLink = Url.Action(nameof(ResetPassword), "Account", new { token, email = user.Email }, Request.Scheme);
                 string userName = user.UserName;
+                var passwordResetLink = TotalLink.LinkForgotPassword + "?token=" + Uri.EscapeDataString(token) + "&email=" + user.Email;
                 // Tạo nội dung HTML cho email
                 string titleContent = "Đổi mật khẩu - Opuslink";
 
@@ -184,25 +191,85 @@ namespace OpusLink.API.Controllers.AccountControllers
                     "Trân trọng,\r\nĐội ngũ hỗ trợ Opuslink";
                 var message = new MessageEmail(new string[] { user.Email! }, titleContent, emailContent);
                 _emailService.SendEmail(message);
+
                 return new ApiResponseModel()
                 {
                     Code = 200,
                     IsSuccess = true,
-                    Message = "Reset password sent",
+                    Message = TotalMessage.ForgotPasswordSuccess,
                 };
             }
             return new ApiResponseModel()
             {
                 Code = 400,
                 IsSuccess = false,
-                Message = "Email not found",
+                Message = TotalMessage.ForgotPasswordError,
             };
         }
+
+        [HttpPost("reSendEmail")]
+        //Resend Email
+        [AllowAnonymous]
+        public async Task<ApiResponseModel> ReSendEmail(string email)
+        {
+            try
+            {
+                var user = await _userManager.FindByEmailAsync(email);
+                if (user != null)
+                {
+                    var token = await _userManager.GeneratePasswordResetTokenAsync(user);
+                    var passwordResetLink = Url.Action(nameof(ReSendEmail), "Account", new { token, email = user.Email }, Request.Scheme);
+                    string userName = user.UserName;
+                    // Tạo nội dung HTML cho email
+                    string titleContent = "Re-send your password - Opuslink";
+
+                    string emailContent = "Hello " + userName + ",\r\n\r\n" +
+                        "Thank you for using Opuslink services. If you have forgotten your password, don't worry! We will help you reset your password easily.\r\n\r\n" +
+                        "Please click on the link below to set your new password:" + "\r\n" +
+                        passwordResetLink + "\r\n\r\n" +
+                        "If you did not request this, please ignore this email.\r\n" +
+                        "Thank you for using Opuslink. If you need assistance or have any questions, please feel free to contact us via email support@opuslink.com.\r\n\r\n" +
+                        "Regards,\r\nOpuslink Support Team";
+
+                    var message = new MessageEmail(new string[] { user.Email! }, titleContent, emailContent);
+                    _emailService.SendEmail(message);
+                    return new ApiResponseModel()
+                    {
+                        IsSuccess = true,
+                        Message = "Reset password email sent",
+                    };
+                }
+                return new ApiResponseModel()
+                {
+                    IsSuccess = false,
+                    Message = "Email not found",
+                };
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponseModel()
+                {
+                    IsSuccess = false,
+                    Message = ex.Message,
+                };
+            }
+        }
+
+        [HttpGet("reSendEmail")]
+        public async Task<IActionResult> ReSendEmail(string token, string email)
+        {
+            var model = new ReSendEmailDTO { Token = token, Email = email };
+            return Ok(new
+            {
+                model
+            });
+        }
+
 
         [HttpGet("resetPassword")]
         public async Task<IActionResult> ResetPassword(string token, string email)
         {
-                var model = new ResetPassword { Token = token, Email = email };
+                var model = new ResetPassword { Token = token, Email = email  };
             return Ok(new
             {
                 model
@@ -254,7 +321,7 @@ namespace OpusLink.API.Controllers.AccountControllers
         {
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             string userName = user.UserName;
-            var confirmationLink = Url.Action(nameof(ConfirmEmail), "Account", new { token, email = user.Email }, Request.Scheme);
+            string confirmationLink = TotalLink.LinkValidRegister + "?token=" + Uri.EscapeDataString(token) + "&email=" + user.Email;
 
             // Tạo nội dung HTML cho email
             string titleContent = "Xác nhận địa chỉ Email của bạn - Opuslink";
@@ -273,6 +340,51 @@ namespace OpusLink.API.Controllers.AccountControllers
 
             // Gửi email
             _emailService.SendEmail(message);
+        }
+
+        [HttpPost("update-role")]
+        public async Task<ApiResponseModel> UpdateUserRole(UpdateRoleDTO model)
+        {
+            try
+            {
+                if (!ModelState.IsValid)
+                {
+                    var errors = ModelState.Values.SelectMany(v => v.Errors)
+                        .Select(e => e.ErrorMessage)
+                        .ToList();
+                    return new ApiResponseModel()
+                    {
+                        Code = 400,
+                        Data = errors,
+                        IsSuccess = false,
+                        Message = string.Join(";", errors)
+                    };
+                }
+                var result = await _accountService.UpdateUserRole(model);
+                return result;
+            }
+            catch (Exception ex)
+            {
+                return new ApiResponseModel()
+                {
+                    Code = StatusCodes.Status400BadRequest,
+                    Message = ex.Message,
+                    Data = ex,
+                    IsSuccess = false
+                };
+            }
+        }
+
+        [HttpGet("logout")]
+        public async Task<ApiResponseModel> Logout()
+        {
+            await _signInManager.SignOutAsync();
+            return new ApiResponseModel()
+            {
+                Code = 200,
+                IsSuccess = true,
+                Message = TotalMessage.LogOutSuccess
+            };
         }
     }
 }

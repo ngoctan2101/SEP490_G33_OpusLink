@@ -35,7 +35,7 @@
 
     .status {
         font-weight: bold;
-        color: white;
+        color: inherit;
         text-align: center;
         display: inline-block;
     }
@@ -92,9 +92,12 @@
             color: white;
         }
 </style>
-<div style="background-color:#F0F0F0; padding:10px">
-    <form method="post">
+<div style="background-color:inherit; padding:10px">
+    <form method="post" onsubmit="return validateBudgetFromAndTo()">
         <input hidden asp-for="@Model.NumberOfPage" value="@Model.NumberOfPage" />
+        <div>
+                    <span id="errorMessage" style="color:red"></span>
+                </div>
         <div class="row" style="margin-bottom:15px">
             <div class="col-md-3">
                 <button type="submit" asp-page-handler="ForSearch" name="pageNo_1" value="1" style="width:100%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964">Search & Filter</button>
@@ -107,7 +110,7 @@
         </div>
         <div class="row">
             <div class="col-md-3">
-                <table style="width:100%;margin-bottom:10px;box-shadow: 0px 0px 4px 4px #DCDCDC;background-color:#FFFFFF" class="filter">
+                <table style="width:100%;margin-bottom:10px;box-shadow: 0px 0px 4px 4px inherit;background-color:inherit" class="filter">
                     <tr id="tsn123">
                         <td colspan="3" class="td"><h6>Category</h6></td>
                     </tr>
@@ -130,7 +133,7 @@
 
                     }
                 </table>
-                <table class="filter" style="width:100%;box-shadow: 0px 0px 4px 4px #DCDCDC;padding:4px;margin-bottom:10px;background-color:#FFFFFF">
+                <table class="filter" style="width:100%;box-shadow: 0px 0px 4px 4px #DCDCDC;padding:4px;margin-bottom:10px;background-color:inherit">
                     <tr>
                         <td class="td" colspan="2"><h6>Status</h6></td>
                     </tr>
@@ -146,17 +149,17 @@
                         </tr>
                     }
                 </table>
-                <table class="filter" style="width:100%;box-shadow: 0px 0px 4px 4px #DCDCDC;padding:4px;margin-bottom:10px;background-color:#FFFFFF">
+                <table class="filter" style="width:100%;box-shadow: 0px 0px 4px 4px #DCDCDC;padding:4px;margin-bottom:10px;background-color:inheritF">
                     <tr>
                         <td class="td" colspan="1"><h6>Date Range</h6></td>
                     </tr>
                     <tr>
                         <td class="td">
-                            <input style="margin-bottom: 5px;" type="text" name="daterange" value="@Model.filter.getDateRange()" />
+                            <input style="margin-bottom: 5px;" type="text" name="daterange" id="dateInput" value="@Model.filter.getDateRange()" />
                         </td>
                     </tr>
                 </table>
-                <table class="filter" style="width:100%;box-shadow: 0px 0px 4px 4px #DCDCDC;padding:4px;margin-bottom:10px;background-color:#FFFFFF">
+                <table class="filter" style="width:100%;box-shadow: 0px 0px 4px 4px #DCDCDC;padding:4px;margin-bottom:10px;background-color:inheritFFFF">
                     <tr>
                         <td class="td" colspan="3"><h6>Price Range</h6></td>
                     </tr>
@@ -165,9 +168,9 @@
                             <div class="price-input" style="margin-bottom: 5px;">
                                 <table>
                                     <tr>
-                                        <td><input type="text" id="price-min" name="price_min" pattern="[0-9VND ,]+" title="Please enter number" value="@Model.filter.BudgetMin" style="width:100% " /></td>
+                                        <td><input type="text" id="price-min" name="price_min" pattern="[0-9₫ ,]+" title="Please enter number" value="@Model.filter.BudgetMin" style="width:100% " /></td>
                                         <td>-</td>
-                                        <td><input type="text" id="price-max" name="price_max" pattern="[0-9VND ,]+" title="Please enter number" value="@Model.filter.BudgetMax" style="width:100% " /></td>
+                                        <td><input type="text" id="price-max" name="price_max" pattern="[0-9₫ ,]+" title="Please enter number" value="@Model.filter.BudgetMax" style="width:100% " /></td>
                                     </tr>
                                 </table>
                             </div>
@@ -176,7 +179,7 @@
                 </table>
             </div>
             <div class="col-md-9">
-                <div style="box-shadow: 0px 0px 4px 4px #DCDCDC;background-color:#FFFFFF; padding-top: 10px">
+                <div style="box-shadow: 0px 0px 4px 4px #DCDCDC;background-color:inherit; padding-top: 10px">
                     <table class="jobTable">
                         <thead>
                             <tr>
@@ -289,14 +292,14 @@
         // Get the input element
         var input = document.getElementById("price-min");
         var input1 = input.value.replaceAll(",", "");
-        input1 = input1.replaceAll("VND", "");
+        input1 = input1.replaceAll("₫", "");
         input1 = input1.replaceAll(" ", "");
         // Get the value and convert it to a number
         var value = parseFloat(input1);
         // Check if the value is a valid number
         if (!isNaN(value)) {
             // Format the number with dots for thousands separator
-            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " VND";
+            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " ₫";
 
             // Update the input field with the formatted value
             input.value = formattedValue;
@@ -308,14 +311,14 @@
         // Get the input element
         var input = document.getElementById("price-max");
         var input1 = input.value.replaceAll(",", "");
-        input1 = input1.replaceAll("VND", "");
+        input1 = input1.replaceAll("₫", "");
         input1 = input1.replaceAll(" ", "");
         // Get the value and convert it to a number
         var value = parseFloat(input1);
         // Check if the value is a valid number
         if (!isNaN(value)) {
             // Format the number with dots for thousands separator
-            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " VND";
+            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " ₫";
 
             // Update the input field with the formatted value
             input.value = formattedValue;
@@ -360,28 +363,28 @@
         // Get the input element
         var input = document.getElementById("price-min");
         var input1 = input.value.replaceAll(",", "");
-        input1 = input1.replaceAll("VND", "");
+        input1 = input1.replaceAll("₫", "");
         input1 = input1.replaceAll(" ", "");
         // Get the value and convert it to a number
         var value = parseFloat(input1);
         // Check if the value is a valid number
         if (!isNaN(value)) {
             // Format the number with dots for thousands separator
-            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " VND";
+            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " ₫";
             // Update the input field with the formatted value
             input.value = formattedValue;
         }
         // Get the input element
         var input = document.getElementById("price-max");
         var input1 = input.value.replaceAll(",", "");
-        input1 = input1.replaceAll("VND", "");
+        input1 = input1.replaceAll("₫", "");
         input1 = input1.replaceAll(" ", "");
         // Get the value and convert it to a number
         var value = parseFloat(input1);
         // Check if the value is a valid number
         if (!isNaN(value)) {
             // Format the number with dots for thousands separator
-            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " VND";
+            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " ₫";
             // Update the input field with the formatted value
             input.value = formattedValue;
         }
@@ -397,7 +400,7 @@
     function FormatBudget() {
         var paragraphs = document.querySelectorAll('.FormatBudget');
         paragraphs.forEach(function (paragraph) {
-            var formattedValue = parseFloat(paragraph.textContent).toLocaleString('en', { maximumFractionDigits: 0 }) + " VND";
+            var formattedValue = parseFloat(paragraph.textContent).toLocaleString('en', { maximumFractionDigits: 0 }) + " ₫";
             paragraph.textContent = formattedValue;
         });
     }
@@ -447,5 +450,92 @@
                 break;
             }
         }
+    }
+</script>
+<script>
+    function validateBudgetFromAndTo() {
+
+        var fromBudget = document.getElementById("price-min").value.replace(/\D/g, '');
+        var toBudget = document.getElementById("price-max").value.replace(/\D/g, '');
+        //var fromBudgetInput = document.getElementById("price-min");
+        //var toBudgetInput = document.getElementById("price-max");
+        var errorMessage = document.getElementById("errorMessage");
+
+        //// Remove existing error messages
+        //fromBudgetInput.classList.remove("error");
+        //toBudgetInput.classList.remove("error");
+        errorMessage.innerHTML = "";
+
+        //// Check if both fields are filled
+        //if (fromBudget === "" || toBudget === "") {
+        //    if (fromBudget === "") fromBudgetInput.classList.add("error");
+        //    if (toBudget === "") toBudgetInput.classList.add("error");
+        //    errorMessage.innerHTML = "Please select both From Budget and To Budget.";
+        //    return false;
+        //}
+        if (isNaN(parseInt(fromBudget)) || isNaN(parseInt(toBudget))) {
+            errorMessage.innerHTML = "Invalid price format. Price must be a number.";
+            return false;
+        }
+        // Check if fromBudget is less than or equal to toBudget
+        if (parseInt(fromBudget) >= parseInt(toBudget)) {
+            errorMessage.innerHTML = "Price min must be less than price max.";
+            return false;
+        }
+
+        var dateInput = document.getElementById("dateInput").value;
+        var dates = dateInput.split(" - ");
+
+        if (dates.length !== 2) {
+            errorMessage.innerHTML = "Please enter two dates in the format mm/dd/yyyy - mm/dd/yyyy";
+            return false;
+        }
+
+        var startDate = new Date(dates[0]);
+        var endDate = new Date(dates[1]);
+
+        if (!isValidDate(dates[0]) || !isValidDate(dates[1])) {
+            errorMessage.innerHTML ="Invalid date format. Please enter dates in the format mm/dd/yyyy";
+            return false;
+        }
+
+        if (startDate >= endDate) {
+            errorMessage.innerHTML = "End date should be greater than start date.";
+            return false;
+        }
+        // If everything is fine, allow the form to be submitted
+        return true;
+    }
+    function isValidDate(date) {
+
+        // Date format: YYYY-MM-DD
+        var datePattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/([12]\d{3})/;
+
+        // Check if the date string format is a match
+        var matchArray = date.match(datePattern);
+        if (matchArray == null) {
+            return false;
+        }
+
+        // Remove any non digit characters
+        var dateString = date.replace(/\D/g, '');
+
+        // Parse integer values from the date string
+        var year = parseInt(dateString.substr(4, 4));
+        var month = parseInt(dateString.substr(0,2));
+        var day = parseInt(dateString.substr(2, 2));
+
+        // Define the number of days per month
+        var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
+
+        // Leap years
+        if (year % 400 == 0 || (year % 100 != 0 && year % 4 == 0)) {
+            daysInMonth[1] = 29;
+        }
+
+        if (month < 1 || month > 12 || day < 1 || day > daysInMonth[month - 1]) {
+            return false;
+        }
+        return true;
     }
 </script>

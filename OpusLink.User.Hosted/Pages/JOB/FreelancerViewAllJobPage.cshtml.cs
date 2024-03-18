@@ -44,9 +44,9 @@ namespace OpusLink.User.Hosted.Pages.JOB
         public async Task OnGetAsync()
         {
             if(filter.Statuses.Count == 0) {
-                filter.Statuses.Add((int)JobStatusEnum.Approved);
-                filter.Statuses.Add((int)JobStatusEnum.Hired);
-                filter.Statuses.Add((int)JobStatusEnum.Close);
+                filter.Statuses.Add((int)JobStatusEnum.Hiring);
+                //filter.Statuses.Add((int)JobStatusEnum.Hired);
+                //filter.Statuses.Add((int)JobStatusEnum.Close);
             }
             //get all first jobs
             var options = new JsonSerializerOptions
@@ -69,19 +69,24 @@ namespace OpusLink.User.Hosted.Pages.JOB
             Categories = await GetListCategoryAsync();
             AllCategories = await GetAllCategoryAsync();
             //get list id of saved jobs
-            AllSavedJobId = await GetListSavedJobId();
+            if (HttpContext.Session.GetInt32("UserId") != null)
+            {
+                AllSavedJobId = await GetListSavedJobId(HttpContext.Session.GetInt32("UserId")??0);
+            }
         }
 
-        private async Task<IList<int>> GetListSavedJobId()
+        private async Task<IList<int>> GetListSavedJobId(int userId)
         {
+            
             IList<int> list = new List<int>();
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = false,
             };
+            
             string json = System.Text.Json.JsonSerializer.Serialize<Filter>(filter, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7265/api/Job7API/GetAllSavedJobId/"+111);
+            HttpResponseMessage response = await client.GetAsync("https://localhost:7265/api/Job7API/GetAllSavedJobId/"+ userId);
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
@@ -112,7 +117,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 {
                     string price = collection[key].ToString();
                     price = price.Replace(",", string.Empty);
-                    price = price.Replace("VND", string.Empty);
+                    price = price.Replace("₫", string.Empty);
                     price = price.Replace(" ", string.Empty);
                     filter.BudgetMin = Int32.Parse(price);
                 }
@@ -120,7 +125,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 {
                     string price = collection[key].ToString();
                     price = price.Replace(",", string.Empty);
-                    price = price.Replace("VND", string.Empty);
+                    price = price.Replace("₫", string.Empty);
                     price = price.Replace(" ", string.Empty);
                     filter.BudgetMax = Int32.Parse(price);
                 }
@@ -166,8 +171,11 @@ namespace OpusLink.User.Hosted.Pages.JOB
             Categories = await GetListCategoryAsync();
             AllCategories = await GetAllCategoryAsync();
             //get list id of saved jobs
-            AllSavedJobId = await GetListSavedJobId();
-            
+            if (HttpContext.Session.GetInt32("UserId") != null)
+            {
+                AllSavedJobId = await GetListSavedJobId(HttpContext.Session.GetInt32("UserId") ?? 0);
+            }
+
         }
         public async Task OnPostForSaveAsync(IFormCollection collection)
         {
@@ -193,7 +201,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 {
                     string price = collection[key].ToString();  
                     price = price.Replace(",", string.Empty);
-                    price = price.Replace("VND", string.Empty);
+                    price = price.Replace("₫", string.Empty);
                     price = price.Replace(" ", string.Empty);
                     filter.BudgetMin = Int32.Parse(price);
                 }
@@ -201,7 +209,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 {
                     string price = collection[key].ToString();
                     price = price.Replace(",", string.Empty);
-                    price = price.Replace("VND", string.Empty);
+                    price = price.Replace("₫", string.Empty);
                     price = price.Replace(" ", string.Empty);
                     filter.BudgetMax = Int32.Parse(price);
                 }
