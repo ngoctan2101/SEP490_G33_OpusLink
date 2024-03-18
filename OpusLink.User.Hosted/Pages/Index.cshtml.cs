@@ -15,13 +15,23 @@ namespace OpusLink.User.Hosted.Pages
         {
             _logger = logger;
         }
-
-<<<<<<< HEAD
         string link = "https://localhost:7265/api/Account/update-role";
         string linkLogOut = "https://localhost:7265/api/Account/logout";
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(string role)
         {
+            if (String.IsNullOrEmpty(role))
+            {
+                role = "Freelancer";
+            }
+            if (role.Equals("Freelancer"))
+            {
+                HttpContext.Session.SetString("Role", "Freelancer");
+            }
+            else if (role.Equals("Employer"))
+            {
+                HttpContext.Session.SetString("Role", "Employer");
+            }
             UpdateRoleDTO account = new UpdateRoleDTO()
             {
                 UserName = HttpContext.Session.GetString("userName"),
@@ -107,21 +117,6 @@ namespace OpusLink.User.Hosted.Pages
                         }
                     }
                 }
-=======
-        public void OnGet(string role)
-        {
-            if (String.IsNullOrEmpty(role))
-            {
-                role = "Freelancer";
-            }
-            if (role.Equals("Freelancer"))
-            {
-                HttpContext.Session.SetString("Role", "Freelancer");
-            }
-            else if (role.Equals("Employer"))
-            {
-                HttpContext.Session.SetString("Role", "Employer");
->>>>>>> nhat
             }
         }
     }
