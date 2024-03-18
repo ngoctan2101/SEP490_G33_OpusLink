@@ -159,7 +159,7 @@
 										}
 										else
 										{
-											<text>@Model.ChatDTOs.FirstOrDefault(c => c.ChatBoxID == message.ChatBoxID)?.FreelancerName</text>
+											<text>You</text>
 										}
 									</div>
 									<div id="ms">@message.MessageContent</div>
@@ -244,7 +244,7 @@
 		messageDiv.innerHTML = `<div class="${user === 'You' ? 'chat-message-right' : 'chat-message-left'} pb-4">
 									<div>
 										<img src="https://bootdey.com/img/Content/avatar/${user === 'You' ? 'avatar1.png' : 'avatar3.png'}" class="rounded-circle mr-1" alt="${user}" width="40" height="40">
-										<div class="text-muted small text-nowrap mt-2">${new Date().toLocaleTimeString()}</div>
+											<div class="text-muted small text-nowrap mt-2">${new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' })}</div>
 									</div>
 									<div class="flex-shrink-1 bg-light rounded py-2 px-3 ${user === 'You' ? 'mr-3' : 'ml-3'}">
 										<div class="font-weight-bold mb-1">${user}</div>
@@ -270,12 +270,35 @@
 						document.getElementById("messageInput").value = "";
 						// Append the sent message to the chat window
 						appendMessage(user, messageContent);
+
+						// Save the message to the database
+						saveMessageToDatabase(chatBoxId, user, messageContent);
 					})
 					.catch(error => console.error(error.toString()));
 			} else {
 				console.error("SignalR connection is not in the 'Connected' state.");
 			}
 		}
+	}
+
+	function saveMessageToDatabase(chatBoxId, user, messageContent) {
+		// Make an AJAX request to save the message to the database
+		$.ajax({
+			url: 'https://localhost:7265/api/Chat/CreateMessage',
+			type: 'POST',
+			contentType: 'application/json',
+			data: JSON.stringify({
+				chatBoxId: chatBoxId,
+				user: user,
+				messageContent: messageContent
+			}),
+			success: function (response) {
+				console.log("Message saved to database:", response);
+			},
+			error: function (xhr) {
+				console.error("Error saving message to database:", xhr.responseText);
+			}
+		});
 	}
 
 	

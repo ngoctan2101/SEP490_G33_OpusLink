@@ -68,16 +68,31 @@ namespace OpusLink.API.Controllers.Chat
         {
             try
             {
+                // Create the message
                 var createdMessage = _chatService.CreateMessage(createMessageDTO);
-                // Send message to clients
+
+                if (createdMessage == null)
+                {
+                    return NotFound("Failed to create message");
+                }
+
+                // Broadcast the message to clients
                 _hubContext.Clients.All.SendAsync("ReceiveMessage", createdMessage);
-                return Ok(createdMessage);
+
+                return CreatedAtAction(nameof(GetMessageById), new { id = createdMessage.MessageID }, createdMessage);
+            }
+            catch (DbUpdateException ex)
+            {
+                // Handle database update errors
+                return StatusCode(500, $"Database error: {ex.InnerException?.Message}");
             }
             catch (Exception ex)
             {
+                // Handle other exceptions
                 return StatusCode(500, $"Internal server error: {ex.Message}");
             }
         }
+
 
         [HttpPost("CreateChatBox")]
         public IActionResult CreateChatBox([FromBody] CreateChatBoxDTO createChatBoxDTO)
