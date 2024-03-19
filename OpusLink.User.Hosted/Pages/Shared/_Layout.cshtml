@@ -1,4 +1,22 @@
-﻿ <!DOCTYPE html>
+﻿@* @using System.Text.Json;
+@{
+    private readonly HttpClient client = null;
+    private string ServiceMangaUrl = "";
+        client = new HttpClient();
+        var contentType = new MediaTypeWithQualityHeaderValue("application/json");
+        client.DefaultRequestHeaders.Accept.Add(contentType);
+    ServiceMangaUrl = "https://localhost:7265/";
+    HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/" + 1);
+    if (responseUser.IsSuccessStatusCode)
+    {
+        string responseBodyUser = await responseUser.Content.ReadAsStringAsync();
+        var optionUser = new JsonSerializerOptions()
+                { PropertyNameCaseInsensitive = true };
+        user = System.Text.Json.JsonSerializer.Deserialize<UserDTO>(responseBodyUser, optionUser);
+    }
+} *@
+
+<!DOCTYPE html>
 <html lang="en">
 <head>
     <meta charset="UTF-8">
@@ -48,7 +66,7 @@
                             <a class="nav-link text-dark" asp-area="" asp-page="/JOB/EmployerViewAllJobCreatedPage" style="background-color:blueviolet;margin:0px 2px 0px 2px"> My created job</a>
                         </li>
                         <li class="nav-item">
-<<<<<<< HEAD
+
                             <a class="nav-link text-dark" asp-area="" asp-page="/JOB/FreelancerViewAllJobSavedPage">Saved job</a>
                         </li>
                         @*<li class="nav-item">
@@ -59,7 +77,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login">Login</a>
-=======
+
                             <a class="nav-link text-dark" asp-area="" asp-page="/JOB/EmployerCreateAJobPage" style="background-color:blueviolet;margin:0px 2px 0px 2px">Post job now</a>
                         </li>
                         <li class="nav-item">
@@ -70,7 +88,7 @@
                         </li>
                         <li class="nav-item">
                             <a class="nav-link text-dark" asp-area="" asp-page="/User/Register" style="background-color:yellowgreen;margin:0px 2px 0px 2px">Register</a>
->>>>>>> nhat
+
                         </li>
                     </ul>
                     <ul class="navbar-nav ms-auto">
@@ -79,7 +97,9 @@
                                 <i class="fas fa-wallet"></i>
                             </a>
                             <div class="dropdown-menu" aria-labelledby="walletDropdown">
-                                <p class="dropdown-item-text">Tiền dư: $100</p>
+                                
+                                <p class="dropdown-item-text" id="amount"> </p>
+                                <button class="btn btn-primary dropdown-item" onclick="napTien()">Nạp tiền</button>
                                 <button class="btn btn-primary dropdown-item" onclick="rutTien()">Rút tiền</button>
                             </div>
                         </li>
@@ -193,6 +213,30 @@
             // Xử lý logic khi rút tiền
             alert('Bạn đã rút tiền thành công!');
         }
+        function napTien() {
+            window.location.href = '/VnPayment/AddMoneyToWallet';
+        }
+        function LoadUserInformation() {
+    $.ajax({
+        url: "https://localhost:7265/api/User/GetUserById/1",
+        type: "GET",
+        contentType: "application/json",
+        success: function (result, status, xhr) {
+                    
+            // Assuming result contains user information
+            // Update the HTML element with the user information
+                    document.getElementById("amount").innerHTML += result["amountMoney"]; // Assuming result is the user information
+        },
+        error: function(xhr, status, error) {
+            // Handle error
+            console.error("Error loading user information:", error);
+        }
+    });
+}
+
+        window.onload = function () {
+            LoadUserInformation();
+        };
     </script>
 </body>
 </html> 
@@ -412,3 +456,5 @@
     @await RenderSectionAsync("Scripts", required: false)
 </body>
 </html>*@
+
+   

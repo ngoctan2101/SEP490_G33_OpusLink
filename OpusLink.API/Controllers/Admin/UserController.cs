@@ -328,7 +328,13 @@ namespace OpusLink.API.Controllers.Admin
             _userService.UpdateUser2(thisUser);
             return Ok();
         }
-
+        [HttpPut("UpdateAmount/{amount}/{userId}")]
+        public async Task<IActionResult> UpdateAmount(double amount, int userId)
+        {
+             _userService.UpdateAmountMoney(amount, userId);
+            
+            return Ok("Update successfull");
+        }
         private List<FreelancerAndSkill> FindFAS2Add(List<FreelancerAndSkill> fasa, List<int> skillIDs, int userId)
         {
             List<FreelancerAndSkill> fasResult = new List<FreelancerAndSkill>();
