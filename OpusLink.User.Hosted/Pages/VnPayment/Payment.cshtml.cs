@@ -152,7 +152,7 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
                             // update amount
                             var jsonProduct = System.Text.Json.JsonSerializer.Serialize(userId);
                             var content7 = new StringContent(jsonProduct, Encoding.UTF8, "application/json");
-                            await client.PutAsync(ServiceMangaUrl + $"api/User/UpdateAmount/{amountBack1}/{userId}", content7);
+                            await client.PutAsync(ServiceMangaUrl + $"api/User/UpdateAmount/{amountBack1/100}/{userId}", content7);
 
                             // add to history
                             HistoryPaymentDTO his = new HistoryPaymentDTO();
