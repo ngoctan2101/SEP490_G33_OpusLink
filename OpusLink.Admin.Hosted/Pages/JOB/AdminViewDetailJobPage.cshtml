@@ -140,6 +140,11 @@
         background-color: #CD2000;
         color: white !important;
     }
+
+    #countdown {
+        font-size: 24px;
+        font-weight: bold;
+    }
 </style>
 <div id="ConfirmDeleteModal" class="modal">
     <!-- Modal delete -->
@@ -212,7 +217,14 @@
                 }
                 else if (item.Status == (int)JobStatusEnum.Hiring)
                 {
-                    <p class="status" style="background-color:#5B9044;margin:0px;padding:0px 4px 0px 4px">Hiring</p>
+                    if (item.EndHiringDate < DateTime.Now)
+                    {
+                        <p class="status" style="background-color:#B5681C;margin:0px;padding:0px 4px 0px 4px">Hiring expried</p>
+                    }
+                    else
+                    {
+                        <p class="status" style="background-color:#00A424;margin:0px;padding:0px 4px 0px 4px">Hiring</p> <span style="color:red;font-size:13px" id="countdown_@item.JobId"></span>
+                    }
                 }
                 else if (item.Status == (int)JobStatusEnum.Hired)
                 {
@@ -293,4 +305,24 @@
     function hideModal() {
         modal.style.display = "none";
     }
+</script>
+<script>
+
+    function startCountdown(endHiringDate, countdownId) {
+        var countdownInterval = setInterval(function () {
+            var now = new Date();
+            var totalSeconds = Math.floor((endHiringDate - now) / 1000);
+            var days = Math.floor(totalSeconds / (60 * 60 * 24));
+            var hours = Math.floor((totalSeconds % (60 * 60 * 24)) / (60 * 60));
+            var minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+            var seconds = Math.floor((totalSeconds % (60)));
+            document.getElementById(countdownId).innerHTML = "(" + days + "d " + hours + "h " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds + ")";
+            if (totalSeconds < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById(countdownId).innerHTML = "Hiring Expried";
+            }
+        }, 1000);
+    }
+    var x = new Date("@(Model.job.EndHiringDate.ToString("yyyy-MM-ddTHH:mm:ss"))");
+    startCountdown(x, "countdown_" + @Model.job.JobId);
 </script>

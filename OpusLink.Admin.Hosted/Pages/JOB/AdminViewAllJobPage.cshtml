@@ -77,6 +77,11 @@
             background-color: #0088CC;
             color: white;
         }
+
+    #countdown {
+        font-size: 24px;
+        font-weight: bold;
+    }
 </style>
 <div style="background-color:inherit; padding:10px">
     <form method="post" onsubmit="return validateBudgetFromAndTo()">
@@ -201,19 +206,26 @@
                                 <td style="text-align: center">
                                     @if (item.Status == (int)JobStatusEnum.NotApprove)
                                     {
-                                        <p class="status" style="background-color:grey;margin:0px;padding:0px 4px 0px 4px">Not Approved</p>
+                                        <p class="status" style="background-color:#CDCDCD;margin:0px;padding:0px 4px 0px 4px">Not Approved</p>
                                     }
                                     else if (item.Status == (int)JobStatusEnum.Hiring)
                                     {
-                                        <p class="status" style="background-color:#5B9044;margin:0px;padding:0px 4px 0px 4px">Hiring</p>
+                                        if (item.EndHiringDate < DateTime.Now)
+                                        {
+                                            <p class="status" style="background-color:#B5681C;margin:0px;padding:0px 4px 0px 4px">Hiring expried</p>
+                                        }
+                                        else
+                                        {
+                                            <p class="status" style="background-color:#00A424;margin:0px;padding:0px 4px 0px 4px">Hiring</p> <span style="color:red;font-size:13px" id="countdown_@item.JobID"></span>
+                                        }
                                     }
                                     else if (item.Status == (int)JobStatusEnum.Hired)
                                     {
-                                        <p class="status" style="background-color:orange;margin:0px;padding:0px 4px 0px 4px">Hired</p>
+                                        <p class="status" style="background-color:#0068AD;margin:0px;padding:0px 4px 0px 4px">Hired</p>
                                     }
                                     else if (item.Status == (int)JobStatusEnum.Close)
                                     {
-                                        <p class="status" style="background-color:#FF0000;margin:0px;padding:0px 4px 0px 4px">Closed</p>
+                                        <p class="status" style="background-color:#FF6D00;margin:0px;padding:0px 4px 0px 4px">Closed</p>
                                     }
                                 </td>
                                 <td>
@@ -526,5 +538,29 @@
             return false;
         }
         return true;
+    }
+</script>
+<script>
+    function startCountdown(endHiringDate, countdownId) {
+        var countdownInterval = setInterval(function () {
+            var now = new Date();
+            var totalSeconds = Math.floor((endHiringDate - now) / 1000);
+            var days = Math.floor(totalSeconds / (60 * 60 * 24));
+            var hours = Math.floor((totalSeconds % (60 * 60 * 24)) / (60 * 60));
+            var minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+            var seconds = Math.floor((totalSeconds % (60)));
+            document.getElementById(countdownId).innerHTML = "(" + days + "d " + hours + "h " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds + ")";
+            if (totalSeconds < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById(countdownId).innerHTML = "Hiring Expried";
+            }
+        }, 1000);
+    }
+    @foreach (var item in Model.Jobs)
+    {
+        <text>
+                var x = new Date("@item.EndHiringDate.ToString("yyyy-MM-ddTHH:mm:ss")");
+        startCountdown(x, "countdown_" + @item.JobID);
+        </text>
     }
 </script>

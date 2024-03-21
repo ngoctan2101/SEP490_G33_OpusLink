@@ -15,5 +15,8 @@ namespace OpusLink.Entity.DTO.JobDTO
         public decimal BudgetMax { get; set; }
         public int LocationId { get; set; }
         public int EmployerId { get; set; }
+        public DateTime EndHiringDate { get; set; }
+        public bool IsPublicMilestone { get; set; }
+        public bool IsFreelancerConfirm { get; set; }
     }
 }
