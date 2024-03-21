@@ -11,7 +11,7 @@ builder.Services.AddDbContext<OpusLinkDBContext>(options =>
 // Add services to the container.
 builder.Services.AddSession(options =>
 {
-    options.IdleTimeout = TimeSpan.FromMinutes(5);
+    options.IdleTimeout = TimeSpan.FromMinutes(10);
     options.Cookie.HttpOnly = true;
     options.Cookie.IsEssential = true;
 });

@@ -90,6 +90,11 @@
             background-color: #0088CC;
             color: white;
         }
+
+    #countdown {
+        font-size: 24px;
+        font-weight: bold;
+    }
 </style>
 <div class="row" style="margin:10px 0px 10px 0px">
     <div class="col-md-1" ></div>
@@ -217,19 +222,26 @@
                                             <td style="text-align: left">
                                                 @if (item.Status == (int)JobStatusEnum.NotApprove)
                                                 {
-                                                    <p class="status" style="background-color:grey;margin:0px;padding:0px 4px 0px 4px">Not Approved</p>
+                                                    <p class="status" style="background-color:#CDCDCD;margin:0px;padding:0px 4px 0px 4px">Not Approved</p>
                                                 }
                                                 else if (item.Status == (int)JobStatusEnum.Hiring)
                                                 {
-                                                    <p class="status" style="background-color:#5B9044;margin:0px;padding:0px 4px 0px 4px">Hiring</p>
+                                                    if (item.EndHiringDate < DateTime.Now)
+                                                    {
+                                                        <p class="status" style="background-color:#B5681C;margin:0px;padding:0px 4px 0px 4px">Hiring expried</p>
+                                                    }
+                                                    else
+                                                    {
+                                                        <p class="status" style="background-color:#00A424;margin:0px;padding:0px 4px 0px 4px">Hiring</p> <span style="color:red;font-size:13px" id="countdown_@item.JobID"></span>
+                                                    }
                                                 }
                                                 else if (item.Status == (int)JobStatusEnum.Hired)
                                                 {
-                                                    <p class="status" style="background-color:orange;margin:0px;padding:0px 4px 0px 4px">Hired</p>
+                                                    <p class="status" style="background-color:#0068AD;margin:0px;padding:0px 4px 0px 4px">Hired</p>
                                                 }
                                                 else if (item.Status == (int)JobStatusEnum.Close)
                                                 {
-                                                    <p class="status" style="background-color:#FF0000;margin:0px;padding:0px 4px 0px 4px">Closed</p>
+                                                    <p class="status" style="background-color:#FF6D00;margin:0px;padding:0px 4px 0px 4px">Closed</p>
                                                 }
                                             </td>
                                             <td style="">
@@ -555,5 +567,30 @@
             return false;
         }
         return true;
+    }
+</script>
+<script>
+
+    function startCountdown(targetDate, countdownId) {
+        var countdownInterval = setInterval(function () {
+            var now = new Date();
+            var timeDifference = targetDate - now;
+            var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+            document.getElementById(countdownId).innerHTML = "(" + days + "d " + hours + "h " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds + ")";
+            if (timeDifference < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById(countdownId).innerHTML = "Hiring Expried";
+            }
+        }, 1000);
+    }
+    @foreach (var item in Model.Jobs)
+    {
+        <text>
+                var x = new Date("@item.EndHiringDate.ToString("yyyy-MM-ddTHH:mm:ss")");
+        startCountdown(x, "countdown_" + @item.JobID);
+        </text>
     }
 </script>
