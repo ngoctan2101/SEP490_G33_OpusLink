@@ -18,6 +18,9 @@ namespace OpusLink.Entity.Models
         public DateTime? DateCreated { get; set; }
         public int? LocationID { get; set; }
         public int Status { get; set; }
+        public DateTime EndHiringDate { get; set; }
+        public bool IsPublicMilestone { get; set; }
+        public bool IsFreelancerConfirm { get; set; }
         public virtual ICollection<JobAndCategory> JobAndCategories { get; set; } = new List<JobAndCategory>();
         public virtual ICollection<Offer> Offers { get; set; } = new List<Offer>();
         public virtual ICollection<Milestone> Milestones { get; set; } = new List<Milestone>();

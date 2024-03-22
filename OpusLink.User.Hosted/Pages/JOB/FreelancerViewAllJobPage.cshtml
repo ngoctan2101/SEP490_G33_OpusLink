@@ -93,6 +93,11 @@
             background-color: #0088CC;
             color: white;
         }
+
+    #countdown {
+        font-size: 24px;
+        font-weight: bold;
+    }
 </style>
 <div class="row" style="margin:10px 0px 10px 0px">
     <div class="col-md-1"></div>
@@ -151,7 +156,8 @@
                                 }
                                 <tr style="width:100%">
                                     <td style="width:15%;text-align:right"><input type="checkbox" name="status_@((int)Enum.Parse(typeof(JobStatusEnum), status.ToString()))" value="@((int)Enum.Parse(typeof(JobStatusEnum), status.ToString()))"></td>
-                                    <td style="width:85%;text-align:left">@status.ToString()</td>
+                                    <td style="width:85%;text-align:left">@status.ToString()
+                                    </td>
                                 </tr>
                             }
                         </table>
@@ -198,19 +204,26 @@
                                             <a style="font-size:16px" class="link" asp-page="./FreelancerViewJobDetail" asp-route-JobId="@item.JobID">@item.JobTitle</a>
                                             @if (item.Status == (int)JobStatusEnum.NotApprove)
                                             {
-                                                <p class="status" style="background-color:grey;margin:0px;padding:0px 4px 0px 4px">Not Approved</p>
+                                                <p class="status" style="background-color:#CDCDCD;margin:0px;padding:0px 4px 0px 4px">Not Approved</p>
                                             }
                                             else if (item.Status == (int)JobStatusEnum.Hiring)
                                             {
-                                                <p class="status" style="background-color:#5B9044;margin:0px;padding:0px 4px 0px 4px">Hiring</p>
+                                                if(item.EndHiringDate < DateTime.Now)
+                                                {
+                                                    <p class="status" style="background-color:#B5681C;margin:0px;padding:0px 4px 0px 4px">Hiring expried</p>
+                                                }
+                                                else
+                                                {
+                                                    <p class="status" style="background-color:#00A424;margin:0px;padding:0px 4px 0px 4px">Hiring</p> <span style="color:red;font-size:13px" id="countdown_@item.JobID"></span>
+                                                }
                                             }
                                             else if (item.Status == (int)JobStatusEnum.Hired)
                                             {
-                                                <p class="status" style="background-color:orange;margin:0px;padding:0px 4px 0px 4px">Hired</p>
+                                                <p class="status" style="background-color:#0068AD;margin:0px;padding:0px 4px 0px 4px">Hired</p>
                                             }
                                             else if (item.Status == (int)JobStatusEnum.Close)
                                             {
-                                                <p class="status" style="background-color:#FF0000;margin:0px;padding:0px 4px 0px 4px">Closed</p>
+                                                <p class="status" style="background-color:#FF6D00;margin:0px;padding:0px 4px 0px 4px">Closed</p>
                                             }
                                         </div>
                                         <div class="col-md-2">
@@ -227,11 +240,11 @@
                                                 }
                                                 if (isSaved)
                                                 {
-                                                    <button type="button" onclick="SaveJob(@item.JobID, @userId)" style="background-color:grey;color:white;display:block;margin:3px;text-align:center" id="btnSave_@item.JobID" disabled>Saved</button>
+                                                    <button type="button" onclick="SaveJob(@item.JobID, @userId)" style="color:#FF7372;display:block;margin:3px;text-align:center;border:none;background-color:inherit" id="btnSave_@item.JobID" disabled>❤</button>
                                                 }
                                                 else
                                                 {
-                                                    <button type="button" onclick="SaveJob(@item.JobID, @userId)" style="background-color:cornflowerblue;color:white;display:block;margin:3px;text-align:center" id="btnSave_@item.JobID">Save</button>
+                                                    <button type="button" onclick="SaveJob(@item.JobID, @userId)" style="color:grey;display:block;margin:3px;text-align:center;border:none;background-color:inherit" id="btnSave_@item.JobID">♡</button>
                                                 }
                                             }
 
@@ -331,7 +344,7 @@
     function removeAllChild(categoryID) {
         document.getElementById("ch_" + categoryID).outerHTML = "";
         document.getElementById("tr_link_" + categoryID).setAttribute("onClick", "displayAllChild(" + categoryID + ")");
-        document.getElementById("tr_link_" + categoryID).style["color"] = "#0a58ca";
+        document.getElementById("tr_link_" + categoryID).style["color"] = "#FF7372";
         document.getElementById("tr_link_" + categoryID).innerHTML = '&#9660;';
     }
     function SaveJob(JobId, FreelancerId) {
@@ -341,8 +354,8 @@
             contentType: "application/json",
             data: JSON.stringify({ JobID: JobId, FreelancerID: FreelancerId }),
             success: function (result, status, xhr) {
-                document.getElementById("btnSave_" + JobId).innerHTML = "Saved";
-                document.getElementById("btnSave_" + JobId).style.backgroundColor = "grey";
+                document.getElementById("btnSave_" + JobId).innerHTML = "❤";
+                document.getElementById("btnSave_" + JobId).style.color = "#FF7372";
                 document.getElementById("btnSave_" + JobId).disabled = true;
             }
         })
@@ -603,5 +616,30 @@
             return false;
         }
         return true;
+    }
+</script>
+<script>
+
+    function startCountdown(endHiringDate, countdownId) {
+        var countdownInterval = setInterval(function () {
+            var now = new Date();
+            var totalSeconds = Math.floor((endHiringDate - now) / 1000);
+            var days = Math.floor(totalSeconds / (60 * 60 * 24));
+            var hours = Math.floor((totalSeconds % (60 * 60 * 24)) / (60 * 60));
+            var minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+            var seconds = Math.floor((totalSeconds % (60)));
+            document.getElementById(countdownId).innerHTML = "(" + days + "d " + hours + "h " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds + ")";
+            if (totalSeconds < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById(countdownId).innerHTML = "Hiring Expried";
+            }
+        }, 1000);
+    }
+    @foreach (var item in Model.Jobs)
+    {
+        <text>
+                var x = new Date("@item.EndHiringDate.ToString("yyyy-MM-ddTHH:mm:ss")");
+        startCountdown(x, "countdown_" + @item.JobID);
+        </text>
     }
 </script>

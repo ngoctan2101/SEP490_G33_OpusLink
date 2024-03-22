@@ -26,7 +26,9 @@ namespace OpusLink.Entity.AutoMapper.JOB
                 .ForMember(dest => dest.BudgetFrom, src => src.MapFrom(x => x.BudgetFrom))
                 .ForMember(dest => dest.BudgetTo, src => src.MapFrom(x => x.BudgetTo))
                 .ForMember(dest => dest.DateCreated, src => src.MapFrom(x => x.DateCreated))
-                .ForMember(dest => dest.LocationID, src => src.MapFrom(x => x.LocationID))
+                .ForMember(dest => dest.EndHiringDate, src => src.MapFrom(x => x.EndHiringDate))
+                .ForMember(dest => dest.IsPublicMilestone, src => src.MapFrom(x => x.IsPublicMilestone))
+                .ForMember(dest => dest.IsFreelancerConfirm, src => src.MapFrom(x => x.IsFreelancerConfirm))
                 .ForMember(dest => dest.LocationName, src => src.MapFrom(x => x.Location.LocationName))
                 .ForMember(dest => dest.Status, src => src.MapFrom(x => x.Status))
                 //lay mot list category cua cai job nay
@@ -39,6 +41,9 @@ namespace OpusLink.Entity.AutoMapper.JOB
                 .ForMember(dest => dest.JobTitle, src => src.MapFrom(x => x.JobTitle))
                 .ForMember(dest => dest.JobContent, src => src.MapFrom(x => x.JobContent))
                 .ForMember(dest => dest.Status, src => src.MapFrom(x => x.Status))
+                .ForMember(dest => dest.EndHiringDate, src => src.MapFrom(x => x.EndHiringDate))
+                .ForMember(dest => dest.IsPublicMilestone, src => src.MapFrom(x => x.IsPublicMilestone))
+                .ForMember(dest => dest.IsFreelancerConfirm, src => src.MapFrom(x => x.IsFreelancerConfirm))
                 .ForMember(dest => dest.EmployerId, src => src.MapFrom(x => x.EmployerID))
                 .ForMember(dest => dest.FreelancerId, src => src.MapFrom(x => x.FreelancerID))
                 .ForMember(dest => dest.EmployerName, src => src.MapFrom(x => x.Employer.UserName))
@@ -63,6 +68,9 @@ namespace OpusLink.Entity.AutoMapper.JOB
                 .ForMember(dest => dest.BudgetTo, src => src.MapFrom(x => x.BudgetMax))
                 .ForMember(dest => dest.DateCreated, src => src.MapFrom(x => DateTime.Now))
                 .ForMember(dest => dest.LocationID, src => src.MapFrom(x => x.LocationId))
+                .ForMember(dest => dest.EndHiringDate, src => src.MapFrom(x => x.EndHiringDate))
+                .ForMember(dest => dest.IsPublicMilestone, src => src.MapFrom(x => x.IsPublicMilestone))
+                .ForMember(dest => dest.IsFreelancerConfirm, src => src.MapFrom(x => x.IsFreelancerConfirm))
                 .ForMember(dest => dest.Status, src => src.MapFrom(x => (int)JobStatusEnum.NotApprove));
 
             CreateMap<PutJobRequest, Job>()
@@ -74,7 +82,11 @@ namespace OpusLink.Entity.AutoMapper.JOB
                 .ForMember(dest => dest.BudgetTo, src => src.MapFrom(x => x.BudgetTo))
                 .ForMember(dest => dest.DateCreated, src => src.MapFrom(x => x.DateCreated))
                 .ForMember(dest => dest.LocationID, src => src.MapFrom(x => x.LocationID))
-                .ForMember(dest => dest.Status, src => src.MapFrom(x => x.Status));
+                .ForMember(dest => dest.Status, src => src.MapFrom(x => x.Status))
+                .ForMember(dest => dest.EndHiringDate, src => src.MapFrom(x => x.EndHiringDate))
+                .ForMember(dest => dest.IsPublicMilestone, src => src.MapFrom(x => x.IsPublicMilestone))
+                .ForMember(dest => dest.IsFreelancerConfirm, src => src.MapFrom(x => x.IsFreelancerConfirm));
+
 
         }
 

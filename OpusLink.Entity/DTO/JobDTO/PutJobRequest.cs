@@ -19,6 +19,9 @@ namespace OpusLink.Entity.DTO.JobDTO
         public DateTime? DateCreated { get; set; }
         public int? LocationID { get; set; }
         public int Status { get; set; }
+        public DateTime EndHiringDate { get; set; }
+        public bool IsPublicMilestone { get; set; }
+        public bool IsFreelancerConfirm { get; set; }
         public List<Int32> CategoryIDs { get; set; }=new List<Int32>();
     }
 }

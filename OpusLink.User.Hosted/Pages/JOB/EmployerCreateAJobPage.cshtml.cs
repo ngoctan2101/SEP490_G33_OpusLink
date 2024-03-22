@@ -75,6 +75,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
                     Job.LocationId = Int32.Parse(collection[key].ToString());
                 }
             }
+            Job.EndHiringDate = DateTime.Now.AddDays(7);
             //post filter to API 
             //get list 10 job base on Filter
             var options = new JsonSerializerOptions

@@ -16,5 +16,12 @@ namespace OpusLink.Entity.Models
         public string TransactionCode { get; set; }
 
         public virtual User User { get; set; }
+
+        //Deposit=1, tiền gửi
+        //Withdraw =2, Rút tiền
+        //PutToEscrow =3, Đặt cọc tiền
+        //FeePostJob = 4, Tiền đăng bài
+        //EarnAMilestone=5, Tiền nhận ở mỗi miston
+        //HoldedAJob = 6, Tiền giữ 20%  
     }
 }
