@@ -12,8 +12,10 @@ namespace OpusLink.Service.Chat
 {
     public interface IChatService
     {
-        List<ChatBox> getAllChatBox(int userId, int role);
+        List<ChatBox> getAllChatBox();
+        List<ChatBox> getChatBoxesByUserIdAndRole(int userId, string role);
         ChatBox getChatBoxById(int id);
+        ChatBox getChatBoxByUserId(int id);
         List<Message> GetMessageById(int id);
         MessageDTO CreateMessage(CreateMessageDTO createMessageDTO);
         ChatDTO CreateChatBox(CreateChatBoxDTO createChatBoxDTO);
@@ -38,12 +40,40 @@ namespace OpusLink.Service.Chat
                 throw new Exception(e.Message);
             }
         }
+        public List<ChatBox> getChatBoxesByUserIdAndRole(int userId, string role)
+        {
+            try
+            {
+                var chatBoxes = _context.ChatBoxs.Include(cb => cb.Messages).Include("Freelancer").Include("Employer")
+					.Where(cb => cb.EmployerID == userId || cb.FreelancerID == userId)
+
+                    .ToList();
+                return chatBoxes;
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
 
         public ChatBox getChatBoxById(int id)
         {
             try
             {
                 var chatBox = _context.ChatBoxs.Include("Freelancer").Include("Employer").Include("Messages").FirstOrDefault(x => x.ChatBoxID == id);
+                return chatBox;
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public ChatBox getChatBoxByUserId(int id)
+        {
+            try
+            {
+                var chatBox = _context.ChatBoxs.Include("Freelancer").Include("Employer").Include("Messages").FirstOrDefault(x => x.FreelancerID == id || x.EmployerID == id);
                 return chatBox;
 
             }
@@ -106,6 +136,8 @@ namespace OpusLink.Service.Chat
                 FreelancerID = chatBox.FreelancerID
             };
         }
+
+      
     }
 }
 

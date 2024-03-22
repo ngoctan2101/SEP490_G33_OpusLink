@@ -28,14 +28,38 @@ namespace OpusLink.API.Controllers.Chat
             _chatService = chatService;
             _mapper = mapper;
         }
-        [HttpGet("GetAllChat/{userId}/{role}")]
-        public ActionResult<IEnumerable<ChatDTO>> GetAllChat(int userId, int role)
+        [HttpGet("GetAllChat")]
+        public ActionResult<IEnumerable<ChatDTO>> GetAllChat()
         {
-            List<ChatBox> chat = _chatService.getAllChatBox(userId, role)
+            List<ChatBox> chat = _chatService.getAllChatBox()
                 .ToList();
             List<ChatDTO> list = _mapper.Map<List<ChatDTO>>(chat);
             return Ok(list);
         }
+
+        [HttpGet("GetChatBoxesBySession")]
+        public IActionResult GetChatBoxesBySession(int userId, string role)
+        {
+            try
+            {
+                //// Retrieve user ID and role from session
+                //int userId = HttpContext.Session.GetInt32("UserId") ?? 0;
+                //int role = HttpContext.Session.GetInt32("UserRole") ?? 0;
+                //Role role = get role by name
+                // Get chat boxes based on user ID and role
+                List<ChatBox> chatBoxes = _chatService.getChatBoxesByUserIdAndRole(userId, role);
+
+                // Map chat boxes to DTOs if needed
+                List<ChatDTO> chatDTOs = _mapper.Map<List<ChatDTO>>(chatBoxes);
+
+                return Ok(chatDTOs);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
         [HttpGet("GetChatBoxById/{id}")]
         public IActionResult GetChatBoxById(int id)
         {
