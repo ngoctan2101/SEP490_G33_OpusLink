@@ -21,6 +21,9 @@ namespace OpusLink.Entity.DTO.JobDTO
         public int? LocationID { get; set; }
         public string? LocationName { get; set; }
         public int Status { get; set; } = 0;
+        public DateTime EndHiringDate { get; set; }
+        public bool IsPublicMilestone { get; set; }
+        public bool IsFreelancerConfirm { get; set; }
         public List<GetCategoryResponse> Categoies { get; set; } = new List<GetCategoryResponse>();
         public int NumberOfOffer { get; set; } = 0;
 

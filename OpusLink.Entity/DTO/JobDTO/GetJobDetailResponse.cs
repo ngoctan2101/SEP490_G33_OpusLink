@@ -27,6 +27,9 @@ namespace OpusLink.Entity.DTO.JobDTO
         public int TotalOffer { get; set; }
         public decimal AverageCost { get; set; }
         public int AverageTime { get; set; }
+        public DateTime EndHiringDate { get; set; }
+        public bool IsPublicMilestone { get; set; }
+        public bool IsFreelancerConfirm { get; set; }
 
     }
 }

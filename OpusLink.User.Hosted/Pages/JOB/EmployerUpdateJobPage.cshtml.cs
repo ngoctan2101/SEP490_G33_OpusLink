@@ -115,6 +115,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
                     PutJob.Status = Int32.Parse(collection[key].ToString());
                 }
             }
+            PutJob.EndHiringDate = DateTime.Now.AddDays(7);
             var options = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = false,

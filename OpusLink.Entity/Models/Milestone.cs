@@ -11,9 +11,13 @@ namespace OpusLink.Entity.Models
         public int MilestoneID { get; set; }
         public int JobID { get; set; }
         public string MilestoneContent { get; set; }
-        public string? FilePathFreelancerUpload { get; set; }
+        //public string? FilePathFreelancerUpload { get; set; }
         public DateTime Deadline { get; set; }
         public decimal AmountToPay { get; set; }
+        public int Status { get; set; }
+        public DateTime DateEdited { get; set; }
+        public DateTime DateCreated { get; set; }
+
         public virtual Job? Job { get; set; }
     }
 }

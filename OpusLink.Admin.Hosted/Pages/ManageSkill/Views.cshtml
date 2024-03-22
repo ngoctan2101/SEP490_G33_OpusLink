@@ -198,7 +198,7 @@
             // Ví dụ sử dụng AJAX
             $.ajax({
                 url: 'https://localhost:7265/api/Skill/DeleteSkillById/' + skillID, // Update the URL based on your controller and action
-                type: 'POST', // You might use POST or DELETE depending on your server configuration
+                type: 'DELETE', // You might use POST or DELETE depending on your server configuration
                 success: function (result) {
                     // Xử lý kết quả sau khi xóa (cập nhật giao diện, thông báo, v.v.)
                     // Ví dụ: location.reload(); để làm mới trang sau khi xóa

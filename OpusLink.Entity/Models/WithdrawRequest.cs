@@ -14,5 +14,7 @@ namespace OpusLink.Entity.Models
         public DateTime DateCreated { get; set; }
         public int Status { get; set; }
         public virtual User? User { get; set; }
+        public string? Reason { get; set; }
+        public int? HistoryPaymentID { get; set; }
     }
 }

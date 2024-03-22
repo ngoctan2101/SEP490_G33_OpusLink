@@ -32,7 +32,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 BudgetMin = 100000,
                 BudgetMax = 500000000,
                 DateMin = DateTime.ParseExact("2023-01-01 00:01", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture),
-                DateMax = DateTime.ParseExact("2024-03-30 23:59", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture)
+                DateMax = DateTime.ParseExact("2024-05-30 23:59", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture)
             };
             
         }

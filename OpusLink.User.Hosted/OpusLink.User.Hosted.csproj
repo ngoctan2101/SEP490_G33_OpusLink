@@ -23,6 +23,7 @@
   <ItemGroup>
     <ProjectReference Include="..\OpusLink.API\OpusLink.API.csproj" />
     <ProjectReference Include="..\OpusLink.Entity\OpusLink.Entity.csproj" />
+    <ProjectReference Include="..\OpusLink.Service\OpusLink.Service.csproj" />
     <ProjectReference Include="..\OpusLink.Shared\OpusLink.Shared.csproj" />
   </ItemGroup>
 
