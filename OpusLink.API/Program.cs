@@ -20,6 +20,7 @@ using OpusLink.Service.HistoryPaymentService;
 using OpusLink.API.Hubs;
 using OpusLink.Service.PaymentServices;
 using OpusLink.Service.ValidationServices;
+using OpusLink.Service.Feedbacks;
 
 internal class Program
 {
@@ -101,6 +102,7 @@ internal class Program
         builder.Services.AddScoped<IJobAndCategoryService, JobAndCategoryService>();
         builder.Services.AddScoped<IFreelancerAndSkillService, FreelancerAndSkillService>();
         builder.Services.AddScoped<IChatService, ChatService>();
+        builder.Services.AddScoped<IFeedbackService, FeedbackService>();
         builder.Services.AddScoped<IEmailService, EmailService>();
         builder.Services.AddScoped<OpusLink.Service.HistoryPaymentService.IHistoryPaymentService, OpusLink.Service.HistoryPaymentService.HistoryPaymentService>();
         builder.Services.AddScoped<OpusLink.Service.PaymentServices.IHistoryPaymentService, OpusLink.Service.PaymentServices.HistoryPaymentService>();

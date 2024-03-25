@@ -19,7 +19,7 @@ namespace OpusLink.User.Hosted.Pages.HistoryPayment
         }
         public async Task OnGetHistoryPaymentByIdAsync(int id)
         {
-            HttpResponseMessage response = await client.GetAsync($"https://localhost:7265/api/HistoryPayment/GetHistoryPaymentByUserId/{id}");
+            HttpResponseMessage response = await client.GetAsync($"https://localhost:7265/api/HistoryPayment/GetDetailHistoryPaymentByUserId/{id}");
 
             if (response.IsSuccessStatusCode)
             {

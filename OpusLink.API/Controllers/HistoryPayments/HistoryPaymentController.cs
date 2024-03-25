@@ -28,8 +28,8 @@ namespace OpusLink.API.Controllers.HistoryPayments
             return Ok(list);
         }
 
-        [HttpGet("GetHistoryPaymentByUserId/{id}")]
-        public IActionResult GetHistoryPaymentByUserId(int id)
+        [HttpGet("GetDetailHistoryPaymentByUserId/{id}")]
+        public IActionResult GetDetailHistoryPaymentByUserId(int id)
         {
             var histories = _historyPaymentService.getHistoryPaymentsByUserId(id);
             if (histories == null)

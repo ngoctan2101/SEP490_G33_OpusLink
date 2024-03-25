@@ -10,5 +10,6 @@ namespace OpusLink.Entity.DTO
     {
         public int EmployerID { get; set; }
         public int FreelancerID { get; set; }
-    }
+		public int JobID { get; set; }
+	}
 }

@@ -118,22 +118,44 @@ namespace OpusLink.Service.Chat
                 MessageContent = message.MessageContent
             };
         }
+        public Boolean isChatBoxExisted ( ChatBox chatBox)
+        {
+            return _context.ChatBoxs.Any(x => x.EmployerID == chatBox.EmployerID &&
+            x.FreelancerID == chatBox.FreelancerID && x.JobID == chatBox.JobID);
+        }
         public ChatDTO CreateChatBox(CreateChatBoxDTO createChatBoxDTO)
         {
             var chatBox = new ChatBox
             {
+                ChatBoxID = 0,
+                JobID= createChatBoxDTO.JobID,
+                IsViewed = true,
                 EmployerID = createChatBoxDTO.EmployerID,
                 FreelancerID = createChatBoxDTO.FreelancerID
             };
+            if(isChatBoxExisted(chatBox)) {
+                var a = _context.ChatBoxs.Where(x => x.EmployerID == chatBox.EmployerID &&
+                x.FreelancerID == chatBox.FreelancerID && x.JobID == chatBox.JobID).FirstOrDefault();
+                return new ChatDTO
+                {
 
+                    ChatBoxID = a.ChatBoxID,
+                    /* EmployerID = chatBox.EmployerID,
+                     FreelancerID = chatBox.FreelancerID*/
+
+                };
+            }
+            
             _context.ChatBoxs.Add(chatBox);
             _context.SaveChanges();
 
             return new ChatDTO
             {
+
                 ChatBoxID = chatBox.ChatBoxID,
-                EmployerID = chatBox.EmployerID,
-                FreelancerID = chatBox.FreelancerID
+               /* EmployerID = chatBox.EmployerID,
+                FreelancerID = chatBox.FreelancerID*/
+                
             };
         }
 
