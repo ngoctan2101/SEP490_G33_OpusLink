@@ -132,7 +132,7 @@ namespace OpusLink.Service.Admin
                         //    user.AmountMoney -= Convert.ToDecimal(Math.Abs(money));
                         //}
 
-                        _context.Update(user);
+                        _context.Users.Update(user);
                         _context.SaveChanges();
                     
                     
@@ -163,7 +163,7 @@ namespace OpusLink.Service.Admin
                 //    throw new Exception();
                 //}
 
-                _context.Update(user);
+                _context.Users.Update(user);
                 _context.SaveChanges();
 
 

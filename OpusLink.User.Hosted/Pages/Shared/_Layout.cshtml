@@ -137,28 +137,29 @@
             <script>
                 function rutTien() {
                     // Xử lý logic khi rút tiền
-                    alert('Bạn đã rút tiền thành công!');
+                    // alert('Bạn đã rút tiền thành công!');
+                    window.location.href = '/WithDrawMoney/WithDrawMoneyRequest';
                 }
-                function napTien() {
-            window.location.href = '/VnPayment/AddMoneyToWallet';
-        }
-        function LoadUserInformation() {
-    $.ajax({
-        url: "https://localhost:7265/api/User/GetUserById/1",
-        type: "GET",
-        contentType: "application/json",
-        success: function (result, status, xhr) {
+                        function napTien() {
+                    window.location.href = '/VnPayment/AddMoneyToWallet';
+                }
+                function LoadUserInformation() {
+                    $.ajax({
+                    url: "https://localhost:7265/api/User/GetUserById/1",
+                    type: "GET",
+                    contentType: "application/json",
+                    success: function (result, status, xhr) {
                     
-            // Assuming result contains user information
-            // Update the HTML element with the user information
-                    document.getElementById("amount").innerHTML += result["amountMoney"]; // Assuming result is the user information
-        },
-        error: function(xhr, status, error) {
-            // Handle error
-            console.error("Error loading user information:", error);
+                        // Assuming result contains user information
+                        // Update the HTML element with the user information
+                                document.getElementById("amount").innerHTML += result["amountMoney"]; // Assuming result is the user information
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error
+                        console.error("Error loading user information:", error);
+                    }
+                });
         }
-    });
-}
 
         window.onload = function () {
             LoadUserInformation();
