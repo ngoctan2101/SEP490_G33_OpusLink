@@ -7,6 +7,8 @@
   </PropertyGroup>
 
   <ItemGroup>
+    <PackageReference Include="Microsoft.AspNet.SignalR.Client" Version="2.4.3" />
+    <PackageReference Include="Microsoft.JSInterop" Version="6.0.28" />
     <Content Remove="wwwroot\js\Layout.js" />
   </ItemGroup>
 
@@ -19,6 +21,7 @@
   </ItemGroup>
 
   <ItemGroup>
+    <ProjectReference Include="..\OpusLink.API\OpusLink.API.csproj" />
     <ProjectReference Include="..\OpusLink.Entity\OpusLink.Entity.csproj" />
     <ProjectReference Include="..\OpusLink.Service\OpusLink.Service.csproj" />
     <ProjectReference Include="..\OpusLink.Shared\OpusLink.Shared.csproj" />

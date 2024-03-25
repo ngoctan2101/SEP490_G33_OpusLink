@@ -78,6 +78,19 @@
         font-size: 24px;
         font-weight: bold;
     }
+    .tinnhan-btn{
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff; /* Màu nền */
+        color: #fff; /* Màu chữ */
+        text-decoration: none; /* Loại bỏ gạch chân */
+        border-radius: 5px; /* Bo tròn góc */
+        transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển đổi màu */
+    }
+    .tinnhan-btn:hover{
+		background-color: #0056b3; /* Màu nền */
+		color: #fff; /* Màu chữ */
+	}
 </style>
 @{
     int userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId") ?? -1;
@@ -118,7 +131,7 @@
                     <tr><td>Budget:</td><td>@Math.Round(item.BudgetMin,0).ToString("#,##") ₫<span style="display:inline-block"> - </span>@Math.Round(item.BudgetMax,0).ToString("#,##") ₫</td></tr>
                     <tr><td>Location:</td><td>@item.Location</td></tr>
                 </table>
-
+                <a class="tinnhan-btn" asp-page="/Chat/ChatList" asp-page-handler="AddChatBox" asp-route-EmployerId="@item.EmployerId" asp-route-FreeLancerId="@userId" asp-route-JobId="@item.JobId">Tin Nhắn</a>
             </div>
             <div class="col-md-9">
                 <div>

@@ -16,8 +16,11 @@ using OpusLink.Entity.DTO.AccountDTO.Common;
 using OpusLink.Entity.DTO.AccountDTO.SendEmail;
 using OpusLink.Service.UserServices;
 using Microsoft.OpenApi.Models;
+using OpusLink.Service.HistoryPaymentService;
+using OpusLink.API.Hubs;
 using OpusLink.Service.PaymentServices;
 using OpusLink.Service.ValidationServices;
+using OpusLink.Service.Feedbacks;
 using OpusLink.Service.WithDrawRequestServices;
 
 internal class Program
@@ -101,14 +104,25 @@ internal class Program
         builder.Services.AddScoped<IJobAndCategoryService, JobAndCategoryService>();
         builder.Services.AddScoped<IFreelancerAndSkillService, FreelancerAndSkillService>();
         builder.Services.AddScoped<IChatService, ChatService>();
+        builder.Services.AddScoped<IFeedbackService, FeedbackService>();
         builder.Services.AddScoped<IEmailService, EmailService>();
-        builder.Services.AddScoped<IHistoryPaymentService, HistoryPaymentService>();
+        builder.Services.AddScoped<OpusLink.Service.HistoryPaymentService.IHistoryPaymentService, OpusLink.Service.HistoryPaymentService.HistoryPaymentService>();
+        builder.Services.AddScoped<OpusLink.Service.PaymentServices.IHistoryPaymentService, OpusLink.Service.PaymentServices.HistoryPaymentService>();
         builder.Services.AddScoped<IValidationService, ValidationService>();
         builder.Services.AddScoped<IWithDrawRequestService, WithDrawRequestService>();
 
         builder.Services.AddDbContext<OpusLinkDBContext>();
         builder.Services.AddSingleton(mapper);
-        builder.Services.AddCors();
+        builder.Services.AddCors(options =>
+        {
+            options.AddPolicy("AllowOrigin", builder =>
+            {
+                builder.WithOrigins("https://localhost:7265")
+                       .AllowAnyHeader()
+                       .AllowAnyMethod();
+            });
+        });
+        builder.Services.AddSignalR();
         var app = builder.Build();
 
         // Configure the HTTP request pipeline.
@@ -129,6 +143,7 @@ internal class Program
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
+            endpoints.MapHub<ChatHub>("/chatHub");
         });
 
         app.Run();

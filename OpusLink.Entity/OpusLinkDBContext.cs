@@ -29,7 +29,7 @@ namespace OpusLink.Entity
                     .SetBasePath(Directory.GetCurrentDirectory())
                     .AddJsonFile("appsettings.json")
                     .Build();
-                optionsBuilder.UseSqlServer(config.GetConnectionString("OpusLink"));
+                optionsBuilder.UseSqlServer(config.GetConnectionString("OpusLink"), options => options.EnableRetryOnFailure());
             }
         }
         protected override void OnModelCreating(ModelBuilder builder)
