@@ -10,6 +10,8 @@ namespace OpusLink.Entity.DTO
     {
         public int PaymentID { get; set; }
         public int UserID { get; set; }
+
+        public String UserName { get; set; }
         public decimal Amount { get; set; }
         public int TransactionType { get; set; }
         public DateTime TransactionDate { get; set; }

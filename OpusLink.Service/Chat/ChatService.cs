@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OpusLink.Entity;
+using OpusLink.Entity.DTO;
 using OpusLink.Entity.Models;
 using System;
 using System.Collections.Generic;
@@ -11,46 +12,78 @@ namespace OpusLink.Service.Chat
 {
     public interface IChatService
     {
-        List<ChatBox> getAllChatBox(int userId, int role);
+        List<ChatBox> getAllChatBox();
+        List<ChatBox> getChatBoxesByUserIdAndRole(int userId, string role);
         ChatBox getChatBoxById(int id);
-        List<Message>  GetMessageById(int id);
+        ChatBox getChatBoxByUserId(int id);
+        List<Message> GetMessageById(int id);
+        MessageDTO CreateMessage(CreateMessageDTO createMessageDTO);
+        ChatDTO CreateChatBox(CreateChatBoxDTO createChatBoxDTO);
     }
-        public class ChatService : IChatService
+    public class ChatService : IChatService
+    {
+        private readonly OpusLinkDBContext _context;
+        public ChatService(OpusLinkDBContext context)
         {
-            private readonly OpusLinkDBContext _context;
-            public ChatService (OpusLinkDBContext context)
+            _context = context;
+        }
+        public List<ChatBox> getAllChatBox()
+        {
+            try
             {
-                _context = context;
+                var chatBox = _context.ChatBoxs.Include("Freelancer").Include("Employer").Include("Messages").ToList();
+                return chatBox;
+
             }
-            public List<ChatBox> getAllChatBox(int userId, int role)
+            catch (Exception e)
             {
-                try
-                {
-                    var chatBox = _context.ChatBoxs.Include("Freelancer").Include("Employer").Include("Messages").ToList();
-                    return chatBox;
-
-                }
-                catch (Exception e)
-                {
-                    throw new Exception(e.Message);
-                }
+                throw new Exception(e.Message);
             }
-
-            public ChatBox getChatBoxById(int id)
+        }
+        public List<ChatBox> getChatBoxesByUserIdAndRole(int userId, string role)
+        {
+            try
             {
-                try
-                {
-                    var chatBox = _context.ChatBoxs.Include("Freelancer").Include("Employer").Include("Messages").FirstOrDefault(x => x.ChatBoxID == id);
-                    return chatBox;
+                var chatBoxes = _context.ChatBoxs.Include(cb => cb.Messages).Include("Freelancer").Include("Employer")
+					.Where(cb => cb.EmployerID == userId || cb.FreelancerID == userId)
 
-                }
-                catch (Exception e)
-                {
-                    throw new Exception(e.Message);
-                }
+                    .ToList();
+                return chatBoxes;
             }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
 
-        public List<Message>  GetMessageById(int id)
+        public ChatBox getChatBoxById(int id)
+        {
+            try
+            {
+                var chatBox = _context.ChatBoxs.Include("Freelancer").Include("Employer").Include("Messages").FirstOrDefault(x => x.ChatBoxID == id);
+                return chatBox;
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+        public ChatBox getChatBoxByUserId(int id)
+        {
+            try
+            {
+                var chatBox = _context.ChatBoxs.Include("Freelancer").Include("Employer").Include("Messages").FirstOrDefault(x => x.FreelancerID == id || x.EmployerID == id);
+                return chatBox;
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception(e.Message);
+            }
+        }
+
+        public List<Message> GetMessageById(int id)
         {
             try
             {
@@ -63,9 +96,71 @@ namespace OpusLink.Service.Chat
                 throw new Exception(e.Message);
             }
         }
+        public MessageDTO CreateMessage(CreateMessageDTO createMessageDTO)
+        {
+            var message = new Message
+            {
+                ChatBoxID = createMessageDTO.ChatBoxID,
+                FromEmployer = false,
+                DateCreated = DateTime.Now,
+                MessageContent = createMessageDTO.MessageContent
+            };
 
-        
+            _context.Messages.Add(message);
+            _context.SaveChanges();
+
+            return new MessageDTO
+            {
+                MessageID = message.MessageID,
+                ChatBoxID = message.ChatBoxID,
+                FromEmployer = message.FromEmployer,
+                DateCreated = message.DateCreated,
+                MessageContent = message.MessageContent
+            };
+        }
+        public Boolean isChatBoxExisted ( ChatBox chatBox)
+        {
+            return _context.ChatBoxs.Any(x => x.EmployerID == chatBox.EmployerID &&
+            x.FreelancerID == chatBox.FreelancerID && x.JobID == chatBox.JobID);
+        }
+        public ChatDTO CreateChatBox(CreateChatBoxDTO createChatBoxDTO)
+        {
+            var chatBox = new ChatBox
+            {
+                ChatBoxID = 0,
+                JobID= createChatBoxDTO.JobID,
+                IsViewed = true,
+                EmployerID = createChatBoxDTO.EmployerID,
+                FreelancerID = createChatBoxDTO.FreelancerID
+            };
+            if(isChatBoxExisted(chatBox)) {
+                var a = _context.ChatBoxs.Where(x => x.EmployerID == chatBox.EmployerID &&
+                x.FreelancerID == chatBox.FreelancerID && x.JobID == chatBox.JobID).FirstOrDefault();
+                return new ChatDTO
+                {
+
+                    ChatBoxID = a.ChatBoxID,
+                    /* EmployerID = chatBox.EmployerID,
+                     FreelancerID = chatBox.FreelancerID*/
+
+                };
+            }
+            
+            _context.ChatBoxs.Add(chatBox);
+            _context.SaveChanges();
+
+            return new ChatDTO
+            {
+
+                ChatBoxID = chatBox.ChatBoxID,
+               /* EmployerID = chatBox.EmployerID,
+                FreelancerID = chatBox.FreelancerID*/
+                
+            };
+        }
+
+      
     }
-    }
-    
+}
+
 
