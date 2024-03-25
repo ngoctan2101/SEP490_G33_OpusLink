@@ -230,9 +230,13 @@
                 {
                     <p class="status" style="background-color:orange;margin:0px;padding:0px 4px 0px 4px">Hired</p>
                 }
-                else if (item.Status == (int)JobStatusEnum.Close)
+                else if (item.Status == (int)JobStatusEnum.Completed)
                 {
                     <p class="status" style="background-color:#FF0000;margin:0px;padding:0px 4px 0px 4px">Closed</p>
+                }
+                else if (item.Status == (int)JobStatusEnum.Failed)
+                {
+                    <p class="status" style="background-color:#FF0000;margin:0px;padding:0px 4px 0px 4px">Failed</p>
                 }
             </div>
             <div class="row">

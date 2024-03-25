@@ -11,7 +11,8 @@ namespace OpusLink.Shared.Enums
         NotApprove=1,
         Hiring=2,
         Hired=3,
-        Close=4,
-        HiringExpried=5
+        Completed = 4,
+        Failed=5,
+        HiringExpried=6
     }
 }

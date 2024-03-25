@@ -142,9 +142,13 @@
                     {
                         <p class="status" style="background-color:#0068AD;margin:0px;padding:0px 4px 0px 4px">Hired</p>
                     }
-                    else if (item.Status == (int)JobStatusEnum.Close)
+                    else if (item.Status == (int)JobStatusEnum.Completed)
                     {
-                        <p class="status" style="background-color:#FF6D00;margin:0px;padding:0px 4px 0px 4px">Closed</p>
+                        <p class="status" style="background-color:#FF6D00;margin:0px;padding:0px 4px 0px 4px">Completed</p>
+                    }
+                    else if (item.Status == (int)JobStatusEnum.Failed)
+                    {
+                        <p class="status" style="background-color:#FF6D00;margin:0px;padding:0px 4px 0px 4px">Failed</p>
                     }
                 </div>
                 <div class="row">
@@ -274,7 +278,7 @@
                 <div class="col-md-2"></div>
             </div>
         }
-        else if (item.Status == (int)JobStatusEnum.Close)
+        else if (item.Status == (int)JobStatusEnum.Completed || item.Status == (int)JobStatusEnum.Failed)
         {
             <div class="row">
                 <div class="col-md-2"></div>
@@ -433,7 +437,7 @@
             }
         }, 1000);
     }
-    var x = new Date(@( Model.job.EndHiringDate.ToString("yyyy-MM-ddTHH:mm:ss")));
+    var x = new Date("@( Model.job.EndHiringDate.ToString("yyyy-MM-ddTHH:mm:ss"))");
     startCountdown(x, "countdown_" + @Model.job.JobId);
 
 </script>

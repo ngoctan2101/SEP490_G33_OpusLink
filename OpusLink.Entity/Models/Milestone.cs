@@ -17,6 +17,7 @@ namespace OpusLink.Entity.Models
         public int Status { get; set; }
         public DateTime DateEdited { get; set; }
         public DateTime DateCreated { get; set; }
+        public bool IsFreelancerDone { get; set; }
 
         public virtual Job? Job { get; set; }
     }
