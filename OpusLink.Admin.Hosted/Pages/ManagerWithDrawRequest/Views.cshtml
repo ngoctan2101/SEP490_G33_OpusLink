@@ -1,0 +1,157 @@
+﻿@page "{WithdrawRequestID:int?}"
+@model OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest.ViewsModel
+@{
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <!-- Font Awesome CSS -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css">
+    <title>Skills Dashboard</title>
+    <style>
+        /* Custom CSS if needed */
+        body {
+            padding-top: 60px;
+        }
+    </style>
+</head>
+<body>
+
+    <!-- Main Content -->
+    <div class="container mt-5">
+        <!-- Search bar and "Add New" button within a div -->
+        <div class="d-flex justify-content-between align-items-center mb-4">
+            <div>
+                <div class="input-group">
+                    <input type="text" class="form-control" placeholder="Search...">
+                    <button class="btn btn-outline-secondary" type="button">Search</button>
+                </div>
+            </div>
+        </div>
+
+        <!-- Skills Table -->
+        <table class="table">
+            <thead>
+                <tr>
+                    <th scope="col">#</th>
+                    <th scope="col">UserName</th>
+                    <th scope="col">Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @if (Model.listWithdraw != null)
+                {
+                    <!-- Data for the table will be added here -->
+                    @foreach (var item in Model.listWithdraw)
+                    {
+                        <div style ="display:none">
+                            <p id="wdr_name_@item.WithdrawRequestID">@item.UserName</p>
+                            <p id="wdr_bankinfo_@item.WithdrawRequestID">@item.BankAccountInfor</p>
+                            <p id="wdr_bankname_@item.WithdrawRequestID">@item.BankName</p>
+                            <p id="wdr_amount_@item.WithdrawRequestID">@item.Amount</p>
+                        </div>
+                        <tr>
+                            <th scope="row" name="@item.WithdrawRequestID" id="WithdrawRequestID_@item.WithdrawRequestID">@item.WithdrawRequestID</th>
+
+                            @* <input hidden name="withdrawId" value="@item.WithdrawRequestID" /> *@
+
+                            <td >@item.UserName</td>
+                            <td>
+                                <!-- Edit and Delete buttons -->
+                                <div class="btn-group" role="group" aria-label="Skill Actions">
+                                    <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editSkillModal" data-withdrawId="@item.WithdrawRequestID" onclick="ViewWithDraw(@item.WithdrawRequestID)"><i class="fas fa-eye"></i> View</button>
+                                    @if(item.Amount <= item.AmountUser)
+                                    {
+                                        <a href="/ManagerWithDrawRequest/TransferMoney?withdrawId=@item.WithdrawRequestID" class="btn btn-success"><i class="fas fa-exchange-alt"></i> Transfer</a>
+                                    }
+
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSkillModal" onclick="ResendWithDraw(@item.WithdrawRequestID)"><i class="fas fa-sync-alt"></i> Resend</button>
+                                </div>
+
+                            </td>
+                        </tr>
+                    }
+                }
+                <!-- Add more rows if needed -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- View Skill Modal -->
+    <div class="modal fade" id="editSkillModal" tabindex="-1" aria-labelledby="editSkillModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editSkillModalLabel">Xem yêu cầu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form for editing skill -->
+                    <form method="post">
+                        <div class="mb-3">
+                            <label for="viewusername" class="form-label">Tên người dùng</label>
+                            <input type="text" class="form-control" id="viewusername" required readonly >
+                            <label for="viewbankinfor" class="form-label">Số tài khoản ngân hàng</label>
+                            <input type="text" class="form-control" id="viewbankinfor" required readonly >
+                            <label for="viewbankname" class="form-label">Tên ngân hàng</label>
+                            <input type="text" class="form-control" id="viewbankname" required readonly >
+                            <label for="viewamount" class="form-label">Số tiền</label>
+                            <input type="text" class="form-control" id="viewamount" required readonly >
+                        </div>
+                        <!-- Add more fields if needed -->
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- Modal add new Skill -->
+    <div class="modal fade" id="addSkillModal" tabindex="-1" aria-labelledby="addSkillModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="addSkillModalLabel">Gửi lại yêu cầu</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form thêm mới sẽ được thêm ở đây -->
+                    <form id="addSkillForm" method="post">
+                        <input hidden name="withdrawid" id="withdrawid" />
+                        <div class="mb-3">
+                            <label for="resendreason" class="form-label">Lý do</label>
+                            <input type="text" class="form-control" id="resendreason" name="reason" required>
+                        </div>
+                        <!-- Thêm các trường khác nếu cần -->
+                        <button type="submit" class="btn btn-primary" asp-page-handler="UpdateWithDraw">Gửi</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Bootstrap JS và Popper.js (đặt dưới thẻ body) -->
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function ViewWithDraw(withdrawRequestID) {
+            var username = document.getElementById("wdr_name_" + withdrawRequestID).innerHTML;
+            var bankinfo = document.getElementById("wdr_bankinfo_" + withdrawRequestID).innerHTML;
+            var bankname = document.getElementById("wdr_bankname_" + withdrawRequestID).innerHTML;
+            var amount = document.getElementById("wdr_amount_" + withdrawRequestID).innerHTML;
+
+            document.getElementById("viewusername").value = username;
+            document.getElementById("viewbankinfor").value = bankinfo;
+            document.getElementById("viewbankname").value = bankname;
+            document.getElementById("viewamount").value = amount;
+            
+        }
+        function ResendWithDraw(withdrawRequestID) {
+            document.getElementById("resendreason").value = "";
+            document.getElementById("withdrawid").value = withdrawRequestID;
+        }
+        
+    </script>
+
+</body>
+</html>

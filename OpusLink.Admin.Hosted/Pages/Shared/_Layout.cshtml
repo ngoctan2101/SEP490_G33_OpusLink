@@ -212,6 +212,10 @@
                     {
                         a = ""; b = ""; c = ""; d = ""; e = ""; f = ""; g = "background-color: sienna";
                     }
+                    else if (pageNow.Equals("ManagerWithDrawRequest"))
+                    {
+                        a = ""; b = ""; c = ""; d = ""; e = ""; f = ""; g = "background-color: sienna";
+                    }
                 }
                 <ul>
                     <a asp-page="/Dashboard/DashboardAdmin">
@@ -241,6 +245,11 @@
                     <a asp-page="/Report/ReportUserList">   
                     <li style="@g">Report User List</li>
                     </a>
+                    <a asp-page="/ManagerWithDrawRequest/Views">
+                    <li style="@g">ManagerWithDrawRequest</li>
+                    </a>
+                   
+                    
                 </ul>
                 <div id="content-left-admin" class="dropdown" onclick="toggleAdminPanel()">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="adminDropdownButton"

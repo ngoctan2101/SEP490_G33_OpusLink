@@ -18,6 +18,7 @@ namespace OpusLink.Service.Admin
         void UpdateUser2(Entity.Models.User a);
 
         void UpdateAmountMoney(double money,int userId);
+        public void WithdrawMoney(double money, int userId);
     }
 
 
@@ -115,31 +116,62 @@ namespace OpusLink.Service.Admin
         {
             
                 Entity.Models.User user = _context.Users.FirstOrDefault(u => u.Id == userId);
-                if (user != null)
-                {
+                //if (user != null)
+                //{
                     
-                        if (money >= 0){
+                        //if (money >= 0){
                             user.AmountMoney += Convert.ToDecimal(money);
-                        }
-                        else if (money <= 0 && Convert.ToDecimal(money) >= user.AmountMoney)
-                        {
-                            return;
-                            // Không thực hiện gì cả vì số tiền trừ không được lớn hơn số tiền hiện có của người dùng
-                        }
-                        else
-                        {
-                            user.AmountMoney -= Convert.ToDecimal(Math.Abs(money));
-                        }
+                        //}
+                        //else if (money <= 0 && Convert.ToDecimal(money) >= user.AmountMoney)
+                        //{
+                        //    return;
+                        //    // Không thực hiện gì cả vì số tiền trừ không được lớn hơn số tiền hiện có của người dùng
+                        //}
+                        //else
+                        //{
+                        //    user.AmountMoney -= Convert.ToDecimal(Math.Abs(money));
+                        //}
 
-                        _context.Update(user);
+                        _context.Users.Update(user);
                         _context.SaveChanges();
                     
                     
-                }
-                else
-                {
-                    throw new Exception("User not found");
-                }
+                //}
+                //else
+                //{
+                //    throw new Exception("User not found");
+                //}
+
+
+
+
+        }
+
+        public void WithdrawMoney(double money, int userId)
+        {
+
+            Entity.Models.User user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            //if (user != null)
+            //{
+
+            //    if (money >= 0 && Convert.ToDecimal(money) <= user.AmountMoney)
+            //    {
+                    user.AmountMoney -= Convert.ToDecimal(money);
+                //}
+                //else
+                //{
+                //    throw new Exception();
+                //}
+
+                _context.Users.Update(user);
+                _context.SaveChanges();
+
+
+            //}
+            //else
+            //{
+            //    throw new Exception("Your account is not enough");
+            //}
 
 
 
