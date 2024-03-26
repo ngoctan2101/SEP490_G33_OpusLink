@@ -151,6 +151,7 @@
                     <th>Số điện thoại</th>
                     <th>Địa chỉ</th>
                     <th>Ngày sinh</th>
+                    <th>Số lượng báo cáo</th>
                     <th>Trạng thái</th>
                 </tr>
                 @foreach (var item in Model.listUser)
@@ -180,17 +181,17 @@
                         <td>@item.Address</td>
                         @* <td>@((cus.CreatedAt == null ? DateTime.Now : (DateTime)cus.CreatedAt).ToString("dd/MM/yyyy"))</td> *@
                         <td>@item.Dob</td>
-@*                         <td>
-                            <a class="delete" id="@item.Id"
-                           asp-page="/ManageUser/UserDetail" asp-route-id="@item.Id"
-                           asp-page-handler="Active">@(item.Status == 1 ? "Active" : "Deactive")</a>
-                        </td> *@
+                        <td>@item.TotalReport</td>
                         <td>
-                                <form asp-page="/ManageUser/UserDetail" asp-route-id="@item.Id" asp-page-handler="Active" method="post">
-                                    <button type="submit" class="delete @(item.Status == 1 ? "active" : "deactive")" id="@item.Id">
-                                        @(item.Status == 1 ? "Active" : "Deactive")
-                                    </button>
-                                </form>
+                            @if(@item.Status == 1){
+                                <button type="button" class="delete @(item.Status == 1 ? "active" : "deactive") openModal" id="@item.Id" data-userid="@item.Id">
+                                    Đang hoạt động
+                                </button>
+                            }else{
+                                <button type="button" class="delete @(item.Status == 1 ? "active" : "deactive") show" id="@item.Id" data-userid="@item.Id">
+                                    Đã bị khóa
+                                </button>
+                            }
                         </td>
                     </tr>
                 }
@@ -217,12 +218,26 @@
     </div>
     </form>
     <!-- Modal -->
-    <div id="confirmationModal" class="modal">
+    <div id="myModal" class="modal">
+
+        <!-- Nội dung modal -->
         <div class="modal-content">
             <span class="close">&times;</span>
-            <p>Bạn có chắc chắn muốn thực hiện hành động này?</p>
-            <button id="confirmButton">Xác nhận</button>
-            <button id="cancelButton">Hủy</button>
+            <form id="modalForm">
+                <input type="hidden" id="modalUserID" name="userID" />
+                <h3 style="text-align: center;">Khóa tài khoản</h3>
+                <label for="cutoffDate">
+                    Tài khoản bị khóa sẽ không thể đăng nhập vào hệ thống trong thời gian quy định. Hết thời gian đó,
+                    tài khoản sẽ  được kích hoạt lại khi người dùng đăng nhập.
+                </label>
+                <br />
+                <br />
+                <label for="time">Chọn thời gian cấm đến</label><br>
+                <input type="date" id="cutoffDate" name="cutoffDate" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")"><br>
+                <label for="reason">Lý do cấm tài khoản</label><br>
+                <textarea id="reason" name="reason" rows="4" cols="50"></textarea><br>
+                <button type="submit" class="confirm-button" onclick="submitForm(this.id)">Xác nhận</button>
+            </form>
         </div>
     </div>
 </body>
@@ -260,43 +275,78 @@
         }
     }
 </script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
 <script>
-    // JavaScript để hiển thị và ẩn modal
-    var modal = document.getElementById("confirmationModal");
-    var confirmButton = document.getElementById("confirmButton");
-    var cancelButton = document.getElementById("cancelButton");
+    $(document).ready(function () {
+        $("button.show").click(function () {
+            var userID = $(this).data("userid");
 
-    // Khi người dùng nhấp vào nút "Active" hoặc "Deactive"
-    var buttons = document.querySelectorAll(".delete");
-    buttons.forEach(function (button) {
-        button.addEventListener("click", function () {
-            modal.style.display = "block";
+            // Lỗi dữ liệu
+            console.log(userID);
+
+            // Ajax request
+            $.ajax({
+                url: `https://localhost:7265/api/User/UnBanUser?userId=` + userID,
+                method: 'PATCH',
+                contentType: 'application/json',
+                success: function (response) {
+                    alert("UnBan User Successfully!");
+                    window.location.reload();
+                },
+                error: function (xhr, status, error) {
+                    alert("Ban Fail Failed!");
+                }
+            });
+
+            // Đóng modal sau khi submit
+            $("#myModal").css("display", "none");
         });
     });
+</script>
+<script>
+    $(document).ready(function () {
+        // Open Modal
+        $(".openModal").click(function () {
+            var userID = $(this).data("userid");
+            $("#modalUserID").val(userID);
+            $("#cutoffDate").val(""); // Xóa giá trị của trường input date
+            $("#reason").val(""); // Xóa giá trị của trường textarea
+            $("#myModal").css("display", "block");
+        });
 
-    // Khi người dùng nhấp vào nút xác nhận trong modal
-    confirmButton.onclick = function () {
-        // Thực hiện hành động tương ứng ở đây
-        modal.style.display = "none";
-    };
+        // Close Modal
+        $(".close").click(function () {
+            $("#myModal").css("display", "none");
+        });
 
-    // Khi người dùng nhấp vào nút hủy trong modal
-    cancelButton.onclick = function () {
-        modal.style.display = "none";
-    };
+        // Submit Form
+        $("#modalForm").submit(function (e) {
+            e.preventDefault();
+            var userID = $("#modalUserID").val();
+            var cutoffDate = $("#cutoffDate").val(); // Lấy giá trị từ trường input date
+            var reason = $("#reason").val(); // Lấy giá trị từ trường textarea
 
-    // Khi người dùng nhấp vào nút đóng (×) trong modal
-    var closeButtons = document.querySelectorAll(".close");
-    closeButtons.forEach(function (closeButton) {
-        closeButton.addEventListener("click", function () {
-            modal.style.display = "none";
+            // Lỗi dữ liệu
+            console.log(userID);
+            console.log(cutoffDate);
+            console.log(reason);
+
+            // Ajax request
+            $.ajax({
+                url: `https://localhost:7265/api/User/BanUser?banReason=` + reason + `&endBanDate=` + cutoffDate + `&userId=` + userID,
+                method: 'PATCH',
+                contentType: 'application/json',
+                success: function (response) {
+                    alert("Ban User Successfully!");
+                    window.location.reload();
+                },
+                error: function (xhr, status, error) {
+                    alert("Ban Fail Failed!");
+                }
+            });
+
+            // Đóng modal sau khi submit
+            $("#myModal").css("display", "none");
         });
     });
-
-    // Khi người dùng nhấp ra ngoài modal, nó sẽ đóng modal
-    window.onclick = function (event) {
-        if (event.target == modal) {
-            modal.style.display = "none";
-        }
-    };
 </script>

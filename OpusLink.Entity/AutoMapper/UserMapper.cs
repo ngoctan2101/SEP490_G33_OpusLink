@@ -14,6 +14,7 @@ namespace OpusLink.Entity.AutoMapper
         public UserMapper()
         {
             CreateMap<User, UserDTO>()
+                .ForMember(dest => dest.TotalReport, opt => opt.MapFrom(src => src.ReportUsersAsATargeter.Count()))
                 .ReverseMap();
 
             CreateMap<Skill, SkillDTO>()

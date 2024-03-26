@@ -60,7 +60,6 @@ namespace OpusLink.User.Hosted.Pages
                             HttpContext.Session.SetString("userName", name);
 
                             //Trả lại Page Index
-                            return RedirectToPage("/JOB/FreelancerViewAllJobPage");
                             if(currentRole == "Freelancer")
                             {
                                 return RedirectToPage("/JOB/FreelancerViewAllJobPage");
