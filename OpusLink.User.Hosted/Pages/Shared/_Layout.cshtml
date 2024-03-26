@@ -198,7 +198,7 @@
     <script>
         function rutTien() {
             // Xử lý logic khi rút tiền
-            alert('Bạn đã rút tiền thành công!');
+            window.location.href = '/WithDrawMoney/WithDrawMoneyRequest';
         }
         function napTien() {
             window.location.href = '/VnPayment/AddMoneyToWallet';
@@ -209,6 +209,18 @@
                 type: "GET",
                 contentType: "application/json",
                 success: function (result, status, xhr) {
+                    
+                      
+                        // Assuming result contains user information
+                        // Update the HTML element with the user information
+                                document.getElementById("amount").innerHTML += result["amountMoney"]; // Assuming result is the user information
+                    },
+                    error: function(xhr, status, error) {
+                        // Handle error
+                        console.error("Error loading user information:", error);
+                    }
+                });
+        }
 
                     // Assuming result contains user information
                     // Update the HTML element with the user information
