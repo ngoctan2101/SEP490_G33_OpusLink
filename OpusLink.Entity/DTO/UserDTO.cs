@@ -27,6 +27,7 @@ namespace OpusLink.Entity.DTO
         public bool IsVeryfiedIdentity { get; set; }
         public decimal? AmountMoney { get; set; }
         public int Status { get; set; }
+        public int TotalReport { get; set; }
 
         public List<SkillDTO> Skills { get; set; }=new List<SkillDTO>();
     }

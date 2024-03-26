@@ -363,17 +363,27 @@ namespace OpusLink.API.Controllers.Admin
                 {
                     _userService.WithdrawMoney(amount, userId);
                      return Ok("Withdraw money successfull");
-
                 }
                 else
                 {
                     NotFound("Insufficient account");
-                }
-                
+                }     
             }
-            
-
             return Ok("Not find User");
+        }
+
+        [HttpPatch("BanUser")]
+        public async Task<IActionResult> UpdateBanUser(string banReason, DateTime endBanDate, int userId)
+        {
+            _userService.UpdateBanUser(banReason, endBanDate, userId);
+            return Ok("Update successfull");
+        }
+
+        [HttpPatch("UnBanUser")]
+        public async Task<IActionResult> UpdateUnBanUser(int userId)
+        {
+            _userService.UpdateUnBanUser(userId);
+            return Ok("Update successfull");
         }
         private List<FreelancerAndSkill> FindFAS2Add(List<FreelancerAndSkill> fasa, List<int> skillIDs, int userId)
         {
