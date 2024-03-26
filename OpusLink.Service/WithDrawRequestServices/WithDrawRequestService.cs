@@ -27,7 +27,7 @@ namespace OpusLink.Service.WithDrawRequestServices
     {
         public readonly OpusLinkDBContext _context = new OpusLinkDBContext();
 
-        public IHistoryPaymentService _historyPayment = new HistoryPaymentService();
+        public IHistoryPaymentService _historyPayment = new OpusLink.Service.PaymentServices.HistoryPaymentService();
 
         public List<WithdrawRequest> GetAllWithdrawRequestByStatus(int status)
         {
