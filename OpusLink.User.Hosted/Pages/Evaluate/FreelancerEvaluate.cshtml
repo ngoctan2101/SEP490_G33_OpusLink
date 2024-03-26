@@ -284,9 +284,11 @@
 				if (response.ok) {
 					// Feedback successfully submitted
 					console.log('Feedback submitted successfully');
+					alert('Feedback submitted successfully');
 				} else {
 					// Handle error response
 					console.error('Failed to submit feedback');
+					alert('Failed to submit feedback');
 				}
 			} catch (error) {
 				console.error('Error submitting feedback:', error);
