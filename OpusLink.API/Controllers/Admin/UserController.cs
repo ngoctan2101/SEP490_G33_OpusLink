@@ -333,8 +333,57 @@ namespace OpusLink.API.Controllers.Admin
         [HttpPut("UpdateAmount/{amount}/{userId}")]
         public async Task<IActionResult> UpdateAmount(double amount, int userId)
         {
-             _userService.UpdateAmountMoney(amount, userId);
-            
+            User us = _userService.GetUserById(userId);
+            if (us != null)
+            {
+                if (amount >= 0 )
+                {
+                    _userService.UpdateAmountMoney(amount, userId);
+                    return Ok("Loaded money successfull");
+
+                }
+                else
+                {
+                    NotFound("Money not accept");
+                }
+
+            }
+
+
+            return Ok("Not find User");
+        }
+
+        [HttpPut("WithdrawMoney/{amount}/{userId}")]
+        public async Task<IActionResult> WithdrawMoney(double amount, int userId)
+        {
+            User us = _userService.GetUserById(userId);
+            if (us != null)
+            {
+                if(amount >= 0 && us.AmountMoney >= Convert.ToDecimal(amount))
+                {
+                    _userService.WithdrawMoney(amount, userId);
+                     return Ok("Withdraw money successfull");
+
+                }
+                else
+                {
+                    NotFound("Insufficient account");
+                }     
+            }
+            return Ok("Not find User");
+        }
+
+        [HttpPatch("BanUser")]
+        public async Task<IActionResult> UpdateBanUser(string banReason, DateTime endBanDate, int userId)
+        {
+            _userService.UpdateBanUser(banReason, endBanDate, userId);
+            return Ok("Update successfull");
+        }
+
+        [HttpPatch("UnBanUser")]
+        public async Task<IActionResult> UpdateUnBanUser(int userId)
+        {
+            _userService.UpdateUnBanUser(userId);
             return Ok("Update successfull");
         }
         private List<FreelancerAndSkill> FindFAS2Add(List<FreelancerAndSkill> fasa, List<int> skillIDs, int userId)

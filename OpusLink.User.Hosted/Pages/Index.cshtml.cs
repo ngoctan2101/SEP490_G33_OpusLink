@@ -5,41 +5,42 @@ using OpusLink.Entity.DTO.AccountDTO.Common;
 using OpusLink.Entity.DTO.AccountDTO;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Principal;
+using System.IdentityModel.Tokens.Jwt;
 
 namespace OpusLink.User.Hosted.Pages
 {
     public class IndexModel : PageModel
     {
-        private readonly ILogger<IndexModel> _logger;
-        public IndexModel(ILogger<IndexModel> logger)
+        // ----LINK API----
+        string linkUpdateRole = "https://localhost:7265/api/Account/update-role";
+        string linkLogOut = "https://localhost:7265/api/Account/logout";
+
+        public async Task<IActionResult> OnGetAsync()
         {
-            _logger = logger;
+            string currentRole = HttpContext.Session.GetString("Role");
+            if (currentRole == "Employer")
+            {
+                return RedirectToPage("/JOB/EmployerViewAllJobCreatedPage");
+            }
+            else
+            {
+                return RedirectToPage("/JOB/FreelancerViewAllJobPage");
+            }
         }
         string link = "https://localhost:7265/api/Account/update-role";
         string linkLogOut = "https://localhost:7265/api/Account/logout";
 
-        public async Task<IActionResult> OnGetAsync(string role)
+        public async Task<IActionResult> OnPostChangeTokenAboutRole()
         {
-            if (String.IsNullOrEmpty(role))
-            {
-                role = "Freelancer";
-            }
-            if (role.Equals("Freelancer"))
-            {
-                HttpContext.Session.SetString("Role", "Freelancer");
-            }
-            else if (role.Equals("Employer"))
-            {
-                HttpContext.Session.SetString("Role", "Employer");
-            }
             UpdateRoleDTO account = new UpdateRoleDTO()
             {
                 UserName = HttpContext.Session.GetString("userName"),
-                CurrentRole = HttpContext.Session.GetString("currentRole"),
+                CurrentRole = HttpContext.Session.GetString("Role")
             };
+
             using (HttpClient client = new HttpClient())
             {
-                using (HttpResponseMessage response = await client.PostAsJsonAsync(link, account))
+                using (HttpResponseMessage response = await client.PostAsJsonAsync(linkUpdateRole, account))
                 {
                     using (HttpContent content = response.Content)
                     {
@@ -52,39 +53,37 @@ namespace OpusLink.User.Hosted.Pages
                             var handler = new JwtSecurityTokenHandler();
                             var jsonToken = handler.ReadToken(token) as JwtSecurityToken;
 
-                            // Lấy ra UserId từ claims
-                            string userId = jsonToken.Claims.First(claim => claim.Type == "UserId").Value;
-                            string currentRole = jsonToken.Claims.First(claim => claim.Type == "role").Value;
-                            string name = jsonToken.Claims.First(claim => claim.Type == "unique_name").Value;
+                            // Lấy thông tin từ Claims
+                            string userId = jsonToken.Claims.First(claim => claim.Type == "userId").Value;
+                            string currentRole = jsonToken.Claims.First(claim => claim.Type == "currentRole").Value;
+                            string name = jsonToken.Claims.First(claim => claim.Type == "userName").Value;
 
+                            //Add thông tin lấy được vào Session
                             HttpContext.Session.SetInt32("UserId", Int32.Parse(userId));
-
                             HttpContext.Session.SetString("token", token);
-                            HttpContext.Session.SetString("currentRole", currentRole);
+                            HttpContext.Session.SetString("Role", currentRole);
                             HttpContext.Session.SetString("userName", name);
 
-                            /*return RedirectToPage("/Index", new { token = apiResponse.Data.ToString() });*/
-                            return Page();
-                        }
-                        else
-                        {
-                            if (apiResponse.Code == 0)
+                            //Trả lại Page Index
+                            if(currentRole == "Freelancer")
                             {
-                                ViewData["Error"] = TotalMessage.LoginError;
-                                return Page();
+                                return RedirectToPage("/JOB/FreelancerViewAllJobPage");
                             }
                             else
                             {
-                                ViewData["Error"] = apiResponse.Message;
-                                return Page();
+                                return RedirectToPage("/JOB/EmployerViewAllJobCreatedPage");
                             }
+                        }
+                        else
+                        {
+                            ViewData["Error"] = apiResponse.Message;
+                            return Page();
                         }
                     }
                 }
             }
         }
-
-        public async Task<IActionResult> OnGetForLogOut()
+        public async Task<IActionResult> OnPostForLogOut()
         {
             using (HttpClient client = new HttpClient())
             {
@@ -98,22 +97,12 @@ namespace OpusLink.User.Hosted.Pages
                         if (apiResponse.IsSuccess)
                         {
                             HttpContext.Session.Clear();
-
-                            /*return RedirectToPage("/Index", new { token = apiResponse.Data.ToString() });*/
-                            return Page();
+                            return RedirectToPage("/JOB/FreelancerViewAllJobPage");
                         }
                         else
                         {
-                            if (apiResponse.Code == 0)
-                            {
-                                ViewData["Error"] = TotalMessage.LoginError;
-                                return Page();
-                            }
-                            else
-                            {
-                                ViewData["Error"] = apiResponse.Message;
-                                return Page();
-                            }
+                            ViewData["Error"] = apiResponse.Message;
+                            return Page();
                         }
                     }
                 }

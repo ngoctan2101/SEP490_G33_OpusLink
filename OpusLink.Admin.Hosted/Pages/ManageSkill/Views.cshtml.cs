@@ -42,15 +42,6 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
         public async Task OnGetAsync()
         {
             HttpContext.Session.SetString("PageNow", "ManageSkill");
-            // call list
-            //HttpResponseMessage responseSkill = await client.GetAsync(ServiceMangaUrl + "api/Skill/GetAllSkill");
-            //if (responseSkill.IsSuccessStatusCode)
-            //{
-            //    string responseBodySkill = await responseSkill.Content.ReadAsStringAsync();
-            //    var optionSkill = new JsonSerializerOptions()
-            //    { PropertyNameCaseInsensitive = true };
-            //    listSkills = JsonSerializer.Deserialize<List<SkillDTO>>(responseBodySkill, optionSkill);
-            //}
             //get list first 10 skills
             var options = new JsonSerializerOptions
             {

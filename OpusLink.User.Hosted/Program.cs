@@ -50,6 +50,20 @@ builder.Services.AddHttpContextAccessor();
 
 
 
+
+
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(5);
+    options.Cookie.HttpOnly = true;
+    options.Cookie.IsEssential = true;
+});
+builder.Services.AddHttpContextAccessor();
+
+
+
+
+
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.

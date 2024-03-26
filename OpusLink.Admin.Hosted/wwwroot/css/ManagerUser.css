@@ -1,4 +1,4 @@
-﻿/* CSS cho modal */
+﻿
 .modal {
     display: none;
     position: fixed;
@@ -8,28 +8,61 @@
     width: 100%;
     height: 100%;
     overflow: auto;
-    background-color: rgb(0, 0, 0);
-    background-color: rgba(0, 0, 0, 0.4);
+    background-color: rgba(0,0,0,0.4);
 }
 
 .modal-content {
     background-color: #fefefe;
-    margin: 15% auto;
+    margin: 10% auto;
     padding: 20px;
     border: 1px solid #888;
-    width: 80%;
+    width: 50%;
+    border-radius: 10px;
+    box-shadow: 0 4px 8px rgba(0,0,0,0.2);
+    animation: animatezoom 0.3s;
+    position: relative;
 }
 
 .close {
-    color: #aaaaaa;
-    float: right;
+    color: #aaa;
+    position: absolute;
+    top: 10px;
+    right: 10px;
     font-size: 28px;
     font-weight: bold;
+    cursor: pointer;
 }
 
     .close:hover,
     .close:focus {
-        color: #000;
+        color: black;
         text-decoration: none;
         cursor: pointer;
+    }
+
+input[type=date], textarea {
+    width: calc(100% - 40px);
+    padding: 12px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+    margin-top: 6px;
+    margin-bottom: 16px;
+    resize: vertical;
+}
+
+.confirm-button {
+    background-color: #4CAF50;
+    color: white;
+    padding: 12px 20px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    width: 50%;
+    margin: 0 auto;
+    display: block;
+}
+
+    .confirm-button:hover {
+        background-color: #45a049;
     }

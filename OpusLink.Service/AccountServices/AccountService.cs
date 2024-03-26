@@ -5,13 +5,9 @@ using OpusLink.Entity.DTO.AccountDTO.Common;
 using OpusLink.Entity.DTO.AccountDTO;
 using OpusLink.Entity.Models;
 using OpusLink.Entity;
-using OpusLink.Shared.Enums;
 using System.IdentityModel.Tokens.Jwt;
 using System.Security.Claims;
 using System.Text;
-using OpusLink.Entity.DTO.AccountDTO.SendEmail;
-using Org.BouncyCastle.Asn1.Ocsp;
-using System.Security.Policy;
 
 namespace OpusLink.Service.AccountServices
 {
@@ -112,10 +108,10 @@ namespace OpusLink.Service.AccountServices
             string role = roles[0].ToString();
             result = new List<Claim>()
             {
-                new(ClaimTypes.Name, user.UserName),
-                new(ClaimTypes.Email, user.Email),
-                new("UserId", user.Id.ToString()),
-                new(ClaimTypes.Role, role),
+                new("userName", user.UserName),
+                new("email", user.Email),
+                new("userId", user.Id.ToString()),
+                new("currentRole", role),
                 new(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
             return result;
@@ -140,10 +136,10 @@ namespace OpusLink.Service.AccountServices
                 
             result = new List<Claim>()
             {
-                new(ClaimTypes.Name, user.UserName),
-                new(ClaimTypes.Email, user.Email),
-                new("UserId", user.Id.ToString()),
-                new(ClaimTypes.Role, role),
+                new("userName", user.UserName),
+                new("email", user.Email),
+                new("userId", user.Id.ToString()),
+                new("currentRole", role),
                 new(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
             return result;

@@ -1,0 +1,106 @@
+﻿@page
+@model OpusLink.User.Hosted.Pages.WithDrawMoney.WithDrawMoneyRequestModel
+@{
+    var erorr = HttpContext!.Session.GetString("_error") ?? string.Empty;
+
+}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Nạp Tiền</title>
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            background-color: #f4f4f4;
+            margin: 0;
+            padding: 0;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            height: 100vh;
+        }
+        .container {
+            background-color: #fff;
+            padding: 20px;
+            border-radius: 8px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+            width: 400px;
+            text-align: center;
+        }
+        .bottom-container {
+            position: absolute;
+            bottom: 20px;
+            width: 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <h2 class="mb-4">Gửi yêu cầu rút tiền</h2>
+        @if (Model.user.BankName == null || Model.user.BankAccountInfor == null)
+        {
+            <p style="color:red;">Bank account name or account number is empty.Please fill in all information</p>
+        }
+        <form id="topupForm" method="post">
+            <div class="mb-3">
+                <label for="username" class="form-label">Số tiền trong tài khoản</label>
+                <input type="text" class="form-control" id="username" name="username" readonly required value="@Model.user.AmountMoney">
+            </div>
+
+            <div class="mb-3">
+                <label for="bankacccountinfor" class="form-label">Số tài khoản ngân hàng</label>
+                <input type="text" class="form-control" id="bankacccountinfor" name="bankacccountinfor" required value="@Model.user.BankAccountInfor">
+            </div>
+
+            <div class="mb-3">
+                <label for="bankname" class="form-label">Tên ngân hàng</label>
+                <input type="text" class="form-control" id="bankname" name="bankname" required value="@Model.user.BankName">
+            </div>
+
+            <div class="mb-3">
+                <label for="amount" class="form-label">Số tiền:</label>
+                <input type="text" class="form-control" id="amount" name="amount" oninput="formatCurrency(this)" required>
+            </div>
+
+            <a href="../Index" class="btn btn-secondary mt-3">
+                <i class="bi bi-arrow-left"></i> Quay lại
+            </a>
+            @if(Model.user.BankAccountInfor == null || Model.user.BankName == null)
+            {
+                <a href="/Freelancer/Profile/Views?id=@Model.user.Id" class="btn btn-success mt-3">
+                    <i class="bi bi-arrow-left"></i> Update
+                </a>
+            }
+            else
+            {
+                <button type="submit" class="btn btn-success mt-3">Rút Tiền</button>
+            }
+           
+        </form>
+
+        <div class="bottom-container">
+            <!-- Chỗ này để đặt các phần tử ở gốc dưới của form -->
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script>
+        function formatCurrency(input) {
+            var value = input.value.replace(/[^\d]/g, '');
+            var formattedValue = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
+            input.value = formattedValue;
+        }
+
+        // function submitForm() {
+        //     var username = document.getElementById("username").value;
+        //     var address = document.getElementById("address").value;
+        //     var dob = document.getElementById("dob").value;
+        //     var amount = document.getElementById("amount").value.replace(/[^\d]/g, '');
+        //     alert("Nạp tiền thành công!\nSố tiền: " + amount);
+        // }
+    </script>
+</body>
+</html>

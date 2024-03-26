@@ -14,14 +14,12 @@ namespace OpusLink.Service.Admin
         OpusLink.Entity.Models.User GetUserById(int id);
         List<OpusLink.Entity.Models.User> GetUserByName(string txt);
         void UpdateOnlyUserIntroductionFileCVAndImage(Entity.Models.User a);
-
         void UpdateUser2(Entity.Models.User a);
-
         void UpdateAmountMoney(double money,int userId);
+        public void WithdrawMoney(double money, int userId);
+        void UpdateBanUser(string banReason, DateTime endBanDate, int userId);
+        void UpdateUnBanUser(int userId);
     }
-
-
-
     public class UserService : IUserService
     {
         private readonly OpusLinkDBContext _context = new OpusLinkDBContext();
@@ -72,7 +70,7 @@ namespace OpusLink.Service.Admin
         {
             try
             {
-                var user = _context.Users.ToList();
+                var user = _context.Users.Include(u => u.ReportUsersAsATargeter).ToList();
                 return user;
 
             }
@@ -115,35 +113,131 @@ namespace OpusLink.Service.Admin
         {
             
                 Entity.Models.User user = _context.Users.FirstOrDefault(u => u.Id == userId);
-                if (user != null)
-                {
+                //if (user != null)
+                //{
                     
-                        if (money >= 0){
+                        //if (money >= 0){
                             user.AmountMoney += Convert.ToDecimal(money);
-                        }
-                        else if (money <= 0 && Convert.ToDecimal(money) >= user.AmountMoney)
-                        {
-                            return;
-                            // Không thực hiện gì cả vì số tiền trừ không được lớn hơn số tiền hiện có của người dùng
-                        }
-                        else
-                        {
-                            user.AmountMoney -= Convert.ToDecimal(Math.Abs(money));
-                        }
+                        //}
+                        //else if (money <= 0 && Convert.ToDecimal(money) >= user.AmountMoney)
+                        //{
+                        //    return;
+                        //    // Không thực hiện gì cả vì số tiền trừ không được lớn hơn số tiền hiện có của người dùng
+                        //}
+                        //else
+                        //{
+                        //    user.AmountMoney -= Convert.ToDecimal(Math.Abs(money));
+                        //}
 
-                        _context.Update(user);
+                        _context.Users.Update(user);
                         _context.SaveChanges();
                     
                     
-                }
-                else
-                {
-                    throw new Exception("User not found");
-                }
+                //}
+                //else
+                //{
+                //    throw new Exception("User not found");
+                //}
 
 
 
 
+        }
+
+        public void WithdrawMoney(double money, int userId)
+        {
+
+            Entity.Models.User user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            //if (user != null)
+            //{
+
+            //    if (money >= 0 && Convert.ToDecimal(money) <= user.AmountMoney)
+            //    {
+                    user.AmountMoney -= Convert.ToDecimal(money);
+                //}
+                //else
+                //{
+                //    throw new Exception();
+                //}
+
+                _context.Users.Update(user);
+                _context.SaveChanges();
+
+
+            //}
+            //else
+            //{
+            //    throw new Exception("Your account is not enough");
+            //}
+
+
+
+
+        }
+
+        //public void WithdrawMoney(double money, int userId)
+        //{
+
+        //    Entity.Models.User user = _context.Users.FirstOrDefault(u => u.Id == userId);
+        //    //if (user != null)
+        //    //{
+
+        //    //    if (money >= 0 && Convert.ToDecimal(money) <= user.AmountMoney)
+        //    //    {
+        //            user.AmountMoney -= Convert.ToDecimal(money);
+        //        //}
+        //        //else
+        //        //{
+        //        //    throw new Exception();
+        //        //}
+
+        //        _context.Users.Update(user);
+        //        _context.SaveChanges();
+
+
+        //    //}
+        //    //else
+        //    //{
+        //    //    throw new Exception("Your account is not enough");
+        //    //}
+
+
+
+
+        //}
+
+        public void UpdateBanUser(string banReason, DateTime endBanDate, int userId)
+        {
+            Entity.Models.User user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            if (user != null)
+            {
+                user.BanReason = banReason;
+                user.EndBanDate = endBanDate;
+                user.Status = 0;
+
+                _context.Update(user);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("User not found");
+            }
+        }
+
+        public void UpdateUnBanUser(int userId)
+        {
+            Entity.Models.User user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            if (user != null)
+            {
+                user.Status = 1;
+
+                _context.Update(user);
+                _context.SaveChanges();
+            }
+            else
+            {
+                throw new Exception("User not found");
+            }
         }
     }
 
