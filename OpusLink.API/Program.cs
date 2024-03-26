@@ -16,7 +16,7 @@ using OpusLink.Entity.DTO.AccountDTO.Common;
 using OpusLink.Entity.DTO.AccountDTO.SendEmail;
 using OpusLink.Service.UserServices;
 using Microsoft.OpenApi.Models;
-using OpusLink.Service.HistoryPaymentService;
+
 using OpusLink.API.Hubs;
 using OpusLink.Service.PaymentServices;
 using OpusLink.Service.ValidationServices;
@@ -106,8 +106,7 @@ internal class Program
         builder.Services.AddScoped<IChatService, ChatService>();
         builder.Services.AddScoped<IFeedbackService, FeedbackService>();
         builder.Services.AddScoped<IEmailService, EmailService>();
-        builder.Services.AddScoped<OpusLink.Service.HistoryPaymentService.IHistoryPaymentService, OpusLink.Service.HistoryPaymentService.HistoryPaymentService>();
-        builder.Services.AddScoped<OpusLink.Service.PaymentServices.IHistoryPaymentService, OpusLink.Service.PaymentServices.HistoryPaymentService>();
+        builder.Services.AddScoped<IHistoryPaymentService,HistoryPaymentService>();
         builder.Services.AddScoped<IValidationService, ValidationService>();
         builder.Services.AddScoped<IWithDrawRequestService, WithDrawRequestService>();
 

@@ -46,8 +46,8 @@
         }
         <form id="topupForm" method="post">
             <div class="mb-3">
-                <label for="username" class="form-label">Tên người dùng:</label>
-                <input type="text" class="form-control" id="username" name="username" readonly required value="@Model.user.UserName">
+                <label for="username" class="form-label">Số tiền trong tài khoản</label>
+                <input type="text" class="form-control" id="username" name="username" readonly required value="@Model.user.AmountMoney">
             </div>
 
             <div class="mb-3">
@@ -76,7 +76,7 @@
             }
             else
             {
-                <button type="submit" class="btn btn-success mt-3">Nạp Tiền</button>
+                <button type="submit" class="btn btn-success mt-3">Rút Tiền</button>
             }
            
         </form>

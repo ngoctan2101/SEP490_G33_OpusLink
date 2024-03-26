@@ -148,16 +148,16 @@
                 <div class="col-md-6">
                     <div class="mb-3">
                         <label for="id" class="form-label">ID:</label>
-                        <input type="text" class="form-control" id="id" name="id" placeholder="Enter ID" readonly value="@Model.user.Id">
+                        <input type="text" class="form-control" id="id" name="id"  readonly value="@Model.user.Id">
                     </div>
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Name:</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" readonly value="@Model.user.UserName">
+                        <input type="text" class="form-control" id="name" name="name"  readonly value="@Model.user.UserName">
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" value="@Model.user.Email">
+                        <input type="email" class="form-control" id="email" name="email"  value="@Model.user.Email">
                     </div>
                     <div class="mb-3">
                         <label for="dob" class="form-label">Date of Birth:</label>
@@ -166,12 +166,12 @@
 
                     <div class="mb-3">
                         <label for="phone" class="form-label">Phone:</label>
-                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter phone" value="@Model.user.PhoneNumber">
+                        <input type="tel" class="form-control" id="phone" name="phone"  value="@Model.user.PhoneNumber">
                     </div>
 
                     <div class="mb-3">
                         <label for="address" class="form-label">Address:</label>
-                        <input type="text" class="form-control" id="address" name="address" placeholder="Enter address" value="@Model.user.Address">
+                        <input type="text" class="form-control" id="address" name="address"  value="@Model.user.Address">
                     </div>
 
                     <div class="mb-3">
@@ -198,6 +198,16 @@
                         <label for="amountmoney" class="form-label">AmountMoney:</label>
                         <input type="text" class="form-control" id="amountmoney" name="amountmoney"
                                placeholder="Enter amountmoney" readonly value="@Model.user.AmountMoney">
+                    </div>
+                    <div class="mb-3">
+                        <label for="amountmoney" class="form-label">BankAccountInfor:</label>
+                        <input type="text" class="form-control" id="bankaccountinfor" name="bankaccountinfor"
+                                readonly value="@Model.user.BankAccountInfor">
+                    </div>
+                    <div class="mb-3">
+                        <label for="amountmoney" class="form-label">BankName:</label>
+                        <input type="text" class="form-control" id="bankname" name="bankname"
+                                readonly value="@Model.user.BankName">
                     </div>
                     <!-- Nút Back -->
                     <div class="d-inline-flex p-2 bd-highlight">
