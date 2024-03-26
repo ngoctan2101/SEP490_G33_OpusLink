@@ -175,36 +175,36 @@ namespace OpusLink.Service.Admin
 
         }
 
-        public void WithdrawMoney(double money, int userId)
-        {
+        //public void WithdrawMoney(double money, int userId)
+        //{
 
-            Entity.Models.User user = _context.Users.FirstOrDefault(u => u.Id == userId);
-            //if (user != null)
-            //{
+        //    Entity.Models.User user = _context.Users.FirstOrDefault(u => u.Id == userId);
+        //    //if (user != null)
+        //    //{
 
-            //    if (money >= 0 && Convert.ToDecimal(money) <= user.AmountMoney)
-            //    {
-                    user.AmountMoney -= Convert.ToDecimal(money);
-                //}
-                //else
-                //{
-                //    throw new Exception();
-                //}
+        //    //    if (money >= 0 && Convert.ToDecimal(money) <= user.AmountMoney)
+        //    //    {
+        //            user.AmountMoney -= Convert.ToDecimal(money);
+        //        //}
+        //        //else
+        //        //{
+        //        //    throw new Exception();
+        //        //}
 
-                _context.Users.Update(user);
-                _context.SaveChanges();
-
-
-            //}
-            //else
-            //{
-            //    throw new Exception("Your account is not enough");
-            //}
+        //        _context.Users.Update(user);
+        //        _context.SaveChanges();
 
 
+        //    //}
+        //    //else
+        //    //{
+        //    //    throw new Exception("Your account is not enough");
+        //    //}
 
 
-        }
+
+
+        //}
 
         public void UpdateBanUser(string banReason, DateTime endBanDate, int userId)
         {

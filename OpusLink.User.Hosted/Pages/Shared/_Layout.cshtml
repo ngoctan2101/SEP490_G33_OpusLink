@@ -66,7 +66,9 @@
                                             <i class="fas fa-wallet"></i>
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="walletDropdown">
-                                            <p class="dropdown-item-text">Tiền dư: $100</p>
+
+                                            <p class="dropdown-item-text" id="amount"> </p>
+                                            <button class="btn btn-primary dropdown-item" onclick="napTien()">Nạp tiền</button>
                                             <button class="btn btn-primary dropdown-item" onclick="rutTien()">Rút tiền</button>
                                         </div>
                                     </li>
@@ -130,7 +132,9 @@
                                     <i class="fas fa-wallet"></i>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="walletDropdown">
-                                    <p class="dropdown-item-text">Tiền dư: $100</p>
+
+                                    <p class="dropdown-item-text" id="amount"> </p>
+                                    <button class="btn btn-primary dropdown-item" onclick="napTien()">Nạp tiền</button>
                                     <button class="btn btn-primary dropdown-item" onclick="rutTien()">Rút tiền</button>
                                 </div>
                             </li>
@@ -222,16 +226,7 @@
                 });
         }
 
-                    // Assuming result contains user information
-                    // Update the HTML element with the user information
-                    document.getElementById("amount").innerHTML += result["amountMoney"]; // Assuming result is the user information
-                },
-                error: function (xhr, status, error) {
-                    // Handle error
-                    console.error("Error loading user information:", error);
-                }
-            });
-        }
+                 
         window.onload = function () {
             LoadUserInformation();
         };
