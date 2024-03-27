@@ -16,6 +16,8 @@ using OpusLink.Entity.DTO.AccountDTO.Common;
 using OpusLink.Entity.DTO.AccountDTO.SendEmail;
 using OpusLink.Service.UserServices;
 using Microsoft.OpenApi.Models;
+using OpusLink.Entity.AutoMapper.MS;
+using OpusLink.Service.MSServices;
 
 internal class Program
 {
@@ -79,6 +81,7 @@ internal class Program
             mc.AddProfile(new LocationProfile());
             mc.AddProfile(new UserProfile());
             mc.AddProfile(new ChatMapper());
+            mc.AddProfile(new MSProfile());
 
         });
         IMapper mapper = mapperConfig.CreateMapper();
@@ -97,6 +100,7 @@ internal class Program
         builder.Services.AddScoped<IFreelancerAndSkillService, FreelancerAndSkillService>();
         builder.Services.AddScoped<IChatService, ChatService>();
         builder.Services.AddScoped<IEmailService, EmailService>();
+        builder.Services.AddScoped<IMilestoneService, MilestoneService>();
 
         builder.Services.AddDbContext<OpusLinkDBContext>();
         builder.Services.AddSingleton(mapper);

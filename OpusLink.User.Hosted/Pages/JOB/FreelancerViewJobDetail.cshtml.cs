@@ -26,7 +26,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
         }
         public async Task<IActionResult> OnGetAsync(int JobId)
         {
-            int userId=0;
+            int userId = 0;
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
                 return RedirectToPage("/Account/Login");
@@ -35,6 +35,8 @@ namespace OpusLink.User.Hosted.Pages.JOB
             {
                 userId = HttpContext.Session.GetInt32("UserId") ?? 0;
             }
+            //HttpContext.Session.SetInt32("UserId", 201); 
+            //int userId = 201;
 
             HttpResponseMessage response = await client.GetAsync("https://localhost:7265/api/Job5API/GetJobDetail/" + JobId);
             if (response.IsSuccessStatusCode)

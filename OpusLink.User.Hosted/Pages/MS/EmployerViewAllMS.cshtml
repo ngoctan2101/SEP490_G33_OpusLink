@@ -1,34 +1,263 @@
 ﻿@page
+@using OpusLink.Shared.Enums;
 @model OpusLink.User.Hosted.Pages.MS.EmployerViewAllMSModel
 @{
     int soThuTu = 1;
 }
 <style>
-  .circle {
-    width: 100px;
-    height: 100px;
-    border-radius: 50%;
-    background-color: #3498db;
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    color: white;
-    font-size: 24px;
-    font-weight: bold;
-  }
+    .circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px solid black;
+        background-color: inherit;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+    }
+
+    .status {
+        font-weight: bold;
+        color: white;
+        display: inline-block;
+        min-width:200px;
+        min-height:40px;
+        padding: 8px 50px 8px 50px;
+        text-align:center;
+    }
+
+    .hrMilestone {
+        border: none;
+        border-bottom: 2px solid #373737;
+        margin-top: 10px;
+        margin-bottom: 0px;
+        margin-left: -5px;
+        margin-right: -5px;
+    }
+    /*modal*/
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 0;
+        border: 1px solid #888;
+        width: 50%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 0.4s
+    }
+
+    /* Add Animation */
+    @@-webkit-keyframes animatetop {
+        from {
+            top: -300px;
+            opacity: 0
+        }
+
+        to {
+            top: 0;
+            opacity: 1
+        }
+    }
+
+    @@keyframes animatetop {
+        from {
+            top: -300px;
+            opacity: 0
+        }
+
+        to {
+            top: 0;
+            opacity: 1
+        }
+    }
+
+    /* The Close Button */
+    .close {
+        color: white;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    .modal-header {
+        padding: 2px 16px;
+        background-color: #2DB964;
+        color: white;
+    }
+
+    .modal-body {
+        padding: 2px 16px;
+    }
+
+    .buttonEdit:hover {
+        background-color: #1B6ABE;
+        color: white !important;
+    }
+
+    .buttonDelete:hover {
+        background-color: #CD2000;
+        color: white !important;
+    }
 </style>
-<div class="row" style="margin:10px 10px 10px 10px">
-    <div class="col-nd-1">
-        <div class="circle">@soThuTu</div>
+<div style="margin: 20px 50px 20px 50px">
+    <div id="addModal" class="modal">
+        <!-- Modal add -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="font-size:24px">Create new Milestone</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return validateDateTime('AddDeadline','AddAmountToPay')">
+                    <input type="text" name="JobID" hidden value="@Model.JobID" />
+                    <table>
+                        <tr><td>Milestone Content:    </td><td><input type="text" name="AddMilestoneContent" required /></td></tr>
+                        <tr><td>Select a future deadline:    </td><td><input type="datetime-local" name="AddDeadline" required /></td></tr>
+                        <tr><td>Amount of money to pay for freelancer:    </td><td><input type="text" name="AddAmountToPay" pattern="[0-9₫ ,]+" title="Please enter number" required /></td></tr>
+                        <span id="AddErrorMessage" style="color:red"></span>
+                        @*<tr>
+                        <td>Status:    </td>
+                        <td>
+                        <select name="AddStatus">
+                        <option value="0">No Parent</option>
+                        @foreach (var item in Model.AllCategories)
+                        {
+                        <option value="@item.CategoryID">@item.CategoryID<span>-</span>@item.CategoryName</option>
+                        }
+                        </select>
+                        </td>
+                        </tr>*@
+                        <tr><td></td><td style="text-align:center"><button type="submit" asp-page-handler="ForAdd" style="width:30%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964">Add</button></td></tr>
+                    </table>
+                </form>
+            </div>
+        </div>
     </div>
-    <div class="col-nd-5">
-
+    <div>
+        <h5>// In ra thông tin của JOB này ở đây nếu cần //</h5>
     </div>
-    <div class="col-nd-2">
-
+    <div class="row" style="margin-bottom:15px">
+        <div class="col-md-10"></div>
+        <div class="col-md-2">
+            <button type="button" id="openAddMilestone" style="width:80%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964;border-radius:3px">Add a milestone</button>
+        </div>
     </div>
-    <div class="col-nd-4">
-
+    <div style="margin: 20px 40px 20px 40px">
+        @foreach (var item in Model.milestones)
+        {
+            <div class="row" style="margin:10px 10px 10px 10px">
+                <div class="col-md-1" style="display: flex;align-items: center;">
+                    <div class="circle">@soThuTu</div>
+                </div>
+                <div class="col-md-5">
+                    <h4 style="font-weight:bold">@item.MilestoneContent</h4>
+                    <p>Due @item.Deadline.ToString("dd/MM/yyyy HH:mm")</p>
+                    <p>@((item.AmountToPay).ToString("#,##")) ₫</p>
+                </div>
+                <div class="col-md-2" style="display: flex;justify-content: center;align-items: center;">
+                    @if (item.IsFreelancerDone && item.Status == (int)MilestoneStatusEnum.MoneyPutted)
+                    {
+                        <p class="status" style="background-color:#9E9E9E;">Đang chờ review</p>
+                    }
+                    else if (item.Status == (int)MilestoneStatusEnum.EmployerCreated)
+                    {
+                        <p class="status" style="background-color:#9E9E9E;">Mới tạo</p>
+                    }
+                    else if (item.Status == (int)MilestoneStatusEnum.MoneyPutted)
+                    {
+                        if (item.Deadline < DateTime.Now)
+                        {
+                            <p class="status" style="background-color:#CF2A27;">Muộn</p>
+                        }
+                        else
+                        {
+                            <p class="status" style="background-color:#0068AD;">Đã đặt tiền</p>  <span style="color:red;font-size:13px" id="countdown1_@item."></span>
+                        }
+                    }
+                    else if (item.Status == (int)MilestoneStatusEnum.EmployerRejected)
+                    {
+                        <p class="status" style="background-color:#FFE599;">Làm lại</p> <span style="color:red;font-size:13px" id="countdown2_@item."></span>
+                    }
+                    else if (item.Status == (int)MilestoneStatusEnum.Completed)
+                    {
+                        <p class="status" style="background-color:#93C47D;">Hoàn thành</p>
+                    }
+                    else if (item.Status == (int)MilestoneStatusEnum.Failed)
+                    {
+                        <p class="status" style="background-color:#E06666;">Thất bại</p>
+                    }
+                </div>
+                <div class="col-md-4">
+                </div>
+            </div>
+            soThuTu += 1;
+            <hr class="hrMilestone">
+        }
     </div>
 </div>
+<script>
+    var addModal = document.getElementById("addModal");
+    // When the user clicks on <span> (x), close the modal
+    document.getElementsByClassName("close")[0].onclick = function () {
+        addModal.style.display = "none";
+    }
+    // When the user clicks the button, open the modal
+    document.getElementById("openAddMilestone").onclick = function () {
+        addModal.style.display = "block";
+    }
+    // When the user clicks anywhere outside of the modal, close it
+    window.onclick = function (event) {
+        if (event.target == addModal) {
+            addModal.style.display = "none";
+        }
+    }
+</script>
+<script>
+    function validateDateTime(nameOfDateTag, nameOfAmountToPayTag) {
+        var inputDateTime = new Date(document.getElementsByName(nameOfDateTag)[0].value);
+        var inputAmountToPay = document.getElementsByName(nameOfAmountToPayTag)[0].value.replace(/\D/g, '');
+        var errorMessage = document.getElementById("AddErrorMessage");
+        errorMessage.innerHTML = "";
+
+
+        var currentDateTime = new Date();
+
+        if (inputDateTime <= currentDateTime) {
+            errorMessage.innerHTML = "Please select a future date and time.";
+            return false;
+        }
+        if (parseInt(inputAmountToPay) <= 0) {
+            errorMessage.innerHTML = "Amount must greater than zero.";
+            return false;
+        }
+        return true;
+    }
+</script>
+
 
