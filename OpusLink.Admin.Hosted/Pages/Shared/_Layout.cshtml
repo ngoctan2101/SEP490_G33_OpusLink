@@ -258,7 +258,9 @@
                     </button>
                     <div id="admin-dropdown" class="dropdown-menu" aria-labelledby="adminDropdownButton">
                         <a class="dropdown-item" asp-page="/Admin/Profile/Index">Profile</a>
-                        <button class="dropdown-item" onclick="logout()">Logout</button>
+                        <form asp-page="/Index" asp-page-handler="ForLogOut" method="post">
+                            <button class="dropdown-item">Đăng xuất</button>
+                        </form>
                     </div>
                 </div>
             </div>

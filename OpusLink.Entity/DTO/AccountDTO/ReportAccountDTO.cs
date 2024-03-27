@@ -11,6 +11,5 @@ namespace OpusLink.Entity.DTO.AccountDTO
         public int CreateByUserID { get; set; }
         public int TargetToUserID { get; set; }
         public string ReportUserContent { get; set; }
-        public DateTime DateCreated { get; set; }
     }
 }

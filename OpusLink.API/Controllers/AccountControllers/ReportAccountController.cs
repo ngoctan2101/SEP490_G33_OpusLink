@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using OpusLink.Entity;
 using OpusLink.Entity.DTO.AccountDTO;
+using OpusLink.Entity.DTO.AccountDTO.Common;
 using OpusLink.Entity.DTO.ReportUserDTO;
 using OpusLink.Entity.Models;
 
@@ -18,18 +19,23 @@ namespace OpusLink.API.Controllers.AccountControllers
         }
 
         [HttpPost]
-        public IActionResult AddNewReport(ReportAccountDTO reportUser)
+        public async Task<ApiResponseModel> AddNewReport(ReportAccountDTO reportAccountDTO)
         {
             ReportUser reportAccount = new ReportUser()
             {
-                CreateByUserID = reportUser.CreateByUserID,
-                TargetToUserID = reportUser.TargetToUserID,
-                ReportUserContent = reportUser.ReportUserContent,
+                CreateByUserID = reportAccountDTO.CreateByUserID,
+                TargetToUserID = reportAccountDTO.TargetToUserID,
+                ReportUserContent = reportAccountDTO.ReportUserContent,
                 DateCreated = DateTime.Now
             };
             _context.ReportUsers.Add(reportAccount);
-            _context.SaveChanges();
-            return Ok("Add report successfull");
+            int number = _context.SaveChanges();
+            return new ApiResponseModel
+            {
+                Code = 200,
+                Message = "Success",
+                IsSuccess = true
+            };
         }
     }
 }
