@@ -2,6 +2,9 @@
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.AccountDTO.Common;
+using OpusLink.Entity.DTO.AccountDTO;
+using System.IdentityModel.Tokens.Jwt;
+using System.Security.Principal;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace OpusLink.User.Hosted.Pages
@@ -24,6 +27,8 @@ namespace OpusLink.User.Hosted.Pages
                 return RedirectToPage("/JOB/FreelancerViewAllJobPage");
             }
         }
+        string link = "https://localhost:7265/api/Account/update-role";
+        string linkLogOut = "https://localhost:7265/api/Account/logout";
 
         public async Task<IActionResult> OnPostChangeTokenAboutRole()
         {

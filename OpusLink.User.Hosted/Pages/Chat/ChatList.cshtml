@@ -6,9 +6,7 @@
 <style>
 
 
-	body {
-		margin-top: 20px;
-	}
+	
 
 	.chat-online {
 		color: #34ce57
@@ -21,7 +19,7 @@
 	.chat-messages {
 		display: flex;
 		flex-direction: column;
-		max-height: 800px;
+		height: 410px;
 		overflow-y: scroll
 	}
 
@@ -61,6 +59,9 @@
 
 	.list-group-item {
 		padding-top: 5px;
+	}
+	.col-12{
+		height: 520px;
 	}
 </style>
 <h1 class="h3 mb-3">Messages</h1>
@@ -120,10 +121,9 @@
 					</div>
 					<div class="flex-grow-1 pl-3">
 						<strong>
-							@if (Model.MessageDTOs != null && Model.MessageDTOs.Any())
-							{
-								var firstMessage = Model.MessageDTOs.First();
-								var chatDTO = Model.ChatDTOs.FirstOrDefault(c => c.ChatBoxID == firstMessage.ChatBoxID);
+							@{
+								
+								var chatDTO = Model.ChatDTOs.FirstOrDefault(c => c.ChatBoxID == Model.ChatDTOs.First().ChatBoxID);
 								if (chatDTO != null)
 								{
 									@chatDTO.EmployerName
@@ -310,4 +310,9 @@
 	}
 
 
+</script>
+<script>
+	// Scroll to bottom of chat messages
+	var chatMessages = document.getElementById('chatMessages');
+	chatMessages.scrollTop = chatMessages.scrollHeight;
 </script>

@@ -20,6 +20,29 @@ namespace OpusLink.API.Controllers.HistoryPaymentControllers
             _mapper = mapper;
         }
 
+        [HttpGet("GetAllHistoryPayment")]
+        public ActionResult<IEnumerable<HistoryPaymentDTO>> GetAllHistoryPayment()
+        {
+            try
+            {
+                return Ok(_mapper.Map<List<HistoryPaymentDTO>>(_historyPaymentService.GetAllHistoryPayment()));
+            }catch (Exception ex)
+            {
+                return NotFound();
+            }
+        }
+
+        //[HttpGet("GetDetailHistoryPaymentByUserId/{id}")]
+        //public IActionResult GetDetailHistoryPaymentByUserId(int id)
+        //{
+        //    var histories = _historyPaymentService.getHistoryPaymentsByUserId(id);
+        //    if (histories == null)
+        //    {
+        //        return Ok("Don't have HistoryPayment");
+        //    }
+        //    return Ok(_mapper.Map<List<HistoryPaymentDTO>>(histories));
+        //}
+
         [HttpGet("GetHistoryPaymentById/{id}")]
         public IActionResult GetHistoryPaymentId(int id)
         {

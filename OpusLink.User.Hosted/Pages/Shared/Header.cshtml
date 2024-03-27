@@ -1,0 +1,96 @@
+﻿@page
+@model OpusLink.User.Hosted.Pages.Shared.HeaderModel
+@{
+}
+<!-- Header.cshtml -->
+@inject IHttpContextAccessor HttpContextAccessor;
+
+<header class="bg-light">
+    <div class="container">
+        <nav class="navbar navbar-expand-lg navbar-light">
+            <a class="navbar-brand" href="#">OpusLink</a>
+            <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarNav" aria-controls="navbarNav" aria-expanded="false" aria-label="Toggle navigation">
+                <span class="navbar-toggler-icon"></span>
+            </button>
+            <div class="collapse navbar-collapse" id="navbarNav">
+                <ul class="navbar-nav me-auto">
+                    @*<li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-page="/Index">Home</a>
+                    </li>*@
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/JOB/FreelancerViewAllJobPage" style="background-color:forestgreen;margin:0px 2px 0px 2px">Find online job</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/JOB/FreelancerViewAllJobOfferedPage" style="background-color:forestgreen;margin:0px 2px 0px 2px">My Offers</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/JOB/FreelancerViewAllJobSavedPage" style="background-color:forestgreen;margin:0px 2px 0px 2px">Saved job</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/JOB/EmployerViewAllJobCreatedPage" style="background-color:blueviolet;margin:0px 2px 0px 2px"> My created job</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/JOB/FreelancerViewAllJobSavedPage" style="background-color:blueviolet;margin:0px 2px 0px 2px">Saved job</a>
+                    </li>
+                    @*<li class="nav-item">
+                    <a class="nav-link text-dark" asp-area="" asp-page="/Privacy">Privacy</a>
+                    </li>*@
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/JOB/EmployerCreateAJobPage" style="background-color:blueviolet;margin:0px 2px 0px 2px">Post job now</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link text-dark" asp-area="" asp-page="/Chat/ChatList" style="background-color:orange;margin:0px 2px 0px 2px">Chat</a>
+                    </li>
+                    @{
+                        string userId = HttpContextAccessor.HttpContext.Session.GetString("UserId");
+                    }
+                    @if (string.IsNullOrEmpty(userId))
+                    {
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Account/Login" style="background-color:yellowgreen;margin:0px 2px 0px 2px">Login</a>
+                        </li>
+                        <li class="nav-item">
+                            <a class="nav-link text-dark" asp-area="" asp-page="/Account/Register" style="background-color:yellowgreen;margin:0px 2px 0px 2px">Register</a>
+                        </li>
+                    }
+                </ul>
+                <ul class="navbar-nav ms-auto">
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="walletDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-wallet"></i>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="walletDropdown">
+                            <p class="dropdown-item-text">Tiền dư: $100</p>
+                            <button class="btn btn-primary dropdown-item" onclick="rutTien()">Rút tiền</button>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-bell"></i>
+                            <span class="badge bg-danger" id="notificationBadge">3</span>
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="notificationDropdown">
+                            <p class="dropdown-item-text">Bạn có 3 thông báo mới</p>
+                            <ul class="list-unstyled">
+                                <li class="dropdown-item">Thông báo 1</li>
+                                <li class="dropdown-item">Thông báo 2</li>
+                                <li class="dropdown-item">Thông báo 3</li>
+                            </ul>
+                        </div>
+                    </li>
+                    <li class="nav-item dropdown">
+                        <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+                            <i class="fas fa-user-circle"></i> <!-- Icon hình thể hiện đang ở role nào -->
+                        </a>
+                        <div class="dropdown-menu" aria-labelledby="userDropdown">
+                            <p class="dropdown-item-text">Freelancer</p>
+                            <a class="dropdown-item" href="#">Profile</a>
+                            <div class="dropdown-divider"></div>
+                            <a class="dropdown-item" href="#">Logout</a>
+                        </div>
+                    </li>
+                </ul>
+            </div>
+        </nav>
+    </div>
+</header>
