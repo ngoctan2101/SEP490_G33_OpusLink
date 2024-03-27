@@ -40,12 +40,15 @@ namespace OpusLink.Admin.Hosted.Pages.Account
                             var jsonToken = handler.ReadToken(token) as JwtSecurityToken;
 
                             // Lấy ra UserId từ claims
-                            string userId = jsonToken.Claims.First(claim => claim.Type == "UserId").Value;
+                            string userId = jsonToken.Claims.First(claim => claim.Type == "userId").Value;
+                            string currentRole = jsonToken.Claims.First(claim => claim.Type == "currentRole").Value;
+                            string name = jsonToken.Claims.First(claim => claim.Type == "userName").Value;
 
                             HttpContext.Session.SetInt32("UserId", Int32.Parse(userId));
                             HttpContext.Session.SetString("token", token);
+                            HttpContext.Session.SetString("Role", currentRole);
+                            HttpContext.Session.SetString("userName", name);
 
-                            /*return RedirectToPage("/Index", new { token = apiResponse.Data.ToString() });*/
                             return RedirectToPage("/Index");
                         }
                         else

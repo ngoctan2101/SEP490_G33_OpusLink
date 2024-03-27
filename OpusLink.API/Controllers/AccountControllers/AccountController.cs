@@ -105,11 +105,11 @@ namespace OpusLink.API.Controllers.AccountControllers
                 var resultCreateUser = await _userManager.CreateAsync(user, model.Password);
 
                 //Role mặc định là Freelancer and Employer
-                var resultRoleFreelancer = await _userManager.AddToRoleAsync(user, Roles.Freelancer.ToString());
-                var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Employer.ToString());
+                /*                var resultRoleFreelancer = await _userManager.AddToRoleAsync(user, Roles.Freelancer.ToString());
+                                var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Employer.ToString());*/
 
                 //Role cho Admin
-/*                var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Admin.ToString());*/
+                var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Admin.ToString());
                 if (!resultCreateUser.Succeeded)
                 {
                     return new ApiResponseModel()

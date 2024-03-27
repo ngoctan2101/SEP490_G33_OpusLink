@@ -14,6 +14,7 @@ namespace OpusLink.User.Hosted.Pages
         // ----LINK API----
         string linkUpdateRole = "https://localhost:7265/api/Account/update-role";
         string linkLogOut = "https://localhost:7265/api/Account/logout";
+        string linkCheckReport = "https://localhost:7265/api/ReportAccount";
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -27,8 +28,6 @@ namespace OpusLink.User.Hosted.Pages
                 return RedirectToPage("/JOB/FreelancerViewAllJobPage");
             }
         }
-        string link = "https://localhost:7265/api/Account/update-role";
-        string linkLogOut = "https://localhost:7265/api/Account/logout";
 
         public async Task<IActionResult> OnPostChangeTokenAboutRole()
         {
@@ -108,5 +107,42 @@ namespace OpusLink.User.Hosted.Pages
                 }
             }
         }
+
+        /*public async Task<IActionResult> OnPostCheckReport()
+        {
+            ReportAccountDTO account = new ReportAccountDTO()
+            {
+                CreateByUserID = HttpContext.Session.GetInt32("UserId") ?? 0,
+                TargetToUserID = ReportToUserId,
+                ReportUserContent = Reason
+            };
+            using (HttpClient client = new HttpClient())
+            {
+                using (HttpResponseMessage response = await client.PostAsJsonAsync(linkCheckReport, account))
+                {
+                    using (HttpContent content = response.Content)
+                    {
+                        string data = await content.ReadAsStringAsync();
+
+                        ApiResponseModel apiResponse = JsonConvert.DeserializeObject<ApiResponseModel>(data);
+                        if (apiResponse.IsSuccess)
+                        {
+                            ViewData["Error"] = apiResponse.Message;
+                            return Page();
+                        }
+                        else
+                        {
+                            ViewData["Error"] = "Thất bại";
+                            return Page();
+                        }
+                    }
+                }
+            }
+        }
+        [BindProperty]
+        public int ReportToUserId { get; set; } // Thuộc tính liên kết với trường ReportToUserId trong form
+
+        [BindProperty]
+        public string Reason { get; set; } // Thuộc tính liên kết với trường reason trong form*/
     }
 }

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using OpusLink.Entity.DTO;
+using OpusLink.Entity.DTO.AccountDTO;
 using OpusLink.Entity.Models;
 using System;
 using System.Collections.Generic;
@@ -19,6 +20,9 @@ namespace OpusLink.Entity.AutoMapper
 
             CreateMap<Skill, SkillDTO>()
                 .ForMember(dest => dest.SkillParentName, opt => opt.MapFrom(src => src.SkillParent != null ? src.SkillParent.SkillName : null));
+            
+            CreateMap<ReportUser, ReportAccountDTO>()
+                .ReverseMap();
         }
     }
 }
