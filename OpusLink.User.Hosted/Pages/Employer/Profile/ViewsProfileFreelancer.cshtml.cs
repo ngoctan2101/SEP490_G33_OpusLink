@@ -23,10 +23,10 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
             client.DefaultRequestHeaders.Accept.Add(contentType);
             ServiceMangaUrl = "https://localhost:7265/";
         }
-        public async Task OnGetAsync(int id)
+        public async Task OnGetAsync(int UserId)
         {
             // call list
-            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/" + id);
+            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/" + UserId);
             if (responseUser.IsSuccessStatusCode)
             {
                 string responseBodyUser = await responseUser.Content.ReadAsStringAsync();

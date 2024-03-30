@@ -1,4 +1,4 @@
-﻿@page "{id:int?}"
+﻿@page 
 @model OpusLink.User.Hosted.Pages.Employer.Profile.ViewsModel
 @{
 }
@@ -191,8 +191,9 @@
                 </div>
                 <div class="mb-3">
                     <label for="amountmoney" class="form-label">BankAccountInfor:</label>
-                    <input type="text" class="form-control" id="bankaccountinfor" name="bankaccountinfor"
-                           readonly value="@Model.user.BankAccountInfor">
+                    @* <input type="text" class="form-control" id="bankaccountinfor" name="bankaccountinfor"
+                           readonly value="@Model.user.BankAccountInfor"> *@
+                    <textarea class="form-control" id="bankaccountinfor" rows="5" name="bankaccountinfor" placeholder="Số tài khoản: 123xxxxx&#10;Tên tài khoản: NGUYEN VAN A&#10; ">@Model.user.BankAccountInfor</textarea>
                 </div>
                 <div class="mb-3">
                     <label for="amountmoney" class="form-label">BankName:</label>
@@ -236,7 +237,7 @@
 
     // Hàm để quay lại trang trước đó
     function onBack() {
-        window.location.href = '#';
+        window.location.href = '/Index';
     }
 
     function redirectToFeedback() {

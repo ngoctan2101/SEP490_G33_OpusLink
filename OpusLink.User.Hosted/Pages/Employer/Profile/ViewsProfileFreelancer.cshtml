@@ -1,4 +1,4 @@
-﻿@page "{id:int?}"
+﻿@page 
 @model OpusLink.User.Hosted.Pages.Employer.Profile.ViewsModel
 @{
 }
@@ -86,7 +86,7 @@
                             <img id="userImage" src="/img/default.png" style="width:50%;height:auto;display:block;margin-bottom:10px" />
                         }
                     }
-                    <input type="file" name="image" accept="image/x-png, image/jpeg" onchange="readURL(this);" />
+                    <input type="file" name="image" accept="image/x-png, image/jpeg" onchange="readURL(this);" readonly />
                     <!-- LinkProfile, Textbox, và Nút Copy -->
                     <div class="mt-3">
                         <p>
@@ -102,9 +102,9 @@
                     </div>
                     <div class="mb-3">
                         <label for="cv" class="form-label">Upload CV:</label>
-                        <input type="file" class="form-control" id="cv" name="cv" readonly accept=".pdf,.docx">
+                        <input type="file" class="form-control" id="cv" name="cv" readonly accept=".pdf,.docx" readonly>
                     </div>
-                    <div class="mb-3">
+                    <div class="mb-3" hidden>
                         <a asp-page-handler="ForDownload" asp-route-UserId="@Model.user.Id">Download CV</a>
                     </div>
                     @* <div class="mt-3">
@@ -238,7 +238,7 @@
 
         // Hàm để quay lại trang trước đó
         function onBack() {
-            window.location.href = '#';
+            window.location.href = '/Index';
         }
 
         function redirectToFeedback() {

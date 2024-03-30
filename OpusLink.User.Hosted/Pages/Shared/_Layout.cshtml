@@ -2,7 +2,7 @@
 @using OpusLink.Shared.Enums;
 @{
     string currentRole = HttpContextAccessor.HttpContext.Session.GetString("Role") ?? "Guest";
-    string userId = HttpContextAccessor.HttpContext.Session.GetString("UserId") ?? null;
+    int? userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId") ?? null;
     string userName = HttpContextAccessor.HttpContext.Session.GetString("userName") ?? null;
 }
 
@@ -96,7 +96,7 @@
                                             <form asp-page="/Index" asp-page-handler="ChangeTokenAboutRole" method="post">
                                                 <button class="dropdown-item">Chuyển sang: Tuyển Dụng</button>
                                             </form>
-                                            <a class="dropdown-item" href="../Freelancer/Profile/Views?id=@userId">Hồ sơ cá nhân</a>
+                                            <a class="dropdown-item" href="../Freelancer/Profile/Views?UserId=@userId">Hồ sơ cá nhân</a>
                                             <div class="dropdown-divider"></div>
                                             <form asp-page="/Index" asp-page-handler="ForLogOut" method="post">
                                                 <button class="dropdown-item">Đăng xuất</button>
@@ -161,7 +161,7 @@
                                     <form asp-page="/Index" asp-page-handler="ChangeTokenAboutRole" method="post">
                                         <button class="dropdown-item">Chuyển sang: Freelancer</button>
                                     </form>
-                                    <a class="dropdown-item" href="../Freelancer/Profile/Views?id=@userId">Hồ sơ cá nhân</a>
+                                    <a class="dropdown-item" href="../Employer/Profile/Views?UserId=@userId">Hồ sơ cá nhân</a>
                                     <div class="dropdown-divider"></div>
                                     <form asp-page="/Index" asp-page-handler="ForLogOut" method="post">
                                         <button class="dropdown-item">Đăng xuất</button>
