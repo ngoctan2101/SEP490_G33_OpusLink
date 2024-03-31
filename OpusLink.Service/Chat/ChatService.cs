@@ -101,7 +101,7 @@ namespace OpusLink.Service.Chat
             var message = new Message
             {
                 ChatBoxID = createMessageDTO.ChatBoxID,
-                FromEmployer = false,
+                FromEmployer = createMessageDTO.FromEmployer,
                 DateCreated = DateTime.Now,
                 MessageContent = createMessageDTO.MessageContent
             };
