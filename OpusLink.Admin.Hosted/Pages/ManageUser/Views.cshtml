@@ -152,7 +152,7 @@
                     <th>Địa chỉ</th>
                     <th>Ngày sinh</th>
                     <th>Số lượng báo cáo</th>
-                    <th>Trạng thái</th>
+                    <th></th>
                 </tr>
                 @foreach (var item in Model.listUser)
                 {
@@ -171,13 +171,9 @@
                                 {
                                     <img id="profileImage" src="/img/default.png" style="width:auto;height:100px;display:block;margin-bottom:10px" />
                                 }
-
-
                             }
-
                         </td>
                         <td>@item.PhoneNumber</td>
-
                         <td>@item.Address</td>
                         @* <td>@((cus.CreatedAt == null ? DateTime.Now : (DateTime)cus.CreatedAt).ToString("dd/MM/yyyy"))</td> *@
                         <td>@item.Dob</td>
@@ -192,6 +188,9 @@
                                     Đã bị khóa
                                 </button>
                             }
+                                || <button type="button">
+                                    Danh sách report
+                                </button>
                         </td>
                     </tr>
                 }
