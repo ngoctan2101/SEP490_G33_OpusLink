@@ -28,7 +28,7 @@ namespace OpusLink.API.Controllers.AccountControllers
                 return new ApiResponseModel
                 {
                     Code = 400,
-                    Message = "Bạn không được quyền Report tài khoản này",
+                    Message = "Bạn không được quyền Report tài khoản này đâu",
                     IsSuccess = false
                 };
             }
