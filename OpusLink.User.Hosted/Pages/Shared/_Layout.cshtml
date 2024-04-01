@@ -84,6 +84,7 @@
                                         <div class="dropdown-menu" aria-labelledby="walletDropdown">
 
                                             <p class="dropdown-item-text" id="amount"> </p>
+                                            <p class="dropdown-item-text" id="amountforms" hidden> </p>
                                             <button class="btn btn-primary dropdown-item" onclick="napTien()">Nạp tiền</button>
                                             <button class="btn btn-primary dropdown-item" onclick="rutTien()">Rút tiền</button>
                                         </div>
@@ -99,7 +100,7 @@
                                             <ul class="list-unstyled" id="listNotification">
                                                 
                                             </ul>
-                                            <a href="/Notification/ViewsNotification?UserId=1" class="dropdown-item view-all">Xem tất cả</a>
+                                            <a href="/Notification/ViewsNotification?UserId=@userId" class="dropdown-item view-all">Xem tất cả</a>
                                         </div>
                                     </li>
 
@@ -148,7 +149,9 @@
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="walletDropdown">
 
-                                    <p class="dropdown-item-text" id="amount"> </p>
+                                    <p class="dropdown-item-text" id="amount" > </p>
+                                    <p class="dropdown-item-text" id="amountforms" hidden> </p>
+                                    
                                     <button class="btn btn-primary dropdown-item" onclick="napTien()">Nạp tiền</button> 
                                     <button class="btn btn-primary dropdown-item" onclick="rutTien()">Rút tiền</button>
 
@@ -166,7 +169,7 @@
                                     <ul class="list-unstyled" id="listNotification">
                                         
                                     </ul>
-                                    <a href="/Notification/ViewsNotification?UserId=1" class="dropdown-item view-all">Xem tất cả</a>
+                                    <a href="/Notification/ViewsNotification?UserId=@userId" class="dropdown-item view-all">Xem tất cả</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -230,7 +233,7 @@
         }
         function LoadUserInformation() {
             $.ajax({
-                url: "https://localhost:7265/api/User/GetUserById/1",
+                url: "https://localhost:7265/api/User/GetUserById/"+@userId+"",
                 type: "GET",
                 contentType: "application/json",
                 success: function (result, status, xhr) {
@@ -238,15 +241,16 @@
                       
                         // Assuming result contains user information
                         // Update the HTML element with the user information
-                    document.getElementById("amount").innerHTML = result["amountMoney"].toLocaleString('en', { maximumFractionDigits: 0 }).replace(/,/g, '.') + " ₫"; // Assuming result is the user information
-                    },
+                    document.getElementById("amount").innerHTML = result["amountMoney"].toLocaleString('en', { maximumFractionDigits: 0 }) + " ₫"; // Assuming result is the user information
+                    document.getElementById("amountforms").innerHTML = result["amountMoney"]
+                },
                     error: function(xhr, status, error) {
                         // Handle error
                         console.error("Error loading user information:", error);
                     }
                 });
             $.ajax({
-                url: "https://localhost:7265/api/Notification/CountNotificationNew/1",
+                url: "https://localhost:7265/api/Notification/CountNotificationNew/" + @userId+"",
                 type: "GET",
                 contentType: "application/json",
                 success: function (result, status, xhr) {
@@ -263,7 +267,7 @@
             });
 
             $.ajax({
-                url: "https://localhost:7265/api/Notification/Get5NotificationNew/1",
+                url: "https://localhost:7265/api/Notification/Get5NotificationNew/"+@userId+"",
                 type: "GET",
                 contentType: "application/json",
                 success: function (result, status, xhr) {
