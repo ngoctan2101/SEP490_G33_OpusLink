@@ -67,13 +67,11 @@
 
 							@if (Model.noti != null)
 							{
-								int i = 0;
 								@foreach (var item in Model.noti)
 								{
-									i++;
 									<tr class="align-middle">
 										<td>
-											<a href="@item.Link">#@i</a>
+											<a href="@item.Link">#</a>
 
 										</td>
 										<td>@item.NotificationContent</td>

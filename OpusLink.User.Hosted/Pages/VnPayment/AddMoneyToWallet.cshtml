@@ -14,8 +14,8 @@
             {
                 PropertyNameCaseInsensitive = true,
             };
-    var erorr = Request.Query["errorKey"];
-    // var erorr = HttpContext!.Session.GetString("_error") ?? string.Empty;
+
+    var erorr = HttpContext!.Session.GetString("_error") ?? string.Empty;
 }
     <style>
         

@@ -1,7 +1,7 @@
 ﻿@page
 @model OpusLink.User.Hosted.Pages.WithDrawMoney.WithDrawMoneyRequestModel
 @{
-    // var erorr = HttpContext!.Session.GetString("_error1") ?? string.Empty;
+    var erorr = HttpContext!.Session.GetString("_error") ?? string.Empty;
 
 }
 
@@ -32,8 +32,7 @@
             <input type="text" hidden name="userid" value="@Model.user.Id" />
             <div class="mb-3">
                 <label for="username" class="form-label">Số tiền trong tài khoản</label>
-                <input type="text" class="form-control" id="username" name="username"  hidden value="@Model.user.AmountMoney">
-                <input type="text" class="form-control" readonly required value="@((Model.user.AmountMoney)?.ToString("#,###")) ₫">
+                <input type="text" class="form-control" id="username" name="username" readonly required value="@Model.user.AmountMoney">
             </div>
             <div class="mb-3">
                 <label for="bankname" class="form-label">Tên ngân hàng</label>
@@ -44,9 +43,9 @@
                 <textarea rows="3" style="width:100%" id="bankacccountinfor" name="bankacccountinfor" placeholder="Số tài khoản: 123xxxxx&#10;Tên tài khoản: NGUYEN VAN A&#10; " required>@Model.user.BankAccountInfor</textarea>
                 @* <input type="text" class="form-control" id="bankacccountinfor" name="bankacccountinfor" required value="@Model.user.BankAccountInfor"> *@
             </div>
-            @if (!string.IsNullOrEmpty(Model.ErrorKey))
+            @if (!string.IsNullOrEmpty(erorr))
             {
-                <p style="color:red;">@Model.ErrorKey</p>
+                <p style="color:red;">@erorr</p>
             }
             <div class="mb-3">
                 <label for="amount" class="form-label">Số tiền:</label>
@@ -81,15 +80,10 @@
     <script>
         function formatCurrency(input) {
             var value = input.value.replace(/[^\d]/g, '');
-            /* value = value.replace(/,/g, '');
-            value = value.replace(/\B(?=(\d{3})+(?!\d))/g, ','); */
-            /* input.value = value; */
             var formattedValue = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
-            input.value = formattedValue; 
-
-      
+            input.value = formattedValue;
         }
-    
+
         // function submitForm() {
         //     var username = document.getElementById("username").value;
         //     var address = document.getElementById("address").value;

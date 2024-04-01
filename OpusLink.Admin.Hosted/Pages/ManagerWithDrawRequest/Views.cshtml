@@ -66,10 +66,8 @@
                                     <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editSkillModal" data-withdrawId="@item.WithdrawRequestID" onclick="ViewWithDraw(@item.WithdrawRequestID)"><i class="fas fa-eye"></i> View</button>
                                     
                                         @* <a href="/ManagerWithDrawRequest/TransferMoney?withdrawId=@item.WithdrawRequestID" class="btn btn-success"><i class="fas fa-exchange-alt"></i> Transfer</a> *@
-                                    @if(item.Amount <= item.AmountUser)
-                                    {
-                                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tranSkillModal" onclick="TranWithDraw(@item.WithdrawRequestID)"><i class="fas fa-exchange-alt"></i> Transfer</button>
-                                    }
+
+                                    <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tranSkillModal" onclick="TranWithDraw(@item.WithdrawRequestID)"><i class="fas fa-exchange-alt"></i> Transfer</button>
                                     <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSkillModal" onclick="ResendWithDraw(@item.WithdrawRequestID)"><i class="fas fa-sync-alt"></i> Reject</button>
                                 </div>
 
@@ -165,8 +163,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="viewamount" class="form-label">Số tiền</label>
-                            <input type="text" class="form-control" id="tranamount" name="tranamount" required hidden>
-                            <input type="text" class="form-control" id="tranamount1" name="tranamount1" required readonly>
+                            <input type="text" class="form-control" id="tranamount" name="tranamount" required readonly>
                         </div>
                         <div class="mb-3">
                             <label for="note" class="form-label">Mã giao dịch</label>
@@ -193,7 +190,7 @@
             document.getElementById("viewusername").value = username;
             document.getElementById("viewbankinfor").value = bankinfo;
             document.getElementById("viewbankname").value = bankname;
-            document.getElementById("viewamount").value = parseFloat( amount).toLocaleString('en', { maximumFractionDigits: 0 }) + " ₫";
+            document.getElementById("viewamount").value = amount;
             
         }
         function ResendWithDraw(withdrawRequestID) {
@@ -216,7 +213,6 @@
             document.getElementById("tranbankinfor").value = bankinfo;
             document.getElementById("tranbankname").value = bankname;
             document.getElementById("tranamount").value = amount;
-            document.getElementById("tranamount1").value = parseFloat(amount).toLocaleString('en', { maximumFractionDigits: 0 }) + " ₫";
             document.getElementById("trancode").value = "";
             document.getElementById("tranuid").value = uid;
         }

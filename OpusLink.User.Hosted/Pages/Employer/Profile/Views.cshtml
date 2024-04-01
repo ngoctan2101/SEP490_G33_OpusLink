@@ -151,7 +151,7 @@
                 </div>
                 <div class="mb-3">
                     <label for="dob" class="form-label">Date of Birth:</label>
-                    <input type="date" class="form-control" id="dob" name="dob" value="@Model.user.Dob?.ToString("dd-MM-yyyy")">
+                    <input type="date" class="form-control" id="dob" name="dob" value="@Model.user.Dob?.ToString("yyyy-MM-dd")">
                 </div>
 
                 <div class="mb-3">
@@ -186,8 +186,8 @@
                 </div>
                 <div class="mb-3">
                     <label for="amountmoney" class="form-label">AmountMoney:</label>
-                    <input type="text" class="form-control" id="amountmoney" name="amountmoney" hidden value="@Model.user.AmountMoney">
-                    <input type="text" class="form-control" readonly value="@((Model.user.AmountMoney)?.ToString("#,###")) ₫">
+                    <input type="text" class="form-control" id="amountmoney" name="amountmoney"
+                            readonly value="@Model.user.AmountMoney">
                 </div>
                 <div class="mb-3">
                     <label for="amountmoney" class="form-label">BankAccountInfor:</label>

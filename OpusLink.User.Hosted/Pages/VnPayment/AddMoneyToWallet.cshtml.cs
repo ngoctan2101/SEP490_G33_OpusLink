@@ -40,7 +40,7 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
             //_validationService = validateService;
         }
 
-        public async Task<IActionResult> OnGet(int UserId)
+        public async Task<IActionResult> OnGet()
         {
             //var json = HttpContext.Session.GetString(LoginKey) ?? string.Empty;
             //var jsonCart = HttpContext.Session.GetString(CartKey) ?? string.Empty;
@@ -59,7 +59,7 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
             //    var strData = await response.Content.ReadAsStringAsync();
             //    orderDetails = System.Text.Json.JsonSerializer.Deserialize<List<OrderDetail>>(strData, option);
 
-            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/" + UserId);
+            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/" + 1);
             if (responseUser.IsSuccessStatusCode)
             {
                 string responseBodyUser = await responseUser.Content.ReadAsStringAsync();

@@ -32,11 +32,11 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
             //_httpContextAccessor = httpContextAccessor;
            
         }
-        public async Task<IActionResult> OnGet(int UserId)
+        public async Task<IActionResult> OnGet()
         {
             double amount = Convert.ToDouble(Request.Query["amount"]);
             //int userId = 0;
-            int userId = UserId;
+            int userId = 1;
             //if (HttpContext.Session.GetInt32("UserId") == null)
             //{
             //    return RedirectToPage("/Login_Register/Login");
@@ -185,7 +185,7 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
                             //var strData = await responseUser.Content.ReadAsStringAsync();
                             //var us = System.Text.Json.JsonSerializer.Deserialize<OpusLink.Entity.Models.User>(strData, option);
 
-                            //HttpContext.Session.SetString(ErrorKey, "");
+                            HttpContext.Session.SetString(ErrorKey, "");
                            
                             return RedirectToPage("/HistoryPayment/HistoryPaymentDetail", new { payId = HisPayId });
                            
@@ -193,16 +193,14 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
                         }
                         else
                         {
-                            ErrorKey = "An error occurred while processing the invoice | Trading code: " + vnpayTranId + " | Error code: " + vnp_ResponseCode + "";
-                            //HttpContext.Session.SetString(ErrorKey, "An error occurred while processing the invoice | Trading code: " + vnpayTranId + " | Error code: " + vnp_ResponseCode);
-                            return RedirectToPage("/VnPayment/AddMoneyToWallet", new { errorKey = ErrorKey });
+                            HttpContext.Session.SetString(ErrorKey, "An error occurred while processing the invoice | Trading code: " + vnpayTranId + " | Error code: " + vnp_ResponseCode);
+                            return RedirectToPage("/VnPayment/AddMoneyToWallet");
                         }
                     }
                     else
                     {
-                        ErrorKey = "An error occurred during processing";
-                        //HttpContext.Session.SetString(ErrorKey, "An error occurred during processing");
-                        return RedirectToPage("/VnPayment/AddMoneyToWallet", new { errorKey = ErrorKey });
+                        HttpContext.Session.SetString(ErrorKey, "An error occurred during processing");
+                        return RedirectToPage("/VnPayment/AddMoneyToWallet");
                     }
                 }
 

@@ -187,9 +187,8 @@
                     </div>
                     <div class="mb-3">
                         <label for="amountmoney" class="form-label">AmountMoney:</label>
-                       
-                    <input type="text" class="form-control" id="amountmoney" name="amountmoney" hidden value="@Model.user.AmountMoney">
-                    <input type="text" class="form-control" readonly value="@((Model.user.AmountMoney)?.ToString("#,###")) ₫">
+                        <input type="text" class="form-control" id="amountmoney" name="amountmoney"
+                               placeholder="Enter amountmoney" readonly value="@Model.user.AmountMoney">
                     </div>
                     <div class="mb-3">
                         <label for="amountmoney" class="form-label">BankAccountInfor:</label>
