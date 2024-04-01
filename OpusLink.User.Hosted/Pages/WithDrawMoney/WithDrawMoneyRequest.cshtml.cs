@@ -21,7 +21,8 @@ namespace OpusLink.User.Hosted.Pages.WithDrawMoney
      
         [BindProperty]
         public UserDTO user { get; set; } = null!;
-        public string ErrorKey = "_error";
+        public string ErrorKey = "";
+        public string money = "";
 
         public WithDrawMoneyRequestModel()
         {
@@ -45,8 +46,7 @@ namespace OpusLink.User.Hosted.Pages.WithDrawMoney
                 user = System.Text.Json.JsonSerializer.Deserialize<UserDTO>(responseBodyUser, optionUser);
             }
 
-           
-           
+
             return Page();
         }
 
@@ -111,7 +111,8 @@ namespace OpusLink.User.Hosted.Pages.WithDrawMoney
             }
             if (user.AmountMoney < Convert.ToDecimal(price))
             {
-                HttpContext.Session.SetString(ErrorKey, "Số tiền rút không được quá số dư tài khoản");
+                ErrorKey = "Số tiền rút không được quá số dư tài khoản";
+                //HttpContext.Session.SetString(ErrorKey, "Số tiền rút không được quá số dư tài khoản");
                 return Page();
             }
 
