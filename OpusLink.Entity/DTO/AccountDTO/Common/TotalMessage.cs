@@ -20,7 +20,6 @@ namespace OpusLink.Entity.DTO.AccountDTO.Common
 
 
         public static string LoginError = "Tên đăng nhập hoặc Mật khẩu không đúng!";
-        public static string LoginFailCuzBanUser = "Tài khoản của bạn đang bị khóa cho đến ";
 
         //---ForgotPassword---
         //Khi quên mật khẩu thành công
