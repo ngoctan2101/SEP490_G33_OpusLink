@@ -219,10 +219,10 @@
 
         function rutTien() {
             // Xử lý logic khi rút tiền
-            window.location.href = '/WithDrawMoney/WithDrawMoneyRequest?UserId=1';
+            window.location.href = '/WithDrawMoney/WithDrawMoneyRequest?UserId=@userId';
         }
         function napTien() {
-            window.location.href = '/VnPayment/AddMoneyToWallet';
+            window.location.href = '/VnPayment/AddMoneyToWallet?UserId=@userId';
         }
         function LoadUserInformation() {
             $.ajax({

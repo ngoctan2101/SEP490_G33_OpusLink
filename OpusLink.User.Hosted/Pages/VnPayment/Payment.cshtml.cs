@@ -32,11 +32,11 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
             //_httpContextAccessor = httpContextAccessor;
            
         }
-        public async Task<IActionResult> OnGet(int UserId)
+        public async Task<IActionResult> OnGet()
         {
             double amount = Convert.ToDouble(Request.Query["amount"]);
+            int userId = 0;
             //int userId = 0;
-            int userId = UserId;
             //if (HttpContext.Session.GetInt32("UserId") == null)
             //{
             //    return RedirectToPage("/Login_Register/Login");
@@ -71,6 +71,17 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
             if (service.Equals("payment"))
             {
                 
+                //int userId = 0;
+              
+                if (HttpContext.Session.GetInt32("UserId") == null)
+                {
+                    return RedirectToPage("/Login_Register/Login");
+                }
+                else
+                {
+                    userId = HttpContext.Session.GetInt32("UserId") ?? 0;
+                }
+
                 string url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
                 string returnUrl = "https://localhost:7131/VnPayment/Payment?opuslink=paymentconfirm";
                 string tmnCode = "NVFQP1WS";
@@ -113,6 +124,18 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
 
             if (service.Equals("paymentconfirm"))
             {
+               
+                //int userId = 0;
+
+                if (HttpContext.Session.GetInt32("UserId") == null)
+                {
+                    return RedirectToPage("/Login_Register/Login");
+                }
+                else
+                {
+                    userId = HttpContext.Session.GetInt32("UserId") ?? 0;
+                }
+
                 if (Request.Query.Count > 0)
                 {
                     string hashSecret = "MPLXERAVPCPUNWPZSLRHRYYBKXYEAVXK";
