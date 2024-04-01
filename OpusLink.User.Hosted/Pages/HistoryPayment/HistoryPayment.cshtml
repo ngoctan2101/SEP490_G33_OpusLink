@@ -67,13 +67,14 @@
 						</thead>
 						<tbody>
 
-							@if (Model.historyPaymentDTOs != null)
+							@if (Model.his != null)
 							{
-								@foreach (var hp in Model.historyPaymentDTOs.Where(hp => hp.UserID == 34).OrderByDescending(hp => hp.TransactionDate))
+								@foreach (var hp in Model.his.OrderByDescending(hp => hp.TransactionDate))
 								{
 									<tr class="align-middle">
 										<td>
-											@hp.PaymentID
+											<a href="/HistoryPayment/HistoryPaymentDetail?payId=@hp.PaymentID">#@hp.PaymentID</a>
+											
 										</td>
 										<td>@hp.TransactionDate</td>
 										<td>@hp.TransactionCode</td>

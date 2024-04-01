@@ -21,7 +21,7 @@ namespace OpusLink.User.Hosted.Pages.WithDrawMoney
      
         [BindProperty]
         public UserDTO user { get; set; } = null!;
-        private string ErrorKey = "_error";
+        public string ErrorKey = "_error";
 
         public WithDrawMoneyRequestModel()
         {
@@ -32,11 +32,11 @@ namespace OpusLink.User.Hosted.Pages.WithDrawMoney
             //_httpContextAccessor = httpContextAccessor;
 
         }
-        public async Task<IActionResult> OnGet()
+        public async Task<IActionResult> OnGet(int UserId )
         {
             
 
-            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/" + 1);
+            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/" + UserId);
             if (responseUser.IsSuccessStatusCode)
             {
                 string responseBodyUser = await responseUser.Content.ReadAsStringAsync();
@@ -71,11 +71,11 @@ namespace OpusLink.User.Hosted.Pages.WithDrawMoney
             string bankInfor ="";
             string bankName ="";
             // manual bind to get Filter object
-
+            int userid = 0;
 
             foreach (string key in keys)
             {
-
+                
                 if (key.Contains("amount"))
                 {
                     string price1 = collection[key].ToString();
@@ -87,7 +87,6 @@ namespace OpusLink.User.Hosted.Pages.WithDrawMoney
                     price1.Trim();
 
                     price = double.Parse(price1 + ".0");
-
                 }
                 if (key.Contains("bankacccountinfor"))
                 {
@@ -97,13 +96,28 @@ namespace OpusLink.User.Hosted.Pages.WithDrawMoney
                 {
                     bankName = collection[key].ToString();
                 }
+                if (key.Contains("userid"))
+                {
+                    userid = Convert.ToInt32(collection[key].ToString());
+                }
+            }
+            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/" + userid);
+            if (responseUser.IsSuccessStatusCode)
+            {
+                string responseBodyUser = await responseUser.Content.ReadAsStringAsync();
+                var optionUser = new JsonSerializerOptions()
+                { PropertyNameCaseInsensitive = true };
+                user = System.Text.Json.JsonSerializer.Deserialize<UserDTO>(responseBodyUser, optionUser);
+            }
+            if (user.AmountMoney < Convert.ToDecimal(price))
+            {
+                HttpContext.Session.SetString(ErrorKey, "Số tiền rút không được quá số dư tài khoản");
+                return Page();
             }
 
-           
 
-         
             WithdrawRequestDTO wdr = new WithdrawRequestDTO();
-            wdr.UserID = 1;
+            wdr.UserID = userid;
             wdr.Amount = Convert.ToDecimal(price);
             wdr.DateCreated = DateTime.Now;
             wdr.Status = 1;

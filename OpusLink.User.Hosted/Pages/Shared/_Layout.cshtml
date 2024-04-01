@@ -16,6 +16,22 @@
     <script src="https://kit.fontawesome.com/10f63c3d6e.js" crossorigin="anonymous"></script>
     <link rel="stylesheet" href="~/css/HomePage.css">
     <title>Trang chủ</title>
+    <style>
+        
+
+        .dropdown-item {
+            background-color: #f2f2f2;
+            border-bottom: 1px solid #ccc;
+        }
+
+            .dropdown-item:hover {
+                background-color: #e0e0e0; /* Màu nền khi hover */
+            }
+
+            .dropdown-item a {
+                color: black;
+                text-decoration: none;
+    </style>
 </head>
 <body>
     <!-- Header -->
@@ -76,15 +92,14 @@
                                     <li class="nav-item dropdown">
                                         <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                             <i class="fas fa-bell"></i>
-                                            <span class="badge bg-danger" id="notificationBadge">3</span>
+                                            <span class="badge bg-danger" id="notificationBadge"></span>
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="notificationDropdown">
-                                            <p class="dropdown-item-text">Bạn có 3 thông báo mới</p>
-                                            <ul class="list-unstyled">
-                                                <li class="dropdown-item">Thông báo 1</li>
-                                                <li class="dropdown-item">Thông báo 2</li>
-                                                <li class="dropdown-item">Thông báo 3</li>
+                                            <p class="dropdown-item-text">Bạn có  thông báo mới</p>
+                                            <ul class="list-unstyled" id="listNotification">
+                                                
                                             </ul>
+                                            <a href="/Notification/ViewsNotification?UserId=1" class="dropdown-item view-all">Xem tất cả</a>
                                         </div>
                                     </li>
 
@@ -94,7 +109,7 @@
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="userDropdown">
                                             <form asp-page="/Index" asp-page-handler="ChangeTokenAboutRole" method="post">
-                                                <button class="dropdown-item">Chuyển sang: Tuyển Dụng</button>
+                                                <button class="dropdown-item">Chuyển sang: Nhà Tuyển Dụng</button>
                                             </form>
                                             <a class="dropdown-item" href="../Freelancer/Profile/Views?UserId=@userId">Hồ sơ cá nhân</a>
                                             <div class="dropdown-divider"></div>
@@ -134,29 +149,31 @@
                                 <div class="dropdown-menu" aria-labelledby="walletDropdown">
 
                                     <p class="dropdown-item-text" id="amount"> </p>
-                                    <button class="btn btn-primary dropdown-item" onclick="napTien()">Nạp tiền</button>
+                                    <button class="btn btn-primary dropdown-item" onclick="napTien()">Nạp tiền</button> 
                                     <button class="btn btn-primary dropdown-item" onclick="rutTien()">Rút tiền</button>
+
+                                    
+                                    
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="notificationDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fas fa-bell"></i>
-                                    <span class="badge bg-danger" id="notificationBadge">3</span>
+                                    <span class="badge bg-danger" id="notificationBadge"></span>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="notificationDropdown">
-                                    <p class="dropdown-item-text">Bạn có 3 thông báo mới</p>
-                                    <ul class="list-unstyled">
-                                        <li class="dropdown-item">Thông báo 1</li>
-                                        <li class="dropdown-item">Thông báo 2</li>
-                                        <li class="dropdown-item">Thông báo 3</li>
+                                    <p class="dropdown-item-text">Bạn có thông báo mới</p>
+                                    <ul class="list-unstyled" id="listNotification">
+                                        
                                     </ul>
+                                    <a href="/Notification/ViewsNotification?UserId=1" class="dropdown-item view-all">Xem tất cả</a>
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
                                 <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
                                     <i class="fa-solid fa-user"></i> <span>Tuyển dụng</span> <!-- Icon hình thể hiện đang ở role nào -->
                                 </a>
-
+                                <a href="abc"></a>
                                 <div class="dropdown-menu" aria-labelledby="userDropdown">
                                     <form asp-page="/Index" asp-page-handler="ChangeTokenAboutRole" method="post">
                                         <button class="dropdown-item">Chuyển sang: Freelancer</button>
@@ -170,6 +187,7 @@
                             </li>
                         </ul>
                     </div>
+                    
                 }
             </nav>
         </div>
@@ -200,9 +218,12 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
+
+        
+
         function rutTien() {
             // Xử lý logic khi rút tiền
-            window.location.href = '/WithDrawMoney/WithDrawMoneyRequest';
+            window.location.href = '/WithDrawMoney/WithDrawMoneyRequest?UserId=1';
         }
         function napTien() {
             window.location.href = '/VnPayment/AddMoneyToWallet';
@@ -217,13 +238,60 @@
                       
                         // Assuming result contains user information
                         // Update the HTML element with the user information
-                                document.getElementById("amount").innerHTML += result["amountMoney"]; // Assuming result is the user information
+                    document.getElementById("amount").innerHTML = result["amountMoney"].toLocaleString('en', { maximumFractionDigits: 0 }).replace(/,/g, '.') + " ₫"; // Assuming result is the user information
                     },
                     error: function(xhr, status, error) {
                         // Handle error
                         console.error("Error loading user information:", error);
                     }
                 });
+            $.ajax({
+                url: "https://localhost:7265/api/Notification/CountNotificationNew/1",
+                type: "GET",
+                contentType: "application/json",
+                success: function (result, status, xhr) {
+
+
+                    // Assuming result contains user information
+                    // Update the HTML element with the user information
+                    document.getElementById("notificationBadge").innerHTML += result; // Assuming result is the user information
+                },
+                error: function (xhr, status, error) {
+                    // Handle error
+                    console.error("Error loading user information:", error);
+                }
+            });
+
+            $.ajax({
+                url: "https://localhost:7265/api/Notification/Get5NotificationNew/1",
+                type: "GET",
+                contentType: "application/json",
+                success: function (result, status, xhr) {
+                    var fivecodeline = "";
+                    var domain = "https://localhost:7131/Index?handler=ForNotificationDetail&link=";
+                    $.each(result, function (index, value) {
+                        if (value["isReaded"] == true) {
+                            fivecodeline += "<li class=\"dropdown-item\"><a style=\"font-weight\:bold\" href=\"" + domain + encodeURIComponent(value["link"]) + "&notiId=" + value["notificationID"] + "\">" + value["notificationContent"] + "</a></li>";
+                        } else {
+                            fivecodeline += "<li class=\"dropdown-item\"><a href=\"" + domain + encodeURIComponent(value["link"]) + "&notiId=" + value["notificationID"] + "\">" + value["notificationContent"] + "</a></li>";
+                        }
+                        
+                         
+
+                       
+                    });
+
+                    
+
+                    // Assuming result contains user information
+                    // Update the HTML element with the user information
+                    document.getElementById("listNotification").innerHTML = fivecodeline; // Assuming result is the user information
+                },
+                error: function (xhr, status, error) {
+                    // Handle error
+                    console.error("Error loading user information:", error);
+                }
+            });
         }
 
                  

@@ -1,7 +1,9 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using Newtonsoft.Json;
 using OpusLink.Entity.DTO;
+using OpusLink.Entity.DTO.NotificationDTO;
 using OpusLink.Entity.DTO.WithdrawRequestDTO;
 using System.Net.Http.Headers;
 using System.Text;
@@ -30,7 +32,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
             ServiceMangaUrl = "https://localhost:7265/";
-           
+
 
         }
         //public async void OnGetAsync(int WithdrawRequestID)
@@ -78,7 +80,8 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
             //UpdateHWithdrawRequestByStatusToFail/{wid}/{reason}
             string resonres = "";
             int wid = 0;
-
+            int uidres = 0;
+            
             List<string> keys = collection.Keys.ToList<string>();
             foreach (string key in keys)
             {
@@ -91,17 +94,147 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
                 {
                     resonres = collection[key].ToString();
                 }
+                if (key.Contains("rejuserid"))
+                {
+                    uidres = Convert.ToInt32(collection[key].ToString());
+                }
             }
 
-            var jsonRequestBody = JsonSerializer.Serialize(wid, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
+            var jsonRequestBody = System.Text.Json.JsonSerializer.Serialize(wid, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
             var content = new StringContent(jsonRequestBody, Encoding.UTF8, "application/json");
 
             var response = await client.PutAsync(ServiceMangaUrl + $"api/WithDrawRequest/UpdateHWithdrawRequestByStatusToFail/{wid}/{resonres}", content);
 
+            
+
+            // add notification reject
+            NotificationDTO noti = new NotificationDTO();
+            noti.UserID = uidres;
+            noti.NotificationContent = resonres;
+            noti.IsReaded = false;
+            //https://localhost:7131/WithDrawMoney/WithDrawMoneyRequest?UserId=1
+            noti.Link = "https://localhost:7131/WithDrawMoney/WithDrawMoneyRequest?UserId=" + uidres + "";
+            noti.NotificationDate = DateTime.Now;
+
+            var notifi = System.Text.Json.JsonSerializer.Serialize(noti);
+            var content1 = new StringContent(notifi, Encoding.UTF8, "application/json");
+            HttpResponseMessage response1 = await client.PostAsync(ServiceMangaUrl + $"api/Notification/AddNotification", content1);
+
+
+
             return Redirect("/ManagerWithDrawRequest/Views");
 
 
         }
+        public async Task<IActionResult> OnPostTranferWithDrawAsync(IFormCollection collection)
+        {
+            List<string> keys = collection.Keys.ToList<string>();
+            int withdrawidres = 0;
+            string usernameres = "";
+            string banknameres = "";
+            string bankacccountinforres = "";
+            decimal price = 0;
+            string trancoderes = "";
+            int uidres = 0;
+            foreach (string key in keys)
+            {
+
+                if (key.Contains("tranwithdrawid"))
+                {
+                    withdrawidres = Convert.ToInt32(collection[key].ToString());
+                }
+                if (key.Contains("tranusername"))
+                {
+                    usernameres = collection[key].ToString();
+                }
+                if (key.Contains("tranbankinfor"))
+                {
+                    bankacccountinforres = collection[key].ToString();
+                }
+                if (key.Contains("tranbankname"))
+                {
+                    banknameres = collection[key].ToString();
+                }
+                if (key.Contains("trancode"))
+                {
+                    trancoderes = collection[key].ToString();
+                }
+                if (key.Contains("tranuid"))
+                {
+                    uidres = Convert.ToInt32(collection[key].ToString());
+                }
+                if (key.Contains("tranamount"))
+                {
+                    string price1 = collection[key].ToString();
+                    price1 = price1.Replace(".", string.Empty);
+                    price1 = price1.Replace("₫", string.Empty);
+                    price1 = price1.Replace(" ", string.Empty);
+                    price1 = price1.TrimStart();
+                    price1 = price1.TrimEnd();
+                    price1.Trim();
+
+                    price = decimal.Parse(price1);
+                }
+
+
+            }
+
+
+            // waillet - tien
+            var jsonProduct = System.Text.Json.JsonSerializer.Serialize(uidres);
+            var content7 = new StringContent(jsonProduct, Encoding.UTF8, "application/json");
+            await client.PutAsync(ServiceMangaUrl + $"api/User/WithdrawMoney/{price / 100}/{uidres}", content7);
+
+            //add to history
+            HistoryPaymentDTO his = new HistoryPaymentDTO();
+            his.Amount = price / 100;
+            his.TransactionDate = DateTime.Now;
+            his.TransactionCode = trancoderes;
+            his.TransactionType = 2;
+            his.UserID = uidres;
+
+
+            var hisroy = System.Text.Json.JsonSerializer.Serialize(his);
+            var content8 = new StringContent(hisroy, Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PostAsync(ServiceMangaUrl + $"api/HistoryPayment/AddHistoryPayment", content8);
+            int HisPayId = 0;
+            if (response.IsSuccessStatusCode)
+            {
+                string strData = await response.Content.ReadAsStringAsync();
+                HisPayId = Convert.ToInt32(JsonConvert.DeserializeObject<Int32>(strData));
+
+            }
+
+            // update status with draw
+            var jsonProduct1 = System.Text.Json.JsonSerializer.Serialize(withdrawidres);
+            var content9 = new StringContent(jsonProduct1, Encoding.UTF8, "application/json");
+            await client.PutAsync(ServiceMangaUrl + $"api/WithDrawRequest/UpdateHisIdWithdrawRequest/{withdrawidres}/{HisPayId}", content9);
+
+            var jsonProduct2 = System.Text.Json.JsonSerializer.Serialize(withdrawidres);
+            var content10 = new StringContent(jsonProduct2, Encoding.UTF8, "application/json");
+            await client.PutAsync(ServiceMangaUrl + $"api/WithDrawRequest/UpdateHWithdrawRequestByStatusToSuccessfull/{withdrawidres}", content10);
+
+
+            //https://localhost:7131/HistoryPayment/HistoryPaymentDetail?payId=1578
+            // add new notification
+            NotificationDTO noti = new NotificationDTO();
+            noti.UserID = uidres;
+            noti.NotificationContent = "Rút tiền thành công";
+            noti.IsReaded = false;
+            noti.Link = "https://localhost:7131/HistoryPayment/HistoryPaymentDetail?payId="+HisPayId+"";
+            noti.NotificationDate = DateTime.Now;
+
+            var notifi = System.Text.Json.JsonSerializer.Serialize(noti);
+            var content1 = new StringContent(notifi, Encoding.UTF8, "application/json");
+            HttpResponseMessage response1 = await client.PostAsync(ServiceMangaUrl + $"api/Notification/AddNotification", content1);
+            
+
+            return Redirect("/ManagerWithDrawRequest/Views");
+        }
+
+
     }
+
 }
+

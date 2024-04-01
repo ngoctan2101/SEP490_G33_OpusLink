@@ -3,47 +3,48 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO;
 using System.Net.Http.Headers;
+using System.Text.Json;
 
 namespace OpusLink.User.Hosted.Pages.HistoryPayment
 {
     public class HistoryPaymentModel : PageModel
     {
-        private readonly HttpClient client = null;
-        public IList<HistoryPaymentDTO> historyPaymentDTOs { get; set; } = default!;
+        [BindProperty]
 
+        public List<HistoryPaymentDTO> his { get; set; } = null!;
+        private readonly HttpClient client = null;
+        private string ServiceMangaUrl = "";
         public HistoryPaymentModel()
         {
             client = new HttpClient();
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
+            ServiceMangaUrl = "https://localhost:7265/";
+            //_validationService = validateService;
         }
-        public async Task OnGetHistoryPaymentByIdAsync(int id)
+        public async Task OnGetAsync(int UserId)
         {
-            HttpResponseMessage response = await client.GetAsync($"https://localhost:7265/api/HistoryPayment/GetDetailHistoryPaymentByUserId/{id}");
 
-            if (response.IsSuccessStatusCode)
+            //int userId = 0;
+            //int userId = 1;
+            //if (HttpContext.Session.GetInt32("UserId") == null)
+            //{
+            //    return RedirectToPage("/Login_Register/Login");
+            //}
+            //else
+            //{
+            //    userId = HttpContext.Session.GetInt32("UserId") ?? 0;
+            //}
+            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + $"api/HistoryPayment/GetHistoryPaymentByUserId/{UserId}");
+            if (responseUser.IsSuccessStatusCode)
             {
-                string strData = await response.Content.ReadAsStringAsync();
-                historyPaymentDTOs = JsonConvert.DeserializeObject<List<HistoryPaymentDTO>>(strData);
+                string responseBodyUser = await responseUser.Content.ReadAsStringAsync();
+                var optionUser = new JsonSerializerOptions()
+                { PropertyNameCaseInsensitive = true };
+                his = System.Text.Json.JsonSerializer.Deserialize<List<HistoryPaymentDTO>>(responseBodyUser, optionUser);
             }
-            else
-            {
 
-            }
-        }
-        public async Task OnGetAsync()
-        {
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7265/api/HistoryPayment/GetHistoryPayment");
 
-            if (response.IsSuccessStatusCode)
-            {
-                string strData = await response.Content.ReadAsStringAsync();
-                historyPaymentDTOs = JsonConvert.DeserializeObject<List<HistoryPaymentDTO>>(strData);
-            }
-            else
-            {
-
-            }
         }
     }
 }

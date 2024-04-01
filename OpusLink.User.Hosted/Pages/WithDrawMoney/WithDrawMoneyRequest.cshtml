@@ -4,75 +4,32 @@
     var erorr = HttpContext!.Session.GetString("_error") ?? string.Empty;
 
 }
-<!DOCTYPE html>
-<html lang="en">
-@* <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nạp Tiền</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-        .container {
-            background-color: #fff;
-            padding: 20px;
-            border-radius: 8px;
-            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
-            text-align: center;
-        }
-        .bottom-container {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-        }
-    </style>
-</head> *@
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
-<style>
-    body {
-        font-family: Arial, sans-serif;
-        background-color: #f4f4f4;
-        margin: 0;
-        padding: 0;
-        display: flex;
-        align-items: center;
-        justify-content: center;
-        height: 100vh;
-    }
 
-    .container {
+<style>
+   
+
+    .container_ruttien {
+        margin-top: 20px;
         background-color: #fff;
         padding: 20px;
         border-radius: 8px;
         box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-        width: 400px;
-        text-align: center;
     }
 
-    .bottom-container {
-        position: absolute;
-        bottom: 20px;
+    
         width: 100%;
     }
 </style>
-<body>
-    <div class="container">
+<div class="row">
+    <div class="col-md-3"></div>
+    <div class="col-md-5 container_ruttien">
         <h2 class="mb-4">Gửi yêu cầu rút tiền</h2>
         @if (Model.user.BankName == null || Model.user.BankAccountInfor == null)
         {
             <p style="color:red;">Bank account name or account number is empty.Please fill in all information</p>
         }
         <form id="topupForm" method="post">
+            <input type="text" hidden name="userid" value="@Model.user.Id" />
             <div class="mb-3">
                 <label for="username" class="form-label">Số tiền trong tài khoản</label>
                 <input type="text" class="form-control" id="username" name="username" readonly required value="@Model.user.AmountMoney">
@@ -86,6 +43,10 @@
                 <textarea rows="3" style="width:100%" id="bankacccountinfor" name="bankacccountinfor" placeholder="Số tài khoản: 123xxxxx&#10;Tên tài khoản: NGUYEN VAN A&#10; " required>@Model.user.BankAccountInfor</textarea>
                 @* <input type="text" class="form-control" id="bankacccountinfor" name="bankacccountinfor" required value="@Model.user.BankAccountInfor"> *@
             </div>
+            @if (!string.IsNullOrEmpty(erorr))
+            {
+                <p style="color:red;">@erorr</p>
+            }
             <div class="mb-3">
                 <label for="amount" class="form-label">Số tiền:</label>
                 <input type="text" class="form-control" id="amount" name="amount" oninput="formatCurrency(this)" required>
@@ -94,25 +55,28 @@
             <a href="../Index" class="btn btn-secondary mt-3">
                 <i class="bi bi-arrow-left"></i> Home
             </a>
-            @if(Model.user.BankAccountInfor == null || Model.user.BankName == null)
+            @* @if(Model.user.BankAccountInfor == null || Model.user.BankName == null)
             {
-                <a href="/Freelancer/Profile/Views?id=@Model.user.Id" class="btn btn-success mt-3">
-                    <i class="bi bi-arrow-left"></i> Update
-                </a>
+            <a href="/Freelancer/Profile/Views?id=@Model.user.Id" class="btn btn-success mt-3">
+            <i class="bi bi-arrow-left"></i> Update
+            </a>
             }
-            else
-            {
-                <button type="submit" class="btn btn-success mt-3">Rút Tiền</button>
-            }
-           
+            else *@
+            @* { *@
+            <button type="submit" class="btn btn-success mt-3">Rút Tiền</button>
+            @* } *@
+
         </form>
 
         <div class="bottom-container">
             <!-- Chỗ này để đặt các phần tử ở gốc dưới của form -->
         </div>
     </div>
+    <div class="col-md-3"></div>
+</div>
+    
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    
     <script>
         function formatCurrency(input) {
             var value = input.value.replace(/[^\d]/g, '');
@@ -128,5 +92,5 @@
         //     alert("Nạp tiền thành công!\nSố tiền: " + amount);
         // }
     </script>
-</body>
-</html>
+
+
