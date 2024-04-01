@@ -17,7 +17,7 @@
     <link rel="stylesheet" href="~/css/HomePage.css">
     <title>Trang chủ</title>
     <style>
-        
+
 
         .dropdown-item {
             background-color: #f2f2f2;
@@ -38,9 +38,9 @@
     <header class="bg-light">
         <div class="container">
             <nav class="navbar navbar-expand-lg navbar-light">
-                <a class="navbar-brand" href="#" style="font-size:30px;color: #4B32E8;font-weight:bold">OPUSLINK</a>
                 @if (currentRole.Equals("Guest") || currentRole.Equals("Freelancer"))
                 {
+                    <a class="navbar-brand" asp-area="" asp-page="/JOB/FreelancerViewAllJobPage" style="font-size:30px;color: #4B32E8;font-weight:bold">OPUSLINK</a>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item">
@@ -74,7 +74,7 @@
                             }
 
                             <ul class="navbar-nav ms-auto">
-                                @if (currentRole.Equals("Guest")){}
+                                @if (currentRole.Equals("Guest")) { }
                                 @if (currentRole.Equals("Freelancer"))
                                 {
                                     <li class="nav-item dropdown">
@@ -98,7 +98,6 @@
                                         <div class="dropdown-menu" aria-labelledby="notificationDropdown">
                                             <p class="dropdown-item-text">Bạn có  thông báo mới</p>
                                             <ul class="list-unstyled" id="listNotification">
-                                                
                                             </ul>
                                             <a href="/Notification/ViewsNotification?UserId=@userId" class="dropdown-item view-all">Xem tất cả</a>
                                         </div>
@@ -124,8 +123,9 @@
                     </div>
                 }
                 @* Cho Role Employer *@
-                else 
+                else
                 {
+                    <a class="navbar-brand" asp-area="" asp-page="/JOB/EmployerViewAllJobCreatedPage" style="font-size:30px;color: #4B32E8;font-weight:bold">OPUSLINK</a>
                     <div class="collapse navbar-collapse" id="navbarNav">
                         <ul class="navbar-nav me-auto">
                             <li class="nav-item">
@@ -138,7 +138,7 @@
                                 <a class="nav-link" asp-area="" asp-page="/Chat/ChatList" asp-route-userId="@userId" asp-route-role="@((int)Roles.Employer)" style="color:#5038ED;margin:0px 10px 0px 10px">Tin nhắn</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../Freelancer/Profile/Views?id=@userId" style="color:#5038ED;margin:0px 10px 0px 10px">Xin chào, @userName</a>
+                                <a class="nav-link" href="../Employer/Profile/Views?id=@userId" style="color:#5038ED;margin:0px 10px 0px 10px">Xin chào, @userName</a>
                             </li>
                         </ul>
 
@@ -154,9 +154,6 @@
                                     
                                     <button class="btn btn-primary dropdown-item" onclick="napTien()">Nạp tiền</button> 
                                     <button class="btn btn-primary dropdown-item" onclick="rutTien()">Rút tiền</button>
-
-                                    
-                                    
                                 </div>
                             </li>
                             <li class="nav-item dropdown">
@@ -167,7 +164,6 @@
                                 <div class="dropdown-menu" aria-labelledby="notificationDropdown">
                                     <p class="dropdown-item-text">Bạn có thông báo mới</p>
                                     <ul class="list-unstyled" id="listNotification">
-                                        
                                     </ul>
                                     <a href="/Notification/ViewsNotification?UserId=@userId" class="dropdown-item view-all">Xem tất cả</a>
                                 </div>
@@ -190,7 +186,6 @@
                             </li>
                         </ul>
                     </div>
-                    
                 }
             </nav>
         </div>
@@ -210,10 +205,10 @@
     </div>
 
     <!-- Footer -->
-@*     <footer class="bg-dark text-light mt-5">
-        <div class="container text-center">
-            <p>&copy; 2024 Your Website. All Rights Reserved.</p>
-        </div>
+    @*     <footer class="bg-dark text-light mt-5">
+    <div class="container text-center">
+    <p>&copy; 2024 Your Website. All Rights Reserved.</p>
+    </div>
     </footer> *@
     @Html.Partial("~/Pages/Shared/Footer.cshtml");
 
@@ -221,8 +216,6 @@
     <script src="~/lib/jquery/dist/jquery.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
-
-        
 
         function rutTien() {
             // Xử lý logic khi rút tiền
@@ -279,14 +272,8 @@
                         } else {
                             fivecodeline += "<li class=\"dropdown-item\"><a href=\"" + domain + encodeURIComponent(value["link"]) + "&notiId=" + value["notificationID"] + "\">" + value["notificationContent"] + "</a></li>";
                         }
-                        
-                         
 
-                       
                     });
-
-                    
-
                     // Assuming result contains user information
                     // Update the HTML element with the user information
                     document.getElementById("listNotification").innerHTML = fivecodeline; // Assuming result is the user information
@@ -298,12 +285,10 @@
             });
         }
 
-                 
         window.onload = function () {
             LoadUserInformation();
         };
     </script>
-
 </body>
 </html>
 
