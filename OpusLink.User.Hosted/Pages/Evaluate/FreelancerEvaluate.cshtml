@@ -12,31 +12,33 @@
 	
 	
 }
-<div class="container">
+<div class="container-eva">
 	@* <div class="header">
 		<div class="logo">Opuslink</div>
 		<div class="chat">
 			<img src="https://cdn.builder.io/api/v1/image/assets/TEMP/412c2e66651b01c951b336ec271764f605885f0cfb40bc677f26eaf5bbb8f67d?" class="chat-icon" loading="lazy" />
 		</div>
 	</div> *@
-	<h1>Đánh giá Employer</h1>
+	<h1>Đánh giá nhà tuyển dụng</h1>
 	<div class="Employer-item">
-		<img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="rounded-circle mr-1" alt="" width="40" height="40">
-		<strong>EmployerName</strong>
+		<img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="rounded-circle mr-1" alt="" width="80" height="80">
+		<h3>EmployerName</h3>
 	</div>
 	
 	<div class="evaluation">
-
-		<h5>Thanh Toán Đúng Hạn</h5>
-		<div class="star-rating-1" data-rating-1="0">
-			<span class="star" data-value="1">&#9733;</span>
-			<span class="star" data-value="2">&#9733;</span>
-			<span class="star" data-value="3">&#9733;</span>
-			<span class="star" data-value="4">&#9733;</span>
-			<span class="star" data-value="5">&#9733;</span>
+		<div class="danh-gia">
+			<h5>Uy tín</h5>
+			<div class="star-rating-1" data-rating-1="0">
+				<span class="star" data-value="1">&#9733;</span>
+				<span class="star" data-value="2">&#9733;</span>
+				<span class="star" data-value="3">&#9733;</span>
+				<span class="star" data-value="4">&#9733;</span>
+				<span class="star" data-value="5">&#9733;</span>
+			</div>
 		</div>
+		
 
-		<h5>Mô tả rõ ràng</h5>
+		<h5>Giá cả</h5>
 		<div class="star-rating-2" data-rating-2="0">
 			<span class="star" data-value="1">&#9733;</span>
 			<span class="star" data-value="2">&#9733;</span>
@@ -44,7 +46,7 @@
 			<span class="star" data-value="4">&#9733;</span>
 			<span class="star" data-value="5">&#9733;</span>
 		</div>
-		<h5>Khả năng giao tiếp</h5>
+		<h5>Thời gian</h5>
 		<div class="star-rating-3" data-rating-3="0">
 			<span class="star" data-value="1">&#9733;</span>
 			<span class="star" data-value="2">&#9733;</span>
@@ -52,7 +54,7 @@
 			<span class="star" data-value="4">&#9733;</span>
 			<span class="star" data-value="5">&#9733;</span>
 		</div>
-		<h5>Kết quả sản phẩm</h5>
+		<h5>Giao tiếp</h5>
 		<div class="star-rating-4" data-rating-4="0">
 			<span class="star" data-value="1">&#9733;</span>
 			<span class="star" data-value="2">&#9733;</span>
@@ -67,11 +69,11 @@
 			<span class="star" data-value="4">&#9733;</span>
 			<span class="star" data-value="5">&#9733;</span>
 		</div> *@
-		<h5>Comment</h5>
-		<textarea id="content" name="content" rows="3" cols="40"></textarea>
+		<h5>Nhận xét</h5>
+		<textarea id="content" name="content" rows="3" cols="100" placeholder="Viết nhận xét..."></textarea>
 
 		<div class="description">
-			Đánh giá của bạn sẽ giúp chúng tôi tìm ra những ứng viên phù hợp và nâng cao chất lượng ứng viên
+			Đánh giá của bạn sẽ giúp chúng tôi tìm ra những nhà tuyển dụng uy tín và nâng cao chất lượng các công việc được đăng.
 		</div>
 		<button type="submit" class="btn-submit" id="btn-submit">Gửi đánh giá</button>
 	</div>
@@ -89,15 +91,18 @@
 		align-items: center; /* Canh dọc các phần tử vào giữa */
 		margin: 30px 0px;
 	}
-	strong {
+	h3 {
+		margin-left: 20px;
+	}h5 {
 		margin-left: 20px;
 	}
 	h1 {
 		text-align: center;
 	}
 
-		
-	.container {
+	
+	.container-eva {
+		margin: 20px 300px;
 		border: 1px solid #000;
 		background-color: #fff;
 		display: flex;
@@ -136,14 +141,23 @@
 		color: #4ce149;
 		cursor: pointer;
 		text-align: center;
+		display: flex;
+		
+		justify-content: center;
+		
 		text-transform: uppercase;
 		padding: 15px 19px;
 		font: 600 16px/1 Poppins, sans-serif;
 		margin-top: 30px;
+		
+	}
+	.btn-submit:hover {
+		background-color: #4ce149;
+		color: #fff;
 	}
 
 	.description{
-		margin-top: 20px;
+		margin: 20px 0px 20px 20px;
 		font-size: 20px;
 		font-style: italic;
 	}

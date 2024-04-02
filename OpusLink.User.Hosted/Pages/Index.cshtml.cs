@@ -28,7 +28,7 @@ namespace OpusLink.User.Hosted.Pages
             }
         }
         string link = "https://localhost:7265/api/Account/update-role";
-        string linkLogOut = "https://localhost:7265/api/Account/logout";
+       
 
         public async Task<IActionResult> OnPostChangeTokenAboutRole()
         {
