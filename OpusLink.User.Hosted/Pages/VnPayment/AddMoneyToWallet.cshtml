@@ -14,46 +14,27 @@
             {
                 PropertyNameCaseInsensitive = true,
             };
-
-    var erorr = HttpContext!.Session.GetString("_error") ?? string.Empty;
+    var erorr = Request.Query["errorKey"];
+    // var erorr = HttpContext!.Session.GetString("_error") ?? string.Empty;
 }
-<!DOCTYPE html>
-<html lang="en">
-<head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Nạp Tiền</title>
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <style>
-        body {
-            font-family: Arial, sans-serif;
-            background-color: #f4f4f4;
-            margin: 0;
-            padding: 0;
-            display: flex;
-            align-items: center;
-            justify-content: center;
-            height: 100vh;
-        }
-
-        .container {
+        
+        .container_naptien {
+            margin-top: 20px;
             background-color: #fff;
             padding: 20px;
             border-radius: 8px;
             box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
-            width: 400px;
-            text-align: center;
+        
         }
 
-        .bottom-container {
-            position: absolute;
-            bottom: 20px;
-            width: 100%;
-        }
     </style>
-</head>
-<body>
-    <div class="container">
+
+
+
+<div class="row">
+    <div class ="col-md-3"></div>
+    <div class="col-md-5 container_naptien">
         <h2 class="mb-4">Nạp Tiền</h2>
         @if (!string.IsNullOrEmpty(erorr))
         {
@@ -77,22 +58,26 @@
 
             <div class="mb-3">
                 <label for="amount" class="form-label">Số tiền:</label>
-                <input type="text" class="form-control" id="amount" name="amount" oninput="formatCurrency(this)" required value="@Model.Price" >
+                <input type="text" class="form-control" id="amount" name="amount" oninput="formatCurrency(this)" required value="@Model.Price">
             </div>
 
             <a href="../Index" class="btn btn-secondary mt-3">
                 <i class="bi bi-arrow-left"></i> Quay lại
             </a>
 
-            <button type="submit" class="btn btn-success mt-3" >Nạp Tiền</button>
+            <button type="submit" class="btn btn-success mt-3">Nạp Tiền</button>
         </form>
 
         <div class="bottom-container">
             <!-- Chỗ này để đặt các phần tử ở gốc dưới của form -->
         </div>
     </div>
+    <div class="col-md-3"></div>
+    
+</div>
 
-    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+
+  
     <script>
         function formatCurrency(input) {
             var value = input.value.replace(/[^\d]/g, '');
@@ -108,6 +93,6 @@
         //     alert("Nạp tiền thành công!\nSố tiền: " + amount);
         // }
     </script>
-</body>
-</html>
+
+
 

@@ -1,5 +1,6 @@
 ﻿using AutoMapper;
 using OpusLink.Entity.DTO;
+using OpusLink.Entity.DTO.NotificationDTO;
 using OpusLink.Entity.Models;
 using System;
 using System.Collections.Generic;
@@ -9,14 +10,12 @@ using System.Threading.Tasks;
 
 namespace OpusLink.Entity.AutoMapper
 {
-    public class HistoryPaymentMapper : Profile
+    public class NotificationMapper : Profile
     {
-        public HistoryPaymentMapper()
+        public NotificationMapper()
         {
-            CreateMap<HistoryPayment, HistoryPaymentDTO>()
-                .ReverseMap();
+            CreateMap<Notification, NotificationDTO>().ReverseMap();
                 
-                ;
         }
     }
 }

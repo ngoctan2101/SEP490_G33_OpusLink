@@ -5,6 +5,8 @@ using System.Text;
 using System.Threading.Tasks;
 using Microsoft.EntityFrameworkCore;
 using OpusLink.Entity;
+using OpusLink.Entity.DTO;
+using OpusLink.Entity.DTO.AccountDTO;
 using OpusLink.Entity.Models;
 namespace OpusLink.Service.Admin
 {
@@ -19,6 +21,7 @@ namespace OpusLink.Service.Admin
         public void WithdrawMoney(double money, int userId);
         void UpdateBanUser(string banReason, DateTime endBanDate, int userId);
         void UpdateUnBanUser(int userId);
+        public void UpdateBankAccUser(BankAccDTO usedto);
     }
     public class UserService : IUserService
     {
@@ -102,12 +105,20 @@ namespace OpusLink.Service.Admin
             user.CVFilePath = a.CVFilePath;
             user.BankName = a.BankName;
             user.BankAccountInfor = a.BankAccountInfor;
-           
-           
-
-      
             _context.SaveChanges();
         }
+
+
+        public void UpdateBankAccUser(BankAccDTO usedto)
+        {
+            User use = _context.Users.Where(x => x.Id  == usedto.UserId).FirstOrDefault();
+
+            use.BankName = usedto.BankName;
+            use.BankAccountInfor = usedto.BankAccountInfor;
+            _context.Users.Update(use);
+            _context.SaveChanges();
+        }
+
 
         public void UpdateAmountMoney(double money, int userId)
         {

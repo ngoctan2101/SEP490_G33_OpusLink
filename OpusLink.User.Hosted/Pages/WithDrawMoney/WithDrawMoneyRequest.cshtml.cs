@@ -9,6 +9,9 @@ using System.Text;
 using OpusLink.Entity.Models;
 using System.Transactions;
 using OpusLink.Entity.DTO.WithdrawRequestDTO;
+using Microsoft.Extensions.Options;
+using OpusLink.Entity.DTO.JobDTO;
+using OpusLink.Entity.DTO.AccountDTO;
 
 namespace OpusLink.User.Hosted.Pages.WithDrawMoney
 {
@@ -21,7 +24,8 @@ namespace OpusLink.User.Hosted.Pages.WithDrawMoney
      
         [BindProperty]
         public UserDTO user { get; set; } = null!;
-        private string ErrorKey = "_error";
+        public string ErrorKey = "";
+        public string money = "";
 
         public WithDrawMoneyRequestModel()
         {
@@ -32,11 +36,11 @@ namespace OpusLink.User.Hosted.Pages.WithDrawMoney
             //_httpContextAccessor = httpContextAccessor;
 
         }
-        public async Task<IActionResult> OnGet()
+        public async Task<IActionResult> OnGet(int UserId )
         {
             
 
-            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/" + 1);
+            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/" + UserId);
             if (responseUser.IsSuccessStatusCode)
             {
                 string responseBodyUser = await responseUser.Content.ReadAsStringAsync();
@@ -45,37 +49,23 @@ namespace OpusLink.User.Hosted.Pages.WithDrawMoney
                 user = System.Text.Json.JsonSerializer.Deserialize<UserDTO>(responseBodyUser, optionUser);
             }
 
-           
-           
+
             return Page();
         }
 
         public async Task<IActionResult> OnPost(IFormCollection collection)
         {
-            //var json = HttpContext.Session.GetString(LoginKey) ?? string.Empty;
-            //var jsonCart = HttpContext.Session.GetString(CartKey) ?? string.Empty;
-            //var jsonCoupon = HttpContext.Session.GetString(DiscountKey) ?? string.Empty;
-            //int amount = Convert.ToInt32(HttpContext.Request["amount"]);
-
-            //if (HttpContext.Session.GetInt32("UserId") == null)
-            //{
-            //    return RedirectToPage("/Account/Login");
-            //}
-            //else
-            //{
-            //    user.Id = HttpContext.Session.GetInt32("UserId") ?? 0;
-            //}
 
             List<string> keys = collection.Keys.ToList<string>();
             double price = 0;
             string bankInfor ="";
             string bankName ="";
             // manual bind to get Filter object
-
+            int userid = 0;
 
             foreach (string key in keys)
             {
-
+                
                 if (key.Contains("amount"))
                 {
                     string price1 = collection[key].ToString();
@@ -87,32 +77,82 @@ namespace OpusLink.User.Hosted.Pages.WithDrawMoney
                     price1.Trim();
 
                     price = double.Parse(price1 + ".0");
-
                 }
                 if (key.Contains("bankacccountinfor"))
                 {
                     bankInfor = (collection[key].ToString());
                 }
-                if (key.Contains("bankacccountinfor"))
+                if (key.Contains("bankname"))
                 {
                     bankName = collection[key].ToString();
                 }
+                if (key.Contains("userid"))
+                {
+                    userid = Convert.ToInt32(collection[key].ToString());
+                }
+            }
+            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/" + userid);
+            if (responseUser.IsSuccessStatusCode)
+            {
+                string responseBodyUser = await responseUser.Content.ReadAsStringAsync();
+                var optionUser = new JsonSerializerOptions()
+                { PropertyNameCaseInsensitive = true };
+                user = System.Text.Json.JsonSerializer.Deserialize<UserDTO>(responseBodyUser, optionUser);
+            }
+            if (bankInfor == null)
+            {
+                ErrorKey = "Thông tin tài khoản không được để trống";
+                //HttpContext.Session.SetString(ErrorKey, "Số tiền rút không được quá số dư tài khoản");
+                return Page();
+            }
+            if (bankName == null)
+            {
+                ErrorKey = "Tên tài khoản không được để trống";
+                //HttpContext.Session.SetString(ErrorKey, "Số tiền rút không được quá số dư tài khoản");
+                return Page();
+            }
+            if (user.AmountMoney < Convert.ToDecimal(price))
+            {
+                ErrorKey = "Số tiền rút không được quá số dư tài khoản";
+                //HttpContext.Session.SetString(ErrorKey, "Số tiền rút không được quá số dư tài khoản");
+                return Page();
             }
 
-           
 
-         
             WithdrawRequestDTO wdr = new WithdrawRequestDTO();
-            wdr.UserID = 1;
+            wdr.UserID = userid;
             wdr.Amount = Convert.ToDecimal(price);
             wdr.DateCreated = DateTime.Now;
             wdr.Status = 1;
+            
 
             var withdraw = System.Text.Json.JsonSerializer.Serialize(wdr);
             var content8 = new StringContent(withdraw, Encoding.UTF8, "application/json");
             HttpResponseMessage response = await client.PostAsync(ServiceMangaUrl + $"api/WithDrawRequest/AddWithdrawRequest", content8);
-            
 
+            BankAccDTO us = new BankAccDTO();
+            us.UserId = userid;
+            us.BankAccountInfor = bankInfor;
+            us.BankName = bankName;
+
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = false,
+            };
+
+
+            string json12 = System.Text.Json.JsonSerializer.Serialize<BankAccDTO>(us, options);
+            StringContent httpContent23 = new StringContent(json12, System.Text.Encoding.UTF8, "application/json");
+            HttpResponseMessage response12 = await client.PutAsync(ServiceMangaUrl + "api/User/UpdateBankAccountUser", httpContent23);
+            if (response.IsSuccessStatusCode)
+            {
+                //message "User Edited" green
+            }
+
+            if (response12.IsSuccessStatusCode)
+            {
+                //message "User Edited" green
+            }
 
             //return RedirectToPage("/HistoryPayment/HistoryPaymentDetail", new { payId = HisPayId });
 

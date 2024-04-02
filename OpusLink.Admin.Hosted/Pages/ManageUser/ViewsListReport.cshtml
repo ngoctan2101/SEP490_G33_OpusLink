@@ -1,0 +1,172 @@
+﻿@page "{id}"
+@model OpusLink.Admin.Hosted.Pages.ManageUser.ViewsListReportModel
+@{
+}
+<style>
+    .path-admin {
+        line-height: 40px;
+        background-color: sienna;
+        color: white;
+        width: 99.5%;
+        margin: 0px 0px;
+        text-transform: uppercase;
+        font-weight: bold;
+        padding-left: 5px;
+    }
+
+    #order-table-admin {
+        margin-top: -30px;
+    }
+
+    #orders {
+        font-family: Arial, Helvetica, sans-serif;
+        border-collapse: collapse;
+        width: 100%;
+    }
+
+        #orders td,
+        #orders th {
+            border: 1px solid #ddd;
+            padding: 8px;
+        }
+
+        #orders tr:nth-child(even) {
+            background-color: #f2f2f2;
+        }
+
+        #orders tr:hover {
+            background-color: #ddd;
+        }
+
+        #orders th {
+            padding-top: 12px;
+            padding-bottom: 12px;
+            text-align: left;
+            background-color: gray;
+            color: white;
+        }
+
+    #order-title {
+        line-height: 40px;
+        padding: 15px;
+    }
+
+    /*pagination*/
+    .pagin {
+        width: 40px;
+        height: 40px;
+        text-align: center;
+        border-radius: 50%;
+        border: none;
+        transition: background-color 0.2s;
+    }
+
+        .pagin:hover {
+            background-color: #0088CC;
+            color: white;
+        }
+
+    #product-title-header {
+        line-height: 40px;
+        padding: 15px;
+        display: flex;
+        width: 96.5%;
+    }
+
+        #product-title-header #filter {
+            display: flex;
+        }
+</style>
+<body>
+    <div class="path-admin">Danh sách Report</div>
+    <form method="post">
+        <div id="content-main-dashboard">
+            <div id="product-title-header">
+            </div>
+            <div id="order-table-admin">
+                <table id="orders">
+                    <thead>
+                        <tr>
+                            @*                             <th>Số thứ tự</th> *@
+                            <th>ID người report</th>
+                            <th>Tài khoản report</th>
+                            <th>Ngày report</th>
+                            <th>Nội dung report</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableData">
+                    </tbody>
+                </table>
+            </div>
+        </div>
+    </form>
+    <!-- Modal -->
+    <div id="myModal" class="modal">
+
+        <!-- Nội dung modal -->
+        <div class="modal-content">
+            <span class="close">&times;</span>
+            <form id="modalForm">
+                <input type="hidden" id="modalUserID" name="userID" />
+                <h3 style="text-align: center;">Khóa tài khoản</h3>
+                <label for="cutoffDate">
+                    Tài khoản bị khóa sẽ không thể đăng nhập vào hệ thống trong thời gian quy định. Hết thời gian đó,
+                    tài khoản sẽ  được kích hoạt lại khi người dùng đăng nhập.
+                </label>
+                <br />
+                <br />
+                <label for="time">Chọn thời gian cấm đến</label><br>
+                <input type="date" id="cutoffDate" name="cutoffDate" min="@DateTime.Now.AddDays(1).ToString("yyyy-MM-dd")"><br>
+                <label for="reason">Lý do cấm tài khoản</label><br>
+                <textarea id="reason" name="reason" rows="4" cols="50"></textarea><br>
+                <button type="submit" class="confirm-button" onclick="submitForm(this.id)">Xác nhận</button>
+            </form>
+        </div>
+    </div>
+</body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(() => {
+        var userId = getUserIdFromUrl();
+        LoadReportList(userId);
+    });
+
+    function getUserIdFromUrl() {
+        var url = window.location.href;
+        var lastSlashIndex = url.lastIndexOf('/');
+        var userId = url.substring(lastSlashIndex + 1);
+        return userId;
+    }
+
+    function LoadReportList(userId) {
+        $.ajax({
+            url: `https://localhost:7265/api/Report/GetAllReportById?id=${userId}`,
+            method: 'GET',
+            contentType: 'application/json',
+            success: (dataReport) => {
+                if (dataReport) {
+                    $('#tableData').html(table(dataReport))
+                }
+            },
+            error: (dataReport) => {
+
+            }
+        })
+    }
+
+    const table = (dataReport) => {
+        let tableData = $('#tableData');
+        dataReport.forEach(element => {
+            tableData += `
+                        <tr>
+                            <td>${element.createByUserID}</td>
+                                <td>${element.createByUserName}</td>
+                                <td>${element.dateCreated}</td>
+                                <td>${element.reportUserContent}</td>
+                        </tr>
+                        `
+        });
+        return tableData;
+    }
+
+</script>

@@ -52,6 +52,7 @@
                             <p id="wdr_bankinfo_@item.WithdrawRequestID">@item.BankAccountInfor</p>
                             <p id="wdr_bankname_@item.WithdrawRequestID">@item.BankName</p>
                             <p id="wdr_amount_@item.WithdrawRequestID">@item.Amount</p>
+                            <p id="wdr_uid_@item.WithdrawRequestID">@item.UserID</p>
                         </div>
                         <tr>
                             <th scope="row" name="@item.WithdrawRequestID" id="WithdrawRequestID_@item.WithdrawRequestID">@item.WithdrawRequestID</th>
@@ -63,12 +64,13 @@
                                 <!-- Edit and Delete buttons -->
                                 <div class="btn-group" role="group" aria-label="Skill Actions">
                                     <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editSkillModal" data-withdrawId="@item.WithdrawRequestID" onclick="ViewWithDraw(@item.WithdrawRequestID)"><i class="fas fa-eye"></i> View</button>
+                                    
+                                        @* <a href="/ManagerWithDrawRequest/TransferMoney?withdrawId=@item.WithdrawRequestID" class="btn btn-success"><i class="fas fa-exchange-alt"></i> Transfer</a> *@
                                     @if(item.Amount <= item.AmountUser)
                                     {
-                                        <a href="/ManagerWithDrawRequest/TransferMoney?withdrawId=@item.WithdrawRequestID" class="btn btn-success"><i class="fas fa-exchange-alt"></i> Transfer</a>
+                                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tranSkillModal" onclick="TranWithDraw(@item.WithdrawRequestID)"><i class="fas fa-exchange-alt"></i> Transfer</button>
                                     }
-
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSkillModal" onclick="ResendWithDraw(@item.WithdrawRequestID)"><i class="fas fa-sync-alt"></i> Resend</button>
+                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSkillModal" onclick="ResendWithDraw(@item.WithdrawRequestID)"><i class="fas fa-sync-alt"></i> Reject</button>
                                 </div>
 
                             </td>
@@ -94,8 +96,9 @@
                         <div class="mb-3">
                             <label for="viewusername" class="form-label">Tên người dùng</label>
                             <input type="text" class="form-control" id="viewusername" required readonly >
-                            <label for="viewbankinfor" class="form-label">Số tài khoản ngân hàng</label>
-                            <input type="text" class="form-control" id="viewbankinfor" required readonly >
+                            <label for="viewbankinfor" class="form-label">Thông tin tài khoản</label>
+                            @* <input type="text" class="form-control" id="viewbankinfor" required readonly > *@
+                            <textarea rows="3" style="width:100%" readonly id="viewbankinfor" name="viewbankinfor" placeholder="Số tài khoản: 123xxxxx&#10;Tên tài khoản: NGUYEN VAN A&#10; " required></textarea>
                             <label for="viewbankname" class="form-label">Tên ngân hàng</label>
                             <input type="text" class="form-control" id="viewbankname" required readonly >
                             <label for="viewamount" class="form-label">Số tiền</label>
@@ -119,6 +122,8 @@
                     <!-- Form thêm mới sẽ được thêm ở đây -->
                     <form id="addSkillForm" method="post">
                         <input hidden name="withdrawid" id="withdrawid" />
+                        <input hidden name="rejuserid" id="rejuserid" />
+                       
                         <div class="mb-3">
                             <label for="resendreason" class="form-label">Lý do</label>
                             <input type="text" class="form-control" id="resendreason" name="reason" required>
@@ -131,6 +136,51 @@
         </div>
     </div>
 
+    <!-- Modal tranfer -->
+    <div class="modal fade" id="tranSkillModal" tabindex="-1" aria-labelledby="tranSkillModal" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="tranSkillModal">Chuyển tiền</h5>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <!-- Form thêm mới sẽ được thêm ở đây -->
+                    <form id="topupForm" method="post">
+                        <input hidden name="tranwithdrawid" id="tranwithdrawid" />
+                        <input hidden name="tranuid" id="tranuid" />
+                        <input hidden name="tranusername" id="tranusername" />
+                        @* <div class="mb-3">
+                            <label for="username" class="form-label">Số tiền trong tài khoản</label>
+                            <input type="text" class="form-control" id="username" name="username" readonly required >
+                        </div> *@
+                        <div class="mb-3">
+                            <label for="viewbankname" class="form-label">Tên ngân hàng</label>
+                            <input type="text" class="form-control" id="tranbankname" name="tranbankname" required readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="viewbankinfor" class="form-label">Thông tin tài khoản</label>
+                            <textarea rows="3" style="width:100%" readonly id="tranbankinfor" name="tranbankinfor" placeholder="Số tài khoản: 123xxxxx&#10;Tên tài khoản: NGUYEN VAN A&#10; " required></textarea>
+                            @* <input type="text" class="form-control" id="bankacccountinfor" name="bankacccountinfor" required value="@Model.user.BankAccountInfor"> *@
+                        </div>
+                        <div class="mb-3">
+                            <label for="viewamount" class="form-label">Số tiền</label>
+                            <input type="text" class="form-control" id="tranamount" name="tranamount" required hidden>
+                            <input type="text" class="form-control" id="tranamount1" name="tranamount1" required readonly>
+                        </div>
+                        <div class="mb-3">
+                            <label for="note" class="form-label">Mã giao dịch</label>
+                            <input type="text" class="form-control" id="trancode" name="trancode" required>
+                        </div>
+                       @*  <a href="/ManagerWithDrawRequest/Views" class="btn btn-secondary mt-3">
+                            <i class="bi bi-arrow-left"></i> Manager
+                        </a> *@
+                        <button type="submit" class="btn btn-success mt-3" asp-page-handler="TranferWithDraw">Chuyển Tiền</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
     <!-- Bootstrap JS và Popper.js (đặt dưới thẻ body) -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
@@ -143,14 +193,33 @@
             document.getElementById("viewusername").value = username;
             document.getElementById("viewbankinfor").value = bankinfo;
             document.getElementById("viewbankname").value = bankname;
-            document.getElementById("viewamount").value = amount;
+            document.getElementById("viewamount").value = parseFloat( amount).toLocaleString('en', { maximumFractionDigits: 0 }) + " ₫";
             
         }
         function ResendWithDraw(withdrawRequestID) {
+            var uid = document.getElementById("wdr_uid_" + withdrawRequestID).innerHTML;
+
+            document.getElementById("rejuserid").value = uid;
             document.getElementById("resendreason").value = "";
             document.getElementById("withdrawid").value = withdrawRequestID;
         }
         
+        function TranWithDraw(withdrawRequestID) {
+            var username = document.getElementById("wdr_name_" + withdrawRequestID).innerHTML;
+            var bankinfo = document.getElementById("wdr_bankinfo_" + withdrawRequestID).innerHTML;
+            var bankname = document.getElementById("wdr_bankname_" + withdrawRequestID).innerHTML;
+            var amount = document.getElementById("wdr_amount_" + withdrawRequestID).innerHTML;
+            var uid = document.getElementById("wdr_uid_" + withdrawRequestID).innerHTML;
+
+            document.getElementById("tranusername").value = username;
+            document.getElementById("tranwithdrawid").value = withdrawRequestID;
+            document.getElementById("tranbankinfor").value = bankinfo;
+            document.getElementById("tranbankname").value = bankname;
+            document.getElementById("tranamount").value = amount;
+            document.getElementById("tranamount1").value = parseFloat(amount).toLocaleString('en', { maximumFractionDigits: 0 }) + " ₫";
+            document.getElementById("trancode").value = "";
+            document.getElementById("tranuid").value = uid;
+        }
     </script>
 
 </body>
