@@ -24,12 +24,12 @@
     <div class="col-md-3"></div>
     <div class="col-md-5 container_ruttien">
         <h2 class="mb-4">Gửi yêu cầu rút tiền</h2>
-        @if (Model.user.BankName == null || Model.user.BankAccountInfor == null)
-        {
-            <p style="color:red;">Bank account name or account number is empty.Please fill in all information</p>
-        }
         <form id="topupForm" method="post">
             <input type="text" hidden name="userid" value="@Model.user.Id" />
+            @if (!string.IsNullOrEmpty(Model.ErrorKey))
+            {
+                <p style="color:red;">@Model.ErrorKey</p>
+            }
             <div class="mb-3">
                 <label for="username" class="form-label">Số tiền trong tài khoản</label>
                 <input type="text" class="form-control" id="username" name="username"  hidden value="@Model.user.AmountMoney">
@@ -44,10 +44,6 @@
                 <textarea rows="3" style="width:100%" id="bankacccountinfor" name="bankacccountinfor" placeholder="Số tài khoản: 123xxxxx&#10;Tên tài khoản: NGUYEN VAN A&#10; " required>@Model.user.BankAccountInfor</textarea>
                 @* <input type="text" class="form-control" id="bankacccountinfor" name="bankacccountinfor" required value="@Model.user.BankAccountInfor"> *@
             </div>
-            @if (!string.IsNullOrEmpty(Model.ErrorKey))
-            {
-                <p style="color:red;">@Model.ErrorKey</p>
-            }
             <div class="mb-3">
                 <label for="amount" class="form-label">Số tiền:</label>
                 <input type="text" class="form-control" id="amount" name="amount" oninput="formatCurrency(this)" required>

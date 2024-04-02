@@ -268,7 +268,7 @@
                     var domain = "https://localhost:7131/Index?handler=ForNotificationDetail&link=";
                     $.each(result, function (index, value) {
                         if (value["isReaded"] == true) {
-                            fivecodeline += "<li class=\"dropdown-item\"><a style=\"font-weight\:bold\" href=\"" + domain + encodeURIComponent(value["link"]) + "&notiId=" + value["notificationID"] + "\">" + value["notificationContent"] + "</a></li>";
+                            fivecodeline += "<li class=\"dropdown-item\"><a style=\"color\:#B0B8B3\" href=\"" + domain + encodeURIComponent(value["link"]) + "&notiId=" + value["notificationID"] + "\">" + value["notificationContent"] + "</a></li>";
                         } else {
                             fivecodeline += "<li class=\"dropdown-item\"><a href=\"" + domain + encodeURIComponent(value["link"]) + "&notiId=" + value["notificationID"] + "\">" + value["notificationContent"] + "</a></li>";
                         }

@@ -159,6 +159,9 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
             {
                 //message "User Edited" green
             }
+
+
+
             return RedirectToPage("/Employer/Profile/Views", new { UserId = PutUser.Id });
         }
     }
