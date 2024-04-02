@@ -184,11 +184,11 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
             // waillet - tien
             var jsonProduct = System.Text.Json.JsonSerializer.Serialize(uidres);
             var content7 = new StringContent(jsonProduct, Encoding.UTF8, "application/json");
-            await client.PutAsync(ServiceMangaUrl + $"api/User/WithdrawMoney/{price / 100}/{uidres}", content7);
+            await client.PutAsync(ServiceMangaUrl + $"api/User/WithdrawMoney/{price}/{uidres}", content7);
 
             //add to history
             HistoryPaymentDTO his = new HistoryPaymentDTO();
-            his.Amount = price / 100;
+            his.Amount = price;
             his.TransactionDate = DateTime.Now;
             his.TransactionCode = trancoderes;
             his.TransactionType = 2;
