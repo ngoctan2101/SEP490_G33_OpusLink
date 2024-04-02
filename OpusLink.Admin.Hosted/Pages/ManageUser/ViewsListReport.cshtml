@@ -1,4 +1,4 @@
-﻿@page
+﻿@page "{id}"
 @model OpusLink.Admin.Hosted.Pages.ManageUser.ViewsListReportModel
 @{
 }
@@ -85,36 +85,19 @@
             </div>
             <div id="order-table-admin">
                 <table id="orders">
-                    <tr>
-                        <th>Id</th>
-                        <th>Tên người dùng</th>
-                        <th>Ảnh hồ sơ</th>
-                        <th>Số điện thoại</th>
-                        <th>Địa chỉ</th>
-                        <th>Ngày sinh</th>
-                        <th>Số lượng báo cáo</th>
-                        <th></th>
-                    </tr>
+                    <thead>
+                        <tr>
+                            @*                             <th>Số thứ tự</th> *@
+                            <th>ID người report</th>
+                            <th>Tài khoản report</th>
+                            <th>Ngày report</th>
+                            <th>Nội dung report</th>
+                        </tr>
+                    </thead>
+                    <tbody id="tableData">
+                    </tbody>
                 </table>
             </div>
-
-           @*  <div style="display:flex;justify-content:center;">
-                @for (int i = 1; i <= Model.NumberOfPage; i++)
-                {
-                    @if (i == Model.PageNo)
-                    {
-                        <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
-                            <button class="pagin" style="background-color:#0088CC; color:white" type="submit" asp-page-handler="ForSearch" name="pageNo_@i" value="@i">@i</button>
-                        </div>
-                    }
-                    else
-                    {
-                        <div style="display:inline-block;margin:10px 5px 10px 5px" id="pagin_@i">
-                            <button class="pagin" type="submit" asp-page-handler="ForSearch" name="pageNo_@i" value="@i">@i</button>
-                        </div>
-                    }
-                }
-            </div> *@
         </div>
     </form>
     <!-- Modal -->
@@ -141,3 +124,49 @@
         </div>
     </div>
 </body>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(() => {
+        var userId = getUserIdFromUrl();
+        LoadReportList(userId);
+    });
+
+    function getUserIdFromUrl() {
+        var url = window.location.href;
+        var lastSlashIndex = url.lastIndexOf('/');
+        var userId = url.substring(lastSlashIndex + 1);
+        return userId;
+    }
+
+    function LoadReportList(userId) {
+        $.ajax({
+            url: `https://localhost:7265/api/Report/GetAllReportById?id=${userId}`,
+            method: 'GET',
+            contentType: 'application/json',
+            success: (dataReport) => {
+                if (dataReport) {
+                    $('#tableData').html(table(dataReport))
+                }
+            },
+            error: (dataReport) => {
+
+            }
+        })
+    }
+
+    const table = (dataReport) => {
+        let tableData = $('#tableData');
+        dataReport.forEach(element => {
+            tableData += `
+                        <tr>
+                            <td>${element.createByUserID}</td>
+                                <td>${element.createByUserName}</td>
+                                <td>${element.dateCreated}</td>
+                                <td>${element.reportUserContent}</td>
+                        </tr>
+                        `
+        });
+        return tableData;
+    }
+
+</script>
