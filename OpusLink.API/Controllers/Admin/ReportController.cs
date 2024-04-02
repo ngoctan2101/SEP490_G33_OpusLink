@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Authorization;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore;
 using OpusLink.Entity;
 using OpusLink.Entity.DTO.AccountDTO.Common;
+using OpusLink.Entity.DTO.ReportUserDTO;
 
 namespace OpusLink.API.Controllers.Admin
 {
@@ -13,10 +15,12 @@ namespace OpusLink.API.Controllers.Admin
     public class ReportController : ControllerBase
     {
         private readonly OpusLinkDBContext _context;
+        private readonly IMapper _mapper;
 
-        public ReportController(OpusLinkDBContext context)
+        public ReportController(OpusLinkDBContext context, IMapper mapper)
         {
             _context = context;
+            _mapper = mapper;
         }
 
         [HttpGet]
@@ -33,5 +37,29 @@ namespace OpusLink.API.Controllers.Admin
             }
         }
 
+        [HttpGet("GetAllReportById")]
+        public async Task<IActionResult> GetAllReportById(int id)
+        {
+            var reports = await _context.ReportUsers
+                .Include(r => r.CreateByUser)
+                .Where(r => r.TargetToUserID == id)
+                .ToListAsync();
+
+            if (reports == null || reports.Count == 0)
+            {
+                return NotFound("No reports found for the given user ID.");
+            }
+
+            var reportInfoDTOs = new List<ReportInfoDTO>();
+
+            foreach (var report in reports)
+            {
+                var reportInfoDTO = _mapper.Map<ReportInfoDTO>(report);
+                reportInfoDTO.DateCreated = report.DateCreated.ToString("dd/MM/yyyy");
+                reportInfoDTOs.Add(reportInfoDTO);
+            }
+
+            return Ok(reportInfoDTOs);
+        }
     }
 }
