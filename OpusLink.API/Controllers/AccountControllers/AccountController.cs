@@ -100,6 +100,7 @@ namespace OpusLink.API.Controllers.AccountControllers
                     Email = model.Email,
                     SecurityStamp = Guid.NewGuid().ToString(),
                     UserName = model.UserName,
+                    AmountMoney = 0
                 };
 
                 var resultCreateUser = await _userManager.CreateAsync(user, model.Password);
