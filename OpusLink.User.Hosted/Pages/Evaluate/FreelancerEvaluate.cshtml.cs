@@ -22,7 +22,7 @@ namespace OpusLink.User.Hosted.Pages.Evaluate
 			var contentType = new MediaTypeWithQualityHeaderValue("application/json");
 			client.DefaultRequestHeaders.Accept.Add(contentType);
 		}
-		public async Task<IActionResult> OnGetAddFeedback(int JobId, int CreateByUserID, int TargetToUserID, decimal Star, string Content)
+		/*public async Task<IActionResult> OnGetAddFeedback(int JobId, int CreateByUserID, int TargetToUserID, decimal Star, string Content)
         {
 			if (HttpContext.Session.GetInt32("UserId") == null)
 			{
@@ -51,6 +51,6 @@ namespace OpusLink.User.Hosted.Pages.Evaluate
 
 			}
 			return RedirectToPage("/Evaluate/FreelancerEvaluate");
-		}
+		}*/
 	}
 }
