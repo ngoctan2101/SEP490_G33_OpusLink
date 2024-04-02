@@ -1,9 +1,11 @@
-﻿@page 
+﻿@page "{id:int?}"
+@inject IHttpContextAccessor HttpContextAccessor;
 @model OpusLink.User.Hosted.Pages.Employer.Profile.ViewsModel
 @{
+    int userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId") ?? 0;
 }
-
-
+<link rel="stylesheet" href="~/css/Report.css">
+<style>
         #backButton {
             position: fixed;
             bottom: 10px;

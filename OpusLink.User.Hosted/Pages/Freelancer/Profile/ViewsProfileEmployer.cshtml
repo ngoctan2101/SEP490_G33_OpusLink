@@ -4,7 +4,7 @@
 @{
     int userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId") ?? 0;
 }
-
+<link rel="stylesheet" href="~/css/Report.css">
 <style>
     /* Thêm CSS để căn chỉnh nút Back ở góc trái dưới cùng */
     #backButton {
@@ -219,7 +219,7 @@
             <br />
             <label for="reason">Lý do báo cáo</label><br>
             <textarea id="reason" name="reason" rows="4" cols="50"></textarea><br>
-            <button type="submit" class="confirm-button" onclick="submitForm(this.id)">Xác nhận</button>
+            <button type="submit" class="confirm-button">Xác nhận</button>
         </form>
     </div>
 </div>
