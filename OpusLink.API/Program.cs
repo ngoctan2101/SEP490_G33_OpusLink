@@ -23,6 +23,7 @@ using OpusLink.Service.ValidationServices;
 using OpusLink.Service.Feedbacks;
 using OpusLink.Service.WithDrawRequestServices;
 using OpusLink.Service.NotificationServices;
+using OpusLink.Service.MSServices;
 
 internal class Program
 {
@@ -89,7 +90,7 @@ internal class Program
             mc.AddProfile(new HistoryPaymentMapper());
             mc.AddProfile(new WithdrawRequesMapper());
             mc.AddProfile(new NotificationMapper());
-
+            mc.AddProfile(new OpusLink.Entity.AutoMapper.MS.MSProfile());
 
         });
         IMapper mapper = mapperConfig.CreateMapper();
@@ -113,7 +114,7 @@ internal class Program
         builder.Services.AddScoped<IValidationService, ValidationService>();
         builder.Services.AddScoped<IWithDrawRequestService, WithDrawRequestService>();
         builder.Services.AddScoped<INotificationServices, NotificationServices>();
-
+        builder.Services.AddScoped<IMilestoneService, MilestoneService>();
 
         builder.Services.AddDbContext<OpusLinkDBContext>();
         builder.Services.AddSingleton(mapper);

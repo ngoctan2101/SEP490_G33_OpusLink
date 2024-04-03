@@ -622,7 +622,8 @@
         return true;
     }
 </script>
-<script>
+@if(@Model.isCount){
+    <script>
 
     function startCountdown(endHiringDate, countdownId) {
         var countdownInterval = setInterval(function () {
@@ -647,3 +648,5 @@
         </text>
     }
 </script>
+}
+
