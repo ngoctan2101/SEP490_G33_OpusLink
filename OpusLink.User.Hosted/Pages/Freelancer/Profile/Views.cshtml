@@ -136,10 +136,13 @@
 
                 <!-- Thông tin bên phải -->
                 <div class="col-md-6">
-                    <div class="mb-3">
+@*                     <div class="mb-3">
                         <label for="id" class="form-label">ID:</label>
                         <input type="text" class="form-control" id="id" name="id"  readonly value="@Model.user.Id">
-                    </div>
+                    </div> *@
+                <a href="/HistoryPayment/HistoryPayment?UserId=@Model.user.Id" class="btn btn btn-primary mt-3">
+                    <i class="bi bi-arrow-left"></i> History
+                </a>
 
                     <div class="mb-3">
                         <label for="name" class="form-label">Name:</label>
@@ -206,9 +209,9 @@
 
                         <button type="button" id="backButton" class="btn btn-primary" onclick="onBack()">Back</button>
                     </div>
-                    <a href="/HistoryPayment/HistoryPayment?UserId=@Model.user.Id" class="btn btn btn-primary mt-3">
+@*                     <a href="/HistoryPayment/HistoryPayment?UserId=@Model.user.Id" class="btn btn btn-primary mt-3">
                         <i class="bi bi-arrow-left"></i> History
-                    </a>
+                    </a> *@
                 </div>
             </div>
     </form>

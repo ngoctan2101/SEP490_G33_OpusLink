@@ -170,7 +170,7 @@
     <div id="container">
         <div id="header">
             <div id="logo-admin">
-                Manager
+                Admin - Opuslink
             </div>
             <div id="banner-admin">
                 <ul>
@@ -219,34 +219,42 @@
                 }
                 <ul>
                     <a asp-page="/Dashboard/DashboardAdmin">
-                    <li style="@a">Dashboard</li>
+                    @* <li style="@a">Dashboard</li> *@
+                    <li style="@a">Tổng quan</li>
                     </a>
                     <a asp-page="/ManageUser/Views">
-                    <li style="@b">Manage User</li>
+                    @* <li style="@b">Manage User</li> *@
+                    <li style="@a">Quản lý người dùng</li>
                     </a>
                     <a asp-page="/JOB/AdminViewAllJobPage">
-                    <li style="@c">Manage Job</li>
+                    @* <li style="@c">Manage Job</li> *@
+                    <li style="@a">Quản lý Job</li>
                     </a>
                     <a asp-page="/JOB/AdminCRUDCategoryPage">
-                    <li style="@d">Manage Category</li>
+                    @* <li style="@d">Manage Category</li> *@
+                    <li style="@a">Quản lý Category</li>
                     </a>
                     <a asp-page="/ManageSkill/Views">
-                    <li style="@e">Manage Skill</li>
+                    @* <li style="@e">Manage Skill</li> *@
+                    <li style="@a">Quản lý Skill</li>
                     </a>
                     <a asp-page="/Admin/Employee/Index">@*Copy cai nay vao OnGet cua ManageWallet: HttpContext.Session.SetString("PageNow", "ManageWallet");*@
-                    <li style="@f">Manage Wallet</li>
+                    @* <li style="@f">Manage Wallet</li> *@
+                    <li style="@f">Quản lý ví tiền</li>
                     </a>
                     <a asp-page="/JOB/AdminViewListJobRequestedPage">
-                    <li style="@g">Manage Job Request</li>
+                    @* <li style="@g">Manage Job Request</li> *@
+                    <li style="@g">Quản lý yêu cầu tạo Job</li>
                     </a>
                     @*<a asp-page="/Admin/Customer/Index">
                     <li>Resquest</li>
                     </a>*@
-                    <a asp-page="/Report/ReportUserList">   
+@*                     <a asp-page="/Report/ReportUserList">   
                     <li style="@g">Report User List</li>
-                    </a>
+                    </a> *@
                     <a asp-page="/ManagerWithDrawRequest/Views">
-                    <li style="@g">ManagerWithDrawRequest</li>
+                   @*  <li style="@g">ManagerWithDrawRequest</li> *@
+                    <li style="@g">Quản lý yêu cầu rút tiền</li>
                     </a>
                    
                     
@@ -257,8 +265,8 @@
                         Admin <i id="setting-icon" class="bi bi-gear"></i>
                     </button>
                     <div id="admin-dropdown" class="dropdown-menu" aria-labelledby="adminDropdownButton">
-                        <a class="dropdown-item" asp-page="/Admin/Profile/Index">Profile</a>
-                        <button class="dropdown-item" onclick="logout()">Logout</button>
+                        <a class="dropdown-item" asp-page="/Admin/Profile/Index">Thông tin Admin</a>
+                        <button class="dropdown-item" onclick="logout()">Đăng xuất</button>
                     </div>
                 </div>
             </div>
