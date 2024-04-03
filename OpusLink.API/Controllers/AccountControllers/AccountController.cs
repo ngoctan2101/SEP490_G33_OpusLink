@@ -8,11 +8,6 @@ using Microsoft.AspNetCore.Identity;
 using OpusLink.Shared.Enums;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
-using Newtonsoft.Json.Linq;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace OpusLink.API.Controllers.AccountControllers
 {
