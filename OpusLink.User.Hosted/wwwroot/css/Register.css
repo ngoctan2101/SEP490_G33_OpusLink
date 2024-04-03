@@ -101,3 +101,7 @@ body {
     margin-bottom: 10px;
     color: red;
 }
+
+.Birthdate{
+    display: none;
+}
