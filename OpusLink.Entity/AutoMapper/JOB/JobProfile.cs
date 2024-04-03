@@ -44,6 +44,8 @@ namespace OpusLink.Entity.AutoMapper.JOB
                 .ForMember(dest => dest.EndHiringDate, src => src.MapFrom(x => x.EndHiringDate))
                 .ForMember(dest => dest.IsPublicMilestone, src => src.MapFrom(x => x.IsPublicMilestone))
                 .ForMember(dest => dest.IsFreelancerConfirm, src => src.MapFrom(x => x.IsFreelancerConfirm))
+                .ForMember(dest => dest.EmployerDoneEditMilestone, src => src.MapFrom(x => x.EmployerDoneEditMilestone))
+                .ForMember(dest => dest.DeadlineFreelancerConfirm, src => src.MapFrom(x => x.DeadlineFreelancerConfirm))
                 .ForMember(dest => dest.EmployerId, src => src.MapFrom(x => x.EmployerID))
                 .ForMember(dest => dest.FreelancerId, src => src.MapFrom(x => x.FreelancerID))
                 .ForMember(dest => dest.EmployerName, src => src.MapFrom(x => x.Employer.UserName))

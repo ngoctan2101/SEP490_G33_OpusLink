@@ -24,6 +24,8 @@ namespace OpusLink.Service.JobServices
         Task<Job> GetJobDetail(int jobId);
         Task<int> CreateNewJob(Job j);
         Task UpdateOnlyJobProperties(Job a);
+        Task HireFreelancerForJob(int freelancerId, int jobId);
+        Task CancelHireFreelancerForJob(int freelancerId, int jobId);
     }
     public class JobService : IJobService
     {
@@ -239,6 +241,22 @@ namespace OpusLink.Service.JobServices
             {
                 return null;
             }
+        }
+
+        public async Task HireFreelancerForJob(int freelancerId, int jobId)
+        {
+            Job b = await _dbContext.Jobs.Where(b => b.JobID == jobId).FirstAsync();
+            b.FreelancerID=freelancerId;
+            b.Status = (int)JobStatusEnum.Hired;
+            await _dbContext.SaveChangesAsync();
+        }
+
+        public async Task CancelHireFreelancerForJob(int freelancerId, int jobId)
+        {
+            Job b = await _dbContext.Jobs.Where(b => b.JobID == jobId).FirstAsync();
+            b.FreelancerID = null;
+            b.Status = (int)JobStatusEnum.Hiring;
+            await _dbContext.SaveChangesAsync();
         }
     }
 }
