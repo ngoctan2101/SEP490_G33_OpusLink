@@ -11,17 +11,19 @@ namespace OpusLink.User.Hosted.Pages.Account
     {
         public string Username { get; set; }
         public string Email { get; set; }
+        public DateTime Birthdate { get; set; }
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
 
         string link = "https://localhost:7265/api/Account/register";
-        public async Task<IActionResult> OnPostAsync(string username, string password, string email, string confirmPassword)
+        public async Task<IActionResult> OnPostAsync(string username, string password, string email, string confirmPassword, DateTime birthDate)
         {
             RegisterDTO account = new RegisterDTO()
             {
                 UserName = username,
                 Password = password,
                 Email = email,
+                DateOfBirth = birthDate,
                 ConfirmPassword = confirmPassword
             };
 
