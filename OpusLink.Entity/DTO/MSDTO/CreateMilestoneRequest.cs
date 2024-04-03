@@ -9,6 +9,7 @@ namespace OpusLink.Entity.DTO.MSDTO
 {
     public class CreateMilestoneRequest
     {
+        public int MilestoneID { get; set; }
         public int JobID { get; set; }
         public string MilestoneContent { get; set; }
         public DateTime Deadline { get; set; }

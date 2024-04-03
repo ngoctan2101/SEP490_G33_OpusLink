@@ -21,10 +21,15 @@
         font-weight: bold;
         color: white;
         display: inline-block;
-        min-width:200px;
-        min-height:40px;
+        min-width: 200px;
+        min-height: 40px;
         padding: 8px 50px 8px 50px;
-        text-align:center;
+        text-align: center;
+    }
+
+    #countdown {
+        font-size: 24px;
+        font-weight: bold;
     }
 
     .hrMilestone {
@@ -57,7 +62,8 @@
         margin: auto;
         padding: 0;
         border: 1px solid #888;
-        width: 50%;
+        min-width: 50%;
+        max-width: 50%;
         box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
         -webkit-animation-name: animatetop;
         -webkit-animation-duration: 0.4s;
@@ -126,6 +132,26 @@
     }
 </style>
 <div style="margin: 20px 50px 20px 50px">
+    <div id="requestModal" class="modal">
+        <!-- Modal request -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="font-size:24px">Request freelancer chấp nhận plan</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return validateDateTimeRequest('RequestDeadline')" style="width:100%">
+                    <input type="text" name="JobID" hidden value="@Model.JobID" />
+                    <table style="width:100%">
+                        <span id="RequestErrorMessage" style="color:red"></span>
+                        <tr><td>Select a deadline for Freelancer to confirm plan:    </td></tr>
+                        <tr><td><input type="datetime-local" name="RequestDeadline" required /></td></tr>
+                        <tr><td style="text-align:center"><button type="submit" asp-page-handler="ForRequest" style="width:30%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964">Request</button></td></tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
     <div id="addModal" class="modal">
         <!-- Modal add -->
         <div class="modal-content">
@@ -134,9 +160,9 @@
                 <span class="close">&times;</span>
             </div>
             <div class="modal-body">
-                <form method="post" onsubmit="return validateDateTime('AddDeadline','AddAmountToPay')">
+                <form method="post" onsubmit="return validateDateTimeAdd('AddDeadline','AddAmountToPay')" style="width:100%">
                     <input type="text" name="JobID" hidden value="@Model.JobID" />
-                    <table>
+                    <table style="width:100%">
                         <tr><td>Milestone Content:    </td><td><input type="text" name="AddMilestoneContent" required /></td></tr>
                         <tr><td>Select a future deadline:    </td><td><input type="datetime-local" name="AddDeadline" required /></td></tr>
                         <tr><td>Amount of money to pay for freelancer:    </td><td><input type="text" name="AddAmountToPay" pattern="[0-9₫ ,]+" title="Please enter number" required /></td></tr>
@@ -159,6 +185,360 @@
             </div>
         </div>
     </div>
+    <div id="updateModal" class="modal">
+        <!-- Modal update -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="font-size:24px">Update milestone</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return validateDateTimeUpdate('UpdateDeadline','UpdateAmountToPay')" style="width:100%">
+                    <input type="text" name="UpdateMilestoneID" hidden />
+                    <input type="text" name="JobID" hidden value="@Model.JobID" />
+                    <table style="width:100%">
+                        <tr><td>Milestone Content:    </td><td><input type="text" name="UpdateMilestoneContent" required /></td></tr>
+                        <tr><td>Select a future deadline:    </td><td><input type="datetime-local" name="UpdateDeadline" required /></td></tr>
+                        <tr><td>Amount of money to pay for freelancer:    </td><td><input type="text" name="UpdateAmountToPay" pattern="[0-9₫ ,]+" title="Please enter number" required /></td></tr>
+                        <span id="UpdateErrorMessage" style="color:red"></span>
+                        @*<tr>
+                        <td>Status:    </td>
+                        <td>
+                        <select name="AddStatus">
+                        <option value="0">No Parent</option>
+                        @foreach (var item in Model.AllCategories)
+                        {
+                        <option value="@item.CategoryID">@item.CategoryID<span>-</span>@item.CategoryName</option>
+                        }
+                        </select>
+                        </td>
+                        </tr>*@
+                        <tr><td></td><td style="text-align:center"><button type="submit" asp-page-handler="ForUpdate" style="width:30%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964">Update</button></td></tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="deleteModal" class="modal">
+        <!-- Modal delete -->
+        <div class="modal-content" style="width:fit-content">
+            <div class="modal-header">
+                <h2 style="font-size:24px">Delete milestone</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form method="post" style="width:100%">
+                    <input type="text" name="DeleteMilestoneID" hidden />
+                    <input type="text" name="JobID" hidden value="@Model.JobID" />
+                    <table style="width:100%">
+                        <tr>
+                            <td colspan="2">
+                                Are you sure you want to delete this milestone ?
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Milestone Content:
+                            </td>
+                            <td>
+                                <input type="text" name="DeleteMilestoneContent" readonly />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Deadline:
+                            </td>
+                            <td>
+                                <input type="datetime-local" name="DeleteDeadline" readonly />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Amount of money to pay for freelancer:
+                            </td>
+                            <td>
+                                <input type="text" name="DeleteAmountToPay" readonly />
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                Status:
+                            </td>
+                            <td name="DeleteStatus">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center"><button type="submit" asp-page-handler="ForDelete" style="background-color:#2DB964;color:white;border:2px solid #2DB964;width:120px">Yes</button></td>
+                            <td style="text-align:center"><button type="button" onclick="hideModal()" style="background-color:#CCCCCC; color:white;width:120px;border:2px solid #CCCCCC">No</button></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="putMoneyModal" class="modal">
+        <!-- Modal PutMoney -->
+        <div class="modal-content" style="width:fit-content">
+            <div class="modal-header">
+                <h2 style="font-size:24px">Put money to this milestone</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form method="post" style="width:100%">
+                    <input type="text" name="PutMoneyMilestoneID" hidden />
+                    <input type="text" name="JobID" hidden value="@Model.JobID" />
+                    <table style="width:100%">
+                        <tr>
+                            <td colspan="2" id="putMoneyInformation">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td colspan="2" id="putMoneyQuestion">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center"><button type="submit" asp-page-handler="ForPutMoney" style="background-color:#2DB964;color:white;border:2px solid #2DB964;width:120px">Đặt tiền</button></td>
+                            <td style="text-align:center"><button type="button" onclick="hideModal()" style="background-color:#CCCCCC; color:white;width:120px;border:2px solid #CCCCCC">Không đặt tiền</button></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="getBackMoneyModal" class="modal">
+        <!-- Modal getBackMoneyModal -->
+        <div class="modal-content" style="width:fit-content">
+            <div class="modal-header">
+                <h2 style="font-size:24px">Bỏ đặt tiền</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form method="post" style="width:100%">
+                    <input type="text" name="GetBackMoneyMilestoneID" hidden />
+                    <input type="text" name="JobID" hidden value="@Model.JobID" />
+                    <table style="width:100%">
+                        <tr>
+                            <td colspan="2" id="getBackMoneyQuestion">
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center"><button type="submit" asp-page-handler="ForGetBackMoney" style="background-color:#2DB964;color:white;border:2px solid #2DB964;width:120px">Bỏ đặt tiền</button></td>
+                            <td style="text-align:center"><button type="button" onclick="hideModal()" style="background-color:#CCCCCC; color:white;width:120px;border:2px solid #CCCCCC">Hủy</button></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="reviewModal" class="modal">
+        <!-- Modal Review -->
+        <div class="modal-content" style="width:fit-content">
+            <div class="modal-header">
+                <h2 style="font-size:24px">Review freelancer's work</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form method="post" style="width:100%">
+                    <input type="text" name="ReviewMilestoneID" hidden />
+                    <input type="text" name="JobID" hidden value="@Model.JobID" />
+                    <table style="width:100%">
+                        <tr>
+                            <td colspan="2">
+                                Bạn có đồng ý rằng Freelancer đã hoàn thành milestone này không ?
+                            </td>
+                        </tr>
+                        <tr>
+                            <td style="text-align:center"><button type="submit" asp-page-handler="ForReviewCompleteMilestone" style="background-color:#2DB964;color:white;border:2px solid #2DB964;width:120px">Đã hoàn thành</button></td>
+                            <td style="text-align:center"><button type="submit" asp-page-handler="ForReviewRejectMilestone" style="background-color:#CCCCCC; color:white;width:120px;border:2px solid #CCCCCC">Chưa hoàn thành</button></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="resolveModal1" class="modal">
+        <!-- Modal Resolve -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="font-size:24px">Resolve problem</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form method="post" style="width:100%">
+                    <input type="text" name="ResolveMilestone1ID" hidden />
+                    <input type="text" name="JobID" hidden value="@Model.JobID" />
+                    <table style="text-align:left;width:100%">
+                        <tr>
+                            <td>
+                                Milestone is overdue and freelancer has not completed it. How do you solve this problem?
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><button type="button" id="OpenExtendDeadline1" style="background-color:#2DB964;color:white;border:2px solid #2DB964">Extend deadline then freelancer redo this milestone</button></td>
+
+                        </tr>
+                        <tr>
+                            <td><button type="button" id="OpenConfirmFailMilestone1" style="background-color:#2DB964;color:white;border:2px solid #2DB964;text-align:left">Freelancer fail this milestone</button></td>
+
+                        </tr>
+                        <tr>
+                            <td><button type="button" id="OpenConfirmFailJob1" style="background-color:#2DB964;color:white;border:2px solid #2DB964;text-align:left">Freelancer fail this job</button></td>
+
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="resolveModal2" class="modal">
+        <!-- Modal Resolve -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="font-size:24px">Resolve problem</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form method="post" style="width:100%">
+                    <input type="text" name="ResolveMilestone2ID" hidden />
+                    <input type="text" name="JobID" hidden value="@Model.JobID" />
+                    <table>
+                        <tr>
+                            <td>
+                                Freelancer completed the milestone before the deadline. But you haven't reviewed the milestone before the deadline.
+                            </td>
+                        </tr>
+                        <tr>
+                            <td>
+                                How do you solve this problem ?
+                            </td>
+                        </tr>
+                        <tr>
+                            <td><button type="button" id="OpenAcceptMilestone2" style="background-color:#2DB964;color:white;border:2px solid #2DB964;text-align:left">Accept freelancer's work. This milestone is completed.</button></td>
+
+                        </tr>
+                        <tr>
+                            <td><button type="button" id="OpenExtendDeadline2" style="background-color:#2DB964;color:white;border:2px solid #2DB964;text-align:left">Extend deadline then freelancer redo this milestone</button></td>
+
+                        </tr>
+                        <tr>
+                            <td><button type="button" id="OpenConfirmFailMilestone2" style="background-color:#2DB964;color:white;border:2px solid #2DB964;text-align:left">Freelancer fail this milestone</button></td>
+
+                        </tr>
+                        <tr>
+                            <td><button type="button" id="OpenConfirmFailJob2" style="background-color:#2DB964;color:white;border:2px solid #2DB964;text-align:left">Freelancer fail this job</button></td>
+
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="extendDeadline" class="modal">
+        <!-- Modal Extend Deadline -->
+        <div class="modal-content">
+            <div class="modal-header">
+                <h2 style="font-size:24px">Gia hạn Milestone</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form method="post" onsubmit="return validateDateTimeExtend('ExtendDeadlineTime')" style="width:100%">
+                    <input type="text" name="ExtendDeadlineMilestoneID" hidden />
+                    <input type="text" name="JobID" hidden value="@Model.JobID" />
+                    <table>
+                        <tr>
+                            <td>
+                                Hãy chọn một deadline mới cho Milestone này.
+                            </td>
+                        </tr>
+                        <span id="ExtendErrorMessage" style="color:red"></span>
+                        <tr><td><input type="datetime-local" name="ExtendDeadlineTime" required /></td></tr>
+                        <tr><td style="text-align:center"><button type="submit" asp-page-handler="ForExtend" style="width:30%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964">Lưu</button></td></tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="failMsModal" class="modal">
+        <!-- Modal failMsModal -->
+        <div class="modal-content" style="width:fit-content">
+            <div class="modal-header">
+                <h2 style="font-size:24px">Fail milestone</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form method="post" style="width:100%">
+                    <input type="text" name="FailMsMilestoneID" hidden />
+                    <input type="text" name="JobID" hidden value="@Model.JobID" />
+                    <table style="width:100%">
+                        <tr>
+                            <td colspan="2">
+                                Milestone này thất bại và bạn sẽ nhận lại 100% tiền của milestone này ?
+                            </td>
+                        </tr>
+                        
+                        <tr>
+                            <td style="text-align:center"><button type="submit" asp-page-handler="ForFailMs" style="background-color:#2DB964;color:white;border:2px solid #2DB964;width:120px">Đồng ý</button></td>
+                            <td style="text-align:center"><button type="button" onclick="hideModal()" style="background-color:#CCCCCC; color:white;width:120px;border:2px solid #CCCCCC">Hủy</button></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="failJobModal" class="modal">
+        <!-- Modal failMsModal -->
+        <div class="modal-content" style="width:fit-content">
+            <div class="modal-header">
+                <h2 style="font-size:24px">Fail job</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form method="post" style="width:100%">
+                    <input type="text" name="FailJobMilestoneID" hidden />
+                    <input type="text" name="JobID" hidden value="@Model.JobID" />
+                    <table style="width:100%">
+                        <tr>
+                            <td colspan="2">
+                                Job này thất bại và bạn sẽ nhận lại 20% của những milestone đã hoàn thành cộng với tất cả tiền của những milestone đang làm ?
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="text-align:center"><button type="submit" asp-page-handler="ForFailJob" style="background-color:#2DB964;color:white;border:2px solid #2DB964;width:120px">Đồng ý</button></td>
+                            <td style="text-align:center"><button type="button" onclick="hideModal()" style="background-color:#CCCCCC; color:white;width:120px;border:2px solid #CCCCCC">Hủy</button></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
+    <div id="acceptMilestoneModal" class="modal">
+        <!-- Modal failMsModal -->
+        <div class="modal-content" style="width:fit-content">
+            <div class="modal-header">
+                <h2 style="font-size:24px">Accept milestone</h2>
+                <span class="close">&times;</span>
+            </div>
+            <div class="modal-body">
+                <form method="post" style="width:100%">
+                    <input type="text" name="AcceptMs2" hidden />
+                    <input type="text" name="JobID" hidden value="@Model.JobID" />
+                    <table style="width:100%">
+                        <tr>
+                            <td colspan="2">
+                                Chấp nhận Freelancer đã hoàn thành milestone này?
+                            </td>
+                        </tr>
+
+                        <tr>
+                            <td style="text-align:center"><button type="submit" asp-page-handler="ForAcceptMilestone2" style="background-color:#2DB964;color:white;border:2px solid #2DB964;width:120px">Chấp nhận</button></td>
+                            <td style="text-align:center"><button type="button" onclick="hideModal()" style="background-color:#CCCCCC; color:white;width:120px;border:2px solid #CCCCCC">Hủy</button></td>
+                        </tr>
+                    </table>
+                </form>
+            </div>
+        </div>
+    </div>
     <div>
         <h5>// In ra thông tin của JOB này ở đây nếu cần //</h5>
     </div>
@@ -175,10 +555,56 @@
                 <div class="col-md-1" style="display: flex;align-items: center;">
                     <div class="circle">@soThuTu</div>
                 </div>
-                <div class="col-md-5">
-                    <h4 style="font-weight:bold">@item.MilestoneContent</h4>
+                <div class="col-md-5" style="display: flex;flex-direction: column;justify-content: center;">
+                    <h4 style="font-weight:bold;display:block">@item.MilestoneContent</h4>
                     <p>Due @item.Deadline.ToString("dd/MM/yyyy HH:mm")</p>
                     <p>@((item.AmountToPay).ToString("#,##")) ₫</p>
+                </div>
+                <div style="display:none">
+                    <span id="MilestoneContent_@item.MilestoneID">@item.MilestoneContent</span>
+                    <span id="Deadline_@item.MilestoneID">@item.Deadline.ToString("yyyy-MM-ddTHH:mm")</span>
+                    <span id="AmountToPay_@item.MilestoneID">@((item.AmountToPay).ToString("#,##")) ₫</span>
+                    <div id="ShowStatus_@item.MilestoneID">
+                        @if (item.IsFreelancerDone && item.Status == (int)MilestoneStatusEnum.MoneyPutted)
+                        {
+                            <p class="status" style="background-color:#9E9E9E;">Đang chờ review</p>
+                        }
+                        else if (item.Status == (int)MilestoneStatusEnum.EmployerCreated)
+                        {
+                            <p class="status" style="background-color:#9E9E9E;">Mới tạo</p>
+                        }
+                        else if (item.Status == (int)MilestoneStatusEnum.MoneyPutted)
+                        {
+                            if (item.Deadline < DateTime.Now)
+                            {
+                                <p class="status" style="background-color:#CF2A27;">Muộn</p>
+                            }
+                            else
+                            {
+                                <p class="status" style="background-color:#0068AD;">Đã đặt tiền</p>  <span style="color:red;font-size:13px" id="countdown1_@item."></span>
+                            }
+                        }
+                        else if (item.Status == (int)MilestoneStatusEnum.EmployerRejected)
+                        {
+                            if (item.IsFreelancerDone == true)
+                            {
+                                <p class="status" style="background-color:#FFE599;">Chờ review lại</p> <span style="color:red;font-size:13px" id="countdown2_@item."></span>
+                            }
+                            else
+                            {
+                                <p class="status" style="background-color:#FFE599;">Làm lại</p> <span style="color:red;font-size:13px" id="countdown2_@item."></span>
+                            }
+
+                        }
+                        else if (item.Status == (int)MilestoneStatusEnum.Completed)
+                        {
+                            <p class="status" style="background-color:#93C47D;">Hoàn thành</p>
+                        }
+                        else if (item.Status == (int)MilestoneStatusEnum.Failed)
+                        {
+                            <p class="status" style="background-color:#E06666;">Thất bại</p>
+                        }
+                    </div>
                 </div>
                 <div class="col-md-2" style="display: flex;justify-content: center;align-items: center;">
                     @if (item.IsFreelancerDone && item.Status == (int)MilestoneStatusEnum.MoneyPutted)
@@ -202,7 +628,17 @@
                     }
                     else if (item.Status == (int)MilestoneStatusEnum.EmployerRejected)
                     {
-                        <p class="status" style="background-color:#FFE599;">Làm lại</p> <span style="color:red;font-size:13px" id="countdown2_@item."></span>
+                        if (item.IsFreelancerDone == true)
+                        {
+                            <p class="status" style="background-color:#FFE599;">Chờ review lại</p> <span style="color:red;font-size:13px" id="countdown2_@item."></span>
+                        }else if (item.Deadline < DateTime.Now)
+                        {
+                            <p class="status" style="background-color:#CF2A27;">Muộn</p>
+                        }
+                        else
+                        {
+                            <p class="status" style="background-color:#FFE599;">Làm lại</p> <span style="color:red;font-size:13px" id="countdown2_@item."></span>
+                        }
                     }
                     else if (item.Status == (int)MilestoneStatusEnum.Completed)
                     {
@@ -213,19 +649,94 @@
                         <p class="status" style="background-color:#E06666;">Thất bại</p>
                     }
                 </div>
-                <div class="col-md-4">
+                <div class="col-md-4" style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+
+                    <button type="button" id="openUpdateMilestone" style="background-color:#00ACD4;color:white;display:block;margin:5px;min-width:150px" onclick="OpenUpdateMilestone(@item.MilestoneID)">Sửa nội dung</button>
+                    <button type="button" id="openDeleteMilestone" style="background-color:#E19400;color:white;display:block;margin:5px;min-width:150px" onclick="OpenDeleteMilestone(@item.MilestoneID)">Xóa</button>
+                    <button type="button" id="openPutMoneyMilestone" style="background-color:#2DB964;color:white;display:block;margin:5px;min-width:150px" onclick="OpenPutMoneyMilestone(@item.MilestoneID,'@((@item.AmountToPay).ToString(" #,##")) ₫')">Đặt tiền</button>
+                    <button type="button" id="openPutMoneyMilestone" style="background-color:#2DB964;color:white;display:block;margin:5px;min-width:150px" onclick="OpenGetBackMoneyMilestone(@item.MilestoneID,'@((@item.AmountToPay).ToString(" #,##")) ₫')">Bỏ đặt tiền</button>
+                    <button type="button" id="openReviewMilestone" style="background-color:#009AFF;color:white;display:block;margin:5px;min-width:150px" onclick="OpenReviewMilestone(@item.MilestoneID)">Review</button>
+                    <button type="button" id="openResolveMilestone1" style="background-color:#B85A44;color:white;display:block;margin:5px;min-width:150px" onclick="OpenResolveMilestone1(@item.MilestoneID)">Resolve Freelancer late</button>
+                    <button type="button" id="openResolveMilestone2" style="background-color:#B85A44;color:white;display:block;margin:5px;min-width:150px" onclick="OpenResolveMilestone2(@item.MilestoneID)">Resolve Employer late</button>
+
                 </div>
             </div>
             soThuTu += 1;
             <hr class="hrMilestone">
         }
     </div>
+    @if (Model.job.EmployerDoneEditMilestone == false && Model.job.IsFreelancerConfirm == false)
+    {
+        <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-4">
+                <button type="button" id="openRequestFAcceptMS" style="background-color:#009400;color:white;display:block;margin:5px;min-width:200px">Request Freelancer chấp nhận plan</button>
+            </div>
+        </div>
+    }
+    else if (Model.job.EmployerDoneEditMilestone == true && Model.job.IsFreelancerConfirm == false)
+    {
+        <h5>Đợi Freelancer phản hồi trong vòng <span style="color:red;font-size:13px" id="countdown"></span></h5>
+    }
+    else if (Model.job.EmployerDoneEditMilestone == true && Model.job.IsFreelancerConfirm == true)
+    {
+        <h5>Các bạn đã thống nhất một plan, bây giờ là lúc làm việc</h5>
+    }
+
 </div>
 <script>
     var addModal = document.getElementById("addModal");
+    var updateModal = document.getElementById("updateModal");
+    var deleteModal = document.getElementById("deleteModal");
+    var requestModal = document.getElementById("requestModal");
+    var putMoneyModal = document.getElementById("putMoneyModal");
+    var getBackMoneyModal = document.getElementById("getBackMoneyModal");
+    var reviewModal = document.getElementById("reviewModal");
+    var resolveModal1 = document.getElementById("resolveModal1");
+    var resolveModal2 = document.getElementById("resolveModal2");
+    var extendModal = document.getElementById("extendDeadline");
+    var failMsModal = document.getElementById("failMsModal");
+    var failJobModal = document.getElementById("failJobModal");
+    var acceptMilestoneModal = document.getElementById("acceptMilestoneModal");
     // When the user clicks on <span> (x), close the modal
     document.getElementsByClassName("close")[0].onclick = function () {
+        requestModal.style.display = "none";
+    }
+    document.getElementsByClassName("close")[1].onclick = function () {
         addModal.style.display = "none";
+    }
+    document.getElementsByClassName("close")[2].onclick = function () {
+        updateModal.style.display = "none";
+    }
+    document.getElementsByClassName("close")[3].onclick = function () {
+        deleteModal.style.display = "none";
+    }
+    document.getElementsByClassName("close")[4].onclick = function () {
+        putMoneyModal.style.display = "none";
+    }
+    document.getElementsByClassName("close")[5].onclick = function () {
+        getBackMoneyModal.style.display = "none";
+    }
+    document.getElementsByClassName("close")[6].onclick = function () {
+        reviewModal.style.display = "none";
+    }
+    document.getElementsByClassName("close")[7].onclick = function () {
+        resolveModal1.style.display = "none";
+    }
+    document.getElementsByClassName("close")[8].onclick = function () {
+        resolveModal2.style.display = "none";
+    }
+    document.getElementsByClassName("close")[9].onclick = function () {
+        extendModal.style.display = "none";
+    }
+    document.getElementsByClassName("close")[10].onclick = function () {
+        failMsModal.style.display = "none";
+    }
+    document.getElementsByClassName("close")[11].onclick = function () {
+        failJobModal.style.display = "none";
+    }
+    document.getElementsByClassName("close")[12].onclick = function () {
+        acceptMilestoneModal.style.display = "none";
     }
     // When the user clicks the button, open the modal
     document.getElementById("openAddMilestone").onclick = function () {
@@ -233,13 +744,49 @@
     }
     // When the user clicks anywhere outside of the modal, close it
     window.onclick = function (event) {
+        if (event.target == requestModal) {
+            requestModal.style.display = "none";
+        }
         if (event.target == addModal) {
             addModal.style.display = "none";
+        }
+        if (event.target == updateModal) {
+            updateModal.style.display = "none";
+        }
+        if (event.target == deleteModal) {
+            deleteModal.style.display = "none";
+        }
+        if (event.target == putMoneyModal) {
+            putMoneyModal.style.display = "none";
+        }
+        if (event.target == getBackMoneyModal) {
+            getBackMoneyModal.style.display = "none";
+        }
+        if (event.target == reviewModal) {
+            reviewModal.style.display = "none";
+        }
+        if (event.target == resolveModal1) {
+            resolveModal1.style.display = "none";
+        }
+        if (event.target == resolveModal2) {
+            resolveModal2.style.display = "none";
+        }
+        if (event.target == extendModal) {
+            extendModal.style.display = "none";
+        }
+        if (event.target == failMsModal) {
+            failMsModal.style.display = "none";
+        }
+        if (event.target == failJobModal) {
+            failJobModal.style.display = "none";
+        }
+        if (event.target == acceptMilestoneModal) {
+            acceptMilestoneModal.style.display = "none";
         }
     }
 </script>
 <script>
-    function validateDateTime(nameOfDateTag, nameOfAmountToPayTag) {
+    function validateDateTimeAdd(nameOfDateTag, nameOfAmountToPayTag) {
         var inputDateTime = new Date(document.getElementsByName(nameOfDateTag)[0].value);
         var inputAmountToPay = document.getElementsByName(nameOfAmountToPayTag)[0].value.replace(/\D/g, '');
         var errorMessage = document.getElementById("AddErrorMessage");
@@ -258,6 +805,237 @@
         }
         return true;
     }
+    function validateDateTimeUpdate(nameOfDateTag, nameOfAmountToPayTag) {
+        var inputDateTime = new Date(document.getElementsByName(nameOfDateTag)[0].value);
+        var inputAmountToPay = document.getElementsByName(nameOfAmountToPayTag)[0].value.replace(/\D/g, '');
+        var errorMessage = document.getElementById("UpdateErrorMessage");
+        errorMessage.innerHTML = "";
+
+
+        var currentDateTime = new Date();
+
+        if (inputDateTime <= currentDateTime) {
+            errorMessage.innerHTML = "Please select a future date and time.";
+            return false;
+        }
+        if (parseInt(inputAmountToPay) <= 0) {
+            errorMessage.innerHTML = "Amount must greater than zero.";
+            return false;
+        }
+        return true;
+    }
+    function validateDateTimeRequest(nameOfDateTag) {
+        var inputDateTime = new Date(document.getElementsByName(nameOfDateTag)[0].value);
+        var errorMessage = document.getElementById("RequestErrorMessage");
+        errorMessage.innerHTML = "";
+
+
+        var currentDateTime = new Date();
+
+        if (inputDateTime <= currentDateTime) {
+            errorMessage.innerHTML = "Please select a future date and time.";
+            return false;
+        }
+        return true;
+    }
+    function validateDateTimeExtend(nameOfDateTag) {
+        var inputDateTime = new Date(document.getElementsByName(nameOfDateTag)[0].value);
+        var errorMessage = document.getElementById("ExtendErrorMessage");
+        errorMessage.innerHTML = "";
+
+
+        var currentDateTime = new Date();
+
+        if (inputDateTime <= currentDateTime) {
+            errorMessage.innerHTML = "Please select a future date and time.";
+            return false;
+        }
+        return true;
+    }
 </script>
+<script>
+    function OpenUpdateMilestone(UpdateMilestoneID) {
+        var milestoneContent = document.getElementById("MilestoneContent_" + UpdateMilestoneID).innerHTML;
+        var deadline = document.getElementById("Deadline_" + UpdateMilestoneID).innerHTML;
+        var amountToPay = document.getElementById("AmountToPay_" + UpdateMilestoneID).innerHTML;
+
+        document.getElementsByName("UpdateMilestoneID")[0].value = UpdateMilestoneID;
+        document.getElementsByName("UpdateMilestoneContent")[0].value = milestoneContent;
+        document.getElementsByName("UpdateDeadline")[0].value = deadline;
+        document.getElementsByName("UpdateAmountToPay")[0].value = amountToPay;
+
+        updateModal.style.display = "block";
+    }
+    function OpenDeleteMilestone(DeleteMilestoneID) {
+        var milestoneContent = document.getElementById("MilestoneContent_" + DeleteMilestoneID).innerHTML;
+        var deadline = document.getElementById("Deadline_" + DeleteMilestoneID).innerHTML;
+        var amountToPay = document.getElementById("AmountToPay_" + DeleteMilestoneID).innerHTML;
+        var status = document.getElementById("ShowStatus_" + DeleteMilestoneID).innerHTML;
+
+        document.getElementsByName("DeleteMilestoneID")[0].value = DeleteMilestoneID;
+        document.getElementsByName("DeleteMilestoneContent")[0].value = milestoneContent;
+        document.getElementsByName("DeleteDeadline")[0].value = deadline;
+        document.getElementsByName("DeleteAmountToPay")[0].value = amountToPay;
+        document.getElementsByName("DeleteStatus")[0].innerHTML = status;
+
+        deleteModal.style.display = "block";
+    }
+    function OpenPutMoneyMilestone(PutMoneyMilestoneID, PutMoneyMilestoneAmount) {
+        var accountMoney = "111,111,111 ₫";
+        document.getElementsByName("PutMoneyMilestoneID")[0].value = PutMoneyMilestoneID;
+        document.getElementById("putMoneyInformation").innerHTML = "Bạn có " + accountMoney + " trong tài khoản.";
+        document.getElementById("putMoneyQuestion").innerHTML = "Đặt " + PutMoneyMilestoneAmount + " vào milestone này.";
+        putMoneyModal.style.display = "block";
+    }
+    function OpenGetBackMoneyMilestone(GetBackMoneyMilestoneID, GetBackMoneyMilestoneAmount) {
+        var accountMoney = "111,111,111 ₫";
+        document.getElementsByName("GetBackMoneyMilestoneID")[0].value = GetBackMoneyMilestoneID;
+        document.getElementById("getBackMoneyQuestion").innerHTML = "Bỏ đặt " + GetBackMoneyMilestoneAmount + " ở milestone này.";
+        getBackMoneyModal.style.display = "block";
+    }
+    function OpenReviewMilestone(ReviewMilestoneID) {
+        document.getElementsByName("ReviewMilestoneID")[0].value = ReviewMilestoneID;
+        reviewModal.style.display = "block";
+    }
+    function OpenResolveMilestone1(ResolveMilestone1ID) {
+        document.getElementsByName("ResolveMilestone1ID")[0].value = ResolveMilestone1ID;
+        document.getElementsByName("ResolveMilestone2ID")[0].value = ResolveMilestone1ID;
+        document.getElementById("OpenExtendDeadline1").onclick = function(){OpenExtendDeadline(ResolveMilestone1ID)};
+        document.getElementById("OpenConfirmFailMilestone1").onclick = function () {
+            OpenConfirmFailMilestone(ResolveMilestone1ID)};
+            document.getElementById("OpenConfirmFailJob1").onclick = function () {
+                OpenConfirmFailJob(ResolveMilestone1ID)};
+        resolveModal1.style.display = "block";
+    }
+    function OpenResolveMilestone2(ResolveMilestone2ID) {
+        document.getElementsByName("ResolveMilestone1ID")[0].value = ResolveMilestone2ID;
+        document.getElementsByName("ResolveMilestone2ID")[0].value = ResolveMilestone2ID;
+        document.getElementById("OpenExtendDeadline2").onclick = function(){OpenExtendDeadline(ResolveMilestone2ID)};
+        document.getElementById("OpenAcceptMilestone2").onclick = function(){OpenAcceptMilestone(ResolveMilestone2ID)};
+        document.getElementById("OpenConfirmFailMilestone2").onclick = function () {
+            OpenConfirmFailMilestone(ResolveMilestone2ID)};
+        document.getElementById("OpenConfirmFailJob2").onclick = function () {
+            OpenConfirmFailJob(ResolveMilestone2ID)};
+        resolveModal2.style.display = "block";
+    }
+    function OpenExtendDeadline(ResolveMilestoneID){
+        resolveModal1.style.display = "none";
+        resolveModal2.style.display = "none";
+        document.getElementsByName("ExtendDeadlineMilestoneID")[0].value = ResolveMilestoneID;
+        extendModal.style.display = "block";
+    }
+    function OpenConfirmFailMilestone(ResolveMilestoneID) {
+        resolveModal1.style.display = "none";
+        resolveModal2.style.display = "none";
+        document.getElementsByName("FailMsMilestoneID")[0].value = ResolveMilestoneID;
+        failMsModal.style.display = "block";
+    }
+    function OpenConfirmFailJob(ResolveMilestoneID) {
+        resolveModal1.style.display = "none";
+        resolveModal2.style.display = "none";
+        document.getElementsByName("FailJobMilestoneID")[0].value = ResolveMilestoneID;
+        failJobModal.style.display = "block";
+    }
+    function OpenAcceptMilestone(ResolveMilestoneID) {
+        resolveModal1.style.display = "none";
+        resolveModal2.style.display = "none";
+        document.getElementsByName("AcceptMs2")[0].value = ResolveMilestoneID;
+        acceptMilestoneModal.style.display = "block";
+    }
+</script>
+<script>
+    document.getElementsByName("AddAmountToPay")[0].addEventListener('change', function () {
+        // Get the input element
+        var input = document.getElementsByName("AddAmountToPay")[0];
+        var input1 = input.value.replaceAll(",", "");
+        input1 = input1.replaceAll("₫", "");
+        input1 = input1.replaceAll(" ", "");
+        // Get the value and convert it to a number
+        var value = parseFloat(input1);
+        // Check if the value is a valid number
+        if (!isNaN(value)) {
+            // Format the number with dots for thousands separator
+            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " ₫";
+
+            // Update the input field with the formatted value
+            input.value = formattedValue;
+        }
+    }, false);
+</script>
+<script>
+    document.getElementsByName("UpdateAmountToPay")[0].addEventListener('change', function () {
+        // Get the input element
+        var input = document.getElementsByName("UpdateAmountToPay")[0];
+        var input1 = input.value.replaceAll(",", "");
+        input1 = input1.replaceAll("₫", "");
+        input1 = input1.replaceAll(" ", "");
+        // Get the value and convert it to a number
+        var value = parseFloat(input1);
+        // Check if the value is a valid number
+        if (!isNaN(value)) {
+            // Format the number with dots for thousands separator
+            var formattedValue = value.toLocaleString('en', { maximumFractionDigits: 0 }) + " ₫";
+
+            // Update the input field with the formatted value
+            input.value = formattedValue;
+        }
+    }, false);
+</script>
+<script>
+    function hideModal() {
+        addModal.style.display = "none";
+        updateModal.style.display = "none";
+        deleteModal.style.display = "none";
+        requestModal.style.display = "none";
+        putMoneyModal.style.display = "none";
+
+        reviewModal.style.display = "none";
+        resolveModal1.style.display = "none";
+        resolveModal2.style.display = "none";
+        extendModal.style.display = "none";
+        failMsModal.style.display = "none";
+        failJobModal.style.display = "none";
+    }
+</script>
+@*if E done edit and Time less than time now*@
+@if (Model.job.EmployerDoneEditMilestone == false && Model.job.IsFreelancerConfirm == false)
+{
+    <script>
+        document.getElementById("openRequestFAcceptMS").onclick = function () {
+            requestModal.style.display = "block";
+        }
+    </script>
+}
+else if (Model.job.EmployerDoneEditMilestone == true && Model.job.IsFreelancerConfirm == false)
+{
+    <script>
+        function startCountdown(targetDate, countdownId) {
+            var countdownInterval = setInterval(function () {
+                var now = new Date();
+                var timeDifference = targetDate - now;
+                var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+                var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+                var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+                var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+                document.getElementById(countdownId).innerHTML = "(" + days + "d " + hours + "h " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds + ")";
+                if (timeDifference < 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById(countdownId).innerHTML = "Hiring Expried";
+                }
+            }, 1000);
+        }
+        var x = new Date("@(Model.job.DeadlineFreelancerConfirm.ToString("yyyy-MM-ddTHH:mm:ss"))");
+        startCountdown(x, "countdown");
+        document.getElementById("openRequestFAcceptMS").onclick = function () {
+            requestModal.style.display = "block";
+        }
+    </script>
+}
+else if (Model.job.EmployerDoneEditMilestone == true && Model.job.IsFreelancerConfirm == true)
+{
+
+}
+
+
 
 
