@@ -8,11 +8,6 @@ using Microsoft.AspNetCore.Identity;
 using OpusLink.Shared.Enums;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
-using Newtonsoft.Json.Linq;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
 
 namespace OpusLink.API.Controllers.AccountControllers
 {
@@ -93,6 +88,16 @@ namespace OpusLink.API.Controllers.AccountControllers
                     };
                 }
 
+                if((DateTime.Now - model.DateOfBirth).TotalDays / 365 < 18)
+                {
+                    return new ApiResponseModel()
+                    {
+                        Code = 400,
+                        Message = "Bạn chưa đủ tuổi để đăng kí tài khoản",
+                        IsSuccess = false
+                    };
+                }
+
                 //Đoạn này : Nếu không tồn tại thì tạo ra 1 user
                 //ID của User thì nó tự tạo rồi
                 var user = new User()
@@ -100,6 +105,7 @@ namespace OpusLink.API.Controllers.AccountControllers
                     Email = model.Email,
                     SecurityStamp = Guid.NewGuid().ToString(),
                     UserName = model.UserName,
+                    Dob = model.DateOfBirth,
                     AmountMoney = 0
                 };
 
