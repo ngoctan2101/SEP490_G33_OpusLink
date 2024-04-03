@@ -102,6 +102,6 @@ body {
     color: red;
 }
 
-.Birthdate{
+input[type="date"]::-webkit-calendar-picker-indicator {
     display: none;
 }

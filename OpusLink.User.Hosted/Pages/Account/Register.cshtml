@@ -11,6 +11,11 @@
     <title>Register Form | Opuslink Team</title>
     <link rel="stylesheet" href="~/css/Register.css">
     <script src="https://kit.fontawesome.com/10f63c3d6e.js" crossorigin="anonymous"></script>
+    <!-- jQuery -->
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+    <!-- jQuery UI -->
+    <link rel="stylesheet" href="https://code.jquery.com/ui/1.12.1/themes/base/jquery-ui.css">
+    <script src="https://code.jquery.com/ui/1.12.1/jquery-ui.min.js"></script>
 </head>
 <script>
     function checkPasswordLength() {
@@ -69,6 +74,38 @@
         }
     }
 </script>
+<script>
+    $(function () {
+        // Kích hoạt Datepicker trên input với id 'Birthdate'
+        $("#Birthdate").datepicker({
+            dateFormat: "dd/mm/yy", // Định dạng ngày
+            onSelect: function (dateText, inst) {
+                // Tách ngày, tháng và năm từ ngày đã chọn
+                var parts = dateText.split('/');
+                var day = parts[0];
+                var month = parts[1];
+                var year = parts[2];
+
+                // Chuyển đổi sang định dạng yyyy-MM-dd
+                var formattedDate = year + "-" + month + "-" + day;
+
+                // Cập nhật giá trị của input với định dạng đã chuyển đổi
+                $(this).val(formattedDate);
+            },
+            // Ngăn chặn sự kiện mặc định của phím Enter
+            onClose: function (selectedDate) {
+                $("#Birthdate").datepicker("widget").off("keydown");
+            }
+        });
+
+        // Gắn sự kiện click vào biểu tượng
+        $("#custom-calendar-icon").click(function () {
+            // Kích hoạt Datepicker khi nhấp vào biểu tượng
+            $("#Birthdate").datepicker("show");
+        });
+    });
+</script>
+
 <body>
     <div class="wrapper">
         <form method="post">
@@ -86,7 +123,7 @@
             <div class="input-box">
                 <label class="label">Ngày sinh của bạn</label>
                 <input type="date" placeholder="Nhập ngày/tháng/năm sinh của bạn" id="Birthdate" name="Birthdate" required>
-                <i class="fa-solid fa-calendar-days"></i>
+                <i class="fa-solid fa-calendar-days" id="custom-calendar-icon"></i>
             </div>
             <div class="input-box">
                 <label class="label">Mật khẩu</label>
