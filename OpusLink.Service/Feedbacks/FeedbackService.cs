@@ -10,13 +10,13 @@ using System.Threading.Tasks;
 
 namespace OpusLink.Service.Feedbacks
 {
-    public interface IFeedbackService
+	public interface IFeedbackService
 	{
 		FeebackDTO CreateFeedback(CreateFeedbackDTO createFeedbackDTO);
-		/*Task<bool> UpdateFeedbackAsync(UpdateFeedbackDTO updateFeedbackDTO);
+		//GetFeedbacksForTargetUser(targetToUserID)
+		List<FeebackDTO> GetFeedbacksForTargetUser(int targetToUserID);
+		
 
-		Task<FeedbackUser> GetFeedbackAsync(int feedbackUserID);
-		Task<IEnumerable<FeedbackUser>> GetFeedbacksAsync(int jobID);*/
 	}
 	public class FeedbackService : IFeedbackService
 	{
@@ -29,16 +29,16 @@ namespace OpusLink.Service.Feedbacks
 
 		public FeebackDTO CreateFeedback(CreateFeedbackDTO createFeedbackDTO)
 		{
-				var feedback = new FeedbackUser
-				{
-					FeedbackUserID = 0,
-					JobID = createFeedbackDTO.JobID,
-					CreateByUserID = createFeedbackDTO.CreateByUserID,
-					TargetToUserID = createFeedbackDTO.TargetToUserID,
-					Star = createFeedbackDTO.Star,
-					Content = createFeedbackDTO.Content,
-					DateCreated = DateTime.Now
-				};
+			var feedback = new FeedbackUser
+			{
+				FeedbackUserID = 0,
+				JobID = createFeedbackDTO.JobID,
+				CreateByUserID = createFeedbackDTO.CreateByUserID,
+				TargetToUserID = createFeedbackDTO.TargetToUserID,
+				Star = createFeedbackDTO.Star,
+				Content = createFeedbackDTO.Content,
+				DateCreated = DateTime.Now
+			};
 			_context.FeedbackUsers.Add(feedback);
 			_context.SaveChanges();
 			return new FeebackDTO
@@ -48,7 +48,27 @@ namespace OpusLink.Service.Feedbacks
 
 			};
 		}
+        //GetFeedbacksForTargetUser(targetToUserID)
+        public List<FeebackDTO> GetFeedbacksForTargetUser(int targetToUserID)
+        {
+            // Fetch feedback entries for the given TargetToUserID
+            var feedbackEntries = _context.FeedbackUsers
+                .Where(f => f.TargetToUserID == targetToUserID)
+                .Select(f => new FeebackDTO
+                {
+                    FeedbackUserID = f.FeedbackUserID,
+                    JobID = f.JobID,
+                    CreateByUserID = f.CreateByUserID,
+                    TargetToUserID = f.TargetToUserID,
+                    Star = f.Star,
+                    Content = f.Content,
+                    DateCreated = f.DateCreated
+					
+                })
+                .ToList();
 
-	}
-	}
-
+            return feedbackEntries;
+        }
+       
+    }
+}

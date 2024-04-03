@@ -22,8 +22,8 @@ namespace OpusLink.User.Hosted.Pages.Evaluate
 			var contentType = new MediaTypeWithQualityHeaderValue("application/json");
 			client.DefaultRequestHeaders.Accept.Add(contentType);
 		}
-		/*public async Task<IActionResult> OnGetAddFeedback(int JobId, int CreateByUserID, int TargetToUserID, decimal Star, string Content)
-        {
+		public async Task<IActionResult> OnGetAddFeedback(int JobId, int CreateByUserID, int TargetToUserID, decimal Star, string Content)
+		{
 			if (HttpContext.Session.GetInt32("UserId") == null)
 			{
 				return RedirectToPage("/Account/Login");
@@ -39,8 +39,14 @@ namespace OpusLink.User.Hosted.Pages.Evaluate
 			{
 				PropertyNameCaseInsensitive = false,
 			};
-			string json = System.Text.Json.JsonSerializer.Serialize<CreateFeedbackDTO>(new CreateFeedbackDTO() { CreateByUserID = CreateByUserID, 
-				TargetToUserID = TargetToUserID, JobID = JobId, Star= Star, Content= Content }, options);
+			string json = System.Text.Json.JsonSerializer.Serialize<CreateFeedbackDTO>(new CreateFeedbackDTO()
+			{
+				CreateByUserID = CreateByUserID,
+				TargetToUserID = TargetToUserID,
+				JobID = JobId,
+				Star = Star,
+				Content = Content
+			}, options);
 			StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
 			HttpResponseMessage response = await client.PostAsync("https://localhost:7265/api/Feedback/AddFeedback", httpContent);
 			FeebackDTO x = new FeebackDTO();
@@ -51,6 +57,6 @@ namespace OpusLink.User.Hosted.Pages.Evaluate
 
 			}
 			return RedirectToPage("/Evaluate/FreelancerEvaluate");
-		}*/
+		}
 	}
 }

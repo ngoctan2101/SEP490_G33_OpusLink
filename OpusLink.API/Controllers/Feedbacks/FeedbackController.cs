@@ -35,5 +35,52 @@ namespace OpusLink.API.Controllers.Feedbacks
 				return StatusCode(500, $"Internal server error: {ex.Message}");
 			}
 		}
-	}
+
+        [HttpGet("GetFeedbacksByTargetUser/{targetToUserID}")]
+        public IActionResult GetFeedbacksByTargetUser(int targetToUserID)
+        {
+            try
+            {
+                var feedbacks = _feedbackService.GetFeedbacksForTargetUser(targetToUserID);
+                if (feedbacks == null || feedbacks.Count == 0)
+                {
+                    return NotFound("No feedbacks found for the specified user.");
+                }
+                return Ok(feedbacks);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+
+        [HttpGet("AverageStars/{targetToUserID}")]
+        public IActionResult AverageStars(int targetToUserID)
+        {
+            try
+            {
+                // Fetch feedback entries for the given TargetToUserID
+                var feedbackEntries = _feedbackService.GetFeedbacksForTargetUser(targetToUserID);
+
+                // Calculate average stars
+                var averageStars = feedbackEntries.Any() ? feedbackEntries.Average(f => f.Star) : 0;
+
+                // Count the number of feedback entries
+                var numberOfEntries = feedbackEntries.Count;
+
+                // Create an anonymous object to return both averageStars and numberOfEntries
+                var result = new
+                {
+                    AverageStars = averageStars,
+                    NumberOfEntries = numberOfEntries
+                };
+
+                return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+    }
 }
