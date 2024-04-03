@@ -3,10 +3,6 @@
 @{
 }
 <style>
-	body {
-		margin-top: 50px;
-		background: #FFF5EE;
-	}
 
 	.mb-lg-5 {
 		margin-top: 50px;
@@ -27,6 +23,9 @@
 		white-space: nowrap;
 	}
 
+	table{
+		overflow-y: scroll
+	}
 	.table > :not(caption) > * > * {
 		padding: 0.75rem 1.25rem;
 		border-bottom-width: 1px;
@@ -69,11 +68,13 @@
 
 							@if (Model.his != null)
 							{
+								int i = 0;
 								@foreach (var hp in Model.his.OrderByDescending(hp => hp.TransactionDate))
 								{
+									i++;
 									<tr class="align-middle">
 										<td>
-											<a href="/HistoryPayment/HistoryPaymentDetail?payId=@hp.PaymentID">#@hp.PaymentID</a>
+											<a href="/HistoryPayment/HistoryPaymentDetail?payId=@hp.PaymentID">#@i</a>
 											
 										</td>
 										<td>@hp.TransactionDate</td>
@@ -83,12 +84,12 @@
 												@if (hp.TransactionType == 1)
 												{
 													<span><i class="fa fa-arrow-up" aria-hidden="true"></i></span>
-													<span>$@hp.Amount</span>
+													<span>@((hp.Amount).ToString("#,###")) ₫</span>
 												}
 												else
 												{
 													<span><i class="fa fa-arrow-down" aria-hidden="true"></i></span>
-													<span>$@hp.Amount</span>
+													<span>@((hp.Amount).ToString("#,###")) ₫</span>
 												}
 
 											</div>
@@ -128,75 +129,9 @@
 								<h1> Không có thanh toán</h1>
 							}
 
-							@* <tr class="align-middle">
-							<td>
-							#012458780
-							</td>
-							<td>19 Aug, 2021</td>
-							<td>Edith Koenig</td>
-							<td>
-							<div class="d-flex align-items-center">
-							<span><i class="fa fa-arrow-down" aria-hidden="true"></i></span>
-							<span>$641.64</span>
-							</div>
-							</td>
-							<td>
-							<span class="badge fs-6 fw-normal bg-tint-warning text-warning">Pending</span>
-							</td>
-							</tr>
-							<tr class="align-middle">
-							<td>
-							#76444326
-							</td>
-							<td>03 April, 2021</td>
-							<td>Carrie Blount</td>
-							<td>
-							<div class="d-flex align-items-center">
-							<span><i class="fa fa-arrow-down" aria-hidden="true"></i></span>
-							<span>$12,457</span>
-							</div>
-							</td>
-							<td>
-							<span class="badge fs-6 fw-normal bg-tint-success text-success">Completed</span>
-							</td>
-							</tr>
-							<tr class="align-middle">
-							<td>
-							#12498745
-							</td>
-							<td>15 March, 2021</td>
-							<td>Ander Durham</td>
-							<td>
-							<div class="d-flex align-items-center">
-							<span><i class="fa fa-arrow-down" aria-hidden="true"></i></span>
-							<span>$785</span>
-							</div>
-							</td>
-							<td>
-							<span class="badge fs-6 fw-normal bg-tint-success text-success">Completed</span>
-							</td>
-							</tr>
-							<tr class="align-middle">
-							<td>
-							#87444654
-							</td>
-							<td>23 Jan, 2021</td>
-							<td>Netflix Inc.</td>
-							<td>
-							<div class="d-flex align-items-center">
-							<span><i class="fa fa-arrow-up" aria-hidden="true"></i></span>
-							<span>$199</span>
-							</div>
-							</td>
-							<td>
-							<span class="badge fs-6 fw-normal bg-tint-success text-success">Completed</span>
-							</td>
-							</tr>*@
+							
 						</tbody>
 					</table>
-				</div>
-				<div class="card-footer text-end">
-					<a href="#!" class="btn btn-gray">View All Transactions</a>
 				</div>
 			</div>
 		</div>

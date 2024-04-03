@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Metadata.Internal;
 using OpusLink.Entity.DTO;
+using OpusLink.Entity.DTO.AccountDTO;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.Models;
 using OpusLink.Service.Admin;
@@ -411,7 +412,16 @@ namespace OpusLink.API.Controllers.Admin
             }
             return fasResult;
         }
-        
+
+        [HttpPut("UpdateBankAccountUser")]
+        public async Task<IActionResult> UpdateBankAccountUser([FromBody] BankAccDTO usedto)
+        {
+
+            _userService.UpdateBankAccUser(usedto);
+
+            return Ok("Update thanh cong");
+        }
+
     }
 
 

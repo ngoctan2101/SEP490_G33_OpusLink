@@ -13,6 +13,7 @@ using OpusLink.API.Hubs;
 using Microsoft.JSInterop;
 using OpusLink.Entity.DTO.JobDTO;
 using System.Text.Json;
+using Microsoft.AspNet.SignalR.Client.Http;
 
 namespace OpusLink.User.Hosted.Pages.Chat
 {
@@ -26,6 +27,7 @@ namespace OpusLink.User.Hosted.Pages.Chat
 		private readonly IHubContext<ChatHub> _hubContext;
 		public int userId { get; set; }
 		public string role { get; set; }
+		public ChatDTO chatDTO { get; set; }
 
 		public ChatListModel(IHubContext<ChatHub> hubContext)
 		{
@@ -61,7 +63,7 @@ namespace OpusLink.User.Hosted.Pages.Chat
 
 			}
 			response = await client.GetAsync("https://localhost:7265/api/Chat/GetMessageById");
-
+			chatDTO = new ChatDTO();
 
 			if (response.IsSuccessStatusCode)
 			{
@@ -74,8 +76,9 @@ namespace OpusLink.User.Hosted.Pages.Chat
 			}
 			return Page();
 		}
-		public async Task<IActionResult> OnGetMessageByIdAsync(int chatBoxId)
+		public async Task<IActionResult> OnGetMessageByIdAsync(int chatBoxId )
 		{
+
 			this.chatBoxId = chatBoxId;
 			HttpResponseMessage response = await client.GetAsync($"https://localhost:7265/api/Chat/GetMessageById/{chatBoxId}");
 
@@ -106,9 +109,23 @@ namespace OpusLink.User.Hosted.Pages.Chat
             {
 
             }
+
+			response = await client.GetAsync($"https://localhost:7265/api/Chat/GetChatBoxById/{chatBoxId}");
+
+
+            if (response.IsSuccessStatusCode)
+            {
+                string strData = await response.Content.ReadAsStringAsync();
+                chatDTO = JsonConvert.DeserializeObject<ChatDTO>(strData);
+            }
+            else
+            {
+
+            }
 			return Page();
 
         }
+
 		public async Task<IActionResult> OnGetAddChatBox(int EmployerId, int FreelancerId, int JobId)
 		{
 			var options = new JsonSerializerOptions
@@ -137,6 +154,34 @@ namespace OpusLink.User.Hosted.Pages.Chat
 			await _hubContext.Clients.Group(chatBoxId.ToString()).SendAsync("ReceiveMessage", user, messageContent);
 		}
 
+        private async Task LoadChatData(int userId, string role)
+        {
+            var response = await client.GetAsync($"https://localhost:7265/api/Chat/GetChatBoxByUserId/{userId}/{role}");
 
-	}
+            if (response.IsSuccessStatusCode)
+            {
+                var strData = await response.Content.ReadAsStringAsync();
+                ChatDTOs = JsonConvert.DeserializeObject<List<ChatDTO>>(strData);
+            }
+            else
+            {
+                // Handle error
+            }
+        }
+
+        private async Task LoadMessagesAsync(int chatBoxId)
+        {
+            var response = await client.GetAsync($"https://localhost:7265/api/Chat/GetMessageById/{chatBoxId}");
+
+            if (response.IsSuccessStatusCode)
+            {
+                var strData = await response.Content.ReadAsStringAsync();
+                MessageDTOs = JsonConvert.DeserializeObject<List<MessageDTO>>(strData);
+            }
+            else
+            {
+                // Handle error
+            }
+        }
+    }
 }

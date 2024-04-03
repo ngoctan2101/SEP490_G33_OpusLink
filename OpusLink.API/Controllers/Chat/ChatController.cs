@@ -105,6 +105,10 @@ namespace OpusLink.API.Controllers.Chat
 				// Broadcast the message to clients
 				_hubContext.Clients.All.SendAsync("ReceiveMessage", createdMessage);
 
+				// Gửi tin nhắn đến nhóm SignalR tương ứng với ChatBoxID
+				_hubContext.Clients.Group(createMessageDTO.ChatBoxID.ToString()).SendAsync("ReceiveMessage", 
+					createMessageDTO.FromEmployer, createMessageDTO.MessageContent);
+
 				return CreatedAtAction(nameof(GetMessageById), new { id = createdMessage.MessageID }, createdMessage);
 			}
 			catch (DbUpdateException ex)

@@ -32,7 +32,8 @@
                                 <tr>
                                     <td>@Model.his.TransactionCode</td>
                                     <td>@Model.his.TransactionDate</td>
-                                    <td>@Model.his.Amount</td>
+                                    <td>@((Model.his.Amount).ToString("#,###")) ₫</td>
+                                    
                                     @if(Model.his.TransactionType == 1){
                                         <td>Nạp tiền</td>
                                     }
