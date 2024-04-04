@@ -1,6 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OpusLink.Entity.DTO;
+using OpusLink.Entity.Models;
 using System.Net.Http.Headers;
 using System.Text.Json;
 
@@ -23,8 +24,13 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
             client.DefaultRequestHeaders.Accept.Add(contentType);
             ServiceMangaUrl = "https://localhost:7265/";
         }
-        public async Task OnGetAsync(int UserId)
+        public async Task<IActionResult> OnGetAsync(int UserId)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("/Account/Login");
+            }
+
             // call list
             HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/" + UserId);
             if (responseUser.IsSuccessStatusCode)
@@ -34,6 +40,7 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
                 { PropertyNameCaseInsensitive = true };
                 user = JsonSerializer.Deserialize<UserDTO>(responseBodyUser, optionUser);
             }
+            return Page();
         }
         private async Task<IList<SkillDTO>> GetAllSkillAsync()
         {

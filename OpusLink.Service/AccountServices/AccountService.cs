@@ -190,23 +190,6 @@ namespace OpusLink.Service.AccountServices
             try
             {
                 var userIdentity = await _userManager.FindByNameAsync(user.UserName);
-
-                if (userIdentity.Status == 0)
-                    if (userIdentity.EndBanDate > DateTime.Now)
-                    {
-                        return new ApiResponseModel
-                        {
-                            Code = 400,
-                            IsSuccess = false,
-                            Message = TotalMessage.LoginFailCuzBanUser + userIdentity.EndBanDate?.ToString("dd/MM/yyyy") + " .Vui lòng liên hệ với admin để được hỗ trợ. Liên hệ support@opuslink.com"
-                        };
-                    }
-                    else
-                    {
-                        userIdentity.Status = 1;
-                        await _userManager.UpdateAsync(userIdentity);
-                    }
-
                 if (userIdentity == null || !await _userManager.CheckPasswordAsync(userIdentity, user.Password))
                 {
                     return new ApiResponseModel
@@ -216,6 +199,25 @@ namespace OpusLink.Service.AccountServices
                         Message = TotalMessage.LoginError
                     };
                 }
+                else
+                {
+                    if (userIdentity.Status == 0)
+                        if (userIdentity.EndBanDate > DateTime.Now)
+                        {
+                            return new ApiResponseModel
+                            {
+                                Code = 400,
+                                IsSuccess = false,
+                                Message = TotalMessage.LoginFailCuzBanUser + userIdentity.EndBanDate?.ToString("dd/MM/yyyy") + " .Vui lòng liên hệ với admin để được hỗ trợ. Liên hệ support@opuslink.com"
+                            };
+                        }
+                        else
+                        {
+                            userIdentity.Status = 1;
+                            await _userManager.UpdateAsync(userIdentity);
+                        }
+                }
+
             }catch(Exception ex)
             {
                 return new ApiResponseModel
