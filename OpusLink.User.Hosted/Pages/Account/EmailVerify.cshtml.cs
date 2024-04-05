@@ -5,6 +5,7 @@ using OpusLink.Entity.DTO.AccountDTO.Common;
 using OpusLink.Entity.DTO.AccountDTO;
 using System.IdentityModel.Tokens.Jwt;
 using Newtonsoft.Json.Linq;
+using OpusLink.Shared.Constants;
 
 namespace OpusLink.User.Hosted.Pages.Account
 {
@@ -15,7 +16,7 @@ namespace OpusLink.User.Hosted.Pages.Account
         {
             Email = TempData["Email"] as string;
         }*/
-        string link = "https://localhost:7265/api/Account/confirmEmail?token=";
+        string link = UrlConstant.ApiBaseUrl + "/Account/confirmEmail?token=";
 
         public async Task<IActionResult> OnGetAsync(string token, string email)
         {

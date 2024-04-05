@@ -14,6 +14,7 @@ using Microsoft.JSInterop;
 using OpusLink.Entity.DTO.JobDTO;
 using System.Text.Json;
 using Microsoft.AspNet.SignalR.Client.Http;
+using OpusLink.Shared.Constants;
 
 namespace OpusLink.User.Hosted.Pages.Chat
 {
@@ -50,7 +51,7 @@ namespace OpusLink.User.Hosted.Pages.Chat
 			}
 
 
-			HttpResponseMessage response = await client.GetAsync($"https://localhost:7265/api/Chat/GetChatBoxByUserId/{userId}/{role}");
+			HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl+$"/Chat/GetChatBoxByUserId/{userId}/{role}");
 
 
 			if (response.IsSuccessStatusCode)
@@ -62,7 +63,7 @@ namespace OpusLink.User.Hosted.Pages.Chat
 			{
 
 			}
-			response = await client.GetAsync("https://localhost:7265/api/Chat/GetMessageById");
+			response = await client.GetAsync(UrlConstant.ApiBaseUrl+"/Chat/GetMessageById");
 			chatDTO = new ChatDTO();
 
 			if (response.IsSuccessStatusCode)
@@ -80,7 +81,7 @@ namespace OpusLink.User.Hosted.Pages.Chat
 		{
 
 			this.chatBoxId = chatBoxId;
-			HttpResponseMessage response = await client.GetAsync($"https://localhost:7265/api/Chat/GetMessageById/{chatBoxId}");
+			HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl+$"/Chat/GetMessageById/{chatBoxId}");
 
 			if (response.IsSuccessStatusCode)
 			{
@@ -97,7 +98,7 @@ namespace OpusLink.User.Hosted.Pages.Chat
                 userId = HttpContext.Session.GetInt32("UserId") ?? 0;
                 role = HttpContext.Session.GetString("Role");
             }
-            response = await client.GetAsync($"https://localhost:7265/api/Chat/GetChatBoxByUserId/{userId}/{role}");
+            response = await client.GetAsync(UrlConstant.ApiBaseUrl+$"/Chat/GetChatBoxByUserId/{userId}/{role}");
 
 
             if (response.IsSuccessStatusCode)
@@ -110,7 +111,7 @@ namespace OpusLink.User.Hosted.Pages.Chat
 
             }
 
-			response = await client.GetAsync($"https://localhost:7265/api/Chat/GetChatBoxById/{chatBoxId}");
+			response = await client.GetAsync(UrlConstant.ApiBaseUrl + $"/Chat/GetChatBoxById/{chatBoxId}");
 
 
             if (response.IsSuccessStatusCode)
@@ -134,7 +135,7 @@ namespace OpusLink.User.Hosted.Pages.Chat
 			};
 			string json = System.Text.Json.JsonSerializer.Serialize<CreateChatBoxDTO>(new CreateChatBoxDTO() { EmployerID = EmployerId, FreelancerID = FreelancerId, JobID = JobId }, options);
 			StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-			HttpResponseMessage response = await client.PostAsync("https://localhost:7265/api/Chat/CreateChatBox", httpContent);
+			HttpResponseMessage response = await client.PostAsync(UrlConstant.ApiBaseUrl+"/Chat/CreateChatBox", httpContent);
 
 			ChatDTO x = new ChatDTO();
 			if (response.IsSuccessStatusCode)
@@ -156,7 +157,7 @@ namespace OpusLink.User.Hosted.Pages.Chat
 
         private async Task LoadChatData(int userId, string role)
         {
-            var response = await client.GetAsync($"https://localhost:7265/api/Chat/GetChatBoxByUserId/{userId}/{role}");
+            var response = await client.GetAsync(UrlConstant.ApiBaseUrl + $"/Chat/GetChatBoxByUserId/{userId}/{role}");
 
             if (response.IsSuccessStatusCode)
             {
@@ -171,7 +172,7 @@ namespace OpusLink.User.Hosted.Pages.Chat
 
         private async Task LoadMessagesAsync(int chatBoxId)
         {
-            var response = await client.GetAsync($"https://localhost:7265/api/Chat/GetMessageById/{chatBoxId}");
+            var response = await client.GetAsync(UrlConstant.ApiBaseUrl + $"/Chat/GetMessageById/{chatBoxId}");
 
             if (response.IsSuccessStatusCode)
             {

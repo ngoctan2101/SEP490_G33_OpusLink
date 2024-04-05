@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.DTO.MSDTO;
+using OpusLink.Shared.Constants;
 using System.Globalization;
 using System.Net.Http.Headers;
 using System.Text.Json;
@@ -33,7 +34,7 @@ namespace OpusLink.User.Hosted.Pages.MS
         private async Task<GetJobDetailResponse> GetThisJob(int jobID)
         {
             //get the job
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7265/api/FMilestonesAPI/GetThisJob/" + jobID);
+            HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl+"/FMilestonesAPI/GetThisJob/" + jobID);
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
@@ -49,7 +50,7 @@ namespace OpusLink.User.Hosted.Pages.MS
         {
             JobID = jobID;
             //get all category
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7265/api/FMilestonesAPI/GetAllMilestone/" + jobID);
+            HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl+"/FMilestonesAPI/GetAllMilestone/" + jobID);
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
@@ -79,7 +80,7 @@ namespace OpusLink.User.Hosted.Pages.MS
             };
             string json = System.Text.Json.JsonSerializer.Serialize<AcceptPlanOrNot>(new AcceptPlanOrNot() { JobID = jobID, Accepted = false }, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync("https://localhost:7265/api/FMilestonesAPI/AcceptPlanOrNot", httpContent);
+            HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl+"/FMilestonesAPI/AcceptPlanOrNot", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToPage("/MS/FreelancerViewAllMS", new { jobID = jobID });
@@ -104,7 +105,7 @@ namespace OpusLink.User.Hosted.Pages.MS
             };
             string json = System.Text.Json.JsonSerializer.Serialize<AcceptPlanOrNot>(new AcceptPlanOrNot() { JobID = jobID, Accepted = true }, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync("https://localhost:7265/api/FMilestonesAPI/AcceptPlanOrNot", httpContent);
+            HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl+"/FMilestonesAPI/AcceptPlanOrNot", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToPage("/MS/FreelancerViewAllMS", new { jobID = jobID });
@@ -133,7 +134,7 @@ namespace OpusLink.User.Hosted.Pages.MS
             };
             string json = System.Text.Json.JsonSerializer.Serialize<RequestDoneAMilestone>(requestDoneAMilestone, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync("https://localhost:7265/api/FMilestonesAPI/DoneAMilestone", httpContent);
+            HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl+"/FMilestonesAPI/DoneAMilestone", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToPage("/MS/FreelancerViewAllMS", new { jobID = requestDoneAMilestone.JobId });

@@ -1,5 +1,6 @@
 ﻿@page "{id:int?}"
 @inject IHttpContextAccessor HttpContextAccessor;
+@using OpusLink.Shared.Constants
 @model OpusLink.User.Hosted.Pages.Freelancer.Profile.ViewsProfileOrtherModel
 @{
     int userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId") ?? 0;
@@ -364,7 +365,7 @@
             };
 
             $.ajax({
-                url: `https://localhost:7265/api/ReportAccount`,
+                url: @UrlConstant.ApiBaseUrl+`/ReportAccount`,
                 method: 'POST',
                 data: JSON.stringify(obj),
                 contentType: 'application/json',

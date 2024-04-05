@@ -10,6 +10,7 @@ using System.Security.Principal;
 using System.Text.Json;
 using System.Text;
 using OpusLink.Entity.Models;
+using OpusLink.Shared.Constants;
 
 namespace OpusLink.User.Hosted.Pages.VnPayment
 {
@@ -28,7 +29,7 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
             client = new HttpClient();
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
-            ServiceMangaUrl = "https://localhost:7265/";
+            ServiceMangaUrl = UrlConstant.ApiBaseUrl;
             //_httpContextAccessor = httpContextAccessor;
            
         }
@@ -83,7 +84,7 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
                 }
 
                 string url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
-                string returnUrl = "https://localhost:7131/VnPayment/Payment?opuslink=paymentconfirm";
+                string returnUrl = UrlConstant.UserClientBaseUrl+"/VnPayment/Payment?opuslink=paymentconfirm";
                 string tmnCode = "NVFQP1WS";
                 string hashSecret = "MPLXERAVPCPUNWPZSLRHRYYBKXYEAVXK";
                 PayLib pay = new PayLib();
@@ -175,7 +176,7 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
                             // update amount
                             var jsonProduct = System.Text.Json.JsonSerializer.Serialize(userId);
                             var content7 = new StringContent(jsonProduct, Encoding.UTF8, "application/json");
-                            await client.PutAsync(ServiceMangaUrl + $"api/User/UpdateAmount/{amountBack1/100}/{userId}", content7);
+                            await client.PutAsync(ServiceMangaUrl + $"/User/UpdateAmount/{amountBack1/100}/{userId}", content7);
 
                             // add to history
                             HistoryPaymentDTO his = new HistoryPaymentDTO();
@@ -194,7 +195,7 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
 
                             var hisroy = System.Text.Json.JsonSerializer.Serialize(his);
                             var content8 = new StringContent(hisroy, Encoding.UTF8, "application/json");
-                            HttpResponseMessage response = await client.PostAsync(ServiceMangaUrl + $"api/HistoryPayment/AddHistoryPayment", content8);
+                            HttpResponseMessage response = await client.PostAsync(ServiceMangaUrl + $"/HistoryPayment/AddHistoryPayment", content8);
                             int HisPayId = 0;
                             if (response.IsSuccessStatusCode)
                             {

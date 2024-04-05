@@ -1,5 +1,6 @@
 ﻿@page
 @model OpusLink.User.Hosted.Pages.Chat.ChatListModel
+@using OpusLink.Shared.Constants
 @using Microsoft.JSInterop
 @inject IHttpContextAccessor HttpContextAccessor;
 <script src="https://cdnjs.cloudflare.com/ajax/libs/library/version/library.min.js"></script>
@@ -386,7 +387,7 @@
 	function saveMessageToDatabase(chatBoxId, FromEmployer, messageContent) {
 		// Make an AJAX request to save the message to the database
 		$.ajax({
-			url: 'https://localhost:7265/api/Chat/CreateMessage',
+			url:  @UrlConstant.ApiBaseUrl+'/Chat/CreateMessage',
 			type: 'POST',
 			contentType: 'application/json',
 			data: JSON.stringify({

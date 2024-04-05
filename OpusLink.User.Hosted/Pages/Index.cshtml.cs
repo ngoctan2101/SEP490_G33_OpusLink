@@ -13,14 +13,15 @@ using System.Security.Cryptography;
 using System.Text;
 using System.Text.Json;
 using System.Text.RegularExpressions;
+using OpusLink.Shared.Constants;
 
 namespace OpusLink.User.Hosted.Pages
 {
     public class IndexModel : PageModel
     {
         // ----LINK API----
-        string linkUpdateRole = "https://localhost:7265/api/Account/update-role";
-        string linkLogOut = "https://localhost:7265/api/Account/logout";
+        string linkUpdateRole = UrlConstant.ApiBaseUrl+"/Account/update-role";
+        string linkLogOut = UrlConstant.ApiBaseUrl+"/Account/logout";
         private readonly HttpClient client = null;
         private string ServiceMangaUrl = "";
         public IndexModel()
@@ -28,7 +29,7 @@ namespace OpusLink.User.Hosted.Pages
             client = new HttpClient();
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
-            ServiceMangaUrl = "https://localhost:7265/";
+            ServiceMangaUrl = UrlConstant.ApiBaseUrl;
             //_validationService = validateService;
         }
 
@@ -44,7 +45,7 @@ namespace OpusLink.User.Hosted.Pages
                 return RedirectToPage("/JOB/FreelancerViewAllJobPage");
             }
         }
-        string link = "https://localhost:7265/api/Account/update-role";
+        string link = UrlConstant.ApiBaseUrl+"/Account/update-role";
        
 
         public async Task<IActionResult> OnPostChangeTokenAboutRole()
@@ -133,7 +134,7 @@ namespace OpusLink.User.Hosted.Pages
 
             var content = new StringContent(jsonRequestBody, Encoding.UTF8, "application/json");
 
-            var response = await client.PutAsync(ServiceMangaUrl + $"api/Notification/UpdateNotificationReader/{notiId}", content);
+            var response = await client.PutAsync(ServiceMangaUrl + $"/Notification/UpdateNotificationReader/{notiId}", content);
            
             return CreateRedirectToPage(link);
 

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.Models;
+using OpusLink.Shared.Constants;
 using System.Globalization;
 using System.Net.Http.Headers;
 using System.Text.Json;
@@ -38,14 +39,14 @@ namespace OpusLink.User.Hosted.Pages.JOB
             //HttpContext.Session.SetInt32("UserId", 201); 
             //int userId = 201;
 
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7265/api/Job5API/GetJobDetail/" + JobId);
+            HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl+"/Job5API/GetJobDetail/" + JobId);
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
                 job = JsonConvert.DeserializeObject<GetJobDetailResponse>(strData);
             }
             //get list offers for job
-            response = await client.GetAsync("https://localhost:7265/api/Offer3API/GetAllOfferOfJob/" + JobId);
+            response = await client.GetAsync(UrlConstant.ApiBaseUrl + "/Offer3API/GetAllOfferOfJob/" + JobId);
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
@@ -54,14 +55,14 @@ namespace OpusLink.User.Hosted.Pages.JOB
             }
             isOffered = false;
             //is offered or not
-            response = await client.GetAsync("https://localhost:7265/api/Offer3API/IsOffered/" + JobId + "/" + userId);
+            response = await client.GetAsync(UrlConstant.ApiBaseUrl + "/Offer3API/IsOffered/" + JobId + "/" + userId);
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
                 if (strData.Equals("true"))
                 {
                     isOffered = true;
-                    response = await client.GetAsync("https://localhost:7265/api/Offer3API/GetOffer/" + JobId + "/" + userId);
+                    response = await client.GetAsync(UrlConstant.ApiBaseUrl + "/Offer3API/GetOffer/" + JobId + "/" + userId);
                     if (response.IsSuccessStatusCode)
                     {
                         strData = await response.Content.ReadAsStringAsync();
@@ -126,7 +127,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
             };
             string json = System.Text.Json.JsonSerializer.Serialize<CreateUpdateOfferRequest>(createUpdateOfferRequest, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync("https://localhost:7265/api/Offer3API/CreateOffer", httpContent);
+            HttpResponseMessage response = await client.PostAsync(UrlConstant.ApiBaseUrl+"/Offer3API/CreateOffer", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 //message "Your job is requested" green
@@ -184,7 +185,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
             };
             string json = System.Text.Json.JsonSerializer.Serialize<CreateUpdateOfferRequest>(createUpdateOfferRequest, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync("https://localhost:7265/api/Offer3API/UpdateOffer", httpContent);
+            HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl+"/Offer3API/UpdateOffer", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 //message "Your job is requested" green

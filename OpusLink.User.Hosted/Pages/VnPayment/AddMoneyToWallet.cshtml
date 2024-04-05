@@ -1,5 +1,6 @@
 ﻿@page
 @using System.Net.Http.Headers
+@using OpusLink.Shared.Constants
 @using System.Text.Json
 @using Microsoft.AspNetCore.Http
 @model OpusLink.User.Hosted.Pages.VnPayment.AddMoneyToWalletModel
@@ -9,7 +10,7 @@
     var _client = new HttpClient();
     var contentType = new MediaTypeWithQualityHeaderValue("application/json");
     _client.DefaultRequestHeaders.Accept.Add(contentType);
-    var ApiUri = $"https://localhost:7265/api/";
+    var ApiUri = @UrlConstant.ApiBaseUrl;
     var option = new JsonSerializerOptions
             {
                 PropertyNameCaseInsensitive = true,

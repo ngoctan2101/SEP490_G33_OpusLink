@@ -613,7 +613,16 @@
                     }
                     else if (item.Status == (int)MilestoneStatusEnum.EmployerCreated)
                     {
+                        if (item.Deadline < DateTime.Now)
+                        {
+                            <p class="status" style="background-color:#CF2A27;">Muộn</p>
+                        }
+                        else
+                        {
                         <p class="status" style="background-color:#9E9E9E;">Mới tạo</p>
+                            
+                        }
+                    
                     }
                     else if (item.Status == (int)MilestoneStatusEnum.MoneyPutted)
                     {

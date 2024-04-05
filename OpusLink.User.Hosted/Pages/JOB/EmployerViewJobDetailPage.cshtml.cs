@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.DTO.MSDTO;
 using OpusLink.Entity.Models;
+using OpusLink.Shared.Constants;
 using System.Net.Http.Headers;
 using System.Text.Json;
 using System.Text.RegularExpressions;
@@ -23,14 +24,14 @@ namespace OpusLink.User.Hosted.Pages.JOB
         }
         public async Task OnGetAsync(int JobId)
         {
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7265/api/Job15API/GetJobDetail/" + JobId);
+            HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl+"/Job15API/GetJobDetail/" + JobId);
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
                 job = JsonConvert.DeserializeObject<GetJobDetailResponse>(strData);
             }
             //get list offers for job
-            response = await client.GetAsync("https://localhost:7265/api/Offer3API/GetAllOfferOfJob/" + JobId);
+            response = await client.GetAsync(UrlConstant.ApiBaseUrl+"/Offer3API/GetAllOfferOfJob/" + JobId);
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
@@ -61,7 +62,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
             };
             string json = System.Text.Json.JsonSerializer.Serialize<HireFreelancerForJobRequest>(hireFreelancerForJobRequest, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync("https://localhost:7265/api/HireFreelancerForJob/HireFreelancerForJob", httpContent);
+            HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl+"/HireFreelancerForJob/HireFreelancerForJob", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToPage("/JOB/EmployerViewJobDetailPage", new { JobId = hireFreelancerForJobRequest.JobId });
@@ -91,7 +92,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
             };
             string json = System.Text.Json.JsonSerializer.Serialize<HireFreelancerForJobRequest>(hireFreelancerForJobRequest, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync("https://localhost:7265/api/HireFreelancerForJob/CancelHireFreelancerForJob", httpContent);
+            HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl+"/HireFreelancerForJob/CancelHireFreelancerForJob", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToPage("/JOB/EmployerViewJobDetailPage", new { JobId = hireFreelancerForJobRequest.JobId });

@@ -8,6 +8,8 @@ namespace OpusLink.Shared.Constants
 {
     public class UrlConstant
     {
-        public const string ApiBaseUrl = "https://localhost:7277";
+        //public const string ApiBaseUrl = "https://localhost:7277";
+        public const string ApiBaseUrl = "https://localhost:7265/api";
+        public const string UserClientBaseUrl = "https://localhost:7131";
     }
 }

@@ -5,6 +5,7 @@ using OpusLink.Entity.DTO.AccountDTO.Common;
 using OpusLink.Entity.DTO.AccountDTO;
 using System.IdentityModel.Tokens.Jwt;
 using OpusLink.Entity.Models;
+using OpusLink.Shared.Constants;
 
 namespace OpusLink.User.Hosted.Pages.Account
 {
@@ -14,7 +15,7 @@ namespace OpusLink.User.Hosted.Pages.Account
         public string Password { get; set; }
         public LoginModel() { }
 
-        string link = "https://localhost:7265/api/Account/Login";
+        string link = UrlConstant.ApiBaseUrl+"/Account/Login";
         public void OnGet() {}
 
         public async Task<IActionResult> OnPostAsync(string username, string password)

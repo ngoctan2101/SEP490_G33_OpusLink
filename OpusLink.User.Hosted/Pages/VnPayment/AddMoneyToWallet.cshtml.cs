@@ -12,6 +12,7 @@ using System.Security.Principal;
 using System.Text.Json;
 using System.Text;
 using Microsoft.AspNetCore.Http;
+using OpusLink.Shared.Constants;
 
 namespace OpusLink.User.Hosted.Pages.VnPayment
 {
@@ -36,7 +37,7 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
             client = new HttpClient();
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
-            ServiceMangaUrl = "https://localhost:7265/";
+            ServiceMangaUrl = UrlConstant.ApiBaseUrl;
             //_validationService = validateService;
         }
 
@@ -59,7 +60,7 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
             //    var strData = await response.Content.ReadAsStringAsync();
             //    orderDetails = System.Text.Json.JsonSerializer.Deserialize<List<OrderDetail>>(strData, option);
 
-            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/" + UserId);
+            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "/User/GetUserById/" + UserId);
             if (responseUser.IsSuccessStatusCode)
             {
                 string responseBodyUser = await responseUser.Content.ReadAsStringAsync();

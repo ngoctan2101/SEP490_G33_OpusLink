@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.AccountDTO;
 using OpusLink.Entity.DTO.AccountDTO.Common;
+using OpusLink.Shared.Constants;
 using System.IdentityModel.Tokens.Jwt;
 
 namespace OpusLink.User.Hosted.Pages.Account
@@ -12,7 +13,7 @@ namespace OpusLink.User.Hosted.Pages.Account
         public string Password { get; set; }
         public ResetPasswordModel() { }
 
-        string link = "https://localhost:7265/api/Account/resetPassword";
+        string link = UrlConstant.ApiBaseUrl+"/Account/resetPassword";
 
         public async Task<IActionResult> OnGetAsync(string token, string email)
         {

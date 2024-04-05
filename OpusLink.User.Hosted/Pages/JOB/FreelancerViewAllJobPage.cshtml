@@ -3,6 +3,7 @@
 @using OpusLink.Entity.DTO.JobDTO;
 @using OpusLink.Entity.Models;
 @using OpusLink.Shared.Enums;
+@using OpusLink.Shared.Constants
 @model OpusLink.User.Hosted.Pages.JOB.FreelancerViewAllJobPageModel
 @{
 }
@@ -320,7 +321,7 @@
 <script>
     function displayAllChild(categoryID) {
         $.ajax({
-            url: "https://localhost:7265/api/Job3API/GetAllChildCategory?parentId=" + categoryID,
+            url: @UrlConstant.ApiBaseUrl+"/Job3API/GetAllChildCategory?parentId=" + categoryID,
             type: "get",
             contentType: "application/json",
             success: function (result, status, xhr) {
@@ -353,7 +354,7 @@
     }
     function SaveJob(JobId, FreelancerId) {
         $.ajax({
-            url: "https://localhost:7265/api/Job7API/AddSaveJob",
+            url: @UrlConstant.ApiBaseUrl+"/Job7API/AddSaveJob",
             type: "post",
             contentType: "application/json",
             data: JSON.stringify({ JobID: JobId, FreelancerID: FreelancerId }),

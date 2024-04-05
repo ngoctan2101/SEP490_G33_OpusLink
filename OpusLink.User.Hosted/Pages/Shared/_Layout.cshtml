@@ -1,5 +1,6 @@
 ﻿@inject IHttpContextAccessor HttpContextAccessor;
 @using OpusLink.Shared.Enums;
+@using OpusLink.Shared.Constants
 @{
     string currentRole = HttpContextAccessor.HttpContext.Session.GetString("Role") ?? "Guest";
     int? userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId") ?? null;
@@ -226,7 +227,7 @@
         }
         function LoadUserInformation() {
             $.ajax({
-                url: "https://localhost:7265/api/User/GetUserById/"+@userId+"",
+                url: @UrlConstant.ApiBaseUrl+"/User/GetUserById/" + @userId+"",
                 type: "GET",
                 contentType: "application/json",
                 success: function (result, status, xhr) {
@@ -243,7 +244,7 @@
                     }
                 });
             $.ajax({
-                url: "https://localhost:7265/api/Notification/CountNotificationNew/" + @userId+"",
+                url: @UrlConstant.ApiBaseUrl+"/Notification/CountNotificationNew/" + @userId+"",
                 type: "GET",
                 contentType: "application/json",
                 success: function (result, status, xhr) {
@@ -260,12 +261,12 @@
             });
 
             $.ajax({
-                url: "https://localhost:7265/api/Notification/Get5NotificationNew/"+@userId+"",
+                url: @UrlConstant.ApiBaseUrl+"/Notification/Get5NotificationNew/" + @userId+"",
                 type: "GET",
                 contentType: "application/json",
                 success: function (result, status, xhr) {
                     var fivecodeline = "";
-                    var domain = "https://localhost:7131/Index?handler=ForNotificationDetail&link=";
+                    var domain = @UrlConstant.UserClientBaseUrl+"/Index?handler=ForNotificationDetail&link=";
                     $.each(result, function (index, value) {
                         if (value["isReaded"] == true) {
                             fivecodeline += "<li class=\"dropdown-item\"><a style=\"color\:#B0B8B3\" href=\"" + domain + encodeURIComponent(value["link"]) + "&notiId=" + value["notificationID"] + "\">" + value["notificationContent"] + "</a></li>";

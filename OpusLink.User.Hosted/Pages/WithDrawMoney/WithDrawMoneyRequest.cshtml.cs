@@ -12,6 +12,7 @@ using OpusLink.Entity.DTO.WithdrawRequestDTO;
 using Microsoft.Extensions.Options;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.DTO.AccountDTO;
+using OpusLink.Shared.Constants;
 
 namespace OpusLink.User.Hosted.Pages.WithDrawMoney
 {
@@ -32,7 +33,7 @@ namespace OpusLink.User.Hosted.Pages.WithDrawMoney
             client = new HttpClient();
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
-            ServiceMangaUrl = "https://localhost:7265/";
+            ServiceMangaUrl = UrlConstant.ApiBaseUrl;
             //_httpContextAccessor = httpContextAccessor;
 
         }
@@ -40,7 +41,7 @@ namespace OpusLink.User.Hosted.Pages.WithDrawMoney
         {
             
 
-            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/" + UserId);
+            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "/User/GetUserById/" + UserId);
             if (responseUser.IsSuccessStatusCode)
             {
                 string responseBodyUser = await responseUser.Content.ReadAsStringAsync();
@@ -91,7 +92,7 @@ namespace OpusLink.User.Hosted.Pages.WithDrawMoney
                     userid = Convert.ToInt32(collection[key].ToString());
                 }
             }
-            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/" + userid);
+            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "/User/GetUserById/" + userid);
             if (responseUser.IsSuccessStatusCode)
             {
                 string responseBodyUser = await responseUser.Content.ReadAsStringAsync();
@@ -128,7 +129,7 @@ namespace OpusLink.User.Hosted.Pages.WithDrawMoney
 
             var withdraw = System.Text.Json.JsonSerializer.Serialize(wdr);
             var content8 = new StringContent(withdraw, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync(ServiceMangaUrl + $"api/WithDrawRequest/AddWithdrawRequest", content8);
+            HttpResponseMessage response = await client.PostAsync(ServiceMangaUrl + $"/WithDrawRequest/AddWithdrawRequest", content8);
 
             BankAccDTO us = new BankAccDTO();
             us.UserId = userid;
@@ -143,7 +144,7 @@ namespace OpusLink.User.Hosted.Pages.WithDrawMoney
 
             string json12 = System.Text.Json.JsonSerializer.Serialize<BankAccDTO>(us, options);
             StringContent httpContent23 = new StringContent(json12, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response12 = await client.PutAsync(ServiceMangaUrl + "api/User/UpdateBankAccountUser", httpContent23);
+            HttpResponseMessage response12 = await client.PutAsync(ServiceMangaUrl + "/User/UpdateBankAccountUser", httpContent23);
             if (response.IsSuccessStatusCode)
             {
                 //message "User Edited" green

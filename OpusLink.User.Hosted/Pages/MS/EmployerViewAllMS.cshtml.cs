@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.DTO.MSDTO;
 using OpusLink.Entity.Models;
+using OpusLink.Shared.Constants;
 using OpusLink.Shared.Enums;
 using System.Globalization;
 using System.Net.Http.Headers;
@@ -34,7 +35,7 @@ namespace OpusLink.User.Hosted.Pages.MS
         private async Task<GetJobDetailResponse> GetThisJob(int jobID)
         {
             //get the job
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7265/api/EMilestonesAPI/GetThisJob/" + jobID);
+            HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl+"/EMilestonesAPI/GetThisJob/" + jobID);
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
@@ -50,7 +51,7 @@ namespace OpusLink.User.Hosted.Pages.MS
         {
             JobID = jobID;
             //get all category
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7265/api/EMilestonesAPI/GetAllMilestone/" + jobID);
+            HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl + "/EMilestonesAPI/GetAllMilestone/" + jobID);
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
@@ -96,7 +97,7 @@ namespace OpusLink.User.Hosted.Pages.MS
             };
             string json = System.Text.Json.JsonSerializer.Serialize<CreateMilestoneRequest>(createMilestoneRequest, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync("https://localhost:7265/api/EMilestonesAPI/AddMilestone", httpContent);
+            HttpResponseMessage response = await client.PostAsync(UrlConstant.ApiBaseUrl + "/EMilestonesAPI/AddMilestone", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToPage("/MS/EmployerViewAllMS", new { jobID = createMilestoneRequest.JobID });
@@ -141,7 +142,7 @@ namespace OpusLink.User.Hosted.Pages.MS
             };
             string json = System.Text.Json.JsonSerializer.Serialize<CreateMilestoneRequest>(createMilestoneRequest, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync("https://localhost:7265/api/EMilestonesAPI/UpdateMilestone", httpContent);
+            HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl+"/EMilestonesAPI/UpdateMilestone", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToPage("/MS/EmployerViewAllMS", new { jobID = createMilestoneRequest.JobID });
@@ -169,7 +170,7 @@ namespace OpusLink.User.Hosted.Pages.MS
             {
                 PropertyNameCaseInsensitive = false,
             };
-            HttpResponseMessage response = await client.DeleteAsync("https://localhost:7265/api/EMilestonesAPI/DeleteMilestone/" + idOfMilestone);
+            HttpResponseMessage response = await client.DeleteAsync(UrlConstant.ApiBaseUrl+"/EMilestonesAPI/DeleteMilestone/" + idOfMilestone);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToPage("/MS/EmployerViewAllMS", new { jobID = idOfJob });
@@ -201,7 +202,7 @@ namespace OpusLink.User.Hosted.Pages.MS
             };
             string json = System.Text.Json.JsonSerializer.Serialize<RequestFreelancerAcceptPlan>(requestFreelancerAcceptPlan, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync("https://localhost:7265/api/EMilestonesAPI/RequestFreelancerAcceptPlan", httpContent);
+            HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl + "/EMilestonesAPI/RequestFreelancerAcceptPlan", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToPage("/MS/EmployerViewAllMS", new { jobID = requestFreelancerAcceptPlan.JobID });
@@ -230,7 +231,7 @@ namespace OpusLink.User.Hosted.Pages.MS
             };
             string json = System.Text.Json.JsonSerializer.Serialize<RequestPutMoney>(requestPutMoney, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync("https://localhost:7265/api/EMilestonesAPI/RequestPutMoney", httpContent);
+            HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl + "/EMilestonesAPI/RequestPutMoney", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToPage("/MS/EmployerViewAllMS", new { jobID = requestPutMoney.JobId });
@@ -259,7 +260,7 @@ namespace OpusLink.User.Hosted.Pages.MS
             };
             string json = System.Text.Json.JsonSerializer.Serialize<RequestGetBackMoney>(requestGetBackMoney, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync("https://localhost:7265/api/EMilestonesAPI/RequestGetBackMoney", httpContent);
+            HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl + "/EMilestonesAPI/RequestGetBackMoney", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToPage("/MS/EmployerViewAllMS", new { jobID = requestGetBackMoney.JobId });
@@ -289,7 +290,7 @@ namespace OpusLink.User.Hosted.Pages.MS
             };
             string json = System.Text.Json.JsonSerializer.Serialize<RequestChangeStatus>(requestChangeStatus, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync("https://localhost:7265/api/EMilestonesAPI/RequestChangeStatus", httpContent);
+            HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl + "/EMilestonesAPI/RequestChangeStatus", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToPage("/MS/EmployerViewAllMS", new { jobID = requestChangeStatus.JobId });
@@ -319,7 +320,7 @@ namespace OpusLink.User.Hosted.Pages.MS
             };
             string json = System.Text.Json.JsonSerializer.Serialize<RequestChangeStatus>(requestChangeStatus, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync("https://localhost:7265/api/EMilestonesAPI/RequestChangeStatus", httpContent);
+            HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl + "/EMilestonesAPI/RequestChangeStatus", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToPage("/MS/EmployerViewAllMS", new { jobID = requestChangeStatus.JobId });
@@ -352,7 +353,7 @@ namespace OpusLink.User.Hosted.Pages.MS
             };
             string json = System.Text.Json.JsonSerializer.Serialize<RequestExtendDeadline>(requestExtendDeadline, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync("https://localhost:7265/api/EMilestonesAPI/RequestExtendDeadline", httpContent);
+            HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl + "/EMilestonesAPI/RequestExtendDeadline", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToPage("/MS/EmployerViewAllMS", new { jobID = requestExtendDeadline.JobId });
@@ -382,7 +383,7 @@ namespace OpusLink.User.Hosted.Pages.MS
             };
             string json = System.Text.Json.JsonSerializer.Serialize<RequestChangeStatus>(requestChangeStatus, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync("https://localhost:7265/api/EMilestonesAPI/RequestChangeStatus", httpContent);
+            HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl + "/EMilestonesAPI/RequestChangeStatus", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToPage("/MS/EmployerViewAllMS", new { jobID = requestChangeStatus.JobId });
@@ -411,7 +412,7 @@ namespace OpusLink.User.Hosted.Pages.MS
             };
             string json = System.Text.Json.JsonSerializer.Serialize<RequestFailJob>(requestFailJob, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync("https://localhost:7265/api/EMilestonesAPI/RequestFailJob", httpContent);
+            HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl + "/EMilestonesAPI/RequestFailJob", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToPage("/MS/EmployerViewAllMS", new { jobID = requestFailJob.JobId });
@@ -442,7 +443,7 @@ namespace OpusLink.User.Hosted.Pages.MS
             };
             string json = System.Text.Json.JsonSerializer.Serialize<RequestChangeStatus>(requestChangeStatus, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync("https://localhost:7265/api/EMilestonesAPI/RequestChangeStatus", httpContent);
+            HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl + "/EMilestonesAPI/RequestChangeStatus", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToPage("/MS/EmployerViewAllMS", new { jobID = requestChangeStatus.JobId });

@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.Models;
+using OpusLink.Shared.Constants;
 using System.Globalization;
 using System.Net.Http.Headers;
 using System.Text.Json;
@@ -84,7 +85,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
             };
             string json = System.Text.Json.JsonSerializer.Serialize<CreateJobRequest>(Job, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync("https://localhost:7265/api/Job10API/CreateJob", httpContent);
+            HttpResponseMessage response = await client.PostAsync(UrlConstant.ApiBaseUrl+"/Job10API/CreateJob", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 //message "Your job is requested" green
@@ -96,7 +97,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
         private async Task<IList<GetCategoryResponse>> GetAllCategoryAsync()
         {
             //get all category
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7265/api/Job10API/GetAllCategory");
+            HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl+"/Job10API/GetAllCategory");
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
@@ -110,7 +111,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
         private async Task<IList<GetLocationResponse>> GetAllLocationAsync()
         {
             //get all location
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7265/api/Job10API/GetAllLocation");
+            HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl+"/Job10API/GetAllLocation");
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
