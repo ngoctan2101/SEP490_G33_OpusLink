@@ -115,27 +115,11 @@
                     <br />
                     <div id="rateSection">
                         <h5>Rating:</h5>
-                        <div id="starRating" onclick="rate()">
-                            <span class="star" id="star1">&#9733;</span>
-                            <span class="star" id="star2">&#9733;</span>
-                            <span class="star" id="star3">&#9733;</span>
-                            <span class="star" id="star4">&#9733;</span>
-                            <span class="star" id="star5">&#9733;</span>
-                        </div>
-                        <p id="averageRating">Average Rating: N/A</p>
+                        
+                        <p id="averageRating"></p>
                     </div>
                     <!-- Feedback Display Area -->
                     <div id="feedbackSection">
-                        <h4>
-                            Feedback from Others
-                            <button type="button" class="btn btn-info" onclick="redirectToFeedback()">See more</button>
-                        </h4>
-                        <div class="comment">Comment 1: This is a great form! (Rating: 5)</div>
-                        <div class="comment">Comment 2: Excellent user interface! (Rating: 4)</div>
-                        <div class="comment">Comment 3: This is a great form! (Rating: 5)</div>
-                        <div class="comment">Comment 4: Excellent user interface! (Rating: 4)</div>
-                        <div class="comment">Comment 5: This is a great form! (Rating: 5)</div>
-                        <div class="comment">Comment 6: Excellent user interface! (Rating: 4)</div>
                     </div>
                 </div>
             </div>
@@ -382,4 +366,58 @@
             $("#myModal").css("display", "none");
         });
     });
+</script>
+<script>
+    // Function to fetch and display feedback information
+    function displayAverageStar() {
+        var EmployerId = @Model.user.Id; // Assuming EmployerId is an integer
+        fetch(`https://localhost:7265/api/Feedback/AverageStars/${EmployerId}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('averageRating').innerHTML = `
+                                    <p> ${data.averageStars}⭐(${data.numberOfEntries} Lượt đánh giá)</p>
+                        `;
+            })
+            .catch(error => {
+                console.error('Error fetching feedback information:', error);
+            });
+    }
+
+    // Call the function to display feedback information when the page loads
+    displayAverageStar();
+</script>
+<script>
+    function displayFeedbacks() {
+        var userId = @Model.user.Id; // Assuming userId is an integer
+        fetch(`https://localhost:7265/api/Feedback/GetFeedbacksByTargetUser/${userId}`)
+            .then(response => response.json())
+            .then(data => {
+                var feedbackSection = document.getElementById('feedbackSection');
+                feedbackSection.innerHTML = ''; // Clear previous content
+
+                if (data.length > 0) {
+                    var commentsToDisplay = data.slice(0, 10); // Chỉ lấy 10 comment đầu tiên
+                    commentsToDisplay.forEach(feedback => {
+                        var commentDiv = document.createElement('div');
+                        commentDiv.className = 'comment';
+                        // Check if comment is too long, limit to a certain number of characters
+                        var commentContent = feedback.content.length > 65 ? feedback.content.substring(0, 65) + "..." : feedback.content;
+                        commentDiv.innerHTML = `Comment: ${commentContent} (Rating: ${feedback.star}⭐)`;
+                        feedbackSection.appendChild(commentDiv);
+                    });
+                } else {
+                    var noFeedbackDiv = document.createElement('div');
+                    noFeedbackDiv.className = 'no-feedback';
+                    noFeedbackDiv.innerText = 'No feedback available.';
+                    feedbackSection.appendChild(noFeedbackDiv);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching feedbacks:', error);
+            });
+    }
+
+    // Call the function to display feedbacks when the page loads
+    displayFeedbacks();
+
 </script>
