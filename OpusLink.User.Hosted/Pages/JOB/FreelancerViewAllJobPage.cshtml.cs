@@ -21,7 +21,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
         public Filter filter { get; set; }
         public int NumberOfPage { get; set; }
         public int PageNo { get; set; }
-
+        public bool isCount { get; set; }
 
         public FreelancerViewAllJobPageModel()
         {
@@ -72,6 +72,14 @@ namespace OpusLink.User.Hosted.Pages.JOB
             if (HttpContext.Session.GetInt32("UserId") != null)
             {
                 AllSavedJobId = await GetListSavedJobId(HttpContext.Session.GetInt32("UserId")??0);
+            }
+            isCount = false;
+            foreach (var j in Jobs) {
+                if(j.Status==(int)JobStatusEnum.Hiring && j.EndHiringDate >= DateTime.Now)
+                {
+                    isCount = true;
+                    break;
+                }
             }
         }
 

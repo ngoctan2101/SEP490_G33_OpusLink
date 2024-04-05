@@ -22,6 +22,16 @@
             cursor: pointer;
         }
 
+    .hireButton{
+        width:100px; 
+        background-color: #DDCB37;
+        color:white;
+        font-weight:bold;
+        font-size:18px;
+        height:30px;
+        bottom:0px;
+        margin-top:20px
+    }
     .status {
         font-weight: bold;
         color: white;
@@ -110,7 +120,7 @@
                     <tr><td>Budget:</td><td>@Math.Round(item.BudgetMin,0).ToString("#,##") ₫<span style="display:inline-block"> - </span>@Math.Round(item.BudgetMax,0).ToString("#,##") ₫</td></tr>
                     <tr><td>Location:</td><td>@item.Location</td></tr>
                 </table>
-                @*<button type="button" style="margin-top:15px;width:80%;background-color:#4A86E8;color:white;font-weight:bold;font-size:20px;border:none">View offers (@item.TotalOffer)</button>*@
+                <a asp-page="../MS/EmployerViewAllMS" asp-route-jobID="@item.JobId" class="link" >View milestones </a>
             </div>
             <div class="col-md-9">
                 <div>
@@ -134,9 +144,13 @@
                     {
                         <p class="status" style="background-color:#0068AD;margin:0px;padding:0px 4px 0px 4px">Hired</p>
                     }
-                    else if (item.Status == (int)JobStatusEnum.Close)
+                    else if (item.Status == (int)JobStatusEnum.Completed)
                     {
                         <p class="status" style="background-color:#FF6D00;margin:0px;padding:0px 4px 0px 4px">Closed</p>
+                    }
+                    else if (item.Status == (int)JobStatusEnum.Failed)
+                    {
+                        <p class="status" style="background-color:#FF6D00;margin:0px;padding:0px 4px 0px 4px">Failed</p>
                     }
                 </div>
                 <div class="row">
@@ -233,12 +247,31 @@
                         <p>Job Done: @a.NumberOfJobDone</p>
                         <button type="button">Message</button>
                     </div>
-                    <div class="col-md-9" style="border-left:2px solid #BEBEBE">
-                        <p>@a.DateOffer.ToString("dd/MM/yyyy")</p>
+                    <div class="col-md-7" style="border-left:2px solid #BEBEBE; padding-top:10px">
+                        <p>@a.DateOffer.ToString("dd/MM/yyyy HH:mm")</p>
                         <p><span style="font-weight:normal;color:#BEBEBE">Trả giá   </span><span style="font-size:20px">@(((int)a.ProposedCost).ToString("#,##")) ₫</span></p>
                         <p><span style="font-weight:normal;color:#BEBEBE">Số ngày dự kiến   </span> <span style="font-size:20px">@a.ExpectedDays ngày</span></p>
                         <p style="white-space:pre-line"><span style="font-weight:bold">Tự giới thiệu:</span><br> @a.SelfIntroduction</p>
                         <p style="white-space:pre-line"><span style="font-weight:bold">Kế hoạch dự tính:</span><br> @a.EstimatedPlan</p>
+                    </div>
+                    <div class="col-md-2">
+                        <form method="post">
+                            <input type="text" hidden name="JobID" value="@item.JobId"/>
+                            <input type="text" hidden name="FreelancerID" value="@a.FreelancerID"/>
+                            @if(item.FreelancerId!=null && item.FreelancerId == a.FreelancerID)
+                            {
+                                <button type="submit" class="hireButton" style="background-color:#7E2100" asp-page-handler="ForCancelHire">Cancel hire</button>
+                            }
+                            else if (item.FreelancerId != null && item.FreelancerId != a.FreelancerID)
+                            {
+                                <button type="button" class="hireButton" style="background-color:#D4D4D4" disabled>Hire</button>
+                            }
+                            else
+                            {
+                                <button type="submit" class="hireButton" asp-page-handler="ForHire">Hire</button>
+                            }
+                            
+                        </form>
                     </div>
                 </div>
             }
@@ -280,7 +313,7 @@
         }, 1000);
     }
 
-    var x = new Date(@(Model.job.EndHiringDate.ToString("yyyy-MM-ddTHH:mm:ss")));
+    var x = new Date("@(Model.job.EndHiringDate.ToString("yyyy-MM-ddTHH:mm:ss"))");
     startCountdown(x, "countdown_" + @Model.job.JobId);
 </script>
 <script>

@@ -9,9 +9,10 @@ namespace OpusLink.Shared.Enums
 
     public enum MilestoneStatusEnum
     {
-        Created = 1,
-        MoneyPuted = 2,
-        FreelancerAccepted = 3,
-        Completed = 4
+        EmployerCreated = 1,
+        MoneyPutted = 2,
+        EmployerRejected = 3,
+        Completed = 4,
+        Failed=5
     }
 }

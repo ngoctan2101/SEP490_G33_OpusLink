@@ -15,8 +15,9 @@ namespace OpusLink.Entity.Models
         public DateTime Deadline { get; set; }
         public decimal AmountToPay { get; set; }
         public int Status { get; set; }
-        public DateTime DateEdited { get; set; }
-        public DateTime DateCreated { get; set; }
+        //public DateTime DateEdited { get; set; }
+        //public DateTime DateCreated { get; set; }
+        public bool IsFreelancerDone { get; set; }
 
         public virtual Job? Job { get; set; }
     }

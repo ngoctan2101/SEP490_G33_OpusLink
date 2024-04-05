@@ -1,0 +1,335 @@
+﻿@page
+@using OpusLink.Shared.Enums;
+@model OpusLink.User.Hosted.Pages.MS.FreelancerViewAllMSModel
+@{
+    int soThuTu = 1;
+}
+<style>
+    .circle {
+        width: 50px;
+        height: 50px;
+        border-radius: 50%;
+        border: 2px solid black;
+        background-color: inherit;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+        font-size: 30px;
+    }
+
+    .status {
+        font-weight: bold;
+        color: white;
+        display: inline-block;
+        min-width: 200px;
+        min-height: 40px;
+        padding: 8px 50px 8px 50px;
+        text-align: center;
+    }
+
+    #countdown {
+        font-size: 24px;
+        font-weight: bold;
+    }
+
+    .hrMilestone {
+        border: none;
+        border-bottom: 2px solid #373737;
+        margin-top: 10px;
+        margin-bottom: 0px;
+        margin-left: -5px;
+        margin-right: -5px;
+    }
+    /*modal*/
+    /* The Modal (background) */
+    .modal {
+        display: none; /* Hidden by default */
+        position: fixed; /* Stay in place */
+        z-index: 1; /* Sit on top */
+        padding-top: 100px; /* Location of the box */
+        left: 0;
+        top: 0;
+        width: 100%; /* Full width */
+        height: 100%; /* Full height */
+        overflow: auto; /* Enable scroll if needed */
+        background-color: rgb(0,0,0); /* Fallback color */
+        background-color: rgba(0,0,0,0.4); /* Black w/ opacity */
+    }
+
+    /* Modal Content */
+    .modal-content {
+        background-color: #fefefe;
+        margin: auto;
+        padding: 0;
+        border: 1px solid #888;
+        width: 50%;
+        box-shadow: 0 4px 8px 0 rgba(0,0,0,0.2),0 6px 20px 0 rgba(0,0,0,0.19);
+        -webkit-animation-name: animatetop;
+        -webkit-animation-duration: 0.4s;
+        animation-name: animatetop;
+        animation-duration: 0.4s
+    }
+
+    /* Add Animation */
+    @@-webkit-keyframes animatetop {
+        from {
+            top: -300px;
+            opacity: 0
+        }
+
+        to {
+            top: 0;
+            opacity: 1
+        }
+    }
+
+    @@keyframes animatetop {
+        from {
+            top: -300px;
+            opacity: 0
+        }
+
+        to {
+            top: 0;
+            opacity: 1
+        }
+    }
+
+    /* The Close Button */
+    .close {
+        color: white;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+
+    .modal-header {
+        padding: 2px 16px;
+        background-color: #2DB964;
+        color: white;
+    }
+
+    .modal-body {
+        padding: 2px 16px;
+    }
+
+    .buttonEdit:hover {
+        background-color: #1B6ABE;
+        color: white !important;
+    }
+
+    .buttonDelete:hover {
+        background-color: #CD2000;
+        color: white !important;
+    }
+</style>
+<div id="confirmDoneMilestone" class="modal">
+    <!-- Modal delete -->
+    <div class="modal-content" style="width:fit-content">
+        <div class="modal-header">
+            <h2 style="font-size:24px">Đã xong milestone</h2>
+            <span class="close">&times;</span>
+        </div>
+        <div class="modal-body">
+            <form method="post" style="width:100%">
+                <input type="text" name="ConfirmDoneMilestoneID" hidden />
+                <input type="text" name="JobID" hidden value="@Model.JobID" />
+                <table style="width:100%">
+                    <tr>
+                        <td colspan="2">
+                            Bạn đã hoàn thành công việc và gửi sản phẩm cho Employer rồi chứ ?
+                        </td>
+                    </tr>
+                    <tr>
+                        <td style="text-align:center"><button type="submit" asp-page-handler="ForConfirmDoneMilestone" style="background-color:#2DB964;color:white;border:2px solid #2DB964;width:120px">Tôi đã xong</button></td>
+                        <td style="text-align:center"><button type="button" onclick="hideModal()" style="background-color:#CCCCCC; color:white;width:120px;border:2px solid #CCCCCC">Tôi chưa xong</button></td>
+                    </tr>
+                </table>
+            </form>
+        </div>
+    </div>
+</div>
+<div style="margin: 20px 50px 20px 50px">
+    <div>
+        <h5>Job Id: @Model.job.JobId</h5>
+        <h5>Job Content: @Model.job.JobContent</h5>
+    </div>
+    <div style="margin: 20px 40px 20px 40px">
+        @foreach (var item in Model.milestones)
+        {
+            <div class="row" style="margin:10px 10px 10px 10px">
+                <div class="col-md-1" style="display: flex;align-items: center;">
+                    <div class="circle">@soThuTu</div>
+                </div>
+                <div class="col-md-5">
+                    <h4 style="font-weight:bold">@item.MilestoneContent</h4>
+                    <p>Due @item.Deadline.ToString("dd/MM/yyyy HH:mm")</p>
+                    <p>@((item.AmountToPay).ToString("#,##")) ₫</p>
+                </div>
+                <div style="display:none">
+                    <span id="MilestoneContent_@item.MilestoneID">@item.MilestoneContent</span>
+                    <span id="Deadline_@item.MilestoneID">@item.Deadline.ToString("yyyy-MM-ddTHH:mm")</span>
+                    <span id="AmountToPay_@item.MilestoneID">@((item.AmountToPay).ToString("#,##")) ₫</span>
+                    <div id="ShowStatus_@item.MilestoneID">
+                        @if (item.IsFreelancerDone && item.Status == (int)MilestoneStatusEnum.MoneyPutted)
+                        {
+                            <p class="status" style="background-color:#9E9E9E;">Đang chờ review</p>
+                        }
+                        else if (item.Status == (int)MilestoneStatusEnum.EmployerCreated)
+                        {
+                            <p class="status" style="background-color:#9E9E9E;">Mới tạo</p>
+                        }
+                        else if (item.Status == (int)MilestoneStatusEnum.MoneyPutted)
+                        {
+                            if (item.Deadline < DateTime.Now)
+                            {
+                                <p class="status" style="background-color:#CF2A27;">Muộn</p>
+                            }
+                            else
+                            {
+                                <p class="status" style="background-color:#0068AD;">Đã đặt tiền</p>  <span style="color:red;font-size:13px" id="countdown1_@item."></span>
+                            }
+                        }
+                        else if (item.Status == (int)MilestoneStatusEnum.EmployerRejected)
+                        {
+                            if (item.IsFreelancerDone == true)
+                            {
+                                <p class="status" style="background-color:#FFE599;">Chờ review lại</p> <span style="color:red;font-size:13px" id="countdown2_@item."></span>
+                            }
+                            else
+                            {
+                                <p class="status" style="background-color:#FFE599;">Làm lại</p> <span style="color:red;font-size:13px" id="countdown2_@item."></span>
+                            }
+                        }
+                        else if (item.Status == (int)MilestoneStatusEnum.Completed)
+                        {
+                            <p class="status" style="background-color:#93C47D;">Hoàn thành</p>
+                        }
+                        else if (item.Status == (int)MilestoneStatusEnum.Failed)
+                        {
+                            <p class="status" style="background-color:#E06666;">Thất bại</p>
+                        }
+                    </div>
+                </div>
+                <div class="col-md-2" style="display: flex;justify-content: center;align-items: center;">
+                    @if (item.IsFreelancerDone && item.Status == (int)MilestoneStatusEnum.MoneyPutted)
+                    {
+                        <p class="status" style="background-color:#9E9E9E;">Đang chờ review</p>
+                    }
+                    else if (item.Status == (int)MilestoneStatusEnum.EmployerCreated)
+                    {
+                        <p class="status" style="background-color:#9E9E9E;">Mới tạo</p>
+                    }
+                    else if (item.Status == (int)MilestoneStatusEnum.MoneyPutted)
+                    {
+                        if (item.Deadline < DateTime.Now)
+                        {
+                            <p class="status" style="background-color:#CF2A27;">Muộn</p>
+                        }
+                        else
+                        {
+                            <p class="status" style="background-color:#0068AD;">Đã đặt tiền</p>  <span style="color:red;font-size:13px" id="countdown1_@item."></span>
+                        }
+                    }
+                    else if (item.Status == (int)MilestoneStatusEnum.EmployerRejected)
+                    {
+                        if (item.IsFreelancerDone == true)
+                        {
+                            <p class="status" style="background-color:#FFE599;">Chờ review lại</p> <span style="color:red;font-size:13px" id="countdown2_@item."></span>
+                        }
+                        else if (item.Deadline < DateTime.Now)
+                        {
+                            <p class="status" style="background-color:#CF2A27;">Muộn</p>
+                        }
+                        else
+                        {
+                            <p class="status" style="background-color:#FFE599;">Làm lại</p> <span style="color:red;font-size:13px" id="countdown2_@item."></span>
+                        }
+                    }
+                    else if (item.Status == (int)MilestoneStatusEnum.Completed)
+                    {
+                        <p class="status" style="background-color:#93C47D;">Hoàn thành</p>
+                    }
+                    else if (item.Status == (int)MilestoneStatusEnum.Failed)
+                    {
+                        <p class="status" style="background-color:#E06666;">Thất bại</p>
+                    }
+                </div>
+                <div class="col-md-4" style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
+                    <button type="button" id="openConfirmDoneMilestone" style="background-color:#00ACD4;color:white;display:block;margin:5px;min-width:150px" onclick="OpenConfirmDoneMilestone(@item.MilestoneID)">Đã làm xong</button>
+                </div>
+            </div>
+            soThuTu += 1;
+            <hr class="hrMilestone">
+        }
+    </div>
+    @if (Model.job.EmployerDoneEditMilestone == true && Model.job.DeadlineFreelancerConfirm > DateTime.Now && Model.job.IsFreelancerConfirm == false)
+    {
+        <h5>Bạn có đồng ý với plan của Employer không ?</h5>
+        <h6>Bạn có <span style="color:red;font-size:13px" id="countdown"></span> để quyết định</h6>
+        <h6>Employer không thể sửa plan được nữa sau khi bạn đồng ý, nếu bạn không đồng ý thì Emlloyer sẽ có quyền sửa lại plan</h6>
+
+        <form method="post">
+            <input type="text" hidden name="JobID" value="@Model.job.JobId" />
+            <div class="row">
+                <div class="col-md-6">
+                    <button type="submit" asp-page-handler="ForNotAcceptPlan" style="background-color:#892311;color:white;margin:5px;min-width:200px">Tôi không đồng ý</button>
+                </div>
+                <div class="col-md-6">
+                    <button type="submit" asp-page-handler="ForAcceptPlan" style="background-color:#009400;color:white;margin:5px;min-width:200px">Tôi đồng ý</button>
+                </div>
+            </div>
+        </form>
+
+    }
+    @if (Model.job.EmployerDoneEditMilestone == false && Model.job.IsFreelancerConfirm == false)
+    {
+        <h5>Hãy nhắn tin với Employer để cùng tạo ra một plan hợp lý nhé</h5>
+    }
+    else if (Model.job.EmployerDoneEditMilestone == true && Model.job.IsFreelancerConfirm == true)
+    {
+        <h5>Các bạn đã thống nhất một plan, bây giờ là lúcs làm việc</h5>
+    }
+</div>
+<script>
+    var confirmDoneMilestone = document.getElementById("confirmDoneMilestone");
+    function OpenConfirmDoneMilestone(ConfirmDoneMilestoneID) {
+
+        document.getElementsByName("ConfirmDoneMilestoneID")[0].value = ConfirmDoneMilestoneID;
+
+        confirmDoneMilestone.style.display = "block";
+    }
+</script>
+<script>
+
+    function startCountdown(targetDate, countdownId) {
+        var countdownInterval = setInterval(function () {
+            var now = new Date();
+            var timeDifference = targetDate - now;
+            var days = Math.floor(timeDifference / (1000 * 60 * 60 * 24));
+            var hours = Math.floor((timeDifference % (1000 * 60 * 60 * 24)) / (1000 * 60 * 60));
+            var minutes = Math.floor((timeDifference % (1000 * 60 * 60)) / (1000 * 60));
+            var seconds = Math.floor((timeDifference % (1000 * 60)) / 1000);
+            document.getElementById(countdownId).innerHTML = "(" + days + "d " + hours + "h " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds + ")";
+            if (timeDifference < 0) {
+                clearInterval(countdownInterval);
+                document.getElementById(countdownId).innerHTML = "Hiring Expried";
+            }
+        }, 1000);
+    }
+    var x = new Date("@(Model.job.DeadlineFreelancerConfirm.ToString("yyyy-MM-ddTHH:mm:ss"))");
+    startCountdown(x, "countdown");
+
+</script>
+
+
+
+
+

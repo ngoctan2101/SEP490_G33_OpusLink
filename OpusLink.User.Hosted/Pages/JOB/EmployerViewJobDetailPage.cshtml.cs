@@ -2,7 +2,11 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.JobDTO;
+using OpusLink.Entity.DTO.MSDTO;
+using OpusLink.Entity.Models;
 using System.Net.Http.Headers;
+using System.Text.Json;
+using System.Text.RegularExpressions;
 
 namespace OpusLink.User.Hosted.Pages.JOB
 {
@@ -34,5 +38,123 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 offers = offers.OrderByDescending(o => o.DateOffer).ToList();
             }
         }
+        public async Task<IActionResult> OnPostForHireAsync(IFormCollection collection)
+        {
+            HireFreelancerForJobRequest hireFreelancerForJobRequest = new HireFreelancerForJobRequest();
+            List<string> keys = collection.Keys.ToList<string>();
+            // manual bind to get  object
+            foreach (string key in keys)
+            {
+                if (key.Contains("JobID"))
+                {
+                    hireFreelancerForJobRequest.JobId = Int32.Parse(collection[key]);
+                }
+                if (key.Contains("FreelancerID"))
+                {
+                    hireFreelancerForJobRequest.FreelancerId = Int32.Parse(collection[key]);
+                }
+
+            }
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = false,
+            };
+            string json = System.Text.Json.JsonSerializer.Serialize<HireFreelancerForJobRequest>(hireFreelancerForJobRequest, options);
+            StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PutAsync("https://localhost:7265/api/HireFreelancerForJob/HireFreelancerForJob", httpContent);
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToPage("/JOB/EmployerViewJobDetailPage", new { JobId = hireFreelancerForJobRequest.JobId });
+            }
+            return RedirectToPage("/JOB/EmployerViewJobDetailPage", new { JobId = hireFreelancerForJobRequest.JobId });
+        }
+        public async Task<IActionResult> OnPostForCancelHireAsync(IFormCollection collection)
+        {
+            HireFreelancerForJobRequest hireFreelancerForJobRequest = new HireFreelancerForJobRequest();
+            List<string> keys = collection.Keys.ToList<string>();
+            // manual bind to get  object
+            foreach (string key in keys)
+            {
+                if (key.Contains("JobID"))
+                {
+                    hireFreelancerForJobRequest.JobId = Int32.Parse(collection[key]);
+                }
+                if (key.Contains("FreelancerID"))
+                {
+                    hireFreelancerForJobRequest.FreelancerId = Int32.Parse(collection[key]);
+                }
+
+            }
+            var options = new JsonSerializerOptions
+            {
+                PropertyNameCaseInsensitive = false,
+            };
+            string json = System.Text.Json.JsonSerializer.Serialize<HireFreelancerForJobRequest>(hireFreelancerForJobRequest, options);
+            StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+            HttpResponseMessage response = await client.PutAsync("https://localhost:7265/api/HireFreelancerForJob/CancelHireFreelancerForJob", httpContent);
+            if (response.IsSuccessStatusCode)
+            {
+                return RedirectToPage("/JOB/EmployerViewJobDetailPage", new { JobId = hireFreelancerForJobRequest.JobId });
+            }
+            return RedirectToPage("/JOB/EmployerViewJobDetailPage", new { JobId = hireFreelancerForJobRequest.JobId });
+        }
+        //public async Task<RedirectToPageResult> OnPostForHireAsync(IFormCollection collection)
+        //{
+        //    CreateUpdateOfferRequest createUpdateOfferRequest = new CreateUpdateOfferRequest();
+        //    if (HttpContext.Session.GetInt32("UserId") == null)
+        //    {
+        //        return RedirectToPage("/Account/Login");
+        //    }
+        //    else
+        //    {
+        //        createUpdateOfferRequest.FreelancerID = HttpContext.Session.GetInt32("UserId") ?? 0;
+        //    }
+        //    List<string> keys = collection.Keys.ToList<string>();
+        //    // manual bind to get Offer object
+        //    foreach (string key in keys)
+        //    {
+        //        if (key.Contains("offerId"))
+        //        {
+        //            createUpdateOfferRequest.OfferID = Int32.Parse(collection[key].ToString().Length == 0 ? "0" : (collection[key].ToString()));
+        //        }
+        //        else if (key.Contains("jobId"))
+        //        {
+        //            createUpdateOfferRequest.JobID = (Int32.Parse(collection[key]));
+        //        }
+        //        else if (key.Contains("dateOffer"))
+        //        {
+        //            createUpdateOfferRequest.DateOffer = DateTime.Parse(collection[key].ToString().Length == 0 ? DateTime.Now.ToString() : collection[key].ToString());
+        //        }
+        //        else if (key.Contains("proposedCost"))
+        //        {
+        //            createUpdateOfferRequest.ProposedCost = Decimal.Parse(Regex.Replace(collection[key].ToString(), "[^0-9]", ""));
+        //        }
+        //        else if (key.Contains("expectedDays"))
+        //        {
+        //            createUpdateOfferRequest.ExpectedDays = Int32.Parse(collection[key].ToString());
+        //        }
+        //        else if (key.Contains("selfIntroduction"))
+        //        {
+        //            createUpdateOfferRequest.SelfIntroduction = collection[key].ToString();
+        //        }
+        //        else if (key.Contains("estimatedPlan"))
+        //        {
+        //            createUpdateOfferRequest.EstimatedPlan = collection[key].ToString();
+        //        }
+        //    }
+        //    //post Offer to API 
+        //    var options = new JsonSerializerOptions
+        //    {
+        //        PropertyNameCaseInsensitive = false,
+        //    };
+        //    string json = System.Text.Json.JsonSerializer.Serialize<CreateUpdateOfferRequest>(createUpdateOfferRequest, options);
+        //    StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
+        //    HttpResponseMessage response = await client.PostAsync("https://localhost:7265/api/Offer3API/CreateOffer", httpContent);
+        //    if (response.IsSuccessStatusCode)
+        //    {
+        //        //message "Your job is requested" green
+        //    }
+        //    return RedirectToPage("/JOB/FreelancerViewJobDetail", new { JobId = createUpdateOfferRequest.JobID });
+        //}
     }
 }

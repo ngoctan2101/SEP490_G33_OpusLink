@@ -16,6 +16,9 @@ namespace OpusLink.Entity.DTO.AccountDTO
         [EmailAddress]
         public string Email { get; set; }
 
+        [Required(ErrorMessage = "Date of Birth is required")]
+        public DateTime DateOfBirth { get; set; }
+
         [Required(ErrorMessage = "Password is required")]
         [MinLength(6)]
         [DataType(DataType.Password)]

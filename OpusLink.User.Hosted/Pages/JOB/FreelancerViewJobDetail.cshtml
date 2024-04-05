@@ -78,19 +78,6 @@
         font-size: 24px;
         font-weight: bold;
     }
-    .tinnhan-btn{
-        display: inline-block;
-        padding: 10px 20px;
-        background-color: #007bff; /* Màu nền */
-        color: #fff; /* Màu chữ */
-        text-decoration: none; /* Loại bỏ gạch chân */
-        border-radius: 5px; /* Bo tròn góc */
-        transition: background-color 0.3s, color 0.3s; /* Hiệu ứng chuyển đổi màu */
-    }
-    .tinnhan-btn:hover{
-		background-color: #0056b3; /* Màu nền */
-		color: #fff; /* Màu chữ */
-	}
 </style>
 @{
     int userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId") ?? -1;
@@ -155,9 +142,13 @@
                     {
                         <p class="status" style="background-color:#0068AD;margin:0px;padding:0px 4px 0px 4px">Hired</p>
                     }
-                    else if (item.Status == (int)JobStatusEnum.Close)
+                    else if (item.Status == (int)JobStatusEnum.Completed)
                     {
-                        <p class="status" style="background-color:#FF6D00;margin:0px;padding:0px 4px 0px 4px">Closed</p>
+                        <p class="status" style="background-color:#FF6D00;margin:0px;padding:0px 4px 0px 4px">Completed</p>
+                    }
+                    else if (item.Status == (int)JobStatusEnum.Failed)
+                    {
+                        <p class="status" style="background-color:#FF6D00;margin:0px;padding:0px 4px 0px 4px">Failed</p>
                     }
                 </div>
                 <div class="row">
@@ -196,6 +187,7 @@
                         <div class="col-md-4">Average time: @item.AverageTime days</div>
                     </div>
                 }
+                <a asp-page="../MS/FreelancerViewAllMS" asp-route-jobID="@item.JobId" class="link" >View milestones </a>
             </div>
         </div>
         @{
@@ -287,7 +279,7 @@
                 <div class="col-md-2"></div>
             </div>
         }
-        else if (item.Status == (int)JobStatusEnum.Close)
+        else if (item.Status == (int)JobStatusEnum.Completed || item.Status == (int)JobStatusEnum.Failed)
         {
             <div class="row">
                 <div class="col-md-2"></div>
@@ -446,7 +438,7 @@
             }
         }, 1000);
     }
-    var x = new Date(@( Model.job.EndHiringDate.ToString("yyyy-MM-ddTHH:mm:ss")));
+    var x = new Date("@( Model.job.EndHiringDate.ToString("yyyy-MM-ddTHH:mm:ss"))");
     startCountdown(x, "countdown_" + @Model.job.JobId);
 
 </script>
