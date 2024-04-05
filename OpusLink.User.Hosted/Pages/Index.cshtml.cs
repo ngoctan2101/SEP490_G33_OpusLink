@@ -72,7 +72,7 @@ namespace OpusLink.User.Hosted.Pages
 
                             // Lấy thông tin từ Claims
                             string userId = jsonToken.Claims.First(claim => claim.Type == "userId").Value;
-                            string currentRole = jsonToken.Claims.First(claim => claim.Type == "currentRole").Value;
+                            string currentRole = jsonToken.Claims.First(claim => claim.Type == "role").Value;
                             string name = jsonToken.Claims.First(claim => claim.Type == "userName").Value;
 
                             //Add thông tin lấy được vào Session

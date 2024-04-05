@@ -1,5 +1,6 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json.Linq;
 using OpusLink.Entity.DTO;
 using OpusLink.Entity.DTO.JobDTO;
 using System.Net.Http.Headers;
@@ -24,8 +25,13 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
             client.DefaultRequestHeaders.Accept.Add(contentType);
             ServiceMangaUrl = "https://localhost:7265/";
         }
-        public async Task OnGetAsync(int UserId)
+        public async Task<IActionResult> OnGetAsync(int UserId)
         {
+            if (HttpContext.Session.GetString("Role").Equals("Employer"))
+            {
+                return RedirectToPage("/Index");
+            }
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             // call list
             HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/" + UserId);
             if (responseUser.IsSuccessStatusCode)
@@ -37,10 +43,12 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
             }
             //get all skill
             AllSkills = await GetAllSkillAsync();
+            return Page();
         }
         private async Task<IList<SkillDTO>> GetAllSkillAsync()
         {
             //get all skill
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "api/Skill/GetAllSkill");
             if (response.IsSuccessStatusCode)
             {
@@ -57,6 +65,7 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
         public async Task<ActionResult> OnGetForDownloadAsync(int UserId)
         {
             int userId = UserId;
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "api/User/GetFileCVById/" + userId);
 
             if (response.IsSuccessStatusCode)
@@ -83,6 +92,7 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
         }
         public async Task<ActionResult> OnPostForSaveAsync(IFormCollection collection, IFormFile image, IFormFile cv)
         {
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             PutUser = new PutUserRequest();
             //get image, get cv from <input>
             if (image != null)

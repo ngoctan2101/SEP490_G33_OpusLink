@@ -17,6 +17,9 @@ namespace OpusLink.User.Hosted.Pages.JOB
         public List<GetOfferAndFreelancerResponse> offers { get; set; }
         public bool isOffered { get; set; }
         public GetOfferResponse offerResponse { get; set; }
+
+        public string token { get; set; }
+
         public FreelancerViewJobDetailModel()
         {
             client = new HttpClient();
@@ -27,12 +30,19 @@ namespace OpusLink.User.Hosted.Pages.JOB
         public async Task<IActionResult> OnGetAsync(int JobId)
         {
             int userId=0;
+
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
                 return RedirectToPage("/Account/Login");
             }
+            if (HttpContext.Session.GetString("Role").Equals("Employer"))
+            {
+                return RedirectToPage("/Index");
+            }
             else
             {
+                token = HttpContext.Session.GetString("token");
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", token);
                 userId = HttpContext.Session.GetInt32("UserId") ?? 0;
             }
 
