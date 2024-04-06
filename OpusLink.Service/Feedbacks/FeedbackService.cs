@@ -15,10 +15,11 @@ namespace OpusLink.Service.Feedbacks
 		FeebackDTO CreateFeedback(CreateFeedbackDTO createFeedbackDTO);
 		//GetFeedbacksForTargetUser(targetToUserID)
 		List<FeebackDTO> GetFeedbacksForTargetUser(int targetToUserID);
-		
 
-	}
-	public class FeedbackService : IFeedbackService
+        FeebackDTO UpdateFeedback(int feedbackUserID, decimal newStar, string newContent);
+
+    }
+    public class FeedbackService : IFeedbackService
 	{
 		private readonly OpusLinkDBContext _context;
 
@@ -69,6 +70,32 @@ namespace OpusLink.Service.Feedbacks
 
             return feedbackEntries;
         }
-       
+       public FeebackDTO UpdateFeedback(int feedbackUserID, decimal newStar, string newContent)
+		{
+            var feedback = _context.FeedbackUsers
+                .Where(f => f.FeedbackUserID == feedbackUserID)
+                .FirstOrDefault();
+
+            if (feedback == null)
+			{
+                return null;
+            }
+
+            feedback.Star = newStar;
+            feedback.Content = newContent;
+
+            _context.SaveChanges();
+
+            return new FeebackDTO
+            {
+                FeedbackUserID = feedback.FeedbackUserID,
+                JobID = feedback.JobID,
+                CreateByUserID = feedback.CreateByUserID,
+                TargetToUserID = feedback.TargetToUserID,
+                Star = feedback.Star,
+                Content = feedback.Content,
+                DateCreated = feedback.DateCreated
+            };
+        }
     }
 }

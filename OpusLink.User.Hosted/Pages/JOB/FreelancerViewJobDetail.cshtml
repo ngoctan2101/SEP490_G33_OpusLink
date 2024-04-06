@@ -462,14 +462,15 @@
     displayFeedbackInfo();
 </script>
 <script>
-    // Function to fetch and display feedback information
+    // Function to fetch and display feedback information for the freelancer
     function displayFeedbackFreelancer() {
-        var freelancerId = @item.FreelancerId; // Assuming EmployerId is an integer
+        var freelancerId = @item.FreelancerId; // Assuming FreelancerId is an integer
         fetch(`https://localhost:7265/api/Feedback/AverageStars/${freelancerId}`)
             .then(response => response.json())
             .then(data => {
-                document.getElementById('feedbackFreeLancer').innerHTML = `
-                                <p> ${data.averageStars}⭐(${data.numberOfEntries} Lượt đánh giá)</p>
+                var feedbackFreelancerDiv = document.getElementById('feedbackFreeLancer');
+                feedbackFreelancerDiv.innerHTML = `
+                        <p>Average Rating: ${data.averageStars}⭐ (${data.numberOfEntries} reviews)</p>
                     `;
             })
             .catch(error => {
@@ -477,6 +478,6 @@
             });
     }
 
-    // Call the function to display feedback information when the page loads
+    // Call the function to display feedback information for the freelancer when the page loads
     displayFeedbackFreelancer();
 </script>

@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.SignalR;
 using OpusLink.API.Hubs;
 using OpusLink.Entity.DTO;
 using OpusLink.Entity.DTO.FeedbackDTO;
+using OpusLink.Entity.DTO.FeedbackDTOs;
 using OpusLink.Service.Chat;
 using OpusLink.Service.Feedbacks;
 
@@ -76,6 +77,23 @@ namespace OpusLink.API.Controllers.Feedbacks
                 };
 
                 return Ok(result);
+            }
+            catch (Exception ex)
+            {
+                return StatusCode(500, $"Internal server error: {ex.Message}");
+            }
+        }
+        [HttpPut("UpdateFeedback/{feedbackUserID}")]
+        public IActionResult UpdateFeedback(int feedbackUserID, [FromBody]UpdateFeedbackDTO updateFeedbackDTO)
+        {
+            try
+            {
+                var updatedFeedback = _feedbackService.UpdateFeedback(feedbackUserID, updateFeedbackDTO.Star, updateFeedbackDTO.Content);
+                if (updatedFeedback == null)
+                {
+                    return NotFound("Feedback not found.");
+                }
+                return Ok(updatedFeedback);
             }
             catch (Exception ex)
             {
