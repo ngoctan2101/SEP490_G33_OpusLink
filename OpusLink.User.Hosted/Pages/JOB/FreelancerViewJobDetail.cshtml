@@ -110,7 +110,7 @@
                     }
                 }
                 <a href="#" class="link" style="display:block">@item.EmployerName</a>
-                ⭐⭐⭐⭐⭐
+                <div id="feedbackInfo"></div>
                 <p>Project Information:</p>
                 <table style="width:100%;font-size:13px">
                     <tr><td>Project Id:</td><td>@item.JobId</td></tr>
@@ -331,7 +331,7 @@
                                     <a href="#" class="link">@a.FreelancerName</a>
                                 </td>
                             </tr>
-                            <tr><td>⭐⭐⭐⭐⭐</td></tr>
+                            <tr><td><div id="feedbackFreeLancer"></div></td></tr>
                         </table>
                         <div>
                             @if (a.Skills.Count > 3)
@@ -441,4 +441,43 @@
     var x = new Date("@( Model.job.EndHiringDate.ToString("yyyy-MM-ddTHH:mm:ss"))");
     startCountdown(x, "countdown_" + @Model.job.JobId);
 
+</script>
+<script>
+    // Function to fetch and display feedback information
+    function displayFeedbackInfo() {
+        var employerId = @item.EmployerId; // Assuming EmployerId is an integer
+        fetch(`https://localhost:7265/api/Feedback/AverageStars/${employerId}`)
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('feedbackInfo').innerHTML = `
+                                <p> ${data.averageStars}⭐(${data.numberOfEntries} Lượt đánh giá)</p>
+                    `;
+            })
+            .catch(error => {
+                console.error('Error fetching feedback information:', error);
+            });
+    }
+
+    // Call the function to display feedback information when the page loads
+    displayFeedbackInfo();
+</script>
+<script>
+    // Function to fetch and display feedback information for the freelancer
+    function displayFeedbackFreelancer() {
+        var freelancerId = @item.FreelancerId; // Assuming FreelancerId is an integer
+        fetch(`https://localhost:7265/api/Feedback/AverageStars/${freelancerId}`)
+            .then(response => response.json())
+            .then(data => {
+                var feedbackFreelancerDiv = document.getElementById('feedbackFreeLancer');
+                feedbackFreelancerDiv.innerHTML = `
+                        <p>Average Rating: ${data.averageStars}⭐ (${data.numberOfEntries} reviews)</p>
+                    `;
+            })
+            .catch(error => {
+                console.error('Error fetching feedback information:', error);
+            });
+    }
+
+    // Call the function to display feedback information for the freelancer when the page loads
+    displayFeedbackFreelancer();
 </script>
