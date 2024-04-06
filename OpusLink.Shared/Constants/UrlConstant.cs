@@ -9,7 +9,7 @@ namespace OpusLink.Shared.Constants
     public class UrlConstant
     {
         //public const string ApiBaseUrl = "https://localhost:7277";
-        public const string ApiBaseUrl = "https://refined-mutually-frog.ngrok-free.app/api";    //https://localhost:7265/api
-        public const string UserClientBaseUrl = "https://localhost:7131";                       //https://localhost:7131
+        public const string ApiBaseUrl = "https://glowing-suddenly-kit.ngrok-free.app/api";    //https://localhost:7265/api
+        public const string UserClientBaseUrl = "https://verified-lovely-reptile.ngrok-free.app";                       //https://localhost:7131
     }
 }

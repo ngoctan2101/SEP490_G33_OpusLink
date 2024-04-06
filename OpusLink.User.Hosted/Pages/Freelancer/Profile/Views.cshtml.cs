@@ -138,6 +138,14 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
                 {
                     PutUser.Id = Int32.Parse(collection[key]);
                 }
+                else if (key.Contains("bankacccountinfor"))
+                {
+                    PutUser.BankAccountInfor = (collection[key]);
+                }
+                else if (key.Contains("bankname"))
+                {
+                    PutUser.BankName = collection[key];
+                }
 
             }
             var options = new JsonSerializerOptions
