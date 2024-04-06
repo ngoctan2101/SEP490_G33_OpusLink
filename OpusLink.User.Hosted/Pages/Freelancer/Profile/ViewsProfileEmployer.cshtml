@@ -365,7 +365,7 @@
             };
 
             $.ajax({
-                url: @UrlConstant.ApiBaseUrl+`/ReportAccount`,
+                url: "@(UrlConstant.ApiBaseUrl+"/ReportAccount")",
                 method: 'POST',
                 data: JSON.stringify(obj),
                 contentType: 'application/json',

@@ -387,8 +387,11 @@
 	function saveMessageToDatabase(chatBoxId, FromEmployer, messageContent) {
 		// Make an AJAX request to save the message to the database
 		$.ajax({
-			url:  @UrlConstant.ApiBaseUrl+'/Chat/CreateMessage',
+			url:  "@(UrlConstant.ApiBaseUrl+"/Chat/CreateMessage")",
 			type: 'POST',
+			headers: {
+				"ngrok-skip-browser-warning": true
+			},
 			contentType: 'application/json',
 			data: JSON.stringify({
 				chatBoxId: chatBoxId,

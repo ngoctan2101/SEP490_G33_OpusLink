@@ -15,7 +15,7 @@
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css">
     <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0-beta3/css/all.min.css">
     <script src="https://kit.fontawesome.com/10f63c3d6e.js" crossorigin="anonymous"></script>
-    <link rel="stylesheet" href="~/css/HomePage.css">
+    @*<link rel="stylesheet" href="~/css/HomePage.css">*@
     <title>Trang chủ</title>
     <style>
 
@@ -227,8 +227,11 @@
         }
         function LoadUserInformation() {
             $.ajax({
-                url: @UrlConstant.ApiBaseUrl+"/User/GetUserById/" + @userId+"",
+                url: "@(UrlConstant.ApiBaseUrl+"/User/GetUserById/")" + @userId,
                 type: "GET",
+                headers: {
+                    "ngrok-skip-browser-warning": true
+                },
                 contentType: "application/json",
                 success: function (result, status, xhr) {
                     
@@ -244,8 +247,11 @@
                     }
                 });
             $.ajax({
-                url: @UrlConstant.ApiBaseUrl+"/Notification/CountNotificationNew/" + @userId+"",
+                url: "@(UrlConstant.ApiBaseUrl+"/Notification/CountNotificationNew/")" + @userId,
                 type: "GET",
+                headers: {
+                    "ngrok-skip-browser-warning": true
+                },
                 contentType: "application/json",
                 success: function (result, status, xhr) {
 
@@ -261,12 +267,15 @@
             });
 
             $.ajax({
-                url: @UrlConstant.ApiBaseUrl+"/Notification/Get5NotificationNew/" + @userId+"",
+                url: "@(UrlConstant.ApiBaseUrl+"/Notification/Get5NotificationNew/")" + @userId,
                 type: "GET",
+                headers: {
+                    "ngrok-skip-browser-warning": true
+                },
                 contentType: "application/json",
                 success: function (result, status, xhr) {
                     var fivecodeline = "";
-                    var domain = @UrlConstant.UserClientBaseUrl+"/Index?handler=ForNotificationDetail&link=";
+                    var domain = "@(UrlConstant.UserClientBaseUrl+"/Index?handler=ForNotificationDetail&link=")";
                     $.each(result, function (index, value) {
                         if (value["isReaded"] == true) {
                             fivecodeline += "<li class=\"dropdown-item\"><a style=\"color\:#B0B8B3\" href=\"" + domain + encodeURIComponent(value["link"]) + "&notiId=" + value["notificationID"] + "\">" + value["notificationContent"] + "</a></li>";

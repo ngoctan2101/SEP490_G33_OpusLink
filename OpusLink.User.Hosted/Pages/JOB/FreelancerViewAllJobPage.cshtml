@@ -321,8 +321,11 @@
 <script>
     function displayAllChild(categoryID) {
         $.ajax({
-            url: @UrlConstant.ApiBaseUrl+"/Job3API/GetAllChildCategory?parentId=" + categoryID,
+            url: "@(UrlConstant.ApiBaseUrl+"/Job3API/GetAllChildCategory?parentId=")" + categoryID,
             type: "get",
+            headers: {
+                "ngrok-skip-browser-warning": true
+            },
             contentType: "application/json",
             success: function (result, status, xhr) {
                 var str1 = "<tr id=\"ch_" + categoryID + "\"><td colspan=\"3\" style=\"width:100%;padding-right:0px;padding-left:7px\"><table style=\"width:100%;padding-right:0px\" >";
@@ -354,7 +357,7 @@
     }
     function SaveJob(JobId, FreelancerId) {
         $.ajax({
-            url: @UrlConstant.ApiBaseUrl+"/Job7API/AddSaveJob",
+            url: "@(UrlConstant.ApiBaseUrl+"/Job7API/AddSaveJob")",
             type: "post",
             contentType: "application/json",
             data: JSON.stringify({ JobID: JobId, FreelancerID: FreelancerId }),
