@@ -11,6 +11,10 @@
     ViewData["Title"] = "Freelancer View All Job";
     int? userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId");
 }
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
 <style>
     .filter .td {
         padding-left: 10px;
@@ -475,12 +479,7 @@
             input.value = formattedValue;
         }
     }
-    window.onload = function () {
-        autoFillForm();
-        FormatBudget();
-        FormatJobContent();
-        FomatPagination();
-    };
+    
 </script>
 <script>
     function FormatBudget() {
@@ -653,4 +652,10 @@
     }
 </script>
 }
+<script>
+    addOnLoadFunction(autoFillForm);
+    addOnLoadFunction(FormatBudget);
+    addOnLoadFunction(FormatJobContent);
+    addOnLoadFunction(FomatPagination);
+</script>
 

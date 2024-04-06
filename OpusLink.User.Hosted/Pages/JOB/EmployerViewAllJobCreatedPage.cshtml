@@ -286,7 +286,7 @@
 <script>
     function displayAllChild(categoryID) {
         $.ajax({
-            url: @UrlConstant.ApiBaseUrl+"/Job3API/GetAllChildCategory?parentId=" + categoryID,
+            url: "@(UrlConstant.ApiBaseUrl+"/Job3API/GetAllChildCategory?parentId=")" + categoryID,
             type: "get",
             contentType: "application/json",
             success: function (result, status, xhr) {
