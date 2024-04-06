@@ -111,7 +111,7 @@ namespace OpusLink.Service.AccountServices
                 new("userName", user.UserName),
                 new("email", user.Email),
                 new("userId", user.Id.ToString()),
-                new("currentRole", role),
+                new(ClaimTypes.Role, role),
                 new(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
             return result;
@@ -139,7 +139,7 @@ namespace OpusLink.Service.AccountServices
                 new("userName", user.UserName),
                 new("email", user.Email),
                 new("userId", user.Id.ToString()),
-                new("currentRole", role),
+                new(ClaimTypes.Role, role),
                 new(System.IdentityModel.Tokens.Jwt.JwtRegisteredClaimNames.Jti, Guid.NewGuid().ToString())
             };
             return result;

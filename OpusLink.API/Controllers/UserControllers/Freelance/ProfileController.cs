@@ -5,6 +5,7 @@ using OpusLink.Service.Admin;
 
 namespace OpusLink.API.Controllers.UserControllers.Freelance
 {
+    
     [Route("api/[controller]")]
     [ApiController]
     public class ProfileController : ControllerBase

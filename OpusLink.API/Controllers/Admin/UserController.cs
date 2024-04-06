@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OpusLink.Entity;
 using OpusLink.Entity.DTO;
@@ -12,7 +13,7 @@ using OpusLink.Service.UserServices;
 
 namespace OpusLink.API.Controllers.Admin
 {
-/*    [Authorize(Roles = "Admin")]*/
+    [Authorize(Roles = "Freelancer,Employer")]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase

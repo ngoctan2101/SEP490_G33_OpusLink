@@ -31,6 +31,7 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
             }
 
             // call list
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/" + UserId);
             if (responseUser.IsSuccessStatusCode)
             {
@@ -44,6 +45,7 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
         private async Task<IList<SkillDTO>> GetAllSkillAsync()
         {
             //get all skill
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "api/Skill/GetAllSkill");
             if (response.IsSuccessStatusCode)
             {
@@ -60,6 +62,7 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
         public async Task<ActionResult> OnGetForDownloadAsync(int UserId)
         {
             int userId = UserId;
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "api/User/GetFileCVById/" + userId);
 
             if (response.IsSuccessStatusCode)
