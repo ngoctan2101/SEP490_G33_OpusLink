@@ -1,15 +1,19 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.EntityFrameworkCore.Diagnostics;
 using OpusLink.Entity.DTO;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.Models;
 using OpusLink.Service.JobServices;
+using OpusLink.Shared.Enums;
 using System.Collections.Generic;
 using System.Diagnostics;
 
 namespace OpusLink.API.Controllers.JobControllers
 {
+    [Authorize(Roles = "Freelancer")]
+
     [Route("api/[controller]")]
     [ApiController]
     public class Job3APIController : ControllerBase

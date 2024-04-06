@@ -1,7 +1,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OpusLink.Entity.DTO;
-using OpusLink.Shared.Constants;
+using OpusLink.Entity.Models;
 using System.Net.Http.Headers;
 using System.Text.Json;
 
@@ -22,12 +22,17 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
             client = new HttpClient();
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
-            ServiceMangaUrl = UrlConstant.ApiBaseUrl;
+            ServiceMangaUrl = "https://localhost:7265/";
         }
-        public async Task OnGetAsync(int UserId)
+        public async Task<IActionResult> OnGetAsync(int UserId)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("/Account/Login");
+            }
+
             // call list
-            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "/User/GetUserById/" + UserId);
+            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/" + UserId);
             if (responseUser.IsSuccessStatusCode)
             {
                 string responseBodyUser = await responseUser.Content.ReadAsStringAsync();
@@ -35,11 +40,12 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
                 { PropertyNameCaseInsensitive = true };
                 user = JsonSerializer.Deserialize<UserDTO>(responseBodyUser, optionUser);
             }
+            return Page();
         }
         private async Task<IList<SkillDTO>> GetAllSkillAsync()
         {
             //get all skill
-            HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "/Skill/GetAllSkill");
+            HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "api/Skill/GetAllSkill");
             if (response.IsSuccessStatusCode)
             {
                 string responseBodyUser = await response.Content.ReadAsStringAsync();
@@ -55,7 +61,7 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
         public async Task<ActionResult> OnGetForDownloadAsync(int UserId)
         {
             int userId = UserId;
-            HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "/User/GetFileCVById/" + userId);
+            HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "api/User/GetFileCVById/" + userId);
 
             if (response.IsSuccessStatusCode)
             {

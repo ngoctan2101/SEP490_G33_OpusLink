@@ -79,6 +79,10 @@
 </style>
 <body>
     <div class="path-admin">Danh sách Report</div>
+    <div class="d-inline-flex p-2 bd-highlight">
+
+        <button type="button" id="backButton" class="btn btn-primary" onclick="onBack()">Back</button>
+    </div>
     <form method="post">
         <div id="content-main-dashboard">
             <div id="product-title-header">
@@ -166,6 +170,11 @@
                         `
         });
         return tableData;
+    }
+
+    // Hàm để quay lại trang trước đó
+    function onBack() {
+        window.location.href = '/ManageUser/Views';
     }
 
 </script>

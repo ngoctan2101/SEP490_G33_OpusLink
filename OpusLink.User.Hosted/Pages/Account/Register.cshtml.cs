@@ -4,7 +4,6 @@ using Newtonsoft.Json;
 using OpusLink.Entity.DTO.AccountDTO.Common;
 using OpusLink.Entity.DTO.AccountDTO;
 using System.ComponentModel.DataAnnotations;
-using OpusLink.Shared.Constants;
 
 namespace OpusLink.User.Hosted.Pages.Account
 {
@@ -16,7 +15,7 @@ namespace OpusLink.User.Hosted.Pages.Account
         public string Password { get; set; }
         public string ConfirmPassword { get; set; }
 
-        string link = UrlConstant.ApiBaseUrl+"/Account/register";
+        string link = "https://localhost:7265/api/Account/register";
         public async Task<IActionResult> OnPostAsync(string username, string password, string email, string confirmPassword, DateTime birthDate)
         {
             RegisterDTO account = new RegisterDTO()

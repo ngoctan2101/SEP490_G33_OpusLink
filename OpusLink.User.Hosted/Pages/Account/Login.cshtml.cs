@@ -43,7 +43,7 @@ namespace OpusLink.User.Hosted.Pages.Account
 
                             // Lấy ra UserId từ claims
                             string userId = jsonToken.Claims.First(claim => claim.Type == "userId").Value;
-                            string currentRole = jsonToken.Claims.First(claim => claim.Type == "currentRole").Value;
+                            string currentRole = jsonToken.Claims.First(claim => claim.Type == "role").Value;
                             string name = jsonToken.Claims.First(claim => claim.Type == "userName").Value;
 
                             HttpContext.Session.SetInt32("UserId", Int32.Parse(userId));

@@ -8,11 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using OpusLink.Shared.Enums;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
-using Newtonsoft.Json.Linq;
-using Microsoft.IdentityModel.Tokens;
-using System.IdentityModel.Tokens.Jwt;
-using System.Security.Claims;
-using System.Text;
+using OpusLink.Shared.Constants;
 
 namespace OpusLink.API.Controllers.AccountControllers
 {
@@ -115,9 +111,26 @@ namespace OpusLink.API.Controllers.AccountControllers
                 };
 
                 var resultCreateUser = await _userManager.CreateAsync(user, model.Password);
+                if(resultCreateUser.Succeeded == false)
+                {
+                    return new ApiResponseModel()
+                    {
+                        Code = 400,
+                        Message = TotalMessage.RegisterError,
+                        IsSuccess = false
+                    };
+                }
 
                 //Role mặc định là Freelancer and Employer
                 var resultRoleFreelancer = await _userManager.AddToRoleAsync(user, Roles.Freelancer.ToString());
+                if(resultRoleFreelancer.Succeeded == false)
+                {
+                    return new ApiResponseModel(){
+                        Code = 400,
+                        Message = TotalMessage.RegisterError,
+                        IsSuccess = false
+                    };
+                }
                 var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Employer.ToString());
 
                 //Role cho Admin
@@ -189,7 +202,7 @@ namespace OpusLink.API.Controllers.AccountControllers
             {
                 var token = await _userManager.GeneratePasswordResetTokenAsync(user);
                 string userName = user.UserName;
-                var passwordResetLink = TotalLink.LinkForgotPassword + "?token=" + Uri.EscapeDataString(token) + "&email=" + user.Email;
+                var passwordResetLink = UrlConstant.UserClientBaseUrl + "/Account/ResetPassword" + "?token=" + Uri.EscapeDataString(token) + "&email=" + user.Email;
                 // Tạo nội dung HTML cho email
                 string titleContent = "Đổi mật khẩu - Opuslink";
 
@@ -333,7 +346,7 @@ namespace OpusLink.API.Controllers.AccountControllers
         {
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             string userName = user.UserName;
-            string confirmationLink = TotalLink.LinkValidRegister + "?token=" + Uri.EscapeDataString(token) + "&email=" + user.Email;
+            string confirmationLink = UrlConstant.UserClientBaseUrl + "/Account/EmailVerify" + "?token=" + Uri.EscapeDataString(token) + "&email=" + user.Email;
 
             // Tạo nội dung HTML cho email
             string titleContent = "Xác nhận địa chỉ Email của bạn - Opuslink";

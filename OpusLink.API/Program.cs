@@ -38,7 +38,7 @@ internal class Program
         builder.Services.AddSwaggerGen();
 
         //Authorization
-        /*builder.Services.AddSwaggerGen(options =>
+        builder.Services.AddSwaggerGen(options =>
         {
             options.SwaggerDoc("v1", new OpenApiInfo
             {
@@ -68,8 +68,9 @@ internal class Program
                     new string[] { }
                 }
             });
-        });*/
+        });
         builder.Services.AddAuthentication(); // Sử dụng dịch vụ Authentication
+        builder.Services.AddAuthorization();
         builder.Services.AddCors(options =>
         {
             options.AddPolicy("CorPolicy", build => build.AllowAnyMethod()
@@ -143,7 +144,7 @@ internal class Program
 
         app.UseRouting();
         app.UseAuthentication();
-/*        app.UseAuthorization();*/
+        app.UseAuthorization();
 
         app.UseEndpoints(endpoints =>
         {
@@ -225,9 +226,9 @@ internal class Program
         var emailConfig = configuration.GetSection("EmailConfiguration").Get<EmailConfiguration>();
         services.AddSingleton(emailConfig);
 
-        /*services.Configure<DataProtectionTokenProviderOptions>(options =>
+        services.Configure<DataProtectionTokenProviderOptions>(options =>
         {
             options.TokenLifespan = TimeSpan.FromMinutes(30);
-        });*/
+        });
     }
 }

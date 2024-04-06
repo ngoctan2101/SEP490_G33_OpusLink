@@ -3,9 +3,11 @@ using OpusLink.Entity.DTO.AccountDTO.Common;
 using OpusLink.Entity.Models;
 using OpusLink.Entity;
 using OpusLink.Entity.DTO.AccountDTO;
+using Microsoft.AspNetCore.Authorization;
 
 namespace OpusLink.API.Controllers.AccountControllers
 {
+    [Authorize(Roles = "Freelancer,Employer")]
     [Route("api/[controller]")]
     [ApiController]
     public class ReportAccountController : ControllerBase

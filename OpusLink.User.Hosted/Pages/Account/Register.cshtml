@@ -8,7 +8,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Register Form | Opuslink Team</title>
+    <title>Đăng ký | Opuslink Team</title>
     <link rel="stylesheet" href="~/css/Register.css">
     <script src="https://kit.fontawesome.com/10f63c3d6e.js" crossorigin="anonymous"></script>
     <!-- jQuery -->
@@ -30,14 +30,20 @@
     if (!hasLength) {
         errorElement.innerText = "Mật khẩu phải dài ít nhất 6 ký tự.";
     } else if (!hasSpecialChar) {
-        errorElement.innerText = "Mật khẩu phải chứa ít nhất một ký tự đặc biệt";
+        errorElement.innerText = "Mật khẩu phải chứa ký tự đặc biệt";
     } else if (!hasNumber) {
-        errorElement.innerText = "Mật khẩu phải chứa ít nhất một số.";
+        errorElement.innerText = "Mật khẩu phải chứa số.";
     } else if (!hasUpperCase || !hasLowerCase) {
-        errorElement.innerText = "Mật khẩu phải chứa ít nhất một chữ cái viết hoa và một chữ cái viết thường.";
+        errorElement.innerText = "Mật khẩu phải chứa chữ cái viết hoa và chữ cái viết thường.";
     } else {
         errorElement.innerText = "";
     }
+        // Kiểm tra xem có lỗi không
+        var hasError = errorElement.innerText !== "";
+
+        // Tùy chỉnh thuộc tính disabled của nút đăng ký tài khoản
+        var registerButton = document.getElementById("registerButton");
+        registerButton.disabled = hasError;
     }
 
     function togglePasswordVisibility(inputId, iconId) {
@@ -67,10 +73,33 @@
         var confirmPassword = document.getElementById("ConfirmPassword").value;
         var confirmPasswordError = document.getElementById("confirmPasswordError");
 
+        // Kiểm tra mật khẩu nhập lại có trùng khớp với mật khẩu không
         if (password !== confirmPassword) {
             confirmPasswordError.innerText = "Nhập lại mật khẩu không khớp với mật khẩu";
         } else {
             confirmPasswordError.innerText = "";
+        }
+
+        // Kiểm tra xem có lỗi nào xuất hiện không
+        var hasPasswordError = document.getElementById("passwordError").innerText !== "";
+        var hasConfirmPasswordError = confirmPasswordError.innerText !== "";
+
+        // Tùy chỉnh thuộc tính disabled của nút đăng ký tài khoản
+        var registerButton = document.getElementById("registerButton");
+        registerButton.disabled = hasPasswordError || hasConfirmPasswordError;
+
+        updateRegisterButtonStyle();
+    }
+
+    function updateRegisterButtonStyle() {
+        var registerButton = document.getElementById("registerButton");
+        var hasError = document.querySelectorAll('.error-message').length > 0 || document.querySelectorAll('input:invalid').length > 0;
+        var allInputsFilled = document.querySelectorAll('input:required').length === document.querySelectorAll('input:required:valid').length;
+
+        if (hasError || !allInputsFilled) {
+            registerButton.classList.remove("active");
+        } else {
+            registerButton.classList.add("active");
         }
     }
 </script>
@@ -105,18 +134,38 @@
         });
     });
 </script>
+<script>
+    function checkUsername() {
+        var usernameInput = document.getElementById("UserName");
+        var username = usernameInput.value.trim(); // Lấy giá trị và loại bỏ dấu cách ở đầu và cuối chuỗi
+        var errorElement = document.getElementById("usernameError");
+        if (username.includes(" ")) {
+            errorElement.innerText = "Tên đăng nhập không được chứa kí tự trắng";
+        } else {
+            errorElement.innerText = ""; // Xóa thông báo lỗi nếu không có kí tự trắng
+        }
+        // Kiểm tra xem có lỗi không
+        var hasError = errorElement.innerText !== "";
+
+        // Tùy chỉnh thuộc tính disabled của nút đăng ký tài khoản
+        var registerButton = document.getElementById("registerButton");
+        registerButton.disabled = hasError;
+    }
+
+</script>
 
 <body>
     <div class="wrapper">
         <form method="post">
-            <h1>Đăng ký | Opuslink</h1>
+            <h1>Đăng ký</h1>
             <div class="input-box">
-                <label class="label">Tên đăng nhập</label>
-                <input type="text" placeholder="Nhập tên đăng nhập" id="UserName" name="Username" required>
+                <label class="label">Tên đăng nhập <span style="color: red;">(*)</span></label>
+                <input type="text" placeholder="Nhập tên đăng nhập" id="UserName" name="Username" required onchange="checkUsername()">
                 <i class="fa-solid fa-user"></i>
             </div>
+            <div id="usernameError" class="alert alert-danger error-message"></div>
             <div class="input-box">
-                <label class="label">Email</label>
+                <label class="label">Email <span style="color: red;">(*)</span></label>
                 <input type="email" placeholder="Nhập email" id="Email" name="Email" required onblur="validateEmail()">
                 <i class="fa-solid fa-envelope"></i>
             </div>
@@ -127,8 +176,14 @@
             </div>
             <div class="input-box">
                 <label class="label">Mật khẩu</label>
-                <input type="password" placeholder="Nhập mật khẩu" id="Password" name="Password" required onchange="checkPasswordLength()">
+                <input type="password" placeholder="Nhập mật khẩu" id="Password" name="Password" required onchange="checkPasswordLength(); validatePasswords();">
                 <i class="fa-solid fa-eye-slash" id="eyeIcon" onclick="togglePasswordVisibility('Password', 'eyeIcon')"></i>
+            </div>
+            <div id="passwordRequirements">
+                <p style="color: red">Mật khẩu phải dài ít nhất 6 ký tự.</p>
+                <p style="color: red">Mật khẩu phải chứa ký tự đặc biệt.</p>
+                <p style="color: red">Mật khẩu phải chứa số.</p>
+                <p style="color: red">Mật khẩu phải chứa chữ cái viết hoa và chữ cái viết thường.</p>
             </div>
             <div id="passwordError" class="alert alert-danger error-message"></div>
             <div class="input-box">
@@ -149,9 +204,12 @@
                     @ViewData["Error"]
                 </div>
             }
-            <button type="submit" class="btn-register">Đăng ký tài khoản</button>
+            <button id="registerButton" type="submit" class="btn-register" disabled>Đăng ký tài khoản</button>
             <div class="login-link">
                 <p>Bạn đã có tài khoản rồi? <a asp-page="/Account/Login">Đăng nhập ngay!</a></p>
+            </div>
+            <div>
+                <p>Lưu ý : Phần <span style="color: red;">(*)</span> không được được trùng với các tài khoản khác</p>
             </div>
         </form>
     </div>

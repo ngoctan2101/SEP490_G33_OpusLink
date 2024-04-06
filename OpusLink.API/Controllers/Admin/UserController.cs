@@ -1,18 +1,19 @@
 ﻿using AutoMapper;
 using Microsoft.AspNetCore.Authorization;
-using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore.Metadata.Internal;
+using OpusLink.Entity;
 using OpusLink.Entity.DTO;
 using OpusLink.Entity.DTO.AccountDTO;
+using OpusLink.Entity.DTO.AccountDTO.SendEmail;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.Models;
+using OpusLink.Service.AccountServices;
 using OpusLink.Service.Admin;
 using OpusLink.Service.UserServices;
 
 namespace OpusLink.API.Controllers.Admin
 {
-/*    [Authorize(Roles = "Admin")]*/
+    [Authorize(Roles = "Freelancer,Employer")]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase
@@ -21,12 +22,17 @@ namespace OpusLink.API.Controllers.Admin
         private IMapper _mapper;
         private ISkillService _skillService;
         private IFreelancerAndSkillService _freelancerAndSkillService;
-        public UserController(IUserService userService, IMapper mapper, ISkillService skillService, IFreelancerAndSkillService freelancerAndSkillService)
+        private readonly OpusLinkDBContext _context;
+        private readonly IEmailService _emailService;
+
+        public UserController(IUserService userService, IMapper mapper, ISkillService skillService, IFreelancerAndSkillService freelancerAndSkillService, OpusLinkDBContext context, IEmailService emailService)
         {
             _userService = userService;
             _mapper = mapper;
             _skillService = skillService;
             _freelancerAndSkillService = freelancerAndSkillService;
+            _emailService = emailService;
+            _context = context;
         }
         [HttpGet("GetAllUser")]
         public IActionResult GetAllUser()
@@ -378,6 +384,20 @@ namespace OpusLink.API.Controllers.Admin
         public async Task<IActionResult> UpdateBanUser(string banReason, DateTime endBanDate, int userId)
         {
             _userService.UpdateBanUser(banReason, endBanDate, userId);
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            string titleContent = "Tài khoản bị khóa - Opuslink";
+
+            string emailContent = "Xin chào " + user.UserName + ",\r\n\r\n" +
+                "Cảm ơn bạn đã sử dụng dịch vụ của Opuslink, nền tảng tìm việc làm freelancer hàng đầu.\r\n" +
+                "Chúng tôi gửi thông báo rằng tài khoản của bạn đã bị khóa từ giờ cho đến " + endBanDate.ToString("dd/MM/yyyy") + "\r\nLý do khóa tài khoản: " +
+                banReason + ".\r\n\r\n" +
+                "Xin lưu ý rằng bạn sẽ không thể truy cập vào tài khoản của mình cho đến " + endBanDate.ToString("dd/MM/yyyy") + "\r\n" +
+                "Để biết thêm thông tin chi tiết và khôi phục tài khoản, vui lòng liên hệ với bộ phận hỗ trợ của chúng tôi.\r\n" +
+                "Cảm ơn bạn đã hiểu và hợp tác trong quá trình này. Nếu bạn có bất kỳ câu hỏi nào, đừng ngần ngại liên hệ với chúng tôi qua email support@opuslink.com.\r\n\r\n" +
+                "Trân trọng,\r\nĐội ngũ hỗ trợ Opuslink";
+
+            var message = new MessageEmail(new string[] { user.Email! }, titleContent, emailContent);
+            _emailService.SendEmail(message);
             return Ok("Update successfull");
         }
 
@@ -385,6 +405,20 @@ namespace OpusLink.API.Controllers.Admin
         public async Task<IActionResult> UpdateUnBanUser(int userId)
         {
             _userService.UpdateUnBanUser(userId);
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+
+            string titleContent = "Tài khoản đã được mở khóa - Opuslink";
+
+            string emailContent = "Xin chào " + user.UserName + ",\r\n\r\n" +
+                "Cảm ơn bạn đã sử dụng dịch vụ của Opuslink, nền tảng tìm việc làm freelancer hàng đầu. " +
+                "Chúng tôi muốn thông báo rằng tài khoản của bạn đã được mở khóa trở lại.\r\n" +
+                "Bạn đã có thể truy cập vào tài khoản của mình bắt đầu từ bây giờ.\r\n\r\n" +
+                "Nếu bạn có bất kỳ câu hỏi nào hoặc cần hỗ trợ thêm, vui lòng liên hệ với bộ phận hỗ trợ của chúng tôi qua email support@opuslink.com.\r\n" +
+                "Cảm ơn bạn đã kiên nhẫn và hợp tác trong quá trình này.\r\n\r\n" +
+                "Trân trọng,\r\nĐội ngũ hỗ trợ Opuslink";
+
+            var message = new MessageEmail(new string[] { user.Email! }, titleContent, emailContent);
+            _emailService.SendEmail(message);
             return Ok("Update successfull");
         }
         private List<FreelancerAndSkill> FindFAS2Add(List<FreelancerAndSkill> fasa, List<int> skillIDs, int userId)
