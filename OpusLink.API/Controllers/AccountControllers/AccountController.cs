@@ -8,6 +8,7 @@ using Microsoft.AspNetCore.Identity;
 using OpusLink.Shared.Enums;
 using System.ComponentModel.DataAnnotations;
 using Microsoft.AspNetCore.Authorization;
+using OpusLink.Shared.Constants;
 
 namespace OpusLink.API.Controllers.AccountControllers
 {
@@ -201,7 +202,7 @@ namespace OpusLink.API.Controllers.AccountControllers
             {
                 var token = await _userManager.GeneratePasswordResetTokenAsync(user);
                 string userName = user.UserName;
-                var passwordResetLink = TotalLink.LinkForgotPassword + "?token=" + Uri.EscapeDataString(token) + "&email=" + user.Email;
+                var passwordResetLink = UrlConstant.UserClientBaseUrl + "/Account/ResetPassword" + "?token=" + Uri.EscapeDataString(token) + "&email=" + user.Email;
                 // Tạo nội dung HTML cho email
                 string titleContent = "Đổi mật khẩu - Opuslink";
 
@@ -345,7 +346,7 @@ namespace OpusLink.API.Controllers.AccountControllers
         {
             var token = await _userManager.GenerateEmailConfirmationTokenAsync(user);
             string userName = user.UserName;
-            string confirmationLink = TotalLink.LinkValidRegister + "?token=" + Uri.EscapeDataString(token) + "&email=" + user.Email;
+            string confirmationLink = UrlConstant.UserClientBaseUrl + "/Account/EmailVerify" + "?token=" + Uri.EscapeDataString(token) + "&email=" + user.Email;
 
             // Tạo nội dung HTML cho email
             string titleContent = "Xác nhận địa chỉ Email của bạn - Opuslink";

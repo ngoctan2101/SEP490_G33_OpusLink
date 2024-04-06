@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace OpusLink.API.Controllers.JobControllers
 {
-    [Authorize(Roles = "Freelancer")]
+    [Authorize(Roles = "Employer")]
     [Route("api/[controller]")]
     [ApiController]
     public class Job10APIController : ControllerBase
@@ -26,6 +26,7 @@ namespace OpusLink.API.Controllers.JobControllers
             _mapper = mapper;
             this.jobAndCategoryService = jobAndCategoryService;
         }
+
         [HttpGet("GetAllLocation")]
         public async Task<IActionResult> GetAllLocation()
         {
