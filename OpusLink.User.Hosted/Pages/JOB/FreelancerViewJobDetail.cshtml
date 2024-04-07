@@ -2,6 +2,7 @@
 @using OpusLink.Entity.DTO.JobDTO;
 @using OpusLink.Entity.Models;
 @using OpusLink.Shared.Enums;
+@using OpusLink.Shared.Constants
 @inject IHttpContextAccessor HttpContextAccessor;
 @model OpusLink.User.Hosted.Pages.JOB.FreelancerViewJobDetailModel
 @{
@@ -111,14 +112,14 @@
                 }
                 <a href="#" class="link" style="display:block">@item.EmployerName</a>
                 <div id="feedbackInfo"></div>
-                <p>Project Information:</p>
+                <p>Thông tin job:</p>
                 <table style="width:100%;font-size:13px">
-                    <tr><td>Project Id:</td><td>@item.JobId</td></tr>
-                    <tr><td style="width:100px">Posted Date:</td><td>@item.DateCreated.ToString("dd/MM/yyyy")</td></tr>
-                    <tr><td>Budget:</td><td>@Math.Round(item.BudgetMin,0).ToString("#,##") ₫<span style="display:inline-block"> - </span>@Math.Round(item.BudgetMax,0).ToString("#,##") ₫</td></tr>
-                    <tr><td>Location:</td><td>@item.Location</td></tr>
+                    <tr><td>Job Id:</td><td>@item.JobId</td></tr>
+                    <tr><td style="width:100px">Ngày đăng:</td><td>@item.DateCreated.ToString("dd/MM/yyyy")</td></tr>
+                    <tr><td>Ngân sách:</td><td>@Math.Round(item.BudgetMin,0).ToString("#,##") ₫<span style="display:inline-block"> - </span>@Math.Round(item.BudgetMax,0).ToString("#,##") ₫</td></tr>
+                    <tr><td>Địa điểm:</td><td>@item.Location</td></tr>
                 </table>
-                <a class="tinnhan-btn" asp-page="/Chat/ChatList" asp-page-handler="AddChatBox" asp-route-EmployerId="@item.EmployerId" asp-route-FreeLancerId="@userId" asp-route-JobId="@item.JobId">Tin Nhắn</a>
+                <a class="tinnhan-btn" asp-page="/Chat/ChatList" asp-page-handler="AddChatBox" asp-route-EmployerId="@item.EmployerId" asp-route-FreeLancerId="@userId" asp-route-JobId="@item.JobId">Nhắn Tin</a>
             </div>
             <div class="col-md-9">
                 <div>
@@ -153,7 +154,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-2">
-                        <p style="display:inline-block">Categories: </p>
+                        <p style="display:inline-block">Danh mục: </p>
                     </div>
                     <div class="col-md-10">
                         @if (item.Categories.Count > 4)
@@ -182,12 +183,12 @@
                 @if (Model.offers.Count != 0)
                 {
                     <div class="row">
-                        <div class="col-md-4">Submit offer: @item.TotalOffer</div>
-                        <div class="col-md-4">Average: @Math.Round(item.AverageCost,0).ToString("#,##") ₫</div>
-                        <div class="col-md-4">Average time: @item.AverageTime days</div>
+                        <div class="col-md-4">Tổng số offer: @item.TotalOffer</div>
+                        <div class="col-md-4">Trung bình: @Math.Round(item.AverageCost,0).ToString("#,##") ₫</div>
+                        <div class="col-md-4">Trung bình thời lượng: @item.AverageTime days</div>
                     </div>
                 }
-                <a asp-page="../MS/FreelancerViewAllMS" asp-route-jobID="@item.JobId" class="link" >View milestones </a>
+                <a asp-page="../MS/FreelancerViewAllMS" asp-route-jobID="@item.JobId" class="link" >Xem milestones </a>
             </div>
         </div>
         @{
@@ -203,7 +204,7 @@
                 f = Model.offerResponse.EstimatedPlan;
             }
         }
-        @if (IsThisJobExpried)
+        @if (item.EndHiringDate < DateTime.Now)
         {
             <div class="row">
                 <div class="col-md-2"></div>
@@ -213,7 +214,7 @@
                 <div class="col-md-2"></div>
             </div>
         }
-        else if (item.Status == (int)JobStatusEnum.Hiring || (item.Status == (int)JobStatusEnum.Hired && IsThisFreelancerGetAcceptToTheJob))
+        else if (item.Status == (int)JobStatusEnum.Hiring || (item.Status == (int)JobStatusEnum.Hired && item.IsFreelancerConfirm==false) || (item.Status == (int)JobStatusEnum.Hired && IsThisFreelancerGetAcceptToTheJob))
         {
             <form method="post" style="box-shadow: 0px 0px 4px 4px #DCDCDC;border-radius:5px;margin-top:30px;padding:8px 12px 8px 12px">
                 <div class="row">
@@ -221,9 +222,9 @@
                         <input type="number" name="offerId" value="@aa" hidden />
                         <input type="number" name="jobId" value="@Model.job.JobId" hidden />
                         <input type="number" name="dateOffer" @b hidden />
-                        <label style="font-weight:bold;font-size:20px;display:block">Proposed cost<span style="color:red">*</span></label>
+                        <label style="font-weight:bold;font-size:20px;display:block">Đề xuất ngân sách<span style="color:red">*</span></label>
                         <input type="text" id="proposedCost" name="proposedCost" placeholder="5,000,000 ₫" value="@c" required @AddReadonlyIfThisFreelancerGetAcceptedToTheJob />
-                        <label style="font-weight:bold;font-size:20px;display:block">Expected days<span style="color:red">*</span></label>
+                        <label style="font-weight:bold;font-size:20px;display:block">Thời lượng dự tính<span style="color:red">*</span></label>
                         <select name="expectedDays" style="width:100%" @AddReadonlyIfThisFreelancerGetAcceptedToTheJob>
                             @for (int i = 1; i < 101; i++)
                             {
@@ -246,7 +247,7 @@
                         {
                             if (Model.isOffered)
                             {
-                                <button type="submit" asp-page-handler="ForUpdate" style="margin-top:15px;width:80%;background-color:green;color:white;font-weight:bold;font-size:30px;border:none">Edit Offer</button>
+                                <button type="submit" asp-page-handler="ForUpdate" style="margin-top:15px;width:80%;background-color:green;color:white;font-weight:bold;font-size:30px;border:none">Sửa Offer</button>
                             }
                             else
                             {
@@ -256,11 +257,11 @@
                     </div>
                     <div class="col-md-8">
                         <div>
-                            <label for="selfIntroduction" style="font-weight:bold;font-size:20px;display:block">Self introduction<span style="color:red">*</span></label>
+                            <label for="selfIntroduction" style="font-weight:bold;font-size:20px;display:block">Tự giới thiệu<span style="color:red">*</span></label>
                             <textarea rows="7" style="width:100%" name="selfIntroduction" placeholder="As a software engineer with a focus on ...&#10;I'm dedicated to ..." required @AddReadonlyIfThisFreelancerGetAcceptedToTheJob>@e</textarea>
                         </div>
                         <div>
-                            <label for="estimatedPlan" style="font-weight:bold;font-size:20px;display:block">Estimated plan<span style="color:red">*</span></label>
+                            <label for="estimatedPlan" style="font-weight:bold;font-size:20px;display:block">Kế hoạch dự kiến<span style="color:red">*</span></label>
                             <textarea rows="7" style="width:100%" name="estimatedPlan" placeholder="First, we will focus on ... by create a ...&#10;Then, use ... to create a ...&#10;Perform test to ensure ..." required @AddReadonlyIfThisFreelancerGetAcceptedToTheJob>@f</textarea>
                         </div>
 
@@ -354,8 +355,8 @@
                                 }
                             }
                         </div>
-                        <p>Job Done: @a.NumberOfJobDone</p>
-                        <button type="button">Message</button>
+                        <p>Số job đã làm: @a.NumberOfJobDone</p>
+                        <button type="button">Nhắn tin</button>
                     </div>
                     <div class="col-md-9" style="border-left:2px solid #BEBEBE">
                         <p>@a.DateOffer.ToString("dd/MM/yyyy")</p>
@@ -446,7 +447,7 @@
     // Function to fetch and display feedback information
     function displayFeedbackInfo() {
         var employerId = @item.EmployerId; // Assuming EmployerId is an integer
-        fetch(`https://localhost:7265/api/Feedback/AverageStars/${employerId}`)
+        fetch(`@(UrlConstant.ApiBaseUrl)/Feedback/AverageStars/${employerId}`)
             .then(response => response.json())
             .then(data => {
                 document.getElementById('feedbackInfo').innerHTML = `
@@ -465,12 +466,12 @@
     // Function to fetch and display feedback information for the freelancer
     function displayFeedbackFreelancer() {
         var freelancerId = @item.FreelancerId; // Assuming FreelancerId is an integer
-        fetch(`https://localhost:7265/api/Feedback/AverageStars/${freelancerId}`)
+        fetch(`@(UrlConstant.ApiBaseUrl)/Feedback/AverageStars/${freelancerId}`)
             .then(response => response.json())
             .then(data => {
                 var feedbackFreelancerDiv = document.getElementById('feedbackFreeLancer');
                 feedbackFreelancerDiv.innerHTML = `
-                        <p>Average Rating: ${data.averageStars}⭐ (${data.numberOfEntries} reviews)</p>
+                        <p>${data.averageStars}⭐ (${data.numberOfEntries} đánh giá)</p>
                     `;
             })
             .catch(error => {

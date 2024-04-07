@@ -8,19 +8,19 @@
 
   <ItemGroup>
     <Compile Remove="Pages\ManageAccount\**" />
+    <Compile Remove="Pages\ManageJob\**" />
     <Content Remove="Pages\ManageAccount\**" />
+    <Content Remove="Pages\ManageJob\**" />
     <EmbeddedResource Remove="Pages\ManageAccount\**" />
+    <EmbeddedResource Remove="Pages\ManageJob\**" />
     <None Remove="Pages\ManageAccount\**" />
+    <None Remove="Pages\ManageJob\**" />
   </ItemGroup>
 
   <ItemGroup>
     <ProjectReference Include="..\OpusLink.Entity\OpusLink.Entity.csproj" />
     <ProjectReference Include="..\OpusLink.Service\OpusLink.Service.csproj" />
     <ProjectReference Include="..\OpusLink.Shared\OpusLink.Shared.csproj" />
-  </ItemGroup>
-
-  <ItemGroup>
-    <Folder Include="Pages\ManageJob\" />
   </ItemGroup>
 
   <ItemGroup>

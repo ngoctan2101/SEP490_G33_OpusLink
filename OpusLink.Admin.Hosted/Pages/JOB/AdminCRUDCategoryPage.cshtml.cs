@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.Models;
+using OpusLink.Shared.Constants;
 using System.Globalization;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -44,7 +45,7 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
             };
             string json = System.Text.Json.JsonSerializer.Serialize<Filter>(filter, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync("https://localhost:7265/api/Job11API/GetAllCategory", httpContent);
+            HttpResponseMessage response = await client.PostAsync(UrlConstant.ApiBaseUrl+"/Job11API/GetAllCategory", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
@@ -112,7 +113,7 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
             };
             string json = System.Text.Json.JsonSerializer.Serialize<Filter>(filter, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync("https://localhost:7265/api/Job11API/GetAllCategory", httpContent);
+            HttpResponseMessage response = await client.PostAsync(UrlConstant.ApiBaseUrl+"/Job11API/GetAllCategory", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
@@ -130,7 +131,7 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
         private async Task<IList<GetCategoryResponse>> GetAllCategoryAsync()
         {
             //get all category
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7265/api/Job11API/GetAllCategory");
+            HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl+"/Job11API/GetAllCategory");
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
@@ -164,11 +165,11 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
             };
             string json = System.Text.Json.JsonSerializer.Serialize<CreateCategoryRequest>(category, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync("https://localhost:7265/api/Job11API/AddCategory", httpContent);
+            HttpResponseMessage response = await client.PostAsync(UrlConstant.ApiBaseUrl+"/Job11API/AddCategory", httpContent);
             
              json = System.Text.Json.JsonSerializer.Serialize<Filter>(filter, options);
              httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-             response = await client.PostAsync("https://localhost:7265/api/Job11API/GetAllCategory", httpContent);
+             response = await client.PostAsync(UrlConstant.ApiBaseUrl+"/Job11API/GetAllCategory", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
@@ -206,11 +207,11 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
             };
             string json = System.Text.Json.JsonSerializer.Serialize<PutCategoryRequest>(category, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync("https://localhost:7265/api/Job11API/UpdateCategory", httpContent);
+            HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl+"/Job11API/UpdateCategory", httpContent);
 
             json = System.Text.Json.JsonSerializer.Serialize<Filter>(filter, options);
             httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            response = await client.PostAsync("https://localhost:7265/api/Job11API/GetAllCategory", httpContent);
+            response = await client.PostAsync(UrlConstant.ApiBaseUrl+"/Job11API/GetAllCategory", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
@@ -238,11 +239,11 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
             {
                 PropertyNameCaseInsensitive = false,
             };
-            HttpResponseMessage response = await client.DeleteAsync("https://localhost:7265/api/Job11API/DeleteCategory/"+ idOfCategory);
+            HttpResponseMessage response = await client.DeleteAsync(UrlConstant.ApiBaseUrl+"/Job11API/DeleteCategory/" + idOfCategory);
             
             string json = System.Text.Json.JsonSerializer.Serialize<Filter>(filter, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            response = await client.PostAsync("https://localhost:7265/api/Job11API/GetAllCategory", httpContent);
+            response = await client.PostAsync(UrlConstant.ApiBaseUrl+"/Job11API/GetAllCategory", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();

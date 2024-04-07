@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using OpusLink.Entity.DTO.AccountDTO.Common;
 using OpusLink.Entity.DTO.AccountDTO;
 using System.IdentityModel.Tokens.Jwt;
+using OpusLink.Shared.Constants;
 
 namespace OpusLink.Admin.Hosted.Pages.Account
 {
@@ -13,7 +14,7 @@ namespace OpusLink.Admin.Hosted.Pages.Account
         public string Password { get; set; }
         public LoginModel() { }
 
-        string link = "https://localhost:7265/api/AdminAccount/login";
+        string link = UrlConstant.ApiBaseUrl+"/AdminAccount/login";
         public void OnGet() { }
 
         public async Task<IActionResult> OnPostAsync(string username, string password)

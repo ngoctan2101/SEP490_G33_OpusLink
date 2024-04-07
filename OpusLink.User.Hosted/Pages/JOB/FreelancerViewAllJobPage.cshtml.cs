@@ -184,6 +184,15 @@ namespace OpusLink.User.Hosted.Pages.JOB
             {
                 AllSavedJobId = await GetListSavedJobId(HttpContext.Session.GetInt32("UserId") ?? 0);
             }
+            isCount = false;
+            foreach (var j in Jobs)
+            {
+                if (j.Status == (int)JobStatusEnum.Hiring && j.EndHiringDate >= DateTime.Now)
+                {
+                    isCount = true;
+                    break;
+                }
+            }
 
         }
         public async Task OnPostForSaveAsync(IFormCollection collection)

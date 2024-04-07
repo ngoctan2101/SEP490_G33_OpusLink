@@ -9,7 +9,7 @@ using System.Linq;
 
 namespace OpusLink.API.Controllers.JobControllers
 {
-    [Authorize(Roles = "Admin")]
+    //[Authorize(Roles = "Admin")]
 
     [Route("api/[controller]")]
     [ApiController]

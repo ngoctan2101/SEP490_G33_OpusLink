@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OpusLink.Entity.DTO;
 using OpusLink.Entity.DTO.JobDTO;
+using OpusLink.Shared.Constants;
 using System.Net.Http.Headers;
 using System.Runtime.Intrinsics.X86;
 using System.Text.Json;
@@ -22,7 +23,7 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
             client = new HttpClient();
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
-            ServiceMangaUrl = "https://localhost:7265/";
+            ServiceMangaUrl = UrlConstant.ApiBaseUrl;
         }
         public async Task<IActionResult> OnGetAsync(int UserId)
         {
@@ -32,7 +33,7 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
                 return RedirectToPage("/Index");
             }
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
-            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/" + UserId);
+            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "/User/GetUserById/" + UserId);
             if (responseUser.IsSuccessStatusCode)
             {
                 string responseBodyUser = await responseUser.Content.ReadAsStringAsync();
@@ -49,7 +50,7 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
         {
             //get all skill
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
-            HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "api/Skill/GetAllSkill");
+            HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "/Skill/GetAllSkill");
             if (response.IsSuccessStatusCode)
             {
                 string responseBodyUser = await response.Content.ReadAsStringAsync();
@@ -66,7 +67,7 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
         {
             int userId = UserId;
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
-            HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "api/User/GetFileCVById/" + userId);
+            HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "/User/GetFileCVById/" + userId);
 
             if (response.IsSuccessStatusCode)
             {
@@ -164,7 +165,7 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
             
             string json = System.Text.Json.JsonSerializer.Serialize<PutUserRequest>(PutUser, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync(ServiceMangaUrl + "api/User/PutUserUser", httpContent);
+            HttpResponseMessage response = await client.PutAsync(ServiceMangaUrl + "/User/PutUserUser", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 //message "User Edited" green

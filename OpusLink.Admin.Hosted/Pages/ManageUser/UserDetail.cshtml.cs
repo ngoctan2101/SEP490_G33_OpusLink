@@ -9,6 +9,7 @@ using System.Text.Json;
 using JsonSerializer = System.Text.Json.JsonSerializer;
 using Microsoft.AspNetCore.Http;
 using OpusLink.Entity.Models;
+using OpusLink.Shared.Constants;
 
 namespace OpusLink.Admin.Hosted.Pages.ManageUser
 {
@@ -26,12 +27,12 @@ namespace OpusLink.Admin.Hosted.Pages.ManageUser
             client = new HttpClient();
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
-            ServiceMangaUrl = "https://localhost:7265/";
+            ServiceMangaUrl = UrlConstant.ApiBaseUrl;
         }
         public async Task OnGetAsync(int id)
         {
             // call list
-            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "api/User/GetUserById/"+id);
+            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "/User/GetUserById/"+id);
             if (responseUser.IsSuccessStatusCode)
             {
                 string responseBodyUser = await responseUser.Content.ReadAsStringAsync();
@@ -45,7 +46,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageUser
         private async Task<IList<SkillDTO>> GetAllSkillAsync()
         {
             //get all skill
-            HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "api/Skill/GetAllSkill");
+            HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "/Skill/GetAllSkill");
             if (response.IsSuccessStatusCode)
             {
                 string responseBodyUser = await response.Content.ReadAsStringAsync();
@@ -61,7 +62,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageUser
         public async Task<ActionResult> OnGetForDownloadAsync(int UserId)
         {
             int userId = UserId;
-            HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "api/User/GetFileCVById/"+userId);
+            HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "/User/GetFileCVById/"+userId);
 
             if (response.IsSuccessStatusCode)
             {
@@ -134,7 +135,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageUser
             PutUser.Email = "caicut@123";
             string json = System.Text.Json.JsonSerializer.Serialize<PutUserRequest>(PutUser, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync(ServiceMangaUrl + "api/User/PutUserAdmin", httpContent);
+            HttpResponseMessage response = await client.PutAsync(ServiceMangaUrl + "/User/PutUserAdmin", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 //message "User Edited" green

@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using OpusLink.Entity.DTO;
 using OpusLink.Entity.DTO.FeedbackDTO;
 using OpusLink.Entity.DTO.FeedbackDTOs;
+using OpusLink.Shared.Constants;
 using System.Net.Http.Headers;
 using System.Text.Json;
 
@@ -48,7 +49,7 @@ namespace OpusLink.User.Hosted.Pages.Evaluate
 				Content = Content
 			}, options);
 			StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-			HttpResponseMessage response = await client.PostAsync("https://localhost:7265/api/Feedback/AddFeedback", httpContent);
+			HttpResponseMessage response = await client.PostAsync(UrlConstant.ApiBaseUrl+"/Feedback/AddFeedback", httpContent);
 			FeebackDTO x = new FeebackDTO();
 			if (response.IsSuccessStatusCode)
 			{

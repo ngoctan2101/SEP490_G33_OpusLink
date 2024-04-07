@@ -1,4 +1,5 @@
 ﻿@page "{id}" 
+@using OpusLink.Shared.Constants
 @model OpusLink.Admin.Hosted.Pages.ManageUser.ViewsListReportModel
 @{
 }
@@ -143,7 +144,7 @@
 
     function LoadReportList(userId) {
         $.ajax({
-            url: `https://localhost:7265/api/Report/GetAllReportById?id=${userId}`,
+            url: `@(UrlConstant.ApiBaseUrl)/Report/GetAllReportById?id=${userId}`,
             method: 'GET',
             contentType: 'application/json',
             success: (dataReport) => {

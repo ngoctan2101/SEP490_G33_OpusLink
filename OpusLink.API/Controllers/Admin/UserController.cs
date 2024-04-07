@@ -13,7 +13,7 @@ using OpusLink.Service.UserServices;
 
 namespace OpusLink.API.Controllers.Admin
 {
-    [Authorize(Roles = "Freelancer,Employer")]
+    //[Authorize(Roles = "Freelancer,Employer")]
     [Route("api/[controller]")]
     [ApiController]
     public class UserController : ControllerBase

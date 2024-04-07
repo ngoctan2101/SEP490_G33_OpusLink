@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.JobDTO;
+using OpusLink.Shared.Constants;
 using System.Net.Http.Headers;
 using System.Text.Json;
 
@@ -34,7 +35,7 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
 
         private async Task<GetJobDetailResponse> GetJobDetail(int jobId)
         {
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7265/api/Job13API/GetJobDetail/" + jobId);
+            HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl+"/Job13API/GetJobDetail/" + jobId);
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
@@ -101,7 +102,7 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
             };
             string json = System.Text.Json.JsonSerializer.Serialize<PutJobRequest>(PutJob, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PutAsync("https://localhost:7265/api/Job13API/EditJob", httpContent);
+            HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl+"/Job13API/EditJob", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 //message "Your job is requested" green
@@ -112,7 +113,7 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
         private async Task<IList<GetCategoryResponse>> GetAllCategoryAsync()
         {
             //get all category
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7265/api/Job13API/GetAllCategory");
+            HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl + "/Job13API/GetAllCategory");
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
@@ -126,7 +127,7 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
         private async Task<IList<GetLocationResponse>> GetAllLocationAsync()
         {
             //get all location
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7265/api/Job13API/GetAllLocation");
+            HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl + "/Job13API/GetAllLocation");
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();

@@ -1,5 +1,6 @@
 ﻿@page "{id:int?}"
 @inject IHttpContextAccessor HttpContextAccessor;
+@using OpusLink.Shared.Constants
 @model OpusLink.User.Hosted.Pages.Employer.Profile.ViewsModel
 @{
     int userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId") ?? 0;
@@ -301,7 +302,7 @@
     // Function to fetch and display feedback information
     function displayAverageStar() {
         var EmployerId = @Model.user.Id; // Assuming EmployerId is an integer
-        fetch(`https://localhost:7265/api/Feedback/AverageStars/${EmployerId}`)
+        fetch(`@(UrlConstant.ApiBaseUrl)/Feedback/AverageStars/${EmployerId}`)
             .then(response => response.json())
             .then(data => {
                 document.getElementById('averageRating').innerHTML = `
@@ -319,7 +320,7 @@
 <script>
     function displayFeedbacks() {
         var userId = @Model.user.Id; // Assuming userId is an integer
-        fetch(`https://localhost:7265/api/Feedback/GetFeedbacksByTargetUser/${userId}`)
+        fetch(`@(UrlConstant.ApiBaseUrl)/Feedback/GetFeedbacksByTargetUser/${userId}`)
             .then(response => response.json())
             .then(data => {
                 var feedbackSection = document.getElementById('feedbackSection');

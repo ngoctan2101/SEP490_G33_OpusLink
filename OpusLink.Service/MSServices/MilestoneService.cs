@@ -115,7 +115,7 @@ namespace OpusLink.Service.MSServices
                 {
                     j.Status = (int)JobStatusEnum.Completed;
                     //neu ko co ms nao bi fail thi F nhan duoc 20% tat ca nhung ms completed
-                    if(AnyMsFail(j)){
+                    if(AnyMsFail(j)==false){
                         freelancer.AmountMoney += 0.2m * TotalMoneyOfMsCompleted(j);
                     }
                     //new co 1 ms bi fail thi E nhan duoc 20% tat ca nhung ms completed

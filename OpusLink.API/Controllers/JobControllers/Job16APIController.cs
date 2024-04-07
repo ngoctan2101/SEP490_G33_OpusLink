@@ -8,7 +8,7 @@ using OpusLink.Shared.Enums;
 
 namespace OpusLink.API.Controllers.JobControllers
 {
-    [Authorize(Roles = "Freelancer")]
+    //[Authorize(Roles = "Freelancer")]
 
     [Route("api/[controller]")]
     [ApiController]

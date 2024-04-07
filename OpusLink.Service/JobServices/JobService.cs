@@ -93,7 +93,10 @@ namespace OpusLink.Service.JobServices
 
         public async Task<int> CreateNewJob(Job j)
         {
+            var e = await _dbContext.Users.Where(u => u.Id == j.EmployerID).FirstOrDefaultAsync();
+            e.AmountMoney -= 200000;
             await _dbContext.Jobs.AddAsync(j);
+
             await _dbContext.SaveChangesAsync();
             return j.JobID;
         }
@@ -108,6 +111,12 @@ namespace OpusLink.Service.JobServices
             b.BudgetTo = a.BudgetTo;
             b.Status = a.Status;
             b.EndHiringDate = a.EndHiringDate;
+            if (b.Status != (int)JobStatusEnum.NotApprove)
+            {
+                var e = await _dbContext.Users.Where(u => u.Id == b.EmployerID).FirstOrDefaultAsync();
+                e.AmountMoney -= 200000;
+            }
+            b.Status = (int)JobStatusEnum.NotApprove;
             await _dbContext.SaveChangesAsync();
         }
 

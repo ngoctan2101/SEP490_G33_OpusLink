@@ -4,6 +4,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using OpusLink.Entity.DTO;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.Models;
+using OpusLink.Shared.Constants;
 using System.Globalization;
 using System.Net.Http;
 using System.Net.Http.Headers;
@@ -30,7 +31,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
             client = new HttpClient();
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
-            ServiceMangaUrl = "https://localhost:7265/";
+            ServiceMangaUrl = UrlConstant.ApiBaseUrl;
             PageNo = 1;
             //category thi chi can moi search thoi
             filter = new Filter()
@@ -49,7 +50,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
             };
             string json = System.Text.Json.JsonSerializer.Serialize<Filter>(filter, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage responseSkill = await client.PostAsync(ServiceMangaUrl + "api/Skill/GetTenSkill", httpContent);
+            HttpResponseMessage responseSkill = await client.PostAsync(ServiceMangaUrl + "/Skill/GetTenSkill", httpContent);
 
             // Check if the HTTP request was successful
             if (responseSkill.IsSuccessStatusCode)
@@ -75,7 +76,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
 
         private async Task<IList<SkillDTO>> GetAllSkillAsync()
         {
-            HttpResponseMessage responseSkill = await client.GetAsync(ServiceMangaUrl + "api/Skill/GetAllSkill");
+            HttpResponseMessage responseSkill = await client.GetAsync(ServiceMangaUrl + "/Skill/GetAllSkill");
 
             // Check if the HTTP request was successful
             if (responseSkill.IsSuccessStatusCode)
@@ -120,7 +121,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
             };
             string json = System.Text.Json.JsonSerializer.Serialize<Filter>(filter, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync(ServiceMangaUrl + "api/Skill/GetTenSkill", httpContent);
+            HttpResponseMessage response = await client.PostAsync(ServiceMangaUrl + "/Skill/GetTenSkill", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 string responseBodySkill = await response.Content.ReadAsStringAsync();
@@ -179,7 +180,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
 
             var content = new StringContent(jsonRequestBody, Encoding.UTF8, "application/json");
 
-            var response = await client.PostAsync(ServiceMangaUrl + "api/Skill/AddSkill", content);
+            var response = await client.PostAsync(ServiceMangaUrl + "/Skill/AddSkill", content);
 
             if (response.IsSuccessStatusCode)
             {
@@ -227,7 +228,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
             var content = new StringContent(jsonRequestBody, Encoding.UTF8, "application/json");
 
             // Assuming your API endpoint for updating a skill is using the PUT method
-            var response = await client.PutAsync(ServiceMangaUrl + $"api/Skill/UpdateSkill", content);
+            var response = await client.PutAsync(ServiceMangaUrl + $"/Skill/UpdateSkill", content);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToPage("./Views"); // Redirect to the skills index page after successful update
@@ -245,7 +246,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
 
             using (HttpClient client = new HttpClient())
             {
-                HttpResponseMessage responseDeleteSkill = await client.DeleteAsync(ServiceMangaUrl + $"api/Skill/DeleteSkillById/{skillIdToDelete}");
+                HttpResponseMessage responseDeleteSkill = await client.DeleteAsync(ServiceMangaUrl + $"/Skill/DeleteSkillById/{skillIdToDelete}");
 
                 if (responseDeleteSkill.IsSuccessStatusCode)
                 {
