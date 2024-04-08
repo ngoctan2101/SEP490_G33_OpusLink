@@ -6,426 +6,448 @@
 <script src="https://cdnjs.cloudflare.com/ajax/libs/library/version/library.min.js"></script>
 
 @{
-	int userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId") ?? -1;
+    int userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId") ?? -1;
 }
 <style>
 
 
 
 
-	.chat-online {
-		color: #34ce57
-	}
+    .chat-online {
+        color: #34ce57
+    }
 
-	.chat-offline {
-		color: #e4606d
-	}
+    .chat-offline {
+        color: #e4606d
+    }
 
-	.chat-messages {
-		display: flex;
-		flex-direction: column;
-		height: 410px;
-		overflow-y: scroll
-	}
+    .chat-messages {
+        display: flex;
+        flex-direction: column;
+        height: 410px;
+        overflow-y: scroll
+    }
 
 
-	.chat-message-left,
-	.chat-message-right {
-		display: flex;
-		flex-shrink: 0
-	}
+    .chat-message-left,
+    .chat-message-right {
+        display: flex;
+        flex-shrink: 0
+    }
 
-	.chat-message-left {
-		margin-right: auto
-	}
+    .chat-message-left {
+        margin-right: auto
+    }
 
-	.chat-message-right {
-		flex-direction: row-reverse;
-		margin-left: auto
-	}
+    .chat-message-right {
+        flex-direction: row-reverse;
+        margin-left: auto
+    }
 
-	.py-3 {
-		padding-top: 1rem !important;
-		padding-bottom: 1rem !important;
-	}
+    .py-3 {
+        padding-top: 1rem !important;
+        padding-bottom: 1rem !important;
+    }
 
-	.px-4 {
-		padding-right: 1.5rem !important;
-		padding-left: 1.5rem !important;
-	}
+    .px-4 {
+        padding-right: 1.5rem !important;
+        padding-left: 1.5rem !important;
+    }
 
-	.flex-grow-0 {
-		flex-grow: 0 !important;
-	}
+    .flex-grow-0 {
+        flex-grow: 0 !important;
+    }
 
-	.border-top {
-		border-top: 1px solid #dee2e6 !important;
-	}
+    .border-top {
+        border-top: 1px solid #dee2e6 !important;
+    }
 
-	.list-group-item {
-		padding-top: 5px;
-	}
+    .list-group-item {
+        padding-top: 5px;
+    }
 
-	.col-12 {
-		height: 520px;
-	}
+    .col-12 {
+        height: 520px;
+    }
 </style>
-<p id="EmployerName" hidden >@Model.chatDTO.EmployerName </p>
+<p id="EmployerName" hidden>@Model.chatDTO.EmployerName </p>
 <p id="FreelancerName" hidden>@Model.chatDTO.FreelancerName </p>
 <h1 class="h3 mb-3">Messages</h1>
 
 <div class="card">
-	<div class="row g-0">
-		<div class="col-12 col-lg-5 col-xl-3 border-right" style="overflow-y: scroll;">
+    <div class="row g-0">
+        <div class="col-12 col-lg-5 col-xl-3 border-right" style="overflow-y: scroll;">
 
-			<div class="px-4 d-none d-md-block">
-				<div class="d-flex align-items-center">
-					<div class="flex-grow-1">
-						<input type="text" class="form-control my-3" placeholder="Search...">
-					</div>
-				</div>
-			</div>
-
-
-			@if (Model.ChatDTOs != null)
-			{
-				if (userId == Model.chatDTO.EmployerID)
-				{
-					@foreach (var chatdto in Model.ChatDTOs)
-					{
-						<a asp-page="./ChatList" asp-route-chatBoxId="@chatdto.ChatBoxID" asp-page-handler="MessageById" class="list-group-item list-group-item-action border-1 border-bottom" onclick="handleClick('@chatdto.ChatBoxID')">
-							<div class="d-flex align-items-start" id="@chatdto.ChatBoxID" href="">
-								<img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="rounded-circle mr-1" alt="" width="40" height="40">
-								<div class="flex-grow-1 ml-3">
-									@if (!chatdto.IsViewed)
-									{
-										<strong>@chatdto.FreelancerName</strong>
-										<div class="small"><strong>@chatdto.NewEstMessage</strong></div>
-									}
-									else
-									{
-										@chatdto.FreelancerName
-										<div class="small">@chatdto.NewEstMessage</div>
-									}
-								</div>
-							</div>
-						</a>
-					}
-				}
-				else
-				{
-					@foreach (var chatdto in Model.ChatDTOs)
-					{
-						<a asp-page="./ChatList" asp-route-chatBoxId="@chatdto.ChatBoxID" asp-page-handler="MessageById" class="list-group-item list-group-item-action border-1 border-bottom" onclick="handleClick('@chatdto.ChatBoxID')">
-							<div class="d-flex align-items-start" id="@chatdto.ChatBoxID" href="">
-								<img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="rounded-circle mr-1" alt="" width="40" height="40">
-								<div class="flex-grow-1 ml-3">
-									@if (!chatdto.IsViewed)
-									{
-										<strong>@chatdto.EmployerName</strong>
-										<div class="small"><strong>@chatdto.NewEstMessage</strong></div>
-									}
-									else
-									{
-										@chatdto.EmployerName
-										<div class="small">@chatdto.NewEstMessage</div>
-									}
-								</div>
-							</div>
-						</a>
-					}
-				}
-				
-			}
-			else
-			{
-				<p>No chat data available</p>
-			}
+            <div class="px-4 d-none d-md-block">
+                <div class="d-flex align-items-center">
+                    <div class="flex-grow-1">
+                        <input type="text" class="form-control my-3" placeholder="Search...">
+                    </div>
+                </div>
+            </div>
 
 
+            @if (Model.ChatDTOs != null)
+            {
+
+                @foreach (var chatdto in Model.ChatDTOs)
+                {
+                    if (userId == chatdto.EmployerID)
+                    {
+                        <a asp-page="./ChatList" asp-route-chatBoxId="@chatdto.ChatBoxID" asp-page-handler="MessageById" class="list-group-item list-group-item-action border-1 border-bottom" onclick="handleClick('@chatdto.ChatBoxID')">
+                            <div class="d-flex align-items-start" id="@chatdto.ChatBoxID" href="">
+                                @*<img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="rounded-circle mr-1" alt="" width="40" height="40">*@
+                                @{
+                                    if (chatdto.FProfilePictureBytes != null && chatdto.FProfilePictureBytes.Length > 0)
+                                    {
+                                        var base64Image = Convert.ToBase64String(chatdto.FProfilePictureBytes);
+                                        var imgSrc = $"data:image/png;base64,{base64Image}";
+                                        <img src="@imgSrc" class="rounded-circle mr-1" alt="" width="40" height="40" />
+                                    }
+                                    else
+                                    {
+                                        <img src="/imgExample/default.png" class="rounded-circle mr-1" alt="" width="40" height="40" />
+                                    }
+                                }
+                                <div class="flex-grow-1 ml-3">
+                                    @if (!chatdto.IsViewed)
+                                    {
+                                        <strong>@chatdto.FreelancerName</strong>
+                                        <div class="small"><strong>@chatdto.NewEstMessage</strong></div>
+                                    }
+                                    else
+                                    {
+                                        @chatdto.FreelancerName
+                                        <div class="small">@chatdto.NewEstMessage</div>
+                                    }
+                                </div>
+                            </div>
+                        </a>
+                    }
+                    else
+                    {
+                        <a asp-page="./ChatList" asp-route-chatBoxId="@chatdto.ChatBoxID" asp-page-handler="MessageById" class="list-group-item list-group-item-action border-1 border-bottom" onclick="handleClick('@chatdto.ChatBoxID')">
+                            <div class="d-flex align-items-start" id="@chatdto.ChatBoxID" href="">
+                                @*<img src="https://bootdey.com/img/Content/avatar/avatar4.png" class="rounded-circle mr-1" alt="" width="40" height="40">*@
+                                @{
+                                    if (chatdto.EProfilePictureBytes != null && chatdto.EProfilePictureBytes.Length > 0)
+                                    {
+                                        var base64Image = Convert.ToBase64String(chatdto.EProfilePictureBytes);
+                                        var imgSrc = $"data:image/png;base64,{base64Image}";
+                                        <img src="@imgSrc" class="rounded-circle mr-1" alt="" width="40" height="40" />
+                                    }
+                                    else
+                                    {
+                                        <img src="/imgExample/default.png" class="rounded-circle mr-1" alt="" width="40" height="40" />
+                                    }
+                                }
+                                <div class="flex-grow-1 ml-3">
+                                    @if (!chatdto.IsViewed)
+                                    {
+                                        <strong>@chatdto.EmployerName</strong>
+                                        <div class="small"><strong>@chatdto.NewEstMessage</strong></div>
+                                    }
+                                    else
+                                    {
+                                        @chatdto.EmployerName
+                                        <div class="small">@chatdto.NewEstMessage</div>
+                                    }
+                                </div>
+                            </div>
+                        </a>
+                    }
+                }
+
+            }
+            else
+            {
+                <p>No chat data available</p>
+            }
 
 
 
-			<hr class="d-block d-lg-none mt-1 mb-0">
-		</div>
-		<div class="col-12 col-lg-7 col-xl-9">
-			<div class="py-2 px-4 border-bottom d-none d-lg-block">
-				<div class="d-flex align-items-center py-1">
-					<div class="position-relative">
-						<img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
-					</div>
-					<div class="flex-grow-1 pl-3">
-						<strong>
-							@if (Model.MessageDTOs != null && Model.MessageDTOs.Any())
-							{
-								var firstMessage = Model.MessageDTOs.First();
-								var chatDTO = Model.ChatDTOs.FirstOrDefault(c => c.ChatBoxID == firstMessage.ChatBoxID);
-								if (chatDTO != null)
-								{
-									if(userId== chatDTO.EmployerID)
-									{
-										@chatDTO.FreelancerName
-									}
-									else
-									{
-										@chatDTO.EmployerName
-									}
-									
-								}
-							}
-						</strong>
-						<div class="text-muted small"><em>Typing...</em></div>
-					</div>
-					<div>
-						@*<button class="btn btn-primary btn-lg mr-1 px-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone feather-lg"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></button>
-						<button class="btn btn-info btn-lg mr-1 px-3 d-none d-md-inline-block"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-video feather-lg"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></button>*@
-						<button class="btn btn-light border btn-lg px-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal feather-lg"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg></button>
-					</div>
-				</div>
-			</div>
 
-			<div class="position-relative">
-				<div id="chatMessages" class="chat-messages p-4">
-					@if (Model.MessageDTOs != null)
-					{
-						if (userId == Model.chatDTO.EmployerID)
-						{
-							@foreach (var message in Model.MessageDTOs)
-							{
-								<div class="@(message.FromEmployer ? "chat-message-right" : "chat-message-left") pb-4">
-									<div>
-										<img src="@(message.FromEmployer ? "https://bootdey.com/img/Content/avatar/avatar3.png" : "https://bootdey.com/img/Content/avatar/avatar1.png")" class="rounded-circle mr-1" alt="@(message.FromEmployer ? "You" : "Freelancer")" width="40" height="40">
-										<div class="text-muted small text-nowrap mt-2">@message.DateCreated.ToString("HH:mm")</div>
-									</div>
-									<div class="flex-shrink-1 bg-light rounded py-2 px-3 @(message.FromEmployer ? "mr-3" : "ml-3")">
-										<div class="font-weight-bold mb-1">
-											@if (message.FromEmployer)
-											{
-												<text>You</text>
-											}
-											else
-											{
-												<text>@Model.ChatDTOs.FirstOrDefault(c => c.ChatBoxID == message.ChatBoxID)?.FreelancerName</text>
-												
-											}
-										</div>
-										<div id="ms">@message.MessageContent</div>
-									</div>
-								</div>
-							}
-						}
-						else
-						{
-							@foreach (var message in Model.MessageDTOs)
-							{
-								<div class="@(message.FromEmployer ? "chat-message-left" : "chat-message-right") pb-4">
-									<div>
-										<img src="@(message.FromEmployer ? "https://bootdey.com/img/Content/avatar/avatar3.png" : "https://bootdey.com/img/Content/avatar/avatar1.png")" class="rounded-circle mr-1" alt="@(message.FromEmployer ? "Employer" : "You")" width="40" height="40">
-										<div class="text-muted small text-nowrap mt-2">@message.DateCreated.ToString("HH:mm")</div>
-									</div>
-									<div class="flex-shrink-1 bg-light rounded py-2 px-3 @(message.FromEmployer ? "ml-3" : "mr-3")">
-										<div class="font-weight-bold mb-1">
-											@if (message.FromEmployer)
-											{
-												<text>@Model.ChatDTOs.FirstOrDefault(c => c.ChatBoxID == message.ChatBoxID)?.EmployerName</text>
-											}
-											else
-											{
-												<text>You</text>
-											}
-										</div>
-										<div id="ms">@message.MessageContent</div>
-									</div>
-								</div>
-							}
-						}
-						
-					}
-					else
-					{
-						<p>Không có đoạn chat</p>
-					}
 
-				</div>
-			</div>
+            <hr class="d-block d-lg-none mt-1 mb-0">
+        </div>
+        <div class="col-12 col-lg-7 col-xl-9">
+            <div class="py-2 px-4 border-bottom d-none d-lg-block">
+                <div class="d-flex align-items-center py-1">
+                    <div class="position-relative">
+                        <img src="https://bootdey.com/img/Content/avatar/avatar3.png" class="rounded-circle mr-1" alt="Sharon Lessman" width="40" height="40">
+                    </div>
+                    <div class="flex-grow-1 pl-3">
+                        <strong>
+                            @if (Model.MessageDTOs != null && Model.MessageDTOs.Any())
+                            {
+                                var firstMessage = Model.MessageDTOs.First();
+                                var chatDTO = Model.ChatDTOs.FirstOrDefault(c => c.ChatBoxID == firstMessage.ChatBoxID);
+                                if (chatDTO != null)
+                                {
+                                    if (userId == chatDTO.EmployerID)
+                                    {
+                                        @chatDTO.FreelancerName
+                                    }
+                                    else
+                                    {
+                                        @chatDTO.EmployerName
+                                    }
 
-			<div class="flex-grow-0 py-3 px-4 border-top">
-				<div class="input-group">
-					<input id="messageInput" type="text" class="form-control" placeholder="Type your message">
-					<button id="sendButton" class="btn btn-primary" onclick="sendMessage(@Model.chatBoxId)">Send</button>
-				</div>
-			</div>
+                                }
+                            }
+                        </strong>
+                        <div class="text-muted small"><em>Typing...</em></div>
+                    </div>
+                    <div>
+                        @*<button class="btn btn-primary btn-lg mr-1 px-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-phone feather-lg"><path d="M22 16.92v3a2 2 0 0 1-2.18 2 19.79 19.79 0 0 1-8.63-3.07 19.5 19.5 0 0 1-6-6 19.79 19.79 0 0 1-3.07-8.67A2 2 0 0 1 4.11 2h3a2 2 0 0 1 2 1.72 12.84 12.84 0 0 0 .7 2.81 2 2 0 0 1-.45 2.11L8.09 9.91a16 16 0 0 0 6 6l1.27-1.27a2 2 0 0 1 2.11-.45 12.84 12.84 0 0 0 2.81.7A2 2 0 0 1 22 16.92z"></path></svg></button>
+                        <button class="btn btn-info btn-lg mr-1 px-3 d-none d-md-inline-block"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-video feather-lg"><polygon points="23 7 16 12 23 17 23 7"></polygon><rect x="1" y="5" width="15" height="14" rx="2" ry="2"></rect></svg></button>*@
+                        <button class="btn btn-light border btn-lg px-3"><svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-more-horizontal feather-lg"><circle cx="12" cy="12" r="1"></circle><circle cx="19" cy="12" r="1"></circle><circle cx="5" cy="12" r="1"></circle></svg></button>
+                    </div>
+                </div>
+            </div>
 
-		</div>
-	</div>
+            <div class="position-relative">
+                <div id="chatMessages" class="chat-messages p-4">
+                    @if (Model.MessageDTOs != null)
+                    {
+                        if (userId == Model.chatDTO.EmployerID)
+                        {
+                            @foreach (var message in Model.MessageDTOs)
+                            {
+                                <div class="@(message.FromEmployer ? "chat-message-right" : "chat-message-left") pb-4">
+                                    <div>
+                                        <img src="@(message.FromEmployer ? "https://bootdey.com/img/Content/avatar/avatar3.png" : "https://bootdey.com/img/Content/avatar/avatar1.png")" class="rounded-circle mr-1" alt="@(message.FromEmployer ? "You" : "Freelancer")" width="40" height="40">
+                                        <div class="text-muted small text-nowrap mt-2">@message.DateCreated.ToString("HH:mm")</div>
+                                    </div>
+                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 @(message.FromEmployer ? "mr-3" : "ml-3")">
+                                        <div class="font-weight-bold mb-1">
+                                            @if (message.FromEmployer)
+                                            {
+                                                <text>You</text>
+                                            }
+                                            else
+                                            {
+                                                <text>@Model.ChatDTOs.FirstOrDefault(c => c.ChatBoxID == message.ChatBoxID)?.FreelancerName</text>
+
+                                            }
+                                        </div>
+                                        <div id="ms">@message.MessageContent</div>
+                                    </div>
+                                </div>
+                            }
+                        }
+                        else
+                        {
+                            @foreach (var message in Model.MessageDTOs)
+                            {
+                                <div class="@(message.FromEmployer ? "chat-message-left" : "chat-message-right") pb-4">
+                                    <div>
+                                        <img src="@(message.FromEmployer ? "https://bootdey.com/img/Content/avatar/avatar3.png" : "https://bootdey.com/img/Content/avatar/avatar1.png")" class="rounded-circle mr-1" alt="@(message.FromEmployer ? "Employer" : "You")" width="40" height="40">
+                                        <div class="text-muted small text-nowrap mt-2">@message.DateCreated.ToString("HH:mm")</div>
+                                    </div>
+                                    <div class="flex-shrink-1 bg-light rounded py-2 px-3 @(message.FromEmployer ? "ml-3" : "mr-3")">
+                                        <div class="font-weight-bold mb-1">
+                                            @if (message.FromEmployer)
+                                            {
+                                                <text>@Model.ChatDTOs.FirstOrDefault(c => c.ChatBoxID == message.ChatBoxID)?.EmployerName</text>
+                                            }
+                                            else
+                                            {
+                                                <text>You</text>
+                                            }
+                                        </div>
+                                        <div id="ms">@message.MessageContent</div>
+                                    </div>
+                                </div>
+                            }
+                        }
+
+                    }
+                    else
+                    {
+                        <p>Không có đoạn chat</p>
+                    }
+
+                </div>
+            </div>
+
+            <div class="flex-grow-0 py-3 px-4 border-top">
+                <div class="input-group">
+                    <input id="messageInput" type="text" class="form-control" placeholder="Type your message">
+                    <button id="sendButton" class="btn btn-primary" onclick="sendMessage(@Model.chatBoxId)">Send</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
 
 </div>
 <script src="~/microsoft/signalr/dist/browser/signalr.js"></script>
 
 
 <script>
-	function handleClick(chatBoxId) {
-		$.ajax({
-			url: '/ChatListModel?handler=GetMessageByIdAsync&chatBoxId=' + chatBoxId,
-			type: 'GET',
-			success: function (response) {
-				// Xử lý dữ liệu nhận được từ server
-				console.log(response);
-			},
-			error: function (xhr) {
-				console.error(xhr.responseText);
-			}
-		});
-	}
+    function handleClick(chatBoxId) {
+        $.ajax({
+            url: '/ChatListModel?handler=GetMessageByIdAsync&chatBoxId=' + chatBoxId,
+            type: 'GET',
+            success: function (response) {
+                // Xử lý dữ liệu nhận được từ server
+                console.log(response);
+            },
+            error: function (xhr) {
+                console.error(xhr.responseText);
+            }
+        });
+    }
 </script>
 
 
 <script>
-	var connection = new signalR.HubConnectionBuilder().withUrl("/chatHub").build();
-	connection.start().then(function () {
-		console.log("Kết nối SignalR đã được thiết lập thành công");
-		var chatBoxId = @Model.chatBoxId;
-		// Call the joinChatRoom function with the chatBoxId
-		joinChatRoom(chatBoxId);
-	}).catch(function (err) {
-		console.error(err.toString());
-	});
+    var connection = new signalR.HubConnectionBuilder().withUrl("@(UrlConstant.ApiBaseUrl)/chatHub").build();
+    connection.start().then(function () {
+        console.log("Kết nối SignalR đã được thiết lập thành công");
+        var chatBoxId = @Model.chatBoxId;
+        // Call the joinChatRoom function with the chatBoxId
+        joinChatRoom(chatBoxId);
+    }).catch(function (err) {
+        console.error(err.toString());
+    });
 
-	connection.on("ReceiveMessage", function (fromEmployer, messageContent) {
-		appendMessage(fromEmployer, messageContent);
-
-
-		// // Gửi tin nhắn sau khi kết nối đã được tái thiết lập
-		// var chatBoxId = @Model.chatBoxId;
-		// var messageContent = document.getElementById("messageInput").value.trim();
-		// if (messageContent) {
-		// 	var user = "You";
-		// 	connection.invoke("SendMessage", chatBoxId, user, messageContent).catch(function (err) {
-		// 		console.error(err.toString());
-		// 	});
-		// 	document.getElementById("messageInput").value = "";
-		// }
-	});
+    connection.on("ReceiveMessage", function (fromEmployer, messageContent) {
+        appendMessage(fromEmployer, messageContent);
 
 
-	// Function to append message to the chat window
-	function appendMessage(fromEmployer, message) {
-		// Create a new <div> element to display the message
-		var messageDiv = document.createElement("div");
-		if ((fromEmployer === true && @userId === @Model.chatDTO.EmployerID) || (fromEmployer === false && @userId === @Model.chatDTO.FreelancerID)) {
-			messageDiv.innerHTML = "<div class=\"chat-message-right pb-4\"><div><img src=\"https://bootdey.com/img/Content/avatar/avatar1.png\" class=\"rounded-circle mr-1\"  width=\"40\" height=\"40\"><div class=\"text-muted small text-nowrap mt-2\">" + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + "</div></div><div class=\"flex-shrink-1 bg-light rounded py-2 px-3 mr-3\"><div class=\"font-weight-bold mb-1\">You</div><div>" + message + "</div></div></div>";
-		} else {
-			if (@userId=== @Model.chatDTO.EmployerID) {
-				messageDiv.innerHTML = "<div class=\"chat-message-left pb-4\"><div><img src=\"https://bootdey.com/img/Content/avatar/avatar2.png\" class=\"rounded-circle ml-1\"  width=\"40\" height=\"40\"><div class=\"text-muted small text-nowrap mt-2\">" + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + "</div></div><div class=\"flex-shrink-1 bg-light rounded py-2 px-3 ml-3\"><div class=\"font-weight-bold mb-1\">"  + document.getElementById("FreelancerName").innerHTML + "</div><div>" + message + "</div></div></div>";
-
-			}
-			else {
-				messageDiv.innerHTML = "<div class=\"chat-message-left pb-4\"><div><img src=\"https://bootdey.com/img/Content/avatar/avatar2.png\" class=\"rounded-circle ml-1\"  width=\"40\" height=\"40\"><div class=\"text-muted small text-nowrap mt-2\">" + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + "</div></div><div class=\"flex-shrink-1 bg-light rounded py-2 px-3 ml-3\"><div class=\"font-weight-bold mb-1\">" + document.getElementById("EmployerName").innerHTML +  "</div><div>" + message + "</div></div></div>";
-
-			}
-		}
-
-		// Set the inner HTML of the message div with the message content
+        // // Gửi tin nhắn sau khi kết nối đã được tái thiết lập
+        // var chatBoxId = @Model.chatBoxId;
+        // var messageContent = document.getElementById("messageInput").value.trim();
+        // if (messageContent) {
+        // 	var user = "You";
+        // 	connection.invoke("SendMessage", chatBoxId, user, messageContent).catch(function (err) {
+        // 		console.error(err.toString());
+        // 	});
+        // 	document.getElementById("messageInput").value = "";
+        // }
+    });
 
 
-		// Append the message div to the chatMessages container
-		document.getElementById("chatMessages").appendChild(messageDiv);
-	}
+    // Function to append message to the chat window
+    function appendMessage(fromEmployer, message) {
+        // Create a new <div> element to display the message
+        var messageDiv = document.createElement("div");
+        if ((fromEmployer === true && @userId === @Model.chatDTO.EmployerID) || (fromEmployer === false && @userId === @Model.chatDTO.FreelancerID)) {
+            messageDiv.innerHTML = "<div class=\"chat-message-right pb-4\"><div><img src=\"https://bootdey.com/img/Content/avatar/avatar1.png\" class=\"rounded-circle mr-1\"  width=\"40\" height=\"40\"><div class=\"text-muted small text-nowrap mt-2\">" + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + "</div></div><div class=\"flex-shrink-1 bg-light rounded py-2 px-3 mr-3\"><div class=\"font-weight-bold mb-1\">You</div><div>" + message + "</div></div></div>";
+        } else {
+            if (@userId=== @Model.chatDTO.EmployerID) {
+                messageDiv.innerHTML = "<div class=\"chat-message-left pb-4\"><div><img src=\"https://bootdey.com/img/Content/avatar/avatar2.png\" class=\"rounded-circle ml-1\"  width=\"40\" height=\"40\"><div class=\"text-muted small text-nowrap mt-2\">" + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + "</div></div><div class=\"flex-shrink-1 bg-light rounded py-2 px-3 ml-3\"><div class=\"font-weight-bold mb-1\">" + document.getElementById("FreelancerName").innerHTML + "</div><div>" + message + "</div></div></div>";
 
-	
+            }
+            else {
+                messageDiv.innerHTML = "<div class=\"chat-message-left pb-4\"><div><img src=\"https://bootdey.com/img/Content/avatar/avatar2.png\" class=\"rounded-circle ml-1\"  width=\"40\" height=\"40\"><div class=\"text-muted small text-nowrap mt-2\">" + new Date().toLocaleTimeString([], { hour: '2-digit', minute: '2-digit' }) + "</div></div><div class=\"flex-shrink-1 bg-light rounded py-2 px-3 ml-3\"><div class=\"font-weight-bold mb-1\">" + document.getElementById("EmployerName").innerHTML + "</div><div>" + message + "</div></div></div>";
 
-	async function joinChatRoom(chatBoxId) {
-		try {
-			await connection.invoke("JoinChatRoom", chatBoxId);
-			console.log("Joined chat room:", chatBoxId);
-		} catch (error) {
-			console.error("Error joining chat room:", error);
-		}
-	}
+            }
+        }
 
-	function sendMessage(chatBoxId) {
-		var messageContent = document.getElementById("messageInput").value.trim();
-		console.log("Message content:", messageContent); // Log the message content
-		if (messageContent) {
-			if (connection.state === 'Connected') {
-				var FromEmployer = false; // Assuming the user is the sender
-				// Neu id o session = employerId cua ChatBox nay thi chuyen fromEmployer = true
-				if (@userId === @Model.chatDTO.EmployerID ) {
-					FromEmployer = true;
-				}
-				// document.getElementById("messageInput").value = "";
-				
-				// connection.start()
-				// 	.then(() => {
-				// 		console.log("Connection established.");
-				// 		// Now that the connection is established, you can perform further actions if needed
-				// 	})
-				// 	.catch(error => {
-				// 		console.error("Connection failed: ", error);
-				// 	});
-				// saveMessageToDatabase(chatBoxId, FromEmployer, messageContent);
-				connection.invoke("SendMessage", chatBoxId, FromEmployer, messageContent)
-					// .then(() => {
-					// 	console.log("Message sent successfully");
-					// 	document.getElementById("messageInput").value = "";
-					// 	// Append the sent message to the chat window
-					// 	//appendMessage(user, messageContent);
+        // Set the inner HTML of the message div with the message content
 
-					// 	// Save the message to the database
 
-					// 	// saveMessageToDatabase(chatBoxId, FromEmployer, messageContent);
-					// })
-					.catch(error => console.error(error.toString()));
-			} else {
-				console.error("SignalR connection is not in the 'Connected' state.");
-			}
-		}
-	}
+        // Append the message div to the chatMessages container
+        document.getElementById("chatMessages").appendChild(messageDiv);
+    }
 
 
 
-	function saveMessageToDatabase(chatBoxId, FromEmployer, messageContent) {
-		// Make an AJAX request to save the message to the database
-		$.ajax({
-			url:  "@(UrlConstant.ApiBaseUrl+"/Chat/CreateMessage")",
-			type: 'POST',
-			headers: {
-				"ngrok-skip-browser-warning": true
-			},
-			contentType: 'application/json',
-			data: JSON.stringify({
-				chatBoxId: chatBoxId,
-				fromEmployer: FromEmployer,
-				messageContent: messageContent
-			}),
-			success: function (response) {
-				// if(@userId == @Model.chatDTO.EmployerID){
-				// 	appendMessage(true, messageContent);
-				// }
-				// else {
-				// 	appendMessage(false, messageContent);
-				// }
-				
-				console.log("Message saved to database:", response);
-			},
-			error: function (xhr) {
-				console.error("Error saving message to database:", xhr.responseText);
-			}
-		});
-	}
+    async function joinChatRoom(chatBoxId) {
+        try {
+            await connection.invoke("JoinChatRoom", chatBoxId);
+            console.log("Joined chat room:", chatBoxId);
+        } catch (error) {
+            console.error("Error joining chat room:", error);
+        }
+    }
+
+    function sendMessage(chatBoxId) {
+        var messageContent = document.getElementById("messageInput").value.trim();
+        console.log("Message content:", messageContent); // Log the message content
+        if (messageContent) {
+            if (connection.state === 'Connected') {
+                var FromEmployer = false; // Assuming the user is the sender
+                // Neu id o session = employerId cua ChatBox nay thi chuyen fromEmployer = true
+                if (@userId === @Model.chatDTO.EmployerID ) {
+                    FromEmployer = true;
+                }
+                // document.getElementById("messageInput").value = "";
+
+                // connection.start()
+                // 	.then(() => {
+                // 		console.log("Connection established.");
+                // 		// Now that the connection is established, you can perform further actions if needed
+                // 	})
+                // 	.catch(error => {
+                // 		console.error("Connection failed: ", error);
+                // 	});
+                // saveMessageToDatabase(chatBoxId, FromEmployer, messageContent);
+                connection.invoke("SendMessage", chatBoxId, FromEmployer, messageContent)
+                    // .then(() => {
+                    // 	console.log("Message sent successfully");
+                    // 	document.getElementById("messageInput").value = "";
+                    // 	// Append the sent message to the chat window
+                    // 	//appendMessage(user, messageContent);
+
+                    // 	// Save the message to the database
+
+                    // 	// saveMessageToDatabase(chatBoxId, FromEmployer, messageContent);
+                    // })
+                    .catch(error => console.error(error.toString()));
+            } else {
+                console.error("SignalR connection is not in the 'Connected' state.");
+            }
+        }
+    }
 
 
 
-	function getChatBoxId() {
-		// Implement this method to return the chat box ID
-		// For example:
-		return document.getElementById("chatBoxId").value; // Assuming "chatBoxId" is the ID of your chat box element
-	}
+    function saveMessageToDatabase(chatBoxId, FromEmployer, messageContent) {
+        // Make an AJAX request to save the message to the database
+        $.ajax({
+            url: "@(UrlConstant.ApiBaseUrl + "/Chat/CreateMessage")",
+            type: 'POST',
+            headers: {
+                "ngrok-skip-browser-warning": true
+            },
+            contentType: 'application/json',
+            data: JSON.stringify({
+                chatBoxId: chatBoxId,
+                fromEmployer: FromEmployer,
+                messageContent: messageContent
+            }),
+            success: function (response) {
+                // if(@userId == @Model.chatDTO.EmployerID){
+                // 	appendMessage(true, messageContent);
+                // }
+                // else {
+                // 	appendMessage(false, messageContent);
+                // }
+
+                console.log("Message saved to database:", response);
+            },
+            error: function (xhr) {
+                console.error("Error saving message to database:", xhr.responseText);
+            }
+        });
+    }
+
+
+
+    function getChatBoxId() {
+        // Implement this method to return the chat box ID
+        // For example:
+        return document.getElementById("chatBoxId").value; // Assuming "chatBoxId" is the ID of your chat box element
+    }
 
 
 </script>
 <script>
-	// Scroll to bottom of chat messages
-	var chatMessages = document.getElementById('chatMessages');
-	chatMessages.scrollTop = chatMessages.scrollHeight;
+    // Scroll to bottom of chat messages
+    var chatMessages = document.getElementById('chatMessages');
+    chatMessages.scrollTop = chatMessages.scrollHeight;
 </script>

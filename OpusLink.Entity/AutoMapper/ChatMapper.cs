@@ -15,9 +15,9 @@ namespace OpusLink.Entity.AutoMapper
         {
             CreateMap<ChatBox, ChatDTO>()
                 .ForMember(x => x.EmployerName, x => x.MapFrom(x => x.Employer.UserName))
-                .ForMember(x => x.ProfilePicture, x => x.MapFrom(x => x.Employer.ProfilePicture))
+                .ForMember(x => x.EProfilePicture, x => x.MapFrom(x => x.Employer.ProfilePicture))
                 .ForMember(x => x.FreelancerName, x => x.MapFrom(x => x.Freelancer.UserName))
-                .ForMember(x => x.ProfilePicture, x => x.MapFrom(x => x.Freelancer.ProfilePicture))
+                .ForMember(x => x.FProfilePicture, x => x.MapFrom(x => x.Freelancer.ProfilePicture))
                 .ForMember(x => x.NewEstMessage, x => x.MapFrom(x => NewEstMessage(x.Messages)));
             CreateMap<Message, MessageDTO>()
                 .ForMember(dest => dest.DateCreated, opt => opt.MapFrom(src => src.DateCreated.ToString("HH:mm"))); 
