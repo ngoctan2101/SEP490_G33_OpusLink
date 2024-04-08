@@ -65,14 +65,14 @@ namespace OpusLink.API.Controllers.Feedbacks
 
                 // Calculate average stars
                 var averageStars = feedbackEntries.Any() ? feedbackEntries.Average(f => f.Star) : 0;
-
-                // Count the number of feedback entries
-                var numberOfEntries = feedbackEntries.Count;
+				var formattedAverageStars = averageStars.ToString("F2");
+				// Count the number of feedback entries
+				var numberOfEntries = feedbackEntries.Count;
 
                 // Create an anonymous object to return both averageStars and numberOfEntries
                 var result = new
                 {
-                    AverageStars = averageStars,
+                    AverageStars = formattedAverageStars,
                     NumberOfEntries = numberOfEntries
                 };
 

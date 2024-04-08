@@ -6,7 +6,7 @@ using OpusLink.Service.JobServices;
 
 namespace OpusLink.API.Controllers.JobControllers
 {
-    [Authorize(Roles = "Freelancer")]
+  /*  [Authorize(Roles = "Freelancer")]*/
     [Route("api/[controller]")]
     [ApiController]
     public class Job5APIController : ControllerBase
