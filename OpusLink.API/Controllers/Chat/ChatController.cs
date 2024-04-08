@@ -34,6 +34,7 @@ namespace OpusLink.API.Controllers.Chat
 			List<ChatBox> chat = _chatService.getAllChatBox()
 				.ToList();
 			List<ChatDTO> list = _mapper.Map<List<ChatDTO>>(chat);
+
 			return Ok(list);
 		}
 
@@ -53,7 +54,26 @@ namespace OpusLink.API.Controllers.Chat
 
 				// Map chat boxes to DTOs if needed
 				List<ChatDTO> chatDTOs = _mapper.Map<List<ChatDTO>>(chatBoxes);
-
+				string imageFilePath = "";
+				foreach (var chatBox in chatDTOs)
+				{
+					if (String.IsNullOrEmpty(chatBox.FProfilePicture) == false)
+					{
+						imageFilePath = Path.Combine(Directory.GetCurrentDirectory(), "FilesUserUpload\\profileImage", chatBox.FProfilePicture);
+						if (System.IO.File.Exists(imageFilePath))
+						{
+							chatBox.FProfilePictureBytes = System.IO.File.ReadAllBytes(imageFilePath);
+						}
+					}
+					if (String.IsNullOrEmpty(chatBox.EProfilePicture) == false)
+					{
+						imageFilePath = Path.Combine(Directory.GetCurrentDirectory(), "FilesUserUpload\\profileImage", chatBox.EProfilePicture);
+						if (System.IO.File.Exists(imageFilePath))
+						{
+							chatBox.EProfilePictureBytes = System.IO.File.ReadAllBytes(imageFilePath);
+						}
+					}
+				}
 				return Ok(chatDTOs);
 			}
 			catch (Exception ex)

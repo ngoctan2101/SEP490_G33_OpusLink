@@ -24,6 +24,7 @@ using OpusLink.Service.Feedbacks;
 using OpusLink.Service.WithDrawRequestServices;
 using OpusLink.Service.NotificationServices;
 using OpusLink.Service.MSServices;
+using OpusLink.Shared.Constants;
 
 internal class Program
 {
@@ -123,10 +124,10 @@ internal class Program
         {
             options.AddPolicy("AllowOrigin", builder =>
             {
-                builder.WithOrigins("https://localhost:7265")
+                builder.WithOrigins(UrlConstant.UserClientBaseUrl, UrlConstant.AdminClientBaseUrl)
                        .AllowAnyHeader()
-                       .AllowAnyMethod();
-            });
+                       .AllowAnyMethod().AllowCredentials();
+			});
         });
         builder.Services.AddSignalR();
         var app = builder.Build();
@@ -137,7 +138,7 @@ internal class Program
             app.UseSwagger();
             app.UseSwaggerUI();
         }
-        app.UseCors(builder => { builder.AllowAnyOrigin().AllowAnyMethod().AllowAnyHeader(); });
+        app.UseCors("AllowOrigin");
         app.UseHttpsRedirection();
 
         app.UseStaticFiles();
@@ -149,7 +150,7 @@ internal class Program
         app.UseEndpoints(endpoints =>
         {
             endpoints.MapControllers();
-            endpoints.MapHub<ChatHub>("/chatHub");
+            endpoints.MapHub<ChatHub>("/api/chatHub");
         });
 
         app.Run();
