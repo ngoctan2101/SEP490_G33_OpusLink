@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json.Linq;
 using OpusLink.Entity.DTO;
@@ -19,6 +19,7 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
         public UserDTO user { get; set; } = null!;
         public IList<SkillDTO> AllSkills { get; set; } = default!;
         public PutUserRequest PutUser { get; set; }
+        public string Mess = "";
         public ViewsModel()
         {
             client = new HttpClient();
@@ -26,8 +27,9 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
             client.DefaultRequestHeaders.Accept.Add(contentType);
             ServiceMangaUrl = UrlConstant.ApiBaseUrl;
         }
-        public async Task<IActionResult> OnGetAsync(int UserId)
+        public async Task<IActionResult> OnGetAsync(int UserId, string Mess)
         {
+            this.Mess = Mess;
             if (HttpContext.Session.GetString("Role").Equals("Employer"))
             {
                 return RedirectToPage("/Index");
@@ -148,7 +150,21 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
                 {
                     PutUser.Id = Int32.Parse(collection[key]);
                 }
+                else if (key.Contains("bankaccountinfor"))
+                {
+                    PutUser.BankAccountInfor = (collection[key]);
+                }
+                else if (key.Contains("bankname"))
+                {
+                    PutUser.BankName = collection[key];
+                }
 
+            }
+            
+            if (DateTime.Today.Year - PutUser.Dob.Value.Year < 18)
+            {
+                Mess = "Số tuổi phải hơn 18 tuổi ";
+                return RedirectToPage("/Freelancer/Profile/Views", new { UserId = PutUser.Id , Mess = Mess });
             }
             var options = new JsonSerializerOptions
             {

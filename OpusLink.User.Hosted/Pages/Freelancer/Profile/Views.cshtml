@@ -136,10 +136,10 @@
 
                 <!-- Thông tin bên phải -->
                 <div class="col-md-6">
-@*                     <div class="mb-3">
+                    <div class="mb-3" hidden>
                         <label for="id" class="form-label">ID:</label>
                         <input type="text" class="form-control" id="id" name="id"  readonly value="@Model.user.Id">
-                    </div> *@
+                    </div>
                 <a href="/HistoryPayment/HistoryPayment?UserId=@Model.user.Id" class="btn btn btn-primary mt-3">
                     <i class="bi bi-arrow-left"></i> History
                 </a>
@@ -152,6 +152,11 @@
                         <label for="email" class="form-label">Email:</label>
                         <input type="email" class="form-control" id="email" name="email"  value="@Model.user.Email">
                     </div>
+                    @if(Model.Mess != null)
+                    {
+                        <p style="color:red">@Model.Mess</p>
+                    
+                    }
                     <div class="mb-3">
                         <label for="dob" class="form-label">Date of Birth:</label>
                         <input type="date" class="form-control" id="dob" name="dob" value="@Model.user.Dob?.ToString("yyyy-MM-dd")">
@@ -197,7 +202,7 @@
                         <label for="amountmoney" class="form-label">BankAccountInfor:</label>
                         @* <input type="text" class="form-control" id="bankaccountinfor" name="bankaccountinfor"
                                 readonly value="@Model.user.BankAccountInfor"> *@
-                        <textarea rows="7" style="width:100%" id="bankacccountinfor" name="bankacccountinfor" placeholder="Số tài khoản: 123xxxxx&#10;Tên tài khoản: NGUYEN VAN A&#10; " required>@Model.user.BankAccountInfor</textarea>
+                        <textarea rows="7" style="width:100%" id="bankaccountinfor" name="bankaccountinfor" placeholder="Số tài khoản: 123xxxxx&#10;Tên tài khoản: NGUYEN VAN A&#10; " >@Model.user.BankAccountInfor</textarea>
                     </div>
                     <div class="mb-3">
                         <label for="amountmoney" class="form-label">BankName:</label>
