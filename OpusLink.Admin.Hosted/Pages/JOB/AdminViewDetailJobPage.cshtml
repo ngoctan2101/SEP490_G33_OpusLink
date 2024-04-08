@@ -158,7 +158,7 @@
                 <table>
                     <tr>
                         <td colspan="2">
-                            Are you sure you want to delete this job ?
+                            Bạn có thực sự muốn xóa job này ?
                         </td>
                     </tr>
                     <tr>
@@ -170,8 +170,8 @@
                         </td>
                     </tr>
                     <tr>
-                        <td style="text-align:center"><button type="submit" asp-page-handler="ForDelete" style="background-color:#2DB964;color:white;border:2px solid #2DB964;width:120px">Yes</button></td>
-                        <td style="text-align:center"><button type="button" onclick="hideModal()" style="background-color:#CCCCCC; color:white;width:120px;border:2px solid #CCCCCC">No</button></td>
+                        <td style="text-align:center"><button type="submit" asp-page-handler="ForDelete" style="background-color:#2DB964;color:white;border:2px solid #2DB964;width:120px">Có</button></td>
+                        <td style="text-align:center"><button type="button" onclick="hideModal()" style="background-color:#CCCCCC; color:white;width:120px;border:2px solid #CCCCCC">Không</button></td>
                     </tr>
                 </table>
             </form>
@@ -198,14 +198,14 @@
                     <img id="profileImage" src="/img/default.png" style="width:50%;height:auto;display:block;margin-bottom:10px" />
                 }
             } 
-            <a asp-page="../ManageUser/UserDetail" asp-route-id="@item.EmployerId" class="link" style="display:block">@item.EmployerName</a>
+            <a asp-page="../ManageUser/UserDetail" asp-route-id="@item.EmployerId" class="link" style="display:block; font-size:25px">@item.EmployerName</a>
             ⭐⭐⭐⭐⭐
-            <p>Project Information:</p>
+            <p style="font-weight:bold">Thông tin job:</p>
             <table style="width:100%;font-size:13px">
-                <tr><td>Project Id:</td><td>@item.JobId</td></tr>
-                <tr><td style="width:100px">Posted Date:</td><td>@item.DateCreated.ToString("dd/MM/yyyy")</td></tr>
-                <tr><td>Budget:</td><td>@Math.Round(item.BudgetMin,0).ToString("#,##") ₫<span style="display:inline-block"> - </span>@Math.Round(item.BudgetMax,0).ToString("#,##") ₫</td></tr>
-                <tr><td>Location:</td><td>@item.Location</td></tr>
+                <tr><td>Job Id:</td><td>@item.JobId</td></tr>
+                <tr><td style="width:100px">Ngày đăng:</td><td>@item.DateCreated.ToString("dd/MM/yyyy")</td></tr>
+                <tr><td>Ngân sách:</td><td>@Math.Round(item.BudgetMin,0).ToString("#,##") ₫<span style="display:inline-block"> - </span>@Math.Round(item.BudgetMax,0).ToString("#,##") ₫</td></tr>
+                <tr><td>Địa điểm:</td><td>@item.Location</td></tr>
             </table>
         </div>
         <div class="col-md-9">
@@ -270,9 +270,9 @@
             @if (item.TotalOffer > 0)
             {
                 <div class="row">
-                    <div class="col-md-4">Submit offer: @item.TotalOffer</div>
-                    <div class="col-md-4">Average: @Math.Round(item.AverageCost,0).ToString("#,##") ₫</div>
-                    <div class="col-md-4">Average time: @item.AverageTime days</div>
+                    <div class="col-md-4">Tổng số offer: @item.TotalOffer</div>
+                    <div class="col-md-4">Số tiền offer trung bình: @Math.Round(item.AverageCost,0).ToString("#,##") ₫</div>
+                    <div class="col-md-4">Thời lượng trung bình: @item.AverageTime ngày</div>
                 </div>
             }
         </div>

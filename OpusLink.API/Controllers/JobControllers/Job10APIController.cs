@@ -8,7 +8,7 @@ using System.Diagnostics;
 
 namespace OpusLink.API.Controllers.JobControllers
 {
-    [Authorize(Roles = "Employer")]
+    //[Authorize(Roles = "Employer")]
     [Route("api/[controller]")]
     [ApiController]
     public class Job10APIController : ControllerBase

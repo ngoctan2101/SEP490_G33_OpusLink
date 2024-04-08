@@ -2,6 +2,7 @@
 @using OpusLink.Entity.DTO.JobDTO;
 @using OpusLink.Entity.Models;
 @using OpusLink.Shared.Enums;
+@using OpusLink.Shared.Constants
 @model OpusLink.Admin.Hosted.Pages.JOB.AdminViewAllJobPageModel
 @{
 }
@@ -283,7 +284,7 @@
 <script>
     function displayAllChild(categoryID) {
         $.ajax({
-            url: "https://localhost:7265/api/Job3API/GetAllChildCategory?parentId=" + categoryID,
+            url: "@(UrlConstant.ApiBaseUrl)/Job3API/GetAllChildCategory?parentId=" + categoryID,
             type: "get",
             contentType: "application/json",
             success: function (result, status, xhr) {

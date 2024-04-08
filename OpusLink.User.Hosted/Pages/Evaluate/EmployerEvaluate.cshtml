@@ -1,4 +1,5 @@
 ﻿@page
+@using OpusLink.Shared.Constants
 @model OpusLink.User.Hosted.Pages.Evaluate.EmployerEvaluateModel
 @{
 }
@@ -290,7 +291,7 @@
 			};
 
 			try {
-				const response = await fetch('https://localhost:7265/api/Feedback/AddFeedback', {
+				const response = await fetch('@(UrlConstant.ApiBaseUrl)/Feedback/AddFeedback', {
 					method: 'POST',
 					headers: {
 						'Content-Type': 'application/json'

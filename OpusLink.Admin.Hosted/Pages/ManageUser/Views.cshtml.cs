@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OpusLink.Entity.DTO;
 using OpusLink.Entity.DTO.JobDTO;
+using OpusLink.Shared.Constants;
 using System.Net.Http.Headers;
 using System.Text.Json;
 
@@ -24,7 +25,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageUser
             client = new HttpClient();
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
-            ServiceMangaUrl = "https://localhost:7265/";
+            ServiceMangaUrl = UrlConstant.ApiBaseUrl;
             PageNo = 1;
             //user thi chi can moi search thoi
             filter = new Filter()
@@ -43,7 +44,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageUser
             };
             string json = System.Text.Json.JsonSerializer.Serialize<Filter>(filter, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage responseUser = await client.PostAsync(ServiceMangaUrl + "api/User/GetTenUser", httpContent);
+            HttpResponseMessage responseUser = await client.PostAsync(ServiceMangaUrl + "/User/GetTenUser", httpContent);
             if (responseUser.IsSuccessStatusCode)
             {
                 string responseBodyUser = await responseUser.Content.ReadAsStringAsync();
@@ -59,7 +60,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageUser
 
 
             //return list ALL skill (for filter ?)
-            HttpResponseMessage responseSkill = await client.GetAsync(ServiceMangaUrl + "api/Skill/GetAllSkill");
+            HttpResponseMessage responseSkill = await client.GetAsync(ServiceMangaUrl + "/Skill/GetAllSkill");
             if (responseSkill.IsSuccessStatusCode)
             {
                 string responseBodySkill = await responseSkill.Content.ReadAsStringAsync();
@@ -91,7 +92,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageUser
             };
             string json = System.Text.Json.JsonSerializer.Serialize<Filter>(filter, options);
             StringContent httpContent = new StringContent(json, System.Text.Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync(ServiceMangaUrl + "api/User/GetTenUser", httpContent);
+            HttpResponseMessage response = await client.PostAsync(ServiceMangaUrl + "/User/GetTenUser", httpContent);
             if (response.IsSuccessStatusCode)
             {
                 string responseBodySkill = await response.Content.ReadAsStringAsync();
@@ -105,7 +106,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageUser
 
             }
             //return list ALL skill (for filter ?)
-            HttpResponseMessage responseSkill = await client.GetAsync(ServiceMangaUrl + "api/Skill/GetAllSkill");
+            HttpResponseMessage responseSkill = await client.GetAsync(ServiceMangaUrl + "/Skill/GetAllSkill");
             if (responseSkill.IsSuccessStatusCode)
             {
                 string responseBodySkill = await responseSkill.Content.ReadAsStringAsync();

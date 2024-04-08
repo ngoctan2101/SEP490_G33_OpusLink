@@ -11,7 +11,7 @@ using System.IO;
 
 namespace OpusLink.API.Controllers.Admin
 {
-    [Authorize(Roles = "Freelancer,Admin,Employer")]
+    //[Authorize(Roles = "Freelancer,Admin,Employer")]
     [Route("api/[controller]")]
     [ApiController]
     public class SkillController : ControllerBase

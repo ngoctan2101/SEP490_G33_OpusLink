@@ -5,10 +5,10 @@ using OpusLink.User.Hosted.Pages.Chat;
 
 var builder = WebApplication.CreateBuilder(args);
 
-var connectionString = builder.Configuration.GetConnectionString("OpusLinkDBContextConnection") ?? throw new InvalidOperationException("Connection string 'OpusLinkDBContextConnection' not found.");
+//var connectionString = builder.Configuration.GetConnectionString("OpusLinkDBContextConnection") ?? throw new InvalidOperationException("Connection string 'OpusLinkDBContextConnection' not found.");
 
-builder.Services.AddDbContext<OpusLinkDBContext>(options =>
-    options.UseSqlServer(connectionString));
+//builder.Services.AddDbContext<OpusLinkDBContext>(options =>
+//    options.UseSqlServer(connectionString));
 
 // Add services to the container.
 builder.Services.AddSession(options =>

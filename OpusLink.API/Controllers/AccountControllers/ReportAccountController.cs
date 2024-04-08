@@ -7,7 +7,7 @@ using Microsoft.AspNetCore.Authorization;
 
 namespace OpusLink.API.Controllers.AccountControllers
 {
-    [Authorize(Roles = "Freelancer,Employer")]
+    //[Authorize(Roles = "Freelancer,Employer")]
     [Route("api/[controller]")]
     [ApiController]
     public class ReportAccountController : ControllerBase

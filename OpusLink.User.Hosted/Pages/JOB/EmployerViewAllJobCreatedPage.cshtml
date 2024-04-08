@@ -108,10 +108,10 @@
                 </div>
                 <div class="row" style="margin-bottom:15px">
                     <div class="col-md-3">
-                        <button type="submit" name="pageNo_1" value="1" style="width:100%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964;border-radius:3px">Search & Filter</button>
+                        <button type="submit" name="pageNo_1" value="1" style="width:100%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964;border-radius:3px">Tìm kiếm</button>
                     </div>
                     <div class="col-md-7">
-                        <input name="Search_Str" value="@Model.filter.SearchStr" style="width:100%;border-radius:3px" placeholder="Find Job" />
+                        <input name="Search_Str" value="@Model.filter.SearchStr" style="width:100%;border-radius:3px" placeholder="Tìm job" />
                     </div>
                     <div class="col-md-2">
                     </div>
@@ -120,7 +120,7 @@
                     <div class="col-md-3">
                         <table style="width:100%;margin-bottom:10px;box-shadow: 0px 0px 4px 4px #DCDCDC;background-color:#FFFFFF" class="filter">
                             <tr id="tsn123">
-                                <td colspan="3" class="td"><h6>Category</h6></td>
+                                <td colspan="3" class="td"><h6>Danh mục</h6></td>
                             </tr>
                             @foreach (var category in Model.Categories)
                             {
@@ -143,7 +143,7 @@
                         </table>
                         <table class="filter" style="width:100%;box-shadow: 0px 0px 4px 4px #DCDCDC;padding:4px;margin-bottom:10px;background-color:#FFFFFF">
                             <tr>
-                                <td class="td" colspan="2"><h6>Status</h6></td>
+                                <td class="td" colspan="2"><h6>Trạng thái</h6></td>
                             </tr>
                             @foreach (var status in Enum.GetValues(typeof(JobStatusEnum)))
                             {
@@ -159,7 +159,7 @@
                         </table>
                         <table class="filter" style="width:100%;box-shadow: 0px 0px 4px 4px #DCDCDC;padding:4px;margin-bottom:10px;background-color:#FFFFFF">
                             <tr>
-                                <td class="td" colspan="1"><h6>Date Range</h6></td>
+                                <td class="td" colspan="1"><h6>Ngày đăng</h6></td>
                             </tr>
                             <tr>
                                 <td class="td">
@@ -169,7 +169,7 @@
                         </table>
                         <table class="filter" style="width:100%;box-shadow: 0px 0px 4px 4px #DCDCDC;padding:4px;margin-bottom:10px;background-color:#FFFFFF">
                             <tr>
-                                <td class="td" colspan="3"><h6>Price Range</h6></td>
+                                <td class="td" colspan="3"><h6>Ngân sách</h6></td>
                             </tr>
                             <tr>
                                 <td class="td">
@@ -195,13 +195,13 @@
                                             <h6 style="margin:1px;text-align: center">Id</h6>
                                         </th>
                                         <th width="60%">
-                                            <h6 style="margin:1px;text-align: left">Title</h6>
+                                            <h6 style="margin:1px;text-align: left">Tiêu đề</h6>
                                         </th>
                                         <th width="10%">
-                                            <h6 style="margin:1px;text-align: center">Offers</h6>
+                                            <h6 style="margin:1px;text-align: center">Tổng số offer</h6>
                                         </th>
                                         <th width="10%">
-                                            <h6 style="margin:1px;text-align: left">Status</h6>
+                                            <h6 style="margin:1px;text-align: left">Trạng thái</h6>
                                         </th>
                                         <th width="17%"></th>
                                     </tr>

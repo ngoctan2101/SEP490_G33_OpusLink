@@ -12,7 +12,7 @@ using System.Diagnostics;
 
 namespace OpusLink.API.Controllers.JobControllers
 {
-    [Authorize(Roles = "Freelancer")]
+    //[Authorize(Roles = "Freelancer")]
 
     [Route("api/[controller]")]
     [ApiController]

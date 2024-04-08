@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.JobDTO;
+using OpusLink.Shared.Constants;
 using System.Net.Http.Headers;
 using System.Text.Json;
 
@@ -19,7 +20,7 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
         }
         public async Task OnGetAsync(int JobId)
         {
-            HttpResponseMessage response = await client.GetAsync("https://localhost:7265/api/Job13API/GetJobDetail/" + JobId);
+            HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl+"/Job13API/GetJobDetail/" + JobId);
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
@@ -42,7 +43,7 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
             {
                 PropertyNameCaseInsensitive = false,
             };
-            HttpResponseMessage response =  await client.DeleteAsync("https://localhost:7265/api/Job13API/DeleteJob/" + idOfJob);
+            HttpResponseMessage response =  await client.DeleteAsync(UrlConstant.ApiBaseUrl+"/Job13API/DeleteJob/" + idOfJob);
             if (response.IsSuccessStatusCode)
             {
                 return RedirectToPage("/JOB/AdminViewAllJobPage");

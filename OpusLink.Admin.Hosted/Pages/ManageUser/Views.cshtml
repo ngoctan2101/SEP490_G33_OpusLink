@@ -1,4 +1,5 @@
 ﻿@page
+@using OpusLink.Shared.Constants
 @model OpusLink.Admin.Hosted.Pages.ManageUser.ViewsModel
 @{
 }
@@ -292,7 +293,7 @@
 
             // Ajax request
             $.ajax({
-                url: `https://localhost:7265/api/User/UnBanUser?userId=` + userID,
+                url: `@(UrlConstant.ApiBaseUrl)/User/UnBanUser?userId=` + userID,
                 method: 'PATCH',
                 contentType: 'application/json',
                 success: function (response) {
@@ -339,7 +340,7 @@
 
             // Ajax request
             $.ajax({
-                url: `https://localhost:7265/api/User/BanUser?banReason=` + reason + `&endBanDate=` + cutoffDate + `&userId=` + userID,
+                url: `@(UrlConstant.ApiBaseUrl)/User/BanUser?banReason=` + reason + `&endBanDate=` + cutoffDate + `&userId=` + userID,
                 method: 'PATCH',
                 contentType: 'application/json',
                 success: function (response) {

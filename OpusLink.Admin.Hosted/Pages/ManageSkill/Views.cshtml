@@ -1,4 +1,5 @@
 ﻿@page "{SkillId:int?}"
+@using OpusLink.Shared.Constants
 @model OpusLink.Admin.Hosted.Pages.ManageSkill.ViewsModel
 @{
 }
@@ -198,7 +199,7 @@
             // Gửi yêu cầu xóa kỹ năng với skillID đến server
             // Ví dụ sử dụng AJAX
             $.ajax({
-                url: 'https://localhost:7265/api/Skill/DeleteSkillById/' + skillID, // Update the URL based on your controller and action
+                url: '@(UrlConstant.ApiBaseUrl)/Skill/DeleteSkillById/' + skillID, // Update the URL based on your controller and action
                 type: 'DELETE', // You might use POST or DELETE depending on your server configuration
                 success: function (result) {
                     // Xử lý kết quả sau khi xóa (cập nhật giao diện, thông báo, v.v.)

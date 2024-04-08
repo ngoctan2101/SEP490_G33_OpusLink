@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using OpusLink.Entity.DTO;
 using OpusLink.Entity.DTO.NotificationDTO;
 using OpusLink.Entity.DTO.WithdrawRequestDTO;
+using OpusLink.Shared.Constants;
 using System.Net.Http.Headers;
 using System.Text;
 using System.Text.Json;
@@ -31,7 +32,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
             client = new HttpClient();
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
-            ServiceMangaUrl = "https://localhost:7265/";
+            ServiceMangaUrl = UrlConstant.ApiBaseUrl;
 
 
         }
@@ -50,7 +51,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
         public async Task<IActionResult> OnGet()
         {
 
-            HttpResponseMessage responseWithDraw = await client.GetAsync(ServiceMangaUrl + "api/WithDrawRequest/GetAllWithdrawRequestByStatus/" + 1);
+            HttpResponseMessage responseWithDraw = await client.GetAsync(ServiceMangaUrl + "/WithDrawRequest/GetAllWithdrawRequestByStatus/" + 1);
             if (responseWithDraw.IsSuccessStatusCode)
             {
                 string responseBodyWithDraw = await responseWithDraw.Content.ReadAsStringAsync();
@@ -104,7 +105,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
 
             var content = new StringContent(jsonRequestBody, Encoding.UTF8, "application/json");
 
-            var response = await client.PutAsync(ServiceMangaUrl + $"api/WithDrawRequest/UpdateHWithdrawRequestByStatusToFail/{wid}/{resonres}", content);
+            var response = await client.PutAsync(ServiceMangaUrl + $"/WithDrawRequest/UpdateHWithdrawRequestByStatusToFail/{wid}/{resonres}", content);
 
             
 
@@ -119,7 +120,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
 
             var notifi = System.Text.Json.JsonSerializer.Serialize(noti);
             var content1 = new StringContent(notifi, Encoding.UTF8, "application/json");
-            HttpResponseMessage response1 = await client.PostAsync(ServiceMangaUrl + $"api/Notification/AddNotification", content1);
+            HttpResponseMessage response1 = await client.PostAsync(ServiceMangaUrl + $"/Notification/AddNotification", content1);
 
 
 
@@ -184,7 +185,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
             // waillet - tien
             var jsonProduct = System.Text.Json.JsonSerializer.Serialize(uidres);
             var content7 = new StringContent(jsonProduct, Encoding.UTF8, "application/json");
-            await client.PutAsync(ServiceMangaUrl + $"api/User/WithdrawMoney/{price}/{uidres}", content7);
+            await client.PutAsync(ServiceMangaUrl + $"/User/WithdrawMoney/{price}/{uidres}", content7);
 
             //add to history
             HistoryPaymentDTO his = new HistoryPaymentDTO();
@@ -197,7 +198,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
 
             var hisroy = System.Text.Json.JsonSerializer.Serialize(his);
             var content8 = new StringContent(hisroy, Encoding.UTF8, "application/json");
-            HttpResponseMessage response = await client.PostAsync(ServiceMangaUrl + $"api/HistoryPayment/AddHistoryPayment", content8);
+            HttpResponseMessage response = await client.PostAsync(ServiceMangaUrl + $"/HistoryPayment/AddHistoryPayment", content8);
             int HisPayId = 0;
             if (response.IsSuccessStatusCode)
             {
@@ -209,11 +210,11 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
             // update status with draw
             var jsonProduct1 = System.Text.Json.JsonSerializer.Serialize(withdrawidres);
             var content9 = new StringContent(jsonProduct1, Encoding.UTF8, "application/json");
-            await client.PutAsync(ServiceMangaUrl + $"api/WithDrawRequest/UpdateHisIdWithdrawRequest/{withdrawidres}/{HisPayId}", content9);
+            await client.PutAsync(ServiceMangaUrl + $"/WithDrawRequest/UpdateHisIdWithdrawRequest/{withdrawidres}/{HisPayId}", content9);
 
             var jsonProduct2 = System.Text.Json.JsonSerializer.Serialize(withdrawidres);
             var content10 = new StringContent(jsonProduct2, Encoding.UTF8, "application/json");
-            await client.PutAsync(ServiceMangaUrl + $"api/WithDrawRequest/UpdateHWithdrawRequestByStatusToSuccessfull/{withdrawidres}", content10);
+            await client.PutAsync(ServiceMangaUrl + $"/WithDrawRequest/UpdateHWithdrawRequestByStatusToSuccessfull/{withdrawidres}", content10);
 
 
             //https://localhost:7131/HistoryPayment/HistoryPaymentDetail?payId=1578
@@ -227,7 +228,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
 
             var notifi = System.Text.Json.JsonSerializer.Serialize(noti);
             var content1 = new StringContent(notifi, Encoding.UTF8, "application/json");
-            HttpResponseMessage response1 = await client.PostAsync(ServiceMangaUrl + $"api/Notification/AddNotification", content1);
+            HttpResponseMessage response1 = await client.PostAsync(ServiceMangaUrl + $"/Notification/AddNotification", content1);
             
 
             return Redirect("/ManagerWithDrawRequest/Views");

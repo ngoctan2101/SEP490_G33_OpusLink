@@ -2,6 +2,7 @@
 @using OpusLink.Entity.DTO.JobDTO;
 @using OpusLink.Entity.Models;
 @using OpusLink.Shared.Enums;
+@using OpusLink.Shared.Constants
 @inject IHttpContextAccessor HttpContextAccessor;
 @model OpusLink.User.Hosted.Pages.JOB.EmployerViewJobDetailPageModel
 @{
@@ -95,7 +96,10 @@
     <div class="col-md-10">
         <div style="display:inline-block;text-align:center;position: relative;width:100%;height:50px">
             <a href="../JOB/EmployerViewAllJobCreatedPage" style="position: absolute;top: 50%;left: 0px;">Back to list</a>
-            <a asp-page="./EmployerUpdateJobPage" asp-route-JobId="@item.JobId" style="width:100px; background-color:#4A86E8;color:white;font-weight:bold;font-size:18px;position: absolute;height:30px;bottom:0px;right: 10px;text-decoration: none;">Edit</a>
+            @if (item.IsFreelancerConfirm ==false)
+            {
+                <a asp-page="./EmployerUpdateJobPage" asp-route-JobId="@item.JobId" style="width:100px; background-color:#4A86E8;color:white;font-weight:bold;font-size:18px;position: absolute;height:30px;bottom:0px;right: 10px;text-decoration: none;">Edit</a>
+            }
         </div>
         <div class="row">
             <div class="col-md-3">
@@ -113,14 +117,14 @@
                 }
                 <a asp-page="../Employer/Profile/ViewsProfileFreelancer" asp-route-UserId="@item.EmployerId" class="link" style="display:block">@item.EmployerName</a>
                 <div id="feedbackInfo"></div>
-                <p>Project Information:</p>
+                <p>Thông tin job:</p>
                 <table style="width:100%;font-size:13px">
-                    <tr><td>Project Id:</td><td>@item.JobId</td></tr>
-                    <tr><td style="width:100px">Posted Date:</td><td>@item.DateCreated.ToString("dd/MM/yyyy")</td></tr>
-                    <tr><td>Budget:</td><td>@Math.Round(item.BudgetMin,0).ToString("#,##") ₫<span style="display:inline-block"> - </span>@Math.Round(item.BudgetMax,0).ToString("#,##") ₫</td></tr>
-                    <tr><td>Location:</td><td>@item.Location</td></tr>
+                    <tr><td>Job Id:</td><td>@item.JobId</td></tr>
+                    <tr><td style="width:100px">Ngày đăng:</td><td>@item.DateCreated.ToString("dd/MM/yyyy")</td></tr>
+                    <tr><td>Ngân sách:</td><td>@Math.Round(item.BudgetMin,0).ToString("#,##") ₫<span style="display:inline-block"> - </span>@Math.Round(item.BudgetMax,0).ToString("#,##") ₫</td></tr>
+                    <tr><td>Địa điểm:</td><td>@item.Location</td></tr>
                 </table>
-                <a asp-page="../MS/EmployerViewAllMS" asp-route-jobID="@item.JobId" class="link" >View milestones </a>
+                
             </div>
             <div class="col-md-9">
                 <div>
@@ -155,7 +159,7 @@
                 </div>
                 <div class="row">
                     <div class="col-md-2">
-                        <p style="display:inline-block">Categories: </p>
+                        <p style="display:inline-block">Danh mục: </p>
                     </div>
                     <div class="col-md-10">
                         @if (item.Categories.Count > 4)
@@ -182,19 +186,20 @@
                 @*<p style="white-space: pre-line">@Html.Raw(item.JobContent.Replace("\r\n", "&#10;"))</p>*@
                 <p style="white-space: pre-line;margin-top:10px">@item.JobContent</p>
                 <div class="row">
-                    <div class="col-md-4">Submit offer: @item.TotalOffer</div>
-                    <div class="col-md-4">Average: @(Math.Round(item.AverageCost, 0).ToString("#,##")) ₫</div>
-                    <div class="col-md-4">Average time: @item.AverageTime days</div>
+                    <div class="col-md-4">Tổng số offer: @item.TotalOffer</div>
+                    <div class="col-md-4">Trung bình: @(Math.Round(item.AverageCost, 0).ToString("#,##")) ₫</div>
+                    <div class="col-md-4">Trung bình thời lượng: @item.AverageTime days</div>
                 </div>
+                <a asp-page="../MS/EmployerViewAllMS" asp-route-jobID="@item.JobId" class="link">Xem milestones</a>
             </div>
         </div>
         @if (Model.offers.Count > 0)
         {
-            <p style="width:100%;text-align:center;color:#4A86E8;font-size:30px">Offers:</p>
+            <p style="width:100%;text-align:center;color:#4A86E8;font-size:30px">Offer nhận được</p>
         }
         else
         {
-            <p style="width:100%;text-align:center;color:#4A86E8;font-size:20px">Receiving Offers</p>
+            <p style="width:100%;text-align:center;color:#4A86E8;font-size:20px">Chưa có offer</p>
         }
         <div>
             @foreach (var a in Model.offers)
@@ -260,17 +265,26 @@
                             <input type="text" hidden name="FreelancerID" value="@a.FreelancerID"/>
                             @if(item.FreelancerId!=null && item.FreelancerId == a.FreelancerID)
                             {
-                                <button type="submit" class="hireButton" style="background-color:#7E2100" asp-page-handler="ForCancelHire">Cancel hire</button>
+                                @if (Model.job.EmployerDoneEditMilestone == false)
+                                {
+                                    <button type="submit" class="hireButton" style="background-color:#7E2100" asp-page-handler="ForCancelHire">Bỏ chọn</button>
+
+                                }
+                                else
+                                {
+                                    <button type="submit" class="hireButton" asp-page-handler="ForHire" disabled>Đang làm việc</button>
+                                }
+
                             }
                             else if (item.FreelancerId != null && item.FreelancerId != a.FreelancerID)
                             {
-                                <button type="button" class="hireButton" style="background-color:#D4D4D4" disabled>Hire</button>
+                                <button type="button" class="hireButton" style="background-color:#D4D4D4" disabled>Chọn</button>
                             }
                             else
                             {
-                                <button type="submit" class="hireButton" asp-page-handler="ForHire">Hire</button>
+                                <button type="submit" class="hireButton" style="background-color:#7E2100" asp-page-handler="ForHire">Chọn</button>
                             }
-                            
+
                         </form>
                     </div>
                 </div>
@@ -320,7 +334,7 @@
     // Function to fetch and display feedback information
     function displayFeedbackInfo() {
         var employerId = @item.EmployerId; // Assuming EmployerId is an integer
-        fetch(`https://localhost:7265/api/Feedback/AverageStars/${employerId}`)
+        fetch(`@(UrlConstant.ApiBaseUrl)/Feedback/AverageStars/${employerId}`)
             .then(response => response.json())
             .then(data => {
                 document.getElementById('feedbackInfo').innerHTML = `

@@ -47,11 +47,11 @@
             <div class="col-md-3"></div>
             <div class="col-md-6">
                 <form method="post" onsubmit="return validateBudgetFromAndTo()">
-                    <p class="Label">Set a title for the job</p>
-                    <input type="text" name="title" placeholder="Job Title" style="width:100% " required />
-                    <p class="Label">Set categories to recruit</p>
+                    <p class="Label">Đặt tiều đề cho job</p>
+                    <input type="text" name="title" placeholder="Tiêu đề" style="width:100% " required />
+                    <p class="Label">Chọn danh mục để tuyển dụng</p>
                     <select style="width:350px;height:30px" onchange="ClickACategory()" id="categoryDropdown">
-                        <option value="" disabled selected>Choose category</option>
+                        <option value="" disabled selected>Chọn danh mục</option>
                         @foreach (var item in Model.AllCategories)
                         {
                             <option value="@item.CategoryID" onclick="ClickACategory(@item.CategoryID ,@item.CategoryName)">@item.CategoryName</option>
@@ -59,11 +59,11 @@
                     </select>
                     <div id="CategoryContainer" style="min-height:30px">
                     </div>
-                    <p class="Label">Description for the job</p>
+                    <p class="Label">Mô tả cho job</p>
                     <textarea name="content" style="width:100%;" rows="5" required></textarea>
-                    <p class="Label">Expected budget for this job</p>
+                    <p class="Label">Ngân sách của job</p>
                     <div class="row">
-                        <div class="col-md-1">From</div>
+                        <div class="col-md-1">Từ</div>
                         <div class="col-md-5">
                             <select name="budget_min" id="budgetFrom">
                                 @for (int i = 1; i < 200; i++)
@@ -79,7 +79,7 @@
                                 }
                             </select>
                         </div>
-                        <div class="col-md-1">To</div>
+                        <div class="col-md-1">Đến</div>
                         <div class="col-md-5">
                             <select name="budget_max" id="budgetTo">
                                 @for (int i = 1; i < 200; i++)
@@ -99,7 +99,7 @@
                     <div>
                         <span id="errorMessage" style="color:red"></span>
                     </div>
-                    <p class="Label">Location</p>
+                    <p class="Label">Địa điểm</p>
                     <select name="location">
                         @foreach (var loca in Model.AllLocations)
                         {
@@ -113,9 +113,9 @@
                             }
                         }
                     </select>
-                    
-                    <div style="text-align:center;margin-top:15px">
-                        <button type="submit" style="background-color:#3C78D8;color:white;font-size:20px">Request to post job</button>
+                    <p style="margin-top:15px">Phí yêu cầu đăng job: 200.000 ₫</p>
+                    <div style="text-align:center;margin-bottom:15px">
+                        <button type="submit" style="background-color:#3C78D8;color:white;font-size:20px">Gửi yêu cầu đăng job</button>
                     </div>
                 </form>
             </div>
@@ -164,11 +164,24 @@
         if (parseInt(fromBudget) >= parseInt(toBudget)) {
             fromBudgetInput.classList.add("error");
             toBudgetInput.classList.add("error");
-            errorMessage.innerHTML = "From Budget must be less than To Budget.";
+            errorMessage.innerHTML = "Ngân sách khoảng từ A đến B, A nhỏ hơn B.";
             return false;
         }
 
         // If everything is fine, allow the form to be submitted
+
+
+        var totalMoney = document.getElementById("amountforms").innerHTML;
+        var fee = 200000;
+        var errorMessage = document.getElementById("errorMessage");
+
+        // Remove existing error messages
+        errorMessage.innerHTML = "";
+
+        if (parseInt(totalMoney) < parseInt(fee)) {
+            errorMessage.innerHTML = "Bạn không đủ tiền để gửi yêu cầu đăng bài.";
+            return false;
+        }
         return true;
     }
 </script>
