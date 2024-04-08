@@ -18,4 +18,4 @@ namespace OpusLink.Shared.Constants
         public const string UserClientBaseUrl = "https://localhost:7131";
         public const string AdminClientBaseUrl = "https://localhost:7165";
     }
-}
+} 
