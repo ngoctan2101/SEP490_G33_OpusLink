@@ -29,8 +29,8 @@ namespace OpusLink.API.Controllers.AccountControllers
             _signInManager = signInManager;
         }
 
-        [HttpPost("login")]
-        public async Task<ApiResponseModel> Login([FromBody] LoginDTO model)
+        [HttpPost("loginUser")]
+        public async Task<ApiResponseModel> LoginUser([FromBody] LoginDTO model)
         {
             try
             {
@@ -48,7 +48,7 @@ namespace OpusLink.API.Controllers.AccountControllers
                         Message = string.Join(";", errors)
                     };
                 }
-                var result = await _accountService.Login(model);
+                var result = await _accountService.LoginUser(model);
                 return result;
             }
             catch (Exception ex)
@@ -94,7 +94,7 @@ namespace OpusLink.API.Controllers.AccountControllers
                     return new ApiResponseModel()
                     {
                         Code = 400,
-                        Message = "Bạn chưa đủ tuổi để đăng kí tài khoản",
+                        Message = TotalMessage.RegisterNotEnoughAge,
                         IsSuccess = false
                     };
                 }
@@ -123,9 +123,10 @@ namespace OpusLink.API.Controllers.AccountControllers
 
                 //Role mặc định là Freelancer and Employer
                 var resultRoleFreelancer = await _userManager.AddToRoleAsync(user, Roles.Freelancer.ToString());
-                if(resultRoleFreelancer.Succeeded == false)
+                if (resultRoleFreelancer.Succeeded == false)
                 {
-                    return new ApiResponseModel(){
+                    return new ApiResponseModel()
+                    {
                         Code = 400,
                         Message = TotalMessage.RegisterError,
                         IsSuccess = false
@@ -134,7 +135,7 @@ namespace OpusLink.API.Controllers.AccountControllers
                 var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Employer.ToString());
 
                 //Role cho Admin
-/*                var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Admin.ToString());*/
+                /*                var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Admin.ToString());*/
                 if (!resultCreateUser.Succeeded)
                 {
                     return new ApiResponseModel()

@@ -11,6 +11,9 @@ body {
     align-items: center;
     min-height: 100vh;
     background: linear-gradient(to left, #6699ff 0%, #ff99cc 100%);
+/*    background: #c31432;
+    background: -webkit-linear-gradient(to right, #240b36, #c31432);
+    background: linear-gradient(to right, #240b36, #c31432);*/
 }
 
 .wrapper {

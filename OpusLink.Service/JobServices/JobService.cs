@@ -85,7 +85,6 @@ namespace OpusLink.Service.JobServices
         }
         public List<Job> GetJob()
         {
-
             var jobs = _dbContext.Jobs
                 .Include("Employer").ToList();
             return jobs;

@@ -17,10 +17,13 @@ namespace OpusLink.Entity.DTO.AccountDTO.Common
 
         //Khi đăng kí nhưng có lỗi khác
         public static string RegisterError = "Lỗi khi tạo tài khoản, vui lòng thử lại";
+        public static string RegisterNotEnoughAge = "Bạn chưa đủ độ tuổi để đăng kí tài khoản với Opuslink";
 
 
         public static string LoginError = "Tên đăng nhập hoặc Mật khẩu không đúng!";
         public static string LoginFailCuzBanUser = "Tài khoản của bạn đang bị khóa cho đến ";
+        public static string LogingErrorRoleAdmin = "Tài khoản Admin không thể đăng nhập với trang này";
+        public static string LoginErrorRoleUser = "Tài khoản của bạn không có quyền đăng nhập trang này";
 
         //---ForgotPassword---
         //Khi quên mật khẩu thành công
