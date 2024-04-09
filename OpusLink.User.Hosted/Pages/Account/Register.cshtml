@@ -102,37 +102,6 @@
     }
 </script>
 <script>
-    $(function () {
-        // Kích hoạt Datepicker trên input với id 'Birthdate'
-        $("#Birthdate").datepicker({
-            dateFormat: "dd/mm/yy", // Định dạng ngày
-            onSelect: function (dateText, inst) {
-                // Tách ngày, tháng và năm từ ngày đã chọn
-                var parts = dateText.split('/');
-                var day = parts[0];
-                var month = parts[1];
-                var year = parts[2];
-
-                // Chuyển đổi sang định dạng yyyy-MM-dd
-                var formattedDate = year + "-" + month + "-" + day;
-
-                // Cập nhật giá trị của input với định dạng đã chuyển đổi
-                $(this).val(formattedDate);
-            },
-            // Ngăn chặn sự kiện mặc định của phím Enter
-            onClose: function (selectedDate) {
-                $("#Birthdate").datepicker("widget").off("keydown");
-            }
-        });
-
-        // Gắn sự kiện click vào biểu tượng
-        $("#custom-calendar-icon").click(function () {
-            // Kích hoạt Datepicker khi nhấp vào biểu tượng
-            $("#Birthdate").datepicker("show");
-        });
-    });
-</script>
-<script>
     function checkUsername() {
         var usernameInput = document.getElementById("UserName");
         var username = usernameInput.value.trim(); // Lấy giá trị và loại bỏ dấu cách ở đầu và cuối chuỗi
@@ -170,7 +139,6 @@
             <div class="input-box">
                 <label class="label">Ngày sinh của bạn <span style="color: red;">(*)</span></label>
                 <input type="date" placeholder="Nhập ngày/tháng/năm sinh của bạn" id="Birthdate" name="Birthdate" required>
-                <i class="fa-solid fa-calendar-days" id="custom-calendar-icon"></i>
             </div>
             <div class="input-box">
                 <label class="label">Mật khẩu <span style="color: red;">(*)</span></label>
