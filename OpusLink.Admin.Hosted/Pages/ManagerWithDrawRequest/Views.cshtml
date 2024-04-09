@@ -168,6 +168,10 @@
                             <input type="text" class="form-control" id="tranamount" name="tranamount" required hidden>
                             <input type="text" class="form-control" id="tranamount1" name="tranamount1" required readonly>
                         </div>
+                        @if(Model.mess != null)
+                        {
+                            <p style=" color:red">@Model.mess</p>
+                        }
                         <div class="mb-3">
                             <label for="note" class="form-label">Mã giao dịch</label>
                             <input type="text" class="form-control" id="trancode" name="trancode" required>

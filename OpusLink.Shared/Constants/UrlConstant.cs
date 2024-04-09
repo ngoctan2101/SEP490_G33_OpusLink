@@ -8,7 +8,7 @@ namespace OpusLink.Shared.Constants
 {
     public class UrlConstant
     {
-        
+
         //deploy
         //public const string ApiBaseUrl = "https://glowing-suddenly-kit.ngrok-free.app/api";
         //public const string UserClientBaseUrl = "https://verified-lovely-reptile.ngrok-free.app";

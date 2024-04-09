@@ -5,6 +5,7 @@ using Newtonsoft.Json;
 using OpusLink.Entity.DTO;
 using OpusLink.Entity.DTO.NotificationDTO;
 using OpusLink.Entity.DTO.WithdrawRequestDTO;
+using OpusLink.Entity.Models;
 using OpusLink.Shared.Constants;
 using System.Net.Http.Headers;
 using System.Text;
@@ -22,9 +23,12 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
         [BindProperty]
         public List<WithdrawResponseDTO> listWithdraw { get; set; } = null;
         [BindProperty]
+        public List<HistoryPaymentDTO> listhis { get; set; } = null;
+        [BindProperty]
         public WithdrawResponseDTO withdraw { get; set; } = null;
         [BindProperty]
         public int withdrawId { get; set; }
+        public string mess = "";
 
 
         public ViewsModel()
@@ -181,6 +185,30 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
 
             }
 
+            // get all historypayment
+            HttpResponseMessage responseUser1 = await client.GetAsync(ServiceMangaUrl + $"/HistoryPayment/GetAllHistoryPayment");
+            if (responseUser1.IsSuccessStatusCode)
+            {
+                string responseBodyUser1 = await responseUser1.Content.ReadAsStringAsync();
+                var optionUser1 = new JsonSerializerOptions()
+                { PropertyNameCaseInsensitive = true };
+                listhis = System.Text.Json.JsonSerializer.Deserialize<List<HistoryPaymentDTO>>(responseBodyUser1, optionUser1);
+            }
+            bool flat = true;
+            foreach(var item in listhis)
+            {
+                if(item.TransactionCode == trancoderes)
+                {
+                    //mess = "Mã giao dịch đã tồn tại";
+                    flat = false;
+                    break;
+                }
+            }
+            if(flat == false)
+            {
+                mess = "Mã giao dịch đã tồn tại";
+                return Redirect("/ManagerWithDrawRequest/Views");
+            }
 
             // waillet - tien
             var jsonProduct = System.Text.Json.JsonSerializer.Serialize(uidres);
