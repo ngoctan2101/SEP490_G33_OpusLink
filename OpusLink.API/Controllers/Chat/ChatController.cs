@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using Microsoft.EntityFrameworkCore;
@@ -13,7 +14,8 @@ using System.IO;
 
 namespace OpusLink.API.Controllers.Chat
 {
-	[Route("api/[controller]")]
+    [Authorize(Roles = "Freelancer,Employer")]
+    [Route("api/[controller]")]
 	[ApiController]
 
 	public class ChatController : ControllerBase

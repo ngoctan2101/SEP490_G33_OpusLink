@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OpusLink.Entity.DTO;
@@ -8,6 +9,7 @@ using OpusLink.Service.PaymentServices;
 
 namespace OpusLink.API.Controllers.HistoryPaymentControllers
 {
+    [Authorize(Roles = "Freelancer,Employer,Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class HistoryPaymentController : ControllerBase

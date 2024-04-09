@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using OpusLink.Entity.DTO;
@@ -10,6 +11,7 @@ using OpusLink.Service.WithDrawRequestServices;
 
 namespace OpusLink.API.Controllers.WithDrawRequestControllers
 {
+    [Authorize(Roles = "Freelancer,Employer,Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class WithDrawRequestController : ControllerBase

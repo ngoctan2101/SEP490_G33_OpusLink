@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.Models;
@@ -7,6 +8,7 @@ using System.Diagnostics;
 
 namespace OpusLink.API.Controllers.JobControllers
 {
+    [Authorize(Roles = "Freelancer,Employer,Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class HireFreelancerForJobController : ControllerBase

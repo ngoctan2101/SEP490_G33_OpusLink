@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.DTO.MSDTO;
@@ -7,6 +8,7 @@ using OpusLink.Service.MSServices;
 
 namespace OpusLink.API.Controllers.MSControllers
 {
+    [Authorize(Roles = "Freelancer")]
     [Route("api/[controller]")]
     [ApiController]
     public class fMilestonesAPI : ControllerBase
