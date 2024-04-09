@@ -17,8 +17,8 @@ namespace OpusLink.API.Controllers.AccountControllers
             _accountService = accountService;
         }
 
-        [HttpPost("login")]
-        public async Task<ApiResponseModel> Login([FromBody] LoginDTO model)
+        [HttpPost("loginAdmin")]
+        public async Task<ApiResponseModel> LoginAdmin([FromBody] LoginDTO model)
         {
             try
             {
@@ -36,7 +36,7 @@ namespace OpusLink.API.Controllers.AccountControllers
                         Message = string.Join(";", errors)
                     };
                 }
-                var result = await _accountService.Login(model);
+                var result = await _accountService.LoginAdmin(model);
                 return result;
             }
             catch (Exception ex)

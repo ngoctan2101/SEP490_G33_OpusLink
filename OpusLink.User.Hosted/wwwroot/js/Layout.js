@@ -1,4 +1,4 @@
-function callFreelancer() {
+/*function callFreelancer() {
     const username = usernameFromSession;
     const currentrole = currentroleFromSession;
 
@@ -41,3 +41,4 @@ function callFreelancer() {
         }
     });
 }
+*/
