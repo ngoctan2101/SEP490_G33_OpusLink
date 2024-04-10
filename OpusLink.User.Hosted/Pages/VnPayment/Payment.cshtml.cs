@@ -85,6 +85,7 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
 
                 string url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
                 string returnUrl = UrlConstant.UserClientBaseUrl+"/VnPayment/Payment?opuslink=paymentconfirm";
+                
                 string tmnCode = "NVFQP1WS";
                 string hashSecret = "MPLXERAVPCPUNWPZSLRHRYYBKXYEAVXK";
                 PayLib pay = new PayLib();
@@ -125,7 +126,7 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
 
             if (service.Equals("paymentconfirm"))
             {
-               
+
                 //int userId = 0;
 
                 if (HttpContext.Session.GetInt32("UserId") == null)

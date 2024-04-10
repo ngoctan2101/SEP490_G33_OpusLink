@@ -41,7 +41,7 @@ namespace OpusLink.Admin.Hosted.Pages.Account
                             var jsonToken = handler.ReadToken(token) as JwtSecurityToken;
 
                             // Lấy ra UserId từ claims
-                            string userId = jsonToken.Claims.First(claim => claim.Type == "UserId").Value;
+                            string userId = jsonToken.Claims.First(claim => claim.Type == "userId").Value;
 
                             HttpContext.Session.SetInt32("UserId", Int32.Parse(userId));
                             HttpContext.Session.SetString("token", token);

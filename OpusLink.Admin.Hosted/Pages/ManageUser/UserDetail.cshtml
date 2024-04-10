@@ -85,7 +85,7 @@
                     </div>*@
 
                     <div class="mt-3">
-                        <label for="introduction" class="form-label" placeholder="Enter introduction">Introduction</label>
+                    <label for="introduction" class="form-label">Giới thiệu</label>
                         <textarea class="form-control" id="introduction" rows="11" readonly name="introduction">@Model.user.Introduction</textarea >
                     </div>
                     @* <div class="mb-3">
@@ -94,7 +94,7 @@
                     </div> *@
                     <div class="mb-3">
                         @if(!String.IsNullOrEmpty(Model.user.CVFilePath)){
-                            <a asp-page-handler="ForDownload" asp-route-UserId="@Model.user.Id">Download CV</a>
+                        <a asp-page-handler="ForDownload" class="btn btn-primary" asp-route-UserId="@Model.user.Id">Tải hồ sơ</a>
                         }
                         
                     </div>
@@ -140,62 +140,73 @@
                 <!-- Thông tin bên phải -->
                 <div class="col-md-6">
                     <div class="mb-3">
-                        <label for="id" class="form-label">ID:</label>
-                        <input type="text" class="form-control" id="id" name="id" placeholder="Enter ID" readonly value="@Model.user.Id">
+                        <label for="id" class="form-label">ID</label>
+                        <input type="text" class="form-control" id="id" name="id"  readonly value="@Model.user.Id">
                     </div>
 
                     <div class="mb-3">
-                        <label for="name" class="form-label">Name:</label>
-                        <input type="text" class="form-control" id="name" name="name" placeholder="Enter name" readonly value="@Model.user.UserName">
+                    <label for="name" class="form-label">Tên tài khoản</label>
+                        <input type="text" class="form-control" id="name" name="name"  readonly value="@Model.user.UserName">
                     </div>
                     <div class="mb-3">
-                        <label for="email" class="form-label">Email:</label>
-                        <input type="email" class="form-control" id="email" name="email" placeholder="Enter email" readonly value="@Model.user.Email">
+                        <label for="email" class="form-label">Email</label>
+                        <input type="email" class="form-control" id="email" name="email"  readonly value="@Model.user.Email">
                     </div>
                     <div class="mb-3">
-                        <label for="dob" class="form-label">Date of Birth:</label>
-                        <input type="date" class="form-control" id="dob" name="dob" readonly value="@Model.user.Dob">
+                    <label for="dob" class="form-label">Ngày sinh</label>
+                    <input type="date" class="form-control" id="dob" name="dob" readonly value="@Model.user.Dob?.ToString("yyyy-MM-dd")">
                     </div>
 
                     <div class="mb-3">
-                        <label for="phone" class="form-label">Phone:</label>
-                        <input type="tel" class="form-control" id="phone" name="phone" placeholder="Enter phone" readonly value="@Model.user.PhoneNumber">
+                    <label for="phone" class="form-label">Số điện thoại</label>
+                        <input type="tel" class="form-control" id="phone" name="phone"  readonly value="@Model.user.PhoneNumber">
                     </div>
 
                     <div class="mb-3">
-                        <label for="address" class="form-label">Address:</label>
-                        <input type="text" class="form-control" id="address" name="address" placeholder="Enter address" readonly value="@Model.user.Address">
+                    <label for="address" class="form-label">Địa chỉ</label>
+                        <input type="text" class="form-control" id="address" name="address"  readonly value="@Model.user.Address">
                     </div>
 
-                    <div class="mb-3" hidden>
-                        <label for="skills" class="form-label">Skills:</label>
-                        <select style="width:100%;height:30px" onchange="ClickASkill()" id="skillDropdown">
-                            <option value="" disabled selected>Choose skill</option>
+                    <div class="mb-3" >
+                    <label for="skills" class="form-label">Kỹ năng</label>
+                        @* <select style="width:100%;height:30px" onchange="ClickASkill()" id="skillDropdown">
+                        <option value="" disabled selected>Chọn kỹ năng</option>
                             @foreach (var item in Model.AllSkills)
                             {
                                 <option value="@item.SkillID" onclick="ClickASkill(@item.SkillID ,@item.SkillName)">@item.SkillName</option>
                             }
-                        </select>
-                        @* <div id="SkillContainer" style="min-height:30px">
+                        </select> *@
+                        <div id="SkillContainer" style="min-height:30px">
                             @foreach (var item in Model.user.Skills)
                             {
                                 <div class="ASkill" id="ASkill_@item.SkillID">
                                     @item.SkillName
-                                    <span class="close" onclick="Delete(@item.SkillID)">&times;</span>
+                                   @*  <span class="close" onclick="Delete(@item.SkillID)">&times;</span> *@
                                     <input type="text" name="skill_@item.SkillID" value="@item.SkillID" hidden />
                                 </div>
                             }
-                        </div> *@
+                        </div>
                     </div>
                     <div class="mb-3">
-                        <label for="amountmoney" class="form-label">AmountMoney:</label>
+                    <label for="amountmoney" class="form-label">Tiền trong ví</label>
                         <input type="text" class="form-control" id="amountmoney" name="amountmoney"
-                               placeholder="Enter amountmoney" readonly value="@Model.user.AmountMoney">
+                                readonly value="@Model.user.AmountMoney">
                     </div>
+                <div class="mb-3">
+                    <label for="amountmoney" class="form-label">Thông tin tài khoản ngân hàng</label>
+                    @* <input type="text" class="form-control" id="bankaccountinfor" name="bankaccountinfor"
+                    readonly value="@Model.user.BankAccountInfor"> *@
+                    <textarea rows="7" style="width:100%" id="bankaccountinfor" name="bankaccountinfor" >@Model.user.BankAccountInfor</textarea>
+                </div>
+                <div class="mb-3">
+                    <label for="amountmoney" class="form-label">Tên tài khoản ngân hàng</label>
+                    <input type="text" class="form-control" id="bankname" name="bankname"
+                           value="@Model.user.BankName">
+                </div>
                     <!-- Nút Back -->
                     <div class="d-inline-flex p-2 bd-highlight">
 
-                        <button type="button" id="backButton" class="btn btn-primary" onclick="onBack()">Back</button>
+                        <button type="button" id="backButton" class="btn btn-primary" onclick="onBack()">Trở lại</button>
                     </div>
 
                 </div>

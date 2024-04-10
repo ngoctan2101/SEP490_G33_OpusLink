@@ -28,6 +28,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
         public WithdrawResponseDTO withdraw { get; set; } = null;
         [BindProperty]
         public int withdrawId { get; set; }
+        
         public string mess = "";
 
 
@@ -54,7 +55,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
 
         public async Task<IActionResult> OnGet()
         {
-
+            
             HttpResponseMessage responseWithDraw = await client.GetAsync(ServiceMangaUrl + "/WithDrawRequest/GetAllWithdrawRequestByStatus/" + 1);
             if (responseWithDraw.IsSuccessStatusCode)
             {
@@ -207,7 +208,9 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
             if(flat == false)
             {
                 mess = "Mã giao dịch đã tồn tại";
+                //return RedirectToPage("/ManagerWithDrawRequest/Views");
                 return Redirect("/ManagerWithDrawRequest/Views");
+                //return Page();
             }
 
             // waillet - tien
@@ -259,7 +262,8 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
             HttpResponseMessage response1 = await client.PostAsync(ServiceMangaUrl + $"/Notification/AddNotification", content1);
             
 
-            return Redirect("/ManagerWithDrawRequest/Views");
+            //return Redirect("/ManagerWithDrawRequest/Views");
+            return RedirectToPage("/ManagerWithDrawRequest/Views");
         }
 
 

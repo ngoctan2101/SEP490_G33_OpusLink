@@ -282,7 +282,7 @@
     </div>
 
 </div>
-<script src="~/microsoft/signalr/dist/browser/signalr.js"></script>
+
 
 
 <script>
@@ -301,7 +301,7 @@
     }
 </script>
 
-
+<script src="~/microsoft/signalr/dist/browser/signalr.js"></script>
 <script>
     var connection = new signalR.HubConnectionBuilder().withUrl("@(UrlConstant.ApiBaseUrl)/chatHub").build();
     connection.start().then(function () {
