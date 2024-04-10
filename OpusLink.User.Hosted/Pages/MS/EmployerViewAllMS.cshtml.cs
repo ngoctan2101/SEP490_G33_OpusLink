@@ -18,6 +18,8 @@ namespace OpusLink.User.Hosted.Pages.MS
         public List<GetMilestoneResponse> milestones { get; set; } = default!;
         public int JobID { get; set; }
         public GetJobDetailResponse job { get; set; }
+        public DateTime nearestDatelineOfMS { get; set; }
+        public bool allMSMoneyPutted { get; set; }
         public EmployerViewAllMSModel()
         {
             client = new HttpClient();
@@ -31,12 +33,34 @@ namespace OpusLink.User.Hosted.Pages.MS
             {
                 return RedirectToPage("../Account/Login");
             }
+
             // Set the JWT token in the authorization header
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             //get all milestones of a job
             milestones = await GetAllMilestonesAsync(jobID);
             //get this job also
             job = await GetThisJob(jobID);
+            allMSMoneyPutted = true;
+            foreach(var m in milestones)
+            {
+                if (m.Status != (int)MilestoneStatusEnum.MoneyPutted)
+                {
+                    allMSMoneyPutted = false; break;
+                }
+            }
+            if (milestones.Count== 0)
+            {
+                return Page();
+            }
+            nearestDatelineOfMS = milestones[0].Deadline;
+            foreach(var m in milestones)
+            {
+                if (m.Deadline < nearestDatelineOfMS)
+                {
+                    nearestDatelineOfMS = m.Deadline;
+                }
+            }
+            nearestDatelineOfMS = nearestDatelineOfMS.AddDays(0);
             return Page();
         }
         private async Task<GetJobDetailResponse> GetThisJob(int jobID)

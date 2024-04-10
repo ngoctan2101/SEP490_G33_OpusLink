@@ -110,25 +110,27 @@ namespace OpusLink.Service.MSServices
                 m.Status = (int)MilestoneStatusEnum.Failed;
                 //tra tien cua ms nay cho E
                 employer.AmountMoney += m.AmountToPay;
-                //neu da het ms thi job se chuyen thanh complete
-                if (NoMsLeft(j))
-                {
-                    j.Status = (int)JobStatusEnum.Completed;
-                    //neu ko co ms nao bi fail thi F nhan duoc 20% tat ca nhung ms completed
-                    if(AnyMsFail(j)==false){
-                        freelancer.AmountMoney += 0.2m * TotalMoneyOfMsCompleted(j);
-                    }
-                    //new co 1 ms bi fail thi E nhan duoc 20% tat ca nhung ms completed
-                    else
-                    {
-                        employer.AmountMoney += 0.2m * TotalMoneyOfMsCompleted(j);
-                    }
-                }
+                
             }
             else
             {
                 //hot hon hot
                 m.Status = status;
+            }
+            //neu da het ms thi job se chuyen thanh complete
+            if (NoMsLeft(j))
+            {
+                j.Status = (int)JobStatusEnum.Completed;
+                //neu ko co ms nao bi fail thi F nhan duoc 20% tat ca nhung ms completed
+                if (AnyMsFail(j) == false)
+                {
+                    freelancer.AmountMoney += 0.19m * TotalMoneyOfMsCompleted(j);
+                }
+                //new co 1 ms bi fail thi E nhan duoc 20% tat ca nhung ms completed
+                else
+                {
+                    employer.AmountMoney += 0.19m * TotalMoneyOfMsCompleted(j);
+                }
             }
             await _dbContext.SaveChangesAsync();
             return true;
@@ -138,7 +140,7 @@ namespace OpusLink.Service.MSServices
         {
             foreach (var m in j.Milestones)
             {
-                if (m.Status == (int)MilestoneStatusEnum.MoneyPutted)
+                if (m.Status == (int)MilestoneStatusEnum.MoneyPutted || m.Status == (int)MilestoneStatusEnum.EmployerRejected)
                 {
                     return false;
                 }
@@ -222,7 +224,7 @@ namespace OpusLink.Service.MSServices
             {
                 return false;
             }
-            if (j.Status == (int)JobStatusEnum.Hired && (j.IsFreelancerConfirm == true || j.EmployerDoneEditMilestone == true))
+            if (j.Status == (int)JobStatusEnum.Hired && (j.IsFreelancerConfirm == true || (j.EmployerDoneEditMilestone == true&&j.DeadlineFreelancerConfirm>DateTime.Now&&j.IsFreelancerConfirm==false)))
             {
                 return false;
             }
@@ -276,7 +278,7 @@ namespace OpusLink.Service.MSServices
             {
                 if (m.Status == (int)MilestoneStatusEnum.Completed)
                 {
-                    total += m.AmountToPay *0.2m;
+                    total += m.AmountToPay *0.19m;
                 }else if(m.Status == (int)MilestoneStatusEnum.MoneyPutted)
                 {
                     total += m.AmountToPay;
