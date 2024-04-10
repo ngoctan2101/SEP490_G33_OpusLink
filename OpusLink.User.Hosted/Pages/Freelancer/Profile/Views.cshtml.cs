@@ -29,6 +29,12 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
         }
         public async Task<IActionResult> OnGetAsync(int UserId, string Mess)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             this.Mess = Mess;
             if (HttpContext.Session.GetString("Role").Equals("Employer"))
             {
@@ -51,7 +57,6 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
         private async Task<IList<SkillDTO>> GetAllSkillAsync()
         {
             //get all skill
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "/Skill/GetAllSkill");
             if (response.IsSuccessStatusCode)
             {
@@ -67,8 +72,13 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
         }
         public async Task<ActionResult> OnGetForDownloadAsync(int UserId)
         {
-            int userId = UserId;
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            int userId = UserId;
             HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "/User/GetFileCVById/" + userId);
 
             if (response.IsSuccessStatusCode)
@@ -95,6 +105,11 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
         }
         public async Task<ActionResult> OnPostForSaveAsync(IFormCollection collection, IFormFile image, IFormFile cv)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             PutUser = new PutUserRequest();
             //get image, get cv from <input>

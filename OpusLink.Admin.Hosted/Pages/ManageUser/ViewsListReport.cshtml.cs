@@ -7,6 +7,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageUser
     {
         public void OnGet()
         {
+
         }
     }
 }

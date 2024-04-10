@@ -25,18 +25,17 @@ namespace OpusLink.User.Hosted.Pages.Evaluate
 		}
 		public async Task<IActionResult> OnGetAddFeedback(int JobId, int CreateByUserID, int TargetToUserID, decimal Star, string Content)
 		{
-			if (HttpContext.Session.GetInt32("UserId") == null)
-			{
-				return RedirectToPage("/Account/Login");
-			}
-			else
-			{
-				userId = HttpContext.Session.GetInt32("UserId") ?? 0;
-				role = HttpContext.Session.GetString("Role");
-			}
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            userId = HttpContext.Session.GetInt32("UserId") ?? 0;
+            role = HttpContext.Session.GetString("Role");
 
 
-			var options = new JsonSerializerOptions
+            var options = new JsonSerializerOptions
 			{
 				PropertyNameCaseInsensitive = false,
 			};

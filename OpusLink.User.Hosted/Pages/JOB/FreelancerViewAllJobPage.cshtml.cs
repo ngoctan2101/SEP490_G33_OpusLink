@@ -44,6 +44,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
         }
         public async Task OnGetAsync()
         {
+
             if(filter.Statuses.Count == 0) {
                 filter.Statuses.Add((int)JobStatusEnum.Hiring);
                 //filter.Statuses.Add((int)JobStatusEnum.Hired);

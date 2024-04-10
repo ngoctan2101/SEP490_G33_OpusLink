@@ -328,7 +328,8 @@
             url: "@(UrlConstant.ApiBaseUrl+"/Job3API/GetAllChildCategory?parentId=")" + categoryID,
             type: "get",
             headers: {
-                "ngrok-skip-browser-warning": true
+                "ngrok-skip-browser-warning": true,
+                "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
             },
             contentType: "application/json",
             success: function (result, status, xhr) {
@@ -362,6 +363,10 @@
     function SaveJob(JobId, FreelancerId) {
         $.ajax({
             url: "@(UrlConstant.ApiBaseUrl+"/Job7API/AddSaveJob")",
+            headers: {
+                "ngrok-skip-browser-warning": true,
+                "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
+            },
             type: "post",
             contentType: "application/json",
             data: JSON.stringify({ JobID: JobId, FreelancerID: FreelancerId }),

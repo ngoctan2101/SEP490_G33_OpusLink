@@ -311,7 +311,12 @@
     // Function to fetch and display feedback information
     function displayAverageStar() {
         var EmployerId = @Model.user.Id; // Assuming EmployerId is an integer
-        fetch(`@(UrlConstant.ApiBaseUrl)/Feedback/AverageStars/${EmployerId}`)
+        fetch(`@(UrlConstant.ApiBaseUrl)/Feedback/AverageStars/${EmployerId}`, {
+            method: "GET", headers: {
+                "ngrok-skip-browser-warning": true,
+                "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
+            }
+        })
             .then(response => response.json())
             .then(data => {
                 document.getElementById('averageRating').innerHTML = `
@@ -329,7 +334,12 @@
 <script>
     function displayFeedbacks() {
         var userId = @Model.user.Id; // Assuming userId is an integer
-        fetch(`@(UrlConstant.ApiBaseUrl)/Feedback/GetFeedbacksByTargetUser/${userId}`)
+        fetch(`@(UrlConstant.ApiBaseUrl)/Feedback/GetFeedbacksByTargetUser/${userId}`, {
+            method: "GET", headers: {
+                "ngrok-skip-browser-warning": true,
+                "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
+            }
+        })
             .then(response => response.json())
             .then(data => {
                 var feedbackSection = document.getElementById('feedbackSection');

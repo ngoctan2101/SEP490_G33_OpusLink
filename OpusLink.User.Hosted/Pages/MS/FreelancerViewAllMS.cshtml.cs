@@ -23,12 +23,19 @@ namespace OpusLink.User.Hosted.Pages.MS
             client.DefaultRequestHeaders.Accept.Add(contentType);
         }
 
-        public async Task OnGetAsync(int jobID)
+        public async Task<IActionResult> OnGetAsync(int jobID)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             //get all milestones of a job
             milestones = await GetAllMilestonesAsync(jobID);
             //get this job also
             job = await GetThisJob(jobID);
+            return Page();
         }
 
         private async Task<GetJobDetailResponse> GetThisJob(int jobID)
@@ -64,6 +71,12 @@ namespace OpusLink.User.Hosted.Pages.MS
 
         public async Task<IActionResult> OnPostForNotAcceptPlanAsync(IFormCollection collection)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             int jobID = 0;
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get  object
@@ -89,6 +102,12 @@ namespace OpusLink.User.Hosted.Pages.MS
         }
         public async Task<IActionResult> OnPostForAcceptPlanAsync(IFormCollection collection)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             int jobID = 0;
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get  object
@@ -114,6 +133,12 @@ namespace OpusLink.User.Hosted.Pages.MS
         }
         public async Task<IActionResult> OnPostForConfirmDoneMilestoneAsync(IFormCollection collection)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             RequestDoneAMilestone requestDoneAMilestone = new RequestDoneAMilestone();
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get  object

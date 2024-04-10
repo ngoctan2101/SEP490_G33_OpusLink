@@ -243,7 +243,8 @@
                 url: "@(UrlConstant.ApiBaseUrl+"/User/GetUserById/")" + @userId,
                 type: "GET",
                 headers: {
-                    "ngrok-skip-browser-warning": true
+                    "ngrok-skip-browser-warning": true,
+                    "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
                 },
                 contentType: "application/json",
                 success: function (result, status, xhr) {
@@ -263,7 +264,8 @@
                 url: "@(UrlConstant.ApiBaseUrl+"/Notification/CountNotificationNew/")" + @userId,
                 type: "GET",
                 headers: {
-                    "ngrok-skip-browser-warning": true
+                    "ngrok-skip-browser-warning": true,
+                    "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
                 },
                 contentType: "application/json",
                 success: function (result, status, xhr) {
@@ -283,7 +285,8 @@
                 url: "@(UrlConstant.ApiBaseUrl+"/Notification/Get5NotificationNew/")" + @userId,
                 type: "GET",
                 headers: {
-                    "ngrok-skip-browser-warning": true
+                    "ngrok-skip-browser-warning": true,
+                    "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
                 },
                 contentType: "application/json",
                 success: function (result, status, xhr) {

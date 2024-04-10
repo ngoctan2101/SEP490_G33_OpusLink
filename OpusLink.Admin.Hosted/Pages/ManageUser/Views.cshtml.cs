@@ -34,8 +34,14 @@ namespace OpusLink.Admin.Hosted.Pages.ManageUser
             };
         }
         
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             HttpContext.Session.SetString("PageNow", "ManageUser");
             //get list 10 skill base on Filter
             var options = new JsonSerializerOptions
@@ -68,9 +74,16 @@ namespace OpusLink.Admin.Hosted.Pages.ManageUser
                 { PropertyNameCaseInsensitive = true };
                 listSkill = JsonSerializer.Deserialize<List<SkillDTO>>(responseBodySkill, optionSkill);
             }
+            return Page();
         }
-        public async Task OnPostForSearchAsync(IFormCollection collection)
+        public async Task<IActionResult> OnPostForSearchAsync(IFormCollection collection)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get Filter object
             foreach (string key in keys)
@@ -114,6 +127,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageUser
                 { PropertyNameCaseInsensitive = true };
                 listSkill = JsonSerializer.Deserialize<List<SkillDTO>>(responseBodySkill, optionSkill);
             }
+            return Page();
         }
     }
 }

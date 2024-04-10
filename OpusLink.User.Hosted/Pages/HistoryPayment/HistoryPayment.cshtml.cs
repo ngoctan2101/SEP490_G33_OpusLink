@@ -2,6 +2,7 @@ using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO;
+using OpusLink.Entity.Models;
 using OpusLink.Shared.Constants;
 using System.Net.Http.Headers;
 using System.Text.Json;
@@ -23,19 +24,16 @@ namespace OpusLink.User.Hosted.Pages.HistoryPayment
             ServiceMangaUrl = UrlConstant.ApiBaseUrl;
             //_validationService = validateService;
         }
-        public async Task OnGetAsync(int UserId)
+        public async Task<IActionResult> OnGetAsync(int UserId)
         {
 
-            //int userId = 0;
-            //int userId = 1;
-            //if (HttpContext.Session.GetInt32("UserId") == null)
-            //{
-            //    return RedirectToPage("/Login_Register/Login");
-            //}
-            //else
-            //{
-            //    userId = HttpContext.Session.GetInt32("UserId") ?? 0;
-            //}
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            
             HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + $"/HistoryPayment/GetHistoryPaymentByUserId/{UserId}");
             if (responseUser.IsSuccessStatusCode)
             {
@@ -45,7 +43,7 @@ namespace OpusLink.User.Hosted.Pages.HistoryPayment
                 his = System.Text.Json.JsonSerializer.Deserialize<List<HistoryPaymentDTO>>(responseBodyUser, optionUser);
             }
 
-
+            return Page();
         }
     }
 }

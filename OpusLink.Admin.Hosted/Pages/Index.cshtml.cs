@@ -19,6 +19,7 @@ namespace OpusLink.Admin.Hosted.Pages
 
         public async Task<IActionResult> OnGetAsync()
         {
+
             string token = HttpContext.Session.GetString("token");
             if (token == null)
             {
