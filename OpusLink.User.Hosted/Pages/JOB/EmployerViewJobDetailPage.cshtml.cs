@@ -22,8 +22,14 @@ namespace OpusLink.User.Hosted.Pages.JOB
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
         }
-        public async Task OnGetAsync(int JobId)
+        public async Task<IActionResult> OnGetAsync(int JobId)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl+"/Job15API/GetJobDetail/" + JobId);
             if (response.IsSuccessStatusCode)
             {
@@ -38,9 +44,16 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 offers = JsonConvert.DeserializeObject<List<GetOfferAndFreelancerResponse>>(strData);
                 offers = offers.OrderByDescending(o => o.DateOffer).ToList();
             }
+            return Page();
         }
         public async Task<IActionResult> OnPostForHireAsync(IFormCollection collection)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             HireFreelancerForJobRequest hireFreelancerForJobRequest = new HireFreelancerForJobRequest();
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get  object
@@ -71,6 +84,12 @@ namespace OpusLink.User.Hosted.Pages.JOB
         }
         public async Task<IActionResult> OnPostForCancelHireAsync(IFormCollection collection)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             HireFreelancerForJobRequest hireFreelancerForJobRequest = new HireFreelancerForJobRequest();
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get  object

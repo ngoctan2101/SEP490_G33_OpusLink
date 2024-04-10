@@ -5,6 +5,7 @@ using OpusLink.Entity.AutoMapper.JOB;
 using OpusLink.Entity.DTO;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Shared.Constants;
+using System.Net.Http;
 using System.Net.Http.Headers;
 using System.Text.Json;
 
@@ -33,9 +34,15 @@ namespace OpusLink.Admin.Hosted.Pages.Dashboard
             ServiceMangaUrl = UrlConstant.ApiBaseUrl;
         }
 
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             HttpContext.Session.SetString("PageNow", "Dashboard");
+            if (HttpContext.Session.GetInt32("UserId")==null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             // call list
             HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "/User/GetAllUser");
             if (responseUser.IsSuccessStatusCode)
@@ -68,7 +75,7 @@ namespace OpusLink.Admin.Hosted.Pages.Dashboard
                 TotalJobsRequest = jobRequests.ElementAt(jobRequests.Count-1).EmployerID;
                 jobRequests.RemoveAt(jobRequests.Count - 1);
             }
-
+            return Page();
         }
     }
 

@@ -226,7 +226,7 @@
                                     <a asp-page="../Employer/Profile/ViewsProfileFreelancer" asp-route-id="@a.FreelancerID" class="link">@a.FreelancerName</a>
                                 </td>
                             </tr>
-                            <tr><td>⭐⭐⭐⭐⭐</td></tr>
+                            <tr><td><div id="feedbackFreeLancer@(a.FreelancerID)"><p>@a.FreelancerStarMedium⭐ (x đánh giá)</p></div></td></tr>
                         </table>
                         <div>
                             @if (a.Skills.Count > 3)
@@ -272,7 +272,7 @@
                                 }
                                 else
                                 {
-                                    <button type="submit" class="hireButton" asp-page-handler="ForHire" disabled>Đang làm việc</button>
+                                    <button type="submit" class="hireButton" asp-page-handler="ForHire" disabled>Đã chọn</button>
                                 }
 
                             }
@@ -334,7 +334,13 @@
     // Function to fetch and display feedback information
     function displayFeedbackInfo() {
         var employerId = @item.EmployerId; // Assuming EmployerId is an integer
-        fetch(`@(UrlConstant.ApiBaseUrl)/Feedback/AverageStars/${employerId}`)
+        fetch(`@(UrlConstant.ApiBaseUrl)/Feedback/AverageStars/${employerId}`, {
+            method: "GET",
+            headers: {
+                "ngrok-skip-browser-warning": true,
+                "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
+            }
+        })
             .then(response => response.json())
             .then(data => {
                 document.getElementById('feedbackInfo').innerHTML = `
@@ -349,3 +355,33 @@
     // Call the function to display feedback information when the page loads
     displayFeedbackInfo();
 </script>
+<script>
+    // Function to fetch and display feedback information for the freelancer
+    function displayFeedbackFreelancer(freelancerID) {
+        fetch(`@(UrlConstant.ApiBaseUrl)/Feedback/AverageStars/${freelancerID}`, {
+            method: "GET", headers: {
+                "ngrok-skip-browser-warning": true,
+                "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                var feedbackFreelancerDiv = document.getElementById('feedbackFreeLancer' + freelancerID);
+                feedbackFreelancerDiv.innerHTML = `
+                            <p>${data.averageStars}⭐ (${data.numberOfEntries} đánh giá)</p>
+                        `;
+            })
+            .catch(error => {
+                console.error('Error fetching feedback information:', error);
+            });
+    }
+
+</script>
+@foreach (var a in Model.offers)
+{
+    <script>
+        // Call the function to display feedback information for the freelancer when the page loads
+        displayFeedbackFreelancer(@a.FreelancerID);
+    </script>
+
+}

@@ -40,8 +40,14 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
             };
         }
         // list skill
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             HttpContext.Session.SetString("PageNow", "ManageSkill");
             //get list first 10 skills
             var options = new JsonSerializerOptions
@@ -72,6 +78,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
             }
             //return list ALL skill (for add,edit)
             AllSkills = await GetAllSkillAsync();
+            return Page();
         }
 
         private async Task<IList<SkillDTO>> GetAllSkillAsync()
@@ -98,8 +105,14 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
                 return null;
             }
         }
-        public async Task OnPostForSearchAsync(IFormCollection collection)
+        public async Task<IActionResult> OnPostForSearchAsync(IFormCollection collection)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get Filter object
             foreach (string key in keys)
@@ -136,6 +149,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
             }
             //return list ALL skill (for add,edit)
             AllSkills = await GetAllSkillAsync();
+            return Page();
         }
         //public async Task OnGetAsync(int SkillId)
         //{
@@ -175,7 +189,12 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
         // add new skill
         public async Task<IActionResult> OnPostAsync(SkillDTO newSkill)
         {
-
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             var jsonRequestBody = JsonSerializer.Serialize(newSkill, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
             var content = new StringContent(jsonRequestBody, Encoding.UTF8, "application/json");
@@ -221,7 +240,12 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
         //[HttpPost("{SkillId:int?}")]
         public async Task<IActionResult> OnPostForUpdateAsync(SkillDTO updatedSkill)
         {
-
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
 
             var jsonRequestBody = JsonSerializer.Serialize(updatedSkill, new JsonSerializerOptions { PropertyNameCaseInsensitive = true });
 
@@ -241,9 +265,14 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
 
         }
 
-        public async Task DeleteSkillAsync(int skillIdToDelete)
+        public async Task<IActionResult> DeleteSkillAsync(int skillIdToDelete)
         {
-
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             using (HttpClient client = new HttpClient())
             {
                 HttpResponseMessage responseDeleteSkill = await client.DeleteAsync(ServiceMangaUrl + $"/Skill/DeleteSkillById/{skillIdToDelete}");
@@ -257,6 +286,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
                     Console.WriteLine($"Failed to delete skill. Status code: {responseDeleteSkill.StatusCode}");
                 }
             }
+            return Page();
         }
     }
 }

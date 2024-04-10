@@ -27,15 +27,16 @@ namespace OpusLink.User.Hosted.Pages.JOB
         }
         public async Task<IActionResult> OnGetAsync(int JobId)
         {
+
             int userId = 0;
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
-                return RedirectToPage("/Account/Login");
+                return RedirectToPage("../Account/Login");
             }
-            else
-            {
-                userId = HttpContext.Session.GetInt32("UserId") ?? 0;
-            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            userId = HttpContext.Session.GetInt32("UserId") ?? 0;
+            
             //HttpContext.Session.SetInt32("UserId", 201); 
             //int userId = 201;
 
@@ -81,12 +82,12 @@ namespace OpusLink.User.Hosted.Pages.JOB
             CreateUpdateOfferRequest createUpdateOfferRequest = new CreateUpdateOfferRequest();
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
-                return RedirectToPage("/Account/Login");
+                return RedirectToPage("../Account/Login");
             }
-            else
-            {
-                createUpdateOfferRequest.FreelancerID = HttpContext.Session.GetInt32("UserId") ?? 0;
-            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            createUpdateOfferRequest.FreelancerID = HttpContext.Session.GetInt32("UserId") ?? 0;
+            
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get Offer object
             foreach (string key in keys)
@@ -139,12 +140,12 @@ namespace OpusLink.User.Hosted.Pages.JOB
             CreateUpdateOfferRequest createUpdateOfferRequest = new CreateUpdateOfferRequest();
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
-                return RedirectToPage("/Account/Login");
+                return RedirectToPage("../Account/Login");
             }
-            else
-            {
-                createUpdateOfferRequest.FreelancerID = HttpContext.Session.GetInt32("UserId") ?? 0;
-            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            createUpdateOfferRequest.FreelancerID = HttpContext.Session.GetInt32("UserId") ?? 0;
+            
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get Offer object
             foreach (string key in keys)

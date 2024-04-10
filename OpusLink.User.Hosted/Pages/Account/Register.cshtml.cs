@@ -1,10 +1,11 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.AccountDTO.Common;
 using OpusLink.Entity.DTO.AccountDTO;
 using System.ComponentModel.DataAnnotations;
 using OpusLink.Shared.Constants;
+using Microsoft.AspNet.SignalR.Client.Http;
 
 namespace OpusLink.User.Hosted.Pages.Account
 {
@@ -19,6 +20,12 @@ namespace OpusLink.User.Hosted.Pages.Account
         string link = UrlConstant.ApiBaseUrl+"/Account/register";
         public async Task<IActionResult> OnPostAsync(string username, string password, string email, string confirmPassword, DateTime birthDate)
         {
+            if ((DateTime.Now - birthDate).TotalDays / 365 < 18)
+            {
+                ViewData["Error"] = TotalMessage.RegisterNotEnoughAge;
+                return Page();
+            }
+
             RegisterDTO account = new RegisterDTO()
             {
                 UserName = username,

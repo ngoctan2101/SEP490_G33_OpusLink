@@ -13,7 +13,8 @@ namespace OpusLink.Service.AccountServices
 {
     public interface IAccountService
     {
-        Task<ApiResponseModel> Login(LoginDTO model);
+        Task<ApiResponseModel> LoginUser(LoginDTO model);
+        Task<ApiResponseModel> LoginAdmin(LoginDTO model);
         Task<ApiResponseModel> ConfirmEmail(string token, string email);
         Task<ApiResponseModel> UpdateUserRole(UpdateRoleDTO model);
     }
@@ -34,11 +35,11 @@ namespace OpusLink.Service.AccountServices
             _dbContext = dbContext;
         }
 
-        public async Task<ApiResponseModel> Login(LoginDTO model)
+        public async Task<ApiResponseModel> LoginUser(LoginDTO model)
         {
             var secretKeyBytes = Encoding.UTF8.GetBytes(_jwtSetting.Key);
             var jwtTokenHandler = new JwtSecurityTokenHandler();
-            var result = await ValidLogin(model);
+            var result = await ValidLoginUser(model);
             if (!result.IsSuccess)
             {
                 return result;
@@ -66,6 +67,44 @@ namespace OpusLink.Service.AccountServices
             {
                 return result;
             }*/
+
+            //Trả về cái accessToken
+            result.Data = accessToken;
+            return result;
+        }
+
+        public async Task<ApiResponseModel> LoginAdmin(LoginDTO model)
+        {
+            var secretKeyBytes = Encoding.UTF8.GetBytes(_jwtSetting.Key);
+            var jwtTokenHandler = new JwtSecurityTokenHandler();
+            var result = await ValidLoginAdmin(model);
+            if (!result.IsSuccess)
+            {
+                return result;
+            }
+
+            // Lấy thông tin user về
+            var claims = await GetClaimsUsers(model);
+
+            //Mô tả Token trả về bao gồm những thông tin nào
+            var tokenDecription = new SecurityTokenDescriptor()
+            {
+                Subject = new ClaimsIdentity(claims),
+                Expires = DateTime.Now.AddHours(3), //Security Key này tồn tại được trong bao nhiêu giờ
+                Issuer = _jwtSetting.Issuer,
+                Audience = _jwtSetting.Issuer,
+
+                //Mã chữ ký - Dùng thuật toán nào để mã hóa
+                SigningCredentials = new SigningCredentials(new SymmetricSecurityKey(secretKeyBytes), SecurityAlgorithms.HmacSha256)
+            };
+
+            //Tạo token dựa vào mô tả của TokenDecription
+            var token = jwtTokenHandler.CreateToken(tokenDecription);
+            string accessToken = jwtTokenHandler.WriteToken(token);
+            /*            if (!result.IsSuccess)
+                        {
+                            return result;
+                        }*/
 
             //Trả về cái accessToken
             result.Data = accessToken;
@@ -179,7 +218,7 @@ namespace OpusLink.Service.AccountServices
         }
 
         //Check xem User có tồn tại hay không
-        private async Task<ApiResponseModel> ValidLogin(LoginDTO user)
+        private async Task<ApiResponseModel> ValidLoginUser(LoginDTO user)
         {
             var result = new ApiResponseModel()
             {
@@ -201,6 +240,19 @@ namespace OpusLink.Service.AccountServices
                 }
                 else
                 {
+                    var userRoles = await _userManager.GetRolesAsync(userIdentity);
+                    bool isAdmin = userRoles.Any(role => role == "Admin");
+
+                    if (isAdmin)
+                    {
+                        return new ApiResponseModel
+                        {
+                            Code = 403, // Forbidden status code
+                            IsSuccess = false,
+                            Message = TotalMessage.LogingErrorRoleAdmin
+                        };
+                    }
+
                     if (userIdentity.Status == 0)
                         if (userIdentity.EndBanDate > DateTime.Now)
                         {
@@ -219,6 +271,72 @@ namespace OpusLink.Service.AccountServices
                 }
 
             }catch(Exception ex)
+            {
+                return new ApiResponseModel
+                {
+                    Code = 400,
+                    IsSuccess = false,
+                    Message = TotalMessage.LoginError
+                };
+            }
+            return result;
+        }
+
+        //Check xem User có tồn tại hay không
+        private async Task<ApiResponseModel> ValidLoginAdmin(LoginDTO user)
+        {
+            var result = new ApiResponseModel()
+            {
+                Code = 200,
+                Message = "ValidLogin thành công",
+                IsSuccess = true
+            };
+            try
+            {
+                var userIdentity = await _userManager.FindByNameAsync(user.UserName);
+                if (userIdentity == null || !await _userManager.CheckPasswordAsync(userIdentity, user.Password))
+                {
+                    return new ApiResponseModel
+                    {
+                        Code = 400,
+                        IsSuccess = false,
+                        Message = TotalMessage.LoginError
+                    };
+                }
+                else
+                {
+                    var userRoles = await _userManager.GetRolesAsync(userIdentity);
+                    bool isAdmin = userRoles.Any(role => role == "Admin");
+
+                    if (!isAdmin)
+                    {
+                        return new ApiResponseModel
+                        {
+                            Code = 403, // Forbidden status code
+                            IsSuccess = false,
+                            Message = TotalMessage.LoginErrorRoleUser
+                        };
+                    }
+
+                    if (userIdentity.Status == 0)
+                        if (userIdentity.EndBanDate > DateTime.Now)
+                        {
+                            return new ApiResponseModel
+                            {
+                                Code = 400,
+                                IsSuccess = false,
+                                Message = TotalMessage.LoginFailCuzBanUser + userIdentity.EndBanDate?.ToString("dd/MM/yyyy") + " .Vui lòng liên hệ với admin để được hỗ trợ. Liên hệ support@opuslink.com"
+                            };
+                        }
+                        else
+                        {
+                            userIdentity.Status = 1;
+                            await _userManager.UpdateAsync(userIdentity);
+                        }
+                }
+
+            }
+            catch (Exception ex)
             {
                 return new ApiResponseModel
                 {

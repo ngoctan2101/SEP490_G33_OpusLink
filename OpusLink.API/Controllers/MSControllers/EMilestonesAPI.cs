@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using OpusLink.Entity.DTO.AccountDTO.Common;
 using OpusLink.Entity.DTO.JobDTO;
@@ -10,6 +11,7 @@ using System.Diagnostics;
 
 namespace OpusLink.API.Controllers.MSControllers
 {
+    [Authorize(Roles = "Employer")]
     [Route("api/[controller]")]
     [ApiController]
     public class EMilestonesAPI : ControllerBase

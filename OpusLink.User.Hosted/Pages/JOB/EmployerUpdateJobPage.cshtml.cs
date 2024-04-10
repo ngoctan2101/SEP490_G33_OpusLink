@@ -29,8 +29,10 @@ namespace OpusLink.User.Hosted.Pages.JOB
         {
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
-                return RedirectToPage("/Account/Login");
+                return RedirectToPage("../Account/Login");
             }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             //get all category
             AllCategories = await GetAllCategoryAsync();
             //get all location
@@ -55,12 +57,13 @@ namespace OpusLink.User.Hosted.Pages.JOB
         {
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
-                return RedirectToPage("/Account/Login");
+                return RedirectToPage("../Account/Login");
             }
-            else
-            {
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            
                 userId = HttpContext.Session.GetInt32("UserId") ?? 0;
-            }
+            
             PutJob = new PutJobRequest();
             PutJob.EmployerID = userId;
             List<string> keys = collection.Keys.ToList<string>();

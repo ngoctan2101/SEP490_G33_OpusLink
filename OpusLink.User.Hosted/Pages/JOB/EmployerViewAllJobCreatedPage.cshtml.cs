@@ -41,12 +41,12 @@ namespace OpusLink.User.Hosted.Pages.JOB
         {
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
-                return RedirectToPage("/Account/Login");
+                return RedirectToPage("../Account/Login");
             }
-            else
-            {
-                filter.UserId = HttpContext.Session.GetInt32("UserId") ?? 0;
-            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            filter.UserId = HttpContext.Session.GetInt32("UserId") ?? 0;
+            
             //get all first jobs
             var options = new JsonSerializerOptions
             {
@@ -73,12 +73,12 @@ namespace OpusLink.User.Hosted.Pages.JOB
         {
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
-                return RedirectToPage("/Account/Login");
+                return RedirectToPage("../Account/Login");
             }
-            else
-            {
-                filter.UserId = HttpContext.Session.GetInt32("UserId") ?? 0;
-            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            filter.UserId = HttpContext.Session.GetInt32("UserId") ?? 0;
+            
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get Filter object
             foreach (string key in keys)

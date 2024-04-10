@@ -28,17 +28,14 @@ namespace OpusLink.User.Hosted.Pages.HistoryPayment
         public async  Task<IActionResult> OnGetAsync(int payId)
         {
 
-            //int userId = 0;
-            //userId = HttpContext.Session.GetInt32("UserId")?? 0;
-            int userId = 0;
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
-                return RedirectToPage("/Login_Register/Login");
+                return RedirectToPage("../Account/Login");
             }
-            else
-            {
-                userId = HttpContext.Session.GetInt32("UserId") ?? 0;
-            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            int userId = 0;
+            userId = HttpContext.Session.GetInt32("UserId") ?? 0;
 
             HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + $"/HistoryPayment/GetHistoryPaymentById/{payId}");
             if (responseUser.IsSuccessStatusCode)

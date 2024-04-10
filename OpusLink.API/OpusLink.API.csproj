@@ -27,8 +27,4 @@
     <ProjectReference Include="..\OpusLink.Service\OpusLink.Service.csproj" />
   </ItemGroup>
 
-  <ItemGroup>
-    <Folder Include="Controllers\UserControllers\Employer\" />
-  </ItemGroup>
-
 </Project>

@@ -1,5 +1,6 @@
 ﻿@page "{id}" 
 @using OpusLink.Shared.Constants
+@inject IHttpContextAccessor HttpContextAccessor;
 @model OpusLink.Admin.Hosted.Pages.ManageUser.ViewsListReportModel
 @{
 }
@@ -145,6 +146,10 @@
     function LoadReportList(userId) {
         $.ajax({
             url: `@(UrlConstant.ApiBaseUrl)/Report/GetAllReportById?id=${userId}`,
+            headers: {
+                "ngrok-skip-browser-warning": true,
+                "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
+            },
             method: 'GET',
             contentType: 'application/json',
             success: (dataReport) => {

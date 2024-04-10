@@ -8,8 +8,7 @@ using OpusLink.Service.JobServices;
 
 namespace OpusLink.API.Controllers.JobControllers
 {
-    //[Authorize(Roles = "Admin")]
-
+    [Authorize(Roles = "Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class Job11APIController : ControllerBase

@@ -39,8 +39,13 @@ namespace OpusLink.User.Hosted.Pages.WithDrawMoney
         }
         public async Task<IActionResult> OnGet(int UserId )
         {
-            
-
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            UserId = HttpContext.Session.GetInt32("UserId") ?? 0;
             HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "/User/GetUserById/" + UserId);
             if (responseUser.IsSuccessStatusCode)
             {
@@ -56,7 +61,12 @@ namespace OpusLink.User.Hosted.Pages.WithDrawMoney
 
         public async Task<IActionResult> OnPost(IFormCollection collection)
         {
-
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             List<string> keys = collection.Keys.ToList<string>();
             double price = 0;
             string bankInfor ="";

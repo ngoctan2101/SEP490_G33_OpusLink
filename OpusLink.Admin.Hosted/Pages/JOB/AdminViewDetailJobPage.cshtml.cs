@@ -18,17 +18,30 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
             var contentType = new MediaTypeWithQualityHeaderValue("application/json");
             client.DefaultRequestHeaders.Accept.Add(contentType);
         }
-        public async Task OnGetAsync(int JobId)
+        public async Task<IActionResult> OnGetAsync(int JobId)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl+"/Job13API/GetJobDetail/" + JobId);
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
                 job = JsonConvert.DeserializeObject<GetJobDetailResponse>(strData);
             }
+            return Page();
         }
         public async Task<IActionResult> OnPostForDeleteAsync(IFormCollection collection)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             int idOfJob = 0;
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get Filter object
@@ -52,7 +65,6 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
             {
                 return RedirectToPage("/JOB/AdminViewAllJobPage");
             }
-            
         }
     }
 }

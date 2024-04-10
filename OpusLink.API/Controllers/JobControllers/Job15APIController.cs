@@ -6,8 +6,7 @@ using OpusLink.Entity.Models;
 using OpusLink.Service.JobServices;
 namespace OpusLink.API.Controllers.JobControllers
 {
-    //[Authorize(Roles = "Admin")]
-
+    [Authorize(Roles = "Employer")]
     [Route("api/[controller]")]
     [ApiController]
     public class Job15APIController : ControllerBase

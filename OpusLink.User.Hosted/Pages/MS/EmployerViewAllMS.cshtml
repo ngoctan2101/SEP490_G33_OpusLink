@@ -540,16 +540,31 @@
         </div>
     </div>
     <div>
-        <h5>// In ra thông tin của JOB này ở đây nếu cần //</h5>
+        <div>
+            <h5>Job Id: @Model.job.JobId</h5>
+            <h5>Job Content: @Model.job.JobContent</h5>
+        </div>
     </div>
     <div class="row" style="margin-bottom:15px">
         <div class="col-md-10"></div>
         <div class="col-md-2">
-            @if (Model.job.EmployerDoneEditMilestone == false)
+            @if (Model.job.Status == (int)JobStatusEnum.Hiring || Model.job.Status == (int)JobStatusEnum.Hired)
             {
-                <button type="button" id="openAddMilestone" style="width:80%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964;border-radius:3px">Add a milestone</button>
+                if (Model.job.EmployerDoneEditMilestone == false)
+                {
+                    <button type="button" id="openAddMilestone" style="width:80%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964;border-radius:3px">Add a milestone</button>
+                }
+                else if (Model.job.EmployerDoneEditMilestone == true && Model.job.IsFreelancerConfirm == false && Model.job.DeadlineFreelancerConfirm < DateTime.Now)
+                {
+                    <button type="button" id="openAddMilestone" style="width:80%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964;border-radius:3px">Add a milestone</button>
+                }
+                else
+                {
+                    <button type="button" id="openAddMilestone" style="width:80%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964;border-radius:3px" hidden>Add a milestone</button>
 
+                }
             }
+
 
         </div>
     </div>
@@ -570,130 +585,200 @@
                     <span id="Deadline_@item.MilestoneID">@item.Deadline.ToString("yyyy-MM-ddTHH:mm")</span>
                     <span id="AmountToPay_@item.MilestoneID">@((item.AmountToPay).ToString("#,##")) ₫</span>
                     <div id="ShowStatus_@item.MilestoneID">
-                        @if (item.IsFreelancerDone && item.Status == (int)MilestoneStatusEnum.MoneyPutted && item.Deadline > DateTime.Now)
+                        @if (Model.job.IsFreelancerConfirm == false)
                         {
-                            <p class="status" style="background-color:#9E9E9E;">Đang chờ review</p>
+                            if (item.Status == (int)MilestoneStatusEnum.EmployerCreated && item.Deadline > DateTime.Now)
+                            {
+                                <p class="status" style="background-color:#9E9E9E;">Mới tạo</p>
+                            }
+                            else if (item.IsFreelancerDone == false && item.Status == (int)MilestoneStatusEnum.MoneyPutted && item.Deadline > DateTime.Now)
+                            {
+                                <p class="status" style="background-color:#0068AD;">Đã đặt tiền</p>
+                            }
+                            else
+                            {
+                                <p class="status" style="background-color:#CF2A27;">Sai ngày</p>
+                            }
+
+
+
                         }
-                        @if (item.Status == (int)MilestoneStatusEnum.EmployerCreated && item.Deadline < DateTime.Now)
+                        else
                         {
-                            <p class="status" style="background-color:#CF2A27;">Muộn</p>
+                            if (item.IsFreelancerDone && item.Status == (int)MilestoneStatusEnum.MoneyPutted && item.Deadline > DateTime.Now)
+                            {
+                                <p class="status" style="background-color:#9E9E9E;">Đang chờ review</p>
+                            }
+                            if (item.Status == (int)MilestoneStatusEnum.EmployerCreated && item.Deadline < DateTime.Now)
+                            {
+                                <p class="status" style="background-color:#CF2A27;">Muộn</p>
+                            }
+                            if (item.Status == (int)MilestoneStatusEnum.EmployerCreated && item.Deadline > DateTime.Now)
+                            {
+                                <p class="status" style="background-color:#9E9E9E;">Mới tạo</p>
+                            }
+                            if (item.IsFreelancerDone && item.Status == (int)MilestoneStatusEnum.MoneyPutted && item.Deadline < DateTime.Now)
+                            {
+                                <p class="status" style="background-color:#CF2A27;">Employer trễ hạn</p>
+                            }
+                            if (item.IsFreelancerDone == false && item.Status == (int)MilestoneStatusEnum.MoneyPutted && item.Deadline < DateTime.Now)
+                            {
+                                <p class="status" style="background-color:#CF2A27;">Freelancer trễ hạn</p>
+                            }
+                            if (item.IsFreelancerDone == false && item.Status == (int)MilestoneStatusEnum.MoneyPutted && item.Deadline > DateTime.Now)
+                            {
+                                <p class="status" style="background-color:#0068AD;">Đã đặt tiền</p>
+                            }
+                            if (item.IsFreelancerDone == true && item.Status == (int)MilestoneStatusEnum.EmployerRejected && item.Deadline > DateTime.Now)
+                            {
+                                <p class="status" style="background-color:#FFE599;">Chờ review lại</p>
+                            }
+                            if (item.IsFreelancerDone == true && item.Status == (int)MilestoneStatusEnum.EmployerRejected && item.Deadline < DateTime.Now)
+                            {
+                                <p class="status" style="background-color:#FFE599;">Employer trễ hạn</p>
+                            }
+                            if (item.IsFreelancerDone == false && item.Status == (int)MilestoneStatusEnum.EmployerRejected && item.Deadline < DateTime.Now)
+                            {
+                                <p class="status" style="background-color:#FFE599;">Freelancer trễ hạn</p>
+                            }
+                            if (item.IsFreelancerDone == false && item.Status == (int)MilestoneStatusEnum.EmployerRejected && item.Deadline > DateTime.Now)
+                            {
+                                <p class="status" style="background-color:#FFE599;">Freelancer đang làm lại</p>
+                            }
+
+                            if (item.Status == (int)MilestoneStatusEnum.Completed)
+                            {
+                                <p class="status" style="background-color:#93C47D;">Hoàn thành</p>
+                            }
+                            if (item.Status == (int)MilestoneStatusEnum.Failed)
+                            {
+                                <p class="status" style="background-color:#E06666;">Thất bại</p>
+                            }
                         }
-                        @if (item.Status == (int)MilestoneStatusEnum.EmployerCreated && item.Deadline > DateTime.Now)
+
+                    </div>
+                </div>
+                <div class="col-md-2" style="display: flex;justify-content: center;align-items: center;">
+
+                    @if (Model.job.IsFreelancerConfirm == false)
+                    {
+                        if (item.Status == (int)MilestoneStatusEnum.EmployerCreated && item.Deadline > DateTime.Now)
                         {
                             <p class="status" style="background-color:#9E9E9E;">Mới tạo</p>
                         }
-                        @if (item.IsFreelancerDone && item.Status == (int)MilestoneStatusEnum.MoneyPutted && item.Deadline < DateTime.Now)
+                        else if (item.IsFreelancerDone == false && item.Status == (int)MilestoneStatusEnum.MoneyPutted && item.Deadline > DateTime.Now)
+                        {
+                            <p class="status" style="background-color:#0068AD;">Đã đặt tiền</p>
+                        }
+                        else
+                        {
+                            <p class="status" style="background-color:#CF2A27;">Sai ngày</p>
+                        }
+
+
+
+                    }
+                    else
+                    {
+                        if (item.IsFreelancerDone && item.Status == (int)MilestoneStatusEnum.MoneyPutted && item.Deadline > DateTime.Now)
+                        {
+                            <p class="status" style="background-color:#9E9E9E;">Đang chờ review</p>
+                        }
+                        if (item.Status == (int)MilestoneStatusEnum.EmployerCreated && item.Deadline < DateTime.Now)
+                        {
+                            <p class="status" style="background-color:#CF2A27;">Muộn</p>
+                        }
+                        if (item.Status == (int)MilestoneStatusEnum.EmployerCreated && item.Deadline > DateTime.Now)
+                        {
+                            <p class="status" style="background-color:#9E9E9E;">Mới tạo</p>
+                        }
+                        if (item.IsFreelancerDone && item.Status == (int)MilestoneStatusEnum.MoneyPutted && item.Deadline < DateTime.Now)
                         {
                             <p class="status" style="background-color:#CF2A27;">Employer trễ hạn</p>
                         }
-                        @if (item.IsFreelancerDone == false && item.Status == (int)MilestoneStatusEnum.MoneyPutted && item.Deadline < DateTime.Now)
+                        if (item.IsFreelancerDone == false && item.Status == (int)MilestoneStatusEnum.MoneyPutted && item.Deadline < DateTime.Now)
                         {
                             <p class="status" style="background-color:#CF2A27;">Freelancer trễ hạn</p>
                         }
-                        @if (item.IsFreelancerDone == false && item.Status == (int)MilestoneStatusEnum.MoneyPutted && item.Deadline > DateTime.Now)
+                        if (item.IsFreelancerDone == false && item.Status == (int)MilestoneStatusEnum.MoneyPutted && item.Deadline > DateTime.Now)
                         {
-                            <p class="status" style="background-color:#0068AD;">Đang làm</p>
+                            <p class="status" style="background-color:#0068AD;">Đã đặt tiền</p>
                         }
-                        @if (item.IsFreelancerDone == true && item.Status == (int)MilestoneStatusEnum.EmployerRejected && item.Deadline > DateTime.Now)
+                        if (item.IsFreelancerDone == true && item.Status == (int)MilestoneStatusEnum.EmployerRejected && item.Deadline > DateTime.Now)
                         {
                             <p class="status" style="background-color:#FFE599;">Chờ review lại</p>
                         }
-                        @if (item.IsFreelancerDone == true && item.Status == (int)MilestoneStatusEnum.EmployerRejected && item.Deadline < DateTime.Now)
+                        if (item.IsFreelancerDone == true && item.Status == (int)MilestoneStatusEnum.EmployerRejected && item.Deadline < DateTime.Now)
                         {
                             <p class="status" style="background-color:#FFE599;">Employer trễ hạn</p>
                         }
-                        @if (item.IsFreelancerDone == false && item.Status == (int)MilestoneStatusEnum.EmployerRejected && item.Deadline < DateTime.Now)
+                        if (item.IsFreelancerDone == false && item.Status == (int)MilestoneStatusEnum.EmployerRejected && item.Deadline < DateTime.Now)
                         {
                             <p class="status" style="background-color:#FFE599;">Freelancer trễ hạn</p>
                         }
-                        @if (item.IsFreelancerDone == false && item.Status == (int)MilestoneStatusEnum.EmployerRejected && item.Deadline > DateTime.Now)
+                        if (item.IsFreelancerDone == false && item.Status == (int)MilestoneStatusEnum.EmployerRejected && item.Deadline > DateTime.Now)
                         {
                             <p class="status" style="background-color:#FFE599;">Freelancer đang làm lại</p>
                         }
 
-                        @if (item.Status == (int)MilestoneStatusEnum.Completed)
+                        if (item.Status == (int)MilestoneStatusEnum.Completed)
                         {
                             <p class="status" style="background-color:#93C47D;">Hoàn thành</p>
                         }
-                        @if (item.Status == (int)MilestoneStatusEnum.Failed)
+                        if (item.Status == (int)MilestoneStatusEnum.Failed)
                         {
                             <p class="status" style="background-color:#E06666;">Thất bại</p>
                         }
-                    </div>
-                </div>
-                <div class="col-md-2" style="display: flex;justify-content: center;align-items: center;">
-                    @if (item.IsFreelancerDone && item.Status == (int)MilestoneStatusEnum.MoneyPutted && item.Deadline > DateTime.Now)
-                    {
-                        <p class="status" style="background-color:#9E9E9E;">Đang chờ review</p>
-                    }
-                    @if (item.Status == (int)MilestoneStatusEnum.EmployerCreated && item.Deadline < DateTime.Now)
-                    {
-                        <p class="status" style="background-color:#CF2A27;">Muộn</p>
-                    }
-                    @if (item.Status == (int)MilestoneStatusEnum.EmployerCreated && item.Deadline > DateTime.Now)
-                    {
-                        <p class="status" style="background-color:#9E9E9E;">Mới tạo</p>
-                    }
-                    @if (item.IsFreelancerDone && item.Status == (int)MilestoneStatusEnum.MoneyPutted && item.Deadline < DateTime.Now)
-                    {
-                        <p class="status" style="background-color:#CF2A27;">Employer trễ hạn</p>
-                    }
-                    @if (item.IsFreelancerDone == false && item.Status == (int)MilestoneStatusEnum.MoneyPutted && item.Deadline < DateTime.Now)
-                    {
-                        <p class="status" style="background-color:#CF2A27;">Freelancer trễ hạn</p>
-                    }
-                    @if (item.IsFreelancerDone == false && item.Status == (int)MilestoneStatusEnum.MoneyPutted && item.Deadline > DateTime.Now)
-                    {
-                        <p class="status" style="background-color:#0068AD;">Đang làm</p>
-                    }
-                    @if (item.IsFreelancerDone == true && item.Status == (int)MilestoneStatusEnum.EmployerRejected && item.Deadline > DateTime.Now)
-                    {
-                        <p class="status" style="background-color:#FFE599;">Chờ review lại</p>
-                    }
-                    @if (item.IsFreelancerDone == true && item.Status == (int)MilestoneStatusEnum.EmployerRejected && item.Deadline < DateTime.Now)
-                    {
-                        <p class="status" style="background-color:#FFE599;">Employer trễ hạn</p>
-                    }
-                    @if (item.IsFreelancerDone == false && item.Status == (int)MilestoneStatusEnum.EmployerRejected && item.Deadline < DateTime.Now)
-                    {
-                        <p class="status" style="background-color:#FFE599;">Freelancer trễ hạn</p>
-                    }
-                    @if (item.IsFreelancerDone == false && item.Status == (int)MilestoneStatusEnum.EmployerRejected && item.Deadline > DateTime.Now)
-                    {
-                        <p class="status" style="background-color:#FFE599;">Freelancer đang làm lại</p>
-                    }
-
-                    @if (item.Status == (int)MilestoneStatusEnum.Completed)
-                    {
-                        <p class="status" style="background-color:#93C47D;">Hoàn thành</p>
-                    }
-                    @if (item.Status == (int)MilestoneStatusEnum.Failed)
-                    {
-                        <p class="status" style="background-color:#E06666;">Thất bại</p>
                     }
                 </div>
                 <div class="col-md-4" style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
-                    @if (Model.job.EmployerDoneEditMilestone == false)
+                    @if (Model.job.Status == (int)JobStatusEnum.Hiring || Model.job.Status == (int)JobStatusEnum.Hired)
                     {
-                        <button type="button" id="openUpdateMilestone" style="background-color:#00ACD4;color:white;display:block;margin:5px;min-width:150px" onclick="OpenUpdateMilestone(@item.MilestoneID)">Sửa nội dung</button>
-                        <button type="button" id="openDeleteMilestone" style="background-color:#E19400;color:white;display:block;margin:5px;min-width:150px" onclick="OpenDeleteMilestone(@item.MilestoneID)">Xóa</button>
-                        <button type="button" style="background-color:#2DB964;color:white;display:block;margin:5px;min-width:150px" onclick="OpenPutMoneyMilestone(@item.MilestoneID,'@((@item.AmountToPay).ToString(" #,##")) ₫')">Đặt tiền</button>
-                        <button type="button" style="background-color:#2DB964;color:white;display:block;margin:5px;min-width:150px" onclick="OpenGetBackMoneyMilestone(@item.MilestoneID,'@((@item.AmountToPay).ToString(" #,##")) ₫')">Bỏ đặt tiền</button>
+                        if (Model.job.EmployerDoneEditMilestone == false)
+                        {
+                            if (item.Status != (int)MilestoneStatusEnum.MoneyPutted)
+                            {
+                                <button type="button" id="openUpdateMilestone" style="background-color:#00ACD4;color:white;display:block;margin:5px;min-width:150px" onclick="OpenUpdateMilestone(@item.MilestoneID)">Sửa nội dung</button>
+                                <button type="button" id="openDeleteMilestone" style="background-color:#E19400;color:white;display:block;margin:5px;min-width:150px" onclick="OpenDeleteMilestone(@item.MilestoneID)">Xóa</button>
+                                <button type="button" style="background-color:#2DB964;color:white;display:block;margin:5px;min-width:150px" onclick="OpenPutMoneyMilestone(@item.MilestoneID,'@((@item.AmountToPay).ToString(" #,##")) ₫')">Đặt tiền</button>
+                            }
+                            else
+                            {
 
-                    }
-                    @if (item.IsFreelancerDone && item.Deadline > DateTime.Now && (item.Status == (int)MilestoneStatusEnum.MoneyPutted || item.Status == (int)MilestoneStatusEnum.EmployerRejected))
-                    {
-                        <button type="button" id="openReviewMilestone" style="background-color:#009AFF;color:white;display:block;margin:5px;min-width:150px" onclick="OpenReviewMilestone(@item.MilestoneID)">Review</button>
+                                <button type="button" style="background-color:#2DB964;color:white;display:block;margin:5px;min-width:150px" onclick="OpenGetBackMoneyMilestone(@item.MilestoneID,'@((@item.AmountToPay).ToString(" #,##")) ₫')">Bỏ đặt tiền</button>
+                            }
+                        }
+                        else if (Model.job.EmployerDoneEditMilestone == true && Model.job.IsFreelancerConfirm == false && Model.job.DeadlineFreelancerConfirm < DateTime.Now)
+                        {
 
+                            if (item.Status != (int)MilestoneStatusEnum.MoneyPutted)
+                            {
+                                <button type="button" id="openUpdateMilestone" style="background-color:#00ACD4;color:white;display:block;margin:5px;min-width:150px" onclick="OpenUpdateMilestone(@item.MilestoneID)">Sửa nội dung</button>
+                                <button type="button" id="openDeleteMilestone" style="background-color:#E19400;color:white;display:block;margin:5px;min-width:150px" onclick="OpenDeleteMilestone(@item.MilestoneID)">Xóa</button>
+                                <button type="button" style="background-color:#2DB964;color:white;display:block;margin:5px;min-width:150px" onclick="OpenPutMoneyMilestone(@item.MilestoneID,'@((@item.AmountToPay).ToString(" #,##")) ₫')">Đặt tiền</button>
+                            }
+                            else
+                            {
+
+                                <button type="button" style="background-color:#2DB964;color:white;display:block;margin:5px;min-width:150px" onclick="OpenGetBackMoneyMilestone(@item.MilestoneID,'@((@item.AmountToPay).ToString(" #,##")) ₫')">Bỏ đặt tiền</button>
+                            }
+
+                        }
+                        else if (item.IsFreelancerDone && item.Deadline > DateTime.Now && (item.Status == (int)MilestoneStatusEnum.MoneyPutted || item.Status == (int)MilestoneStatusEnum.EmployerRejected))
+                        {
+                            <button type="button" id="openReviewMilestone" style="background-color:#009AFF;color:white;display:block;margin:5px;min-width:150px" onclick="OpenReviewMilestone(@item.MilestoneID)">Review</button>
+
+                        }
+                        else if (item.IsFreelancerDone && item.Deadline < DateTime.Now && (item.Status == (int)MilestoneStatusEnum.MoneyPutted || item.Status == (int)MilestoneStatusEnum.EmployerRejected))
+                        {
+                            <button type="button" id="openResolveMilestone2" style="background-color:#B85A44;color:white;display:block;margin:5px;min-width:150px" onclick="OpenResolveMilestone2(@item.MilestoneID)">Resolve Employer late</button>
+                        }
+                        else if (item.IsFreelancerDone == false && item.Deadline < DateTime.Now && (item.Status == (int)MilestoneStatusEnum.MoneyPutted || item.Status == (int)MilestoneStatusEnum.EmployerRejected))
+                        {
+                            <button type="button" id="openResolveMilestone1" style="background-color:#B85A44;color:white;display:block;margin:5px;min-width:150px" onclick="OpenResolveMilestone1(@item.MilestoneID)">Resolve Freelancer late</button>
+                        }
                     }
-                    @if (item.IsFreelancerDone && item.Deadline < DateTime.Now && (item.Status == (int)MilestoneStatusEnum.MoneyPutted || item.Status == (int)MilestoneStatusEnum.EmployerRejected))
-                    {
-                        <button type="button" id="openResolveMilestone2" style="background-color:#B85A44;color:white;display:block;margin:5px;min-width:150px" onclick="OpenResolveMilestone2(@item.MilestoneID)">Resolve Employer late</button>
-                    }
-                    @if (item.IsFreelancerDone == false && item.Deadline < DateTime.Now && (item.Status == (int)MilestoneStatusEnum.MoneyPutted || item.Status == (int)MilestoneStatusEnum.EmployerRejected))
-                    {
-                        <button type="button" id="openResolveMilestone1" style="background-color:#B85A44;color:white;display:block;margin:5px;min-width:150px" onclick="OpenResolveMilestone1(@item.MilestoneID)">Resolve Freelancer late</button>
-                    }
+
 
 
 
@@ -708,17 +793,52 @@
         <div class="row">
             <div class="col-md-8"></div>
             <div class="col-md-4">
-                <button type="button" id="openRequestFAcceptMS" style="background-color:#009400;color:white;display:block;margin:5px;min-width:200px">Request Freelancer chấp nhận plan</button>
+                @if (Model.allMSMoneyPutted)
+                {
+                    <button type="button" id="openRequestFAcceptMS" style="background-color:#009400;color:white;display:block;margin:5px;min-width:200px">Request Freelancer chấp nhận plan</button>
+                }
+                else
+                {
+                    <button type="button" id="openRequestFAcceptMS" style="background-color:#009400;color:white;display:block;margin:5px;min-width:200px" hidden>Request Freelancer chấp nhận plan</button>
+                }
             </div>
         </div>
     }
-    else if (Model.job.EmployerDoneEditMilestone == true && Model.job.IsFreelancerConfirm == false)
+    else if (Model.job.EmployerDoneEditMilestone == true && Model.job.IsFreelancerConfirm == false && Model.job.DeadlineFreelancerConfirm > DateTime.Now)
     {
-        <h5>Đợi Freelancer phản hồi trong vòng <span style="color:red;font-size:13px" id="countdown"></span></h5>
+        <h5 id="requestPlan">Đợi Freelancer phản hồi trong vòng <span style="color:red;font-size:13px" id="countdown"></span></h5>
+    }
+    else if (Model.job.EmployerDoneEditMilestone == true && Model.job.IsFreelancerConfirm == false && Model.job.DeadlineFreelancerConfirm < DateTime.Now)
+    {
+        <div class="row">
+            <div class="col-md-8"></div>
+            <div class="col-md-4">
+                @if (Model.allMSMoneyPutted)
+                {
+                    <button type="button" id="openRequestFAcceptMS" style="background-color:#009400;color:white;display:block;margin:5px;min-width:200px">Request Freelancer chấp nhận plan</button>
+                }
+                else
+                {
+                    <button type="button" id="openRequestFAcceptMS" style="background-color:#009400;color:white;display:block;margin:5px;min-width:200px" hidden>Request Freelancer chấp nhận plan</button>
+                }
+
+            </div>
+        </div>
     }
     else if (Model.job.EmployerDoneEditMilestone == true && Model.job.IsFreelancerConfirm == true)
     {
-        <h5>Các bạn đã thống nhất một plan, bây giờ là lúc làm việc</h5>
+        if (Model.job.Status == (int)JobStatusEnum.Completed)
+        {
+            <h5>Job đã kết thúc thành công.</h5>
+        }
+        else if (Model.job.Status == (int)JobStatusEnum.Failed)
+        {
+            <h5>Job đã kết thúc thất bại.</h5>
+        }
+        else
+        {
+           <h5>Các bạn đã thống nhất một plan, bây giờ là lúc làm việc</h5> 
+        }
     }
 
 </div>
@@ -834,11 +954,11 @@
         var currentDateTime = new Date();
 
         if (inputDateTime <= currentDateTime) {
-            errorMessage.innerHTML = "Please select a future date and time.";
+            errorMessage.innerHTML = "Hãy chọn một ngày ở tương lai.";
             return false;
         }
         if (parseInt(inputAmountToPay) <= 0) {
-            errorMessage.innerHTML = "Amount must greater than zero.";
+            errorMessage.innerHTML = "Số tiền phải lớn hơn số không.";
             return false;
         }
         return true;
@@ -853,11 +973,11 @@
         var currentDateTime = new Date();
 
         if (inputDateTime <= currentDateTime) {
-            errorMessage.innerHTML = "Please select a future date and time.";
+            errorMessage.innerHTML = "Hãy chọn một ngày ở tương lai.";
             return false;
         }
         if (parseInt(inputAmountToPay) <= 0) {
-            errorMessage.innerHTML = "Amount must greater than zero.";
+            errorMessage.innerHTML = "Số tiền phải lớn hơn số không.";
             return false;
         }
         return true;
@@ -871,7 +991,11 @@
         var currentDateTime = new Date();
 
         if (inputDateTime <= currentDateTime) {
-            errorMessage.innerHTML = "Please select a future date and time.";
+            errorMessage.innerHTML = "Hãy chọn một ngày ở tương lai.";
+            return false;
+        }
+        if (inputDateTime > new Date(@Model.nearestDatelineOfMS.Year, @Model.nearestDatelineOfMS.Month - 1, @Model.nearestDatelineOfMS.Day, @Model.nearestDatelineOfMS.Hour, @Model.nearestDatelineOfMS.Minute, @Model.nearestDatelineOfMS.Second)) {
+            errorMessage.innerHTML = "Hạn cho Freelancer chấp nhận cần phải trước hạn của milestone gần nhất ít nhất 0 ngày.";
             return false;
         }
         return true;
@@ -885,7 +1009,7 @@
         var currentDateTime = new Date();
 
         if (inputDateTime <= currentDateTime) {
-            errorMessage.innerHTML = "Please select a future date and time.";
+            errorMessage.innerHTML = "Hãy chọn một ngày ở tương lai.";
             return false;
         }
         return true;
@@ -1061,7 +1185,7 @@ else if (Model.job.EmployerDoneEditMilestone == true && Model.job.IsFreelancerCo
                 document.getElementById(countdownId).innerHTML = "(" + days + "d " + hours + "h " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds + ")";
                 if (timeDifference < 0) {
                     clearInterval(countdownInterval);
-                    document.getElementById(countdownId).innerHTML = "Hiring Expried";
+                    document.getElementById("requestPlan").innerHTML = "Xin hãy tải lại trang web.";
                 }
             }, 1000);
         }

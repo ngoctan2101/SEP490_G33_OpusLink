@@ -29,8 +29,10 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
         {
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
-                return RedirectToPage("/Account/Login");
+                return RedirectToPage("../Account/Login");
             }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
 
             // call list
             HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "/User/GetUserById/" + UserId);
@@ -61,6 +63,12 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
         }
         public async Task<ActionResult> OnGetForDownloadAsync(int UserId)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             int userId = UserId;
             HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "/User/GetFileCVById/" + userId);
 

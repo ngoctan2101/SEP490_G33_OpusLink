@@ -1,4 +1,5 @@
 ﻿using AutoMapper;
+using Microsoft.AspNetCore.Authorization;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.SignalR;
 using OpusLink.API.Hubs;
@@ -10,7 +11,8 @@ using OpusLink.Service.Feedbacks;
 
 namespace OpusLink.API.Controllers.Feedbacks
 {
-	[Route("api/[controller]")]
+    [Authorize(Roles = "Freelancer,Employer,Admin")]
+    [Route("api/[controller]")]
 	[ApiController]
 	public class FeedbackController : ControllerBase
 	{

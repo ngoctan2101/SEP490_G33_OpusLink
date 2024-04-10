@@ -38,12 +38,12 @@ namespace OpusLink.User.Hosted.Pages.JOB
         {
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
-                return RedirectToPage("/Account/Login");
+                return RedirectToPage("../Account/Login");
             }
-            else
-            {
-                userID = HttpContext.Session.GetInt32("UserId") ?? 0;
-            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            userID = HttpContext.Session.GetInt32("UserId") ?? 0;
+            
             //Get All Offer by userID
             var options = new JsonSerializerOptions
             {
@@ -68,12 +68,12 @@ namespace OpusLink.User.Hosted.Pages.JOB
         {
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
-                return RedirectToPage("/Account/Login");
+                return RedirectToPage("../Account/Login");
             }
-            else
-            {
-                userID = HttpContext.Session.GetInt32("UserId") ?? 0;
-            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            userID = HttpContext.Session.GetInt32("UserId") ?? 0;
+            
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get Filter object
             foreach (string key in keys)
@@ -113,12 +113,12 @@ namespace OpusLink.User.Hosted.Pages.JOB
         {
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
-                return RedirectToPage("/Account/Login");
+                return RedirectToPage("../Account/Login");
             }
-            else
-            {
-                userID = HttpContext.Session.GetInt32("UserId") ?? 0;
-            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            userID = HttpContext.Session.GetInt32("UserId") ?? 0;
+            
             int SaveJobId = 0;
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get Filter object

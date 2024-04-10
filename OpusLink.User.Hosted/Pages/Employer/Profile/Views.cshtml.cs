@@ -28,6 +28,12 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
         }
         public async Task<IActionResult> OnGetAsync(int UserId, string Mess)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             this.Mess = Mess;
             // call list
             if (HttpContext.Session.GetString("Role").Equals("Freelancer"))
@@ -67,6 +73,12 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
         }
         public async Task<ActionResult> OnGetForDownloadAsync(int UserId)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             int userId = UserId;
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "/User/GetFileCVById/" + userId);
@@ -95,6 +107,11 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
         }
         public async Task<ActionResult> OnPostForSaveAsync(IFormCollection collection, IFormFile image, IFormFile cv)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             PutUser = new PutUserRequest();
             //get image, get cv from <input>

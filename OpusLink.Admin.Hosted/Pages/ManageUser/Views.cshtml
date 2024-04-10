@@ -1,6 +1,7 @@
 ﻿@page
 @using OpusLink.Shared.Constants
 @model OpusLink.Admin.Hosted.Pages.ManageUser.ViewsModel
+@inject IHttpContextAccessor HttpContextAccessor;
 @{
 }
 <link rel="stylesheet" href="~/css/ManagerUser.css">
@@ -294,6 +295,10 @@
             // Ajax request
             $.ajax({
                 url: `@(UrlConstant.ApiBaseUrl)/User/UnBanUser?userId=` + userID,
+                headers: {
+                    "ngrok-skip-browser-warning": true,
+                    "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
+                },
                 method: 'PATCH',
                 contentType: 'application/json',
                 success: function (response) {
@@ -341,6 +346,10 @@
             // Ajax request
             $.ajax({
                 url: `@(UrlConstant.ApiBaseUrl)/User/BanUser?banReason=` + reason + `&endBanDate=` + cutoffDate + `&userId=` + userID,
+                headers: {
+                    "ngrok-skip-browser-warning": true,
+                    "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
+                },
                 method: 'PATCH',
                 contentType: 'application/json',
                 success: function (response) {

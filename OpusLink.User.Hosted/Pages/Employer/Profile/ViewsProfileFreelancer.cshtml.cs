@@ -28,11 +28,13 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
         {
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
-                return RedirectToPage("/Account/Login");
+                return RedirectToPage("../Account/Login");
             }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
 
             // call list
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            
             HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "/User/GetUserById/" + UserId);
             if (responseUser.IsSuccessStatusCode)
             {
@@ -45,8 +47,8 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
         }
         private async Task<IList<SkillDTO>> GetAllSkillAsync()
         {
+
             //get all skill
-            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "/Skill/GetAllSkill");
             if (response.IsSuccessStatusCode)
             {
@@ -62,8 +64,13 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
         }
         public async Task<ActionResult> OnGetForDownloadAsync(int UserId)
         {
-            int userId = UserId;
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            int userId = UserId;
             HttpResponseMessage response = await client.GetAsync(ServiceMangaUrl + "/User/GetFileCVById/" + userId);
 
             if (response.IsSuccessStatusCode)

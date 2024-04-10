@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc.RazorPages;
+﻿using Microsoft.AspNetCore.Mvc;
+using Microsoft.AspNetCore.Mvc.RazorPages;
 using Microsoft.Extensions.Options;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.JobDTO;
@@ -34,9 +35,15 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
                 DateMax = DateTime.ParseExact("2024-05-30 23:59", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture)
             };
         }
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             HttpContext.Session.SetString("PageNow", "ManageJob");
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             //get all first jobs
             var options = new JsonSerializerOptions
             {
@@ -56,11 +63,18 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
             //get all category has parent is 0
             Categories = await GetListCategoryAsync();
             AllCategories = await GetAllCategoryAsync();
+            return Page();
         }
 
         
-        public async Task OnPostAsync(IFormCollection collection)
+        public async Task<IActionResult> OnPostAsync(IFormCollection collection)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             List<string> keys=collection.Keys.ToList<string>();
             // manual bind to get Filter object
             foreach (string key in keys)
@@ -130,6 +144,7 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
             //get all category has parent is 0
             Categories = await GetListCategoryAsync();
             AllCategories = await GetAllCategoryAsync();
+            return Page();
         }
 
         private async Task<IList<GetCategoryResponse>> GetListCategoryAsync()

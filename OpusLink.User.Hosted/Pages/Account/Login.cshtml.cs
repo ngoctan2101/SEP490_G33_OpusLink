@@ -15,7 +15,7 @@ namespace OpusLink.User.Hosted.Pages.Account
         public string Password { get; set; }
         public LoginModel() { }
 
-        string link = UrlConstant.ApiBaseUrl+"/Account/Login";
+        string link = UrlConstant.ApiBaseUrl+ "/Account/loginUser";
         public void OnGet() {}
 
         public async Task<IActionResult> OnPostAsync(string username, string password)

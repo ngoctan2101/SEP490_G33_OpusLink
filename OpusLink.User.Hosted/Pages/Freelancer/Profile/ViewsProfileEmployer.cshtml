@@ -6,6 +6,7 @@
     int userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId") ?? 0;
 }
 <link rel="stylesheet" href="~/css/Report.css">
+<script src="https://kit.fontawesome.com/10f63c3d6e.js" crossorigin="anonymous"></script>
 <style>
     /* Thêm CSS để căn chỉnh nút Back ở góc trái dưới cùng */
     #backButton {
@@ -109,11 +110,13 @@
                     <div>
                         <h4 style="float: left;">Rate and Provide Feedback</h4>
                         <button style="float: right;" type="button" class="openModal" id="@userId" data-userid="@userId">
-                            Báo cáo
+                            <i class="fa-solid fa-circle-exclamation" style="font-size: 24px;"></i> <!-- Đặt kích thước cho biểu tượng -->
+                            Report <!-- Thêm văn bản bên cạnh biểu tượng (tùy chọn) -->
                         </button>
                     </div>
                     <br />
                     <br />
+
                     <div id="rateSection">
                         <h5>Rating:</h5>
                         
@@ -350,6 +353,10 @@
 
             $.ajax({
                 url: "@(UrlConstant.ApiBaseUrl+"/ReportAccount")",
+                headers: {
+                    "ngrok-skip-browser-warning": true,
+                    "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
+                }
                 method: 'POST',
                 data: JSON.stringify(obj),
                 contentType: 'application/json',
@@ -372,7 +379,12 @@
     // Function to fetch and display feedback information
     function displayAverageStar() {
         var EmployerId = @Model.user.Id; // Assuming EmployerId is an integer
-        fetch(`@(UrlConstant.ApiBaseUrl)/Feedback/AverageStars/${EmployerId}`)
+        fetch(`@(UrlConstant.ApiBaseUrl)/Feedback/AverageStars/${EmployerId}`, {
+            method: "GET", headers: {
+                "ngrok-skip-browser-warning": true,
+                "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
+            }
+        })
             .then(response => response.json())
             .then(data => {
                 document.getElementById('averageRating').innerHTML = `
@@ -390,7 +402,12 @@
 <script>
     function displayFeedbacks() {
         var userId = @Model.user.Id; // Assuming userId is an integer
-        fetch(`@(UrlConstant.ApiBaseUrl)/Feedback/GetFeedbacksByTargetUser/${userId}`)
+        fetch(`@(UrlConstant.ApiBaseUrl)/Feedback/GetFeedbacksByTargetUser/${userId}`, {
+            method: "GET", headers: {
+                "ngrok-skip-browser-warning": true,
+                "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
+            }
+        })
             .then(response => response.json())
             .then(data => {
                 var feedbackSection = document.getElementById('feedbackSection');

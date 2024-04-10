@@ -1,5 +1,6 @@
 ﻿@page "{SkillId:int?}"
 @using OpusLink.Shared.Constants
+@inject IHttpContextAccessor HttpContextAccessor;
 @model OpusLink.Admin.Hosted.Pages.ManageSkill.ViewsModel
 @{
 }
@@ -200,6 +201,10 @@
             // Ví dụ sử dụng AJAX
             $.ajax({
                 url: '@(UrlConstant.ApiBaseUrl)/Skill/DeleteSkillById/' + skillID, // Update the URL based on your controller and action
+                headers: {
+                    "ngrok-skip-browser-warning": true,
+                    "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
+                },
                 type: 'DELETE', // You might use POST or DELETE depending on your server configuration
                 success: function (result) {
                     // Xử lý kết quả sau khi xóa (cập nhật giao diện, thông báo, v.v.)
