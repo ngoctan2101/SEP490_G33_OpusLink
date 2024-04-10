@@ -93,7 +93,7 @@
                         <input type="file" class="form-control" id="cv" name="cv" readonly accept=".pdf,.docx">
                     </div>
                     <div class="mb-3">
-                    <a asp-page-handler="ForDownload" asp-route-UserId="@Model.user.Id">Tải hồ sơ</a>
+                    <a asp-page-handler="ForDownload" class="btn btn-danger" asp-route-UserId="@Model.user.Id">Tải hồ sơ</a>
                     </div>
                     <div class="mt-3">
                     <input type="submit" asp-page-handler="ForSave" class="btn btn-success" value="Cập nhật">
