@@ -71,6 +71,21 @@
         opacity: 0.6;
     }
 
+    .tinnhan-btn {
+        /* Thiết lập các thuộc tính CSS tùy theo ý của bạn */
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff; /* Màu nền */
+        color: #fff; /* Màu chữ */
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+        /* CSS khi hover */
+        .tinnhan-btn:hover {
+            background-color: #0056b3; /* Màu nền khi hover */
+            color: #fff; /* Màu chữ khi hover */
+        }
         .skillFake:hover {
             cursor: pointer;
         }
@@ -119,7 +134,7 @@
                     <tr><td>Ngân sách:</td><td>@Math.Round(item.BudgetMin,0).ToString("#,##") ₫<span style="display:inline-block"> - </span>@Math.Round(item.BudgetMax,0).ToString("#,##") ₫</td></tr>
                     <tr><td>Địa điểm:</td><td>@item.Location</td></tr>
                 </table>
-                <a class="tinnhan-btn" asp-page="/Chat/ChatList" asp-page-handler="AddChatBox" asp-route-EmployerId="@item.EmployerId" asp-route-FreeLancerId="@userId" asp-route-JobId="@item.JobId">Nhắn Tin</a>
+                <a class="tinnhan-btn" asp-page="/Chat/ChatList" asp-page-handler="AddChatBox" asp-route-EmployerId="@item.EmployerId" asp-route-FreeLancerId="@userId" asp-route-JobId="@item.JobId">Nhắn tin với Employer</a>
             </div>
             <div class="col-md-9">
                 <div>
