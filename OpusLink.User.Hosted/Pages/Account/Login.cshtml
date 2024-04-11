@@ -9,8 +9,10 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Đăng nhập - Opuslink</title>
-    <link rel="stylesheet" href="~/css/Login.css">
+    <link rel="stylesheet" href="~/css/Account.css">
     <script src="https://kit.fontawesome.com/10f63c3d6e.js" crossorigin="anonymous"></script>
+
+    <!-- Script form -->
     <script>
         function togglePasswordVisibility() {
             var passwordInput = document.getElementById("Password");
@@ -18,10 +20,10 @@
 
             if (passwordInput.type == "password") {
                 passwordInput.type = "text";
-                eyeIcon.className = "fa-solid fa-eye"; // Thêm dòng này để đổi icon mắt
+                eyeIcon.className = "fa-solid fa-eye"; 
             } else {
                 passwordInput.type = "password";
-                eyeIcon.className = "fa-solid fa-eye-slash"; // Thêm dòng này để đổi icon mắt
+                eyeIcon.className = "fa-solid fa-eye-slash";
             }
         }
 
@@ -31,21 +33,25 @@
         };
     </script>
 </head>
+
 <body>
     <div class="wrapper container-fluid">
         <form method="post">
             <h1>Đăng nhập</h1>
+
             <div class="input-box">
                 <label class="label">Tên tài khoản</label>
                 <input type="text" placeholder="Nhập tên đăng nhập" id="Username" name="Username" required>
                 <i class="fa-solid fa-user"></i>
             </div>
+
             <div class="input-box">
                 <label class="label">Mật khẩu</label>
                 <input type="password" placeholder="Nhập mật khẩu" id="Password" name="Password" required>
                 <i class="fa-solid fa-eye-slash" id="eyeIcon" onclick="togglePasswordVisibility()"></i>
             </div>
             <div id="passwordError" class="alert alert-danger error-message"></div>
+
             @if (ViewData["Error"] != null)
             {
                 <div class="alert alert-danger" role="alert">
@@ -53,11 +59,14 @@
                 </div>
             }
             <br />
+
             <div class="forgot-password">
                 <a asp-page="ForgotPassword">Quên mật khẩu?</a>
             </div>
-            <button type="submit" class="btn-login">Đăng nhập</button>
-            <div class="register-link">
+
+            <button type="submit" class="btn-confirm">Đăng nhập</button>
+
+            <div class="change-link">
                 <p>Bạn chưa có tài khoản? <a asp-page="/Account/Register">Đăng ký ngay!</a></p>
             </div>
         </form>

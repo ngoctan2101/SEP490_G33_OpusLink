@@ -9,14 +9,16 @@
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Xác thực Email - Opuslink</title>
-    <link rel="stylesheet" href="~/css/EmailVerify.css">
+    <link rel="stylesheet" href="~/css/Account.css">
 </head>
 <body>
     <div class="wrapper container-fluid">
         <form method="post">
-            <h1>Kiểm tra Email của bạn</h1>
-            <label class="label">Chúng tôi vừa gửi một đường link xác nhận đến email @Model.Email của bạn. Hãy kiểm tra Email và xác nhận nhé</label>
-@*             <button type="submit" class="btn-resend">Gửi lại Email</button> *@
+
+            <h1>Kiểm tra Email</h1>
+            <br />
+            <label class="label">Chúng tôi vừa gửi một đường link xác nhận đến email <span style="color: red;">@Model.Email</span> của bạn. Hãy kiểm tra Email và xác nhận nhé</label>
+
             @if (ViewData["Message"] != null)
             {
                 <div class="alert alert-danger" role="alert">
