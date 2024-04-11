@@ -1,8 +1,10 @@
 ﻿@page
 @using OpusLink.Shared.Enums;
+@inject IHttpContextAccessor HttpContextAccessor;
 @model OpusLink.User.Hosted.Pages.MS.FreelancerViewAllMSModel
 @{
     int soThuTu = 1;
+    int userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId") ?? 0;
 }
 <style>
     .circle {
@@ -200,7 +202,7 @@
                         }
                         @if (item.IsFreelancerDone == false && item.Status == (int)MilestoneStatusEnum.MoneyPutted && item.Deadline > DateTime.Now)
                         {
-                            <p class="status" style="background-color:#0068AD;">Đang làm</p>
+                            <p class="status" style="background-color:#0068AD;">Đã đặt tiền</p>
                         }
                         @if (item.IsFreelancerDone == true && item.Status == (int)MilestoneStatusEnum.EmployerRejected && item.Deadline > DateTime.Now)
                         {
@@ -252,7 +254,7 @@
                     }
                     @if (item.IsFreelancerDone == false && item.Status == (int)MilestoneStatusEnum.MoneyPutted && item.Deadline > DateTime.Now)
                     {
-                        <p class="status" style="background-color:#0068AD;">Đang làm</p>
+                        <p class="status" style="background-color:#0068AD;">Đã đặt tiền</p>
                     }
                     @if (item.IsFreelancerDone == true && item.Status == (int)MilestoneStatusEnum.EmployerRejected && item.Deadline > DateTime.Now)
                     {
@@ -281,7 +283,7 @@
                     }
                 </div>
                 <div class="col-md-4" style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
-                    @if (Model.job.IsFreelancerConfirm && item.IsFreelancerDone == false && item.Deadline > DateTime.Now)
+                    @if (Model.job.IsFreelancerConfirm && item.IsFreelancerDone == false && item.Deadline > DateTime.Now && userId==Model.job.FreelancerId)
                     {
                         <button type="button" id="openConfirmDoneMilestone" style="background-color:#00ACD4;color:white;display:block;margin:5px;min-width:150px" onclick="OpenConfirmDoneMilestone(@item.MilestoneID)">Đã làm xong</button>
                     }
@@ -294,21 +296,24 @@
     </div>
     @if (Model.job.EmployerDoneEditMilestone == true && Model.job.DeadlineFreelancerConfirm > DateTime.Now && Model.job.IsFreelancerConfirm == false)
     {
-        <h5>Bạn có đồng ý với plan của Employer không ?</h5>
-        <h6>Bạn có <span style="color:red;font-size:13px" id="countdown"></span> để quyết định</h6>
-        <h6>Employer không thể sửa plan được nữa sau khi bạn đồng ý, nếu bạn không đồng ý thì Emlloyer sẽ có quyền sửa lại plan</h6>
+        <div id="acceptPlan">
+            <h5>Bạn có đồng ý với plan của Employer không ?</h5>
+            <h6>Bạn có <span style="color:red;font-size:13px" id="countdown"></span> để quyết định</h6>
+            <h6>Employer không thể sửa plan được nữa sau khi bạn đồng ý, nếu bạn không đồng ý thì Emlloyer sẽ có quyền sửa lại plan</h6>
 
-        <form method="post">
-            <input type="text" hidden name="JobID" value="@Model.job.JobId" />
-            <div class="row">
-                <div class="col-md-6">
-                    <button type="submit" asp-page-handler="ForNotAcceptPlan" style="background-color:#892311;color:white;margin:5px;min-width:200px">Tôi không đồng ý</button>
+            <form method="post">
+                <input type="text" hidden name="JobID" value="@Model.job.JobId" />
+                <div class="row">
+                    <div class="col-md-6">
+                        <button type="submit" asp-page-handler="ForNotAcceptPlan" style="background-color:#892311;color:white;margin:5px;min-width:200px">Tôi không đồng ý</button>
+                    </div>
+                    <div class="col-md-6">
+                        <button type="submit" asp-page-handler="ForAcceptPlan" style="background-color:#009400;color:white;margin:5px;min-width:200px">Tôi đồng ý</button>
+                    </div>
                 </div>
-                <div class="col-md-6">
-                    <button type="submit" asp-page-handler="ForAcceptPlan" style="background-color:#009400;color:white;margin:5px;min-width:200px">Tôi đồng ý</button>
-                </div>
-            </div>
-        </form>
+            </form>
+        </div>
+        
 
     }
     @if (Model.job.EmployerDoneEditMilestone == false && Model.job.IsFreelancerConfirm == false)
@@ -342,7 +347,7 @@
             document.getElementById(countdownId).innerHTML = "(" + days + "d " + hours + "h " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds + ")";
             if (timeDifference < 0) {
                 clearInterval(countdownInterval);
-                document.getElementById(countdownId).innerHTML = "Hiring Expried";
+                document.getElementById("acceptPlan").innerHTML = "Đã hết hạn chấp nhận plan. Hãy nhắn lại cho Employer để thông nhất một plan nhé.";
             }
         }, 1000);
     }

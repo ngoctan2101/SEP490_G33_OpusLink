@@ -39,6 +39,7 @@
                     <th scope="col">#</th>
                     <th scope="col">UserName</th>
                     <th scope="col">Actions</th>
+                    <th scope="col"></th>
                 </tr>
             </thead>
             <tbody>
@@ -62,17 +63,23 @@
                             <td >@item.UserName</td>
                             <td>
                                 <!-- Edit and Delete buttons -->
-                                <div class="btn-group" role="group" aria-label="Skill Actions">
+                                @* <div class="btn-group" role="group" aria-label="Skill Actions"> *@
                                     <button class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editSkillModal" data-withdrawId="@item.WithdrawRequestID" onclick="ViewWithDraw(@item.WithdrawRequestID)"><i class="fas fa-eye"></i> View</button>
                                     
                                         @* <a href="/ManagerWithDrawRequest/TransferMoney?withdrawId=@item.WithdrawRequestID" class="btn btn-success"><i class="fas fa-exchange-alt"></i> Transfer</a> *@
                                     @if(item.Amount <= item.AmountUser)
                                     {
-                                        <button type="button" class="btn btn-success" data-bs-toggle="modal" data-bs-target="#tranSkillModal" onclick="TranWithDraw(@item.WithdrawRequestID)"><i class="fas fa-exchange-alt"></i> Transfer</button>
+                                        <button type="button" class="btn btn-success btn-sm" data-bs-toggle="modal" data-bs-target="#tranSkillModal" onclick="TranWithDraw(@item.WithdrawRequestID)"><i class="fas fa-exchange-alt"></i> Transfer</button>
                                     }
-                                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSkillModal" onclick="ResendWithDraw(@item.WithdrawRequestID)"><i class="fas fa-sync-alt"></i> Reject</button>
-                                </div>
-
+                                    <button type="button" class="btn btn-primary btn-sm" data-bs-toggle="modal" data-bs-target="#addSkillModal" onclick="ResendWithDraw(@item.WithdrawRequestID)"><i class="fas fa-sync-alt"></i> Reject</button>
+                                @* </div> *@
+                                
+                            </td>
+                            <td>
+                                @if (!string.IsNullOrEmpty(Model.mess))
+                                {
+                                    <p style=" color:red">@Model.mess</p>
+                                }
                             </td>
                         </tr>
                     }
@@ -163,15 +170,16 @@
                             <textarea rows="3" style="width:100%" readonly id="tranbankinfor" name="tranbankinfor" placeholder="Số tài khoản: 123xxxxx&#10;Tên tài khoản: NGUYEN VAN A&#10; " required></textarea>
                             @* <input type="text" class="form-control" id="bankacccountinfor" name="bankacccountinfor" required value="@Model.user.BankAccountInfor"> *@
                         </div>
+                        @if (!string.IsNullOrEmpty(Model.mess))
+                        {
+                            <p style=" color:red">@Model.mess</p>
+                        }
                         <div class="mb-3">
                             <label for="viewamount" class="form-label">Số tiền</label>
                             <input type="text" class="form-control" id="tranamount" name="tranamount" required hidden>
                             <input type="text" class="form-control" id="tranamount1" name="tranamount1" required readonly>
                         </div>
-                        @if(Model.mess != null)
-                        {
-                            <p style=" color:red">@Model.mess</p>
-                        }
+                        
                         <div class="mb-3">
                             <label for="note" class="form-label">Mã giao dịch</label>
                             <input type="text" class="form-control" id="trancode" name="trancode" required>

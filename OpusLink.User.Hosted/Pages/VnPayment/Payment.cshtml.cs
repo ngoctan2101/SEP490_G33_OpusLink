@@ -85,6 +85,7 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
 
                 string url = "https://sandbox.vnpayment.vn/paymentv2/vpcpay.html";
                 string returnUrl = UrlConstant.UserClientBaseUrl+"/VnPayment/Payment?opuslink=paymentconfirm";
+                
                 string tmnCode = "NVFQP1WS";
                 string hashSecret = "MPLXERAVPCPUNWPZSLRHRYYBKXYEAVXK";
                 PayLib pay = new PayLib();
@@ -125,7 +126,7 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
 
             if (service.Equals("paymentconfirm"))
             {
-               
+
                 //int userId = 0;
 
                 if (HttpContext.Session.GetInt32("UserId") == null)
@@ -166,13 +167,14 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
                     {
                         if (vnp_ResponseCode == "00")
                         {
-                           
+
                             //HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + $"api/User/GetUserById/{userId}");
                             //var strData = await responseUser.Content.ReadAsStringAsync();
                             //var us = System.Text.Json.JsonSerializer.Deserialize<OpusLink.Entity.Models.User>(strData, option);
 
                             //us.AmountMoney =us.AmountMoney + Convert.ToDecimal(amount);
-
+                            // Set the JWT token in the authorization header
+                            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
                             // update amount
                             var jsonProduct = System.Text.Json.JsonSerializer.Serialize(userId);
                             var content7 = new StringContent(jsonProduct, Encoding.UTF8, "application/json");

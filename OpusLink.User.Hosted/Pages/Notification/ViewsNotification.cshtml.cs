@@ -23,10 +23,15 @@ namespace OpusLink.User.Hosted.Pages.Notification
 			ServiceMangaUrl = UrlConstant.ApiBaseUrl;
 			//_validationService = validateService;
 		}
-		public async Task OnGetAsync(int UserId)
+		public async Task<IActionResult> OnGetAsync(int UserId)
 		{
-
-			HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + $"/Notification/GetAllNotification/{UserId}");
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + $"/Notification/GetAllNotification/{UserId}");
 			if (responseUser.IsSuccessStatusCode)
 			{
 				string responseBodyUser = await responseUser.Content.ReadAsStringAsync();
@@ -35,8 +40,8 @@ namespace OpusLink.User.Hosted.Pages.Notification
 				noti = JsonSerializer.Deserialize<List<NotificationDTO>>(responseBodyUser, optionUser);
 			}
 
-
-		}
+            return Page();
+        }
 
 	}
 }

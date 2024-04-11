@@ -35,9 +35,15 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
                 DateMax = DateTime.ParseExact("2024-03-30 23:59", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture)
             };
         }
-        public async Task OnGetAsync()
+        public async Task<IActionResult> OnGetAsync()
         {
             HttpContext.Session.SetString("PageNow", "ManageCategory");
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             //get all first categories
             var options = new JsonSerializerOptions
             {
@@ -56,10 +62,17 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
             }
             //get all category for "name instead id"
             AllCategories = await GetAllCategoryAsync();
+            return Page();
         }
 
-        public async Task OnPostForSearchAsync(IFormCollection collection)
+        public async Task<IActionResult> OnPostForSearchAsync(IFormCollection collection)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get Filter object
             foreach (string key in keys)
@@ -127,6 +140,7 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
 
             }
             AllCategories = await GetAllCategoryAsync();
+            return Page();
         }
         private async Task<IList<GetCategoryResponse>> GetAllCategoryAsync()
         {
@@ -143,8 +157,14 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
             }
         }
 
-        public async Task OnPostForAddAsync(IFormCollection collection)
+        public async Task<IActionResult> OnPostForAddAsync(IFormCollection collection)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             CreateCategoryRequest category = new CreateCategoryRequest();
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get Filter object
@@ -180,9 +200,16 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
             }
             //get all category for "name instead id"
             AllCategories = await GetAllCategoryAsync();
+            return Page();
         }
-        public async Task OnPostForUpdateAsync(IFormCollection collection)
+        public async Task<IActionResult> OnPostForUpdateAsync(IFormCollection collection)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             PutCategoryRequest category = new PutCategoryRequest();
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get Filter object
@@ -222,9 +249,16 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
             }
             //get all category for "name instead id"
             AllCategories = await GetAllCategoryAsync();
+            return Page();
         }
-        public async Task OnPostForDeleteAsync(IFormCollection collection)
+        public async Task<IActionResult> OnPostForDeleteAsync(IFormCollection collection)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             int idOfCategory = 0;
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get Filter object
@@ -254,6 +288,7 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
             }
             //get all category for "name instead id"
             AllCategories = await GetAllCategoryAsync();
+            return Page();
         }
     }
 }

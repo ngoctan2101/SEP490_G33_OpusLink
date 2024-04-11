@@ -3,6 +3,7 @@
 @using OpusLink.Entity.Models;
 @using OpusLink.Shared.Enums;
 @using OpusLink.Shared.Constants
+@inject IHttpContextAccessor HttpContextAccessor;
 @model OpusLink.User.Hosted.Pages.JOB.EmployerViewAllJobCreatedPageModel
 @{
 }
@@ -287,6 +288,10 @@
     function displayAllChild(categoryID) {
         $.ajax({
             url: "@(UrlConstant.ApiBaseUrl+"/Job3API/GetAllChildCategory?parentId=")" + categoryID,
+            headers: {
+                "ngrok-skip-browser-warning": true,
+                "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
+            }
             type: "get",
             contentType: "application/json",
             success: function (result, status, xhr) {

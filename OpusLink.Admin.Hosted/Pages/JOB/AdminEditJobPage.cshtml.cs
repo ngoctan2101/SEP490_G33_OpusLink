@@ -23,14 +23,21 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
             client.DefaultRequestHeaders.Accept.Add(contentType);
         }
 
-        public async Task OnGetAsync(int JobId)
+        public async Task<IActionResult> OnGetAsync(int JobId)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             //get all category
             AllCategories = await GetAllCategoryAsync();
             //get all location
             AllLocations = await GetAllLocationAsync();
             //get this Job
             Job = await GetJobDetail(JobId);
+            return Page();
         }
 
         private async Task<GetJobDetailResponse> GetJobDetail(int jobId)
@@ -46,6 +53,12 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
 
         public async Task<RedirectToPageResult> OnPostAsync(IFormCollection collection)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             PutJob = new PutJobRequest();
             List<string> keys = collection.Keys.ToList<string>();
             // manual bind to get Filter object

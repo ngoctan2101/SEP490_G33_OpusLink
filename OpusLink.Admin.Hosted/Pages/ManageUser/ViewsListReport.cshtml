@@ -1,5 +1,6 @@
 ﻿@page "{id}" 
 @using OpusLink.Shared.Constants
+@inject IHttpContextAccessor HttpContextAccessor;
 @model OpusLink.Admin.Hosted.Pages.ManageUser.ViewsListReportModel
 @{
 }
@@ -82,7 +83,7 @@
     <div class="path-admin">Danh sách Report</div>
     <div class="d-inline-flex p-2 bd-highlight">
 
-        <button type="button" id="backButton" class="btn btn-primary" onclick="onBack()">Back</button>
+        <button type="button" id="backButton" class="btn btn-primary" onclick="onBack()">Trở lại</button>
     </div>
     <form method="post">
         <div id="content-main-dashboard">
@@ -145,6 +146,10 @@
     function LoadReportList(userId) {
         $.ajax({
             url: `@(UrlConstant.ApiBaseUrl)/Report/GetAllReportById?id=${userId}`,
+            headers: {
+                "ngrok-skip-browser-warning": true,
+                "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
+            },
             method: 'GET',
             contentType: 'application/json',
             success: (dataReport) => {

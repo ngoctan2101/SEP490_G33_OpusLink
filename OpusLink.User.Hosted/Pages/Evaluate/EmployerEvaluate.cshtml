@@ -294,7 +294,9 @@
 				const response = await fetch('@(UrlConstant.ApiBaseUrl)/Feedback/AddFeedback', {
 					method: 'POST',
 					headers: {
-						'Content-Type': 'application/json'
+						'Content-Type': 'application/json',
+						"ngrok-skip-browser-warning": true,
+						"Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
 					},
 					body: JSON.stringify(feedbackData)
 				});

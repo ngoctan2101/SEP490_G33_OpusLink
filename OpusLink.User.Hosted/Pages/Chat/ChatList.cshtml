@@ -282,13 +282,17 @@
     </div>
 
 </div>
-<script src="~/microsoft/signalr/dist/browser/signalr.js"></script>
 
 
-<script>
+
+@*<script>
     function handleClick(chatBoxId) {
         $.ajax({
             url: '/ChatListModel?handler=GetMessageByIdAsync&chatBoxId=' + chatBoxId,
+            headers: {
+                "ngrok-skip-browser-warning": true,
+                "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
+            },
             type: 'GET',
             success: function (response) {
                 // Xử lý dữ liệu nhận được từ server
@@ -299,9 +303,9 @@
             }
         });
     }
-</script>
+</script>*@
 
-
+<script src="~/microsoft/signalr/dist/browser/signalr.js"></script>
 <script>
     var connection = new signalR.HubConnectionBuilder().withUrl("@(UrlConstant.ApiBaseUrl)/chatHub").build();
     connection.start().then(function () {
@@ -412,7 +416,8 @@
             url: "@(UrlConstant.ApiBaseUrl + "/Chat/CreateMessage")",
             type: 'POST',
             headers: {
-                "ngrok-skip-browser-warning": true
+                "ngrok-skip-browser-warning": true,
+                "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))"
             },
             contentType: 'application/json',
             data: JSON.stringify({

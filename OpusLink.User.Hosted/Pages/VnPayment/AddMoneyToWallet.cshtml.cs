@@ -43,24 +43,16 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
 
         public async Task<IActionResult> OnGet(int UserId)
         {
-            //var json = HttpContext.Session.GetString(LoginKey) ?? string.Empty;
-            //var jsonCart = HttpContext.Session.GetString(CartKey) ?? string.Empty;
-            //var jsonCoupon = HttpContext.Session.GetString(DiscountKey) ?? string.Empty;
 
-            //var option = new JsonSerializerOptions
-            //{
-            //    PropertyNameCaseInsensitive = true,
-            //};
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            UserId = HttpContext.Session.GetInt32("UserId")??0;
 
-            //if (!string.IsNullOrEmpty(json))
-            //{
-            //    var account = JsonConvert.DeserializeObject<Account>(json);
-
-            //    var response = await _client.GetAsync(ApiUri + $"orderdetail/get-orderdetails-customerid/{account.AccountId}");
-            //    var strData = await response.Content.ReadAsStringAsync();
-            //    orderDetails = System.Text.Json.JsonSerializer.Deserialize<List<OrderDetail>>(strData, option);
-
-            HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "/User/GetUserById/" + UserId);
+             HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + "/User/GetUserById/" + UserId);
             if (responseUser.IsSuccessStatusCode)
             {
                 string responseBodyUser = await responseUser.Content.ReadAsStringAsync();

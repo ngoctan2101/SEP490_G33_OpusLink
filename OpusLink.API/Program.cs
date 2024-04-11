@@ -72,11 +72,7 @@ internal class Program
         });
         builder.Services.AddAuthentication(); // Sử dụng dịch vụ Authentication
         builder.Services.AddAuthorization();
-        builder.Services.AddCors(options =>
-        {
-            options.AddPolicy("CorPolicy", build => build.AllowAnyMethod()
-            .AllowAnyHeader().AllowCredentials().SetIsOriginAllowed(hostName => true).Build());
-        });
+        
         var mapperConfig = new MapperConfiguration(mc =>
         {
             mc.AddProfile(new MapperConfig());
