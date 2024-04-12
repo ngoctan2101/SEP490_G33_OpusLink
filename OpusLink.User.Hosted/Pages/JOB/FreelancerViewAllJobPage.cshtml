@@ -379,7 +379,14 @@
     }
 </script>
 <script>
-    $('input[name="daterange"]').daterangepicker();
+    $('input[name="daterange"]').daterangepicker({
+        timePicker: false,
+        startDate: moment().add(-5,'day'),
+        endDate: moment(),
+        locale: {
+            format: 'DD/MM/YYYY'
+        }
+    });
 </script>
 
 <script>
