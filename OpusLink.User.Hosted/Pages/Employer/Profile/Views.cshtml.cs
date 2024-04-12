@@ -180,7 +180,7 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
             if (DateTime.Today.Year - PutUser.Dob.Value.Year < 18)
             {
                 Mess = "Số tuổi phải hơn 18 tuổi ";
-                return RedirectToPage("/Freelancer/Profile/Views", new { UserId = PutUser.Id , Mess = Mess});
+                return RedirectToPage("/Employer/Profile/Views", new { UserId = PutUser.Id , Mess = Mess});
             }
             var options = new JsonSerializerOptions
             {
