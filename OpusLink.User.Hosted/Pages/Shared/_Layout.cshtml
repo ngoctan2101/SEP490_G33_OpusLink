@@ -30,6 +30,19 @@
                 color: black;
                 text-decoration: none;
     </style>
+    <script>
+        function addOnLoadFunction(func) {
+            var oldOnLoad = window.onload;
+            if (typeof oldOnLoad == 'function') {
+                window.onload = function () {
+                    oldOnLoad();
+                    func();
+                };
+            } else {
+                window.onload = func;
+            }
+        }
+    </script>
 </head>
 <body>
     <!-- Header -->
@@ -57,7 +70,7 @@
                                     <a class="nav-link" asp-area="" asp-page="/Chat/ChatList" asp-route-userId="@userId" asp-route-role="@((int)Roles.Freelancer)" style="color:#5038ED;margin:0px 10px 0px 10px">Tin nhắn</a>
                                 </li>
                                 <li class="nav-item">
-                                    <a class="nav-link" href="../Freelancer/Profile/Views?UserId=@userId" style="color:#5038ED;margin:0px 10px 0px 10px">Xin chào, @userName</a>
+                                    <a class="nav-link" href="/Freelancer/Profile/Views?UserId=@userId" style="color:#5038ED;margin:0px 10px 0px 10px">Xin chào, @userName</a>
                                 </li>
                             }
 
@@ -109,7 +122,7 @@
                                             <form asp-page="/Index" asp-page-handler="ChangeTokenAboutRole" method="post">
                                                 <button class="dropdown-item">Chuyển sang: Nhà Tuyển Dụng</button>
                                             </form>
-                                            <a class="dropdown-item" href="../Freelancer/Profile/Views?UserId=@userId">Hồ sơ cá nhân</a>
+                                            <a class="dropdown-item" href="/Freelancer/Profile/Views?UserId=@userId">Hồ sơ cá nhân</a>
                                             <div class="dropdown-divider"></div>
                                             <form asp-page="/Index" asp-page-handler="ForLogOut" method="post">
                                                 <button class="dropdown-item">Đăng xuất</button>
@@ -136,7 +149,7 @@
                                 <a class="nav-link" asp-area="" asp-page="/Chat/ChatList" asp-route-userId="@userId" asp-route-role="@((int)Roles.Employer)" style="color:#5038ED;margin:0px 10px 0px 10px">Tin nhắn</a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="../Employer/Profile/Views?id=@userId" style="color:#5038ED;margin:0px 10px 0px 10px">Xin chào, @userName</a>
+                                <a class="nav-link" href="/Employer/Profile/Views?id=@userId" style="color:#5038ED;margin:0px 10px 0px 10px">Xin chào, @userName</a>
                             </li>
                         </ul>
 
@@ -175,7 +188,7 @@
                                     <form asp-page="/Index" asp-page-handler="ChangeTokenAboutRole" method="post">
                                         <button class="dropdown-item">Chuyển sang: Freelancer</button>
                                     </form>
-                                    <a class="dropdown-item" href="../Employer/Profile/Views?UserId=@userId">Hồ sơ cá nhân</a>
+                                    <a class="dropdown-item" href="/Employer/Profile/Views?UserId=@userId">Hồ sơ cá nhân</a>
                                     <div class="dropdown-divider"></div>
                                     <form asp-page="/Index" asp-page-handler="ForLogOut" method="post">
                                         <button class="dropdown-item">Đăng xuất</button>
@@ -290,19 +303,7 @@
         }
         addOnLoadFunction(LoadUserInformation);
     </script>
-    <script>
-        function addOnLoadFunction(func) {
-            var oldOnLoad = window.onload;
-            if (typeof oldOnLoad == 'function') {
-                window.onload = function () {
-                    oldOnLoad();
-                    func();
-                };
-            } else {
-                window.onload = func;
-            }
-        }
-    </script>
+    
 </body>
 </html>
 

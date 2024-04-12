@@ -151,7 +151,15 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
                 }
                 else if (key.Contains("dob"))
                 {
-                    PutUser.Dob = DateTime.Parse(collection[key]);
+                    
+                    try
+                    {
+                        PutUser.Dob = DateTime.Parse(collection[key]);
+                    }
+                    catch (Exception ex)
+                    {
+
+                    }
                 }
                 else if (key.Contains("phone"))
                 {
@@ -175,7 +183,12 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
                 }
 
             }
-            
+            if (PutUser.Dob == null)
+            {
+                Mess = "Bạn cần nhập ngày sinh ";
+                return RedirectToPage("/Freelancer/Profile/Views", new { UserId = PutUser.Id, Mess = Mess });
+
+            }
             if (DateTime.Today.Year - PutUser.Dob.Value.Year < 18)
             {
                 Mess = "Số tuổi phải hơn 18 tuổi ";

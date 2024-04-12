@@ -153,7 +153,14 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
                 }
                 else if (key.Contains("dob"))
                 {
-                    PutUser.Dob = DateTime.Parse(collection[key]);
+                    try
+                    {
+                        PutUser.Dob = DateTime.Parse(collection[key]);
+                    }
+                    catch(Exception ex)
+                    {
+
+                    }
                 }
                 else if (key.Contains("phone"))
                 {
@@ -177,7 +184,7 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
                 }
 
             }
-            if(PutUser.Dob.Value == null)
+            if(PutUser.Dob == null)
             {
                 Mess = "Bạn cần nhập ngày sinh ";
                 return RedirectToPage("/Employer/Profile/Views", new { UserId = PutUser.Id, Mess = Mess });
