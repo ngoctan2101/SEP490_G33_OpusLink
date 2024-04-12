@@ -177,6 +177,12 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
                 }
 
             }
+            if(PutUser.Dob.Value == null)
+            {
+                Mess = "Bạn cần nhập ngày sinh ";
+                return RedirectToPage("/Employer/Profile/Views", new { UserId = PutUser.Id, Mess = Mess });
+
+            }
             if (DateTime.Today.Year - PutUser.Dob.Value.Year < 18)
             {
                 Mess = "Số tuổi phải hơn 18 tuổi ";
