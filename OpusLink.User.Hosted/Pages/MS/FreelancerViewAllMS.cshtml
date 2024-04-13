@@ -371,9 +371,23 @@
     {
         <h5>Hãy nhắn tin với Employer để cùng tạo ra một plan hợp lý nhé</h5>
     }
-    else if (Model.job.EmployerDoneEditMilestone == true && Model.job.IsFreelancerConfirm == true)
+    else if (Model.job.EmployerDoneEditMilestone == true && Model.job.IsFreelancerConfirm == true && userId==Model.job.FreelancerId)
     {
-        <h5>Các bạn đã thống nhất một plan, bây giờ là lúc làm việc</h5>
+        if(Model.job.Status == (int)JobStatusEnum.Hired)
+        {
+            <h5>Các bạn đã thống nhất một plan, bây giờ là lúc làm việc</h5>
+        }
+        else if (Model.job.Status == (int)JobStatusEnum.Completed)
+        {
+            <h5>Job đã kết thúc thành công.</h5>
+            <a asp-page="/Evaluate/FreelancerEvaluate" asp-route-jobId="@Model.job.JobId" asp-route-createByUserID="@Model.job.FreelancerId">Đánh giá employer</a>
+        }
+        else if (Model.job.Status == (int)JobStatusEnum.Failed)
+        {
+            <h5>Job đã kết thúc thất bại.</h5>
+            <a asp-page="/Evaluate/FreelancerEvaluate" asp-route-jobId="@Model.job.JobId" asp-route-createByUserID="@Model.job.FreelancerId">Đánh giá employer</a>
+        }
+
     }
 </div>
 <script>

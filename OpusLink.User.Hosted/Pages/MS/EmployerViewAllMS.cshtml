@@ -843,10 +843,12 @@
         if (Model.job.Status == (int)JobStatusEnum.Completed)
         {
             <h5>Job đã kết thúc thành công.</h5>
+            <a asp-page="../Evaluate/EmployerEvaluate" asp-route-jobId="@Model.job.JobId" asp-route-createByUserID="@Model.job.EmployerId">Đánh giá freelancer</a>
         }
         else if (Model.job.Status == (int)JobStatusEnum.Failed)
         {
             <h5>Job đã kết thúc thất bại.</h5>
+            <a asp-page="../Evaluate/EmployerEvaluate" asp-route-jobId="@Model.job.JobId" asp-route-createByUserID="@Model.job.EmployerId">Đánh giá freelancer</a>
         }
         else
         {

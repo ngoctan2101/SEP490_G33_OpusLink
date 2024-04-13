@@ -16,6 +16,9 @@ namespace OpusLink.User.Hosted.Pages.Evaluate
 		public FeebackDTO feedbackDTOs { get; set; } = default!;
 		public int userId { get; set; }
 		public string role { get; set; }
+		public int JobID { get; set; }
+		public int CreateByUserID { get; set; }
+
 
 		public FreelancerEvaluateModel()
         {
@@ -23,8 +26,23 @@ namespace OpusLink.User.Hosted.Pages.Evaluate
 			var contentType = new MediaTypeWithQualityHeaderValue("application/json");
 			client.DefaultRequestHeaders.Accept.Add(contentType);
 		}
-		public async Task<IActionResult> OnGetAddFeedback(int JobId, int CreateByUserID, int TargetToUserID, decimal Star, string Content)
+        public IActionResult OnGet(int jobId, int createByUserID)
+        {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            this.JobID = jobId;
+			this.CreateByUserID = createByUserID;
+			if(HttpContext.Session.GetInt32("UserId")!= createByUserID)
+			{
+                return RedirectToPage("../Account/Login");
+            }
+			return Page();
+        }
+        public async Task<IActionResult> OnGetAddFeedback(int JobId, int CreateByUserID, int TargetToUserID, decimal Star, string Content)
 		{
+			//hmmm
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
                 return RedirectToPage("../Account/Login");
@@ -42,7 +60,6 @@ namespace OpusLink.User.Hosted.Pages.Evaluate
 			string json = System.Text.Json.JsonSerializer.Serialize<CreateFeedbackDTO>(new CreateFeedbackDTO()
 			{
 				CreateByUserID = CreateByUserID,
-				TargetToUserID = TargetToUserID,
 				JobID = JobId,
 				Star = Star,
 				Content = Content

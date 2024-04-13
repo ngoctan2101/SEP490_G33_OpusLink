@@ -31,6 +31,10 @@ namespace OpusLink.API.Controllers.Feedbacks
 			try
 			{
 				var createFeedback = _feedbackService.CreateFeedback(createFeedbackDTO);
+                if (createFeedback.FeedbackUserID == 0)
+                {
+                    return BadRequest("Can not feedback");
+                }
 				return Ok(createFeedback);
 			}
 			catch (Exception ex)

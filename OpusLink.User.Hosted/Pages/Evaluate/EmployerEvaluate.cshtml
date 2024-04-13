@@ -283,9 +283,9 @@
 			const content = document.getElementById('content').value;
 
 			const feedbackData = {
-				JobId: 250 /* Get JobId from your page */,
-				CreateByUserID: 203 /* Get CreateByUserID from your page */,
-				TargetToUserID: 201 /* Get TargetToUserID from your page */,
+				JobId: @Model.JobID /* Get JobId from your page */,
+				CreateByUserID: @Model.CreateByUserID /* Get CreateByUserID from your page */,
+				/*TargetToUserID: 201*/ /* Get TargetToUserID from your page */
 				Star: arrRate,
 				Content: content
 			};
@@ -302,15 +302,20 @@
 				});
 
 				if (response.ok) {
-					// Feedback successfully submitted
-					console.log('Feedback submitted successfully');
-					alert('Feedback submitted successfully');
-					//reload page
-					location.reload();
+					document.getElementById("notifai").innerHTML = 'Feedback thành công';
+					displayMessage();
+					//// Feedback successfully submitted
+					//console.log('Feedback submitted successfully');
+					//alert('Feedback submitted successfully');
+					////reload page
+					//location.reload();
 				} else {
+					document.getElementById("notifaiDiv").style.backgroundColor = '#0FFF4B';
+                    document.getElementById("notifai").innerHTML='Feedback thất bại';
+                    displayMessage();
 					// Handle error response
-					console.error('Failed to submit feedback');
-					alert('Failed to submit feedback');
+					//console.error('Failed to submit feedback');
+					//alert('Failed to submit feedback');
 				}
 			} catch (error) {
 				console.error('Error submitting feedback:', error);

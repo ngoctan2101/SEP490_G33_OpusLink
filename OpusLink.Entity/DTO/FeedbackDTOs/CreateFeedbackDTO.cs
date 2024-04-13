@@ -10,7 +10,7 @@ namespace OpusLink.Entity.DTO.FeedbackDTO
     {
         public int JobID { get; set; }
         public int CreateByUserID { get; set; }
-        public int TargetToUserID { get; set; }
+        //public int TargetToUserID { get; set; }
 		public decimal Star { get; set; }
 		public string Content { get; set; }
 	}

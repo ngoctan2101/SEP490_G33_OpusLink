@@ -30,17 +30,34 @@ namespace OpusLink.Service.Feedbacks
 
 		public FeebackDTO CreateFeedback(CreateFeedbackDTO createFeedbackDTO)
 		{
+            
 			var feedback = new FeedbackUser
 			{
 				FeedbackUserID = 0,
 				JobID = createFeedbackDTO.JobID,
 				CreateByUserID = createFeedbackDTO.CreateByUserID,
-				TargetToUserID = createFeedbackDTO.TargetToUserID,
+				TargetToUserID = 0,
 				Star = createFeedbackDTO.Star,
 				Content = createFeedbackDTO.Content,
 				DateCreated = DateTime.Now
 			};
-			_context.FeedbackUsers.Add(feedback);
+            Job? j = _context.Jobs.Where(j => j.JobID == createFeedbackDTO.JobID).FirstOrDefault();
+            if (j == null)
+            {
+                return new FeebackDTO { FeedbackUserID = 0 };
+            }
+            if (j.EmployerID == createFeedbackDTO.CreateByUserID)
+            {
+                feedback.TargetToUserID = j.FreelancerID??0;
+            }else if(j.FreelancerID== createFeedbackDTO.CreateByUserID)
+            {
+                feedback.TargetToUserID = j.EmployerID;
+            }
+            else
+            {
+                return new FeebackDTO{FeedbackUserID = 0};
+            }
+            _context.FeedbackUsers.Add(feedback);
 			_context.SaveChanges();
 			return new FeebackDTO
 			{
