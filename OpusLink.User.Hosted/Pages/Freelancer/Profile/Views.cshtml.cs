@@ -205,6 +205,8 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
             if (response.IsSuccessStatusCode)
             {
                 //message "User Edited" green
+                HttpContext.Session.SetString("Notification", "Thông tin cá nhân đã được thay đổi");
+                HttpContext.Session.SetInt32("NotiIsNew", 1);
             }
             return RedirectToPage("/Freelancer/Profile/Views", new { UserId = PutUser.Id });
         }

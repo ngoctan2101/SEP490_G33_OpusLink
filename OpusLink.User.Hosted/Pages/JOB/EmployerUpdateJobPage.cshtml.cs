@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.JobDTO;
@@ -130,6 +130,8 @@ namespace OpusLink.User.Hosted.Pages.JOB
             if (response.IsSuccessStatusCode)
             {
                 //message "Your job is requested" green
+                HttpContext.Session.SetString("Notification", "Yêu cầu sửa bài của bạn đã được gửi");
+                HttpContext.Session.SetInt32("NotiIsNew", 1);
             }
             return RedirectToPage("/JOB/EmployerViewAllJobCreatedPage");
         }

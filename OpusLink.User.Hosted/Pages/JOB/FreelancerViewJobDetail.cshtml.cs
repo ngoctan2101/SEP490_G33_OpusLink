@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.JobDTO;
@@ -131,7 +131,8 @@ namespace OpusLink.User.Hosted.Pages.JOB
             HttpResponseMessage response = await client.PostAsync(UrlConstant.ApiBaseUrl+"/Offer3API/CreateOffer", httpContent);
             if (response.IsSuccessStatusCode)
             {
-                //message "Your job is requested" green
+                HttpContext.Session.SetString("Notification", "Tạo offer thành công");
+                HttpContext.Session.SetInt32("NotiIsNew", 1);
             }
             return RedirectToPage("/JOB/FreelancerViewJobDetail", new { JobId = createUpdateOfferRequest.JobID });
         }
@@ -189,7 +190,8 @@ namespace OpusLink.User.Hosted.Pages.JOB
             HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl+"/Offer3API/UpdateOffer", httpContent);
             if (response.IsSuccessStatusCode)
             {
-                //message "Your job is requested" green
+                HttpContext.Session.SetString("Notification", "Sửa offer thành công");
+                HttpContext.Session.SetInt32("NotiIsNew", 1);
             }
             return RedirectToPage("/JOB/FreelancerViewJobDetail", new { JobId = createUpdateOfferRequest.JobID });
         }

@@ -96,6 +96,8 @@ namespace OpusLink.User.Hosted.Pages.MS
             HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl+"/FMilestonesAPI/AcceptPlanOrNot", httpContent);
             if (response.IsSuccessStatusCode)
             {
+                HttpContext.Session.SetString("Notification", "Đã từ chối kế hoạch của Employer");
+                HttpContext.Session.SetInt32("NotiIsNew", 1);
                 return RedirectToPage("/MS/FreelancerViewAllMS", new { jobID = jobID });
             }
             return RedirectToPage("/MS/FreelancerViewAllMS", new { jobID = jobID });
@@ -127,6 +129,8 @@ namespace OpusLink.User.Hosted.Pages.MS
             HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl+"/FMilestonesAPI/AcceptPlanOrNot", httpContent);
             if (response.IsSuccessStatusCode)
             {
+                HttpContext.Session.SetString("Notification", "Đã chấp thuận kế hoạch của Employer");
+                HttpContext.Session.SetInt32("NotiIsNew", 1);
                 return RedirectToPage("/MS/FreelancerViewAllMS", new { jobID = jobID });
             }
             return RedirectToPage("/MS/FreelancerViewAllMS", new { jobID = jobID });
@@ -162,6 +166,8 @@ namespace OpusLink.User.Hosted.Pages.MS
             HttpResponseMessage response = await client.PutAsync(UrlConstant.ApiBaseUrl+"/FMilestonesAPI/DoneAMilestone", httpContent);
             if (response.IsSuccessStatusCode)
             {
+                HttpContext.Session.SetString("Notification", "Đã dánh dấu là hoàn thành, đang chờ Employer review.");
+                HttpContext.Session.SetInt32("NotiIsNew", 1);
                 return RedirectToPage("/MS/FreelancerViewAllMS", new { jobID = requestDoneAMilestone.JobId });
             }
             return RedirectToPage("/MS/FreelancerViewAllMS", new { jobID = requestDoneAMilestone.JobId });

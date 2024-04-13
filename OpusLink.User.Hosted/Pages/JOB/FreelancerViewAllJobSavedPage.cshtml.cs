@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.JobDTO;
@@ -157,6 +157,8 @@ namespace OpusLink.User.Hosted.Pages.JOB
             }
             //get all category
             AllCategories = await GetAllCategoryAsync();
+            HttpContext.Session.SetString("Notification", "Đã bỏ lưu job");
+            HttpContext.Session.SetInt32("NotiIsNew", 1);
             return Page();
         }
 
