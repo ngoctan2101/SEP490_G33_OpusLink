@@ -108,8 +108,8 @@
                     <div>
                         <h4 style="float: left;">Rate and Provide Feedback</h4>
                         <button style="float: right;" type="button" class="openModal" id="@userId" data-userid="@userId">
-                            <i class="fa-solid fa-circle-exclamation" style="font-size: 24px;"></i> <!-- Đặt kích thước cho biểu tượng -->
-                            Report <!-- Thêm văn bản bên cạnh biểu tượng (tùy chọn) -->
+                            <i class="fa-solid fa-circle-exclamation" style="font-size: 24px;"></i>
+                            Report
                         </button>
                     </div>
                     <br />
@@ -193,6 +193,25 @@
                 </div>
             </div>
     </form>
+<!-- Modal -->
+<div id="myModal" class="modal">
+    <!-- Nội dung modal -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="modalForm">
+            <input type="hidden" id="modalUserID" name="userID" />
+            <h3 style="text-align: center;">Báo cáo tài khoản</h3>
+            <label for="cutoffDate">
+                Bạn đang báo cáo tài khoản @Model.user.UserName
+            </label>
+            <br />
+            <br />
+            <label for="reason">Lý do báo cáo</label><br>
+            <textarea id="reason" name="reason" rows="4" cols="50"></textarea><br>
+            <button type="submit" class="confirm-button">Xác nhận</button>
+        </form>
+    </div>
+</div>
     <!-- Link to Bootstrap JS and Popper.js (required for Bootstrap) -->
    
 
@@ -370,4 +389,55 @@
     // Call the function to display feedbacks when the page loads
     displayFeedbacks();
 
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Open Modal
+        $(".openModal").click(function () {
+            var userID = $(this).data("userid");
+            console.log(userID);
+            $("#modalUserID").val(userID);
+            $("#reason").val(""); // Xóa giá trị của trường textarea
+            $("#myModal").css("display", "block");
+        });
+
+        // Close Modal
+        $(".close").click(function () {
+            $("#myModal").css("display", "none");
+        });
+
+        // Submit Form
+        $(".confirm-button").click(function () {
+
+            // Ajax request
+            var obj = {
+                createByUserID: parseInt($("#modalUserID").val()),
+                targetToUserID: @Model.user.Id,
+                reportUserContent: $("#reason").val()
+            };
+
+            $.ajax({
+                url: "@(UrlConstant.ApiBaseUrl + "/ReportAccount")",
+                headers: {
+                    "ngrok-skip-browser-warning": true,
+                    "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))"
+                },
+                method: 'POST',
+                data: JSON.stringify(obj),
+                contentType: 'application/json',
+                success: (data) => {
+                    alert("Report Account Successfully!");
+                    window.location.reload();
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert("Report Account Failed!");
+                }
+            });
+
+            // Đóng modal sau khi submit
+            $("#myModal").css("display", "none");
+        });
+    });
 </script>

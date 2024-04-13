@@ -110,8 +110,8 @@
                     <div>
                         <h4 style="float: left;">Rate and Provide Feedback</h4>
                         <button style="float: right;" type="button" class="openModal" id="@userId" data-userid="@userId">
-                            <i class="fa-solid fa-circle-exclamation" style="font-size: 24px;"></i> <!-- Đặt kích thước cho biểu tượng -->
-                            Report <!-- Thêm văn bản bên cạnh biểu tượng (tùy chọn) -->
+                            <i class="fa-solid fa-circle-exclamation" style="font-size: 24px;"></i>
+                            Report
                         </button>
                     </div>
                     <br />
@@ -352,11 +352,11 @@
             };
 
             $.ajax({
-                url: "@(UrlConstant.ApiBaseUrl+"/ReportAccount")",
+                url: "@(UrlConstant.ApiBaseUrl + "/ReportAccount")",
                 headers: {
                     "ngrok-skip-browser-warning": true,
-                    "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
-                }
+                    "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))"
+                },
                 method: 'POST',
                 data: JSON.stringify(obj),
                 contentType: 'application/json',
@@ -365,16 +365,18 @@
                     window.location.reload();
                 },
                 error: function (xhr, status, error) {
-                    console.error(xhr.responseText); // Log lỗi chi tiết để dễ dàng debug
+                    console.error(xhr.responseText);
                     alert("Report Account Failed!");
                 }
             });
+
 
             // Đóng modal sau khi submit
             $("#myModal").css("display", "none");
         });
     });
 </script>
+
 <script>
     // Function to fetch and display feedback information
     function displayAverageStar() {
