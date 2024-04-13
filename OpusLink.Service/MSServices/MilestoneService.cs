@@ -38,16 +38,29 @@ namespace OpusLink.Service.MSServices
         public async Task AcceptPlanOrNot(int jobID, bool accepted)
         {
             Job j = await _dbContext.Jobs.Where(j => j.JobID == jobID).FirstOrDefaultAsync();
+            Notification n = new Notification()
+            {
+                NotificationID = 0,
+                UserID = j.EmployerID,
+                NotificationContent = "",
+                IsReaded = false,
+                Link = "/MS/EmployerViewAllMS?jobID=" + j.JobID,
+                NotificationDate = DateTime.Now
+            };
+
             if (accepted)
             {
                 j.EmployerDoneEditMilestone = true;
                 j.IsFreelancerConfirm = true;
+                n.NotificationContent = "Freelancer đã chấp thuận kế hoạch";
             }
             else
             {
                 j.EmployerDoneEditMilestone = false;
                 j.IsFreelancerConfirm = false;
+                n.NotificationContent = "Freelancer không chấp thuận kế hoạch";
             }
+            _dbContext.Notifications.Add(n);
             await _dbContext.SaveChangesAsync();
         }
 
@@ -88,24 +101,74 @@ namespace OpusLink.Service.MSServices
             {
                 freelancer.AmountMoney += 0.8m * m.AmountToPay;
                 m.Status = status;
+                Notification n = new Notification()
+                {
+                    NotificationID = 0,
+                    UserID = j.FreelancerID ?? 0,
+                    NotificationContent = "Hoàn thành milestone thành công",
+                    IsReaded = false,
+                    Link = "/MS/FreelancerViewAllMS?jobID=" + j.JobID,
+                    NotificationDate = DateTime.Now
+                };
+                _dbContext.Notifications.Add(n);
             }
             else if (m.Status == (int)MilestoneStatusEnum.EmployerRejected && status == (int)MilestoneStatusEnum.Completed)
             {
                 freelancer.AmountMoney += 0.8m * m.AmountToPay;
                 m.Status = status;
+                Notification n = new Notification()
+                {
+                    NotificationID = 0,
+                    UserID = j.FreelancerID ?? 0,
+                    NotificationContent = "Hoàn thành milestone thành công",
+                    IsReaded = false,
+                    Link = "/MS/FreelancerViewAllMS?jobID=" + j.JobID,
+                    NotificationDate = DateTime.Now
+                };
+                _dbContext.Notifications.Add(n);
             }
             else if(m.Status == (int)MilestoneStatusEnum.MoneyPutted && status == (int)MilestoneStatusEnum.EmployerRejected)
             {
                 m.IsFreelancerDone = false;
                 m.Status = status;
+                Notification n = new Notification()
+                {
+                    NotificationID = 0,
+                    UserID = j.FreelancerID ?? 0,
+                    NotificationContent = "Employer từ chối công việc của milestone",
+                    IsReaded = false,
+                    Link = "/MS/FreelancerViewAllMS?jobID=" + j.JobID,
+                    NotificationDate = DateTime.Now
+                };
+                _dbContext.Notifications.Add(n);
             }
             else if (m.Status == (int)MilestoneStatusEnum.EmployerRejected && status == (int)MilestoneStatusEnum.EmployerRejected)
             {
                 m.IsFreelancerDone = false;
                 m.Status = status;
+                Notification n = new Notification()
+                {
+                    NotificationID = 0,
+                    UserID = j.FreelancerID ?? 0,
+                    NotificationContent = "Employer từ chối công việc của milestone",
+                    IsReaded = false,
+                    Link = "/MS/FreelancerViewAllMS?jobID=" + j.JobID,
+                    NotificationDate = DateTime.Now
+                };
+                _dbContext.Notifications.Add(n);
             }
             else if(status == (int)MilestoneStatusEnum.Failed)
             {
+                Notification n = new Notification()
+                {
+                    NotificationID = 0,
+                    UserID = j.FreelancerID ?? 0,
+                    NotificationContent = "Milestone đã kết thúc thất bại",
+                    IsReaded = false,
+                    Link = "/MS/FreelancerViewAllMS?jobID=" + j.JobID,
+                    NotificationDate = DateTime.Now
+                };
+                _dbContext.Notifications.Add(n);
                 //chuyen trang thai ms thanh fail
                 m.Status = (int)MilestoneStatusEnum.Failed;
                 //tra tien cua ms nay cho E
@@ -120,6 +183,16 @@ namespace OpusLink.Service.MSServices
             //neu da het ms thi job se chuyen thanh complete
             if (NoMsLeft(j))
             {
+                Notification n = new Notification()
+                {
+                    NotificationID = 0,
+                    UserID = j.FreelancerID ?? 0,
+                    NotificationContent = "Job hoàn thành thành công",
+                    IsReaded = false,
+                    Link = "/MS/FreelancerViewAllMS?jobID=" + j.JobID,
+                    NotificationDate = DateTime.Now
+                };
+                _dbContext.Notifications.Add(n);
                 j.Status = (int)JobStatusEnum.Completed;
                 //neu ko co ms nao bi fail thi F nhan duoc 20% tat ca nhung ms completed
                 if (AnyMsFail(j) == false)
@@ -183,6 +256,16 @@ namespace OpusLink.Service.MSServices
             if (m.Status == (int)MilestoneStatusEnum.MoneyPutted)
             {
                 m.IsFreelancerDone = true;
+                Notification n = new Notification()
+                {
+                    NotificationID = 0,
+                    UserID = j.EmployerID,
+                    NotificationContent = "Freelancer đã làm xong milestone",
+                    IsReaded = false,
+                    Link = "/MS/EmployerViewAllMS?jobID=" + j.JobID,
+                    NotificationDate = DateTime.Now
+                };
+                _dbContext.Notifications.Add(n);
                 await _dbContext.SaveChangesAsync();
                 return true;
 
@@ -190,6 +273,16 @@ namespace OpusLink.Service.MSServices
             if (m.Status == (int)MilestoneStatusEnum.EmployerRejected)
             {
                 m.IsFreelancerDone = true;
+                Notification n = new Notification()
+                {
+                    NotificationID = 0,
+                    UserID = j.EmployerID,
+                    NotificationContent = "Freelancer đã làm xong milestone",
+                    IsReaded = false,
+                    Link = "/MS/EmployerViewAllMS?jobID=" + j.JobID,
+                    NotificationDate = DateTime.Now
+                };
+                _dbContext.Notifications.Add(n);
                 await _dbContext.SaveChangesAsync();
                 return true;
             }
@@ -202,6 +295,17 @@ namespace OpusLink.Service.MSServices
             m.Deadline=newDeadline;
             m.IsFreelancerDone = false;
             m.Status = (int)MilestoneStatusEnum.EmployerRejected;
+            Job j = await _dbContext.Jobs.Where(j => j.JobID == jobId).FirstOrDefaultAsync();
+            Notification n = new Notification()
+            {
+                NotificationID = 0,
+                UserID = j.FreelancerID ?? 0,
+                NotificationContent = "Employer gia hạn deadline",
+                IsReaded = false,
+                Link = "/MS/FreelancerViewAllMS?jobID=" + j.JobID,
+                NotificationDate = DateTime.Now
+            };
+            _dbContext.Notifications.Add(n);
             await _dbContext.SaveChangesAsync();
             return true;
         }
@@ -212,6 +316,17 @@ namespace OpusLink.Service.MSServices
             j.DeadlineFreelancerConfirm = deadlineAccept;
             j.EmployerDoneEditMilestone = true;
             j.IsFreelancerConfirm = false;
+            Notification n = new Notification()
+            {
+                NotificationID = 0,
+                UserID = j.FreelancerID??0,
+                NotificationContent = "Yêu cầu chấp thuận kế hoạch",
+                IsReaded = false,
+                Link = "/MS/FreelancerViewAllMS?jobID="+j.JobID,
+                NotificationDate = DateTime.Now
+            };
+            _dbContext.Notifications.Add(n);
+
             await _dbContext.SaveChangesAsync();
         }
 
@@ -271,6 +386,16 @@ namespace OpusLink.Service.MSServices
             Job j = await _dbContext.Jobs.Where(j => j.JobID == jobId).Include("Milestones").FirstOrDefaultAsync();
             User employer = await _dbContext.Users.Where(u => u.Id == j.EmployerID).FirstOrDefaultAsync();
             j.Status = (int)JobStatusEnum.Failed;
+            Notification n = new Notification()
+            {
+                NotificationID = 0,
+                UserID = j.FreelancerID ?? 0,
+                NotificationContent = "Job đã thất bại",
+                IsReaded = false,
+                Link = "/JOB/FreelancerViewJobDetail?jobID=" + j.JobID,
+                NotificationDate = DateTime.Now
+            };
+            _dbContext.Notifications.Add(n);
             //E nhan lai 20% cua nhung ms da Completed. 100% nhung ms MoneyPutted
             //100% nhung ms EmployerRejected
             Decimal total = 0;

@@ -12,6 +12,7 @@ namespace OpusLink.Service.NotificationServices
     public interface  INotificationServices
     {
         public void AddHNotification(Notification notification);
+        public void AddNotification(int UserId,string notificationContent, string link );
         public List<Notification> Get5NotificationNew(int uid);
         public List<Notification> GetAllNotification(int uid);
         public Notification UpdateNotificationReader(int notiId);
@@ -62,6 +63,30 @@ namespace OpusLink.Service.NotificationServices
             catch (Exception e)
             {
                 throw new Exception("Error adding skill", e);
+            }
+
+        }
+        public void AddNotification(int userId, string notificationContent, string link)
+        {
+            Notification n = new Notification()
+            {
+                NotificationID = 0,
+                UserID = userId,
+                NotificationContent = notificationContent,
+                IsReaded = false,
+                Link = link,
+                NotificationDate = DateTime.Now
+            };
+            try
+            {
+
+                _context.Notifications.Add(n);
+                _context.SaveChanges();
+
+            }
+            catch (Exception e)
+            {
+                throw new Exception("Error adding notification", e);
             }
 
         }

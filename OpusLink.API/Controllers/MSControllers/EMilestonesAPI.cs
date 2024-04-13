@@ -7,6 +7,7 @@ using OpusLink.Entity.DTO.MSDTO;
 using OpusLink.Entity.Models;
 using OpusLink.Service.JobServices;
 using OpusLink.Service.MSServices;
+using OpusLink.Service.NotificationServices;
 using System.Diagnostics;
 
 namespace OpusLink.API.Controllers.MSControllers
@@ -17,11 +18,13 @@ namespace OpusLink.API.Controllers.MSControllers
     public class EMilestonesAPI : ControllerBase
     {
         private readonly IMilestoneService milestoneService;
+        private readonly INotificationServices notificationService;
         private readonly IMapper _mapper;
-        public EMilestonesAPI(IMilestoneService milestoneService, IMapper mapper)
+        public EMilestonesAPI(IMilestoneService milestoneService, IMapper mapper, INotificationServices notificationService)
         {
             _mapper = mapper;
             this.milestoneService = milestoneService;
+            this.notificationService = notificationService;
         }
         [HttpGet("GetAllMilestone/{jobID}")]
         public async Task<IActionResult> GetAllMilestone([FromRoute] int jobID)
@@ -54,6 +57,7 @@ namespace OpusLink.API.Controllers.MSControllers
         {
 
             await milestoneService.RequestFreelancerAcceptPlan(rq.JobID, rq.DeadlineAccept);
+            
             return Ok();
         }
         [HttpGet("GetThisJob/{jobID}")]

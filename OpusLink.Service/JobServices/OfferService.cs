@@ -31,6 +31,17 @@ namespace OpusLink.Service.JobServices
         public async Task CreateOffer(Offer offer)
         {
             _dbContext.Offers.Add(offer);
+            var j = _dbContext.Jobs.Where(h=>h.JobID== offer.JobID).ToList();   
+            Notification n = new Notification()
+            {
+                NotificationID = 0,
+                UserID = j[0].EmployerID,
+                NotificationContent = "Job của bạn có thêm một offer.",
+                IsReaded = false,
+                Link = "/JOB/EmployerViewJobDetailPage?JobId=" + offer.JobID,
+                NotificationDate = DateTime.Now
+            };
+            _dbContext.Notifications.Add(n);
             await _dbContext.SaveChangesAsync();
         }
 

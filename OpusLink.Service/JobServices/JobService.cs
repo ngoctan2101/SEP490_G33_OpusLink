@@ -71,6 +71,16 @@ namespace OpusLink.Service.JobServices
         {
             Job a = await _dbContext.Jobs.Where(j => j.JobID == jobId).FirstAsync();
             a.Status = (int)JobStatusEnum.Hiring;
+            Notification n = new Notification()
+            {
+                NotificationID = 0,
+                UserID = a.EmployerID,
+                NotificationContent = "Job của bạn đã được duyệt",
+                IsReaded = false,
+                Link = "/JOB/EmployerViewJobDetailPage?JobId=" + a.JobID,
+                NotificationDate = DateTime.Now
+            };
+            _dbContext.Notifications.Add(n);
             await _dbContext.SaveChangesAsync();
         }
 
@@ -256,6 +266,16 @@ namespace OpusLink.Service.JobServices
             Job b = await _dbContext.Jobs.Where(b => b.JobID == jobId).FirstAsync();
             b.FreelancerID=freelancerId;
             b.Status = (int)JobStatusEnum.Hired;
+            Notification n = new Notification()
+            {
+                NotificationID = 0,
+                UserID = freelancerId,
+                NotificationContent = "Bạn đã được nhận vào job",
+                IsReaded = false,
+                Link = "/JOB/FreelancerViewJobDetail?JobId=" + jobId,
+                NotificationDate = DateTime.Now
+            };
+            _dbContext.Notifications.Add(n);
             await _dbContext.SaveChangesAsync();
         }
 
@@ -264,6 +284,16 @@ namespace OpusLink.Service.JobServices
             Job b = await _dbContext.Jobs.Where(b => b.JobID == jobId).FirstAsync();
             b.FreelancerID = null;
             b.Status = (int)JobStatusEnum.Hiring;
+            Notification n = new Notification()
+            {
+                NotificationID = 0,
+                UserID = freelancerId,
+                NotificationContent = "Bạn đã bị Employer từ chối",
+                IsReaded = false,
+                Link = "/JOB/FreelancerViewJobDetail?JobId=" + jobId,
+                NotificationDate = DateTime.Now
+            };
+            _dbContext.Notifications.Add(n);
             await _dbContext.SaveChangesAsync();
         }
     }
