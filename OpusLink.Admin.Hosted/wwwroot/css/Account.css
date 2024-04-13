@@ -1,0 +1,128 @@
+﻿* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+    font-family: 'Poppins', sans-serif;
+}
+
+body {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    background: linear-gradient(to left, #6699ff 0%, #ff99cc 100%);
+}
+
+.wrapper {
+    width: 460px;
+    background: #fff;
+    color: #000000;
+    border-radius: 12px;
+    padding: 40px 40px;
+    border: 2px solid rgba(255, 255, 255, 0.2);
+}
+
+    .wrapper h1 {
+        font-size: 36px;
+        text-align: center;
+    }
+
+    .wrapper .input-box {
+        position: relative;
+        width: 100%;
+        height: 50px;
+        margin: 30px 0;
+    }
+
+.input-box label {
+    display: block;
+    margin-top: 5px;
+    margin-bottom: 5px;
+    font-weight: bold;
+}
+
+
+.input-box input {
+    width: 100%;
+    height: 100%;
+    background: #f3f1ff;
+    border: none;
+    outline: none;
+    border: 1px solid #000000;
+    border-radius: 40px;
+    font-size: 16px;
+    color: #000000;
+    padding: 20px 45px 20px 20px;
+}
+
+    .input-box input::placeholder {
+        color: #000000;
+    }
+
+.input-box i {
+    position: absolute;
+    right: 10px;
+    top: 95%;
+    transform: translate(-90%, -50%);
+    font-size: 18px;
+}
+
+.wrapper .forgot-password {
+    display: flex;
+    justify-content: space-between;
+    font-size: 16px;
+    margin: -15px 0px 15px;
+}
+
+.forgot-password a {
+    color: #9788f4;
+    font-weight: bold;
+}
+
+    .forgot-password a:hover {
+        text-decoration: underline;
+    }
+
+.wrapper .btn-confirm {
+    width: 100%;
+    height: 43px;
+    background: #4ce149;
+    border: none;
+    outline: none;
+    border-radius: 40px;
+    box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+    cursor: pointer;
+    font-size: 17px;
+    color: #fff;
+    font-weight: 600;
+}
+
+.wrapper .change-link {
+    font-size: 16px;
+    text-align: center;
+    margin: 20px 0 15px;
+}
+
+.change-link p a {
+    color: #988af4;
+    font-weight: 600;
+}
+
+    .change-link p a:hover {
+        text-decoration: underline;
+    }
+
+.alert {
+    margin-top: 40px;
+    margin-bottom: 10px;
+    color: red;
+}
+
+.btn-confirm[disabled] {
+    background-color: #ccc;
+    color: #000000
+}
+
+.btn-confirm.active {
+    background-color: #4ce149;
+}
