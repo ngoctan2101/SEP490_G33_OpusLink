@@ -19,6 +19,12 @@ namespace OpusLink.Admin.Hosted.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string username, string password)
         {
+            if (!IsPasswordValid(password))
+            {
+                ViewData["Error"] = TotalMessage.LoginError;
+                return Page();
+            }
+
             LoginDTO account = new LoginDTO()
             {
                 UserName = username,
@@ -65,6 +71,22 @@ namespace OpusLink.Admin.Hosted.Pages.Account
                     }
                 }
             }
+        }
+        public bool IsPasswordValid(string password)
+        {
+            if (password.Length < 6 ||
+                !password.Any(IsSpecialChar) ||
+                !password.Any(char.IsDigit) ||
+                (!password.Any(char.IsUpper) || !password.Any(char.IsLower)))
+            {
+                return false;
+            }
+            return true;
+        }
+
+        public static bool IsSpecialChar(char c)
+        {
+            return !char.IsLetterOrDigit(c) && !char.IsWhiteSpace(c);
         }
     }
 }
