@@ -422,15 +422,13 @@
                 headers: {
                     "ngrok-skip-browser-warning": true,
                     "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))"
-                }, // Thêm dấu phẩy tại đây
+                },
                 method: 'POST',
                 data: JSON.stringify(obj),
                 contentType: 'application/json',
                 success: (data) => {
-                    function (xhr, status) {
-                        console.error(xhr.responseText);
-                    }
-                    
+                    alert("Report Account Successfully!");
+                    window.location.reload();
                 },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText);
