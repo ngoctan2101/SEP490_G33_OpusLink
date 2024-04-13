@@ -206,6 +206,8 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
             if (response.IsSuccessStatusCode)
             {
                 //message "User Edited" green
+                HttpContext.Session.SetString("Notification", "Thông tin cá nhân đã được thay đổi");
+                HttpContext.Session.SetInt32("NotiIsNew", 1);
             }
 
 

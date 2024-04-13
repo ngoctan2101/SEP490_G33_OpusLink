@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Http;
+﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OpusLink.Entity.DTO;
@@ -203,6 +203,8 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
 
             if (response.IsSuccessStatusCode)
             {
+                HttpContext.Session.SetString("Notification", "Thêm mới 1 skill thành công");
+                HttpContext.Session.SetInt32("NotiIsNew", 1);
                 return RedirectToPage("./Views"); // Redirect to the skills index page after successful creation
             }
             else
@@ -255,6 +257,8 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
             var response = await client.PutAsync(ServiceMangaUrl + $"/Skill/UpdateSkill", content);
             if (response.IsSuccessStatusCode)
             {
+                HttpContext.Session.SetString("Notification", "Sửa skill thành công");
+                HttpContext.Session.SetInt32("NotiIsNew", 1);
                 return RedirectToPage("./Views"); // Redirect to the skills index page after successful update
             }
             else
@@ -279,6 +283,8 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
 
                 if (responseDeleteSkill.IsSuccessStatusCode)
                 {
+                    HttpContext.Session.SetString("Notification", "Xóa skill thành công");
+                    HttpContext.Session.SetInt32("NotiIsNew", 1);
                     Console.WriteLine("Skill deleted successfully.");
                 }
                 else

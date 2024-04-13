@@ -95,7 +95,8 @@ namespace OpusLink.User.Hosted.Pages.JOB
             HttpResponseMessage response = await client.PostAsync(UrlConstant.ApiBaseUrl+"/Job10API/CreateJob", httpContent);
             if (response.IsSuccessStatusCode)
             {
-                //message "Your job is requested" green
+                HttpContext.Session.SetString("Notification", "Yêu cầu đăng bài của bạn sẽ được hệ thống xử lý trong vòng 48h tới");
+                HttpContext.Session.SetInt32("NotiIsNew", 1);
             }
             return RedirectToPage("/JOB/EmployerViewAllJobCreatedPage");
         }
