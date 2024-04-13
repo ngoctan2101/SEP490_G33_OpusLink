@@ -110,7 +110,7 @@
                     <div>
                         <h4 style="float: left;">Rate and Provide Feedback</h4>
                         <button style="float: right;" type="button" class="openModal" id="@userId" data-userid="@userId">
-                            <i class="fa-solid fa-circle-exclamation" style="font-size: 24px;"></i> <!-- Đặt kích thước cho biểu tượng -->
+                            <i class="fa-solid fa-circle-exclamation" style="font-size: 24px;" class="openModal"></i> <!-- Đặt kích thước cho biểu tượng -->
                             Report <!-- Thêm văn bản bên cạnh biểu tượng (tùy chọn) -->
                         </button>
                     </div>
@@ -325,16 +325,20 @@
     }
 </script>
 <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
 <script>
+
+
     $(document).ready(function () {
         // Open Modal
         $(".openModal").click(function () {
             var userID = $(this).data("userid");
             console.log(userID);
             $("#modalUserID").val(userID);
-            $("#reason").val(""); // Xóa giá trị của trường textarea
+            $("#reason").val(""); // Clear the textarea value
             $("#myModal").css("display", "block");
         });
+
 
         // Close Modal
         $(".close").click(function () {

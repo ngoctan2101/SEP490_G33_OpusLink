@@ -26,7 +26,7 @@
                 right: 5px;
                 top: 50%;
                 transform: translateY(-50%);
-                color: #888; 
+                color: #888;
                 font-size: 18px;
             }
 
@@ -53,9 +53,8 @@
     function checkPasswordLength() {
         var password = document.getElementById("Password").value;
         var errorElement = document.getElementById("passwordError");
-
         var hasLength = password.length >= 6;
-        var hasSpecialChar = /[ `!#$%^&*()_+\-=\@@[\]{};':"\\|,.<>\/?~]/.test(password);
+        var hasSpecialChar = /[`!#$%^&*()_+\-=\@@[\]{};':"\\|,.<>\/?~]/.test(password);
         var hasNumber = /\d/.test(password);
         var hasUpperCase = /[A-Z]/.test(password);
         var hasLowerCase = /[a-z]/.test(password);
@@ -159,7 +158,7 @@
             <div class="input-box">
                 <label class="label">Ngày sinh của bạn <span style="color: red;">(*)</span></label>
                 <div class="input-container">
-                    <input type="date" placeholder="Nhập ngày/tháng/năm sinh của bạn" id="Birthdate" name="Birthdate" required>
+                    <input type="date" placeholder="Nhập ngày/tháng/năm sinh của bạn" id="Birthdate" name="Birthdate" required oninput="checkInputs()">
                     <i class="icon-calendar"></i>
                 </div>
             </div>
