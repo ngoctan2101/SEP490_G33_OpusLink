@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.DTO;
@@ -206,13 +206,14 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
                                 
                             }
 
-                         
+
                             //HttpResponseMessage responseUser = await client.GetAsync(ServiceMangaUrl + $"api/User/GetUserById/{userId}");
                             //var strData = await responseUser.Content.ReadAsStringAsync();
                             //var us = System.Text.Json.JsonSerializer.Deserialize<OpusLink.Entity.Models.User>(strData, option);
 
                             //HttpContext.Session.SetString(ErrorKey, "");
-                           
+                            HttpContext.Session.SetString("Notification", "Nạp tiền thành công");
+                            HttpContext.Session.SetInt32("NotiIsNew", 1);
                             return RedirectToPage("/HistoryPayment/HistoryPaymentDetail", new { payId = HisPayId });
                            
 

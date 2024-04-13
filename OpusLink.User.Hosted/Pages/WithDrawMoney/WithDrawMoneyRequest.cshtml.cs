@@ -165,13 +165,8 @@ namespace OpusLink.User.Hosted.Pages.WithDrawMoney
                 //message "User Edited" green
             }
 
-            //return RedirectToPage("/HistoryPayment/HistoryPaymentDetail", new { payId = HisPayId });
-
-
-            var option = new JsonSerializerOptions
-            {
-                PropertyNameCaseInsensitive = true,
-            };
+            HttpContext.Session.SetString("Notification", "Yêu cầu rút tiền của bạn sẽ được hệ thống xử lý trong vòng 48h tới");
+            HttpContext.Session.SetInt32("NotiIsNew", 1);
             return Redirect("../Index");
 
         }

@@ -64,7 +64,7 @@
                     ? displaySkillName
                     : $"{item.SkillName} ({item.SkillParentID})"; *@
 
-                            <tr>
+                            <tr id="tr_@item.SkillID">
                                 <th scope="row" name="@item.SkillID" id="SkillID_@item.SkillID">@item.SkillID</th>
                                 <td>
                                     @if (item.SkillParentID != 0)
@@ -212,10 +212,15 @@
                 success: function (result) {
                     // Xử lý kết quả sau khi xóa (cập nhật giao diện, thông báo, v.v.)
                     // Ví dụ: location.reload(); để làm mới trang sau khi xóa
-                    location.reload();
+                    document.getElementById("notifaiDiv").style.backgroundColor = '#0FFF4B';
+                    document.getElementById("notifai").innerHTML='Xóa skill thành công';
+                    document.getElementById("tr_" + skillID).remove();
+                    displayMessage();
                 },
                 error: function (error) {
-                    console.error('Error deleting skill:', error);
+                    document.getElementById("notifaiDiv").style.backgroundColor = '#E27E2E';
+                    document.getElementById("notifai").innerHTML = 'Xóa skill không thành công';
+                    displayMessage();
                 }
             });
         }

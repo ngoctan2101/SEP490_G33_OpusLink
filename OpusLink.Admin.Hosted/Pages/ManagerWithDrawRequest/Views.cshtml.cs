@@ -138,7 +138,8 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
             var content1 = new StringContent(notifi, Encoding.UTF8, "application/json");
             HttpResponseMessage response1 = await client.PostAsync(ServiceMangaUrl + $"/Notification/AddNotification", content1);
 
-
+            HttpContext.Session.SetString("Notification", "Đã từ chối yêu cầu rút tiền");
+            HttpContext.Session.SetInt32("NotiIsNew", 1);
 
             return Redirect("/ManagerWithDrawRequest/Views");
 
@@ -271,8 +272,9 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
             var notifi = System.Text.Json.JsonSerializer.Serialize(noti);
             var content1 = new StringContent(notifi, Encoding.UTF8, "application/json");
             HttpResponseMessage response1 = await client.PostAsync(ServiceMangaUrl + $"/Notification/AddNotification", content1);
-            
 
+            HttpContext.Session.SetString("Notification", "Chuyển tiền thành công");
+            HttpContext.Session.SetInt32("NotiIsNew", 1);
             //return Redirect("/ManagerWithDrawRequest/Views");
             return RedirectToPage("/ManagerWithDrawRequest/Views");
         }
