@@ -10,7 +10,7 @@ using OpusLink.Service.PaymentServices;
 
 namespace OpusLink.API.Controllers.NotificationControllers
 {
-    [Authorize(Roles = "Freelancer,Employer")]
+    [Authorize(Roles = "Freelancer,Employer,Admin")]
     [Route("api/[controller]")]
     [ApiController]
     public class NotificationController : ControllerBase

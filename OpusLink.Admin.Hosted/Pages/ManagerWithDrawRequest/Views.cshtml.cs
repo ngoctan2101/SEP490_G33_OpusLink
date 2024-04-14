@@ -147,6 +147,11 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
         }
         public async Task<IActionResult> OnPostTranferWithDrawAsync(IFormCollection collection)
         {
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             List<string> keys = collection.Keys.ToList<string>();
             int withdrawidres = 0;
             string usernameres = "";

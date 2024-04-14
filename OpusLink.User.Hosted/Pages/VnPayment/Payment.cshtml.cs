@@ -220,14 +220,14 @@ namespace OpusLink.User.Hosted.Pages.VnPayment
                         }
                         else
                         {
-                            ErrorKey = "An error occurred while processing the invoice | Trading code: " + vnpayTranId + " | Error code: " + vnp_ResponseCode + "";
+                            ErrorKey = "Đã xảy ra lỗi khi xử lý hóa đơn | Mã giao dịch: " + vnpayTranId + " | Mã lỗi: " + vnp_ResponseCode + "";
                             //HttpContext.Session.SetString(ErrorKey, "An error occurred while processing the invoice | Trading code: " + vnpayTranId + " | Error code: " + vnp_ResponseCode);
                             return RedirectToPage("/VnPayment/AddMoneyToWallet", new { errorKey = ErrorKey });
                         }
                     }
                     else
                     {
-                        ErrorKey = "An error occurred during processing";
+                        ErrorKey = "Một lỗi đã xảy ra trong quá trình xử lý";
                         //HttpContext.Session.SetString(ErrorKey, "An error occurred during processing");
                         return RedirectToPage("/VnPayment/AddMoneyToWallet", new { errorKey = ErrorKey });
                     }

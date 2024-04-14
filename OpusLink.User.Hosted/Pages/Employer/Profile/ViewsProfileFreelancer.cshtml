@@ -14,7 +14,8 @@
         }
 
         body {
-            background: linear-gradient(to left, #6699ff 0%, #cc33ff 100%);
+            /* background: linear-gradient(to left, #6699ff 0%, #cc33ff 100%); */
+              background-color: #f2fcfe;
         }
 
 
@@ -106,10 +107,10 @@
                     <!-- Form for Rating and Feedback -->
                     <div class="mt-3">
                     <div>
-                        <h4 style="float: left;">Rate and Provide Feedback</h4>
+                        <h4 style="float: left;">Đánh giá và bình luận</h4>
                         <button style="float: right;" type="button" class="openModal" id="@userId" data-userid="@userId">
                             <i class="fa-solid fa-circle-exclamation" style="font-size: 24px;"></i>
-                            Report
+                            Báo cáo
                         </button>
                     </div>
                     <br />
@@ -117,12 +118,13 @@
 
 
                     <div id="rateSection">
-                        <h5>Rating:</h5>
+                        <h5>Đánh giá:</h5>
 
                         <p id="averageRating"></p>
                     </div>
                     <!-- Feedback Display Area -->
                     <div id="feedbackSection">
+                        <h5>Bình luận</h5>
                     </div>
 
 
@@ -146,7 +148,7 @@
                     </div>
                     <div class="mb-3">
                     <label for="dob" class="form-label">Ngày sinh</label>
-                        <input type="date" class="form-control" id="dob" name="dob" readonly value="@Model.user.Dob?.ToString("yyyy-MM-dd")">
+                        <input type="text" class="form-control" id="dob" name="dob" readonly value="@Model.user.Dob?.ToString("dd/MM/yyy")">
                     </div>
 
                     <div class="mb-3">
@@ -174,7 +176,7 @@
                                 <div class="ASkill" id="ASkill_@item.SkillID">
                                     @item.SkillName
                                     @* <span  class="close" onclick="#Delete(@item.SkillID)">&times;</span> *@
-                                    <input type="text" name="skill_@item.SkillID" value="@item.SkillID"  />
+                                   @*  <input type="text" name="skill_@item.SkillID" value="@item.SkillID"  /> *@
                                 </div>
                             }
                         </div>
