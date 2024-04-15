@@ -17,6 +17,7 @@ namespace OpusLink.Service.AccountServices
         Task<ApiResponseModel> LoginAdmin(LoginDTO model);
         Task<ApiResponseModel> ConfirmEmail(string token, string email);
         Task<ApiResponseModel> UpdateUserRole(UpdateRoleDTO model);
+        string GenerateRandomString();
     }
     public class AccountService : IAccountService
     {
@@ -253,6 +254,16 @@ namespace OpusLink.Service.AccountServices
                         };
                     }
 
+                    if(!userIdentity.EmailConfirmed)
+                    {
+                        return new ApiResponseModel
+                        {
+                            Code = 400,
+                            IsSuccess = false,
+                            Message = TotalMessage.LoginErrorEmailConfirm
+                        };
+                    }
+
                     if (userIdentity.Status == 0)
                         if (userIdentity.EndBanDate > DateTime.Now)
                         {
@@ -346,6 +357,42 @@ namespace OpusLink.Service.AccountServices
                 };
             }
             return result;
+        }
+
+        public string GenerateRandomString()
+        {
+            Random random = new Random();
+            StringBuilder sb = new StringBuilder();
+
+            // Thêm ít nhất một ký tự in thường, in hoa, số, và ký tự đặc biệt
+            sb.Append((char)random.Next('a', 'z' + 1)); // Thêm ký tự in thường
+            sb.Append((char)random.Next('A', 'Z' + 1)); // Thêm ký tự in hoa
+            sb.Append((char)random.Next('0', '9' + 1)); // Thêm ký tự số
+            sb.Append((char)random.Next(33, 48)); // Thêm ký tự đặc biệt từ ASCII 33 đến 47
+
+            // Thêm các ký tự ngẫu nhiên cho đến khi đạt được độ dài tối thiểu 6 ký tự
+            while (sb.Length < 6)
+            {
+                char nextChar = (char)random.Next(33, 126); // Ký tự từ ASCII 33 đến 125 (bao gồm ký tự đặc biệt và chữ cái)
+                sb.Append(nextChar);
+            }
+
+            // Trộn ngẫu nhiên chuỗi
+            return RandomizeString(sb.ToString());
+        }
+
+        private string RandomizeString(string input)
+        {
+            char[] chars = input.ToCharArray();
+            Random random = new Random();
+            for (int i = 0; i < chars.Length; i++)
+            {
+                int randomIndex = random.Next(i, chars.Length);
+                char temp = chars[randomIndex];
+                chars[randomIndex] = chars[i];
+                chars[i] = temp;
+            }
+            return new string(chars);
         }
     }
 }

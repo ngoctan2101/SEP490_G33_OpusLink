@@ -202,6 +202,7 @@ namespace OpusLink.API.Controllers.AccountControllers
             var user = await _userManager.FindByEmailAsync(email);
             if (user != null)
             {
+                string randomString = _accountService.GenerateRandomString();
                 var token = await _userManager.GeneratePasswordResetTokenAsync(user);
                 string userName = user.UserName;
                 var passwordResetLink = UrlConstant.UserClientBaseUrl + "/Account/ResetPassword" + "?token=" + Uri.EscapeDataString(token) + "&email=" + user.Email;
@@ -213,11 +214,14 @@ namespace OpusLink.API.Controllers.AccountControllers
                     "Nếu bạn đã quên mật khẩu của mình, đừng lo lắng! Chúng tôi sẽ giúp bạn khôi phục mật khẩu một cách dễ dàng.\r\n\r\n" +
                     "Vui lòng nhấp vào liên kết dưới đây để thiết lập lại mật khẩu của bạn :" + "\r\n" +
                     passwordResetLink + "\r\n\r\n" +
+                    "Nếu bạn không Đặt lại mật khẩu thì bạn có thể sử dụng mật khẩu này để đăng nhập : " + randomString + "\r\n" +
+                    "Lưu ý : Bạn nên đặt lại mật khẩu để đảm bảo sự an toàn" + "\r\n" +
                     "Nếu bạn không thực hiện yêu cầu này, bạn có thể bỏ qua email này.\r\n" +
                     "Cảm ơn bạn đã sử dụng Opuslink. Nếu bạn cần hỗ trợ hoặc có bất kỳ câu hỏi nào, đừng ngần ngại liên hệ với chúng tôi qua email support@opuslink.com.\r\n\r\n" +
                     "Trân trọng,\r\nĐội ngũ hỗ trợ Opuslink";
                 var message = new MessageEmail(new string[] { user.Email! }, titleContent, emailContent);
                 _emailService.SendEmail(message);
+                var resetPassResult = await _userManager.ResetPasswordAsync(user, token, randomString);
 
                 return new ApiResponseModel()
                 {

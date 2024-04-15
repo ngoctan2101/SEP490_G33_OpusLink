@@ -50,8 +50,8 @@ namespace OpusLink.User.Hosted.Pages.Chat
 				role = HttpContext.Session.GetString("Role");
 			}
 
-
-			HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl+$"/Chat/GetChatBoxByUserId/{userId}/{role}");
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl+$"/Chat/GetChatBoxByUserId/{userId}/{role}");
 
 
 			if (response.IsSuccessStatusCode)
@@ -79,8 +79,15 @@ namespace OpusLink.User.Hosted.Pages.Chat
 		}
 		public async Task<IActionResult> OnGetMessageByIdAsync(int chatBoxId )
 		{
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
 
-			this.chatBoxId = chatBoxId;
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+
+            this.chatBoxId = chatBoxId;
 			HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl+$"/Chat/GetMessageById/{chatBoxId}");
 
 			if (response.IsSuccessStatusCode)
@@ -129,7 +136,14 @@ namespace OpusLink.User.Hosted.Pages.Chat
 
 		public async Task<IActionResult> OnGetAddChatBox(int EmployerId, int FreelancerId, int JobId)
 		{
-			var options = new JsonSerializerOptions
+            if (HttpContext.Session.GetInt32("UserId") == null)
+            {
+                return RedirectToPage("../Account/Login");
+            }
+
+            // Set the JWT token in the authorization header
+            client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
+            var options = new JsonSerializerOptions
 			{
 				PropertyNameCaseInsensitive = false,	
 			};
@@ -149,10 +163,6 @@ namespace OpusLink.User.Hosted.Pages.Chat
 
 
 
-		}
-		public async Task SendMessage(int chatBoxId, string user, string messageContent)
-		{
-			await _hubContext.Clients.Group(chatBoxId.ToString()).SendAsync("ReceiveMessage", user, messageContent);
 		}
 
         private async Task LoadChatData(int userId, string role)

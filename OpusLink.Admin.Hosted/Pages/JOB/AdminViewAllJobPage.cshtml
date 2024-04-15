@@ -358,9 +358,11 @@
     document.getElementById("price-min").addEventListener('change', function () {
         // Get the input element
         var input = document.getElementById("price-min");
-        var input1 = input.value.replaceAll(",", "");
-        input1 = input1.replaceAll("₫", "");
-        input1 = input1.replaceAll(" ", "");
+        var input1 = input.value..replace(/\D/g, '');
+        //var input1 = input.value.replaceAll(",", "");
+        //input1 = input1.replaceAll("-", "");
+        //input1 = input1.replaceAll("₫", "");
+        //input1 = input1.replaceAll(" ", "");
         // Get the value and convert it to a number
         var value = parseFloat(input1);
         // Check if the value is a valid number
@@ -377,9 +379,11 @@
     document.getElementById("price-max").addEventListener('change', function () {
         // Get the input element
         var input = document.getElementById("price-max");
-        var input1 = input.value.replaceAll(",", "");
-        input1 = input1.replaceAll("₫", "");
-        input1 = input1.replaceAll(" ", "");
+        var input1 = input.value.replace(/\D/g, '');
+        //var input1 = input.value.replaceAll(",", "");
+        //input1 = input1.replaceAll("-", "");
+        //input1 = input1.replaceAll("₫", "");
+        //input1 = input1.replaceAll(" ", "");
         // Get the value and convert it to a number
         var value = parseFloat(input1);
         // Check if the value is a valid number

@@ -265,9 +265,13 @@
                                     </div>
                                     <div style="background-color:inherit; padding:5px">
                                         <p style="display:inline">@item.LocationName</p> | <p class="FormatBudget" style="display:inline">@(item.BudgetFrom)</p> - <p class="FormatBudget" style="display:inline">@(item.BudgetTo)</p>
+                                        
                                     </div>
+
                                     <div>
-                                        <p class="JobContent">@item.JobContent</p>
+
+                                        <p class="JobContent" style="display:inline-block" onclick="simulateLinkClick(this)">@item.JobContent</p>
+                                        <a style="font-size:16px;display:inline-block" class="link" asp-page="./FreelancerViewJobDetail" asp-route-JobId="@item.JobID" hidden>More</a>
                                     </div>
                                     <div class="row">
                                         <div class="col-md-10">
@@ -326,7 +330,7 @@
 <script>
     function displayAllChild(categoryID) {
         $.ajax({
-            url: "@(UrlConstant.ApiBaseUrl + "/Job3API/GetAllChildCategory?parentId=")" + categoryID,
+            url: "@(UrlConstant.ApiBaseUrl + "/Job4API/GetAllChildCategory?parentId=")" + categoryID,
             type: "get",
             headers: {
                 "ngrok-skip-browser-warning": true,
@@ -397,9 +401,11 @@
     document.getElementById("price-min").addEventListener('change', function () {
         // Get the input element
         var input = document.getElementById("price-min");
-        var input1 = input.value.replaceAll(",", "");
-        input1 = input1.replaceAll("₫", "");
-        input1 = input1.replaceAll(" ", "");
+        var input1 = input.value.replace(/\D/g, '');
+        //var input1 = input.value.replaceAll(",", "");
+        //input1 = input1.replaceAll("-", "");
+        //input1 = input1.replaceAll("₫", "");
+        //input1 = input1.replaceAll(" ", "");
         // Get the value and convert it to a number
         var value = parseFloat(input1);
         // Check if the value is a valid number
@@ -416,9 +422,11 @@
     document.getElementById("price-max").addEventListener('change', function () {
         // Get the input element
         var input = document.getElementById("price-max");
-        var input1 = input.value.replaceAll(",", "");
-        input1 = input1.replaceAll("₫", "");
-        input1 = input1.replaceAll(" ", "");
+        var input1 = input.value.replace(/\D/g, '');
+        //var input1 = input.value.replaceAll(",", "");
+        //input1 = input1.replaceAll("-", "");
+        //input1 = input1.replaceAll("₫", "");
+        //input1 = input1.replaceAll(" ", "");
         // Get the value and convert it to a number
         var value = parseFloat(input1);
         // Check if the value is a valid number
@@ -511,9 +519,12 @@
             var content = paragraph.textContent;
             if (content.length > 200) {
                 paragraph.textContent = content.slice(0, 200) + '...'; // Truncate content to 200 characters
-                paragraph.innerHTML += " <span style=\"color:#3F88CC\">More<span>"
             }
         });
+    }
+    function simulateLinkClick(span) {
+        var link = span.nextElementSibling; // Get the previous sibling, which is the link
+        link.click(); // Simulate a click on the link
     }
     function DisplayAllCategory(JobID) {
         document.getElementsByName('hidden_fake_category_' + JobID)[0].style.display = "none";
@@ -675,7 +686,7 @@
     </script>
 }
 <script>
-        addOnLoadFunction(autoFillForm);
+    addOnLoadFunction(autoFillForm);
     addOnLoadFunction(FormatBudget);
     addOnLoadFunction(FormatJobContent);
     addOnLoadFunction(FomatPagination);

@@ -28,7 +28,7 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
         {
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
-                return RedirectToPage("../Account/Login");
+                return RedirectToPage("/Account/Login");
             }
             // Set the JWT token in the authorization header
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));

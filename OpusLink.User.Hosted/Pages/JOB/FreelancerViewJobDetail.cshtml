@@ -125,7 +125,7 @@
                         <img id="profileImage" src="/imgExample/default.png" style="width:50%;height:auto;display:block" />
                     }
                 }
-                <a href="#" class="link" style="display:block">@item.EmployerName</a>
+                <a asp-page="../Freelancer/Profile/ViewsProfileEmployer" asp-route-UserId="@item.EmployerId" class="link">@item.EmployerName</a>
                 <div id="feedbackInfo"><p>@item.EmployerStarMedium⭐ (x đánh giá)</p></div>
                 <p>Thông tin job:</p>
                 <table style="width:100%;font-size:13px">
@@ -344,7 +344,7 @@
                                     }
                                 </td>
                                 <td>
-                                    <a href="#" class="link">@a.FreelancerName</a>
+                                    <a asp-page="../Employer/Profile/ViewsProfileFreelancer" asp-route-UserId="@a.FreelancerID" class="link" style="display:block">@a.FreelancerName</a>
                                 </td>
                             </tr>
                             <tr><td><div id="feedbackFreeLancer@(a.FreelancerID)"><p>@a.FreelancerStarMedium⭐ (x đánh giá)</p></div></td></tr>
@@ -371,7 +371,6 @@
                             }
                         </div>
                         <p>Số job đã làm: @a.NumberOfJobDone</p>
-                        <button type="button">Nhắn tin</button>
                     </div>
                     <div class="col-md-9" style="border-left:2px solid #BEBEBE">
                         <p>@a.DateOffer.ToString("dd/MM/yyyy")</p>

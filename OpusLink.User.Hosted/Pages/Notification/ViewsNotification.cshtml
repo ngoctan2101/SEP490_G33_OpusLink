@@ -1,8 +1,10 @@
 ﻿@page
+@inject IHttpContextAccessor HttpContextAccessor;
 @model OpusLink.User.Hosted.Pages.Notification.ViewsNotificationModel
 @{
+	string userRole = HttpContextAccessor.HttpContext.Session.GetString("Role") ?? "";
+	string isAllow = "";
 }
-
 <style>
 	
 
@@ -42,6 +44,13 @@
 	.fa-arrow-down {
 		color: #FF00FF;
 	}
+
+	.disabled-link {
+		color: gray; /* Change color to visually indicate it's disabled */
+		cursor: not-allowed; /* Change cursor to indicate it's not clickable */
+		pointer-events: none; /* Prevent mouse events from being triggered */
+		text-decoration: none; /* Remove underline */
+	}
 </style>
 <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet" />
 <div class="container">
@@ -67,10 +76,19 @@
 								int i = 0;
 								@foreach (var item in Model.noti)
 								{
+									isAllow = "";
+									@if ((item.Link.Contains("MS/Freelancer") || item.Link.Contains("JOB/Freelancer")) && userRole.Equals("Employer"))
+									{
+										isAllow = "class=disabled-link ";
+									}
+									else if ((item.Link.Contains("MS/Employer") || item.Link.Contains("JOB/Employer")) && userRole.Equals("Freelancer"))
+									{
+										isAllow = "class=disabled-link  ";
+									}
 									i++;
 									<tr class="align-middle">
 										<td>
-											<a href="@item.Link">#@i</a>
+											<a href="@item.Link" @isAllow>#@i</a>
 
 										</td>
 										<td>@item.NotificationContent</td>
