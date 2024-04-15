@@ -201,7 +201,7 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
             }
             //get all category for "name instead id"
             AllCategories = await GetAllCategoryAsync();
-            HttpContext.Session.SetString("Notification", "Thêm mới 1 category thành công");
+            HttpContext.Session.SetString("Notification", "Thêm mới 1 danh mục thành công");
             HttpContext.Session.SetInt32("NotiIsNew", 1);
             return Page();
         }
@@ -252,7 +252,7 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
             }
             //get all category for "name instead id"
             AllCategories = await GetAllCategoryAsync();
-            HttpContext.Session.SetString("Notification", "Sửa category thành công");
+            HttpContext.Session.SetString("Notification", "Sửa danh mục thành công");
             HttpContext.Session.SetInt32("NotiIsNew", 1);
             return Page();
         }
@@ -293,7 +293,7 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
             }
             //get all category for "name instead id"
             AllCategories = await GetAllCategoryAsync();
-            HttpContext.Session.SetString("Notification", "Xóa category thành công");
+            HttpContext.Session.SetString("Notification", "Xóa danh mục thành công");
             HttpContext.Session.SetInt32("NotiIsNew", 1);
             return Page();
         }

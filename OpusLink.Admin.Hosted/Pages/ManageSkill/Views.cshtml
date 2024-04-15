@@ -32,12 +32,12 @@
             <div class="d-flex justify-content-between align-items-center mb-4">
                 <div>
                     <div class="input-group">
-                        <input type="text" name="Search_Str" value="@Model.filter.SearchStr" class="form-control" placeholder="Search by Name">
-                        <button class="btn btn-outline-secondary" type="submit" asp-page-handler="ForSearch" name="pageNo_1" value="1">Search</button>
+                        <input type="text" name="Search_Str" value="@Model.filter.SearchStr" class="form-control" placeholder="Tìm kiếm theo tên">
+                        <button class="btn btn-outline-secondary" type="submit" asp-page-handler="ForSearch" name="pageNo_1" value="1">Tìm kiếm</button>
                     </div>
                 </div>
                 <div>
-                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSkillModal">Add New</button>
+                    <button type="button" class="btn btn-primary" data-bs-toggle="modal" data-bs-target="#addSkillModal">Thêm mới</button>
                 </div>
             </div>
 
@@ -46,9 +46,9 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Skill Parent</th>
-                        <th scope="col">Skill Name</th>
-                        <th scope="col">Actions</th>
+                        <th scope="col">Kĩ năng cha</th>
+                        <th scope="col">Kĩ năng</th>
+                        <th scope="col">Hành động</th>
                     </tr>
                 </thead>
                 <tbody>
@@ -78,8 +78,8 @@
                                 <td id="SkillName_@item.SkillID">@item.SkillName</td>
                                 <td>
       
-                                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editSkillModal" data-skillid="@item.SkillID" onclick="OpenUpdateSkill(@item.SkillID)"> <i class="fas fa-edit"></i> Edit</button>
-                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(@item.SkillID)"><i class="fas fa-trash-alt"></i>Delete</button>
+                                    <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editSkillModal" data-skillid="@item.SkillID" onclick="OpenUpdateSkill(@item.SkillID)"> <i class="fas fa-edit"></i> Chỉnh sửa</button>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(@item.SkillID)"><i class="fas fa-trash-alt"></i>Xóa</button>
                                 </td>
                             </tr>
                             <!-- Modal Edit -->
@@ -117,16 +117,16 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="addSkillModalLabel">Add New Skill</h5>
+                    <h5 class="modal-title" id="addSkillModalLabel">Thêm kĩ năng mới</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
                     <!-- Form thêm mới sẽ được thêm ở đây -->
                     <form id="addSkillForm" method="post">
                         <div class="mb-3">
-                            <label for="skillParentID" class="form-label">Skill Parent</label>
+                            <label for="skillParentID" class="form-label">Kĩ năng cha</label>
                             <select name="SkillParentID">
-                                <option value="0">No Parent</option>
+                                <option value="0">Không có kĩ năng cha</option>
                                 @foreach (var item in Model.AllSkills)
                                 {
                                     <option value="@item.SkillID">@item.SkillID<span>-</span>@item.SkillName</option>
@@ -134,11 +134,11 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="skillName" class="form-label">Skill Name</label>
+                            <label for="skillName" class="form-label">Tên kĩ năng</label>
                             <input type="text" class="form-control" id="skillName" name="SkillName" required>
                         </div>
                         <!-- Thêm các trường khác nếu cần -->
-                        <button type="submit" asp-page-handler="ForAdd" class="btn btn-primary">Add Skill</button>
+                        <button type="submit" asp-page-handler="ForAdd" class="btn btn-primary">Thêm mới</button>
                     </form>
                 </div>
             </div>
@@ -151,7 +151,7 @@
         <div class="modal-dialog">
             <div class="modal-content">
                 <div class="modal-header">
-                    <h5 class="modal-title" id="editSkillModalLabel">Edit Skill</h5>
+                    <h5 class="modal-title" id="editSkillModalLabel">Chỉnh sửa kĩ năng</h5>
                     <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
                 </div>
                 <div class="modal-body">
@@ -160,9 +160,9 @@
                         <input type="hidden" id="editSkillId" name="SkillID" value="" /> <!-- Hidden input for SkillID -->
 
                         <div class="mb-3">
-                            <label for="editSkillParentID" class="form-label">SkillParentID</label>
+                            <label for="editSkillParentID" class="form-label">ID kĩ năng cha</label>
                             <select name="SkillParentID">
-                                <option value="0">No Parent</option>
+                                <option value="0">Không có kĩ năng cha</option>
                                 @foreach (var item in Model.AllSkills)
                                 {
                                     <option value="@item.SkillID">@item.SkillID<span>-</span>@item.SkillName</option>
@@ -170,11 +170,11 @@
                             </select>
                         </div>
                         <div class="mb-3">
-                            <label for="editSkillName" class="form-label">Skill Name</label>
+                            <label for="editSkillName" class="form-label">Tên kĩ năng</label>
                             <input type="text" class="form-control" id="editSkillName" name="SkillName" required value="">
                         </div>
                         <!-- Thêm các trường khác nếu cần -->
-                        <button type="submit" asp-page-handler="ForUpdate" class="btn btn-primary">Save Changes</button>
+                        <button type="submit" asp-page-handler="ForUpdate" class="btn btn-primary">Lưu</button>
                     </form>
                 </div>
             </div>
@@ -189,7 +189,7 @@
     <script>
 
         function confirmDelete(skillID) {
-            var result = confirm("Are you sure you want to delete this skill?");
+            var result = confirm("Bạn có chắc chắn muốn xóa kỹ năng này không?");
             if (result) {
                 // Thực hiện xóa nếu người dùng chọn "OK"
                 // Thêm mã xóa kỹ năng ở đây, truyền skillID về hàm deleteSkill
@@ -213,13 +213,13 @@
                     // Xử lý kết quả sau khi xóa (cập nhật giao diện, thông báo, v.v.)
                     // Ví dụ: location.reload(); để làm mới trang sau khi xóa
                     document.getElementById("notifaiDiv").style.backgroundColor = '#0FFF4B';
-                    document.getElementById("notifai").innerHTML='Xóa skill thành công';
+                    document.getElementById("notifai").innerHTML='Xóa kĩ năng thành công';
                     document.getElementById("tr_" + skillID).remove();
                     displayMessage();
                 },
                 error: function (error) {
                     document.getElementById("notifaiDiv").style.backgroundColor = '#E27E2E';
-                    document.getElementById("notifai").innerHTML = 'Xóa skill không thành công';
+                    document.getElementById("notifai").innerHTML = 'Xóa kĩ năng không thành công';
                     displayMessage();
                 }
             });
