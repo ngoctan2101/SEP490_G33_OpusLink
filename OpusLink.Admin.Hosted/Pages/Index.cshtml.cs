@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using Newtonsoft.Json;
 using OpusLink.Entity.DTO;
+using OpusLink.Entity.DTO.AccountDTO.Common;
+using OpusLink.Shared.Constants;
 
 namespace OpusLink.Admin.Hosted.Pages
 {
@@ -8,15 +11,17 @@ namespace OpusLink.Admin.Hosted.Pages
     {
         private readonly ILogger<IndexModel> _logger;
 
+
         public IndexModel(ILogger<IndexModel> logger)
         {
             _logger = logger;
         }
 
-/*        public void OnGet()
-        {
-            HttpContext.Session.SetString("PageNow", "Index");
-        }*/
+        /*        public void OnGet()
+                {
+                    HttpContext.Session.SetString("PageNow", "Index");
+                }*/
+        string linkLogOut = UrlConstant.ApiBaseUrl + "/Account/logout";
 
         public async Task<IActionResult> OnGetAsync()
         {
@@ -29,6 +34,32 @@ namespace OpusLink.Admin.Hosted.Pages
             else
             {
                 return RedirectToPage("/Dashboard/DashboardAdmin",new { year=2024});
+            }
+        }
+
+        public async Task<IActionResult> OnPostForLogOut()
+        {
+            using (HttpClient client = new HttpClient())
+            {
+                using (HttpResponseMessage response = await client.GetAsync(linkLogOut))
+                {
+                    using (HttpContent content = response.Content)
+                    {
+                        string data = await content.ReadAsStringAsync();
+                        ApiResponseModel apiResponse = JsonConvert.DeserializeObject<ApiResponseModel>(data);
+
+                        if (apiResponse.IsSuccess)
+                        {
+                            HttpContext.Session.Clear();
+                            return RedirectToPage("/Account/Login");
+                        }
+                        else
+                        {
+                            ViewData["Error"] = apiResponse.Message;
+                            return Page();
+                        }
+                    }
+                }
             }
         }
     }
