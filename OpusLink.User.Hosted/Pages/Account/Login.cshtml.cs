@@ -41,7 +41,7 @@ namespace OpusLink.User.Hosted.Pages.Account
                         string data = await content.ReadAsStringAsync();
                         ApiResponseModel apiResponse = JsonConvert.DeserializeObject<ApiResponseModel>(data);
 
-                        if (apiResponse.IsSuccess)
+                        if (response.IsSuccessStatusCode)
                         {
                             string token = apiResponse.Data.ToString();
                             var handler = new JwtSecurityTokenHandler();

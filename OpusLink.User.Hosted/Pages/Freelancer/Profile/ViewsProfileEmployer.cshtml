@@ -207,7 +207,7 @@
             <br />
             <label for="reason">Lý do báo cáo</label><br>
             <textarea id="reason" name="reason" rows="4" cols="50"></textarea><br>
-            <button type="submit" class="confirm-button">Xác nhận</button>
+            <button type="button" class="confirm-button">Xác nhận</button>
         </form>
     </div>
 </div>
@@ -357,12 +357,12 @@
                     "ngrok-skip-browser-warning": true,
                     "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))"
                 },
-                method: 'POST',
+                type: 'POST',
                 data: JSON.stringify(obj),
                 contentType: 'application/json',
-                success: (data) => {
+                success: function (result) {
                     alert("Report Account Successfully!");
-                    window.location.reload();
+                    //window.location.reload();
                 },
                 error: function (xhr, status, error) {
                     console.error(xhr.responseText);

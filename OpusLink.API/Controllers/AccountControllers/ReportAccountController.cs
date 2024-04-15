@@ -20,19 +20,21 @@ namespace OpusLink.API.Controllers.AccountControllers
         }
 
         [HttpPost]
-        public async Task<ApiResponseModel> AddNewReport(ReportAccountDTO reportAccountDTO)
+        public async Task<IActionResult> AddNewReport(ReportAccountDTO reportAccountDTO)
         {
             var job = _context.Jobs.FirstOrDefault(j => j.EmployerID == reportAccountDTO.CreateByUserID && j.FreelancerID == reportAccountDTO.TargetToUserID ||
             j.EmployerID == reportAccountDTO.TargetToUserID && j.FreelancerID == reportAccountDTO.CreateByUserID);
 
             if (job == null)
             {
-                return new ApiResponseModel
+/*                return new ApiResponseModel
                 {
-                    Code = 400,
+                    Code = StatusCodes.Status400BadRequest,
                     Message = "Bạn không được quyền Report tài khoản này",
                     IsSuccess = false
-                };
+                };*/
+
+                return BadRequest("Can not set status to review");
             }
             else
             {
@@ -45,12 +47,15 @@ namespace OpusLink.API.Controllers.AccountControllers
                 };
                 _context.ReportUsers.Add(reportAccount);
                 int number = _context.SaveChanges();
-                return new ApiResponseModel
-                {
-                    Code = 200,
-                    Message = "Success",
-                    IsSuccess = true
-                };
+                /*                return new ApiResponseModel
+                                {
+                                    Code = 200,
+                                    Message = "Success",
+                                    IsSuccess = true
+                                };*/
+
+                return Ok("Success");
+
             }
         }
     }
