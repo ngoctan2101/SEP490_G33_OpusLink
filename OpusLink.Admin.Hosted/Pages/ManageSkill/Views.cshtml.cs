@@ -42,6 +42,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
         // list skill
         public async Task<IActionResult> OnGetAsync()
         {
+            HttpContext.Session.SetString("PageNow", "ManageSkill");
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
                 return RedirectToPage("../Account/Login");
@@ -107,6 +108,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
         }
         public async Task<IActionResult> OnPostForSearchAsync(IFormCollection collection)
         {
+            HttpContext.Session.SetString("PageNow", "ManageSkill");
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
                 return RedirectToPage("../Account/Login");

@@ -246,38 +246,38 @@
                 <h3>OpusLink</h3>
                 @{
                     string pageNow = HttpContextAccessor.HttpContext.Session.GetString("PageNow") ?? "";
-                    string a = "", b = "", c = "", d = "", e = "", f = "", g = "";
+                    string a = "", b = "", c = "", d = "", e = "", f = "", g = "",h="";
                     if (pageNow.Equals("Dashboard"))
                     {
-                        a = "background-color: sienna"; b = ""; c = ""; d = ""; e = ""; f = ""; g = "";
+                        a = "background-color: sienna"; b = ""; c = ""; d = ""; e = ""; f = ""; g = "";h = "";
                     }
                     else if (pageNow.Equals("ManageUser"))
                     {
-                        a = ""; b = "background-color: sienna"; c = ""; d = ""; e = ""; f = ""; g = "";
+                        a = ""; b = "background-color: sienna"; c = ""; d = ""; e = ""; f = ""; g = "";h = "";
                     }
                     else if (pageNow.Equals("ManageJob"))
                     {
-                        a = ""; b = ""; c = "background-color: sienna"; d = ""; e = ""; f = ""; g = "";
+                        a = ""; b = ""; c = "background-color: sienna"; d = ""; e = ""; f = ""; g = "";h = "";
                     }
                     else if (pageNow.Equals("ManageCategory"))
                     {
-                        a = ""; b = ""; c = ""; d = "background-color: sienna"; e = ""; f = ""; g = "";
+                        a = ""; b = ""; c = ""; d = "background-color: sienna"; e = ""; f = ""; g = "";h = "";
                     }
                     else if (pageNow.Equals("ManageSkill"))
                     {
-                        a = ""; b = ""; c = ""; d = ""; e = "background-color: sienna"; f = ""; g = "";
+                        a = ""; b = ""; c = ""; d = ""; e = "background-color: sienna"; f = ""; g = "";h = "";
                     }
                     else if (pageNow.Equals("ManageWallet"))
                     {
-                        a = ""; b = ""; c = ""; d = ""; e = ""; f = "background-color: sienna"; g = "";
+                        a = ""; b = ""; c = ""; d = ""; e = ""; f = "background-color: sienna"; g = ""; h = "";
                     }
                     else if (pageNow.Equals("ManageJobRequest"))
                     {
-                        a = ""; b = ""; c = ""; d = ""; e = ""; f = ""; g = "background-color: sienna";
+                        a = ""; b = ""; c = ""; d = ""; e = ""; f = ""; g = "background-color: sienna";h = "";
                     }
                     else if (pageNow.Equals("ManagerWithDrawRequest"))
                     {
-                        a = ""; b = ""; c = ""; d = ""; e = ""; f = ""; g = "background-color: sienna";
+                        a = ""; b = ""; c = ""; d = ""; e = ""; f = ""; g = ""; h = "background-color: sienna";
                     }
                 }
                 <ul>
@@ -287,19 +287,19 @@
                     </a>
                     <a asp-page="/ManageUser/Views">
                     @* <li style="@b">Manage User</li> *@
-                    <li style="@a">Quản lý người dùng</li>
+                    <li style="@b">Quản lý người dùng</li>
                     </a>
                     <a asp-page="/JOB/AdminViewAllJobPage">
                     @* <li style="@c">Manage Job</li> *@
-                    <li style="@a">Quản lý Job</li>
+                    <li style="@c">Quản lý Job</li>
                     </a>
                     <a asp-page="/JOB/AdminCRUDCategoryPage">
                     @* <li style="@d">Manage Category</li> *@
-                    <li style="@a">Quản lý Category</li>
+                    <li style="@d">Quản lý Category</li>
                     </a>
                     <a asp-page="/ManageSkill/Views">
                     @* <li style="@e">Manage Skill</li> *@
-                    <li style="@a">Quản lý Skill</li>
+                    <li style="@e">Quản lý Skill</li>
                     </a>
                     <a asp-page="/Admin/Employee/Index">@*Copy cai nay vao OnGet cua ManageWallet: HttpContext.Session.SetString("PageNow", "ManageWallet");*@
                     @* <li style="@f">Manage Wallet</li> *@
@@ -317,7 +317,7 @@
                     </a> *@
                     <a asp-page="/ManagerWithDrawRequest/Views">
                    @*  <li style="@g">ManagerWithDrawRequest</li> *@
-                    <li style="@g">Quản lý yêu cầu rút tiền</li>
+                    <li style="@h">Quản lý yêu cầu rút tiền</li>
                     </a>
                    
                     

@@ -69,6 +69,7 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
         
         public async Task<IActionResult> OnPostAsync(IFormCollection collection)
         {
+            HttpContext.Session.SetString("PageNow", "ManageJob");
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
                 return RedirectToPage("../Account/Login");

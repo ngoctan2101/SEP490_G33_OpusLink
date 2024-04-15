@@ -55,6 +55,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
 
         public async Task<IActionResult> OnGet()
         {
+            HttpContext.Session.SetString("PageNow", "ManagerWithDrawRequest");
             if (HttpContext.Session.GetInt32("UserId") == null)
             {
                 return RedirectToPage("../Account/Login");
