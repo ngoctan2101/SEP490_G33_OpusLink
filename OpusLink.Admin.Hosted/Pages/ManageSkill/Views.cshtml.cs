@@ -205,7 +205,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
 
             if (response.IsSuccessStatusCode)
             {
-                HttpContext.Session.SetString("Notification", "Thêm mới 1 skill thành công");
+                HttpContext.Session.SetString("Notification", "Thêm mới 1 kĩ năng thành công");
                 HttpContext.Session.SetInt32("NotiIsNew", 1);
                 return RedirectToPage("./Views"); // Redirect to the skills index page after successful creation
             }
@@ -259,7 +259,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
             var response = await client.PutAsync(ServiceMangaUrl + $"/Skill/UpdateSkill", content);
             if (response.IsSuccessStatusCode)
             {
-                HttpContext.Session.SetString("Notification", "Sửa skill thành công");
+                HttpContext.Session.SetString("Notification", "Sửa kĩ năng thành công");
                 HttpContext.Session.SetInt32("NotiIsNew", 1);
                 return RedirectToPage("./Views"); // Redirect to the skills index page after successful update
             }
@@ -285,7 +285,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManageSkill
 
                 if (responseDeleteSkill.IsSuccessStatusCode)
                 {
-                    HttpContext.Session.SetString("Notification", "Xóa skill thành công");
+                    HttpContext.Session.SetString("Notification", "Xóa kĩ năng thành công");
                     HttpContext.Session.SetInt32("NotiIsNew", 1);
                     Console.WriteLine("Skill deleted successfully.");
                 }

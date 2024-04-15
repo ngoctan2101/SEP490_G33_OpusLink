@@ -123,8 +123,8 @@ namespace OpusLink.API.Controllers.AccountControllers
                 }
 
                 //Role mặc định là Freelancer and Employer
-                var resultRoleFreelancer = await _userManager.AddToRoleAsync(user, Roles.Freelancer.ToString());
-                if (resultRoleFreelancer.Succeeded == false)
+/*                var resultRoleFreelancer = await _userManager.AddToRoleAsync(user, Roles.Freelancer.ToString());*/
+/*                if (resultRoleFreelancer.Succeeded == false)
                 {
                     return new ApiResponseModel()
                     {
@@ -132,11 +132,11 @@ namespace OpusLink.API.Controllers.AccountControllers
                         Message = TotalMessage.RegisterError,
                         IsSuccess = false
                     };
-                }
-                var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Employer.ToString());
+                }*/
+/*                var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Employer.ToString());*/
 
                 //Role cho Admin
-                /*                var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Admin.ToString());*/
+                var resultRoleEmployer = await _userManager.AddToRoleAsync(user, Roles.Admin.ToString());
                 if (!resultCreateUser.Succeeded)
                 {
                     return new ApiResponseModel()
