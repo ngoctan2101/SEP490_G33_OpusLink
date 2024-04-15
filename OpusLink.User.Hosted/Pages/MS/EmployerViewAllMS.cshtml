@@ -166,7 +166,7 @@
                     <table style="width:100%">
                         <tr><td>Nội dung:    </td><td><input type="text" name="AddMilestoneContent" required /></td></tr>
                         <tr><td>Chọn thời hạn:    </td><td><input id="addModalDTL" type="datetime-local" name="AddDeadline" required /></td></tr>
-                        <tr><td>Số tiền:    </td><td><input type="text" name="AddAmountToPay" pattern="[0-9₫ ,]+" title="Xin hãy nhập số" required /></td></tr>
+                        <tr><td>Số tiền:    </td><td><input type="text" name="AddAmountToPay" pattern="[0-9₫ ,.]+" title="Xin hãy nhập số" required /></td></tr>
                         <span id="AddErrorMessage" style="color:red"></span>
                         @*<tr>
                         <td>Status:    </td>
@@ -200,7 +200,7 @@
                     <table style="width:100%">
                         <tr><td>Nội dung milestone:    </td><td><input type="text" name="UpdateMilestoneContent" required /></td></tr>
                         <tr><td>Chọn thời hạn:    </td><td><input id="updateModalDTL" type="datetime-local" name="UpdateDeadline" required /></td></tr>
-                        <tr><td>Số tiền:    </td><td><input type="text" name="UpdateAmountToPay" pattern="[0-9₫ ,]+" title="Hãy nhập số" required /></td></tr>
+                        <tr><td>Số tiền:    </td><td><input type="text" name="UpdateAmountToPay" pattern="[0-9₫ ,.]+" title="Hãy nhập số" required /></td></tr>
                         <span id="UpdateErrorMessage" style="color:red"></span>
                         @*<tr>
                         <td>Status:    </td>
@@ -801,7 +801,11 @@
             <hr class="hrMilestone">
         }
     </div>
-    @if (Model.job.EmployerDoneEditMilestone == false && Model.job.IsFreelancerConfirm == false)
+    @if(Model.job.FreelancerId==null || Model.job.FreelancerId == 0)
+    {
+        
+    }
+    else if (Model.job.EmployerDoneEditMilestone == false && Model.job.IsFreelancerConfirm == false)
     {
         <div class="row">
             <div class="col-md-8"></div>
