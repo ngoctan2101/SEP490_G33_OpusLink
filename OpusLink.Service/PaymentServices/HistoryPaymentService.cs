@@ -1,5 +1,6 @@
 ﻿using Microsoft.EntityFrameworkCore;
 using OpusLink.Entity;
+using OpusLink.Entity.DTO;
 using OpusLink.Entity.Models;
 using OpusLink.Service.Admin;
 using System;
@@ -19,6 +20,8 @@ namespace OpusLink.Service.PaymentServices
         bool CheckExist(List<HistoryPayment> hisList, int targehisListtHislId);
         void UpdateHistoryPayment(HistoryPayment historyPayment);
         void DeleteHistoryPayment(int payId);
+		Task<DataIncomePerYear> GetDataIncome(int year);
+        Task<List<HistoryPayment>> GetHistory(int month, int year);
     }
     public class HistoryPaymentService : IHistoryPaymentService
     {
@@ -129,6 +132,72 @@ namespace OpusLink.Service.PaymentServices
         public bool CheckExist(List<HistoryPayment> hisList, int targehisListtHislId)
         {
             return hisList.Any(x => x.PaymentID == targehisListtHislId);
+        }
+
+		public async Task<DataIncomePerYear> GetDataIncome(int year)
+		{
+            DataIncomePerYear data = new DataIncomePerYear();
+            var hps = await _context.HistoryPayments.Where(h=>h.TransactionDate.Year==year &&  h.TransactionType == 10).ToListAsync();
+            foreach(var h in hps)
+            {
+                if (h.TransactionDate.Month == 1)
+                {
+                    data.ThangMot += h.Amount;
+
+				}
+				else if(h.TransactionDate.Month == 2)
+				{
+					data.ThangHai += h.Amount;
+				}
+				else if (h.TransactionDate.Month == 3)
+				{
+					data.ThangBa += h.Amount;
+				}
+				else if (h.TransactionDate.Month == 4)
+				{
+					data.ThangTu += h.Amount;
+				}
+				else if (h.TransactionDate.Month == 5)
+				{
+					data.ThangNam += h.Amount;
+				}
+				else if (h.TransactionDate.Month == 6)
+				{
+					data.ThangSau += h.Amount;
+				}
+				else if (h.TransactionDate.Month == 7)
+				{
+					data.ThangBay += h.Amount;
+				}
+				else if (h.TransactionDate.Month == 8)
+				{
+					data.ThangTam += h.Amount;
+				}
+				else if (h.TransactionDate.Month == 9)
+				{
+					data.ThangChin += h.Amount;
+				}
+				else if (h.TransactionDate.Month == 10)
+				{
+					data.ThangMuoi += h.Amount;
+				}
+				else if (h.TransactionDate.Month == 11)
+				{
+					data.ThangMuoiMot += h.Amount;
+				}
+				else if (h.TransactionDate.Month == 12)
+				{
+					data.ThangMuoiHai += h.Amount;
+				}
+
+			}
+            return data;
+		}
+
+
+        public async Task<List<HistoryPayment>> GetHistory(int month, int year)
+        {
+           return await _context.HistoryPayments.Where(h => h.TransactionDate.Year == year && h.TransactionDate.Month == month && h.TransactionType == 10).ToListAsync();
         }
     }
 }

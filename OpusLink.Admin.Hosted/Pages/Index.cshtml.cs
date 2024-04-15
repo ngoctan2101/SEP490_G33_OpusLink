@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
+using OpusLink.Entity.DTO;
 
 namespace OpusLink.Admin.Hosted.Pages
 {
@@ -27,7 +28,7 @@ namespace OpusLink.Admin.Hosted.Pages
             }
             else
             {
-                return RedirectToPage("/Dashboard/DashboardAdmin");
+                return RedirectToPage("/Dashboard/DashboardAdmin",new { year=2024});
             }
         }
     }

@@ -10,6 +10,11 @@
 @{
     ViewData["Title"] = "Admin View All Job";
 }
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.10/dayjs.min.js"></script>
 <style>
     .filter .td {
         padding-left: 10px;
@@ -59,6 +64,19 @@
         border-radius: 5px;
         font-size: 14px
     }
+       .categoryFake {
+        display: inline-block;
+        margin-bottom: 3px;
+        background-color: lightblue;
+        padding: 7px;
+        border-radius: 5px;
+        font-size: 14px;
+        opacity: 0.6;
+    }
+
+        .categoryFake:hover {
+            cursor: pointer;
+        }
     /* Added line below */
     hr {
         border: none;
@@ -93,19 +111,19 @@
         </div>
         <div class="row" style="margin-bottom:15px">
             <div class="col-md-3">
-                <button type="submit" name="pageNo_1" value="1" style="width:100%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964">Search & Filter</button>
+                <button type="submit" name="pageNo_1" value="1" style="width:100%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964">Tìm kiếm</button>
             </div>
             <div class="col-md-7">
-                <input name="Search_Str" value="@Model.filter.SearchStr" style="width:100%" placeholder="Find Job" />
+                <input name="Search_Str" value="@Model.filter.SearchStr" style="width:100%" placeholder="Tìm Job" />
             </div>
             <div class="col-md-2">
             </div>
         </div>
         <div class="row">
             <div class="col-md-3">
-                <table style="width:100%;margin-bottom:10px;box-shadow: 0px 0px 4px 4px inherit;background-color:inherit" class="filter">
+                <table style="width:100%;margin-bottom:10px;box-shadow: 0px 0px 4px 4px #DCDCDC;background-color:inherit" class="filter">
                     <tr id="tsn123">
-                        <td colspan="3" class="td"><h6>Category</h6></td>
+                        <td colspan="3" class="td"><h6>Danh mục</h6></td>
                     </tr>
                     @foreach (var category in Model.Categories)
                     {
@@ -128,7 +146,7 @@
                 </table>
                 <table class="filter" style="width:100%;box-shadow: 0px 0px 4px 4px #DCDCDC;padding:4px;margin-bottom:10px;background-color:inherit">
                     <tr>
-                        <td class="td" colspan="2"><h6>Status</h6></td>
+                        <td class="td" colspan="2"><h6>Trạng thái</h6></td>
                     </tr>
                     @foreach (var status in Enum.GetValues(typeof(JobStatusEnum)))
                     {
@@ -140,26 +158,26 @@
                 </table>
                 <table class="filter" style="width:100%;box-shadow: 0px 0px 4px 4px #DCDCDC;padding:4px;margin-bottom:10px;background-color:inherit">
                     <tr>
-                        <td class="td" colspan="1"><h6>Date Range</h6></td>
+                        <td class="td" colspan="1"><h6>Khoảng thời gian</h6></td>
                     </tr>
                     <tr>
                         <td class="td">
-                            <input style="margin-bottom: 5px;" type="text" name="daterange" id="dateInput" value="@Model.filter.getDateRange()" />
+                            <input style="margin-bottom: 5px;" type="text" name="daterange" id="dateInput" />
                         </td>
                     </tr>
                 </table>
                 <table class="filter" style="width:100%;box-shadow: 0px 0px 4px 4px #DCDCDC;padding:4px;margin-bottom:10px;background-color:inherit">
                     <tr>
-                        <td class="td" colspan="3"><h6>Price Range</h6></td>
+                        <td class="td" colspan="3"><h6>Khoảng tiền</h6></td>
                     </tr>
                     <tr>
                         <td class="td">
                             <div class="price-input" style="margin-bottom: 5px;">
                                 <table>
                                     <tr>
-                                        <td><input type="text" id="price-min" name="price_min" pattern="[0-9₫ ,]+" title="Please enter number" value="@Model.filter.BudgetMin" style="width:100% " /></td>
+                                        <td><input type="text" id="price-min" name="price_min" pattern="[0-9₫ ,]+" title="Số tiền cần là số dương" value="@Model.filter.BudgetMin" style="width:100% " /></td>
                                         <td>-</td>
-                                        <td><input type="text" id="price-max" name="price_max" pattern="[0-9₫ ,]+" title="Please enter number" value="@Model.filter.BudgetMax" style="width:100% " /></td>
+                                        <td><input type="text" id="price-max" name="price_max" pattern="[0-9₫ ,]+" title="Số tiền cần là số dương" value="@Model.filter.BudgetMax" style="width:100% " /></td>
                                     </tr>
                                 </table>
                             </div>
@@ -175,16 +193,16 @@
                                 <h6 style="margin:1px">Id</h6>
                             </th>
                             <th width="15%">
-                                <h6 style="margin:1px">Title</h6>
+                                <h6 style="margin:1px">Tiêu đề</h6>
                             </th>
                             <th width="12%">
-                                <h6 style="margin:1px">Budget range</h6>
+                                <h6 style="margin:1px">Ngân sách</h6>
                             </th>
                             <th width="4%">
-                                <h6 style="margin:1px">Status</h6>
+                                <h6 style="margin:1px">Trạng thái</h6>
                             </th>
                             <th width="17%">
-                                <h6 style="margin:1px">Categories</h6>
+                                <h6 style="margin:1px">Danh mục</h6>
                             </th>
                             <th width="5%">
                                 <h6 style="margin:1px">Offers</h6>
@@ -200,10 +218,10 @@
                                     @item.JobID
                                 </td>
                                 <td>
-                                    <a style="font-size:16px" class="link" asp-page="./AdminViewDetailJobPage" asp-route-JobId="@item.JobID" >@item.JobTitle</a>
+                                    <a style="font-size:16px" class="link" asp-page="./AdminViewDetailJobPage" asp-route-JobId="@item.JobID">@item.JobTitle</a>
                                 </td>
                                 <td>
-                                    @((item.BudgetFrom ?? 0).ToString("#,##") + " - " + (item.BudgetTo ?? 0).ToString("#,##"))
+                                    @((item.BudgetFrom ?? 0).ToString("#,##") + " ₫" + " - " + (item.BudgetTo ?? 0).ToString("#,##") + " ₫")
                                 </td>
                                 <td style="text-align: center">
                                     @if (item.Status == (int)JobStatusEnum.NotApprove)
@@ -242,7 +260,11 @@
                                             {
                                                 <div class="category">@item.Categoies.ElementAt(i).CategoryName</div>
                                             }
-                                            <div class="category" style="opacity:0.6">. . .</div>
+                                            <div name="hidden_fake_category_@item.JobID" class="categoryFake" onclick="DisplayAllCategory('@item.JobID')">. . .</div>
+                                            for (int i = 4; i < item.Categoies.Count; i++)
+                                            {
+                                                <div name="hidden_category_@item.JobID" class="category" style="display: none;">@item.Categoies.ElementAt(i).CategoryName</div>
+                                            }
                                         }
                                         else
                                         {
@@ -322,7 +344,14 @@
     }
 </script>
 <script>
-    $('input[name="daterange"]').daterangepicker();
+    $('input[name="daterange"]').daterangepicker({
+        timePicker: false,
+        startDate: '@(Model.filter?.DateMin.ToString("dd/MM/yyyy"))',
+        endDate: '@(Model.filter?.DateMax.ToString("dd/MM/yyyy"))',
+        locale: {
+            format: 'DD/MM/YYYY'
+        }
+    });
 </script>
 
 <script>
@@ -462,6 +491,14 @@
             }
         }
     }
+    function DisplayAllCategory(JobID) {
+        document.getElementsByName('hidden_fake_category_' + JobID)[0].style.display = "none";
+        var hiddenCategory = document.getElementsByName('hidden_category_' + JobID);
+        hiddenCategory.forEach(function (hiddenCategory) {
+            hiddenCategory.style.display = "inline-block";
+        })
+
+    }
 </script>
 <script>
     function validateBudgetFromAndTo() {
@@ -506,7 +543,32 @@
         var endDate = new Date(dates[1]);
 
         if (!isValidDate(dates[0]) || !isValidDate(dates[1])) {
-            errorMessage.innerHTML ="Invalid date format. Please enter dates in the format mm/dd/yyyy";
+            errorMessage.innerHTML = "Invalid date format. Please enter dates in the format mm/dd/yyyy";
+            return false;
+        }
+
+        if (startDate >= endDate) {
+            errorMessage.innerHTML = "End date should be greater than start date.";
+            return false;
+        }
+        var dateInput = document.getElementById("dateInput").value;
+        var dates = dateInput.split(" - ");
+
+        if (dates.length !== 2) {
+            errorMessage.innerHTML = "Please enter two dates in the format dd/mm/yyyy - dd/mm/yyyy";
+            return false;
+        }
+
+        var parts1 = dates[0].split('/');
+        var parts2 = dates[1].split('/');
+
+
+
+        var startDate = new Date(parseInt(parts1[2], 10), parseInt(parts1[1], 10) - 1, parseInt(parts1[0], 10));
+        var endDate = new Date(parseInt(parts2[2], 10), parseInt(parts2[1], 10) - 1, parseInt(parts2[0], 10));
+
+        if (!isValidDate(dates[0]) || !isValidDate(dates[1])) {
+            errorMessage.innerHTML = "Invalid date format. Please enter dates in the format dd/mm/yyyy";
             return false;
         }
 
@@ -520,7 +582,7 @@
     function isValidDate(date) {
 
         // Date format: YYYY-MM-DD
-        var datePattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/([12]\d{3})/;
+        var datePattern = /^(0[1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/([12]\d{3})$/;
 
         // Check if the date string format is a match
         var matchArray = date.match(datePattern);
@@ -533,8 +595,8 @@
 
         // Parse integer values from the date string
         var year = parseInt(dateString.substr(4, 4));
-        var month = parseInt(dateString.substr(0,2));
-        var day = parseInt(dateString.substr(2, 2));
+        var day = parseInt(dateString.substr(0, 2));
+        var month = parseInt(dateString.substr(2, 2));
 
         // Define the number of days per month
         var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -569,7 +631,7 @@
     @foreach (var item in Model.Jobs)
     {
         <text>
-                var x = new Date("@item.EndHiringDate.ToString("yyyy-MM-ddTHH:mm:ss")");
+                        var x = new Date("@item.EndHiringDate.ToString("yyyy-MM-ddTHH:mm:ss")");
         startCountdown(x, "countdown_" + @item.JobID);
         </text>
     }

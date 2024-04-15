@@ -1,349 +1,503 @@
 ﻿@page
+@using OpusLink.Shared.Constants
+@inject IHttpContextAccessor HttpContextAccessor;
 @model OpusLink.Admin.Hosted.Pages.Dashboard.DashboardAdminModel
 @{
 }
 <span style="font-family: verdana, geneva, sans-serif;">
-	<!DOCTYPE html>
-	<html lang="en">
-	<head>
-		<meta charset="UTF-8" />
-		<title>Dashboard | By Code Info</title>
-		<link rel="stylesheet" href="style.css" />
-		<!-- Font Awesome Cdn Link -->
-		<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
-	</head>
-	<body>
+    <!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="UTF-8" />
+        <title>Dashboard</title>
+        <!-- Font Awesome Cdn Link -->
+        <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.4/css/all.min.css" />
+    </head>
+    <body>
 
-		<div class="container">
+        <div class="container">
 
 
-			<section class="main">
-				<div class="main-top">
-					<h1>Statistics</h1>
-					<i class="fas fa-user-cog"></i>
-				</div>
-				<div class="main-skills">
-					<div class="card">
-						<i class="fas fa-laptop-code"></i>
-						<h3>Total User</h3>
-						<p>Join @Model.TotalUsers User</p>
-						<button id="manageButton1">Manage</butto>
-					</div>
-					<div class="card">
-						<i class="fab fa-wordpress"></i>
-						<h3>Total Jobs</h3>
-						<p>Join @Model.TotalJobs Jobs.</p>
-						<button id="manageButton2">Manage</button>
-					</div>
-					<div class="card">
-						<i class="fas fa-palette"></i>
-						<h3>Revenue</h3>
-						<p>Join Over 2 million $.</p>
-						<button id="manageButton3">Manage</button>
-					</div>
-					<div class="card">
-						<i class="fab fa-app-store-ios"></i>
-						<h3>Job Request</h3>
-						<p>Join @Model.TotalJobsRequest Jobs.</p>
-						<button id="manageButton4">Manage</button>
-					</div>
-					
-				</div>
-				
-				@*<section class="main-course">
-				<h1>Statistics</h1>
-				<div class="course-box">
-				<ul>
-				<li class="active">In progress</li>
-				<li>explore</li>
-				<li>incoming</li>
-				<li>finished</li>
-				</ul>
-				<div class="course">
-				<div class="box">
-				<h3>HTML</h3>
-				<p>80% - progress</p>
-				<button>continue</button>
-				<i class="fab fa-html5 html"></i>
-				</div>
-				<div class="box">
-				<h3>CSS</h3>
-				<p>50% - progress</p>
-				<button>continue</button>
-				<i class="fab fa-css3-alt css"></i>
-				</div>
-				<div class="box">
-				<h3>JavaScript</h3>
-				<p>30% - progress</p>
-				<button>continue</button>
-				<i class="fab fa-js-square js"></i>
-				</div>
-				</div>
-				</div>
-				</section>*@
-				
-	</body>
-			</section>
-		</div>
-	<span id="versionText">OpusLink-Version1.1-2024</span>
+            <section class="main">
+                <div class="main-top">
+                    <h1>Statistics</h1>
+                    <i class="fas fa-user-cog"></i>
+                </div>
+                <div class="main-skills">
+                    <div class="card">
+                        <i class="fas fa-laptop-code"></i>
+                        <h3>Người dùng</h3>
+                        <p>@Model.TotalUsers người dùng</p>
+                        <button id="manageButton1">Quản lý</butto>
+                    </div>
+                    <div class="card">
+                        <i class="fab fa-wordpress"></i>
+                        <h3>Job</h3>
+                        <p>@Model.TotalJobs jobs.</p>
+                        <button id="manageButton2">Quản lý</button>
+                    </div>@*
+                    <div class="card">
+                        <i class="fas fa-palette"></i>
+                        <h3>Revenue</h3>
+                        <p>Join Over 2 million $.</p>
+                        <button id="manageButton3">Quản lý</button>
+                    </div>*@
+                    <div class="card">
+                        <i class="fab fa-app-store-ios"></i>
+                        <h3>Đăng job</h3>
+                        <p>@Model.TotalJobsRequest yêu cầu.</p>
+                        <button id="manageButton4">Quản lý</button>
+                    </div>
+
+                </div>
+                @{
+                    var links = new[]
+                    {
+                new { Page = "Page1", RouteValues = new { year = 2023 }, Label = "2023" },
+                new { Page = "Page2", RouteValues = new { year = 2024 }, Label = "2024" },
+                new { Page = "Page3", RouteValues = new { year = 2025 }, Label = "2025" }
+                        };
+                }
+                
+                <div class="chart-container">
+                    <label>Chọn một năm:</label>
+                    <select onchange="location = this.value;">
+                        @foreach (var link in links)
+                        {
+                            if (link.RouteValues.year == Model.year)
+                            {
+                                <option value="@Url.Page("/Dashboard/DashboardAdmin", link.RouteValues)" selected>@link.Label</option>
+
+                            }
+                            else
+                            {
+                                <option value="@Url.Page("/Dashboard/DashboardAdmin", link.RouteValues)">@link.Label</option>
+                            }
+
+                        }
+                    </select>
+                    <canvas id="myChart"></canvas>
+                 </div>
+                
+                <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+                <script>
+                    const handleResize = (chart) => {
+                        chart.resize();
+                    }
+                    const ctx = document.getElementById('myChart');
+                    var options = {
+                        maintainAspectRatio: false,
+                        scales: {
+                            y: {
+                                stacked: true,
+                                grid: {
+                                    display: true,
+                                    color: "rgba(255,99,132,0.2)"
+                                }
+                            },
+                            x: {
+                                grid: {
+                                    display: false
+                                }
+                            }
+                        }
+                    };
+                    const myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: ['Tháng 1', 'Tháng 2', 'Tháng 3', 'Tháng 4', 'Tháng 5', 'Tháng 6', 'Tháng 7', 'Tháng 8', 'Tháng 9', 'Tháng 10', 'Tháng 11', 'Tháng 12'],
+                            datasets: [{
+                                label: 'Doanh thu (đồng)',
+                                data: [parseInt(@Model.dataIncomePerYear.ThangMot), parseInt(@Model.dataIncomePerYear.ThangHai), parseInt(@Model.dataIncomePerYear.ThangBa), parseInt(@Model.dataIncomePerYear.ThangTu), parseInt(@Model.dataIncomePerYear.ThangNam), parseInt(@Model.dataIncomePerYear.ThangSau),
+                                parseInt(@Model.dataIncomePerYear.ThangBay), parseInt(@Model.dataIncomePerYear.ThangTam), parseInt(@Model.dataIncomePerYear.ThangChin), parseInt(@Model.dataIncomePerYear.ThangMuoi), parseInt(@Model.dataIncomePerYear.ThangMuoiMot), parseInt(@Model.dataIncomePerYear.ThangMuoiHai)],
+                                borderWidth: 1
+                            }]
+                        },
+                        option: options
+                    });
+
+                </script>
+                <h6 id="label1" style=" width:80%; margin:auto;">Hãy chọn 1 tháng để xem những lần thu phí</h6>
+                <table style=" width:80%; margin:auto">
+                    <thead>
+                        <tr style="border-bottom:1px solid black">
+                            <th style="width:20%">Số thanh toán</th>
+                            <th style="width:20%">Số tiền (đồng)</th>
+                            <th style="width:60%">Thời điểm</th>
+                        </tr>
+                    </thead>
+                    <tbody id="asd">
+                    </tbody>
+                </table>
+            </section>
+        </div>
+    </body>
+    <span id="versionText">OpusLink-Version1.1-2024</span>
 </html>
 </span>
 
 <style>
-	*{
-	margin: 0;
-	padding: 0;
-	outline: none;
-	border: none;
-	text-decoration: none;
-	box-sizing: border-box;
-	font-family: "Poppins", sans-serif;
-	}
+    * {
+        margin: 0;
+        padding: 0;
+        outline: none;
+        border: none;
+        text-decoration: none;
+        box-sizing: border-box;
+        font-family: "Poppins", sans-serif;
+    }
 
-	body {
-		background: #dfe9f5;
-	}
-		#versionText {
-		position: fixed;
-		bottom: 10px;
-		right: 10px;
-		font-style: italic;
-		color: #FF4500;
-	}
-	.container {
-		display: flex;
-	}
+    body {
+        background: #dfe9f5;
+    }
 
-	nav {
-		position: relative;
-		top: 0;
-		bottom: 0;
-		height: 100vh;
-		left: 0;
-		background: #fff;
-		width: 280px;
-		overflow: hidden;
-		box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-	}
+    #versionText {
+        position: fixed;
+        bottom: 10px;
+        right: 10px;
+        font-style: italic;
+        color: #FF4500;
+    }
 
-	.logo {
-		text-align: center;
-		display: flex;
-		margin: 10px 0 0 10px;
-	}
+    .container {
+        display: flex;
+    }
 
-		.logo img {
-			width: 45px;
-			height: 45px;
-			border-radius: 50%;
-		}
+    nav {
+        position: relative;
+        top: 0;
+        bottom: 0;
+        height: 100vh;
+        left: 0;
+        background: #fff;
+        width: 280px;
+        overflow: hidden;
+        box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+    }
 
-		.logo span {
-			font-weight: bold;
-			padding-left: 15px;
-			font-size: 18px;
-			text-transform: uppercase;
-		}
+    .logo {
+        text-align: center;
+        display: flex;
+        margin: 10px 0 0 10px;
+    }
 
-	/*Bi loi UI nen la khong dung cai nay duoc
-	a {
-		position: relative;
-		color: rgb(85, 83, 83);
-		font-size: 14px;
-		display: table;
-		width: 280px;
-		padding: 10px;
-	}*/
+        .logo img {
+            width: 45px;
+            height: 45px;
+            border-radius: 50%;
+        }
 
-	nav .fas {
-		position: relative;
-		width: 70px;
-		height: 40px;
-		top: 14px;
-		font-size: 20px;
-		text-align: center;
-	}
+        .logo span {
+            font-weight: bold;
+            padding-left: 15px;
+            font-size: 18px;
+            text-transform: uppercase;
+        }
 
-	.nav-item {
-		position: relative;
-		top: 12px;
-		margin-left: 10px;
-	}
+    /*Bi loi UI nen la khong dung cai nay duoc
+            a {
+                position: relative;
+                color: rgb(85, 83, 83);
+                font-size: 14px;
+                display: table;
+                width: 280px;
+                padding: 10px;
+            }*/
 
-	a:hover {
-		background: #eee;
-	}
+    nav .fas {
+        position: relative;
+        width: 70px;
+        height: 40px;
+        top: 14px;
+        font-size: 20px;
+        text-align: center;
+    }
 
-	.logout {
-		position: absolute;
-		bottom: 0;
-	}
+    .nav-item {
+        position: relative;
+        top: 12px;
+        margin-left: 10px;
+    }
 
-	/* Main Section */
-	.main {
-		position: relative;
-		padding: 20px;
-		width: 100%;
-	}
+    a:hover {
+        background: #eee;
+    }
 
-	.main-top {
-		display: flex;
-		width: 100%;
-	}
+    .logout {
+        position: absolute;
+        bottom: 0;
+    }
 
-		.main-top i {
-			position: absolute;
-			right: 0;
-			margin: 10px 30px;
-			color: rgb(110, 109, 109);
-			cursor: pointer;
-		}
+    /* Main Section */
+    .main {
+        position: relative;
+        padding: 20px;
+        width: 100%;
+    }
 
-	.main-skills {
-		display: flex;
-		margin-top: 20px;
-	}
+    .main-top {
+        display: flex;
+        width: 100%;
+    }
 
-		.main-skills .card {
-			width: 25%;
-			margin: 10px;
-			background: #fff;
-			text-align: center;
-			border-radius: 20px;
-			padding: 10px;
-			box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-		}
+        .main-top i {
+            position: absolute;
+            right: 0;
+            margin: 10px 30px;
+            color: rgb(110, 109, 109);
+            cursor: pointer;
+        }
 
-			.main-skills .card h3 {
-				margin: 10px;
-				text-transform: capitalize;
-			}
+    .main-skills {
+        display: flex;
+        margin-top: 20px;
+    }
 
-			.main-skills .card p {
-				font-size: 12px;
-			}
+        .main-skills .card {
+            width: 25%;
+            margin: 10px;
+            background: #fff;
+            text-align: center;
+            border-radius: 20px;
+            padding: 10px;
+            box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+        }
 
-			.main-skills .card button {
-				background: orangered;
-				color: #fff;
-				padding: 7px 15px;
-				border-radius: 10px;
-				margin-top: 15px;
-				cursor: pointer;
-			}
+            .main-skills .card h3 {
+                margin: 10px;
+                text-transform: capitalize;
+            }
 
-				.main-skills .card button:hover {
-					background: rgba(223, 70, 15, 0.856);
-				}
+            .main-skills .card p {
+                font-size: 12px;
+            }
 
-			.main-skills .card i {
-				font-size: 22px;
-				padding: 10px;
-			}
+            .main-skills .card button {
+                background: orangered;
+                color: #fff;
+                padding: 7px 15px;
+                border-radius: 10px;
+                margin-top: 15px;
+                cursor: pointer;
+            }
 
-	/* Courses */
-	.main-course {
-		margin-top: 20px;
-		text-transform: capitalize;
-	}
+                .main-skills .card button:hover {
+                    background: rgba(223, 70, 15, 0.856);
+                }
 
-	.course-box {
-		width: 100%;
-		height: 300px;
-		padding: 10px 10px 30px 10px;
-		margin-top: 10px;
-		background: #fff;
-		border-radius: 10px;
-		box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-	}
+            .main-skills .card i {
+                font-size: 22px;
+                padding: 10px;
+            }
 
-		.course-box ul {
-			list-style: none;
-			display: flex;
-		}
+    /* Courses */
+    .main-course {
+        margin-top: 20px;
+        text-transform: capitalize;
+    }
 
-			.course-box ul li {
-				margin: 10px;
-				color: gray;
-				cursor: pointer;
-			}
+    .course-box {
+        width: 100%;
+        height: 300px;
+        padding: 10px 10px 30px 10px;
+        margin-top: 10px;
+        background: #fff;
+        border-radius: 10px;
+        box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+    }
 
-			.course-box ul .active {
-				color: #000;
-				border-bottom: 1px solid #000;
-			}
+        .course-box ul {
+            list-style: none;
+            display: flex;
+        }
 
-		.course-box .course {
-			display: flex;
-		}
+            .course-box ul li {
+                margin: 10px;
+                color: gray;
+                cursor: pointer;
+            }
 
-	.box {
-		width: 33%;
-		padding: 10px;
-		margin: 10px;
-		border-radius: 10px;
-		background: rgb(235, 233, 233);
-		box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
-	}
+            .course-box ul .active {
+                color: #000;
+                border-bottom: 1px solid #000;
+            }
 
-		.box p {
-			font-size: 12px;
-			margin-top: 5px;
-		}
+        .course-box .course {
+            display: flex;
+        }
 
-		.box button {
-			background: #000;
-			color: #fff;
-			padding: 7px 10px;
-			border-radius: 10px;
-			margin-top: 3rem;
-			cursor: pointer;
-		}
+    .box {
+        width: 33%;
+        padding: 10px;
+        margin: 10px;
+        border-radius: 10px;
+        background: rgb(235, 233, 233);
+        box-shadow: 0 20px 35px rgba(0, 0, 0, 0.1);
+    }
 
-			.box button:hover {
-				background: rgba(0, 0, 0, 0.842);
-			}
+        .box p {
+            font-size: 12px;
+            margin-top: 5px;
+        }
 
-		.box i {
-			font-size: 7rem;
-			float: right;
-			margin: -20px 20px 20px 0;
-		}
+        .box button {
+            background: #000;
+            color: #fff;
+            padding: 7px 10px;
+            border-radius: 10px;
+            margin-top: 3rem;
+            cursor: pointer;
+        }
 
-	.html {
-		color: rgb(25, 94, 54);
-	}
+            .box button:hover {
+                background: rgba(0, 0, 0, 0.842);
+            }
 
-	.css {
-		color: rgb(104, 179, 35);
-	}
+        .box i {
+            font-size: 7rem;
+            float: right;
+            margin: -20px 20px 20px 0;
+        }
 
-	.js {
-		color: rgb(28, 98, 179);
-	}
+    .html {
+        color: rgb(25, 94, 54);
+    }
 
+    .css {
+        color: rgb(104, 179, 35);
+    }
+
+    .js {
+        color: rgb(28, 98, 179);
+    }
+    .tooltip {
+        position: relative;
+        display: inline-block;
+        border-bottom: 1px dotted black; /* If you want dots under the hoverable text */
+    }
+
+    .tooltip .tooltiptext {
+        visibility: hidden;
+        width: 120px;
+        background-color: #555;
+        color: #fff;
+        text-align: center;
+        border-radius: 6px;
+        padding: 5px 0;
+        position: absolute;
+        z-index: 1;
+        bottom: 125%;
+        left: 50%;
+        margin-left: -60px;
+        opacity: 0;
+        transition: opacity 0.3s;
+    }
+
+    .tooltip:hover .tooltiptext {
+        visibility: visible;
+        opacity: 1;
+    }
+
+    .chart-container {
+        position: relative;
+        margin: auto;
+        width: 70vw;
+        margin-bottom:30px;
+    }
 </style>
 <script>
-	// Get the button element by its id
-	var manageButton = document.getElementById('manageButton1');
+    // Get the button element by its id
+    var manageButton = document.getElementById('manageButton1');
 
-	// Attach a click event listener to the button
-	manageButton.addEventListener('click', function () {
-		// Navigate to the desired URL when the button is clicked
-		window.location.href = '/ManageUser/Views';
-	});// Get the button element by its id
-	var manageButton = document.getElementById('manageButton2');
+    // Attach a click event listener to the button
+    manageButton.addEventListener('click', function () {
+        // Navigate to the desired URL when the button is clicked
+        window.location.href = '/ManageUser/Views';
+    });// Get the button element by its id
+    var manageButton = document.getElementById('manageButton2');
 
-	// Attach a click event listener to the button
-	manageButton.addEventListener('click', function () {
-		// Navigate to the desired URL when the button is clicked
-		window.location.href = '/JOB/AdminViewAllJobPage';
-	});// Get the button element by its id
-	var manageButton = document.getElementById('manageButton4');
+    // Attach a click event listener to the button
+    manageButton.addEventListener('click', function () {
+        // Navigate to the desired URL when the button is clicked
+        window.location.href = '/JOB/AdminViewAllJobPage';
+    });// Get the button element by its id
+    var manageButton = document.getElementById('manageButton4');
 
-	// Attach a click event listener to the button
-	manageButton.addEventListener('click', function () {
-		// Navigate to the desired URL when the button is clicked
-		window.location.href = '/JOB/AdminViewListJobRequestedPage';
-	});
+    // Attach a click event listener to the button
+    manageButton.addEventListener('click', function () {
+        // Navigate to the desired URL when the button is clicked
+        window.location.href = '/JOB/AdminViewListJobRequestedPage';
+    });
+</script>
+<script>
+    function displayAllHistory(month) {
+        $.ajax({
+            url: "@(UrlConstant.ApiBaseUrl)" + "/InCome/GetHistory/"+month+"/"+@Model.year,
+            type: "get",
+            headers: {
+                "ngrok-skip-browser-warning": true,
+                "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
+            },
+            contentType: "application/json",
+            success: function (result, status, xhr) {
+                var str2 = "";
+                $.each(result, function (index, value) {
+                    str2 += "<tr style=\"border-bottom: 1px solid #BEBEBE; height: 40px\">";
+                    str2 += "<td>" + value["paymentID"]+"</td>";
+                    str2 += "<td>" + value["amount"].toLocaleString('en-US') + "</td>";
+                    str2 += "<td>" + convertToVietnameseDatetime(value["transactionDate"]) + "</td>";
+                    str2 += "</tr>";
+                });
+                document.getElementById("asd").innerHTML= str2;
+                document.getElementById("label1").innerHTML = "Thu phí tháng "+month+":";
+            }
+        })
+    }
+</script>
+<script>
+    document.getElementById("myChart").onclick = function (e) {
+        const points = myChart.getElementsAtEventForMode(e, 'nearest', { intersect: true }, true);
+        if (points.length) {
+            const firstPoint = points[0];
+            displayAllHistory(firstPoint.index+1);
+        }
+    }
+    window.addEventListener('beforeprint', () => {
+        myChart.resize(600, 600);
+    });
+    window.addEventListener('afterprint', () => {
+        myChart.resize();
+    });
+</script>
+<script>
+    // Function to convert datetime string to Vietnamese format
+    function convertToVietnameseDatetime(datetimeString) {
+        // Parse the datetime string
+        const datetime = new Date(datetimeString);
+
+        // Get day, month, year
+        const day = datetime.getDate();
+        const month = datetime.getMonth() + 1; // Month is zero-based
+        const year = datetime.getFullYear();
+
+        // Get hours and minutes
+        let hours = datetime.getHours();
+        let minutes = datetime.getMinutes();
+
+        // Convert hours to 12-hour format and determine AM/PM
+        let period = "SA";
+        if (hours >= 12) {
+            period = "CH";
+            if (hours > 12) {
+                hours -= 12;
+            }
+        }
+
+        // Add leading zero to single-digit values
+        hours = hours < 10 ? "0" + hours : hours;
+        minutes = minutes < 10 ? "0" + minutes : minutes;
+
+        // Return formatted datetime string
+        return `${day}/${month}/${year} ${hours}:${minutes} ${period}`;
+    }
 </script>

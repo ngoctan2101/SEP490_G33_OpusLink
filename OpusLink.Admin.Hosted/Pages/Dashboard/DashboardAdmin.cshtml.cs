@@ -23,6 +23,8 @@ namespace OpusLink.Admin.Hosted.Pages.Dashboard
         public List<ChatDTO> chats { get; set; } = null!;
         public List<GetJobResponse> listJob { get; set; } = null!;
         public List<GetJobResponse> Jobs { get; set; } = default!;
+        public DataIncomePerYear dataIncomePerYear { get; set; }
+        public int year { get; set; }
         //public int SkillID { get; set; }
         //public int? SkillParentID { get; set; }
         //public string SkillName { get; set; }
@@ -34,7 +36,7 @@ namespace OpusLink.Admin.Hosted.Pages.Dashboard
             ServiceMangaUrl = UrlConstant.ApiBaseUrl;
         }
 
-        public async Task<IActionResult> OnGetAsync()
+        public async Task<IActionResult> OnGetAsync(int year)
         {
             HttpContext.Session.SetString("PageNow", "Dashboard");
             if (HttpContext.Session.GetInt32("UserId")==null)
@@ -75,7 +77,16 @@ namespace OpusLink.Admin.Hosted.Pages.Dashboard
                 TotalJobsRequest = jobRequests.ElementAt(jobRequests.Count-1).EmployerID;
                 jobRequests.RemoveAt(jobRequests.Count - 1);
             }
-            return Page();
+			HttpResponseMessage responseIncome = await client.GetAsync(ServiceMangaUrl + "/InCome/GetDataIncome/"+year);
+			if (responseUser.IsSuccessStatusCode)
+			{
+				string responseBodyUser = await responseIncome.Content.ReadAsStringAsync();
+				var optionUser = new JsonSerializerOptions()
+				{ PropertyNameCaseInsensitive = true };
+				dataIncomePerYear = JsonSerializer.Deserialize<DataIncomePerYear>(responseBodyUser, optionUser);
+			}
+            this.year = year;
+			return Page();
         }
     }
 

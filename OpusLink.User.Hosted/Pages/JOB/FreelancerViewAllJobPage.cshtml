@@ -20,7 +20,7 @@
         padding-left: 10px;
         padding-right: 5px
     }
-    
+
     .link {
         text-decoration: none;
         font-weight: bold;
@@ -123,7 +123,7 @@
                     <div class="col-md-2">
                     </div>
                 </div>
-                
+
                 <div class="row">
                     <div class="col-md-3">
                         <table style="width:100%;margin-bottom:10px;box-shadow: 0px 0px 4px 4px #DCDCDC;background-color:inherit" class="filter">
@@ -161,7 +161,8 @@
                                 }
                                 <tr style="width:100%">
                                     <td style="width:15%;text-align:right"><input type="checkbox" name="status_@((int)Enum.Parse(typeof(JobStatusEnum), status.ToString()))" value="@((int)Enum.Parse(typeof(JobStatusEnum), status.ToString()))"></td>
-                                    <td style="width:85%;text-align:left">@status.ToString()
+                                    <td style="width:85%;text-align:left">
+                                        @status.ToString()
                                     </td>
                                 </tr>
                             }
@@ -172,7 +173,7 @@
                             </tr>
                             <tr>
                                 <td class="td">
-                                    <input style="margin-bottom: 5px;" type="text" name="daterange" id="dateInput"  />
+                                    <input style="margin-bottom: 5px;" type="text" name="daterange" id="dateInput" />
                                 </td>
                             </tr>
                         </table>
@@ -213,7 +214,7 @@
                                             }
                                             else if (item.Status == (int)JobStatusEnum.Hiring)
                                             {
-                                                if(item.EndHiringDate < DateTime.Now)
+                                                if (item.EndHiringDate < DateTime.Now)
                                                 {
                                                     <p class="status" style="background-color:#B5681C;margin:0px;padding:0px 4px 0px 4px">Hiring expried</p>
                                                 }
@@ -325,7 +326,7 @@
 <script>
     function displayAllChild(categoryID) {
         $.ajax({
-            url: "@(UrlConstant.ApiBaseUrl+"/Job3API/GetAllChildCategory?parentId=")" + categoryID,
+            url: "@(UrlConstant.ApiBaseUrl + "/Job3API/GetAllChildCategory?parentId=")" + categoryID,
             type: "get",
             headers: {
                 "ngrok-skip-browser-warning": true,
@@ -362,7 +363,7 @@
     }
     function SaveJob(JobId, FreelancerId) {
         $.ajax({
-            url: "@(UrlConstant.ApiBaseUrl+"/Job7API/AddSaveJob")",
+            url: "@(UrlConstant.ApiBaseUrl + "/Job7API/AddSaveJob")",
             headers: {
                 "ngrok-skip-browser-warning": true,
                 "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
@@ -494,7 +495,7 @@
             input.value = formattedValue;
         }
     }
-    
+
 </script>
 <script>
     function FormatBudget() {
@@ -598,7 +599,7 @@
 
 
         var startDate = new Date(parseInt(parts1[2], 10), parseInt(parts1[1], 10) - 1, parseInt(parts1[0], 10));
-        var endDate = new Date( parseInt(parts2[2], 10),parseInt(parts2[1], 10) - 1, parseInt(parts2[0], 10));
+        var endDate = new Date(parseInt(parts2[2], 10), parseInt(parts2[1], 10) - 1, parseInt(parts2[0], 10));
 
         if (!isValidDate(dates[0]) || !isValidDate(dates[1])) {
             errorMessage.innerHTML = "Invalid date format. Please enter dates in the format dd/mm/yyyy";
@@ -628,7 +629,7 @@
 
         // Parse integer values from the date string
         var year = parseInt(dateString.substr(4, 4));
-        var day  = parseInt(dateString.substr(0, 2));
+        var day = parseInt(dateString.substr(0, 2));
         var month = parseInt(dateString.substr(2, 2));
 
         // Define the number of days per month
@@ -645,35 +646,36 @@
         return true;
     }
 </script>
-@if(@Model.isCount){
+@if (@Model.isCount)
+{
     <script>
 
-    function startCountdown(endHiringDate, countdownId) {
-        var countdownInterval = setInterval(function () {
-            var now = new Date();
-            var totalSeconds = Math.floor((endHiringDate - now) / 1000);
-            var days = Math.floor(totalSeconds / (60 * 60 * 24));
-            var hours = Math.floor((totalSeconds % (60 * 60 * 24)) / (60 * 60));
-            var minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
-            var seconds = Math.floor((totalSeconds % (60)));
-            document.getElementById(countdownId).innerHTML = "(" + days + "d " + hours + "h " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds + ")";
-            if (totalSeconds < 0) {
-                clearInterval(countdownInterval);
-                document.getElementById(countdownId).innerHTML = "Hiring Expried";
-            }
-        }, 1000);
-    }
-    @foreach (var item in Model.Jobs)
-    {
-        <text>
-                var x = new Date("@item.EndHiringDate.ToString("yyyy-MM-ddTHH:mm:ss")");
-        startCountdown(x, "countdown_" + @item.JobID);
-        </text>
-    }
-</script>
+        function startCountdown(endHiringDate, countdownId) {
+            var countdownInterval = setInterval(function () {
+                var now = new Date();
+                var totalSeconds = Math.floor((endHiringDate - now) / 1000);
+                var days = Math.floor(totalSeconds / (60 * 60 * 24));
+                var hours = Math.floor((totalSeconds % (60 * 60 * 24)) / (60 * 60));
+                var minutes = Math.floor((totalSeconds % (60 * 60)) / 60);
+                var seconds = Math.floor((totalSeconds % (60)));
+                document.getElementById(countdownId).innerHTML = "(" + days + "d " + hours + "h " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds + ")";
+                if (totalSeconds < 0) {
+                    clearInterval(countdownInterval);
+                    document.getElementById(countdownId).innerHTML = "Hiring Expried";
+                }
+            }, 1000);
+        }
+        @foreach (var item in Model.Jobs)
+        {
+            <text>
+                                        var x = new Date("@item.EndHiringDate.ToString("yyyy-MM-ddTHH:mm:ss")");
+            startCountdown(x, "countdown_" + @item.JobID);
+            </text>
+        }
+    </script>
 }
 <script>
-    addOnLoadFunction(autoFillForm);
+        addOnLoadFunction(autoFillForm);
     addOnLoadFunction(FormatBudget);
     addOnLoadFunction(FormatJobContent);
     addOnLoadFunction(FomatPagination);

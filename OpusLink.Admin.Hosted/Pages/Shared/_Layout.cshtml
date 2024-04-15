@@ -9,11 +9,11 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Admin</title>
-    <link rel="icon" href="path/to/english-icon.png" sizes="16x16" type="image/png">
-    <link rel="icon" href="path/to/vietnamese-icon.png" sizes="16x16" type="image/png">
-    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
+ @*   <link rel="icon" href="path/to/english-icon.png" sizes="16x16" type="image/png">
+    <link rel="icon" href="path/to/vietnamese-icon.png" sizes="16x16" type="image/png">*@
+@*    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css"
           integrity="sha512-H+KQOVFajAqldxUe9/ijzpOTNNx4B47uvimCzJZ17WJ8c1o4eS/RbBThTlMYNQ8Bu7Q4JugG2PD3b5gJAdqOAA=="
-          crossorigin="anonymous" referrerpolicy="no-referrer" />
+          crossorigin="anonymous" referrerpolicy="no-referrer" />*@
 
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha2/dist/css/bootstrap.min.css" rel="stylesheet">
 
@@ -281,7 +281,7 @@
                     }
                 }
                 <ul>
-                    <a asp-page="/Dashboard/DashboardAdmin">
+                    <a asp-page="/Dashboard/DashboardAdmin" asp-route-year="2024">
                     @* <li style="@a">Dashboard</li> *@
                     <li style="@a">Tổng quan</li>
                     </a>
@@ -343,7 +343,6 @@
         </div>
         <!-- <div id="footer-admin">footer</div> -->
 
-        <script src="~/lib/microsoft/signalr/dist/browser/signalr.js"></script>
         <script src="~/js/site.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.0.0-alpha2/dist/js/bootstrap.bundle.min.js"></script>
         <script src="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.15.0/dist/js/bootstrap-icons.min.js"></script>

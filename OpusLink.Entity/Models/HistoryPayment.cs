@@ -23,5 +23,11 @@ namespace OpusLink.Entity.Models
         //FeePostJob = 4, Tiền đăng bài
         //EarnAMilestone=5, Tiền nhận ở mỗi miston
         //HoldedAJob = 6, Tiền giữ 20%  
+
+
+        //F nhan 19% = 6, khi job success
+        //E nhan 19% = 7, khi job fail
+        //E nhan 100% = 8, khi MS fail
+        //Fee 1% = 9, phi moi MS
     }
 }

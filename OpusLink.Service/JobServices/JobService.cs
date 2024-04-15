@@ -41,6 +41,7 @@ namespace OpusLink.Service.JobServices
             jobs = _dbContext.Jobs
                 .Include("Employer")
                 .Where(j => j.Status == (int)JobStatusEnum.NotApprove)
+                .OrderByDescending(j=>j.DateCreated)
                 .ToList();
             jobs = jobs.Where(j => (filter.Statuses.Count == 0 ? true : filter.Statuses.Contains(j.Status)) &&
                                 (filter.CategoryIDs.Count == 0 ? true : j.JobAndCategories.Any(jac => filter.CategoryIDs.Contains(jac.CategoryID))) &&
