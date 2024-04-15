@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OpusLink.Entity.DTO;
 using OpusLink.Shared.Constants;
@@ -93,7 +93,7 @@ namespace OpusLink.User.Hosted.Pages.Employer.Profile
                 }
             }
             // Handle the case where the request was not successful
-            return Content("Error downloading file");
+            return Content("Lỗi tải xuống");
         }
     }
 }
