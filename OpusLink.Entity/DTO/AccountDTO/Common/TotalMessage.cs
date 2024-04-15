@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.Linq;
+using System.Net.NetworkInformation;
 using System.Text;
 using System.Threading.Tasks;
 
@@ -24,6 +25,7 @@ namespace OpusLink.Entity.DTO.AccountDTO.Common
         public static string LoginFailCuzBanUser = "Tài khoản của bạn đang bị khóa cho đến ";
         public static string LogingErrorRoleAdmin = "Tài khoản Admin không thể đăng nhập với trang này";
         public static string LoginErrorRoleUser = "Tài khoản của bạn không có quyền đăng nhập trang này";
+        public static string LoginErrorEmailConfirm = "Bạn chưa xác thực Email cho tài khoản này.";
 
         //---ForgotPassword---
         //Khi quên mật khẩu thành công
