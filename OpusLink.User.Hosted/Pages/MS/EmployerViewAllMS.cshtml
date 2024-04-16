@@ -583,7 +583,7 @@
             <div class="col-md-4" style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
                 Thao tác
             </div>
-           
+
         </div>
         <hr class="hrMilestone">
         @foreach (var item in Model.milestones)
@@ -597,9 +597,9 @@
                     <p>Due @item.Deadline.ToString("dd/MM/yyyy HH:mm")</p>
                     <p>@((item.AmountToPay).ToString("#,##")) ₫</p>
                     @if (Model.job.IsFreelancerConfirm == false && item.Deadline < DateTime.Now)
-                            {
-                                <p style="color:red">Không thể đặt thời hạn của milestone ở quá khứ.</p>
-                            }
+                    {
+                        <p style="color:red">Không thể đặt thời hạn của milestone ở quá khứ.</p>
+                    }
                 </div>
                 <div style="display:none">
                     <span id="MilestoneContent_@item.MilestoneID">@item.MilestoneContent</span>
@@ -801,9 +801,9 @@
             <hr class="hrMilestone">
         }
     </div>
-    @if(Model.job.FreelancerId==null || Model.job.FreelancerId == 0)
+    @if (Model.job.FreelancerId == null || Model.job.FreelancerId == 0)
     {
-        
+
     }
     else if (Model.job.EmployerDoneEditMilestone == false && Model.job.IsFreelancerConfirm == false)
     {
@@ -847,16 +847,23 @@
         if (Model.job.Status == (int)JobStatusEnum.Completed)
         {
             <h5>Job đã kết thúc thành công.</h5>
-            <a asp-page="../Evaluate/EmployerEvaluate" asp-route-jobId="@Model.job.JobId" asp-route-createByUserID="@Model.job.EmployerId">Đánh giá freelancer</a>
+            if (Model.isAllowToGiveFeedback)
+            {
+                <a asp-page="../Evaluate/EmployerEvaluate" asp-route-jobId="@Model.job.JobId" asp-route-createByUserID="@Model.job.EmployerId">Đánh giá freelancer</a>
+            }
         }
         else if (Model.job.Status == (int)JobStatusEnum.Failed)
         {
             <h5>Job đã kết thúc thất bại.</h5>
-            <a asp-page="../Evaluate/EmployerEvaluate" asp-route-jobId="@Model.job.JobId" asp-route-createByUserID="@Model.job.EmployerId">Đánh giá freelancer</a>
+            if (Model.isAllowToGiveFeedback)
+            {
+                <a asp-page="../Evaluate/EmployerEvaluate" asp-route-jobId="@Model.job.JobId" asp-route-createByUserID="@Model.job.EmployerId">Đánh giá freelancer</a>
+            }
+
         }
         else
         {
-           <h5>Các bạn đã thống nhất một plan, bây giờ là lúc làm việc</h5> 
+            <h5>Các bạn đã thống nhất một plan, bây giờ là lúc làm việc</h5>
         }
     }
 
@@ -1131,9 +1138,10 @@
     document.getElementsByName("AddAmountToPay")[0].addEventListener('change', function () {
         // Get the input element
         var input = document.getElementsByName("AddAmountToPay")[0];
-        var input1 = input.value.replaceAll(",", "");
-        input1 = input1.replaceAll("₫", "");
-        input1 = input1.replaceAll(" ", "");
+        var input1 = input.value.replace(/\D/g, '');
+        //var input1 = input.value.replaceAll(",", "");
+        //input1 = input1.replaceAll("₫", "");
+        //input1 = input1.replaceAll(" ", "");
         // Get the value and convert it to a number
         var value = parseFloat(input1);
         // Check if the value is a valid number
@@ -1150,9 +1158,10 @@
     document.getElementsByName("UpdateAmountToPay")[0].addEventListener('change', function () {
         // Get the input element
         var input = document.getElementsByName("UpdateAmountToPay")[0];
-        var input1 = input.value.replaceAll(",", "");
-        input1 = input1.replaceAll("₫", "");
-        input1 = input1.replaceAll(" ", "");
+        var input1 = input.value.replace(/\D/g, '');
+        //var input1 = input.value.replaceAll(",", "");
+        //input1 = input1.replaceAll("₫", "");
+        //input1 = input1.replaceAll(" ", "");
         // Get the value and convert it to a number
         var value = parseFloat(input1);
         // Check if the value is a valid number
@@ -1228,7 +1237,7 @@ else if (Model.job.EmployerDoneEditMilestone == true && Model.job.IsFreelancerCo
 
         // Get the value and convert it to a format dd-MM-yyyy HH:mm
         var formattedValue = ("0" + d.getDate()).slice(-2) + "-" + ("0"+(d.getMonth()+1)).slice(-2) + "-" + d.getFullYear() + " " + ("0" + d.getHours()).slice(-2) + ":" + ("0" + d.getMinutes()).slice(-2);
-        
+
         // Update the input field with the formatted value
             input.value = formattedValue;
     }, false);

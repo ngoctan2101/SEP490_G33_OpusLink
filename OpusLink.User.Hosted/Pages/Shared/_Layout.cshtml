@@ -133,6 +133,9 @@
                                     <a class="nav-link" asp-area="" asp-page="/Chat/ChatList" asp-route-userId="@userId" asp-route-role="@((int)Roles.Freelancer)" style="color:#5038ED;margin:0px 10px 0px 10px">Tin nhắn</a>
                                 </li>
                                 <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Privacy" style="color:#5038ED;margin:0px 10px 0px 10px">Luồng hoạt động</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" href="/Freelancer/Profile/Views?UserId=@userId" style="color:#5038ED;margin:0px 10px 0px 10px">Xin chào, @userName</a>
                                 </li>
                             }
@@ -140,13 +143,16 @@
                             @if (currentRole.Equals("Guest"))
                             {
                                 <li class="nav-item">
+                                    <a class="nav-link" asp-area="" asp-page="/Privacy" style="color:#5038ED;margin:0px 10px 0px 10px">Luồng hoạt động</a>
+                                </li>
+                                <li class="nav-item">
                                     <a class="nav-link" asp-area="" asp-page="/Account/Login" style="color:#5038ED;margin:0px 10px 0px 10px">Đăng nhập</a>
                                 </li>
                                 <li class="nav-item">
                                     <a class="nav-link" asp-area="" asp-page="/Account/Register" style="color:#5038ED;margin:0px 10px 0px 10px">Đăng ký</a>
                                 </li>
                             }
-
+                            
                             <ul class="navbar-nav ms-auto">
                                 @if (currentRole.Equals("Guest")) { }
                                 @if (currentRole.Equals("Freelancer"))
@@ -170,7 +176,7 @@
                                             <span class="badge bg-danger" id="notificationBadge"></span>
                                         </a>
                                         <div class="dropdown-menu" aria-labelledby="notificationDropdown">
-                                            <p class="dropdown-item-text">Bạn có  thông báo mới</p>
+                                            <p class="dropdown-item-text">Thông báo hôm nay</p>
                                             <ul class="list-unstyled" id="listNotification">
                                             </ul>
                                             <a href="/Notification/ViewsNotification?UserId=@userId" class="dropdown-item view-all">Xem tất cả</a>
@@ -236,7 +242,7 @@
                                     <span class="badge bg-danger" id="notificationBadge"></span>
                                 </a>
                                 <div class="dropdown-menu" aria-labelledby="notificationDropdown">
-                                    <p class="dropdown-item-text">Bạn có thông báo mới</p>
+                                    <p class="dropdown-item-text">Thông báo hôm nay</p>
                                     <ul class="list-unstyled" id="listNotification">
                                     </ul>
                                     <a href="/Notification/ViewsNotification?UserId=@userId" class="dropdown-item view-all">Xem tất cả</a>
@@ -348,9 +354,9 @@
                     var domain = "@(UrlConstant.UserClientBaseUrl + "/Index?handler=ForNotificationDetail&link=")";
                     $.each(result, function (index, value) {
                         if (value["isReaded"] == true) {
-                            fivecodeline += "<li class=\"dropdown-item\"><a style=\"color\:#B0B8B3\" href=\"" + domain + encodeURIComponent(value["link"]) + "&notiId=" + value["notificationID"] + "\">" + value["notificationContent"] + "</a></li>";
+                            fivecodeline += "<li class=\"dropdown-item\" style=\"color\:#B0B8B3\" onclick=\"clickNoti("+value["notificationID"]+",\`"+value["link"] + "\`)\">" + value["notificationContent"] + "</li>";
                         } else {
-                            fivecodeline += "<li class=\"dropdown-item\"><a href=\"" + domain + encodeURIComponent(value["link"]) + "&notiId=" + value["notificationID"] + "\">" + value["notificationContent"] + "</a></li>";
+                            fivecodeline += "<li class=\"dropdown-item\"onclick=\"clickNoti(" + value["notificationID"] + ",\`" + value["link"] + "\`)\">" + value["notificationContent"] + "</li>";
                         }
 
                     });
@@ -367,6 +373,33 @@
         addOnLoadFunction(LoadUserInformation);
     </script>
     <script>
+        function clickNoti(notificationID,link){
+            $.ajax({
+                url: "@(UrlConstant.ApiBaseUrl + "/Notification/UpdateNotificationReader/")" + notificationID,
+                type: "Put",
+                headers: {
+                    "ngrok-skip-browser-warning": true,
+                    "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
+                },
+                contentType: "application/json",
+                success: function (result, status, xhr) {
+                    if ((link.includes("MS/Freelancer") || link.includes("JOB/Freelancer")) && '@currentRole'=== 'Employer'){
+                        displayMessage1("Bạn cần chuyển sang role Freelancer trước");
+                    }
+                    else if ((link.includes("MS/Employer") || link.includes("JOB/Employer")) && '@currentRole'=== 'Freelancer') {
+                        displayMessage1("Bạn cần chuyển sang role Employer trước");
+                    }else{
+                        window.location.href = "@(UrlConstant.UserClientBaseUrl)" + link;
+                    }
+                    
+                },
+                error: function (xhr, status, error) {
+                    
+                }
+            });
+        }
+    </script>
+    <script>
         //thong bao hien ra 3 giay roi an di
         function displayMessage() {
             var message = document.getElementById("NotificationModal");
@@ -374,6 +407,10 @@
             setTimeout(function () {
                 message.style.display = "none";
             }, 3000); // 3000 milliseconds = 3 seconds
+        }
+        function displayMessage1(mesage){
+            document.getElementById("notifai").innerHTML=mesage;
+            displayMessage()
         }
     </script>
     @if (HttpContextAccessor.HttpContext.Session.GetInt32("NotiIsNew") == 1)

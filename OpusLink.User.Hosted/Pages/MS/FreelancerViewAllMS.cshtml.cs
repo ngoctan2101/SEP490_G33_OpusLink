@@ -3,6 +3,7 @@ using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.JobDTO;
 using OpusLink.Entity.DTO.MSDTO;
+using OpusLink.Entity.Models;
 using OpusLink.Shared.Constants;
 using System.Globalization;
 using System.Net.Http.Headers;
@@ -15,6 +16,7 @@ namespace OpusLink.User.Hosted.Pages.MS
         private readonly HttpClient client = null;
         public List<GetMilestoneResponse> milestones { get; set; } = default!;
         public GetJobDetailResponse job { get; set; }
+        public bool isAllowToGiveFeedback { get; set; }
         public int JobID { get; set; }
         public FreelancerViewAllMSModel()
         {
@@ -35,9 +37,24 @@ namespace OpusLink.User.Hosted.Pages.MS
             milestones = await GetAllMilestonesAsync(jobID);
             //get this job also
             job = await GetThisJob(jobID);
+            // check is user allow to give feedback
+            isAllowToGiveFeedback = await isAllowToGiveFeedbackAsync(jobID, HttpContext.Session.GetInt32("UserId"));
+            //isAllowToGiveFeedback = true;
             return Page();
         }
-
+        private async Task<bool> isAllowToGiveFeedbackAsync(int jobID, int? userId)
+        {
+            HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl + "/FMilestonesAPI/IsAllowToGiveFeedback/" + jobID + "/" + userId);
+            if (response.IsSuccessStatusCode)
+            {
+                string strData = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Boolean>(strData);
+            }
+            else
+            {
+                return false;
+            }
+        }
         private async Task<GetJobDetailResponse> GetThisJob(int jobID)
         {
             //get the job

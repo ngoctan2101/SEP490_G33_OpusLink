@@ -535,6 +535,9 @@
 
     }
     function FomatPagination() {
+        if (@Model.NumberOfPage<5) {
+            return;
+        }
         for (let i = 1; i <= @Model.NumberOfPage; i++) {
             if (i == 1) {
                 document.getElementById('pagin_' + i).style.display = "inline-block";
@@ -678,10 +681,13 @@
         }
         @foreach (var item in Model.Jobs)
         {
-            <text>
-                                        var x = new Date("@item.EndHiringDate.ToString("yyyy-MM-ddTHH:mm:ss")");
-            startCountdown(x, "countdown_" + @item.JobID);
-            </text>
+            if (item.Status == (int)JobStatusEnum.Hiring && item.EndHiringDate > DateTime.Now)
+            {
+                <text>
+                                            var x = new Date("@item.EndHiringDate.ToString("yyyy-MM-ddTHH:mm:ss")");
+                startCountdown(x, "countdown_" + @item.JobID);
+                </text>
+            }
         }
     </script>
 }

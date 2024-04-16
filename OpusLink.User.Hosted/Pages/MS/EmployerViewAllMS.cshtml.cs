@@ -20,6 +20,7 @@ namespace OpusLink.User.Hosted.Pages.MS
         public GetJobDetailResponse job { get; set; }
         public DateTime nearestDatelineOfMS { get; set; }
         public bool allMSMoneyPutted { get; set; }
+        public bool isAllowToGiveFeedback { get; set; }
         public EmployerViewAllMSModel()
         {
             client = new HttpClient();
@@ -61,8 +62,25 @@ namespace OpusLink.User.Hosted.Pages.MS
                 }
             }
             nearestDatelineOfMS = nearestDatelineOfMS.AddDays(0);
+            //check is user allow to give feedback
+            isAllowToGiveFeedback = await isAllowToGiveFeedbackAsync(jobID, HttpContext.Session.GetInt32("UserId"));
             return Page();
         }
+
+        private async Task<bool> isAllowToGiveFeedbackAsync(int jobID, int? userId)
+        {
+            HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl + "/EMilestonesAPI/IsAllowToGiveFeedback/" + jobID+"/"+ userId);
+            if (response.IsSuccessStatusCode)
+            {
+                string strData = await response.Content.ReadAsStringAsync();
+                return JsonConvert.DeserializeObject<Boolean>(strData);
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         private async Task<GetJobDetailResponse> GetThisJob(int jobID)
         {
             //get the job
@@ -122,6 +140,7 @@ namespace OpusLink.User.Hosted.Pages.MS
                 if (key.Contains("AddAmountToPay"))
                 {
                     string amount = collection[key].ToString();
+                    amount = amount.Replace(".", string.Empty);
                     amount = amount.Replace(",", string.Empty);
                     amount = amount.Replace("₫", string.Empty);
                     amount = amount.Replace(" ", string.Empty);
@@ -175,6 +194,7 @@ namespace OpusLink.User.Hosted.Pages.MS
                 if (key.Contains("UpdateAmountToPay"))
                 {
                     string amount = collection[key].ToString();
+                    amount = amount.Replace(".", string.Empty);
                     amount = amount.Replace(",", string.Empty);
                     amount = amount.Replace("₫", string.Empty);
                     amount = amount.Replace(" ", string.Empty);
@@ -307,7 +327,13 @@ namespace OpusLink.User.Hosted.Pages.MS
                 HttpContext.Session.SetInt32("NotiIsNew", 1);
                 return RedirectToPage("/MS/EmployerViewAllMS", new { jobID = requestPutMoney.JobId });
             }
-            return RedirectToPage("/MS/EmployerViewAllMS", new { jobID = requestPutMoney.JobId });
+            else
+            {
+                HttpContext.Session.SetString("Notification", "Bạn không đủ tiền");
+                HttpContext.Session.SetInt32("NotiIsNew", 1);
+                return RedirectToPage("/MS/EmployerViewAllMS", new { jobID = requestPutMoney.JobId });
+            }
+            
         }
         public async Task<IActionResult> OnPostForGetBackMoneyAsync(IFormCollection collection)
         {

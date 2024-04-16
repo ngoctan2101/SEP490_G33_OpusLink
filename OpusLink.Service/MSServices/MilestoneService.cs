@@ -18,6 +18,7 @@ namespace OpusLink.Service.MSServices
         Task DeleteMilestone(int milestoneID);
         Task<List<Milestone>> GetAllMilestoneByJobID(int jobID);
         Task<Job> GetThisJob(int jobID);
+        Task<bool> IsAllowToGiveFeedback(int jobId, int userId);
         Task<bool> RequestChangeStatus(int milestoneId, int jobId, int status);
         Task<bool> RequestDoneAMilestone(int milestoneId, int jobId);
         Task<bool> RequestExtendDeadline(int milestoneId, int jobId, DateTime newDeadline);
@@ -111,6 +112,7 @@ namespace OpusLink.Service.MSServices
                     NotificationDate = DateTime.Now
                 };
                 _dbContext.Notifications.Add(n);
+                await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = j.FreelancerID??0, Amount = 0.8m * m.AmountToPay, TransactionType = 5, TransactionCode = "" , TransactionDate = DateTime.Now }); //get money when complete a MS
             }
             else if (m.Status == (int)MilestoneStatusEnum.EmployerRejected && status == (int)MilestoneStatusEnum.Completed)
             {
@@ -126,6 +128,7 @@ namespace OpusLink.Service.MSServices
                     NotificationDate = DateTime.Now
                 };
                 _dbContext.Notifications.Add(n);
+                await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = j.FreelancerID ?? 0, Amount = 0.8m * m.AmountToPay, TransactionType = 5, TransactionCode = "" , TransactionDate = DateTime.Now }); //get money when complete a MS
             }
             else if(m.Status == (int)MilestoneStatusEnum.MoneyPutted && status == (int)MilestoneStatusEnum.EmployerRejected)
             {
@@ -173,7 +176,7 @@ namespace OpusLink.Service.MSServices
                 m.Status = (int)MilestoneStatusEnum.Failed;
                 //tra tien cua ms nay cho E
                 employer.AmountMoney += m.AmountToPay;
-                
+                await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = j.EmployerID, Amount = m.AmountToPay, TransactionType = 8, TransactionCode = "" , TransactionDate = DateTime.Now }); //E get back money when F fail MS
             }
             else
             {
@@ -198,11 +201,15 @@ namespace OpusLink.Service.MSServices
                 if (AnyMsFail(j) == false)
                 {
                     freelancer.AmountMoney += 0.19m * TotalMoneyOfMsCompleted(j);
+                    await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = j.FreelancerID ?? 0, Amount = 0.19m * TotalMoneyOfMsCompleted(j), TransactionType = 6, TransactionCode = "" , TransactionDate = DateTime.Now }); //get money when complete JOB
+                    await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = j.FreelancerID ?? 0, Amount = 0.01m * TotalMoneyOfMsCompleted(j), TransactionType = 10, TransactionCode = "" , TransactionDate = DateTime.Now }); //A get 1% money of completed MS when F complete JOB
                 }
                 //new co 1 ms bi fail thi E nhan duoc 20% tat ca nhung ms completed
                 else
                 {
                     employer.AmountMoney += 0.19m * TotalMoneyOfMsCompleted(j);
+                    await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = j.EmployerID, Amount = 0.19m * TotalMoneyOfMsCompleted(j), TransactionType = 7, TransactionCode = "" , TransactionDate = DateTime.Now }); //E get money when fail JOB
+                    await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = j.FreelancerID ?? 0, Amount = 0.01m * TotalMoneyOfMsCompleted(j), TransactionType = 10, TransactionCode = "" , TransactionDate = DateTime.Now }); //A get 1% money of completed MS when F complete JOB
                 }
             }
             await _dbContext.SaveChangesAsync();
@@ -345,6 +352,7 @@ namespace OpusLink.Service.MSServices
             }
             u.AmountMoney = u.AmountMoney + m.AmountToPay;
             m.Status = (int)MilestoneStatusEnum.EmployerCreated;
+            await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = j.EmployerID, Amount = m.AmountToPay, TransactionType = 11, TransactionCode = "" , TransactionDate = DateTime.Now }); //get back money from ms
             await _dbContext.SaveChangesAsync();
             return true;
         }
@@ -368,6 +376,7 @@ namespace OpusLink.Service.MSServices
             }
             u.AmountMoney = u.AmountMoney - m.AmountToPay;
             m.Status = (int)MilestoneStatusEnum.MoneyPutted;
+            await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = j.EmployerID, Amount = m.AmountToPay, TransactionType = 3, TransactionCode = "" , TransactionDate = DateTime.Now }); //put money to a MS
             await _dbContext.SaveChangesAsync();
             return true;
         }
@@ -404,7 +413,9 @@ namespace OpusLink.Service.MSServices
                 if (m.Status == (int)MilestoneStatusEnum.Completed)
                 {
                     total += m.AmountToPay *0.19m;
-                }else if(m.Status == (int)MilestoneStatusEnum.MoneyPutted)
+                    await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = j.FreelancerID ?? 0, Amount = 0.01m * m.AmountToPay, TransactionType = 10, TransactionCode = "" , TransactionDate = DateTime.Now }); //A get 1% money of completed MS when F fail JOB
+                }
+                else if(m.Status == (int)MilestoneStatusEnum.MoneyPutted)
                 {
                     total += m.AmountToPay;
                 }else if(m.Status == (int)MilestoneStatusEnum.EmployerRejected)
@@ -414,6 +425,16 @@ namespace OpusLink.Service.MSServices
             }
             employer.AmountMoney += total;
             await _dbContext.SaveChangesAsync();
+            return true;
+        }
+
+        public async Task<bool> IsAllowToGiveFeedback(int jobId, int userId)
+        {
+            var bol = await _dbContext.FeedbackUsers.FirstOrDefaultAsync(f=>f.JobID== jobId && (f.CreateByUserID==userId));
+            if (bol != null)
+            {
+                return false;
+            }
             return true;
         }
     }

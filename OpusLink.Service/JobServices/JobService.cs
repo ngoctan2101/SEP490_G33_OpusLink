@@ -104,9 +104,9 @@ namespace OpusLink.Service.JobServices
         public async Task<int> CreateNewJob(Job j)
         {
             var e = await _dbContext.Users.Where(u => u.Id == j.EmployerID).FirstOrDefaultAsync();
-            e.AmountMoney -= 200000;
+            e.AmountMoney -= 50000;
             await _dbContext.Jobs.AddAsync(j);
-
+            await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = j.EmployerID, Amount = 50000m, TransactionType = 4 , TransactionCode="", TransactionDate = DateTime.Now }); //phi post job
             await _dbContext.SaveChangesAsync();
             return j.JobID;
         }
@@ -124,7 +124,8 @@ namespace OpusLink.Service.JobServices
             if (b.Status != (int)JobStatusEnum.NotApprove)
             {
                 var e = await _dbContext.Users.Where(u => u.Id == b.EmployerID).FirstOrDefaultAsync();
-                e.AmountMoney -= 200000;
+                e.AmountMoney -= 50000;
+                await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = b.EmployerID, Amount = 50000m, TransactionType = 4, TransactionCode = "" , TransactionDate = DateTime.Now }); //phi post job
             }
             b.Status = (int)JobStatusEnum.NotApprove;
             await _dbContext.SaveChangesAsync();
@@ -240,7 +241,9 @@ namespace OpusLink.Service.JobServices
                             (filter.CategoryIDs.Count == 0 ? true : j.JobAndCategories.Any(jac => filter.CategoryIDs.Contains(jac.CategoryID))) &&
                             (j.BudgetFrom <= filter.BudgetMax && j.BudgetTo >= filter.BudgetMin) &&
                             (j.DateCreated >= filter.DateMin && j.DateCreated <= filter.DateMax) &&
-                            (filter.SearchStr.Length == 0 ? true : (j.JobTitle.Contains(filter.SearchStr) || j.JobContent.Contains(filter.SearchStr)))).ToList();
+                            (filter.SearchStr.Length == 0 ? true : (j.JobTitle.Contains(filter.SearchStr) || j.JobContent.Contains(filter.SearchStr))))
+            .OrderByDescending(j=>j.DateCreated)
+            .ToList();
 
 
 

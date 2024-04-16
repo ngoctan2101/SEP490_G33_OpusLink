@@ -336,13 +336,13 @@
                 <div class="col-md-4" style="display: flex;flex-direction: column;justify-content: center;align-items: center;">
                     @if (Model.job.Status == (int)MilestoneStatusEnum.Completed || Model.job.Status == (int)MilestoneStatusEnum.Failed)
                     {
-                        
+
                     }
-                    else if (Model.job.IsFreelancerConfirm && item.IsFreelancerDone == false && item.Deadline > DateTime.Now && userId==Model.job.FreelancerId)
+                    else if (Model.job.IsFreelancerConfirm && item.IsFreelancerDone == false && item.Deadline > DateTime.Now && userId == Model.job.FreelancerId)
                     {
                         <button type="button" id="openConfirmDoneMilestone" style="background-color:#00ACD4;color:white;display:block;margin:5px;min-width:150px" onclick="OpenConfirmDoneMilestone(@item.MilestoneID)">Đã làm xong</button>
                     }
-                    
+
                 </div>
             </div>
             soThuTu += 1;
@@ -368,28 +368,34 @@
                 </div>
             </form>
         </div>
-        
+
 
     }
     @if (Model.job.EmployerDoneEditMilestone == false && Model.job.IsFreelancerConfirm == false)
     {
         <h5>Hãy nhắn tin với Employer để cùng tạo ra một plan hợp lý nhé</h5>
     }
-    else if (Model.job.EmployerDoneEditMilestone == true && Model.job.IsFreelancerConfirm == true && userId==Model.job.FreelancerId)
+    else if (Model.job.EmployerDoneEditMilestone == true && Model.job.IsFreelancerConfirm == true && userId == Model.job.FreelancerId)
     {
-        if(Model.job.Status == (int)JobStatusEnum.Hired)
+        if (Model.job.Status == (int)JobStatusEnum.Hired)
         {
             <h5>Các bạn đã thống nhất một plan, bây giờ là lúc làm việc</h5>
         }
         else if (Model.job.Status == (int)JobStatusEnum.Completed)
         {
             <h5>Job đã kết thúc thành công.</h5>
-            <a asp-page="/Evaluate/FreelancerEvaluate" asp-route-jobId="@Model.job.JobId" asp-route-createByUserID="@Model.job.FreelancerId">Đánh giá employer</a>
+            if (Model.isAllowToGiveFeedback)
+            {
+                <a asp-page="/Evaluate/FreelancerEvaluate" asp-route-jobId="@Model.job.JobId" asp-route-createByUserID="@Model.job.FreelancerId">Đánh giá employer</a>
+            }
         }
         else if (Model.job.Status == (int)JobStatusEnum.Failed)
         {
             <h5>Job đã kết thúc thất bại.</h5>
-            <a asp-page="/Evaluate/FreelancerEvaluate" asp-route-jobId="@Model.job.JobId" asp-route-createByUserID="@Model.job.FreelancerId">Đánh giá employer</a>
+            if (Model.isAllowToGiveFeedback)
+            {
+                <a asp-page="/Evaluate/FreelancerEvaluate" asp-route-jobId="@Model.job.JobId" asp-route-createByUserID="@Model.job.FreelancerId">Đánh giá employer</a>
+            }
         }
 
     }

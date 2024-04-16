@@ -10,6 +10,11 @@
 @{
     ViewData["Title"] = "Freelancer View All Job";
 }
+<script type="text/javascript" src="https://cdn.jsdelivr.net/jquery/latest/jquery.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/momentjs/latest/moment.min.js"></script>
+<script type="text/javascript" src="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.min.js"></script>
+<link rel="stylesheet" type="text/css" href="https://cdn.jsdelivr.net/npm/daterangepicker/daterangepicker.css" />
+<script src="https://cdnjs.cloudflare.com/ajax/libs/dayjs/1.11.10/dayjs.min.js"></script>
 <style>
     .filter .td {
         padding-left: 10px;
@@ -157,7 +162,7 @@
                     </tr>
                     <tr>
                         <td class="td">
-                            <input style="margin-bottom: 5px;" type="text" name="daterange" id="dateInput" value="@Model.filter.getDateRange()" />
+                            <input style="margin-bottom: 5px;" type="text" name="daterange" id="dateInput" />
                         </td>
                     </tr>
                 </table>
@@ -301,9 +306,10 @@
     document.getElementById("price-min").addEventListener('change', function () {
         // Get the input element
         var input = document.getElementById("price-min");
-        var input1 = input.value.replaceAll(",", "");
-        input1 = input1.replaceAll("₫", "");
-        input1 = input1.replaceAll(" ", "");
+        var input1 = input.value.replace(/\D/g, '');
+        //var input1 = input.value.replaceAll(",", "");
+        //input1 = input1.replaceAll("₫", "");
+        //input1 = input1.replaceAll(" ", "");
         // Get the value and convert it to a number
         var value = parseFloat(input1);
         // Check if the value is a valid number
@@ -320,9 +326,10 @@
     document.getElementById("price-max").addEventListener('change', function () {
         // Get the input element
         var input = document.getElementById("price-max");
-        var input1 = input.value.replaceAll(",", "");
-        input1 = input1.replaceAll("₫", "");
-        input1 = input1.replaceAll(" ", "");
+        var input1 = input.value.replace(/\D/g, '');
+        //var input1 = input.value.replaceAll(",", "");
+        //input1 = input1.replaceAll("₫", "");
+        //input1 = input1.replaceAll(" ", "");
         // Get the value and convert it to a number
         var value = parseFloat(input1);
         // Check if the value is a valid number
@@ -463,6 +470,16 @@
     }
 </script>
 <script>
+    $('input[name="daterange"]').daterangepicker({
+        timePicker: false,
+        startDate: '@(Model.filter?.DateMin.ToString("dd/MM/yyyy"))',
+        endDate: '@(Model.filter?.DateMax.ToString("dd/MM/yyyy"))',
+        locale: {
+            format: 'DD/MM/YYYY'
+        }
+    });
+</script>
+<script>
     function validateBudgetFromAndTo() {
 
         var fromBudget = document.getElementById("price-min").value.replace(/\D/g, '');
@@ -505,7 +522,32 @@
         var endDate = new Date(dates[1]);
 
         if (!isValidDate(dates[0]) || !isValidDate(dates[1])) {
-            errorMessage.innerHTML ="Invalid date format. Please enter dates in the format mm/dd/yyyy";
+            errorMessage.innerHTML = "Invalid date format. Please enter dates in the format mm/dd/yyyy";
+            return false;
+        }
+
+        if (startDate >= endDate) {
+            errorMessage.innerHTML = "End date should be greater than start date.";
+            return false;
+        }
+        var dateInput = document.getElementById("dateInput").value;
+        var dates = dateInput.split(" - ");
+
+        if (dates.length !== 2) {
+            errorMessage.innerHTML = "Please enter two dates in the format dd/mm/yyyy - dd/mm/yyyy";
+            return false;
+        }
+
+        var parts1 = dates[0].split('/');
+        var parts2 = dates[1].split('/');
+
+
+
+        var startDate = new Date(parseInt(parts1[2], 10), parseInt(parts1[1], 10) - 1, parseInt(parts1[0], 10));
+        var endDate = new Date(parseInt(parts2[2], 10), parseInt(parts2[1], 10) - 1, parseInt(parts2[0], 10));
+
+        if (!isValidDate(dates[0]) || !isValidDate(dates[1])) {
+            errorMessage.innerHTML = "Invalid date format. Please enter dates in the format dd/mm/yyyy";
             return false;
         }
 
@@ -519,7 +561,7 @@
     function isValidDate(date) {
 
         // Date format: YYYY-MM-DD
-        var datePattern = /^(0[1-9]|1[0-2])\/(0[1-9]|[12]\d|3[01])\/([12]\d{3})/;
+        var datePattern = /^(0[1-9]|[1-2][0-9]|3[0-1])\/(0[1-9]|1[0-2])\/([12]\d{3})$/;
 
         // Check if the date string format is a match
         var matchArray = date.match(datePattern);
@@ -532,8 +574,8 @@
 
         // Parse integer values from the date string
         var year = parseInt(dateString.substr(4, 4));
-        var month = parseInt(dateString.substr(0,2));
-        var day = parseInt(dateString.substr(2, 2));
+        var day = parseInt(dateString.substr(0, 2));
+        var month = parseInt(dateString.substr(2, 2));
 
         // Define the number of days per month
         var daysInMonth = [31, 28, 31, 30, 31, 30, 31, 31, 30, 31, 30, 31];
@@ -548,4 +590,5 @@
         }
         return true;
     }
+</script>
 </script>
