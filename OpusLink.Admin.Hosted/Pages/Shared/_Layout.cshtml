@@ -1,6 +1,7 @@
 ﻿@inject IHttpContextAccessor HttpContextAccessor;
-
-
+@{
+    int? userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId") ?? null;
+}
 <!DOCTYPE html>
 <html lang="en">
 
@@ -303,7 +304,7 @@
                     </a>
                     <a asp-page="/Admin/Employee/Index">@*Copy cai nay vao OnGet cua ManageWallet: HttpContext.Session.SetString("PageNow", "ManageWallet");*@
                     @* <li style="@f">Manage Wallet</li> *@
-                    <li style="@f">Quản lý ví tiền</li>
+                   @*  <li style="@f">Quản lý ví tiền</li> *@
                     </a>
                     <a asp-page="/JOB/AdminViewListJobRequestedPage">
                     @* <li style="@g">Manage Job Request</li> *@
@@ -328,7 +329,7 @@
                         Admin <i id="setting-icon" class="bi bi-gear"></i>
                     </button>
                     <div id="admin-dropdown" class="dropdown-menu" aria-labelledby="adminDropdownButton">
-                        <a class="dropdown-item" asp-page="/Admin/Profile/Index">Thông tin Admin</a>
+                        @* <a class="dropdown-item" asp-page="/Freelancer/Profile/Views?UserId=@userId">Thông tin Admin</a> *@
                         <form asp-page="/Index" asp-page-handler="ForLogOut" method="post">
                             <button class="dropdown-item">Đăng xuất</button>
                         </form>

@@ -128,6 +128,9 @@
 
                 <!-- Thông tin bên phải -->
                 <div class="col-md-6">
+                    <a href="/ManageUser/HistoryPay?UserId=@Model.user.Id" class="btn btn btn-primary mt-3">
+                        <i class="bi bi-arrow-left"></i> Lịch sử giao dịch
+                    </a>
                     <div class="mb-3">
                         <label for="id" class="form-label">ID</label>
                         <input type="text" class="form-control" id="id" name="id"  readonly value="@Model.user.Id">
@@ -185,11 +188,11 @@
                     <label for="amountmoney" class="form-label">Thông tin tài khoản ngân hàng</label>
                     @* <input type="text" class="form-control" id="bankaccountinfor" name="bankaccountinfor"
                     readonly value="@Model.user.BankAccountInfor"> *@
-                    <textarea rows="7" style="width:100%" id="bankaccountinfor" name="bankaccountinfor" >@Model.user.BankAccountInfor</textarea>
+                    <textarea rows="7" style="width:100%" id="bankaccountinfor" readonly name="bankaccountinfor">@Model.user.BankAccountInfor</textarea>
                 </div>
                 <div class="mb-3">
                     <label for="amountmoney" class="form-label">Tên tài khoản ngân hàng</label>
-                    <input type="text" class="form-control" id="bankname" name="bankname"
+                    <input type="text" class="form-control" readonly id="bankname" name="bankname"
                            value="@Model.user.BankName">
                 </div>
                     <!-- Nút Back -->

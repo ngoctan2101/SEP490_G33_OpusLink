@@ -132,7 +132,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
             noti.NotificationContent = resonres;
             noti.IsReaded = false;
             //https://localhost:7131/WithDrawMoney/WithDrawMoneyRequest?UserId=1
-            noti.Link = "https://localhost:7131/WithDrawMoney/WithDrawMoneyRequest?UserId=" + uidres + "";
+            noti.Link = "/WithDrawMoney/WithDrawMoneyRequest?UserId=" + uidres + "";
             noti.NotificationDate = DateTime.Now;
 
             var notifi = System.Text.Json.JsonSerializer.Serialize(noti);
@@ -225,14 +225,13 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
             }
             if(flat == false)
             {
-                mess = "Mã giao dịch đã tồn tại";
-                //return RedirectToPage("/ManagerWithDrawRequest/Views");
+                //mess = "Mã giao dịch đã tồn tại";
+               
                 HttpContext.Session.SetString("Notification", "Mã giao dịch đã tồn tại");
                 HttpContext.Session.SetInt32("NotiIsNew", 1);
-                //return Redirect("/ManagerWithDrawRequest/Views");
+
                 return RedirectToPage("/ManagerWithDrawRequest/Views");
-                //return Redirect("/ManagerWithDrawRequest/Views");
-                //return Page();
+                
             }
 
             // waillet - tien
@@ -276,7 +275,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
             noti.UserID = uidres;
             noti.NotificationContent = "Rút tiền thành công";
             noti.IsReaded = false;
-            noti.Link = "https://localhost:7131/HistoryPayment/HistoryPaymentDetail?payId="+HisPayId+"";
+            noti.Link = "/HistoryPayment/HistoryPaymentDetail?payId="+HisPayId+"";
             noti.NotificationDate = DateTime.Now;
 
             var notifi = System.Text.Json.JsonSerializer.Serialize(noti);

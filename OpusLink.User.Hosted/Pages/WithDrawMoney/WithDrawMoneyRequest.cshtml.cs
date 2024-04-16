@@ -122,9 +122,9 @@ namespace OpusLink.User.Hosted.Pages.WithDrawMoney
                 //HttpContext.Session.SetString(ErrorKey, "Số tiền rút không được quá số dư tài khoản");
                 return Page();
             }
-            if (user.AmountMoney < Convert.ToDecimal(price))
+            if (user.AmountMoney < Convert.ToDecimal(price) || Convert.ToDecimal(price) <= 0)
             {
-                ErrorKey = "Số tiền rút không được quá số dư tài khoản";
+                ErrorKey = "Số tiền rút không được quá số dư tài khoản và phải lớn hơn 0";
                 //HttpContext.Session.SetString(ErrorKey, "Số tiền rút không được quá số dư tài khoản");
                 return Page();
             }

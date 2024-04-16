@@ -1,0 +1,79 @@
+﻿@page
+@model OpusLink.Admin.Hosted.Pages.ManageUser.HistoryPayDetailModel
+@{
+}
+
+<style>
+    .container_historupayDetail{
+        margin-top: 20px;
+        background-color: #fff;
+        padding: 20px;
+        border-radius: 8px;
+        box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        
+    }
+</style>
+<div class="row">
+    <div class="col-md-2"></div>
+    <div class="col-md-8 container_historupayDetail">
+        <h1 class="text-center mb-4">View invoice</h1>
+        <div class="row">
+            <div class="offset-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <h5 class="card-title">Payment Details</h5>
+                        <table class="table">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Mã giao dịch</th>
+                                    <th scope="col">Ngày Giao dịch</th>
+                                    <th scope="col">Số tiền giao dịch</th>
+                                    <th scope="col">Loại giao dịch</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                <tr>
+                                    <td>@Model.his.TransactionCode</td>
+                                    <td>@Model.his.TransactionDate</td>
+                                    <td>@((Model.his.Amount).ToString("#,###")) ₫</td>
+
+                                    @if (Model.his.TransactionType == 1)
+                                    {
+                                        <td>Nạp tiền</td>
+                                    }
+                                    else if (Model.his.TransactionType == 2)
+                                    {
+                                        <td>Rút tiền</td>
+                                    }
+                                    else if (Model.his.TransactionType == 3)
+                                    {
+                                        <td>Đặt cọc tiền</td>
+                                    }
+                                    else if (Model.his.TransactionType == 4)
+                                    {
+                                        <td>Tiền đăng bài</td>
+                                    }
+                                    else if (Model.his.TransactionType == 5)
+                                    {
+                                        <td>Tiền nhận ở mỗi miston</td>
+                                    }
+                                    else if (Model.his.TransactionType == 6)
+                                    {
+                                        <td>Tiền giữ 20%</td>
+                                    }
+
+                                </tr>
+                                <!-- You can add more rows dynamically with data -->
+                            </tbody>
+                        </table>
+                        <a href="/ManageUser/HistoryPay?UserId=@Model.his.UserID" class="btn btn-primary">Lịch sử giao dịch</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="col-md-2"></div>
+</div>
+    
+
+

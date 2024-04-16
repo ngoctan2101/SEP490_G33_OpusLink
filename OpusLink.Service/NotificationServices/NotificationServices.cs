@@ -112,7 +112,7 @@ namespace OpusLink.Service.NotificationServices
         {
             try
             {
-                var noti = _context.Notifications.Include(x => x.User).Where(x => x.UserID == uid && x.NotificationDate.Date == DateTime.Today).OrderByDescending(x => x.NotificationDate).Take(5).ToList();
+                var noti = _context.Notifications.Include(x => x.User).Where(x => x.UserID == uid && x.NotificationDate.Date == DateTime.Today).OrderByDescending(x => x.NotificationDate).ToList();
                 var count = noti.Count;
                 return count;
 

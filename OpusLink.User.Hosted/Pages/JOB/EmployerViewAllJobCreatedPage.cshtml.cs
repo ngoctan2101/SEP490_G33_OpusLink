@@ -115,8 +115,8 @@ namespace OpusLink.User.Hosted.Pages.JOB
                 {
                     string date1 = collection[key].ToString().Split('-')[0].Trim();
                     string date2 = collection[key].ToString().Split('-')[1].Trim();
-                    filter.DateMin = DateTime.ParseExact(date1, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-                    filter.DateMax = DateTime.ParseExact(date2, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                    filter.DateMin = DateTime.ParseExact(date1, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    filter.DateMax = DateTime.ParseExact(date2, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 }
                 else if (key.Contains("pageNo"))
                 {
