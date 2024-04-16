@@ -32,7 +32,7 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
                 BudgetMin = 100000,
                 BudgetMax = 500000000,
                 DateMin = DateTime.ParseExact("2023-01-01 00:01", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture),
-                DateMax = DateTime.ParseExact("2024-03-30 23:59", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture)
+                DateMax = DateTime.ParseExact("2024-05-30 23:59", "yyyy-MM-dd HH:mm", CultureInfo.InvariantCulture)
             };
         }
         public async Task<IActionResult> OnGetAsync()
@@ -109,8 +109,8 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
                 {
                     string date1 = collection[key].ToString().Split('-')[0].Trim();
                     string date2 = collection[key].ToString().Split('-')[1].Trim();
-                    filter.DateMin = DateTime.ParseExact(date1, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-                    filter.DateMax = DateTime.ParseExact(date2, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                    filter.DateMin = DateTime.ParseExact(date1, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    filter.DateMax = DateTime.ParseExact(date2, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 }
                 else if (key.Contains("pageNo"))
                 {
@@ -189,8 +189,8 @@ namespace OpusLink.Admin.Hosted.Pages.JOB
                 {
                     string date1 = collection[key].ToString().Split('-')[0].Trim();
                     string date2 = collection[key].ToString().Split('-')[1].Trim();
-                    filter.DateMin = DateTime.ParseExact(date1, "MM/dd/yyyy", CultureInfo.InvariantCulture);
-                    filter.DateMax = DateTime.ParseExact(date2, "MM/dd/yyyy", CultureInfo.InvariantCulture);
+                    filter.DateMin = DateTime.ParseExact(date1, "dd/MM/yyyy", CultureInfo.InvariantCulture);
+                    filter.DateMax = DateTime.ParseExact(date2, "dd/MM/yyyy", CultureInfo.InvariantCulture);
                 }
                 else if (key.Contains("pageNo"))
                 {

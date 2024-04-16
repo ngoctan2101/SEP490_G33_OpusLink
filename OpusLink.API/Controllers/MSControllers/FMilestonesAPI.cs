@@ -55,6 +55,12 @@ namespace OpusLink.API.Controllers.MSControllers
                 return BadRequest("Can not set status to review");
             }
         }
+        [HttpGet("IsAllowToGiveFeedback/{jobId}/{freelancerId}")]
+        public async Task<IActionResult> IsAllowToGiveFeedback([FromRoute] int jobId, [FromRoute] int freelancerId)
+        {
 
+            bool result = await milestoneService.IsAllowToGiveFeedback(jobId, freelancerId);
+            return Ok(result);
+        }
     }
 }

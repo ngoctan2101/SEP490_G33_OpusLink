@@ -173,6 +173,9 @@ internal class Program
         });
         services.AddIdentity<User, Role>().AddEntityFrameworkStores<OpusLinkDBContext>().AddDefaultTokenProviders();
         services.AddIdentityCore<User>();
+/*        services.AddIdentity<User, IdentityRole>(options => {
+            options.User.AllowedUserNameCharacters = "abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ0123456789-._@+/ ";
+        });*/
         services.Configure<IdentityOptions>(options =>
         {
             //setting for password

@@ -84,13 +84,48 @@
 												@if (hp.TransactionType == 1)
 												{
 													<span><i class="fa fa-arrow-up" aria-hidden="true"></i></span>
-													<span>@((hp.Amount).ToString("#,###")) ₫</span>
 												}
-												else
+												else if (hp.TransactionType == 2)
 												{
 													<span><i class="fa fa-arrow-down" aria-hidden="true"></i></span>
-													<span>@((hp.Amount).ToString("#,###")) ₫</span>
 												}
+												else if (hp.TransactionType == 3)
+												{
+													<span><i class="fa fa-arrow-down" aria-hidden="true"></i></span>
+												}
+												else if (hp.TransactionType == 4)
+												{
+													<span><i class="fa fa-arrow-down" aria-hidden="true"></i></span>
+												}
+												else if (hp.TransactionType == 5)
+												{
+													<span><i class="fa fa-arrow-up" aria-hidden="true"></i></span>
+												}
+												else if (hp.TransactionType == 6)
+												{
+													<span><i class="fa fa-arrow-up" aria-hidden="true"></i></span>
+												}
+												else if (hp.TransactionType == 7)
+												{
+													<span><i class="fa fa-arrow-up" aria-hidden="true"></i></span>
+												}
+												else if (hp.TransactionType == 8)
+												{
+													<span><i class="fa fa-arrow-up" aria-hidden="true"></i></span>
+												}
+												else if (hp.TransactionType == 9)
+												{
+													<a>--------------------------------</a>
+												}
+												else if (hp.TransactionType == 10)
+												{
+													<span><i class="fa fa-arrow-down" aria-hidden="true"></i></span>
+												}
+												else if (hp.TransactionType == 11)
+												{
+													<span><i class="fa fa-arrow-up" aria-hidden="true"></i></span>
+												}
+												<span>@((hp.Amount).ToString("#,###")) ₫</span>
 
 											</div>
 										</td>
@@ -98,27 +133,47 @@
 											@*//<span class="badge fs-6 fw-normal bg-tint-success text-success">@hp.TransactionType</span>*@
 											@if (hp.TransactionType == 1)
 											{
-												<a>Nạp Tiền</a>
+												<a>Nạp tiền vào app</a>
 											}
 											else if (hp.TransactionType == 2)
 											{
-												<a>Rút Tiền</a>
+												<a>Rút từ app</a>
 											}
 											else if (hp.TransactionType == 3)
 											{
-												<a>Đặt Cọc Tiền </a>
+												<a>Employer đặt tiền vào một Milestone</a>
 											}
 											else if (hp.TransactionType == 4)
 											{
-												<a>Thanh Toán Job</a>
+												<a>Phí đăng job</a>
 											}
 											else if (hp.TransactionType == 5)
 											{
-												<a>Phí MileStone</a>
+												<a>Freelancer nhận 80% tiền ở milestone khi milestone success</a>
 											}
 											else if (hp.TransactionType == 6)
 											{
-												<a>Đã Giữ Tiền</a>
+												<a>Freelancer nhận 19% của tất cả những milestone đã hoàn thành sau khi job kết thúc thành công</a>
+											}
+											else if (hp.TransactionType == 7)
+											{
+												<a>Employer nhận 19% của tất cả những milestone đã hoàn thành sau khi job kết thúc thất bại</a>
+											}
+											else if (hp.TransactionType == 8)
+											{
+												<a>Employer nhận 100% tiền của Milestone khi Milestone đó Fail</a>
+											}
+											else if (hp.TransactionType == 9)
+											{
+												<a>--------------------------------</a>
+											}
+											else if (hp.TransactionType == 10)
+											{
+												<a>Freelancer chịu phí 1% của những milestone thành công</a>
+											}
+											else if (hp.TransactionType == 11)
+											{
+												<a>Employer lấy lại tiền đã đặt cọc</a>
 											}
 										</td>
 									</tr>

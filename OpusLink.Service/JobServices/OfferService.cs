@@ -61,6 +61,7 @@ namespace OpusLink.Service.JobServices
                 .Include("Job.Offers")
                 .Include("Job.Location")
                 .Where(s => s.FreelancerID == userId)
+                .OrderByDescending(s=>s.DateOffer)
                 .ToListAsync();
         }
 

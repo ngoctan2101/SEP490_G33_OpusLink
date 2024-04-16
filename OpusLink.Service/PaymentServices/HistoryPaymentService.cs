@@ -137,7 +137,7 @@ namespace OpusLink.Service.PaymentServices
 		public async Task<DataIncomePerYear> GetDataIncome(int year)
 		{
             DataIncomePerYear data = new DataIncomePerYear();
-            var hps = await _context.HistoryPayments.Where(h=>h.TransactionDate.Year==year &&  h.TransactionType == 10).ToListAsync();
+            var hps = await _context.HistoryPayments.Where(h=>h.TransactionDate.Year==year &&  (h.TransactionType == 10 || h.TransactionType == 4)).ToListAsync();
             foreach(var h in hps)
             {
                 if (h.TransactionDate.Month == 1)
@@ -197,7 +197,7 @@ namespace OpusLink.Service.PaymentServices
 
         public async Task<List<HistoryPayment>> GetHistory(int month, int year)
         {
-           return await _context.HistoryPayments.Where(h => h.TransactionDate.Year == year && h.TransactionDate.Month == month && h.TransactionType == 10).ToListAsync();
+           return await _context.HistoryPayments.Where(h => h.TransactionDate.Year == year && h.TransactionDate.Month == month && (h.TransactionType == 10 || h.TransactionType == 4)).ToListAsync();
         }
     }
 }

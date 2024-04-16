@@ -303,7 +303,12 @@
 
 				if (response.ok) {
 					document.getElementById("notifai").innerHTML = 'Feedback thành công';
+					document.getElementById("btn-submit").disabled = true;
 					displayMessage();
+					setTimeout(function () {
+						// Code to execute after 3 seconds
+						window.location.href = "../MS/EmployerViewAllMS?jobID=" + @Model.JobID;
+					}, 3000)
 					//// Feedback successfully submitted
 					//console.log('Feedback submitted successfully');
 					//alert('Feedback submitted successfully');

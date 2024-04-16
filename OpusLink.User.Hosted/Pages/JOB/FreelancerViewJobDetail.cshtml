@@ -453,8 +453,13 @@
             }
         }, 1000);
     }
-    var x = new Date("@( Model.job.EndHiringDate.ToString("yyyy-MM-ddTHH:mm:ss"))");
-    startCountdown(x, "countdown_" + @Model.job.JobId);
+    @if (Model.job.Status == (int)JobStatusEnum.Hiring && Model.job.EndHiringDate > DateTime.Now)
+    {
+        <text>
+               var x = new Date("@Model.job.EndHiringDate.ToString("yyyy-MM-ddTHH:mm:ss")");
+                startCountdown(x, "countdown_" + @Model.job.JobId);
+        </text>
+    }
 
 </script>
 <script>

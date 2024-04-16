@@ -141,6 +141,13 @@ namespace OpusLink.API.Controllers.MSControllers
                 return BadRequest("Can not set job fail");
             }
         }
+        [HttpGet("IsAllowToGiveFeedback/{jobId}/{employerId}")]
+        public async Task<IActionResult> IsAllowToGiveFeedback([FromRoute] int jobId, [FromRoute] int employerId)
+        {
+
+            bool result = await milestoneService.IsAllowToGiveFeedback(jobId, employerId);
+            return Ok(result);
+        }
     }
 
 }
