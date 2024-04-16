@@ -227,7 +227,11 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
             {
                 mess = "Mã giao dịch đã tồn tại";
                 //return RedirectToPage("/ManagerWithDrawRequest/Views");
-                return Redirect("/ManagerWithDrawRequest/Views");
+                HttpContext.Session.SetString("Notification", "Mã giao dịch đã tồn tại");
+                HttpContext.Session.SetInt32("NotiIsNew", 1);
+                //return Redirect("/ManagerWithDrawRequest/Views");
+                return RedirectToPage("/ManagerWithDrawRequest/Views");
+                //return Redirect("/ManagerWithDrawRequest/Views");
                 //return Page();
             }
 
