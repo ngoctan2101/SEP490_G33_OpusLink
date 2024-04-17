@@ -254,7 +254,7 @@ namespace OpusLink.Service.AccountServices
                         };
                     }
 
-                    if(!userIdentity.EmailConfirmed)
+                    /*if(!userIdentity.EmailConfirmed)
                     {
                         return new ApiResponseModel
                         {
@@ -262,7 +262,7 @@ namespace OpusLink.Service.AccountServices
                             IsSuccess = false,
                             Message = TotalMessage.LoginErrorEmailConfirm
                         };
-                    }
+                    }*/
 
                     if (userIdentity.Status == 0)
                         if (userIdentity.EndBanDate > DateTime.Now)
