@@ -132,6 +132,21 @@
         background-color: #CD2000;
         color: white !important;
     }
+
+    .feedbackbtn {
+        /* Thiết lập các thuộc tính CSS tùy theo ý của bạn */
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff; /* Màu nền */
+        color: #fff; /* Màu chữ */
+        text-decoration: none;
+        border-radius: 5px;
+    }
+
+        .feedbackbtn:hover {
+            background-color: #0056b3; /* Màu nền khi hover */
+            color: #fff; /* Màu chữ khi hover */
+        }
 </style>
 <div id="confirmDoneMilestone" class="modal">
     <!-- Modal delete -->
@@ -386,7 +401,7 @@
             <h5>Job đã kết thúc thành công.</h5>
             if (Model.isAllowToGiveFeedback)
             {
-                <a asp-page="/Evaluate/FreelancerEvaluate" asp-route-jobId="@Model.job.JobId" asp-route-createByUserID="@Model.job.FreelancerId">Đánh giá employer</a>
+                <a class="feedbackbtn" asp-page="/Evaluate/FreelancerEvaluate" asp-route-jobId="@Model.job.JobId" asp-route-createByUserID="@Model.job.FreelancerId">Đánh giá employer</a>
             }
         }
         else if (Model.job.Status == (int)JobStatusEnum.Failed)
@@ -394,7 +409,7 @@
             <h5>Job đã kết thúc thất bại.</h5>
             if (Model.isAllowToGiveFeedback)
             {
-                <a asp-page="/Evaluate/FreelancerEvaluate" asp-route-jobId="@Model.job.JobId" asp-route-createByUserID="@Model.job.FreelancerId">Đánh giá employer</a>
+                <a class="feedbackbtn" asp-page="/Evaluate/FreelancerEvaluate" asp-route-jobId="@Model.job.JobId" asp-route-createByUserID="@Model.job.FreelancerId">Đánh giá employer</a>
             }
         }
 

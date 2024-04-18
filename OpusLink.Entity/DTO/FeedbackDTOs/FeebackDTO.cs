@@ -12,7 +12,10 @@ namespace OpusLink.Entity.DTO.FeedbackDTOs
 		public int JobID { get; set; }
 		public int CreateByUserID { get; set; }
 		public int TargetToUserID { get; set; }
-		public decimal Star { get; set; }
+        
+        public String CreateByUserName { get; set; }
+        public String TargetToUserName { get; set; }
+        public decimal Star { get; set; }
 		public string Content { get; set; }
 		public DateTime DateCreated { get; set; }
 		

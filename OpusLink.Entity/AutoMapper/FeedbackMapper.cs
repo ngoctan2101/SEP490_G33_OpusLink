@@ -14,7 +14,10 @@ namespace OpusLink.Entity.AutoMapper
 	{
 		public FeedbackMapper()
 		{
-			CreateMap<FeedbackUser, FeebackDTO>();
+			CreateMap<FeedbackUser, FeebackDTO>()
+				.ForMember(x => x.CreateByUserName, opt => opt.MapFrom(x => x.CreateByUser.UserName))
+				.ForMember(x => x.TargetToUserName, opt => opt.MapFrom(x => x.TargetToUser.UserName))
+				;
 
 
 		}
