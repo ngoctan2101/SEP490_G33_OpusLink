@@ -115,6 +115,8 @@ namespace OpusLink.User.Hosted.Pages
                         if (apiResponse.IsSuccess)
                         {
                             HttpContext.Session.Clear();
+                            HttpContext.Session.SetString("Notification", "Đăng xuất thành công");
+                            HttpContext.Session.SetInt32("NotiIsNew", 1);
                             return RedirectToPage("/JOB/FreelancerViewAllJobPage");
                         }
                         else
