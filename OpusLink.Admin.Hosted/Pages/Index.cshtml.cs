@@ -51,6 +51,8 @@ namespace OpusLink.Admin.Hosted.Pages
                         if (apiResponse.IsSuccess)
                         {
                             HttpContext.Session.Clear();
+                            HttpContext.Session.SetString("Notification", "Đăng xuất thành công");
+                            HttpContext.Session.SetInt32("NotiIsNew", 1);
                             return RedirectToPage("/Account/Login");
                         }
                         else

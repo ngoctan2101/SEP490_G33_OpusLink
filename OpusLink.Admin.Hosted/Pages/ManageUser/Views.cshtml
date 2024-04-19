@@ -176,11 +176,11 @@
                                 {
                                     var base64Image = Convert.ToBase64String(item.UserImageBytes);
                                     var imgSrc = $"data:image/png;base64,{base64Image}";
-                                    <img id="profileImage" src="@imgSrc" style="width:auto;height:100px;display:block" />
+                                        <img id="profileImage" src="@imgSrc" style="width:auto;height:100px;display:block" />
                                 }
                                 else
                                 {
-                                    <img id="profileImage" src="/img/default.png" style="width:auto;height:100px;display:block;margin-bottom:10px" />
+                                        <img id="profileImage" src="/img/default.png" style="width:auto;height:100px;display:block;margin-bottom:10px" />
                                 }
                             }
                         </td>
@@ -287,28 +287,27 @@
 <script>
     $(document).ready(function () {
         $("button.show").click(function () {
-            var userID = $(this).data("userid");
+            if (confirm("Bạn có thực sự muốn mở khóa tài khoản này không?")) {
+                var userID = $(this).data("userid");
 
-            // Lỗi dữ liệu
-            console.log(userID);
-
-            // Ajax request
-            $.ajax({
-                url: `@(UrlConstant.ApiBaseUrl)/User/UnBanUser?userId=` + userID,
-                headers: {
-                    "ngrok-skip-browser-warning": true,
-                    "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
-                },
-                method: 'PATCH',
-                contentType: 'application/json',
-                success: function (response) {
-                    alert("Mở khóa tài khoản thành công!");
-                    window.location.reload();
-                },
-                error: function (xhr, status, error) {
-                    alert("Mở khóa tài khoản thất bại!");
-                }
-            });
+                // Ajax request
+                $.ajax({
+                    url: `@(UrlConstant.ApiBaseUrl)/User/UnBanUser?userId=` + userID,
+                    headers: {
+                        "ngrok-skip-browser-warning": true,
+                        "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
+                    },
+                    method: 'PATCH',
+                    contentType: 'application/json',
+                    success: function (response) {
+                        alert("Mở khóa tài khoản thành công!");
+                        window.location.reload();
+                    },
+                    error: function (xhr, status, error) {
+                        alert("Mở khóa tài khoản thất bại!");
+                    }
+                });
+            };
 
             // Đóng modal sau khi submit
             $("#myModal").css("display", "none");

@@ -1,4 +1,5 @@
 ﻿@page
+@inject IHttpContextAccessor HttpContextAccessor;
 @model OpusLink.Admin.Hosted.Pages.Account.LoginModel
 @{
     Layout = null;
@@ -30,8 +31,46 @@
             document.getElementById('Password').value = ''
         };
     </script>
+    <style>
+        .moda {
+            display: none; /* Hidden by default */
+            position: fixed; /* Stay in place */
+            z-index: 1; /* Sit on top */
+            padding-top: 10px; /* Location of the box */
+            left: 0;
+            top: 0;
+            width: 100%; /* Full width */
+            height: 20%; /* Full height */
+        }
+        /* Modal Content */
+        .moda-content {
+            background-color: #0FFF4B;
+            border-radius: 10px;
+            text-align: center;
+            margin: auto;
+            padding: 0;
+            width: 50%;
+            -webkit-animation-name: animatetop;
+            -webkit-animation-duration: 0.4s;
+            animation-name: animatetop;
+            animation-duration: 0.4s
+        }
+
+        .moda-body {
+            padding: 20px 50px 20px 50px;
+            border-radius: 10%;
+        }
+    </style>
 </head>
 <body>
+    <div id="NotificationModal" class="moda">
+        <!-- Modal Notification -->
+        <div class="moda-content" id="notifaiDiv">
+            <div class="moda-body">
+                <h5 id="notifai">@(HttpContextAccessor.HttpContext.Session.GetString("Notification") ?? "")</h5>
+            </div>
+        </div>
+    </div>
     <div class="wrapper container-fluid">
         <form method="post">
             <h1>Đăng nhập - Admin</h1>
@@ -54,6 +93,25 @@
             }
             <button type="submit" class="btn-confirm">Đăng nhập</button>
         </form>
+        <script>
+            //thong bao hien ra 3 giay roi an di
+            function displayMessage() {
+                var message = document.getElementById("NotificationModal");
+                message.style.display = "block";
+                setTimeout(function () {
+                    message.style.display = "none";
+                }, 3000); // 3000 milliseconds = 3 seconds
+            }
+        </script>
+        @if (HttpContextAccessor.HttpContext.Session.GetInt32("NotiIsNew") == 1)
+        {
+            <script>
+                displayMessage();
+            </script>
+            HttpContextAccessor.HttpContext.Session.SetInt32("NotiIsNew", 0);
+
+        }
     </div>
 </body>
 </html>
+

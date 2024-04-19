@@ -19,6 +19,7 @@ namespace OpusLink.Admin.Hosted.Pages.Account
 
         public async Task<IActionResult> OnPostAsync(string username, string password)
         {
+            HttpContext.Session.Clear();
             if (!IsPasswordValid(password))
             {
                 ViewData["Error"] = TotalMessage.LoginError;
@@ -51,6 +52,8 @@ namespace OpusLink.Admin.Hosted.Pages.Account
 
                             HttpContext.Session.SetInt32("UserId", Int32.Parse(userId));
                             HttpContext.Session.SetString("token", token);
+                            HttpContext.Session.SetString("Notification", "Đăng nhập thành công");
+                            HttpContext.Session.SetInt32("NotiIsNew", 1);
 
                             /*return RedirectToPage("/Index", new { token = apiResponse.Data.ToString() });*/
                             return RedirectToPage("/Index");
