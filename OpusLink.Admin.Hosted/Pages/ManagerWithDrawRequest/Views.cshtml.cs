@@ -231,6 +231,8 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
                 HttpContext.Session.SetInt32("NotiIsNew", 1);
 
                 return RedirectToPage("/ManagerWithDrawRequest/Views");
+
+
                 
             }
 
