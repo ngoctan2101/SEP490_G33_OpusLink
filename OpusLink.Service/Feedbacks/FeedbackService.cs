@@ -78,6 +78,8 @@ namespace OpusLink.Service.Feedbacks
                     JobID = f.JobID,
                     CreateByUserID = f.CreateByUserID,
                     TargetToUserID = f.TargetToUserID,
+                    CreateByUserName = f.CreateByUser.UserName,
+                    TargetToUserName = f.TargetToUser.UserName,
                     Star = f.Star,
                     Content = f.Content,
                     DateCreated = f.DateCreated
