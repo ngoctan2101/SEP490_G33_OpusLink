@@ -20,6 +20,7 @@ namespace OpusLink.Service.Admin
         void UpdateAmountMoney(double money,int userId);
         public void WithdrawMoney(double money, int userId);
         void UpdateBanUser(string banReason, DateTime endBanDate, int userId);
+        bool UpdateBanUser1(string banReason, DateTime endBanDate, int userId);
         void UpdateUnBanUser(int userId);
         public void UpdateBankAccUser(BankAccDTO usedto);
     }
@@ -232,6 +233,33 @@ namespace OpusLink.Service.Admin
             else
             {
                 throw new Exception("User not found");
+            }
+        }
+
+        public bool UpdateBanUser1(string banReason, DateTime endBanDate, int userId)
+        {
+            Entity.Models.User user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            var isUserInJob = _context.Jobs.Where(j => j.EmployerID == userId || j.FreelancerID == userId).ToList();
+            if (isUserInJob.Count > 0)
+            {
+                return false;
+            }
+            else
+            {
+                if (user != null)
+                {
+                    user.BanReason = banReason;
+                    user.EndBanDate = endBanDate;
+                    user.Status = 0;
+
+                    _context.Update(user);
+                    _context.SaveChanges();
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
             }
         }
 
