@@ -24,7 +24,6 @@ namespace OpusLink.API.Controllers.AccountControllers
         {
             var job = _context.Jobs.FirstOrDefault(j => j.EmployerID == reportAccountDTO.CreateByUserID && j.FreelancerID == reportAccountDTO.TargetToUserID ||
             j.EmployerID == reportAccountDTO.TargetToUserID && j.FreelancerID == reportAccountDTO.CreateByUserID);
-
             if (job == null)
             {
                 return new ApiResponseModel

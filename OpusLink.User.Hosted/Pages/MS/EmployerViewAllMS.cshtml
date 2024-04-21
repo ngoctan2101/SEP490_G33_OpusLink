@@ -152,7 +152,7 @@
         <!-- Modal request -->
         <div class="modal-content">
             <div class="modal-header">
-                <h2 style="font-size:24px">Yêu cầu freelancer chấp nhận plan</h2>
+                <h2 style="font-size:24px">Yêu cầu freelancer chấp nhận kế hoạch</h2>
                 <span class="close">&times;</span>
             </div>
             <div class="modal-body">
@@ -410,7 +410,7 @@
         <!-- Modal Resolve -->
         <div class="modal-content">
             <div class="modal-header">
-                <h2 style="font-size:24px">Resolve problem</h2>
+                <h2 style="font-size:24px">Giải quyết vấn đề</h2>
                 <span class="close">&times;</span>
             </div>
             <div class="modal-body">
@@ -420,28 +420,28 @@
                     <table>
                         <tr>
                             <td>
-                                Freelancer completed the milestone before the deadline. But you haven't reviewed the milestone before the deadline.
+                                Freelancer đã hoàn thành milestone trước thời hạn. Nhưng bạn chưa xem lại milestone trước thời hạn.
                             </td>
                         </tr>
                         <tr>
                             <td>
-                                How do you solve this problem ?
+                                Bạn giải quyết vấn đề này như thế nào?
                             </td>
                         </tr>
                         <tr>
-                            <td><button type="button" id="OpenAcceptMilestone2" style="background-color:#2DB964;color:white;border:2px solid #2DB964;text-align:left">Accept freelancer's work. This milestone is completed.</button></td>
+                            <td><button type="button" id="OpenAcceptMilestone2" style="background-color:#2DB964;color:white;border:2px solid #2DB964;text-align:left">Chấp nhận công việc của freelancer. Milestone này đã hoàn thành.</button></td>
 
                         </tr>
                         <tr>
-                            <td><button type="button" id="OpenExtendDeadline2" style="background-color:#2DB964;color:white;border:2px solid #2DB964;text-align:left">Extend deadline then freelancer redo this milestone</button></td>
+                            <td><button type="button" id="OpenExtendDeadline2" style="background-color:#2DB964;color:white;border:2px solid #2DB964;text-align:left">Gia hạn thời hạn sau đó freelancer làm lại milestone này</button></td>
 
                         </tr>
                         <tr>
-                            <td><button type="button" id="OpenConfirmFailMilestone2" style="background-color:#2DB964;color:white;border:2px solid #2DB964;text-align:left">Freelancer fail this milestone</button></td>
+                            <td><button type="button" id="OpenConfirmFailMilestone2" style="background-color:#2DB964;color:white;border:2px solid #2DB964;text-align:left">Freelancer thất bại ở milestone này</button></td>
 
                         </tr>
                         <tr>
-                            <td><button type="button" id="OpenConfirmFailJob2" style="background-color:#2DB964;color:white;border:2px solid #2DB964;text-align:left">Freelancer fail this job</button></td>
+                            <td><button type="button" id="OpenConfirmFailJob2" style="background-color:#2DB964;color:white;border:2px solid #2DB964;text-align:left">Freelancer thất bại trong công việc này</button></td>
 
                         </tr>
                     </table>
@@ -478,7 +478,7 @@
         <!-- Modal failMsModal -->
         <div class="modal-content" style="width:fit-content">
             <div class="modal-header">
-                <h2 style="font-size:24px">Fail milestone</h2>
+                <h2 style="font-size:24px">Milestone thất bại</h2>
                 <span class="close">&times;</span>
             </div>
             <div class="modal-body">
@@ -532,7 +532,7 @@
         <!-- Modal failMsModal -->
         <div class="modal-content" style="width:fit-content">
             <div class="modal-header">
-                <h2 style="font-size:24px">Accept milestone</h2>
+                <h2 style="font-size:24px">Chấp nhận Milestone</h2>
                 <span class="close">&times;</span>
             </div>
             <div class="modal-body">
@@ -568,15 +568,15 @@
             {
                 if (Model.job.EmployerDoneEditMilestone == false)
                 {
-                    <button type="button" id="openAddMilestone" style="width:80%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964;border-radius:3px">Add a milestone</button>
+                    <button type="button" id="openAddMilestone" style="width:80%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964;border-radius:3px">Thêm một Milestone</button>
                 }
                 else if (Model.job.EmployerDoneEditMilestone == true && Model.job.IsFreelancerConfirm == false && Model.job.DeadlineFreelancerConfirm < DateTime.Now)
                 {
-                    <button type="button" id="openAddMilestone" style="width:80%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964;border-radius:3px">Add a milestone</button>
+                    <button type="button" id="openAddMilestone" style="width:80%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964;border-radius:3px">Thêm một Milestone</button>
                 }
                 else
                 {
-                    <button type="button" id="openAddMilestone" style="width:80%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964;border-radius:3px" hidden>Add a milestone</button>
+                    <button type="button" id="openAddMilestone" style="width:80%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964;border-radius:3px" hidden>Thêm một Milestone</button>
 
                 }
             }
@@ -827,11 +827,11 @@
             <div class="col-md-4">
                 @if (Model.allMSMoneyPutted)
                 {
-                    <button type="button" id="openRequestFAcceptMS" style="background-color:#009400;color:white;display:block;margin:5px;min-width:200px">Request Freelancer chấp nhận plan</button>
+                    <button type="button" id="openRequestFAcceptMS" style="background-color:#009400;color:white;display:block;margin:5px;min-width:200px">Yêu cầu Freelancer chấp nhận kế hoạch</button>
                 }
                 else
                 {
-                    <button type="button" id="openRequestFAcceptMS" style="background-color:#009400;color:white;display:block;margin:5px;min-width:200px" hidden>Request Freelancer chấp nhận plan</button>
+                    <button type="button" id="openRequestFAcceptMS" style="background-color:#009400;color:white;display:block;margin:5px;min-width:200px" hidden>Yêu cầu Freelancer chấp nhận kế hoạch</button>
                 }
             </div>
         </div>
@@ -847,11 +847,11 @@
             <div class="col-md-4">
                 @if (Model.allMSMoneyPutted)
                 {
-                    <button type="button" id="openRequestFAcceptMS" style="background-color:#009400;color:white;display:block;margin:5px;min-width:200px">Request Freelancer chấp nhận plan</button>
+                    <button type="button" id="openRequestFAcceptMS" style="background-color:#009400;color:white;display:block;margin:5px;min-width:200px">Yêu cầu Freelancer chấp nhận kế hoạch</button>
                 }
                 else
                 {
-                    <button type="button" id="openRequestFAcceptMS" style="background-color:#009400;color:white;display:block;margin:5px;min-width:200px" hidden>Request Freelancer chấp nhận plan</button>
+                    <button type="button" id="openRequestFAcceptMS" style="background-color:#009400;color:white;display:block;margin:5px;min-width:200px" hidden>Yêu cầu Freelancer chấp nhận kế hoạch</button>
                 }
 
             </div>
@@ -878,7 +878,7 @@
         }
         else
         {
-            <h5>Các bạn đã thống nhất một plan, bây giờ là lúc làm việc</h5>
+            <h5>Các bạn đã thống nhất một kế hoạch, bây giờ là lúc làm việc</h5>
         }
     }
 

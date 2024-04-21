@@ -370,7 +370,6 @@ namespace OpusLink.API.Controllers.Admin
                 {
                     _userService.WithdrawMoney(amount, userId);
                      return Ok("Withdraw money successfull");
-
                 }
                 else
                 {
@@ -378,6 +377,31 @@ namespace OpusLink.API.Controllers.Admin
                 }     
             }
             return Ok("Not find User");
+        }
+
+        [HttpPatch("BanUser1")]
+        public async Task<IActionResult> UpdateBanUser1(string banReason, DateTime endBanDate, int userId)
+        {
+            bool isCheck = _userService.UpdateBanUser1(banReason, endBanDate, userId);
+            if(isCheck == false)
+            {
+                return BadRequest("Cannot update because this user account has job");
+            }
+            var user = _context.Users.FirstOrDefault(u => u.Id == userId);
+            string titleContent = "Tài khoản bị khóa - Opuslink";
+
+            string emailContent = "Xin chào " + user.UserName + ",\r\n\r\n" +
+                "Cảm ơn bạn đã sử dụng dịch vụ của Opuslink, nền tảng tìm việc làm freelancer hàng đầu.\r\n" +
+                "Chúng tôi gửi thông báo rằng tài khoản của bạn đã bị khóa từ giờ cho đến " + endBanDate.ToString("dd/MM/yyyy") + "\r\nLý do khóa tài khoản: " +
+                banReason + ".\r\n\r\n" +
+                "Xin lưu ý rằng bạn sẽ không thể truy cập vào tài khoản của mình cho đến " + endBanDate.ToString("dd/MM/yyyy") + "\r\n" +
+                "Để biết thêm thông tin chi tiết và khôi phục tài khoản, vui lòng liên hệ với bộ phận hỗ trợ của chúng tôi.\r\n" +
+                "Cảm ơn bạn đã hiểu và hợp tác trong quá trình này. Nếu bạn có bất kỳ câu hỏi nào, đừng ngần ngại liên hệ với chúng tôi qua email support@opuslink.com.\r\n\r\n" +
+                "Trân trọng,\r\nĐội ngũ hỗ trợ Opuslink";
+
+            var message = new MessageEmail(new string[] { user.Email! }, titleContent, emailContent);
+            _emailService.SendEmail(message);
+            return Ok("Update successfull");
         }
 
         [HttpPatch("BanUser")]

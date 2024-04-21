@@ -344,7 +344,7 @@
 
             // Ajax request
             $.ajax({
-                url: `@(UrlConstant.ApiBaseUrl)/User/BanUser?banReason=` + reason + `&endBanDate=` + cutoffDate + `&userId=` + userID,
+                url: `@(UrlConstant.ApiBaseUrl)/User/BanUser1?banReason=` + reason + `&endBanDate=` + cutoffDate + `&userId=` + userID,
                 headers: {
                     "ngrok-skip-browser-warning": true,
                     "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
@@ -356,7 +356,30 @@
                     window.location.reload();
                 },
                 error: function (xhr, status, error) {
-                    alert("Khóa tài khoản thất bại!");
+                    // Kiểm tra nếu lỗi là do tài khoản đang có JOB
+                    if (xhr.status === 400) {
+                        if (confirm("Tài khoản này đang có công việc trên hệ thống. Bạn có thực sự muốn khóa tài khoản này không?")) {
+                            // Nếu người dùng đồng ý, thực hiện Ajax khác
+                            $.ajax({
+                                url: `@(UrlConstant.ApiBaseUrl)/User/BanUser?banReason=` + reason + `&endBanDate=` + cutoffDate + `&userId=` + userID,
+                                headers: {
+                                    "ngrok-skip-browser-warning": true,
+                                    "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
+                                },
+                                method: 'PATCH',
+                                contentType: 'application/json',
+                                success: function (response) {
+                                    alert("Khóa tài khoản thành công!");
+                                    window.location.reload();
+                                },
+                                error: function (xhr, status, error) {
+                                    alert("Khóa tài khoản thất bại!");
+                                }
+                            });
+                        }
+                    } else {
+                        alert("Khóa tài khoản thất bại!");
+                    }
                 }
             });
 
