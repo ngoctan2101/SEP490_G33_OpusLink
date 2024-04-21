@@ -129,7 +129,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
             // add notification reject
             NotificationDTO noti = new NotificationDTO();
             noti.UserID = uidres;
-            noti.NotificationContent = resonres;
+            noti.NotificationContent ="Yêu cầu rút tiền của bạn bị từ chối bởi vì: "+ resonres ;
             noti.IsReaded = false;
             //https://localhost:7131/WithDrawMoney/WithDrawMoneyRequest?UserId=1
             noti.Link = "/WithDrawMoney/WithDrawMoneyRequest?UserId=" + uidres + "";
@@ -275,7 +275,7 @@ namespace OpusLink.Admin.Hosted.Pages.ManagerWithDrawRequest
             // add new notification
             NotificationDTO noti = new NotificationDTO();
             noti.UserID = uidres;
-            noti.NotificationContent = "Rút tiền thành công";
+            noti.NotificationContent = "Yêu cầu rút tiền của bạn thành công";
             noti.IsReaded = false;
             noti.Link = "/HistoryPayment/HistoryPaymentDetail?payId="+HisPayId+"";
             noti.NotificationDate = DateTime.Now;
