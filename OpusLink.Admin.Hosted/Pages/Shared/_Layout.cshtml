@@ -1,4 +1,5 @@
 ﻿@inject IHttpContextAccessor HttpContextAccessor;
+@inject IHttpContextAccessor HttpContextAccessor;
 @{
     int? userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId") ?? null;
 }
@@ -284,7 +285,7 @@
                 <ul>
                     <a asp-page="/Dashboard/DashboardAdmin" asp-route-year="2024">
                     @* <li style="@a">Dashboard</li> *@
-                    <li style="@a">Tổng quan</li>
+                    <li style="@a">Thống kê</li>
                     </a>
                     <a asp-page="/ManageUser/Views">
                     @* <li style="@b">Manage User</li> *@
@@ -308,7 +309,7 @@
                     </a>
                     <a asp-page="/JOB/AdminViewListJobRequestedPage">
                     @* <li style="@g">Manage Job Request</li> *@
-                    <li style="@g">Quản lý yêu cầu tạo việc</li>
+                    <li style="@g">Danh sách việc chờ duyệt</li>
                     </a>
                     @*<a asp-page="/Admin/Customer/Index">
                     <li>Resquest</li>
@@ -318,7 +319,7 @@
                     </a> *@
                     <a asp-page="/ManagerWithDrawRequest/Views">
                    @*  <li style="@g">ManagerWithDrawRequest</li> *@
-                    <li style="@h">Quản lý yêu cầu rút tiền</li>
+                    <li style="@h">Danh sách yêu cầu rút tiền</li>
                     </a>
                    
                     
@@ -326,7 +327,7 @@
                 <div id="content-left-admin" class="dropdown" onclick="toggleAdminPanel()">
                     <button class="btn btn-secondary dropdown-toggle" type="button" id="adminDropdownButton"
                             data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        Admin <i id="setting-icon" class="bi bi-gear"></i>
+                        <i class="fa-solid fa-user-gear"></i> Admin <i id="setting-icon" class="bi bi-gear"></i>
                     </button>
                     <div id="admin-dropdown" class="dropdown-menu" aria-labelledby="adminDropdownButton">
                         @* <a class="dropdown-item" asp-page="/Freelancer/Profile/Views?UserId=@userId">Thông tin Admin</a> *@

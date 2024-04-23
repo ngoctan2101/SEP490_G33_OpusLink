@@ -124,10 +124,10 @@
                 <table>
                     <tr><td>Tên danh mục:</td><td><input type="text" name="AddCategoryName" required /></td></tr>
                     <tr>
-                        <td>Danh mục cha:</td>
+                        <td>Nhóm danh mục :</td>
                         <td>
                             <select name="AddCategoryParent">
-                                <option value="0">Không thuộc danh mục cha nào</option>
+                                <option value="0">Không thuộc nhóm danh mục nào</option>
                                 @foreach (var item in Model.AllCategories)
                                 {
                                     <option value="@item.CategoryID">@item.CategoryID<span>-</span>@item.CategoryName</option>
@@ -154,10 +154,10 @@
                 <table>
                     <tr><td>Tên danh mục:    </td><td><input type="text" name="UpdateCategoryName" style="width:100%" required /></td></tr>
                     <tr>
-                        <td>Danh mục cha:    </td>
+                        <td>Nhóm danh mục:    </td>
                         <td>
                             <select name="UpdateCategoryParent">
-                                <option value="0">Không thuộc danh mục cha nào</option>
+                                <option value="0">Không thuộc nhóm danh mục nào</option>
                                 @foreach (var item in Model.AllCategories)
                                 {
                                     <option value="@item.CategoryID">@item.CategoryID<span>-</span>@item.CategoryName</option>
@@ -221,7 +221,7 @@
                 <thead>
                     <tr style="border-bottom:1px solid black">
                         <th style="width:10%">Id</th>
-                        <th style="width:30%">Danh mục cha</th>
+                        <th style="width:30%">Nhóm danh mục </th>
                         <th style="width:40%">Tên danh mục</th>
                         <th style="width:10%"></th>
                         <th style="width:10%"></th>
