@@ -147,11 +147,11 @@
 
                 <div class="mb-3">
                     <label for="name" class="form-label">Tên tài khoản</label>
-                    <input type="text" class="form-control" id="name" name="name"  readonly value="@Model.user.UserName">
+                    <input type="text" class="form-control" style="background-color:#E9ECEF" id="name" name="name" readonly value="@Model.user.UserName">
                 </div>
                 <div class="mb-3">
                     <label for="email" class="form-label">Email</label>
-                    <input type="email" class="form-control" id="email" name="email" readonly value="@Model.user.Email">
+                    <input type="email" class="form-control" style="background-color:#E9ECEF" id="email" name="email" readonly value="@Model.user.Email">
                 </div>
                 @if (Model.Mess != null)
                 {
@@ -196,7 +196,7 @@
                 <div class="mb-3">
                     <label for="amountmoney" class="form-label">Tiền trong ví</label>
                     <input type="text" class="form-control" id="amountmoney" name="amountmoney" hidden value="@Model.user.AmountMoney">
-                    <input type="text" class="form-control" readonly value="@((Model.user.AmountMoney)?.ToString("#,###")) ₫">
+                    <input type="text" class="form-control" style="background-color:#E9ECEF" readonly value="@((Model.user.AmountMoney)?.ToString("#,###")) ₫">
                 </div>
                 <div class="mb-3">
                     <label for="amountmoney" class="form-label">Thông tin tài khoản ngân hàng</label>

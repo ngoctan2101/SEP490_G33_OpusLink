@@ -80,20 +80,20 @@
                    @*  <input type="file" name="image" accept="image/x-png, image/jpeg" onchange="readURL(this);" readonly /> *@
                     <!-- LinkProfile, Textbox, và Nút Copy -->
                     <div class="mt-3">
-                        <p>
+                        @* <p>
                         <span id="linkProfile">Link cá nhân</span>
                             <input type="text" class="form-control" id="linkTextBox" readonly>
-                        </p>
+                        </p> *@
                         <button type="button" class="btn btn-secondary" onclick="copyLink()">Copy Link</button>
                     </div>
 
                     <div class="mt-3">
                     <label for="introduction" class="form-label">Giới thiệu</label>
-                        <textarea class="form-control" id="introduction" rows="11" name="introduction" readonly>@Model.user.Introduction</textarea>
+                    <textarea class="form-control" style="background-color:#E9ECEF" id="introduction" rows="11" name="introduction" readonly>@Model.user.Introduction</textarea>
                     </div>
                     <div class="mb-3" hidden>
                         <label for="cv" class="form-label">Upload CV</label>
-                        <input type="file" class="form-control" id="cv" name="cv" readonly accept=".pdf,.docx" readonly>
+                        <input type="file" class="form-control"  id="cv" name="cv" readonly accept=".pdf,.docx" readonly>
                     </div>
                     <div class="mb-3" >
                     <a asp-page-handler="ForDownload" class="btn btn-danger" asp-route-UserId="@Model.user.Id">Tải hồ sơ</a>
@@ -140,25 +140,25 @@
 
                     <div class="mb-3">
                     <label for="name" class="form-label">Tên tài khoản</label>
-                        <input type="text" class="form-control" id="name" name="name"  readonly value="@Model.user.UserName">
+                    <input type="text" class="form-control" id="name" name="name" style="background-color:#E9ECEF" readonly value="@Model.user.UserName">
                     </div>
                     <div class="mb-3">
                         <label for="email" class="form-label">Email</label>
-                        <input type="email" class="form-control" id="email" name="email"  readonly value="@Model.user.Email">
+                    <input type="email" class="form-control" id="email" name="email" style="background-color:#E9ECEF" readonly value="@Model.user.Email">
                     </div>
                     <div class="mb-3">
                     <label for="dob" class="form-label">Ngày sinh</label>
-                        <input type="text" class="form-control" id="dob" name="dob" readonly value="@Model.user.Dob?.ToString("dd/MM/yyy")">
+                    <input type="text" class="form-control" id="dob" name="dob" style="background-color:#E9ECEF" readonly value="@Model.user.Dob?.ToString("dd/MM/yyy")">
                     </div>
 
                     <div class="mb-3">
                     <label for="phone" class="form-label">Số điện thoại</label>
-                        <input type="tel" class="form-control" id="phone" name="phone"  readonly value="@Model.user.PhoneNumber">
+                    <input type="tel" class="form-control" id="phone" name="phone" style="background-color:#E9ECEF" readonly value="@Model.user.PhoneNumber">
                     </div>
 
                     <div class="mb-3">
                     <label for="address" class="form-label">Địa chỉ</label>
-                        <input type="text" class="form-control" id="address" name="address"  readonly value="@Model.user.Address">
+                    <input type="text" class="form-control" id="address" name="address" style="background-color:#E9ECEF" readonly value="@Model.user.Address">
                     </div>
 
                     <div class="mb-3">
