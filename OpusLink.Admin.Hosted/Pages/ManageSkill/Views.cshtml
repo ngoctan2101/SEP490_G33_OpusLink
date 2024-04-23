@@ -46,7 +46,7 @@
                 <thead>
                     <tr>
                         <th scope="col">#</th>
-                        <th scope="col">Kĩ năng cha</th>
+                        <th scope="col">Nhóm kĩ năng </th>
                         <th scope="col">Kĩ năng</th>
                         <th scope="col">Hành động</th>
                     </tr>
@@ -79,7 +79,7 @@
                                 <td>
       
                                     <button type="button" class="btn btn-warning btn-sm" data-bs-toggle="modal" data-bs-target="#editSkillModal" data-skillid="@item.SkillID" onclick="OpenUpdateSkill(@item.SkillID)"> <i class="fas fa-edit"></i> Chỉnh sửa</button>
-                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(@item.SkillID)"><i class="fas fa-trash-alt"></i>Xóa</button>
+                                    <button type="button" class="btn btn-danger btn-sm" onclick="confirmDelete(@item.SkillID)"><i class="fas fa-trash-alt"></i> Xóa</button>
                                 </td>
                             </tr>
                             <!-- Modal Edit -->
@@ -124,9 +124,9 @@
                     <!-- Form thêm mới sẽ được thêm ở đây -->
                     <form id="addSkillForm" method="post">
                         <div class="mb-3">
-                            <label for="skillParentID" class="form-label">Kĩ năng cha</label>
+                            <label for="skillParentID" class="form-label">Nhóm kĩ năng</label>
                             <select name="SkillParentID">
-                                <option value="0">Không có kĩ năng cha</option>
+                                <option value="0">Không có nhóm kĩ năng</option>
                                 @foreach (var item in Model.AllSkills)
                                 {
                                     <option value="@item.SkillID">@item.SkillID<span>-</span>@item.SkillName</option>
@@ -160,9 +160,9 @@
                         <input type="hidden" id="editSkillId" name="SkillID" value="" /> <!-- Hidden input for SkillID -->
 
                         <div class="mb-3">
-                            <label for="editSkillParentID" class="form-label">ID kĩ năng cha</label>
+                            <label for="editSkillParentID" class="form-label">ID nhóm kĩ năng</label>
                             <select name="SkillParentID">
-                                <option value="0">Không có kĩ năng cha</option>
+                                <option value="0">Không có nhóm kĩ năng</option>
                                 @foreach (var item in Model.AllSkills)
                                 {
                                     <option value="@item.SkillID">@item.SkillID<span>-</span>@item.SkillName</option>

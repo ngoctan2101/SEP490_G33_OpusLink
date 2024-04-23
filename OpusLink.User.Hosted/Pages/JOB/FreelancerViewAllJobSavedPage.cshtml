@@ -158,7 +158,7 @@
                                     </div>
                                 </div>
                                 <div>
-                                    <span>5</span>⭐ <a style="text-decoration:none" asp-page="../Freelancer/Profile/ViewsProfileEmployer" asp-route-id="@item.GetJobResponse.EmployerID">@item.GetJobResponse.EmployerName</a>
+                                    <span>5</span>⭐ <a style="text-decoration:none" asp-page="../Freelancer/Profile/ViewsProfileEmployer" asp-route-userid="@item.GetJobResponse.EmployerID">@item.GetJobResponse.EmployerName</a>
                                 </div>
                                 <div style="background-color:inherit; padding:5px">
                                     <p style="display:inline">@item.GetJobResponse.LocationName</p> | <p class="FormatBudget" style="display:inline">@(item.GetJobResponse.BudgetFrom)</p> - <p class="FormatBudget" style="display:inline">@(item.GetJobResponse.BudgetTo)</p>
