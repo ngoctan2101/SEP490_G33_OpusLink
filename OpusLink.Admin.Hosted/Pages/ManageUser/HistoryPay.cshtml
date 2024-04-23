@@ -73,6 +73,10 @@
 								@foreach (var hp in Model.his.OrderByDescending(hp => hp.TransactionDate))
 								{
 									i++;
+									if (hp.TransactionType == 9)
+									{
+										continue;
+									}
 									<tr class="align-middle">
 										<td>
 											<a href="/ManageUser/HistoryPayDetail?payId=@hp.PaymentID">#@i</a>
@@ -113,10 +117,6 @@
 												else if (hp.TransactionType == 8)
 												{
 													<span><i class="fa fa-arrow-up" aria-hidden="true"></i></span>
-												}
-												else if (hp.TransactionType == 9)
-												{
-													<a>--------------------------------</a>
 												}
 												else if (hp.TransactionType == 10)
 												{
@@ -163,10 +163,6 @@
 											else if (hp.TransactionType == 8)
 											{
 												<a>Employer nhận 100% tiền của Milestone khi Milestone đó Fail</a>
-											}
-											else if (hp.TransactionType == 9)
-											{
-												<a>--------------------------------</a>
 											}
 											else if (hp.TransactionType == 10)
 											{

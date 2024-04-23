@@ -49,6 +49,10 @@ namespace OpusLink.User.Hosted.Pages.MS
                     allMSMoneyPutted = false; break;
                 }
             }
+            if(milestones.Count== 0)
+            {
+                allMSMoneyPutted=false;
+            }
             if (milestones.Count== 0)
             {
                 return Page();
