@@ -45,6 +45,47 @@ namespace OpusLink.User.Hosted.Pages.JOB
             {
                 string strData = await response.Content.ReadAsStringAsync();
                 job = JsonConvert.DeserializeObject<GetJobDetailResponse>(strData);
+                HttpContext.Session.SetInt32("JobId", JobId);
+            }
+            else
+            {
+                HttpResponseMessage responseOther = await client.GetAsync(UrlConstant.ApiBaseUrl + "/Job5API/GetJobDetail/" + HttpContext.Session.GetInt32("JobId"));
+                if (responseOther.IsSuccessStatusCode)
+                {
+                    string strData = await responseOther.Content.ReadAsStringAsync();
+                    job = JsonConvert.DeserializeObject<GetJobDetailResponse>(strData);
+                }
+                responseOther = await client.GetAsync(UrlConstant.ApiBaseUrl + "/Offer3API/GetAllOfferOfJob/" + HttpContext.Session.GetInt32("JobId"));
+                if (responseOther.IsSuccessStatusCode)
+                {
+                    string strData = await responseOther.Content.ReadAsStringAsync();
+                    offers = JsonConvert.DeserializeObject<List<GetOfferAndFreelancerResponse>>(strData);
+                    offers = offers.OrderByDescending(o => o.DateOffer).ToList();
+                }
+                isOffered = false;
+                //is offered or not
+                responseOther = await client.GetAsync(UrlConstant.ApiBaseUrl + "/Offer3API/IsOffered/" + JobId + "/" + userId);
+                if (responseOther.IsSuccessStatusCode)
+                {
+                    string strData = await responseOther.Content.ReadAsStringAsync();
+                    if (strData.Equals("true"))
+                    {
+                        isOffered = true;
+                        responseOther = await client.GetAsync(UrlConstant.ApiBaseUrl + "/Offer3API/GetOffer/" + JobId + "/" + userId);
+                        if (responseOther.IsSuccessStatusCode)
+                        {
+                            strData = await responseOther.Content.ReadAsStringAsync();
+                            offerResponse = JsonConvert.DeserializeObject<GetOfferResponse>(strData);
+                        }
+                    }
+                    else if (strData.Equals("false"))
+                    {
+                        isOffered = false;
+                    }
+                }
+                HttpContext.Session.SetString("Notification", "Không tồn tại");
+                HttpContext.Session.SetInt32("NotiIsNew", 1);
+                return RedirectToPage("/JOB/FreelancerViewJobDetail", new { JobId = HttpContext.Session.GetInt32("JobId") });
             }
             //get list offers for job
             response = await client.GetAsync(UrlConstant.ApiBaseUrl + "/Offer3API/GetAllOfferOfJob/" + JobId);

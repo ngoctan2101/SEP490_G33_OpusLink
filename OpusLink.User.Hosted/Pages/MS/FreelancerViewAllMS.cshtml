@@ -367,9 +367,9 @@
     @if (Model.job.EmployerDoneEditMilestone == true && Model.job.DeadlineFreelancerConfirm > DateTime.Now && Model.job.IsFreelancerConfirm == false)
     {
         <div id="acceptPlan">
-            <h5>Bạn có đồng ý với plan của Employer không ?</h5>
+            <h5>Bạn có đồng ý với kế hoạch của Employer không ?</h5>
             <h6>Bạn có <span style="color:red;font-size:13px" id="countdown"></span> để quyết định</h6>
-            <h6>Employer không thể sửa plan được nữa sau khi bạn đồng ý, nếu bạn không đồng ý thì Emlloyer sẽ có quyền sửa lại plan</h6>
+            <h6>Employer không thể sửa kế hoạch được nữa sau khi bạn đồng ý, nếu bạn không đồng ý thì Employer sẽ có quyền sửa lại kế hoạch</h6>
 
             <form method="post">
                 <input type="text" hidden name="JobID" value="@Model.job.JobId" />
@@ -388,17 +388,17 @@
     }
     @if (Model.job.EmployerDoneEditMilestone == false && Model.job.IsFreelancerConfirm == false)
     {
-        <h5>Hãy nhắn tin với Employer để cùng tạo ra một plan hợp lý nhé</h5>
+        <h5>Hãy nhắn tin với Employer để cùng tạo ra một kế hoạch hợp lý nhé</h5>
     }
     else if (Model.job.EmployerDoneEditMilestone == true && Model.job.IsFreelancerConfirm == true && userId == Model.job.FreelancerId)
     {
         if (Model.job.Status == (int)JobStatusEnum.Hired)
         {
-            <h5>Các bạn đã thống nhất một plan, bây giờ là lúc làm việc</h5>
+            <h5>Các bạn đã thống nhất một kế hoạch, bây giờ là lúc làm việc</h5>
         }
         else if (Model.job.Status == (int)JobStatusEnum.Completed)
         {
-            <h5>Job đã kết thúc thành công.</h5>
+            <h5>Công việc đã kết thúc thành công.</h5>
             if (Model.isAllowToGiveFeedback)
             {
                 <a class="feedbackbtn" asp-page="/Evaluate/FreelancerEvaluate" asp-route-jobId="@Model.job.JobId" asp-route-createByUserID="@Model.job.FreelancerId">Đánh giá employer</a>
@@ -406,7 +406,7 @@
         }
         else if (Model.job.Status == (int)JobStatusEnum.Failed)
         {
-            <h5>Job đã kết thúc thất bại.</h5>
+            <h5>Công việc đã kết thúc thất bại.</h5>
             if (Model.isAllowToGiveFeedback)
             {
                 <a class="feedbackbtn" asp-page="/Evaluate/FreelancerEvaluate" asp-route-jobId="@Model.job.JobId" asp-route-createByUserID="@Model.job.FreelancerId">Đánh giá employer</a>
@@ -437,7 +437,7 @@
             document.getElementById(countdownId).innerHTML = "(" + days + "d " + hours + "h " + minutes + ":" + (seconds < 10 ? "0" : "") + seconds + ")";
             if (timeDifference < 0) {
                 clearInterval(countdownInterval);
-                document.getElementById("acceptPlan").innerHTML = "Đã hết hạn chấp nhận plan. Hãy nhắn lại cho Employer để thông nhất một plan nhé.";
+                document.getElementById("acceptPlan").innerHTML = "Đã hết hạn chấp nhận kế hoạch. Hãy nhắn lại cho Employer để thống nhất một kế hoạch nhé.";
             }
         }, 1000);
     }

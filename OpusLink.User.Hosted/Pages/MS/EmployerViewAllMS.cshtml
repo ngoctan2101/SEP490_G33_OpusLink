@@ -394,11 +394,11 @@
 
                         </tr>
                         <tr>
-                            <td><button type="button" id="OpenConfirmFailMilestone1" style="background-color:#2DB964;color:white;border:2px solid #2DB964;text-align:left">Freelancer đã làm milestone thất bại</button></td>
+                            <td><button type="button" id="OpenConfirmFailMilestone1" style="background-color:#2DB964;color:white;border:2px solid #2DB964;text-align:left">Freelancer đã thất bại ở milestone này</button></td>
 
                         </tr>
                         <tr>
-                            <td><button type="button" id="OpenConfirmFailJob1" style="background-color:#2DB964;color:white;border:2px solid #2DB964;text-align:left">Freelancer đã làm job thất bại</button></td>
+                            <td><button type="button" id="OpenConfirmFailJob1" style="background-color:#2DB964;color:white;border:2px solid #2DB964;text-align:left">Freelancer đã thất bại trong toàn bộ công việc</button></td>
 
                         </tr>
                     </table>
@@ -505,7 +505,7 @@
         <!-- Modal failMsModal -->
         <div class="modal-content" style="width:fit-content">
             <div class="modal-header">
-                <h2 style="font-size:24px">Fail job</h2>
+                <h2 style="font-size:24px">Công việc thất bại</h2>
                 <span class="close">&times;</span>
             </div>
             <div class="modal-body">
@@ -515,7 +515,7 @@
                     <table style="width:100%">
                         <tr>
                             <td colspan="2">
-                                Job này thất bại và bạn sẽ nhận lại 20% của những milestone đã hoàn thành cộng với tất cả tiền của những milestone đang làm ?
+                                Công việc này thất bại và bạn sẽ nhận lại 20% của những milestone đã hoàn thành cộng với tất cả tiền của những milestone đang làm ?
                             </td>
                         </tr>
 
@@ -861,7 +861,7 @@
     {
         if (Model.job.Status == (int)JobStatusEnum.Completed)
         {
-            <h5>Job đã kết thúc thành công.</h5>
+            <h5>Công việc đã kết thúc thành công.</h5>
             if (Model.isAllowToGiveFeedback)
             {
                 <a class="feedbackbtn" asp-page="../Evaluate/EmployerEvaluate" asp-route-jobId="@Model.job.JobId" asp-route-createByUserID="@Model.job.EmployerId">Đánh giá freelancer</a>
@@ -869,7 +869,7 @@
         }
         else if (Model.job.Status == (int)JobStatusEnum.Failed)
         {
-            <h5>Job đã kết thúc thất bại.</h5>
+            <h5>Công việc đã kết thúc thất bại.</h5>
             if (Model.isAllowToGiveFeedback)
             {
                 <a class="feedbackbtn" asp-page="../Evaluate/EmployerEvaluate" asp-route-jobId="@Model.job.JobId" asp-route-createByUserID="@Model.job.EmployerId">Đánh giá freelancer</a>

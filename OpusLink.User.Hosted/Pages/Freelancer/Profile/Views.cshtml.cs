@@ -33,6 +33,20 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
             {
                 return RedirectToPage("/Account/Login");
             }
+            if (HttpContext.Session.GetInt32("UserIdCheck") == null)
+            {
+                HttpContext.Session.SetInt32("UserIdCheck", UserId);
+            }
+
+            // Kiểm tra nếu UserId không bằng UserId lưu trong Session thì chuyển hướng về trang với UserId ban đầu
+            int originalUserId = HttpContext.Session.GetInt32("UserIdCheck") ?? 0;
+            if (UserId != originalUserId)
+            {
+                HttpContext.Session.SetString("Notification", "Id sai hoặc bạn không có quyền truy cập");
+                HttpContext.Session.SetInt32("NotiIsNew", 1);
+                return RedirectToPage("/Freelancer/Profile/Views", new { UserId = originalUserId });
+            }
+
             // Set the JWT token in the authorization header
             client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
             this.Mess = Mess;
@@ -49,6 +63,11 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
                 var optionUser = new JsonSerializerOptions()
                 { PropertyNameCaseInsensitive = true };
                 user = JsonSerializer.Deserialize<UserDTO>(responseBodyUser, optionUser);
+/*                HttpContext.Session.SetInt32("UserIdCheck", UserId);*/
+            }
+            else
+            {
+                return RedirectToPage("/Freelancer/Profile/Views", new { UserId = HttpContext.Session.GetInt32("UserIdCheck") });
             }
             //get all skill
             AllSkills = await GetAllSkillAsync();

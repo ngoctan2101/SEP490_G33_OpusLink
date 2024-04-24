@@ -126,13 +126,13 @@ namespace OpusLink.API.Controllers.Admin
 
             var user = _userService.GetUserById(id);
             var userdto = _mapper.Map<UserDTO>(user);
-            foreach (FreelancerAndSkill fas in user.FreelancerAndSkills)
-            {
-                userdto.Skills.Add(_mapper.Map<SkillDTO>(fas.Skill));
-            }
             if (user == null)
             {
                 return NotFound("Don't have user");
+            }
+            foreach (FreelancerAndSkill fas in user.FreelancerAndSkills)
+            {
+                userdto.Skills.Add(_mapper.Map<SkillDTO>(fas.Skill));
             }
             string UserImagePath = userdto.ProfilePicture;
             if (UserImagePath == null || UserImagePath.Length == 0)
