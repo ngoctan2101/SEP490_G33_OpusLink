@@ -42,7 +42,7 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
             int originalUserId = HttpContext.Session.GetInt32("UserIdCheck") ?? 0;
             if (UserId != originalUserId)
             {
-                HttpContext.Session.SetString("Notification", "Id sai hoặc bạn không có quyền truy cập");
+                HttpContext.Session.SetString("Notification", "Bạn không có quyền truy cập");
                 HttpContext.Session.SetInt32("NotiIsNew", 1);
                 return RedirectToPage("/Freelancer/Profile/Views", new { UserId = originalUserId });
             }

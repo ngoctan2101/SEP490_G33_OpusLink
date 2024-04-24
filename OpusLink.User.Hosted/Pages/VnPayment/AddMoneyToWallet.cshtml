@@ -79,6 +79,7 @@
             var value = input.value.replace(/[^\d]/g, '');
             var formattedValue = new Intl.NumberFormat('vi-VN', { style: 'currency', currency: 'VND' }).format(value);
             input.value = formattedValue;
+            
         }
 
         // function submitForm() {

@@ -4,6 +4,7 @@ using Newtonsoft.Json;
 using OpusLink.Entity.DTO;
 using OpusLink.Entity.Models;
 using OpusLink.Shared.Constants;
+using OpusLink.Shared.VnPay;
 using System.Net.Http.Headers;
 using System.Text.Json;
 
@@ -41,7 +42,9 @@ namespace OpusLink.User.Hosted.Pages.HistoryPayment
                 var optionUser = new JsonSerializerOptions()
                 { PropertyNameCaseInsensitive = true };
                 his = System.Text.Json.JsonSerializer.Deserialize<List<HistoryPaymentDTO>>(responseBodyUser, optionUser);
+                HttpContext.Session.Remove("PayIdCheck");
             }
+            
 
             return Page();
         }

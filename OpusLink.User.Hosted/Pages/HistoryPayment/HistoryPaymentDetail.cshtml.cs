@@ -25,7 +25,7 @@ namespace OpusLink.User.Hosted.Pages.HistoryPayment
             ServiceMangaUrl = UrlConstant.ApiBaseUrl;
             //_validationService = validateService;
         }
-        public async  Task<IActionResult> OnGetAsync(int payId)
+        public async  Task<IActionResult> OnGetAsync(int payId) //1259
         {
 
             if (HttpContext.Session.GetInt32("UserId") == null)
@@ -36,12 +36,16 @@ namespace OpusLink.User.Hosted.Pages.HistoryPayment
             {
                 HttpContext.Session.SetInt32("PayIdCheck", payId);
             }
+            //if (HttpContext.Session.GetInt32("PayIdCheck") != null)
+            //{
+            //    HttpContext.Session.SetInt32("PayIdCheck", payId);
+            //}
 
             // Kiểm tra nếu UserId không bằng UserId lưu trong Session thì chuyển hướng về trang với UserId ban đầu
             int originalPayId = HttpContext.Session.GetInt32("PayIdCheck") ?? 0;
             if (payId != originalPayId)
             {
-                HttpContext.Session.SetString("Notification", "Id sai hoặc bạn không có quyền truy cập");
+                HttpContext.Session.SetString("Notification", "Bạn không có quyền truy cập");
                 HttpContext.Session.SetInt32("NotiIsNew", 1);
                 return RedirectToPage("/HistoryPayment/HistoryPaymentDetail", new { payId = originalPayId });
             }
