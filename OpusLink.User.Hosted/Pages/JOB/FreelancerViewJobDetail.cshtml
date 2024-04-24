@@ -194,13 +194,13 @@
                     </div>
                 </div>
                 @*<p style="white-space: pre-line">@Html.Raw(item.JobContent.Replace("\r\n", "&#10;"))</p>*@
-                <p style="white-space: pre-line;margin-top:10px">@item.JobContent</p>
+                <p style="white-space: pre-line;margin-top:10px">Mô tả công việc: @item.JobContent</p>
                 @if (Model.offers.Count != 0)
                 {
                     <div class="row">
                         <div class="col-md-4">Tổng số offer: @item.TotalOffer</div>
                         <div class="col-md-4">Trung bình: @Math.Round(item.AverageCost,0).ToString("#,##") ₫</div>
-                        <div class="col-md-4">Trung bình thời lượng: @item.AverageTime days</div>
+                        <div class="col-md-4">Trung bình thời lượng: @item.AverageTime ngày</div>
                     </div>
                 }
                 <a asp-page="../MS/FreelancerViewAllMS" asp-route-jobID="@item.JobId" class="link" >Xem milestones </a>
@@ -224,7 +224,7 @@
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
-                    <p>Công việc này đã hết hạn nhận đơn</p>
+                    <p style="color:red">Công việc này đã hết hạn nhận đơn</p>
                 </div>
                 <div class="col-md-2"></div>
             </div>
@@ -245,15 +245,15 @@
                             {
                                 if (i == Model.offerResponse.ExpectedDays)
                                 {
-                                    <option value="@i" selected>@(i) day</option>
+                                    <option value="@i" selected>@(i) ngày</option>
                                 }
                                 else if (i == 1)
                                 {
-                                    <option value="@(i*2)">@(i * 2) day</option>
+                                    <option value="@(i*2)">@(i * 2) ngày</option>
                                 }
                                 else
                                 {
-                                    <option value="@(i*2)">@(i * 2) days</option>
+                                    <option value="@(i*2)">@(i * 2) ngày</option>
                                 }
 
                             }
@@ -266,18 +266,18 @@
                             }
                             else
                             {
-                                <button type="submit" asp-page-handler="ForAdd" style="margin-top:15px;width:80%;background-color:#FF9900;color:white;font-weight:bold;font-size:30px;border:none">Offer</button>
+                                <button type="submit" asp-page-handler="ForAdd" style="margin-top:15px;width:80%;background-color:#FF9900;color:white;font-weight:bold;font-size:30px;border:none">Gửi Offer</button>
                             }
                         }
                     </div>
                     <div class="col-md-8">
                         <div>
                             <label for="selfIntroduction" style="font-weight:bold;font-size:20px;display:block">Tự giới thiệu<span style="color:red">*</span></label>
-                            <textarea rows="7" style="width:100%" name="selfIntroduction" placeholder="As a software engineer with a focus on ...&#10;I'm dedicated to ..." required @AddReadonlyIfThisFreelancerGetAcceptedToTheJob>@e</textarea>
+                            <textarea rows="7" style="width:100%" name="selfIntroduction" placeholder="Là một kỹ sư phần mềm tập trung vào ...&#10;Tôi cống hiến hết mình cho ..." required @AddReadonlyIfThisFreelancerGetAcceptedToTheJob>@e</textarea>
                         </div>
                         <div>
                             <label for="estimatedPlan" style="font-weight:bold;font-size:20px;display:block">Kế hoạch dự kiến<span style="color:red">*</span></label>
-                            <textarea rows="7" style="width:100%" name="estimatedPlan" placeholder="First, we will focus on ... by create a ...&#10;Then, use ... to create a ...&#10;Perform test to ensure ..." required @AddReadonlyIfThisFreelancerGetAcceptedToTheJob>@f</textarea>
+                            <textarea rows="7" style="width:100%" name="estimatedPlan" placeholder="1, chúng ta sẽ tập trung vào ... bằng cách tạo ra một ...&#10;Sau đó, sử dụng ... để tạo ra một ...&#10;Thực hiện kiểm tra để đảm bảo ..." required @AddReadonlyIfThisFreelancerGetAcceptedToTheJob>@f</textarea>
                         </div>
 
 
@@ -370,12 +370,12 @@
                                 }
                             }
                         </div>
-                        <p>Số job đã làm: @a.NumberOfJobDone</p>
+                        <p>Số công việc đã làm: @a.NumberOfJobDone</p>
                     </div>
                     <div class="col-md-9" style="border-left:2px solid #BEBEBE">
                         <p>@a.DateOffer.ToString("dd/MM/yyyy")</p>
-                        <p><span style="font-weight:normal;color:#BEBEBE">Trả giá   </span><span style="font-size:20px">@(((int)a.ProposedCost).ToString("#,##")) ₫</span></p>
-                        <p><span style="font-weight:normal;color:#BEBEBE">Số ngày dự kiến   </span> <span style="font-size:20px">@a.ExpectedDays ngày</span></p>
+                        <p><span style="font-weight:normal;">Trả giá:   </span><span style="font-size:20px">@(((int)a.ProposedCost).ToString("#,##")) ₫</span></p>
+                        <p><span style="font-weight:normal;">Số ngày dự kiến:   </span> <span style="font-size:20px">@a.ExpectedDays ngày</span></p>
                         @*<p style="white-space:pre-line"><span style="font-weight:bold">Tự giới thiệu:</span><br> @a.SelfIntroduction</p>
                     <p style="white-space:pre-line"><span style="font-weight:bold">Kế hoạch dự tính:</span><br> @a.EstimatedPlan</p>*@
                     </div>

@@ -82,11 +82,11 @@
                 @* <input type="file" name="image" accept="image/x-png, image/jpeg" onchange="readURL(this);" readonly /> *@
                 <!-- LinkProfile, Textbox, và Nút Copy -->
                 <div class="mt-3">
-                    @* <p>
+                    <p>
                         <span id="linkProfile">Link cá nhân</span>
-                        <input type="text" class="form-control" id="linkTextBox" readonly>
-                    </p> *@
-                    <button type="button" class="btn btn-secondary" onclick="copyLink()">Copy Link</button>
+                        <input  type="text" class="form-control" id="linkTextBox" readonly>
+                    </p>
+                    <button type="button" class="btn btn-secondary" onclick="copyLink()">Lấy link</button>
                 </div>
 
                 <div class="mt-3">
@@ -97,10 +97,10 @@
                     <label for="cv" class="form-label">Upload CV</label>
                     <input type="file" class="form-control" id="cv" name="cv" readonly accept=".pdf,.docx">
                 </div>
-                @* @if (!String.IsNullOrEmpty(Model.user.CVFilePath))
-                { *@
+                @if (!String.IsNullOrEmpty(Model.user.CVFilePath))
+                {
                     <a asp-page-handler="ForDownload" style=" text-decoration: none;" asp-route-UserId="@Model.user.Id"><i class="fa-solid fa-download"></i> Tải hồ sơ</a>
-               @*  } *@
+                }
                 @* <div class="mt-3">
                 <input type="submit" asp-page-handler="ForSave" class="btn btn-success" value="Update">
 
@@ -204,7 +204,8 @@
             <input type="hidden" id="modalUserID" name="userID" />
             <h3 style="text-align: center;">Báo cáo tài khoản</h3>
             <label for="cutoffDate">
-                Bạn đang báo cáo tài khoản @Model.user.UserName
+                Bạn đang báo cáo tài khoản @Model.user.UserName. Lưu ý, bạn không thể xóa, hay sửa nếu đã gửi báo cáo đi.
+                Vì vậy, hãy cân nhắc trước khi gửi. Vui lòng cung cấp cho chúng tôi nhiều thông tin nhất để đánh giá lượt báo cáo này chính xác. Cảm ơn bạn
             </label>
             <br />
             <br />
@@ -234,11 +235,11 @@
         document.execCommand("Copy");
 
         // Thông báo cho người dùng
-        alert("Link copied successfully!");
+        alert("Lấy link cá nhân thành công!");
     }
 
     // Thiết lập đường dẫn mẫu cho LinkProfile
-    document.getElementById("linkProfile").innerText = "LinkProfile";
+    document.getElementById("linkProfile").innerText = "Link cá nhân";
 
     // Hàm để quay lại trang trước đó
     function onBack() {
@@ -291,10 +292,9 @@
         var averageRatingDisplay = document.getElementById("averageRating");
 
         if (!isNaN(averageRating)) {
-            averageRatingDisplay.innerHTML = "Average Rating: " + averageRating.toFixed(2);
+            averageRatingDisplay.innerHTML = "Đánh giá trung bình: " + averageRating.toFixed(2);
         } else {
-            averageRatingDisplay.innerHTML = "Average Rating: N/A";
-        }
+            averageRatingDisplay.innerHTML = "Đánh giá trung bình: N/A";
     }
 
     function highlightStars(rating) {
@@ -364,12 +364,11 @@
                 data: JSON.stringify(obj),
                 contentType: 'application/json',
                 success: (data) => {
-                    alert("Report Account Successfully!");
+                    alert("Báo cáo thành công!");
                     window.location.reload();
                 },
                 error: function (xhr, status, error) {
-                    console.error(xhr.responseText);
-                    alert("Report Account Failed!");
+                    alert("Báo cáo thất bại!");
                 }
             });
 
@@ -425,7 +424,7 @@
                         commentDiv.className = 'comment';
                         // Check if comment is too long, limit to a certain number of characters
                         var commentContent = feedback.content.length > 65 ? feedback.content.substring(0, 65) + "..." : feedback.content;
-                        commentDiv.innerHTML = `${feedback.createByUserName}:  ${commentContent} (Rating: ${feedback.star}⭐)`;
+                        commentDiv.innerHTML = `${feedback.createByUserName}:  ${commentContent} (Đánh giá: ${feedback.star}⭐)`;
                         feedbackSection.appendChild(commentDiv);
                     });
                 } else {

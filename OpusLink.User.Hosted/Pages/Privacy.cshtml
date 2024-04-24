@@ -1,47 +1,47 @@
 ﻿@page
 @model PrivacyModel
 @{
-    ViewData["Title"] = "Giải thích luồng hoạt động";
+    ViewData["Title"] = "Điều khoản sử dụng";
 }
 <div style="width:80%;margin:auto">
 <h1>@ViewData["Title"]</h1>
 
-<h2>1, Đăng việc</h2>
-Một Job được bắt đầu bằng việc đăng lên website. Phí của mỗi lần yêu cầu đăng việc sẽ là 50.000 đồng. Sau khi yêu cầu đăng việc được Admin chấp nhận thì Job sẽ có thời hạn 7 ngày để nhận Offer từ Freelancer.
+<h2>I. Điều khoản chung cho người dùng</h2>
+    - Hồ sơ phải bao gồm các thông tin cá nhân với các thông tin chính xác.<br />
+    - Ảnh đại diện cần phải rõ mặt, hoặc logo nếu là công ty/team.<br />
+    - Mỗi tài khoản chỉ thuộc về một người dùng, không chia sẻ tài khoản cho người khác.<br />
+    - Không lợi dụng hệ thống để thực hiện các hành vi trái pháp luật, gian lận, mọi phát hiện sẽ bị khóa tài khoản vĩnh viễn và chịu trách nhiệm hình sự theo quy định của pháp luật Việt Nam.<br />
 
-<h2>2, Sửa việc</h2>
-Employer có thể sửa Job trong khi Job ở trạng thái chờ được Admin duyệt. Thời điểm này Employer có thể sửa việc mà không mất phí.
-<br>
-Khi Job đã được Admin duyệt và Employer chưa chọn Freelancer. Employer có thể chỉnh sửa nội dung của Job. Nhưng sẽ bị mất phí 50.000 đồng và phải chờ được Admin duyệt. Sau khi admin duyệt thì Job lại có 7 ngày để nhận Offer từ Freelancer.
+<h2>II. Điều khoản sử dụng dành cho Freelancer</h2>
+    <h3>
+        1. Nhận offer
+    </h3>
+    - Một offer  thành công khi nó cung cấp những thông tin đầy đủ, chính xác và chuyên nghiệp. Chỉ nên gửi chào giá khi bạn có kỹ năng phù hợp và khả năng hoàn thành công việc<br />
+    - Sau khi offer thành công, Employee sẽ thực hiện chia công việc thành các milestone các yêu cầu về mức độ hoàn thành, chi phí và thời gian hoàn thành, bạn sẽ bắt đầu công việc sau khi chấp nhận với thông tin các milestone được Employee đưa ra.<br />
 
-<h2>3, Nhận Offer</h2>
-Trong thời gian 7 ngày sau khi Job được Admin duyệt, Freelancer có thể tạo Offer cho Job. Mỗi một Freelancer chỉ có một Offer cho một Job. Sau khi tạo Offer thì Freelancer có thể sửa lại nếu thỏa mãn đủ 3 điều kiện:
-<br>
-- Job còn hạn 7 ngày nhận Offer.
-<br>
-- Employer chưa thống nhất plan với một Freelancer nào
-<br>
-- Freelancer này chưa được Employer chọn
+    <h3>
+        2. Chính sách thanh toán
+    </h3>
+    - Sau khi hoàn thành mỗi đầu theo milestone , bạn cần gửi thông tin để yêu cầu Employee review.<br />
+    - Bạn sẽ nhận được 80% số tiền của milestone đó nếu Employer chấp nhận kết quả công việc của bạn. 19% còn lại bạn sẽ nhận được sau khi hoàn thành tất cả các milestone của công việc. 1% là phí nền tảng của chúng tôi. Nếu có bất cứ một milestone nào không được chấp nhận bạn sẽ không nhận được 19% còn lại.<br />
+    - Hãy liên hệ với chúng tôi hoặc thực hiện đánh giá Employee một cách công tâm nhất nếu công việc của bạn không được đánh giá một cách chính xác và có dấu hiệu gian lận, chúng tôi sẽ giúp bạn giải quyết.<br />
+    - Để rút tiền từ ví về tài khoản ngân hàng, hãy tạo một yêu cầu rút tiền từ hệ thống, để thực hiện giao dịch số tiền bạn yêu cầu rút cần nhỏ hơn hoặc bằng số tiền bạn đang có trong ví. Trong vòng 48h, hệ thống của chúng tôi sẽ thực hiện gửi tiền vào số tài khoản bạn đã đăng ký và có thông báo đến bạn.<br />
 
-<h2>3, Employer chọn Freelancer cho Job</h2>
-Mỗi một Job chỉ có thể chọn một Freelancer. Nếu Employer đã chọn 1 Freelancer và 2 người vẫn chưa thống nhất Plan, thì Employer có thể bỏ chọn Freelancer này và rồi chọn một Freelancer khác.
-<br>
-Nếu 2 người đã thống nhất Plan thì Employer sẽ không thể bỏ chọn Freelancer. Và 2 ngời phải làm việc cho tới khi Job đạt trạng thái Fail hoặc Complete.
 
-<h2>4, Employer và Freelancer thống nhất Plan</h2>
-Mỗi Job có một Plan, Plan bao gồm nhiều Milestones. Employer sẽ là người tạo, chỉnh sửa nội dung, đặt tiền cho Milestone. Freelancer sẽ giao tiếp với Employer để Employer tạo ra một plan hợp lý cho cả 2 người. Sau khi tạo thì Employer phải đặt tiền vào tất cả Milestone để có thể gửi yêu cầu chấp thuận Plan cho Freelancer.
-<br>
-Trước khi gửi yêu cầu chấp thuận Plan, thì Employer sẽ chọn một ngày tháng là hạn cuối để Freelancer chọn chấp thuận hay không. Nếu quá hạn đó mà Freelancer không chọn, nghĩa là Freelancer không đồng ý Plan.
-<br>
-Nếu Freelancer không đồng ý Plan hoặc không phản hồi yêu cầu, thì Employer có quyền chỉnh sửa lại Plan và chọn Freelancer khác.
-<br>
-Nếu Freelancer đồng ý Plan thì Employer sẽ không thể chỉnh sửa Plan nữa và 2 người sẽ làm việc.
+    <h2>
+         III. Điều khoản sử dụng dành cho Employer
+    </h2>
+    <h3>
+        1. Đăng job
+    </h3>
+    - Bạn cần trả phí 50.000 VND cho mỗi job được đăng trên nền tảng của chúng tôi trong vòng 7 ngày. Thời gian đăng được tính từ thời điểm bài đăng của bạn được duyệt. <br />
+    - Thời gian duyệt bài trong vòng 48h, nếu sau thời gian trên có vấn đề với bài đăng của bạn chúng tôi sẽ liên hệ lại hoặc bạn hãy liên hệ với chúng tôi để được giải quyết.<br />
+    <h3>2. Chính sách thanh toán</h3>
+    - Khi tạo một bài đăng công việc , Employer cần tạo các milestone và đặt tiền vào tất cả milestone để có thể gửi yêu cầu tới freelancer và bắt đầu làm việc.<br />
+    - Employer cần đặt cọc 100% số tiền của milestone đó và sẽ được hoàn lại tiền trong trường hơp milestone thất bại.<br />
 
-<h2>5, Freelancer và Employer làm việc dựa trên Milestone.</h2>
-Trong quá trình hoàn thành từng Milestone. Freelancer và Employer sẽ giao tiếp và gửi kết quả thông qua tính năng Chat. Trong thời hạn của một Milestone, Freelancer phải nhấn nút "Tôi đã xong" của một Milestone để hệ thống ghi nhận và chuyển thông báo cho Employer để Employer quyết định Milestone đó đã hoàn thành hay chưa.
-<br>
-Nếu Milestone đó được Employer quyết là đã hoàn thành. Thì hệ thống sẽ gửi 80% tiền của Milestone đó cho Freelancer, hệ thống sẽ lấy 1 % tiền phí, 19% còn lại hệ thống sẽ giữ và trả cho Freelancer nếu Freelancer hoàn thành hết Milestone (100% complete, 0% fail), nếu không hoàn thành hết thì 19% đó sẽ được trả cho Employer.
-<br>
+    <h2>IV. Cam kết của OpusLink</h2>
+    - Chúng tôi không bán hoặc cho thuê thông tin của bạn cho bên thứ ba ngoài hệ thống OpusLink mà không có sự cho phép của bạn.
 </div>
 
 

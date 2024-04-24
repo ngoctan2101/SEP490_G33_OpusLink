@@ -265,6 +265,7 @@ namespace OpusLink.Service.AccountServices
                     }
 
                     if (userIdentity.Status == 0)
+                    {
                         if (userIdentity.EndBanDate > DateTime.Now)
                         {
                             return new ApiResponseModel
@@ -279,6 +280,7 @@ namespace OpusLink.Service.AccountServices
                             userIdentity.Status = 1;
                             await _userManager.UpdateAsync(userIdentity);
                         }
+                    }
                 }
 
             }catch(Exception ex)
