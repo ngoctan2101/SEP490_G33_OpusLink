@@ -148,12 +148,12 @@
 									@if (!chatdto.IsViewed)
 									{
 										<strong>@chatdto.EmployerName</strong>
-										<div class="small"><strong>@chatdto.NewEstMessage</strong></div>
+										<div class="small"><strong>@trimmedMessage</strong></div>
 									}
 									else
 									{
 										@chatdto.EmployerName
-										<div class="small">@chatdto.NewEstMessage</div>
+										<div class="small">@trimmedMessage</div>
 									}
 								</div>
 							</div>
