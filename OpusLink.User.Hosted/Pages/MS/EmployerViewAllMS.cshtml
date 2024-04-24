@@ -557,8 +557,8 @@
     </div>
     <div>
         <div>
-            <h5>Job Id: @Model.job.JobId</h5>
-            <h5>Job Content: @Model.job.JobContent</h5>
+            <h5>Tiêu đề: @Model.job.JobTitle</h5>
+            <h5>Mô tả công việc: @Model.job.JobContent</h5>
         </div>
     </div>
     <div class="row" style="margin-bottom:15px">
@@ -609,7 +609,7 @@
                 </div>
                 <div class="col-md-5" style="display: flex;flex-direction: column;justify-content: center;">
                     <h4 style="font-weight:bold;display:block">@item.MilestoneContent</h4>
-                    <p>Due @item.Deadline.ToString("dd/MM/yyyy HH:mm")</p>
+                    <p>Thời hạn @item.Deadline.ToString("dd/MM/yyyy HH:mm")</p>
                     <p>@((item.AmountToPay).ToString("#,##")) ₫</p>
                     @if (Model.job.IsFreelancerConfirm == false && item.Deadline < DateTime.Now)
                     {

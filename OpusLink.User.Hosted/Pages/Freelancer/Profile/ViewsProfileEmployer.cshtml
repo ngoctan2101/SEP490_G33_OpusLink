@@ -82,11 +82,11 @@
                 @* <input type="file" name="image" accept="image/x-png, image/jpeg" onchange="readURL(this);" readonly /> *@
                 <!-- LinkProfile, Textbox, và Nút Copy -->
                 <div class="mt-3">
-                    @* <p>
+                    <p>
                         <span id="linkProfile">Link cá nhân</span>
-                        <input type="text" class="form-control" id="linkTextBox" readonly>
-                    </p> *@
-                    <button type="button" class="btn btn-secondary" onclick="copyLink()">Copy Link</button>
+                        <input  type="text" class="form-control" id="linkTextBox" readonly>
+                    </p>
+                    <button type="button" class="btn btn-secondary" onclick="copyLink()">Lấy link</button>
                 </div>
 
                 <div class="mt-3">
@@ -234,11 +234,11 @@
         document.execCommand("Copy");
 
         // Thông báo cho người dùng
-        alert("Link copied successfully!");
+        alert("Lấy link cá nhân thành công!");
     }
 
     // Thiết lập đường dẫn mẫu cho LinkProfile
-    document.getElementById("linkProfile").innerText = "LinkProfile";
+    document.getElementById("linkProfile").innerText = "Link cá nhân";
 
     // Hàm để quay lại trang trước đó
     function onBack() {

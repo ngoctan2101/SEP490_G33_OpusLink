@@ -176,8 +176,8 @@
 </div>
 <div style="margin: 20px 50px 20px 50px">
     <div>
-        <h5>Job Id: @Model.job.JobId</h5>
-        <h5>Job Content: @Model.job.JobContent</h5>
+        <h5>Tiêu đề: @Model.job.JobTitle</h5>
+        <h5>Mô tả công việc: @Model.job.JobContent</h5>
     </div>
     <div style="margin: 20px 40px 20px 40px">
         <div class="row" style="margin:10px 10px 10px 10px">
@@ -204,7 +204,7 @@
                 </div>
                 <div class="col-md-5">
                     <h4 style="font-weight:bold">@item.MilestoneContent</h4>
-                    <p>Due @item.Deadline.ToString("dd/MM/yyyy HH:mm")</p>
+                    <p>Thời hạn @item.Deadline.ToString("dd/MM/yyyy HH:mm")</p>
                     <p>@((item.AmountToPay).ToString("#,##")) ₫</p>
                 </div>
                 <div style="display:none">
