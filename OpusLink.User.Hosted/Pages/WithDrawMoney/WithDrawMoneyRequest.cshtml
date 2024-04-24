@@ -33,7 +33,7 @@
             <div class="mb-3">
                 <label for="username" class="form-label">Số tiền trong tài khoản</label>
                 <input type="text" class="form-control" id="username" name="username"  hidden value="@Model.user.AmountMoney">
-                <input type="text" class="form-control" readonly required value="@((Model.user.AmountMoney)?.ToString("#,###")) ₫">
+                <input type="text" class="form-control" style="background-color:#E9ECEF" readonly required value="@((Model.user.AmountMoney)?.ToString("#,###")) ₫">
             </div>
             <div class="mb-3">
                 <label for="bankname" class="form-label">Tên ngân hàng</label>

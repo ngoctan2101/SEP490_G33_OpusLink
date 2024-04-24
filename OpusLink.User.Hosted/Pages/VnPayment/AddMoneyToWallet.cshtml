@@ -44,17 +44,17 @@
         <form id="topupForm" method="post">
             <div class="mb-3">
                 <label for="username" class="form-label">Tên người dùng:</label>
-                <input type="text" class="form-control" id="username" name="username" readonly required value="@Model.user.UserName">
+                <input type="text" class="form-control" id="username" name="username" style="background-color:#E9ECEF" readonly required value="@Model.user.UserName">
             </div>
 
             <div class="mb-3">
                 <label for="address" class="form-label">Địa chỉ:</label>
-                <input type="text" class="form-control" id="address" name="address" readonly required value="@Model.user.Address">
+                <input type="text" class="form-control" id="address" name="address" style="background-color:#E9ECEF" readonly required value="@Model.user.Address">
             </div>
 
             <div class="mb-3" hidden>
                 <label for="dob" class="form-label">Ngày sinh:</label>
-                <input type="date" class="form-control" id="dob" name="dob" readonly required value="@Model.user.Dob">
+                <input type="date" class="form-control" id="dob" name="dob" style="background-color:#E9ECEF" readonly required value="@Model.user.Dob">
             </div>
 
             <div class="mb-3">
