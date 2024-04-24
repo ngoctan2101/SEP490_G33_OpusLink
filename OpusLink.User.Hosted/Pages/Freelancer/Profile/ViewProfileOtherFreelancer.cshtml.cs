@@ -41,6 +41,11 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
                 var optionUser = new JsonSerializerOptions()
                 { PropertyNameCaseInsensitive = true };
                 user = JsonSerializer.Deserialize<UserDTO>(responseBodyUser, optionUser);
+                HttpContext.Session.SetInt32("UserIdCheckNew", UserId);
+            }
+            else
+            {
+                return RedirectToPage("/Freelancer/Profile/ViewsProfileOtherFreelancer", new { UserId = HttpContext.Session.GetInt32("UserIdCheckNew") });
             }
             return Page();
         }

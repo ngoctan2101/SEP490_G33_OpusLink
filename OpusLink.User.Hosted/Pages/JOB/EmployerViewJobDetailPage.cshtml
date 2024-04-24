@@ -119,9 +119,9 @@
                 }
                 <a asp-page="../Employer/Profile/ViewsProfileFreelancer" asp-route-UserId="@item.EmployerId" class="link" style="display:block">@item.EmployerName</a>
                 <div id="feedbackInfo"></div>
-                <p>Thông tin job:</p>
+                <p>Thông tin công việc:</p>
                 <table style="width:100%;font-size:13px">
-                    <tr><td>Job Id:</td><td>@item.JobId</td></tr>
+                    <tr><td>Id việc:</td><td>@item.JobId</td></tr>
                     <tr><td style="width:100px">Ngày đăng:</td><td>@item.DateCreated.ToString("dd/MM/yyyy")</td></tr>
                     <tr><td>Ngân sách:</td><td>@Math.Round(item.BudgetMin,0).ToString("#,##") ₫<span style="display:inline-block"> - </span>@Math.Round(item.BudgetMax,0).ToString("#,##") ₫</td></tr>
                     <tr><td>Địa điểm:</td><td>@item.Location</td></tr>
