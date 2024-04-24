@@ -1,0 +1,446 @@
+﻿@page
+@model OpusLink.User.Hosted.Pages.Freelancer.Profile.ViewProfileOtherFreelancerModel
+@inject IHttpContextAccessor HttpContextAccessor;
+@using OpusLink.Shared.Constants
+@{
+    int userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId") ?? 0;
+}
+<link rel="stylesheet" href="~/css/Report.css">
+<script src="https://kit.fontawesome.com/10f63c3d6e.js" crossorigin="anonymous"></script>
+<style>
+    /* Thêm CSS để căn chỉnh nút Back ở góc trái dưới cùng */
+    #backButton {
+        position: fixed;
+        bottom: 10px;
+        left: 10px;
+    }
+
+    body {
+        /* background: linear-gradient(to left, #6699ff 0%, #cc33ff 100%); */
+        background-color: #f2fcfe;
+    }
+
+
+    #feedbackSection {
+        background-color: #f8f9fa;
+        padding: 10px;
+        border-radius: 5px;
+        margin-top: 20px;
+    }
+
+    #rateSection {
+        background-color: #f8f9fa;
+        width: 250px;
+    }
+
+    .ASkill {
+        display: inline-block;
+        background-color: #CFE2F3;
+        border: 1px solid grey;
+        margin: 9px 9px 0px 0px;
+        padding-left: 5px;
+    }
+    /* The Close Button */
+    .close {
+        color: red;
+        float: right;
+        font-size: 28px;
+        font-weight: bold;
+        height: 30px;
+        line-height: 22px;
+        vertical-align: middle;
+        padding: 0px 5px 0px 5px
+    }
+
+        .close:hover,
+        .close:focus {
+            color: #000;
+            text-decoration: none;
+            cursor: pointer;
+        }
+</style>
+
+<form method="post" enctype="multipart/form-data">
+    <input type="number" hidden name="userId" value="@Model.user.Id" />
+    <div class="container mt-5 ">
+        <div class="row ">
+            <!-- Hình ảnh bên trái -->
+            <div class="col-md-6 mb-3;">
+
+                @{
+                    if (Model.user.UserImageBytes != null && Model.user.UserImageBytes.Length > 0)
+                    {
+                        var base64Image = Convert.ToBase64String(Model.user.UserImageBytes);
+                        var imgSrc = $"data:image/png;base64,{base64Image}";
+                        <img alt="User Image" id="userImage" class="img-fluid" src="@imgSrc" style="width:50%;height:auto;display:block;margin-bottom:10px" />
+                    }
+                    else
+                    {
+                        <img id="userImage" src="/img/default.png" style="width:50%;height:auto;display:block;margin-bottom:10px" />
+                    }
+                }
+                @* <input type="file" name="image" accept="image/x-png, image/jpeg" onchange="readURL(this);" readonly /> *@
+                <!-- LinkProfile, Textbox, và Nút Copy -->
+                <div class="mt-3">
+                    @* <p>
+                        <span id="linkProfile">Link cá nhân</span>
+                        <input type="text" class="form-control" id="linkTextBox" readonly>
+                    </p> *@
+                    <button type="button" class="btn btn-secondary" onclick="copyLink()">Copy Link</button>
+                </div>
+
+                <div class="mt-3">
+                    <label for="introduction" class="form-label">Giới thiệu</label>
+                    <textarea class="form-control" style="background-color:#E9ECEF" id="introduction" rows="11" name="introduction" readonly>@Model.user.Introduction</textarea>
+                </div>
+                <div class="mb-3" hidden>
+                    <label for="cv" class="form-label">Upload CV</label>
+                    <input type="file" class="form-control" id="cv" name="cv" readonly accept=".pdf,.docx">
+                </div>
+                 @if (!String.IsNullOrEmpty(Model.user.CVFilePath))
+                { 
+                    <a asp-page-handler="ForDownload" style=" text-decoration: none;" asp-route-UserId="@Model.user.Id"><i class="fa-solid fa-download"></i> Tải hồ sơ</a>
+                 } 
+                @* <div class="mt-3">
+                <input type="submit" asp-page-handler="ForSave" class="btn btn-success" value="Update">
+
+                </div> *@
+
+
+                <!-- Form for Rating and Feedback -->
+                <div class="mt-3">
+                    <div>
+                        <h4 style="float: left;">Đánh giá và bình luận</h4>
+                        <button style="float: right;" type="button" class="openModal" id="@userId" data-userid="@userId">
+                            <i class="fa-solid fa-circle-exclamation" style="font-size: 24px;"></i>
+                            Báo cáo
+                        </button>
+                    </div>
+                    <br />
+                    <br />
+
+                    <div id="rateSection">
+                        <h5>Đánh giá:</h5>
+                        
+                        <p id="averageRating"></p>
+                    </div>
+                    <!-- Feedback Display Area -->
+                    <div id="feedbackSection">
+                        <h5>Bình luận</h5>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Thông tin bên phải -->
+            <div class="col-md-6">
+                <div class="mb-3" style="display:none">
+                    <label for="id" class="form-label">ID</label>
+                    <input type="text" class="form-control" id="id" name="id"  readonly value="@Model.user.Id">
+                </div>
+
+                <div class="mb-3">
+                    <label for="name" class="form-label">Tên tài khoản</label>
+                    <input type="text" class="form-control" style="background-color:#E9ECEF" id="name" name="name" readonly value="@Model.user.UserName">
+                </div>
+                <div class="mb-3">
+                    <label for="email" class="form-label">Email</label>
+                    <input type="email" class="form-control" style="background-color:#E9ECEF" id="email" name="email" readonly value="@Model.user.Email">
+                </div>
+                <div class="mb-3">
+                    <label for="dob" class="form-label">Ngày sinh</label>
+                    <input type="text" class="form-control" style="background-color:#E9ECEF" id="dob" name="dob" readonly value="@Model.user.Dob?.ToString("dd/MM/yyyy")">
+                </div>
+
+                <div class="mb-3">
+                    <label for="phone" class="form-label">Số điện thoại</label>
+                    <input type="tel" class="form-control" style="background-color:#E9ECEF" id="phone" name="phone" readonly value="@Model.user.PhoneNumber">
+                </div>
+
+                <div class="mb-3">
+                    <label for="address" class="form-label">Địa chỉ</label>
+                    <input type="text" class="form-control" style="background-color:#E9ECEF" id="address" name="address" readonly value="@Model.user.Address">
+                </div>
+
+                <div class="mb-3" readonly>
+                    <label for="skills" class="form-label">Kỹ năng</label>
+                    @* <select style="width:100%;height:30px" onchange="ClickASkill()" id="skillDropdown" hidden>
+                    <option value="" disabled selected>Choose skill</option>
+                    @foreach (var item in Model.AllSkills)
+                    {
+                    <option value="@item.SkillID" onclick="ClickASkill(@item.SkillID ,@item.SkillName)">@item.SkillName</option>
+                    }
+                    </select> *@
+                    <div id="SkillContainer" style="min-height:30px" readonly>
+                        @foreach (var item in Model.user.Skills)
+                        {
+                            <div class="ASkill" id="ASkill_@item.SkillID" readonly>
+                                @item.SkillName
+                                @* <span class="close" onclick="#Delete(@item.SkillID)">&times;</span> *@
+                                @* <input type="text" name="skill_@item.SkillID" value="@item.SkillID" /> *@
+                            </div>
+                        }
+                    </div>
+                </div>
+                <div class="mb-3" hidden>
+                    <label for="amountmoney" class="form-label">Tiền trong ví</label>
+                    <input type="text" class="form-control" style="background-color:#E9ECEF" id="amountmoney" name="amountmoney"
+                           placeholder="Enter amountmoney" readonly value="@Model.user.AmountMoney">
+                </div>
+                <!-- Nút Back -->
+                <div class="d-inline-flex p-2 bd-highlight">
+
+                    <button type="button" id="backButton" class="btn btn-primary" onclick="onBack()">Trang chủ</button>
+                </div>
+
+            </div>
+        </div>
+</form>
+<!-- Modal -->
+<div id="myModal" class="modal">
+    <!-- Nội dung modal -->
+    <div class="modal-content">
+        <span class="close">&times;</span>
+        <form id="modalForm">
+            <input type="hidden" id="modalUserID" name="userID" />
+            <h3 style="text-align: center;">Báo cáo tài khoản</h3>
+            <label for="cutoffDate">
+                Bạn đang báo cáo tài khoản @Model.user.UserName
+            </label>
+            <br />
+            <br />
+            <label for="reason">Lý do báo cáo</label><br>
+            <textarea id="reason" name="reason" rows="4" cols="50"></textarea><br>
+            <button type="submit" class="confirm-button">Xác nhận</button>
+        </form>
+    </div>
+</div>
+<!-- Link to Bootstrap JS and Popper.js (required for Bootstrap) -->
+
+
+<script>
+    // Hàm để copy đường dẫn vào clipboard
+    function copyLink() {
+        var linkProfile = document.getElementById("linkProfile");
+        var linkTextBox = document.getElementById("linkTextBox");
+
+        // Lấy địa chỉ URL hiện tại của trang
+        var currentURL = window.location.href;
+
+        // Hiển thị đường dẫn trong textbox
+        linkTextBox.value = currentURL;
+
+        // Chọn và sao chép đường dẫn vào clipboard
+        linkTextBox.select();
+        document.execCommand("Copy");
+
+        // Thông báo cho người dùng
+        alert("Link copied successfully!");
+    }
+
+    // Thiết lập đường dẫn mẫu cho LinkProfile
+    document.getElementById("linkProfile").innerText = "LinkProfile";
+
+    // Hàm để quay lại trang trước đó
+    function onBack() {
+        window.location.href = '/Index';
+    }
+
+    function redirectToFeedback() {
+        window.location.href = 'Skill.html'; // Thay đổi 'feedback.html' bằng đường dẫn của trang Feedback
+    }
+
+    var currentRating = 0;
+
+    // Check if the user has already rated (stored in local storage)
+
+    var userRating = localStorage.getItem("userRating");
+    if (userRating) {
+        highlightStars(userRating);
+    }
+
+    function rate() {
+        var stars = document.getElementsByClassName("star");
+
+        for (var i = 0; i < stars.length; i++) {
+            stars[i].style.color = "black"; // Reset all stars to black
+        }
+
+        event.target.style.color = "gold"; // Change the color of clicked star and above stars
+
+        // Calculate the rating based on the clicked star
+        currentRating = Array.from(stars).indexOf(event.target) + 1;
+
+        // Save the user's rating to local storage
+        localStorage.setItem("userRating", currentRating);
+
+        // Update the average rating display
+        updateAverageRating();
+    }
+
+    function updateAverageRating() {
+        var feedbackSection = document.getElementById("feedbackSection");
+        var comments = feedbackSection.getElementsByClassName("comment");
+        var totalRating = 0;
+
+        for (var i = 0; i < comments.length; i++) {
+            var rating = parseInt(comments[i].textContent.match(/\d+/)[0]); // Extract the rating from the comment
+            totalRating += rating;
+        }
+
+        var averageRating = totalRating / comments.length;
+        var averageRatingDisplay = document.getElementById("averageRating");
+
+        if (!isNaN(averageRating)) {
+            averageRatingDisplay.innerHTML = "Average Rating: " + averageRating.toFixed(2);
+        } else {
+            averageRatingDisplay.innerHTML = "Average Rating: N/A";
+        }
+    }
+
+    function highlightStars(rating) {
+        var stars = document.getElementsByClassName("star");
+        for (var i = 0; i < rating; i++) {
+            stars[i].style.color = "gold";
+        }
+    }
+    function readURL(input) {
+        if (input.files && input.files[0]) {
+            var reader = new FileReader();
+
+            reader.onload = function (e) {
+                $('#userImage').attr('src', e.target.result);
+            };
+
+            reader.readAsDataURL(input.files[0]);
+        }
+    }
+    function ClickASkill() {
+
+        var selectElement = document.getElementById("skillDropdown");
+        var selectedSkillId = selectElement.value;
+        var selectedSkillName = selectElement.options[selectElement.selectedIndex].text;
+        var SkillContainer = document.getElementById("SkillContainer");
+        var str = "<div class=\"ASkill\" id=\"ASkill_" + selectedSkillId + "\">" + selectedSkillName + "<span class=\"close\" onclick=\"Delete(" + selectedSkillId + ")\">&times;</span><input type=\"text\" name=\"skill_" + selectedSkillId + "\" value=\"" + selectedSkillId + "\" hidden/></div>"
+        SkillContainer.innerHTML += str;
+    }
+    function Delete(SkillId) {
+        var SkillDiv = document.getElementById("ASkill_" + SkillId).remove();
+    }
+</script>
+<script src="https://ajax.googleapis.com/ajax/libs/jquery/3.5.1/jquery.min.js"></script>
+<script>
+    $(document).ready(function () {
+        // Open Modal
+        $(".openModal").click(function () {
+            var userID = $(this).data("userid");
+            console.log(userID);
+            $("#modalUserID").val(userID);
+            $("#reason").val(""); // Xóa giá trị của trường textarea
+            $("#myModal").css("display", "block");
+        });
+
+        // Close Modal
+        $(".close").click(function () {
+            $("#myModal").css("display", "none");
+        });
+
+        // Submit Form
+        $(".confirm-button").click(function () {
+
+            // Ajax request
+            var obj = {
+                createByUserID: parseInt($("#modalUserID").val()),
+                targetToUserID: @Model.user.Id,
+                reportUserContent: $("#reason").val()
+            };
+
+            $.ajax({
+                url: "@(UrlConstant.ApiBaseUrl + "/ReportAccount")",
+                headers: {
+                    "ngrok-skip-browser-warning": true,
+                    "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))"
+                },
+                method: 'POST',
+                data: JSON.stringify(obj),
+                contentType: 'application/json',
+                success: (data) => {
+                    alert("Report Account Successfully!");
+                    window.location.reload();
+                },
+                error: function (xhr, status, error) {
+                    console.error(xhr.responseText);
+                    alert("Report Account Failed!");
+                }
+            });
+
+
+            // Đóng modal sau khi submit
+            $("#myModal").css("display", "none");
+        });
+    });
+</script>
+
+<script>
+    // Function to fetch and display feedback information
+    function displayAverageStar() {
+        var EmployerId = @Model.user.Id; // Assuming EmployerId is an integer
+        fetch(`@(UrlConstant.ApiBaseUrl)/Feedback/AverageStars/${EmployerId}`, {
+            method: "GET", headers: {
+                "ngrok-skip-browser-warning": true,
+                "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                document.getElementById('averageRating').innerHTML = `
+                                    <p> ${data.averageStars}⭐(${data.numberOfEntries} Lượt đánh giá)</p>
+                        `;
+            })
+            .catch(error => {
+                console.error('Error fetching feedback information:', error);
+            });
+    }
+
+    // Call the function to display feedback information when the page loads
+    displayAverageStar();
+</script>
+<script>
+    function displayFeedbacks() {
+        var userId = @Model.user.Id; // Assuming userId is an integer
+        fetch(`@(UrlConstant.ApiBaseUrl)/Feedback/GetFeedbacksByTargetUser/${userId}`, {
+            method: "GET", headers: {
+                "ngrok-skip-browser-warning": true,
+                "Authorization": "Bearer " + "@(HttpContextAccessor.HttpContext.Session.GetString("token"))",
+            }
+        })
+            .then(response => response.json())
+            .then(data => {
+                var feedbackSection = document.getElementById('feedbackSection');
+                feedbackSection.innerHTML = ''; // Clear previous content
+
+                if (data.length > 0) {
+                    var commentsToDisplay = data.slice(0, 10); // Chỉ lấy 10 comment đầu tiên
+                    commentsToDisplay.forEach(feedback => {
+                        var commentDiv = document.createElement('div');
+                        commentDiv.className = 'comment';
+                        // Check if comment is too long, limit to a certain number of characters
+                        var commentContent = feedback.content.length > 65 ? feedback.content.substring(0, 65) + "..." : feedback.content;
+                        commentDiv.innerHTML = `${feedback.createByUserName}:  ${commentContent} (Rating: ${feedback.star}⭐)`;
+                        feedbackSection.appendChild(commentDiv);
+                    });
+                } else {
+                    var noFeedbackDiv = document.createElement('div');
+                    noFeedbackDiv.className = 'no-feedback';
+                    noFeedbackDiv.innerText = 'No feedback available.';
+                    feedbackSection.appendChild(noFeedbackDiv);
+                }
+            })
+            .catch(error => {
+                console.error('Error fetching feedbacks:', error);
+            });
+    }
+
+    // Call the function to display feedbacks when the page loads
+    displayFeedbacks();
+
+</script>
