@@ -76,26 +76,27 @@
                     }
                 }
                 <input type="file" name="image" accept="image/x-png, image/jpeg" onchange="readURL(this);" />
-                @*<!-- LinkProfile, Textbox, và Nút Copy -->
-                <div class="mt-3">
-                <p>
+                <!-- LinkProfile, Textbox, và Nút Copy -->
+                @* <div class="mt-3">
+                 <p>
                 <span id="linkProfile">LinkProfile</span>
                 <input type="text" class="form-control" id="linkTextBox" readonly>
-                </p>
+                </p> 
                 <button type="button" class="btn btn-secondary" onclick="copyLink()">Copy Link</button>
-                </div>*@
+                </div> *@
 
                 <div class="mt-3">
                     <label for="introduction" class="form-label">Giới thiệu</label>
                     <textarea class="form-control" id="introduction" rows="11" name="introduction">@Model.user.Introduction</textarea>
-                </div>
+                </div></br>
                 <div class="mb-3">
-                    <label for="cv" class="form-label">Upload CV</label>
+                    <label for="cv" class="form-label">Tải lên CV</label>
                     <input type="file" class="form-control" id="cv" name="cv" readonly accept=".pdf,.docx">
                 </div>
-                <div class="mb-3">
-                    <a asp-page-handler="ForDownload" class="btn btn-danger" asp-route-UserId="@Model.user.Id">Tải hồ sơ</a>
-                </div>
+                @* @if (!String.IsNullOrEmpty(Model.user.CVFilePath))
+                { *@
+                    <a asp-page-handler="ForDownload" style=" text-decoration: none;" asp-route-UserId="@Model.user.Id"><i class="fa-solid fa-download"></i> Tải hồ sơ</a>
+                @* } *@
                 <div class="mt-3">
                     <input type="submit" asp-page-handler="ForSave" class="btn btn-success" value="Cập nhật">
 

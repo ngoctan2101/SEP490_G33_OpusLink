@@ -90,14 +90,14 @@
                         <textarea class="form-control" id="introduction" rows="11" name="introduction">@Model.user.Introduction</textarea>
                     </div>
                     <div class="mb-3">
-                        <label for="cv" class="form-label">Upload CV</label>
+                    <label for="cv" class="form-label">Tải lên CV</label>
                         <input type="file" class="form-control" id="cv" name="cv" readonly accept=".pdf,.docx">
                     </div>
                     <div class="mb-3">
-                    @if (!String.IsNullOrEmpty(Model.user.CVFilePath))
-                    {
-                        <a asp-page-handler="ForDownload" class="btn btn-danger" asp-route-UserId="@Model.user.Id">Tải hồ sơ</a>
-                    }
+                    @* @if (!String.IsNullOrEmpty(Model.user.CVFilePath))
+                    { *@
+                        <a asp-page-handler="ForDownload" style=" text-decoration: none;" asp-route-UserId="@Model.user.Id"><i class="fa-solid fa-download"></i> Tải hồ sơ</a>
+                    @* } *@
                     </div>
                     <div class="mt-3">
                     <input type="submit" asp-page-handler="ForSave" class="btn btn-success" value="Cập nhật">
