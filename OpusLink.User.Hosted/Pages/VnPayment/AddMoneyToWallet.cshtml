@@ -52,11 +52,6 @@
                 <input type="text" class="form-control" id="address" name="address" style="background-color:#E9ECEF" readonly required value="@Model.user.Address">
             </div>
 
-            <div class="mb-3" hidden>
-                <label for="dob" class="form-label">Ngày sinh:</label>
-                <input type="date" class="form-control" id="dob" name="dob" style="background-color:#E9ECEF" readonly required value="@Model.user.Dob">
-            </div>
-
             <div class="mb-3">
                 <label for="amount" class="form-label">Số tiền:</label>
                 <input type="text" class="form-control" id="amount" name="amount" oninput="formatCurrency(this)" required value="@Model.Price">
