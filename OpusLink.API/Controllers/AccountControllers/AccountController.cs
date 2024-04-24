@@ -79,12 +79,23 @@ namespace OpusLink.API.Controllers.AccountControllers
                 // Đoạn này : Nếu Mail và Name đã tồn tại
                 var userExistMail = await _userManager.FindByEmailAsync(model.Email);
                 var userExistName = await _userManager.FindByNameAsync(model.UserName);
-                if (userExistMail != null || userExistName != null)
+
+                if (userExistName != null)
                 {
                     return new ApiResponseModel()
                     {
                         Code = 400,
-                        Message = TotalMessage.RegisterAccountExists,
+                        Message = TotalMessage.RegisterAccountNameExists,
+                        IsSuccess = false
+                    };
+                }
+
+                if (userExistMail != null)
+                {
+                    return new ApiResponseModel()
+                    {
+                        Code = 400,
+                        Message = TotalMessage.RegisterAccountEmailExists,
                         IsSuccess = false
                     };
                 }

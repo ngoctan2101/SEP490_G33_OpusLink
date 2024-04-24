@@ -14,7 +14,8 @@ namespace OpusLink.Entity.DTO.AccountDTO.Common
         public static string RegisterSuccess = "Đăng kí tài khoản thành công";
 
         //Khi đăng kí nhưng tài khoản đã tồn tại
-        public static string RegisterAccountExists = "Tài khoản này đã tồn tại";
+        public static string RegisterAccountNameExists = "Email này đã được đăng kí trước đó. Vui lòng đăng nhập hoặc đăng kí với email khác";
+        public static string RegisterAccountEmailExists = "Tên tài khoản này đã được đăng kí trước đó. Vui lòng đăng nhập hoặc đăng kí với tên tài khoản khác";
 
         //Khi đăng kí nhưng có lỗi khác
         public static string RegisterError = "Lỗi khi tạo tài khoản, vui lòng thử lại";
