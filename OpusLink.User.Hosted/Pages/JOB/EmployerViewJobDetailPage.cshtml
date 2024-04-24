@@ -190,7 +190,7 @@
                 <div class="row">
                     <div class="col-md-4">Tổng số offer: @item.TotalOffer</div>
                     <div class="col-md-4">Trung bình: @(Math.Round(item.AverageCost, 0).ToString("#,##")) ₫</div>
-                    <div class="col-md-4">Trung bình thời lượng: @item.AverageTime days</div>
+                    <div class="col-md-4">Trung bình thời lượng: @item.AverageTime ngày</div>
                 </div>
                 <a asp-page="../MS/EmployerViewAllMS" asp-route-jobID="@item.JobId" class="link">Xem milestones</a>
             </div>
@@ -256,8 +256,8 @@
                     </div>
                     <div class="col-md-7" style="border-left:2px solid #BEBEBE; padding-top:10px">
                         <p>@a.DateOffer.ToString("dd/MM/yyyy HH:mm")</p>
-                        <p><span style="font-weight:normal;color:#BEBEBE">Trả giá   </span><span style="font-size:20px">@(((int)a.ProposedCost).ToString("#,##")) ₫</span></p>
-                        <p><span style="font-weight:normal;color:#BEBEBE">Số ngày dự kiến   </span> <span style="font-size:20px">@a.ExpectedDays ngày</span></p>
+                        <p><span style="font-weight:normal;">Trả giá:   </span><span style="font-size:20px">@(((int)a.ProposedCost).ToString("#,##")) ₫</span></p>
+                        <p><span style="font-weight:normal;">Số ngày dự kiến:   </span> <span style="font-size:20px">@a.ExpectedDays ngày</span></p>
                         <p style="white-space:pre-line"><span style="font-weight:bold">Tự giới thiệu:</span><br> @a.SelfIntroduction</p>
                         <p style="white-space:pre-line"><span style="font-weight:bold">Kế hoạch dự tính:</span><br> @a.EstimatedPlan</p>
                     </div>
