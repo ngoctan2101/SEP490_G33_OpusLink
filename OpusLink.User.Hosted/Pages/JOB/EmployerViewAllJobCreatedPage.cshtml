@@ -117,7 +117,7 @@
                         <button type="submit" name="pageNo_1" value="1" style="width:100%;background-color:#2DB964;border:none;color:white;border:2px solid #2DB964;border-radius:3px">Tìm kiếm</button>
                     </div>
                     <div class="col-md-7">
-                        <input name="Search_Str" value="@Model.filter.SearchStr" style="width:100%;border-radius:3px" placeholder="Tìm job" />
+                        <input name="Search_Str" value="@Model.filter.SearchStr" style="width:100%;border-radius:3px" placeholder="Tìm việc" />
                     </div>
                     <div class="col-md-2">
                     </div>
@@ -182,9 +182,9 @@
                                     <div class="price-input" style="margin-bottom: 5px;">
                                         <table>
                                             <tr>
-                                                <td><input type="text" id="price-min" name="price_min" pattern="[0-9₫ ,]+" title="Please enter number" value="@Model.filter.BudgetMin" style="width:100% " /></td>
+                                                <td><input type="text" id="price-min" name="price_min" pattern="[0-9₫ ,]+" title="Vui lòng nhập số" value="@Model.filter.BudgetMin" style="width:100% " /></td>
                                                 <td>-</td>
-                                                <td><input type="text" id="price-max" name="price_max" pattern="[0-9₫ ,]+" title="Please enter number" value="@Model.filter.BudgetMax" style="width:100% " /></td>
+                                                <td><input type="text" id="price-max" name="price_max" pattern="[0-9₫ ,]+" title="Vui lòng nhập số" value="@Model.filter.BudgetMax" style="width:100% " /></td>
                                             </tr>
                                         </table>
                                     </div>
@@ -532,12 +532,12 @@
         //    return false;
         //}
         if (isNaN(parseInt(fromBudget)) || isNaN(parseInt(toBudget))) {
-            errorMessage.innerHTML = "Invalid price format. Price must be a number.";
+            errorMessage.innerHTML = "Định dạng ngân sách không hợp lệ. Nó phải là một con số.";
             return false;
         }
         // Check if fromBudget is less than or equal to toBudget
         if (parseInt(fromBudget) >= parseInt(toBudget)) {
-            errorMessage.innerHTML = "Price min must be less than price max.";
+            errorMessage.innerHTML = "Ngân sách tối thiểu phải nhỏ hơn ngân sách tối đa.";
             return false;
         }
 
@@ -545,7 +545,7 @@
         var dates = dateInput.split(" - ");
 
         if (dates.length !== 2) {
-            errorMessage.innerHTML = "Please enter two dates in the format dd/mm/yyyy - dd/mm/yyyy";
+            errorMessage.innerHTML = "Vui lòng nhập ngày theo định dạng ngày/tháng/năm";
             return false;
         }
 
@@ -558,12 +558,12 @@
         var endDate = new Date(parseInt(parts2[2], 10), parseInt(parts2[1], 10) - 1, parseInt(parts2[0], 10));
 
         if (!isValidDate(dates[0]) || !isValidDate(dates[1])) {
-            errorMessage.innerHTML = "Invalid date format. Please enter dates in the format dd/mm/yyyy";
+            errorMessage.innerHTML = "Định dạng ngày tháng không hợp lệ. Vui lòng nhập ngày theo định dạng ngày/tháng/năm";
             return false;
         }
 
         if (startDate >= endDate) {
-            errorMessage.innerHTML = "End date should be greater than start date.";
+            errorMessage.innerHTML = "Ngày kết thúc phải lớn hơn ngày bắt đầu.";
             return false;
         }
         // If everything is fine, allow the form to be submitted
