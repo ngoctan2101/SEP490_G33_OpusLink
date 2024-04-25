@@ -423,6 +423,17 @@
 
         confirmDoneMilestone.style.display = "block";
     }
+    document.getElementsByClassName("close")[0].onclick = function () {
+        confirmDoneMilestone.style.display = "none";
+    }
+    window.onclick = function (event) {
+        if (event.target == confirmDoneMilestone) {
+            confirmDoneMilestone.style.display = "none";
+        }
+    }
+    function hideModal() {
+        confirmDoneMilestone.style.display = "none";
+    }
 </script>
 <script>
 

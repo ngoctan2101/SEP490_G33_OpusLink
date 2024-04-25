@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using Newtonsoft.Json;
 using OpusLink.Entity.DTO.JobDTO;
@@ -35,6 +35,12 @@ namespace OpusLink.User.Hosted.Pages.JOB
             {
                 string strData = await response.Content.ReadAsStringAsync();
                 job = JsonConvert.DeserializeObject<GetJobDetailResponse>(strData);
+                if (job.EmployerId != HttpContext.Session.GetInt32("UserId"))
+                {
+                    HttpContext.Session.SetString("Notification", "Lỗi không lấy được thông tin của Job này");
+                    HttpContext.Session.SetInt32("NotiIsNew", 1);
+                    return RedirectToPage("../JOB/EmployerViewAllJobCreatedPage");
+                }
             }
             //get list offers for job
             response = await client.GetAsync(UrlConstant.ApiBaseUrl+"/Offer3API/GetAllOfferOfJob/" + JobId);

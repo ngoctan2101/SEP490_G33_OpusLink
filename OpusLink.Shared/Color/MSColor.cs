@@ -20,4 +20,14 @@ namespace OpusLink.Shared.Color
         public const string Failed = "#FF0000";
 
     }
+    public class JobColor 
+    {
+        public const string NotApprove = "#CDCDCD";
+        public const string Hiring = "#00A424";
+        public const string Hired = "#0068AD";
+        public const string Completed = "#F2D640";
+        public const string Failed = "#FF6D00";
+        public const string HiringExpried = "#B5681C";
+    }
+
 }

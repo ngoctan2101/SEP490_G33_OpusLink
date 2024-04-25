@@ -38,17 +38,32 @@ namespace OpusLink.User.Hosted.Pages.JOB
             //get all location
             AllLocations = await GetAllLocationAsync();
             //get this Job
-            Job=await GetJobDetail(JobId);
+            Job=await GetJobDetail(JobId, HttpContext.Session.GetInt32("UserId")??0);
+            if(Job == null)
+            {
+                HttpContext.Session.SetString("Notification", "Lỗi không lấy được thông tin của Job này");
+                HttpContext.Session.SetInt32("NotiIsNew", 1);
+                return RedirectToPage("../JOB/EmployerViewAllJobCreatedPage");
+            }
             return Page();
         }
 
-        private async Task<GetJobDetailResponse> GetJobDetail(int jobId)
+        private async Task<GetJobDetailResponse> GetJobDetail(int jobId, int userID)
         {
+            GetJobDetailResponse result;
             HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl+"/Job15API/GetJobDetail/" + jobId);
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<GetJobDetailResponse>(strData);
+                result= JsonConvert.DeserializeObject<GetJobDetailResponse>(strData);
+                if (result.EmployerId != userID)
+                {
+                    return null;
+                }
+                else
+                {
+                    return result;
+                }
             }
             return null;
         }

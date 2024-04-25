@@ -71,6 +71,10 @@
 								int i = 0;
 								@foreach (var hp in Model.his.OrderByDescending(hp => hp.TransactionDate))
 								{
+									if (hp.Amount < 1)
+									{
+										continue;
+									}
 									i++;
 									if (hp.TransactionType == 9)
 									{
@@ -165,7 +169,7 @@
 											}
 											else if (hp.TransactionType == 10)
 											{
-												<a>Freelancer chịu phí 1% của những milestone thành công</a>
+												<a>Nhận 1% của những milestone thành công</a>
 											}
 											else if (hp.TransactionType == 11)
 											{

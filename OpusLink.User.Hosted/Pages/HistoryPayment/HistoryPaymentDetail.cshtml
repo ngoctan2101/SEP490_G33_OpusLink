@@ -38,29 +38,44 @@
 
                                     @if (Model.his.TransactionType == 1)
                                     {
-                                        <td>Nạp tiền</td>
+                                        <td>Nạp tiền vào app</td>
                                     }
                                     else if (Model.his.TransactionType == 2)
                                     {
-                                        <td>Rút tiền</td>
+                                        <td>Rút từ app</td>
                                     }
                                     else if (Model.his.TransactionType == 3)
                                     {
-                                        <td>Đặt cọc tiền</td>
+                                        <td>Employer đặt tiền vào một Milestone</td>
                                     }
                                     else if (Model.his.TransactionType == 4)
                                     {
-                                        <td>Tiền đăng bài</td>
+                                        <td>Phí đăng job</td>
                                     }
                                     else if (Model.his.TransactionType == 5)
                                     {
-                                        <td>Tiền nhận ở mỗi miston</td>
+                                        <td>Freelancer nhận 80% tiền ở milestone khi milestone thành công</td>
                                     }
                                     else if (Model.his.TransactionType == 6)
                                     {
-                                        <td>Tiền giữ 20%</td>
+                                        <td>Freelancer nhận 19% của tất cả những milestone đã hoàn thành sau khi job kết thúc thành công</td>
                                     }
-
+                                    else if (Model.his.TransactionType == 7)
+                                    {
+                                        <td>Employer nhận 19% của tất cả những milestone đã hoàn thành sau khi job kết thúc thất bại</td>
+                                    }
+                                    else if (Model.his.TransactionType == 8)
+                                    {
+                                        <td>Employer nhận 100% tiền của Milestone khi Milestone đó Fail</td>
+                                    }
+                                    else if (Model.his.TransactionType == 10)
+                                    {
+                                        <td>Nhận 1% của những milestone thành công</td>
+                                    }
+                                    else if (Model.his.TransactionType == 11)
+                                    {
+                                        <td>Employer lấy lại tiền đã đặt cọc</td>
+                                    }
                                 </tr>
                                 <!-- You can add more rows dynamically with data -->
                             </tbody>

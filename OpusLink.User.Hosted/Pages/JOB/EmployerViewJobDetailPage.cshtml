@@ -2,6 +2,7 @@
 @using OpusLink.Entity.DTO.JobDTO;
 @using OpusLink.Entity.Models;
 @using OpusLink.Shared.Enums;
+@using OpusLink.Shared.Color;
 @using OpusLink.Shared.Constants
 @inject IHttpContextAccessor HttpContextAccessor;
 @model OpusLink.User.Hosted.Pages.JOB.EmployerViewJobDetailPageModel
@@ -133,30 +134,30 @@
                     <p style="font-weight:bold;display:inline-block">@item.JobTitle</p>
                     @if (item.Status == (int)JobStatusEnum.NotApprove)
                     {
-                        <p class="status" style="background-color:#CDCDCD;margin:0px;padding:0px 4px 0px 4px">Not Approved</p>
+                        <p class="status" style="background-color:@JobColor.NotApprove;margin:0px;padding:0px 4px 0px 4px">Not Approved</p>
                     }
                     else if (item.Status == (int)JobStatusEnum.Hiring)
                     {
                         if (item.EndHiringDate < DateTime.Now)
                         {
-                            <p class="status" style="background-color:#B5681C;margin:0px;padding:0px 4px 0px 4px">Hiring expried</p>
+                            <p class="status" style="background-color:@JobColor.HiringExpried;margin:0px;padding:0px 4px 0px 4px">Hiring expried</p>
                         }
                         else
                         {
-                            <p class="status" style="background-color:#00A424;margin:0px;padding:0px 4px 0px 4px">Hiring</p> <span style="color:red;font-size:13px" id="countdown_@item.JobId"></span>
+                            <p class="status" style="background-color:@JobColor.Hiring;margin:0px;padding:0px 4px 0px 4px">Hiring</p> <span style="color:red;font-size:13px" id="countdown_@item.JobId"></span>
                         }
                     }
                     else if (item.Status == (int)JobStatusEnum.Hired)
                     {
-                        <p class="status" style="background-color:#0068AD;margin:0px;padding:0px 4px 0px 4px">Hired</p>
+                        <p class="status" style="background-color:@JobColor.Hired;margin:0px;padding:0px 4px 0px 4px">Hired</p>
                     }
                     else if (item.Status == (int)JobStatusEnum.Completed)
                     {
-                        <p class="status" style="background-color:#FF6D00;margin:0px;padding:0px 4px 0px 4px">Completed</p>
+                        <p class="status" style="background-color:@JobColor.Completed;margin:0px;padding:0px 4px 0px 4px">Completed</p>
                     }
                     else if (item.Status == (int)JobStatusEnum.Failed)
                     {
-                        <p class="status" style="background-color:#FF6D00;margin:0px;padding:0px 4px 0px 4px">Failed</p>
+                        <p class="status" style="background-color:@JobColor.Failed;margin:0px;padding:0px 4px 0px 4px">Failed</p>
                     }
                 </div>
                 <div class="row">

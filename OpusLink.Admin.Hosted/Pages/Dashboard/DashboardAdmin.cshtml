@@ -122,9 +122,10 @@
                 <table style=" width:80%; margin:auto">
                     <thead>
                         <tr style="border-bottom:1px solid black">
-                            <th style="width:20%">Số thanh toán</th>
+                            <th style="width:10%">Số thanh toán</th>
                             <th style="width:20%">Số tiền (đồng)</th>
-                            <th style="width:60%">Thời điểm</th>
+                            <th style="width:30%">Thời điểm</th>
+                            <th style="width:40%">Kiểu giao dịch</th>
                         </tr>
                     </thead>
                     <tbody id="asd">
@@ -443,11 +444,18 @@
             success: function (result, status, xhr) {
                 var str2 = "";
                 $.each(result, function (index, value) {
-                    str2 += "<tr style=\"border-bottom: 1px solid #BEBEBE; height: 40px\">";
+                    if (value["amount"]>0){
+                        str2 += "<tr style=\"border-bottom: 1px solid #BEBEBE; height: 40px\">";
                     str2 += "<td>" + value["paymentID"]+"</td>";
                     str2 += "<td>" + value["amount"].toLocaleString('en-US') + "</td>";
                     str2 += "<td>" + convertToVietnameseDatetime(value["transactionDate"]) + "</td>";
+                    if (value["transactionType"]==4){
+                        str2 += "<td>Phí đăng job</td>"
+                    } else if (value["transactionType"] == 10){
+                        str2 += "<td>Nhận 1% của những milestone thành công</td>"
+                    }
                     str2 += "</tr>";
+                    }
                 });
                 document.getElementById("asd").innerHTML= str2;
                 document.getElementById("label1").innerHTML = "Thu phí tháng "+month+":";

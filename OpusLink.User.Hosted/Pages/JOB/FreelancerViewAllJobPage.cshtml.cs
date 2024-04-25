@@ -73,6 +73,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
             //get list id of saved jobs
             if (HttpContext.Session.GetInt32("UserId") != null)
             {
+                client.DefaultRequestHeaders.Authorization = new AuthenticationHeaderValue("Bearer", HttpContext.Session.GetString("token"));
                 AllSavedJobId = await GetListSavedJobId(HttpContext.Session.GetInt32("UserId")??0);
             }
             isCount = false;

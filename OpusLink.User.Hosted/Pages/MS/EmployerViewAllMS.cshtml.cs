@@ -40,7 +40,13 @@ namespace OpusLink.User.Hosted.Pages.MS
             //get all milestones of a job
             milestones = await GetAllMilestonesAsync(jobID);
             //get this job also
-            job = await GetThisJob(jobID);
+            job = await GetThisJob(jobID, HttpContext.Session.GetInt32("UserId") ?? 0);
+            if (job == null)
+            {
+                HttpContext.Session.SetString("Notification", "Lỗi không lấy được thông tin của Job này");
+                HttpContext.Session.SetInt32("NotiIsNew", 1);
+                return RedirectToPage("../JOB/EmployerViewAllJobCreatedPage");
+            }
             allMSMoneyPutted = true;
             foreach(var m in milestones)
             {
@@ -85,14 +91,23 @@ namespace OpusLink.User.Hosted.Pages.MS
             }
         }
 
-        private async Task<GetJobDetailResponse> GetThisJob(int jobID)
+        private async Task<GetJobDetailResponse> GetThisJob(int jobID, int userID)
         {
+            GetJobDetailResponse result;
             //get the job
             HttpResponseMessage response = await client.GetAsync(UrlConstant.ApiBaseUrl+"/EMilestonesAPI/GetThisJob/" + jobID);
             if (response.IsSuccessStatusCode)
             {
                 string strData = await response.Content.ReadAsStringAsync();
-                return JsonConvert.DeserializeObject<GetJobDetailResponse>(strData);
+                result= JsonConvert.DeserializeObject<GetJobDetailResponse>(strData);
+                if (result.EmployerId != userID)
+                {
+                    return null;
+                }
+                else
+                {
+                    return result;
+                }
             }
             else
             {

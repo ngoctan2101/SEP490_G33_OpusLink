@@ -202,14 +202,14 @@ namespace OpusLink.Service.MSServices
                 {
                     freelancer.AmountMoney += 0.19m * TotalMoneyOfMsCompleted(j);
                     await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = j.FreelancerID ?? 0, Amount = 0.19m * TotalMoneyOfMsCompleted(j), TransactionType = 6, TransactionCode = "" , TransactionDate = DateTime.Now }); //get money when complete JOB
-                    await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = j.FreelancerID ?? 0, Amount = 0.01m * TotalMoneyOfMsCompleted(j), TransactionType = 10, TransactionCode = "" , TransactionDate = DateTime.Now }); //A get 1% money of completed MS when F complete JOB
+                    await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = 9, Amount = 0.01m * TotalMoneyOfMsCompleted(j), TransactionType = 10, TransactionCode = "" , TransactionDate = DateTime.Now }); //A get 1% money of completed MS when F complete JOB
                 }
                 //new co 1 ms bi fail thi E nhan duoc 20% tat ca nhung ms completed
                 else
                 {
                     employer.AmountMoney += 0.19m * TotalMoneyOfMsCompleted(j);
                     await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = j.EmployerID, Amount = 0.19m * TotalMoneyOfMsCompleted(j), TransactionType = 7, TransactionCode = "" , TransactionDate = DateTime.Now }); //E get money when fail JOB
-                    await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = j.FreelancerID ?? 0, Amount = 0.01m * TotalMoneyOfMsCompleted(j), TransactionType = 10, TransactionCode = "" , TransactionDate = DateTime.Now }); //A get 1% money of completed MS when F complete JOB
+                    await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = 9, Amount = 0.01m * TotalMoneyOfMsCompleted(j), TransactionType = 10, TransactionCode = "" , TransactionDate = DateTime.Now }); //A get 1% money of completed MS when F complete JOB
                 }
             }
             await _dbContext.SaveChangesAsync();
@@ -413,14 +413,18 @@ namespace OpusLink.Service.MSServices
                 if (m.Status == (int)MilestoneStatusEnum.Completed)
                 {
                     total += m.AmountToPay *0.19m;
-                    await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = j.FreelancerID ?? 0, Amount = 0.01m * m.AmountToPay, TransactionType = 10, TransactionCode = "" , TransactionDate = DateTime.Now }); //A get 1% money of completed MS when F fail JOB
+                    await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = j.EmployerID, Amount = 0.19m * m.AmountToPay, TransactionType = 7, TransactionCode = "", TransactionDate = DateTime.Now }); //E get money when fail JOB
+                    await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = 9, Amount = 0.01m * m.AmountToPay, TransactionType = 10, TransactionCode = "" , TransactionDate = DateTime.Now }); //A get 1% money of completed MS when F fail JOB
                 }
                 else if(m.Status == (int)MilestoneStatusEnum.MoneyPutted)
                 {
                     total += m.AmountToPay;
-                }else if(m.Status == (int)MilestoneStatusEnum.EmployerRejected)
+                    await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = j.EmployerID, Amount = m.AmountToPay, TransactionType = 8, TransactionCode = "", TransactionDate = DateTime.Now }); //Employer nhận 100% tiền của Milestone khi Milestone đó Fail
+                }
+                else if(m.Status == (int)MilestoneStatusEnum.EmployerRejected)
                 {
                     total += m.AmountToPay;
+                    await _dbContext.HistoryPayments.AddAsync(new HistoryPayment() { PaymentID = 0, UserID = j.EmployerID, Amount = m.AmountToPay, TransactionType = 8, TransactionCode = "", TransactionDate = DateTime.Now }); //Employer nhận 100% tiền của Milestone khi Milestone đó Fail
                 }
             }
             employer.AmountMoney += total;
