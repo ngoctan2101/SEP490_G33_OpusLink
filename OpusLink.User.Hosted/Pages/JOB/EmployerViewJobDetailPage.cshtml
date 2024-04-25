@@ -14,7 +14,21 @@
     int userId = HttpContextAccessor.HttpContext.Session.GetInt32("UserId") ?? 0;
 }
 <style>
+    .tinnhan-btn {
+        /* Thiết lập các thuộc tính CSS tùy theo ý của bạn */
+        display: inline-block;
+        padding: 10px 20px;
+        background-color: #007bff; /* Màu nền */
+        color: #fff; /* Màu chữ */
+        text-decoration: none;
+        border-radius: 5px;
+    }
 
+        /* CSS khi hover */
+        .tinnhan-btn:hover {
+            background-color: #0056b3; /* Màu nền khi hover */
+            color: #fff; /* Màu chữ khi hover */
+        }
     .link {
         text-decoration: none;
         font-weight: bold;
@@ -253,7 +267,9 @@
                             }
                         </div>
                         <p>Số việc đã làm: @a.NumberOfJobDone</p>
-                        <button type="button">Nhắn tin</button>
+                       @*  <button type="button">Nhắn tin</button> *@
+                        <a class="tinnhan-btn" asp-page="/Chat/ChatList" asp-page-handler="AddChatBox" asp-route-FreelancerId="@a.FreelancerID" asp-route-EmployerId="@userId" asp-route-JobId="@item.JobId">Nhắn tin </a>
+
                     </div>
                     <div class="col-md-7" style="border-left:2px solid #BEBEBE; padding-top:10px">
                         <p>@a.DateOffer.ToString("dd/MM/yyyy HH:mm")</p>
