@@ -1,4 +1,4 @@
-using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.RazorPages;
 using OpusLink.Entity.DTO;
 using OpusLink.Shared.Constants;
@@ -45,7 +45,9 @@ namespace OpusLink.User.Hosted.Pages.Freelancer.Profile
             }
             else
             {
-                return RedirectToPage("/Freelancer/Profile/ViewsProfileOtherFreelancer", new { UserId = HttpContext.Session.GetInt32("UserIdCheckNew") });
+                HttpContext.Session.SetString("Notification", "Bạn không có quyền truy cập");
+                HttpContext.Session.SetInt32("NotiIsNew", 1);
+                return RedirectToPage("/Freelancer/Profile/ViewProfileOtherFreelancer", new { UserId = HttpContext.Session.GetInt32("UserIdCheckNew") });
             }
             return Page();
         }
