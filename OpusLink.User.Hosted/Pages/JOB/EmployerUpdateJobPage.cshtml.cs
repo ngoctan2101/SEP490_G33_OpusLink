@@ -41,7 +41,7 @@ namespace OpusLink.User.Hosted.Pages.JOB
             Job=await GetJobDetail(JobId, HttpContext.Session.GetInt32("UserId")??0);
             if(Job == null)
             {
-                HttpContext.Session.SetString("Notification", "Lỗi không lấy được thông tin của Job này");
+                HttpContext.Session.SetString("Notification", "Bạn không có quyền truy cập");
                 HttpContext.Session.SetInt32("NotiIsNew", 1);
                 return RedirectToPage("../JOB/EmployerViewAllJobCreatedPage");
             }
